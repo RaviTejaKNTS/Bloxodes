@@ -83,7 +83,7 @@ type CollectConfig = {
 };
 
 function parseSeeds() {
-  return parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, defaultDecalQuerySeeds(DEFAULT_QUERY_SEEDS));
+  return defaultDecalQuerySeeds(parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS));
 }
 
 async function fetchToolboxDecalPage(pageToken: string | null, config: CollectConfig): Promise<ToolboxResponse> {

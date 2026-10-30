@@ -100,12 +100,12 @@ async function main() {
     throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE must be set.");
   }
 
-  const run = await startStatsJobRun({ jobName: "decal_ids_refresh" });
+  // Take the lock first so a run blocked by an active refresh writes no ledger row.
+  await acquireLock();
   const stepResults: Array<{ name: string; status: string; duration_ms: number } & Record<string, unknown>> = [];
-  let locked = false;
+  let run: Awaited<ReturnType<typeof startStatsJobRun>> | null = null;
   try {
-    await acquireLock();
-    locked = true;
+    run = await startStatsJobRun({ jobName: "decal_ids_refresh" });
     console.log(`Starting decal ID refresh with ${steps.length} step(s). Lock: ${LOCK_DIR}`);
     for (const step of steps) {
       const startedAt = Date.now();
@@ -135,10 +135,10 @@ async function main() {
     }
     console.log(`Decal ID refresh finished. Outcome: ${healthError ? "partial" : "success"}.`);
   } catch (error) {
-    await finishStatsJobRun(run, { status: "failed", error, metadata: { steps: stepResults } });
+    if (run) await finishStatsJobRun(run, { status: "failed", error, metadata: { steps: stepResults } });
     throw error;
   } finally {
-    if (locked) await releaseLock();
+    await releaseLock();
   }
 }
 
