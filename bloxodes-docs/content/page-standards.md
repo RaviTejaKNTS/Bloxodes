@@ -60,7 +60,7 @@ Template headings like "Page Indexes" and "Top Pages" are site navigation. Chang
 
 ## Images
 
-Every page ships with its images. Never publish without them.
+Every page ships with every image it can get. Never leave out an image that exists.
 
 | Page | Required |
 | --- | --- |
@@ -72,7 +72,8 @@ Every page ships with its images. Never publish without them.
 - **Roblox:** the first official 768x432 universe thumbnail for the cover and the official 512x512 icon for the square.
 - **Non-Roblox:** official key art, store art or real gameplay screenshots, stored on the game row (`games.cover_image` 16:9, `games.hero_image` square). Quizzes, checklists, codes, catalogs and maps use their game's art; tools set `thumb_url`. A cover must be truly landscape; don't pad portrait box art. Publishing rejects missing, logo, broken or wrongly shaped images.
 - Use exact images. No unrelated crops, edited art or generic game thumbnails standing in for a missing item. If an item truly has no clean image, record the gap in the dataset.
-- Check the page's `og:image` after publishing. If it shows the default Bloxodes logo, the page is missing its image.
+- **Missing item images never hold a collection back.** Publish it with the images that exist, even if that's none, and record each gap. A game without its collections is worse than a collection without images. The hub cover and thumbnail are still required.
+- Check the page's `og:image` after publishing. On a hub, the default Bloxodes logo means the cover is missing. A collection with no item images shows the logo, and that's expected.
 
 ## Before you publish
 
