@@ -51,7 +51,7 @@ export async function loadPlayersCalendar(): Promise<CalendarDay[][]> {
   return await insightRead("players-calendar", async (signal) => {
     const { data, error } = await supabaseAdmin().from("roblox_platform_stats_daily")
       .select("stat_date,playing").abortSignal(signal).gte("stat_date", utcDay(Date.now() - 96 * DAY_MS))
-      .lte("stat_date", utcDay(Date.now())).order("stat_date", { ascending: false }).limit(97);
+      .lt("stat_date", utcDay(Date.now())).order("stat_date", { ascending: false }).limit(97);
     if (error) throw error;
     // Daily `playing` is the rounded sum of daily averages, exactly as in
     // mapPlatformAggregatePoint. `peak_players` sums separate game peaks.

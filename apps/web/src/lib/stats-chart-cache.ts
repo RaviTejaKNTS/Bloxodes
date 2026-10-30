@@ -32,7 +32,10 @@ export async function cachedStatsChart<T>(
         if (value != null) {
           // Per-game insights add variable keys; bound process memory while
           // keeping the same last-good/stale-while-revalidate contract.
-          if (!values.has(key) && values.size >= 2048) values.delete(values.keys().next().value!);
+          // Re-inserting moves a refreshed key to the end, so eviction drops
+          // the least recently refreshed answer, not a hot shared chart.
+          values.delete(key);
+          if (values.size >= 2048) values.delete(values.keys().next().value!);
           values.set(key, { value, storedAt: now() });
         }
         return value;

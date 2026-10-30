@@ -76,3 +76,17 @@ it("bounds variable per-game keys and reloads an evicted answer", async () => {
   await cachedStatsChart("eviction-first", load);
   expect(load).toHaveBeenCalledTimes(2);
 });
+
+it("keeps a regularly refreshed key when newer keys fill the cache", async () => {
+  const time = clock();
+  const load = vi.fn(async () => "hot");
+  await cachedStatsChart("refreshed-hot", load, 1000, time.now);
+  for (let i = 0; i < 1000; i++) await cachedStatsChart(`refresh-before:${i}`, async () => i);
+  time.advance(5000);
+  // Expired: serves the stale value and refreshes it in the background.
+  await cachedStatsChart("refreshed-hot", load, 1000, time.now);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  for (let i = 0; i < 1500; i++) await cachedStatsChart(`refresh-after:${i}`, async () => i);
+  await expect(cachedStatsChart("refreshed-hot", load, 1000, time.now)).resolves.toBe("hot");
+  expect(load).toHaveBeenCalledTimes(2);
+});
