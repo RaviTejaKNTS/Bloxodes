@@ -1,0 +1,739 @@
+{
+  "page": {
+    "universe_id": 1176784616,
+    "code": "tower-defense-simulator",
+    "title": "Tower Defense Simulator Roblox Quiz: 15 Questions on Towers",
+    "description_md": "Think you know Tower Defense Simulator's enemy interactions, support towers, and Molten rules? Each attempt draws 15 random questions, five each from Easy, Medium, and Hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Tower Defense Simulator knowledge of enemy interactions, support towers and Molten Mode. Each attempt draws 15 random questions, five per tier.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What happens to an enemy's body when it gains the Hidden attribute?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It becomes completely invisible."
+          },
+          {
+            "id": "b",
+            "text": "It becomes translucent."
+          },
+          {
+            "id": "c",
+            "text": "It becomes completely opaque."
+          },
+          {
+            "id": "d",
+            "text": "It becomes covered in solid metal."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "How many waves are in standard Molten Mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "40"
+          },
+          {
+            "id": "c",
+            "text": "25"
+          },
+          {
+            "id": "d",
+            "text": "35"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What is the minimum account level for standard Molten Mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 15"
+          },
+          {
+            "id": "b",
+            "text": "Level 5"
+          },
+          {
+            "id": "c",
+            "text": "Level 30"
+          },
+          {
+            "id": "d",
+            "text": "Level 50"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Who is the final boss of standard Molten Mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Molten Titan"
+          },
+          {
+            "id": "b",
+            "text": "Tanker"
+          },
+          {
+            "id": "c",
+            "text": "Molten Warlord"
+          },
+          {
+            "id": "d",
+            "text": "Molten Executioner"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How much cash do you start with in standard Molten Mode before the group bonus?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$600"
+          },
+          {
+            "id": "b",
+            "text": "$500"
+          },
+          {
+            "id": "c",
+            "text": "$750"
+          },
+          {
+            "id": "d",
+            "text": "$900"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What does a Commander's passive support buff increase for an ordinary attacking tower in range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Attacks per second"
+          },
+          {
+            "id": "b",
+            "text": "Damage per hit"
+          },
+          {
+            "id": "c",
+            "text": "Attack range"
+          },
+          {
+            "id": "d",
+            "text": "Tower placement limit"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which tower stat does the DJ Booth's Purple track boost at Level 0?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Damage per hit"
+          },
+          {
+            "id": "b",
+            "text": "Upgrade discount"
+          },
+          {
+            "id": "c",
+            "text": "Attack range"
+          },
+          {
+            "id": "d",
+            "text": "Attack speed"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "An ordinary non-final wave ends. How long is the intermission before the next wave?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10 seconds"
+          },
+          {
+            "id": "b",
+            "text": "15 seconds"
+          },
+          {
+            "id": "c",
+            "text": "20 seconds"
+          },
+          {
+            "id": "d",
+            "text": "5 seconds"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "How long does an unmodified Level 2 Commander's Call to Arms buff last?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10 seconds"
+          },
+          {
+            "id": "b",
+            "text": "5 seconds"
+          },
+          {
+            "id": "c",
+            "text": "20 seconds"
+          },
+          {
+            "id": "d",
+            "text": "30 seconds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "In a standard four-player match, what is the minimum number of normal skip votes needed once voting opens, without a VIP instant skip?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "4"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "1"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "What is the nominal player-count health increase for enemies in a standard Molten trio?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15%"
+          },
+          {
+            "id": "b",
+            "text": "25%"
+          },
+          {
+            "id": "c",
+            "text": "40%"
+          },
+          {
+            "id": "d",
+            "text": "50%"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "A Hidden enemy is caught in an ordinary damaging explosion from a tower without Hidden Detection. No other attribute blocks that damage. What can happen?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The explosion removes its Hidden attribute."
+          },
+          {
+            "id": "b",
+            "text": "The explosion heals the enemy instead."
+          },
+          {
+            "id": "c",
+            "text": "The explosion cannot damage the enemy."
+          },
+          {
+            "id": "d",
+            "text": "The enemy takes indirect splash damage."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "A unit crosses a Flying enemy's position. How much unit collision damage can that collision deal to the Flying enemy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Half the usual damage"
+          },
+          {
+            "id": "b",
+            "text": "None"
+          },
+          {
+            "id": "c",
+            "text": "The full usual damage"
+          },
+          {
+            "id": "d",
+            "text": "Double the usual damage"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "A Flying enemy passes over a Trapper trap, with no other enemy setting it off. What does its passage do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It passes over without triggering the trap."
+          },
+          {
+            "id": "b",
+            "text": "It triggers the trap at full strength."
+          },
+          {
+            "id": "c",
+            "text": "It triggers the trap at half strength."
+          },
+          {
+            "id": "d",
+            "text": "It triggers the trap and grounds the enemy."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "A tower without Lead Detection has a Lead enemy in range. No other attribute blocks targeting. What can the tower do to that enemy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Damage it, but not target it"
+          },
+          {
+            "id": "b",
+            "text": "Both target and damage it"
+          },
+          {
+            "id": "c",
+            "text": "Target it, but not damage it"
+          },
+          {
+            "id": "d",
+            "text": "Neither target nor damage it"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "In a standard Molten duo, one player deals all the damage that kills an ordinary enemy. Before cash rounding, what share of its normal solo kill bounty does each player receive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Attacker 50%; teammate 50%"
+          },
+          {
+            "id": "b",
+            "text": "Attacker 75%; teammate 25%"
+          },
+          {
+            "id": "c",
+            "text": "Attacker 100%; teammate 0%"
+          },
+          {
+            "id": "d",
+            "text": "Attacker 25%; teammate 75%"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "A Green DJ Booth uses Drop the Beat below its cash cap. Which count increases the cash from that activation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Enemies defeated during the match"
+          },
+          {
+            "id": "b",
+            "text": "Players taking part in the match"
+          },
+          {
+            "id": "c",
+            "text": "Waves completed during the match"
+          },
+          {
+            "id": "d",
+            "text": "Towers inside the DJ Booth's range"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Which wave result earns standard Molten's wave-clear bonus?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Some wave enemies survive; the base takes damage."
+          },
+          {
+            "id": "b",
+            "text": "All wave enemies are killed; the base takes no damage."
+          },
+          {
+            "id": "c",
+            "text": "Some wave enemies survive; the base takes no damage."
+          },
+          {
+            "id": "d",
+            "text": "All wave enemies are killed; the base takes damage."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Which attributes can a Level 3 Red DJ Booth's Drop the Beat damage get past when its pulse reaches an otherwise susceptible enemy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hidden and Lead only"
+          },
+          {
+            "id": "b",
+            "text": "Hidden and Flying only"
+          },
+          {
+            "id": "c",
+            "text": "Hidden, Lead, and Flying"
+          },
+          {
+            "id": "d",
+            "text": "Lead and Flying only"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "A Purple DJ Booth's Drop the Beat pulse reaches a non-Boss ground enemy with no control immunities. Which effects apply?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Slowing without knockback"
+          },
+          {
+            "id": "b",
+            "text": "Neither knockback nor slowing"
+          },
+          {
+            "id": "c",
+            "text": "Knockback without slowing"
+          },
+          {
+            "id": "d",
+            "text": "Both knockback and slowing"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "What happens if you try to activate Call to Arms while the Commander itself is stunned?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It cannot activate while stunned."
+          },
+          {
+            "id": "b",
+            "text": "It activates with its normal buff."
+          },
+          {
+            "id": "c",
+            "text": "It activates with a smaller buff."
+          },
+          {
+            "id": "d",
+            "text": "It activates for a shorter duration."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which of these costs can the Green DJ Booth's discount reduce for towers in range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Placing a Ranger"
+          },
+          {
+            "id": "b",
+            "text": "Upgrading a Ranger"
+          },
+          {
+            "id": "c",
+            "text": "Placing a Farm"
+          },
+          {
+            "id": "d",
+            "text": "Upgrading a Farm"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "A DJ Booth's range buff reaches a Commander. Which of the Commander's coverage areas can expand?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Passive support range only"
+          },
+          {
+            "id": "b",
+            "text": "Call to Arms range only"
+          },
+          {
+            "id": "c",
+            "text": "Both passive support and Call to Arms range"
+          },
+          {
+            "id": "d",
+            "text": "Neither passive support nor Call to Arms range"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "What happens to incoming damage when the Molten Warlord starts Unchained Pandemonium at 35% health?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is doubled temporarily."
+          },
+          {
+            "id": "b",
+            "text": "It is blocked temporarily."
+          },
+          {
+            "id": "c",
+            "text": "It is blocked permanently."
+          },
+          {
+            "id": "d",
+            "text": "It is doubled permanently."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "When an enemy has an attribute such as Bloated in multiplayer Molten, when is player-count health scaling applied?",
+        "options": [
+          {
+            "id": "a",
+            "text": "After its attributes are applied"
+          },
+          {
+            "id": "b",
+            "text": "Before its attributes are applied"
+          },
+          {
+            "id": "c",
+            "text": "Instead of applying its attributes"
+          },
+          {
+            "id": "d",
+            "text": "Only if no attributes are applied"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "A modern Lead enemy's shield health reaches zero, but visible armor remains. Which of its original Lead and Stun Immunity attributes still apply?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lead only"
+          },
+          {
+            "id": "b",
+            "text": "Stun Immunity only"
+          },
+          {
+            "id": "c",
+            "text": "Neither Lead nor Stun Immunity"
+          },
+          {
+            "id": "d",
+            "text": "Both Lead and Stun Immunity"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Two same-level Commanders cover the same towers. The second casts Call to Arms while the first cast's buff is still active. What happens to that buff?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its strength stays unchanged; its duration resets."
+          },
+          {
+            "id": "b",
+            "text": "Its strength stacks; its duration stays unchanged."
+          },
+          {
+            "id": "c",
+            "text": "Its strength stays unchanged; its duration stays unchanged."
+          },
+          {
+            "id": "d",
+            "text": "Its strength stacks; its duration resets."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "You place a tower inside a Commander's range after Call to Arms has started. It stays in range. Which event lets it receive that active ability buff?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its placement during the existing activation"
+          },
+          {
+            "id": "b",
+            "text": "The start of the next wave without another cast"
+          },
+          {
+            "id": "c",
+            "text": "Its first upgrade without another cast"
+          },
+          {
+            "id": "d",
+            "text": "A later Call to Arms activation that covers it"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "A Purple DJ Booth's Drop the Beat pulse reaches a non-Boss Flying enemy with no other control immunities. Which effects apply?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Knockback without slowing"
+          },
+          {
+            "id": "b",
+            "text": "Slowing without knockback"
+          },
+          {
+            "id": "c",
+            "text": "Both slowing and knockback"
+          },
+          {
+            "id": "d",
+            "text": "Neither slowing nor knockback"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "A Medic's shield covers towers hit by the Molten Warlord's effects. Which protection does it provide?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fatigue protection, but no stun protection"
+          },
+          {
+            "id": "b",
+            "text": "Both stun and Fatigue protection"
+          },
+          {
+            "id": "c",
+            "text": "Neither stun nor Fatigue protection"
+          },
+          {
+            "id": "d",
+            "text": "Stun protection, but no Fatigue protection"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

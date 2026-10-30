@@ -1,0 +1,691 @@
+{
+  "page": {
+    "universe_id": 1686885941,
+    "code": "brookhaven-rp",
+    "title": "Brookhaven RP Roblox Quiz: 15 Random Questions per Attempt",
+    "description_md": "Think you know Brookhaven? Each attempt gives you 15 random questions, five from each difficulty tier, with no timer. The questions cover roleplay, places, houses, vehicles, passes, and hidden spots around town.",
+    "seo_title": null,
+    "seo_description": "Take 15 random Roblox Brookhaven RP questions, five per difficulty, with no timer. Test what you know about roles, places, houses, vehicles, passes and secrets.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "BHR-E02",
+        "question": "Which statement about Brookhaven is false?",
+        "options": [
+          {
+            "id": "A",
+            "text": "You can create your own roleplay stories."
+          },
+          {
+            "id": "B",
+            "text": "Everyone must finish the same main objective."
+          },
+          {
+            "id": "C",
+            "text": "You can act out different roles around town."
+          },
+          {
+            "id": "D",
+            "text": "You can change your avatar while playing."
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-E04",
+        "question": "What is the name of the hospital in Brookhaven?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Brookhaven General"
+          },
+          {
+            "id": "B",
+            "text": "Haven Medical Center"
+          },
+          {
+            "id": "C",
+            "text": "Madison Memorial"
+          },
+          {
+            "id": "D",
+            "text": "St. Luke's Hospital"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-E05",
+        "question": "Where would you go to roleplay as a firefighter?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The Power Plant"
+          },
+          {
+            "id": "B",
+            "text": "The Fire Station"
+          },
+          {
+            "id": "C",
+            "text": "The Bank"
+          },
+          {
+            "id": "D",
+            "text": "The Museum"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-E06",
+        "question": "What is the coffee shop in Brookhaven called?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Starbrooks Coffee"
+          },
+          {
+            "id": "B",
+            "text": "Brew Haven"
+          },
+          {
+            "id": "C",
+            "text": "Coffee Corner"
+          },
+          {
+            "id": "D",
+            "text": "Bean Brook"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-E07",
+        "question": "Which statement about houses and vehicles in Brookhaven is true?",
+        "options": [
+          {
+            "id": "A",
+            "text": "You can choose a house, but vehicles are only scenery."
+          },
+          {
+            "id": "B",
+            "text": "You can spawn a vehicle, but houses are only scenery."
+          },
+          {
+            "id": "C",
+            "text": "Houses and vehicles are both only scenery."
+          },
+          {
+            "id": "D",
+            "text": "You can choose a house and spawn a vehicle."
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-E11",
+        "question": "Which place has classrooms for student-and-teacher roleplay?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The Airport"
+          },
+          {
+            "id": "B",
+            "text": "The Cemetery"
+          },
+          {
+            "id": "C",
+            "text": "The School"
+          },
+          {
+            "id": "D",
+            "text": "The Fire Station"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-E12",
+        "question": "Which building has a check-in desk, a security scanner, and a departure gate?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The Bank"
+          },
+          {
+            "id": "B",
+            "text": "The Grocery Store"
+          },
+          {
+            "id": "C",
+            "text": "The Library"
+          },
+          {
+            "id": "D",
+            "text": "The Airport"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-M10",
+        "question": "What is the lake with the Yacht called?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Lake Madison"
+          },
+          {
+            "id": "B",
+            "text": "Lake Brook"
+          },
+          {
+            "id": "C",
+            "text": "Haven Lake"
+          },
+          {
+            "id": "D",
+            "text": "Lake Crown"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-M13",
+        "question": "Where can you adopt cats and dogs in Brookhaven?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The Bank"
+          },
+          {
+            "id": "B",
+            "text": "The Post Office"
+          },
+          {
+            "id": "C",
+            "text": "The Adoption Center"
+          },
+          {
+            "id": "D",
+            "text": "The Pet Hospital"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-H11",
+        "question": "Which building has a hidden passage connected to its X-ray room?",
+        "options": [
+          {
+            "id": "A",
+            "text": "St. Luke's Hospital"
+          },
+          {
+            "id": "B",
+            "text": "The Police Station"
+          },
+          {
+            "id": "C",
+            "text": "The Town Hall"
+          },
+          {
+            "id": "D",
+            "text": "The Museum"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-E13",
+        "question": "Inside a workplace, which button starts a job?",
+        "options": [
+          {
+            "id": "A",
+            "text": "End Break"
+          },
+          {
+            "id": "B",
+            "text": "Take Job"
+          },
+          {
+            "id": "C",
+            "text": "Take a Break"
+          },
+          {
+            "id": "D",
+            "text": "Quit"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-E14",
+        "question": "Where do boats appear when you spawn them?",
+        "options": [
+          {
+            "id": "A",
+            "text": "On a street"
+          },
+          {
+            "id": "B",
+            "text": "In the airport hangar"
+          },
+          {
+            "id": "C",
+            "text": "At the water"
+          },
+          {
+            "id": "D",
+            "text": "At a helipad"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "BHR-M03",
+        "question": "In a private server, which pass unlocks the Futuristic City and War Zone map themes?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Boat Pack"
+          },
+          {
+            "id": "B",
+            "text": "Music Unlocked"
+          },
+          {
+            "id": "C",
+            "text": "Horse Upgrade"
+          },
+          {
+            "id": "D",
+            "text": "Theme Pack"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-M04",
+        "question": "Which pass lets you trigger fire, flood, or zombies at your house or apartment?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Boat Pack"
+          },
+          {
+            "id": "B",
+            "text": "Theme Pack"
+          },
+          {
+            "id": "C",
+            "text": "Disaster Pass"
+          },
+          {
+            "id": "D",
+            "text": "Horse Upgrade"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-M11",
+        "question": "Which pass adds speedboats, ships, yachts, rafts, and sharks?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Music Unlocked"
+          },
+          {
+            "id": "B",
+            "text": "Penthouse"
+          },
+          {
+            "id": "C",
+            "text": "Boat Pack"
+          },
+          {
+            "id": "D",
+            "text": "Horse Upgrade"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-M12",
+        "question": "In a private server, who sees a map theme change?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only the player who applied it"
+          },
+          {
+            "id": "B",
+            "text": "Only the owner of the server"
+          },
+          {
+            "id": "C",
+            "text": "Only players sharing the owner's house"
+          },
+          {
+            "id": "D",
+            "text": "Everyone in the server"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-H08",
+        "question": "What does Music Unlocked provide through the Boombox?",
+        "options": [
+          {
+            "id": "A",
+            "text": "A song library for playback that nearby players can hear"
+          },
+          {
+            "id": "B",
+            "text": "A voice recorder for messages that nearby players can hear"
+          },
+          {
+            "id": "C",
+            "text": "A song broadcast that reaches every player across the server"
+          },
+          {
+            "id": "D",
+            "text": "A mute control that silences every player's music across the server"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-H10",
+        "question": "Which pass unlocks estate houses on the large North, South, and Island lots?",
+        "options": [
+          {
+            "id": "A",
+            "text": "On Demand Fire"
+          },
+          {
+            "id": "B",
+            "text": "Vehicle Customization"
+          },
+          {
+            "id": "C",
+            "text": "Estates Unlocked"
+          },
+          {
+            "id": "D",
+            "text": "Theme Pack"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-H12",
+        "question": "Which pass adds horse breeds and body, mane, tail, and saddle customization?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Premium"
+          },
+          {
+            "id": "B",
+            "text": "Horse Upgrade"
+          },
+          {
+            "id": "C",
+            "text": "Land Unlocked"
+          },
+          {
+            "id": "D",
+            "text": "Boat Pack"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-M14",
+        "question": "Which pass adds vehicle wraps, underglow colors, and fire, smoke, and wheel-loss effects?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vehicle Boost Upgrade"
+          },
+          {
+            "id": "B",
+            "text": "Vehicle Customization"
+          },
+          {
+            "id": "C",
+            "text": "Vehicle Speed Unlocked"
+          },
+          {
+            "id": "D",
+            "text": "Boat Pack"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-M15",
+        "question": "Which pass raises street- and small-vehicle top speeds and adds three turbo stages?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vehicle Boost Upgrade"
+          },
+          {
+            "id": "B",
+            "text": "Vehicle Speed Unlocked"
+          },
+          {
+            "id": "C",
+            "text": "Vehicle Customization"
+          },
+          {
+            "id": "D",
+            "text": "Boat Pack"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-M16",
+        "question": "Which pass combines extra props, no house cooldown, and up to two vehicles at once in public servers?",
+        "options": [
+          {
+            "id": "A",
+            "text": "VIP"
+          },
+          {
+            "id": "B",
+            "text": "Premium"
+          },
+          {
+            "id": "C",
+            "text": "Vehicle Speed Unlocked"
+          },
+          {
+            "id": "D",
+            "text": "Estates Unlocked"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "BHR-H02",
+        "question": "Where is the hidden entrance to the Agency Bunker?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Behind the hospital reception desk"
+          },
+          {
+            "id": "B",
+            "text": "Inside the Town Hall lobby"
+          },
+          {
+            "id": "C",
+            "text": "Inside the Airport hangar"
+          },
+          {
+            "id": "D",
+            "text": "In the hillside beside Rotten Robbie"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "BHR-H03",
+        "question": "Which house has the vault opened by an orange button behind its TV?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Underground House"
+          },
+          {
+            "id": "B",
+            "text": "Tree House"
+          },
+          {
+            "id": "C",
+            "text": "Trailer House"
+          },
+          {
+            "id": "D",
+            "text": "Family House"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-H04",
+        "question": "What is hidden beyond the Yacht's lower-deck shower wall?",
+        "options": [
+          {
+            "id": "A",
+            "text": "An engine-control room"
+          },
+          {
+            "id": "B",
+            "text": "A weapons room"
+          },
+          {
+            "id": "C",
+            "text": "A medical treatment room"
+          },
+          {
+            "id": "D",
+            "text": "A recording studio"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "BHR-H14",
+        "question": "What does the door at the end of the tunnels beneath the Power Plant need?",
+        "options": [
+          {
+            "id": "A",
+            "text": "An orange key card"
+          },
+          {
+            "id": "B",
+            "text": "A green key card"
+          },
+          {
+            "id": "C",
+            "text": "A blue key card"
+          },
+          {
+            "id": "D",
+            "text": "A red key card"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "BHR-H15",
+        "question": "Counting from the left, which Cemetery grave leads down to the Agency coffin?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The third grave"
+          },
+          {
+            "id": "B",
+            "text": "The first grave"
+          },
+          {
+            "id": "C",
+            "text": "The second grave"
+          },
+          {
+            "id": "D",
+            "text": "The fourth grave"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "BHR-H16",
+        "question": "Where is the hidden “Wolfpaq Was Here!” text?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Inside the Bank vault"
+          },
+          {
+            "id": "B",
+            "text": "Inside the Yacht's lower level"
+          },
+          {
+            "id": "C",
+            "text": "Above the School classrooms"
+          },
+          {
+            "id": "D",
+            "text": "Behind the Hospital reception desk"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      }
+    ]
+  }
+}

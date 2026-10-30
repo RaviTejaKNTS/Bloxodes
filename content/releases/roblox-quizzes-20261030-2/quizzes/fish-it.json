@@ -1,0 +1,643 @@
+{
+  "page": {
+    "universe_id": 6701277882,
+    "code": "fish-it",
+    "title": "Fish It Roblox Quiz: 15 Questions on Rods, Fish and Islands",
+    "description_md": "Think you know Fish It? Easy questions cover the starting island, the reel step on desktop, fish records and travel between islands. Medium ones ask about rods, Bobbers, enchanting and the boat menu. Hard questions test where specific fish get caught, plus the minor fishing regions on Classic Island, Pirate Cove and Ancient Jungle.",
+    "seo_title": null,
+    "seo_description": "How well do you know Fish It on Roblox? Test the reel step, rods, Bobbers, enchanting, boats and where rare fish get caught, from easy questions to hard ones.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Where does a new player start in Fish It?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tropical Grove"
+          },
+          {
+            "id": "b",
+            "text": "Fisherman Island"
+          },
+          {
+            "id": "c",
+            "text": "Kohana Island"
+          },
+          {
+            "id": "d",
+            "text": "Crater Island"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "On desktop, what do you do once a fish bites?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Press E once"
+          },
+          {
+            "id": "b",
+            "text": "Hold the left mouse button until the fish is reeled in"
+          },
+          {
+            "id": "c",
+            "text": "Click rapidly to reel it in"
+          },
+          {
+            "id": "d",
+            "text": "Press Space once"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which rod do you get when you first enter the game?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Starter Rod"
+          },
+          {
+            "id": "b",
+            "text": "Carbon Rod"
+          },
+          {
+            "id": "c",
+            "text": "Luck Rod"
+          },
+          {
+            "id": "d",
+            "text": "Lava Rod"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What can you spend the money from selling fish on?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rods, bait and boats"
+          },
+          {
+            "id": "b",
+            "text": "Fish Index entries, quest progress and fish records"
+          },
+          {
+            "id": "c",
+            "text": "Rod stats, island tabs and catch records"
+          },
+          {
+            "id": "d",
+            "text": "Boat Spawn points, map markers and player levels"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What is the main way to travel between distant islands?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Enchanting Stones"
+          },
+          {
+            "id": "b",
+            "text": "The Fish Index"
+          },
+          {
+            "id": "c",
+            "text": "Boats"
+          },
+          {
+            "id": "d",
+            "text": "Bobbers"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Which feature keeps a record of caught fish, sorted by island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Fish Index"
+          },
+          {
+            "id": "b",
+            "text": "Rod Shop"
+          },
+          {
+            "id": "c",
+            "text": "Boat Spawn menu"
+          },
+          {
+            "id": "d",
+            "text": "Bobbers Shop"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Where can you catch fish during a trip between islands?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kohana Volcano"
+          },
+          {
+            "id": "b",
+            "text": "Esoteric Depths"
+          },
+          {
+            "id": "c",
+            "text": "Fisherman Island"
+          },
+          {
+            "id": "d",
+            "text": "The Ocean"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which three main stats do fishing rods list?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Passenger count, Acceleration, and Top Speed"
+          },
+          {
+            "id": "b",
+            "text": "Luck, Speed, and Weight"
+          },
+          {
+            "id": "c",
+            "text": "Mutation, Shiny Chance, and Bonus XP"
+          },
+          {
+            "id": "d",
+            "text": "Acceleration, Mutation, and Shiny Chance"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Where do most fishing rods come from?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Quest NPCs"
+          },
+          {
+            "id": "b",
+            "text": "The Bobbers Shop"
+          },
+          {
+            "id": "c",
+            "text": "Island shops"
+          },
+          {
+            "id": "d",
+            "text": "The Fish Index"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Which NPC gives you the Lava Rod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Seth"
+          },
+          {
+            "id": "b",
+            "text": "Joe"
+          },
+          {
+            "id": "c",
+            "text": "The fish merchant"
+          },
+          {
+            "id": "d",
+            "text": "The Lava Fisherman"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Where is Kohana Volcano located?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside the mountain on Kohana Island"
+          },
+          {
+            "id": "b",
+            "text": "A separate island"
+          },
+          {
+            "id": "c",
+            "text": "An underwater room on Lost Isle"
+          },
+          {
+            "id": "d",
+            "text": "A cave on Crater Island"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which of these can a Bobber change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Boat speed"
+          },
+          {
+            "id": "b",
+            "text": "Passenger seats"
+          },
+          {
+            "id": "c",
+            "text": "Shiny Chance"
+          },
+          {
+            "id": "d",
+            "text": "Rod weight limit"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Who do you talk to for the Bobbers Shop on Fisherman Island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Joe"
+          },
+          {
+            "id": "b",
+            "text": "Seth"
+          },
+          {
+            "id": "c",
+            "text": "The Lava Fisherman"
+          },
+          {
+            "id": "d",
+            "text": "The fish merchant"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "Which of these items can be used to enchant a rod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fishing bait"
+          },
+          {
+            "id": "b",
+            "text": "Diving Gear"
+          },
+          {
+            "id": "c",
+            "text": "A Fish Index entry"
+          },
+          {
+            "id": "d",
+            "text": "An Enchanting Stone"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Where do you go to enchant a rod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Esoteric Depths"
+          },
+          {
+            "id": "b",
+            "text": "Coral Reefs"
+          },
+          {
+            "id": "c",
+            "text": "Crater Island"
+          },
+          {
+            "id": "d",
+            "text": "Kohana Volcano"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "How can you open the boat menu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Fish Radar or the Rod Shop"
+          },
+          {
+            "id": "b",
+            "text": "A pier NPC or a Boat Spawn point"
+          },
+          {
+            "id": "c",
+            "text": "The Fish Index or the Bobbers Shop"
+          },
+          {
+            "id": "d",
+            "text": "The Rod Skin Shop or Diving Gear"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Where can you catch Clownfish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kohana Volcano"
+          },
+          {
+            "id": "b",
+            "text": "Crater Island"
+          },
+          {
+            "id": "c",
+            "text": "Fisherman Island"
+          },
+          {
+            "id": "d",
+            "text": "Tropical Grove"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Which area is Manta Ray found in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kohana Island"
+          },
+          {
+            "id": "b",
+            "text": "The Ocean"
+          },
+          {
+            "id": "c",
+            "text": "Coral Reefs"
+          },
+          {
+            "id": "d",
+            "text": "Crater Island"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "Where is Fire Goby found?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Ocean"
+          },
+          {
+            "id": "b",
+            "text": "Coral Reefs"
+          },
+          {
+            "id": "c",
+            "text": "Lost Isle"
+          },
+          {
+            "id": "d",
+            "text": "Kohana Island"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Where would you catch Volsail Tang?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kohana Volcano"
+          },
+          {
+            "id": "b",
+            "text": "Coral Reefs"
+          },
+          {
+            "id": "c",
+            "text": "Tropical Grove"
+          },
+          {
+            "id": "d",
+            "text": "Fisherman Island"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "At which location can you catch the Great Whale?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Ocean"
+          },
+          {
+            "id": "b",
+            "text": "Kohana Island"
+          },
+          {
+            "id": "c",
+            "text": "Tropical Grove"
+          },
+          {
+            "id": "d",
+            "text": "Crater Island"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Where can you catch the Legendary Axolotl?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tropical Grove"
+          },
+          {
+            "id": "b",
+            "text": "Crater Island"
+          },
+          {
+            "id": "c",
+            "text": "Kohana Volcano"
+          },
+          {
+            "id": "d",
+            "text": "The Ocean"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What do you need to access the Treasure Room or the Sisyphus Statue on Lost Isle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An Enchanting Stone"
+          },
+          {
+            "id": "b",
+            "text": "A Bobber"
+          },
+          {
+            "id": "c",
+            "text": "A Luck Rod"
+          },
+          {
+            "id": "d",
+            "text": "Diving Gear"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "What are the two minor fishing regions on Classic Island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Iron Caverns and the Iron Cafe"
+          },
+          {
+            "id": "b",
+            "text": "The Sisyphus Statue and Kohana Volcano"
+          },
+          {
+            "id": "c",
+            "text": "The Crystal Depths and the Pirate Treasure Room"
+          },
+          {
+            "id": "d",
+            "text": "The Esoteric Depths and Tropical Grove"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "Which two minor fishing regions belong to Pirate Cove?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Coral Reefs and the Tropical Grove"
+          },
+          {
+            "id": "b",
+            "text": "The Sisyphus Statue and Kohana Volcano"
+          },
+          {
+            "id": "c",
+            "text": "The Crystal Depths and the Pirate Treasure Room"
+          },
+          {
+            "id": "d",
+            "text": "The Esoteric Depths and Tropical Grove"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "Where are Ancient Jungle's two minor fishing regions hidden?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside sunken ships"
+          },
+          {
+            "id": "b",
+            "text": "In the open Ocean"
+          },
+          {
+            "id": "c",
+            "text": "On the volcano rim"
+          },
+          {
+            "id": "d",
+            "text": "Inside temples"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

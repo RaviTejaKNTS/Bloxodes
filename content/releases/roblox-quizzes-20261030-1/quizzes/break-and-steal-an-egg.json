@@ -1,0 +1,427 @@
+{
+  "page": {
+    "universe_id": 10765288803,
+    "code": "break-and-steal-an-egg",
+    "title": "Break and Steal an Egg Roblox Quiz: 15 Questions on Eggs and Pets",
+    "description_md": "You’ll get 15 random questions per attempt, five each at Easy, Medium, and Hard. They cover eggs, pets, training, zone runs, and Index rewards.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Break and Steal an Egg knowledge on eggs, pets, training, zones and Index rewards. Each attempt draws 15 random questions, five per tier.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-r-e1",
+        "question": "Which tool do you use to break an egg?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bat"
+          },
+          {
+            "id": "b",
+            "text": "Pickaxe"
+          },
+          {
+            "id": "c",
+            "text": "Hammer"
+          },
+          {
+            "id": "d",
+            "text": "Shovel"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-r-e5",
+        "question": "Which feature keeps your animal collection record?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Index"
+          },
+          {
+            "id": "b",
+            "text": "Pen"
+          },
+          {
+            "id": "c",
+            "text": "Pickaxe Shop"
+          },
+          {
+            "id": "d",
+            "text": "Trails Shop"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e7",
+        "question": "What does the Pet Merge Machine turn pets into?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Potions"
+          },
+          {
+            "id": "b",
+            "text": "Trails"
+          },
+          {
+            "id": "c",
+            "text": "Eggs"
+          },
+          {
+            "id": "d",
+            "text": "Cash"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-m6",
+        "question": "What does Pickaxe Power measure?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Animal carry speed"
+          },
+          {
+            "id": "b",
+            "text": "Guard range"
+          },
+          {
+            "id": "c",
+            "text": "Cash per second"
+          },
+          {
+            "id": "d",
+            "text": "Damage dealt by each swing"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-r-m7",
+        "question": "How often does an animal in your Pen earn cash?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every second"
+          },
+          {
+            "id": "b",
+            "text": "Every minute"
+          },
+          {
+            "id": "c",
+            "text": "Every hour"
+          },
+          {
+            "id": "d",
+            "text": "Only when first placed"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-r-m10",
+        "question": "As you go farther from the Safe Zone, how does guardian speed change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It decreases with distance"
+          },
+          {
+            "id": "b",
+            "text": "It increases with distance"
+          },
+          {
+            "id": "c",
+            "text": "It stays the same"
+          },
+          {
+            "id": "d",
+            "text": "It alternates between faster and slower"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-r3",
+        "question": "Which pickaxe do you start with?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stone"
+          },
+          {
+            "id": "b",
+            "text": "Iron"
+          },
+          {
+            "id": "c",
+            "text": "Wooden"
+          },
+          {
+            "id": "d",
+            "text": "Golden"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-m1",
+        "question": "What is the usual Speed target for a Desert run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 500 Speed"
+          },
+          {
+            "id": "b",
+            "text": "About 5,000 Speed"
+          },
+          {
+            "id": "c",
+            "text": "About 75,000 Speed"
+          },
+          {
+            "id": "d",
+            "text": "About 1,000 Speed"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-m2",
+        "question": "What is the usual Speed target for a Snowy run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 5,000 Speed"
+          },
+          {
+            "id": "b",
+            "text": "About 25,000 Speed"
+          },
+          {
+            "id": "c",
+            "text": "About 50,000 Speed"
+          },
+          {
+            "id": "d",
+            "text": "About 75,000 Speed"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-r-e10",
+        "question": "How does carrying a heavy egg affect the trip back?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It speeds up the return"
+          },
+          {
+            "id": "b",
+            "text": "It slows the return"
+          },
+          {
+            "id": "c",
+            "text": "It leaves return speed unchanged"
+          },
+          {
+            "id": "d",
+            "text": "It prevents all movement"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-r-m8",
+        "question": "What starts a zone guardian's chase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Taking an animal from its territory"
+          },
+          {
+            "id": "b",
+            "text": "Entering its territory"
+          },
+          {
+            "id": "c",
+            "text": "Breaking an egg in its territory"
+          },
+          {
+            "id": "d",
+            "text": "Training Speed before entering its territory"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-r-m9",
+        "question": "What happens if a rival hits you with a Bat while you're carrying an animal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The animal returns to its egg"
+          },
+          {
+            "id": "b",
+            "text": "You drop your pickaxe"
+          },
+          {
+            "id": "c",
+            "text": "The animal goes straight to your Pen"
+          },
+          {
+            "id": "d",
+            "text": "You drop the animal"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-r-h1",
+        "question": "With the Moonlight Trail equipped, how do Treadmill Speed gains and Index Speed rewards change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Treadmill gains stay the same; Index rewards increase"
+          },
+          {
+            "id": "b",
+            "text": "Treadmill gains increase; Index rewards increase"
+          },
+          {
+            "id": "c",
+            "text": "Treadmill gains increase; Index rewards stay the same"
+          },
+          {
+            "id": "d",
+            "text": "Treadmill gains stay the same; Index rewards stay the same"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-r-h3",
+        "question": "A pet's first-discovery Index cash reward is about how much of its Pen income?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 100 seconds of income"
+          },
+          {
+            "id": "b",
+            "text": "About 1 second of income"
+          },
+          {
+            "id": "c",
+            "text": "About 10 seconds of income"
+          },
+          {
+            "id": "d",
+            "text": "About 1,000 seconds of income"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-r-h5",
+        "question": "How does a Galaxy Crocodile's Pen income compare with a Snowy Polar Bear's over the same time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One quarter as much"
+          },
+          {
+            "id": "b",
+            "text": "Four times as much"
+          },
+          {
+            "id": "c",
+            "text": "Twice as much"
+          },
+          {
+            "id": "d",
+            "text": "Eight times as much"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-r1",
+        "question": "From Desert through Blossom, claiming all of a zone's first-discovery Index rewards gives about what share of the next zone's Speed target?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 10%"
+          },
+          {
+            "id": "b",
+            "text": "About 50%"
+          },
+          {
+            "id": "c",
+            "text": "About 30%"
+          },
+          {
+            "id": "d",
+            "text": "About 100%"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-r2",
+        "question": "With each Trail equipped in turn, how much faster is Treadmill Speed training with Moonlight than with White?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50 times faster"
+          },
+          {
+            "id": "b",
+            "text": "500 times faster"
+          },
+          {
+            "id": "c",
+            "text": "50,000 times faster"
+          },
+          {
+            "id": "d",
+            "text": "5,000 times faster"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

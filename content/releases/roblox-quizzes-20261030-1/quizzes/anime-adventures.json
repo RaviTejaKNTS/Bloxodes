@@ -1,0 +1,595 @@
+{
+  "page": {
+    "universe_id": 3183403065,
+    "code": "anime-adventures",
+    "title": "Anime Adventures Roblox Quiz: 15 Questions on Worlds and Traits",
+    "description_md": "Do you know your way around the Story worlds, units and game systems in Anime Adventures? Easy questions cover summons, currencies, rerolls and XP food. Hard ones dig into traits like Culling, Godspeed and Unique. Each attempt has 15 questions: five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Think you know Anime Adventures on Roblox? Take 15 questions on Story world bosses, enemies, traits, rerolls and dungeons, from easy basics to tricky mechanics.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which activity do Gems fund?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Summoning units in the lobby"
+          },
+          {
+            "id": "b",
+            "text": "Buying food and evolution supplies"
+          },
+          {
+            "id": "c",
+            "text": "Placing and upgrading units during a match"
+          },
+          {
+            "id": "d",
+            "text": "Rerolling a unit's trait"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What does every summon guarantee?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An item, with no unit attached"
+          },
+          {
+            "id": "b",
+            "text": "At least one unit; extra items may also drop"
+          },
+          {
+            "id": "c",
+            "text": "A unit, but an extra item can replace it"
+          },
+          {
+            "id": "d",
+            "text": "Either a unit or an item, your choice"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which XP food do you use for Planet Greenie?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ghoul Coffee"
+          },
+          {
+            "id": "b",
+            "text": "Devil Fruit"
+          },
+          {
+            "id": "c",
+            "text": "Senzu Bean"
+          },
+          {
+            "id": "d",
+            "text": "Soul Candy"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Which XP food do you use for Walled City?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ramen Bowl"
+          },
+          {
+            "id": "b",
+            "text": "Devil Fruit"
+          },
+          {
+            "id": "c",
+            "text": "Ghoul Coffee"
+          },
+          {
+            "id": "d",
+            "text": "Mysterious Fluid"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Where do players go to reroll traits?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Ethereal Guide outside the Evolve area"
+          },
+          {
+            "id": "b",
+            "text": "The Ethereal Guide inside the Evolve area"
+          },
+          {
+            "id": "c",
+            "text": "The Gambler in the lobby"
+          },
+          {
+            "id": "d",
+            "text": "The Bartender, who sells unit slots"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "How many Reroll Tokens does each trait reroll cost on any unit, including Mythic and Secret units?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "1"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which XP food do you use for Snowy Town?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Soul Candy"
+          },
+          {
+            "id": "b",
+            "text": "Curse Talisman"
+          },
+          {
+            "id": "c",
+            "text": "Wisteria Flower"
+          },
+          {
+            "id": "d",
+            "text": "Pirate Grapes"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "In Dungeons, what layout should you expect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A fixed layout with one level"
+          },
+          {
+            "id": "b",
+            "text": "A fixed layout with several levels"
+          },
+          {
+            "id": "c",
+            "text": "Random layouts with one level"
+          },
+          {
+            "id": "d",
+            "text": "Random layouts with more than one level"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What unlocks a Story world's Infinite mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Clearing any single act in that world"
+          },
+          {
+            "id": "b",
+            "text": "Finishing the daily Infinite quest"
+          },
+          {
+            "id": "c",
+            "text": "Clearing every act in that world"
+          },
+          {
+            "id": "d",
+            "text": "Reaching a specific unit level"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "What do Massive Titans do when they die in Walled City Act 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Clone weaker Titans"
+          },
+          {
+            "id": "b",
+            "text": "Split into two stronger Titans"
+          },
+          {
+            "id": "c",
+            "text": "Disappear without creating another enemy"
+          },
+          {
+            "id": "d",
+            "text": "Spawn a new wave"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "In which Story acts of Ant Kingdom can Massive Ants appear?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only in Act 1"
+          },
+          {
+            "id": "b",
+            "text": "Only in the final act"
+          },
+          {
+            "id": "c",
+            "text": "Not before Act 6"
+          },
+          {
+            "id": "d",
+            "text": "In any act"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What happens when a Clone Demon dies in Snowy Town?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One stronger clone spawns"
+          },
+          {
+            "id": "b",
+            "text": "Two stacked clones spawn"
+          },
+          {
+            "id": "c",
+            "text": "A portal opens"
+          },
+          {
+            "id": "d",
+            "text": "A healing zone appears"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Which boss closes Walled City's Story route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Colossal Titan"
+          },
+          {
+            "id": "b",
+            "text": "Zezoom"
+          },
+          {
+            "id": "c",
+            "text": "Goldeo"
+          },
+          {
+            "id": "d",
+            "text": "Vurtor"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What kind of enemy does Sand Village introduce?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Clone Demons"
+          },
+          {
+            "id": "b",
+            "text": "Massive Ants"
+          },
+          {
+            "id": "c",
+            "text": "Explosive enemies"
+          },
+          {
+            "id": "d",
+            "text": "Mutant Ants"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Which boss sequence appears at the end of Planet Greenie's Act 6?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Goldeo, then Zezoom"
+          },
+          {
+            "id": "b",
+            "text": "Freezo, then Freezo (Final)"
+          },
+          {
+            "id": "c",
+            "text": "Freezo (Final), then Freezo"
+          },
+          {
+            "id": "d",
+            "text": "Gunyu, then Freezo (Final)"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Which boss closes Snowy Town's Story route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Goldeo"
+          },
+          {
+            "id": "b",
+            "text": "Zezoom"
+          },
+          {
+            "id": "c",
+            "text": "Gunyu"
+          },
+          {
+            "id": "d",
+            "text": "Muzo"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Which boss closes Sand Village's Story route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sashora (Puppet Master)"
+          },
+          {
+            "id": "b",
+            "text": "Zarbo (Evolved)"
+          },
+          {
+            "id": "c",
+            "text": "Freezo (Final)"
+          },
+          {
+            "id": "d",
+            "text": "Colossal Titan"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "An Ant Egg dropped by Massive Ants comes with how many shield instances?",
+        "options": [
+          {
+            "id": "a",
+            "text": "4"
+          },
+          {
+            "id": "b",
+            "text": "5"
+          },
+          {
+            "id": "c",
+            "text": "6"
+          },
+          {
+            "id": "d",
+            "text": "8"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "How many Star Remnants does one trait reroll cost for a Mythic or Secret unit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2"
+          },
+          {
+            "id": "b",
+            "text": "3"
+          },
+          {
+            "id": "c",
+            "text": "10"
+          },
+          {
+            "id": "d",
+            "text": "5"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What is the chance that one trait reroll gives a unit two traits?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0.2%"
+          },
+          {
+            "id": "b",
+            "text": "0.02%"
+          },
+          {
+            "id": "c",
+            "text": "2%"
+          },
+          {
+            "id": "d",
+            "text": "20%"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "By what percentage does Godspeed reduce SPA, the stat that sets how often a unit attacks?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10%"
+          },
+          {
+            "id": "b",
+            "text": "15%"
+          },
+          {
+            "id": "c",
+            "text": "20%"
+          },
+          {
+            "id": "d",
+            "text": "30%"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "In Dungeon mode, a Shrine can offer a stronger curse. What does the player get in return?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A larger reward"
+          },
+          {
+            "id": "b",
+            "text": "A shorter run"
+          },
+          {
+            "id": "c",
+            "text": "A cheaper dungeon key"
+          },
+          {
+            "id": "d",
+            "text": "A weaker enemy wave"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What placement limit does Unique put on its owner?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One unit total in the match"
+          },
+          {
+            "id": "b",
+            "text": "Two copies with no upgrades"
+          },
+          {
+            "id": "c",
+            "text": "One copy of that unit"
+          },
+          {
+            "id": "d",
+            "text": "One copy per lane"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What is the highest enemy health percentage that still takes Culling's bonus damage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10%"
+          },
+          {
+            "id": "b",
+            "text": "30%"
+          },
+          {
+            "id": "c",
+            "text": "40%"
+          },
+          {
+            "id": "d",
+            "text": "50%"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

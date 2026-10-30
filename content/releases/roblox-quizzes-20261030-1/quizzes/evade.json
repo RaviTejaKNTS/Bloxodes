@@ -1,0 +1,619 @@
+{
+  "page": {
+    "universe_id": 3647333358,
+    "code": "evade",
+    "title": "Evade Roblox Quiz: 15 Questions on Nextbots, Controls and Revives",
+    "description_md": "Think you know how to survive a Nextbot chase? These questions cover the warnings that tell you one is close, the PC keys you'll press every round, and how teammates bring a downed player back. Each attempt draws 15 questions, five from each difficulty.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Evade knowledge on Nextbot warnings, PC keyboard controls and teammate revives, from basic round rules to trickier rescue-item effects.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What are Nextbots in Evade?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hunters that chase players around the map"
+          },
+          {
+            "id": "b",
+            "text": "Perks players equip to improve movement"
+          },
+          {
+            "id": "c",
+            "text": "Currencies players earn after a round"
+          },
+          {
+            "id": "d",
+            "text": "Menus players use to change their settings"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What is the goal in a standard round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Earn the most tokens before the timer ends"
+          },
+          {
+            "id": "b",
+            "text": "Rescue every teammate before a Nextbot arrives"
+          },
+          {
+            "id": "c",
+            "text": "Stay alive until the round timer runs out"
+          },
+          {
+            "id": "d",
+            "text": "Clear every Nextbot before the map changes"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What does the E key do on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Swap out the item you have equipped"
+          },
+          {
+            "id": "b",
+            "text": "Interact with doors and downed players"
+          },
+          {
+            "id": "c",
+            "text": "Open the leaderboard for the round"
+          },
+          {
+            "id": "d",
+            "text": "Switch your view between first and third person"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What does the G key do on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Uses the item you have equipped"
+          },
+          {
+            "id": "b",
+            "text": "Opens the usables wheel to pick an item"
+          },
+          {
+            "id": "c",
+            "text": "Drops a decoy for the Nextbots to follow"
+          },
+          {
+            "id": "d",
+            "text": "Plays the emote you have equipped"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Which key equips or unequips your light on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "F"
+          },
+          {
+            "id": "b",
+            "text": "1"
+          },
+          {
+            "id": "c",
+            "text": "T"
+          },
+          {
+            "id": "d",
+            "text": "G"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Which key opens the Usables wheel on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "N"
+          },
+          {
+            "id": "b",
+            "text": "G"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "3"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What do C or Ctrl do on PC when you are not running?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Use an equipped item"
+          },
+          {
+            "id": "b",
+            "text": "Whistle for your teammates"
+          },
+          {
+            "id": "c",
+            "text": "Return to the menu"
+          },
+          {
+            "id": "d",
+            "text": "Crouch"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which key returns you to the menu on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "T"
+          },
+          {
+            "id": "b",
+            "text": "M"
+          },
+          {
+            "id": "c",
+            "text": "E"
+          },
+          {
+            "id": "d",
+            "text": "N"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How long does a standard round last?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three minutes"
+          },
+          {
+            "id": "b",
+            "text": "One minute"
+          },
+          {
+            "id": "c",
+            "text": "Two minutes"
+          },
+          {
+            "id": "d",
+            "text": "Five minutes"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "What warning gets stronger as a Nextbot gets closer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A progress bar fills up"
+          },
+          {
+            "id": "b",
+            "text": "A red or black screen filter"
+          },
+          {
+            "id": "c",
+            "text": "A chat message pops up"
+          },
+          {
+            "id": "d",
+            "text": "A reward banner appears"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What usually happens when a Nextbot catches a player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They respawn at the map start right away"
+          },
+          {
+            "id": "b",
+            "text": "They stand back up automatically after a short delay"
+          },
+          {
+            "id": "c",
+            "text": "They enter a downed state a teammate can revive"
+          },
+          {
+            "id": "d",
+            "text": "They stay upright but lose the ability to run"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What does the T whistle do for a downed player on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It highlights the player for teammates"
+          },
+          {
+            "id": "b",
+            "text": "It stuns the nearest Nextbot for a moment"
+          },
+          {
+            "id": "c",
+            "text": "It revives the player on the spot"
+          },
+          {
+            "id": "d",
+            "text": "It opens the round's scoreboard"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "On PC, what does sliding into a door do while you run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It locks the door behind you"
+          },
+          {
+            "id": "b",
+            "text": "It opens the door quietly"
+          },
+          {
+            "id": "c",
+            "text": "It repairs damage to the door"
+          },
+          {
+            "id": "d",
+            "text": "It bashes the door down"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "If there is no objective, which way does the Compass point?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toward a teammate"
+          },
+          {
+            "id": "b",
+            "text": "Directly north"
+          },
+          {
+            "id": "c",
+            "text": "Toward the last Nextbot you saw"
+          },
+          {
+            "id": "d",
+            "text": "Back to spawn"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What does the Timer show?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Time remaining in the current round"
+          },
+          {
+            "id": "b",
+            "text": "Time since the last teammate revive"
+          },
+          {
+            "id": "c",
+            "text": "Distance to the nearest objective"
+          },
+          {
+            "id": "d",
+            "text": "Time until the next Nextbot arrives"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What happens to the Radar as an enemy gets closer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its beeps slow down"
+          },
+          {
+            "id": "b",
+            "text": "Its display turns off"
+          },
+          {
+            "id": "c",
+            "text": "Its pings come more often"
+          },
+          {
+            "id": "d",
+            "text": "Its pings get quieter"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Which map difficulty gives the most XP at the end of a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Easy"
+          },
+          {
+            "id": "b",
+            "text": "Normal"
+          },
+          {
+            "id": "c",
+            "text": "Hard"
+          },
+          {
+            "id": "d",
+            "text": "Expert"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Which key carries a downed teammate on PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Q"
+          },
+          {
+            "id": "b",
+            "text": "E"
+          },
+          {
+            "id": "c",
+            "text": "T"
+          },
+          {
+            "id": "d",
+            "text": "R"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What happens on a player's third down?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The player starts a new round automatically"
+          },
+          {
+            "id": "b",
+            "text": "The player gets one more down before elimination"
+          },
+          {
+            "id": "c",
+            "text": "The player is eliminated from the round"
+          },
+          {
+            "id": "d",
+            "text": "The player stays down and can still be revived"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "Which statement about Cola and carrying a downed player is correct?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Cola before pickup keeps its boost, and you can drink while carrying"
+          },
+          {
+            "id": "b",
+            "text": "A Cola before pickup keeps its boost, but you can't drink while carrying"
+          },
+          {
+            "id": "c",
+            "text": "A Cola before pickup gives no boost, but you can drink while carrying"
+          },
+          {
+            "id": "d",
+            "text": "A Cola before pickup gives no boost, and you can't drink while carrying"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What does the Stethoscope do when you revive a teammate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It makes every Nextbot slower for the round"
+          },
+          {
+            "id": "b",
+            "text": "It lets you see downed players through walls"
+          },
+          {
+            "id": "c",
+            "text": "It stops the first Nextbot hit from downing you"
+          },
+          {
+            "id": "d",
+            "text": "It makes regular teammate revives faster"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "At what level does the Stethoscope unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 4"
+          },
+          {
+            "id": "b",
+            "text": "Level 2"
+          },
+          {
+            "id": "c",
+            "text": "Level 10"
+          },
+          {
+            "id": "d",
+            "text": "Level 50"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does the Defibrillator do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reveals every downed player on the map"
+          },
+          {
+            "id": "b",
+            "text": "Blocks Nextbots from reaching a downed player"
+          },
+          {
+            "id": "c",
+            "text": "Instantly revives one selected player"
+          },
+          {
+            "id": "d",
+            "text": "Makes the user immune to the next Nextbot hit"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What does the Revive Grenade do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It revives all downed players anywhere, even if carried"
+          },
+          {
+            "id": "b",
+            "text": "It revives nearby downed players, except those being carried"
+          },
+          {
+            "id": "c",
+            "text": "It revives nearby downed players only if they're being carried"
+          },
+          {
+            "id": "d",
+            "text": "It revives one selected downed player, even if carried"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "What does the Medkit perk change while you are downed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It hides the wearer from Nextbots while they're downed"
+          },
+          {
+            "id": "b",
+            "text": "It lets the wearer open doors from farther away while downed"
+          },
+          {
+            "id": "c",
+            "text": "It gives the wearer a shield against the next Nextbot hit"
+          },
+          {
+            "id": "d",
+            "text": "It speeds downed movement and extends the revive window"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

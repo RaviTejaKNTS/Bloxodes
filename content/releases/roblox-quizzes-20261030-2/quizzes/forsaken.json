@@ -1,0 +1,667 @@
+{
+  "page": {
+    "universe_id": 6331902150,
+    "code": "forsaken",
+    "title": "Forsaken Roblox Quiz: 15 Questions on Noob, Elliot and Effects",
+    "description_md": "Think you know how a Forsaken round plays out? Questions cover the round timer, Noob's consumables, Elliot's pizza healing and the status effects that shape a chase. Each attempt gives you 15 questions: five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Test what you know about Noob, Elliot, status effects and match goals in Roblox Forsaken. Fifteen questions run from familiar basics to trickier details.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "How do Survivors win a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Survive until time runs out"
+          },
+          {
+            "id": "b",
+            "text": "Eliminate the Killer"
+          },
+          {
+            "id": "c",
+            "text": "Repair every generator"
+          },
+          {
+            "id": "d",
+            "text": "Escape through an exit"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What is the Killer's goal in a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Complete every objective"
+          },
+          {
+            "id": "b",
+            "text": "Escape as the last player"
+          },
+          {
+            "id": "c",
+            "text": "Eliminate every Survivor"
+          },
+          {
+            "id": "d",
+            "text": "Heal every teammate"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which statement about Noob's base character is true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Noob requires a gamepass"
+          },
+          {
+            "id": "b",
+            "text": "Noob is free to all players"
+          },
+          {
+            "id": "c",
+            "text": "Noob unlocks at level 25"
+          },
+          {
+            "id": "d",
+            "text": "Noob unlocks at level 50"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What is Noob's Survivor class?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Support"
+          },
+          {
+            "id": "b",
+            "text": "Sentinel"
+          },
+          {
+            "id": "c",
+            "text": "Killer"
+          },
+          {
+            "id": "d",
+            "text": "Survivalist"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What is Elliot's Survivor class?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Support"
+          },
+          {
+            "id": "b",
+            "text": "Survivalist"
+          },
+          {
+            "id": "c",
+            "text": "Sentinel"
+          },
+          {
+            "id": "d",
+            "text": "Killer"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Which Noob ability gives a movement boost and removes slowing effects?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Slateskin Potion"
+          },
+          {
+            "id": "b",
+            "text": "Bloxy Cola"
+          },
+          {
+            "id": "c",
+            "text": "Ghostburger"
+          },
+          {
+            "id": "d",
+            "text": "Elliot's Pizza Throw"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which status does Noob's Slateskin Potion apply after the drink finishes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Exhausted II"
+          },
+          {
+            "id": "b",
+            "text": "Bleeding"
+          },
+          {
+            "id": "c",
+            "text": "Slateskin III"
+          },
+          {
+            "id": "d",
+            "text": "Burning"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "When does Elliot's Pizza Throw heal another Survivor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When that Survivor picks up the pizza"
+          },
+          {
+            "id": "b",
+            "text": "When Elliot throws it"
+          },
+          {
+            "id": "c",
+            "text": "When it hits the Killer"
+          },
+          {
+            "id": "d",
+            "text": "When it lands on the ground"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "What does repairing a generator do to the round timer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It adds time to the round timer"
+          },
+          {
+            "id": "b",
+            "text": "It stops the round timer"
+          },
+          {
+            "id": "c",
+            "text": "It has no effect on the round timer"
+          },
+          {
+            "id": "d",
+            "text": "It cuts time off the round timer"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What do EXP points let Survivors and Killers do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Buy skins"
+          },
+          {
+            "id": "b",
+            "text": "Level up"
+          },
+          {
+            "id": "c",
+            "text": "Raise the server player cap"
+          },
+          {
+            "id": "d",
+            "text": "Trade items with other players"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Which two statuses does Noob get after eating a Ghostburger?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Speed I and Slowness I"
+          },
+          {
+            "id": "b",
+            "text": "Slowness I and Exhausted II"
+          },
+          {
+            "id": "c",
+            "text": "Undetectable I and Invisibility IV"
+          },
+          {
+            "id": "d",
+            "text": "Regeneration and Bleeding"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Outside Last Man Standing, what does the regular Bloxy Cola item give when used?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Speed II for 10 seconds"
+          },
+          {
+            "id": "b",
+            "text": "Speed I for 10 seconds"
+          },
+          {
+            "id": "c",
+            "text": "Speed II for 5 seconds"
+          },
+          {
+            "id": "d",
+            "text": "Speed II for 20 seconds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "How much health does a Medkit heal when used?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40 health"
+          },
+          {
+            "id": "b",
+            "text": "60 health"
+          },
+          {
+            "id": "c",
+            "text": "100 health"
+          },
+          {
+            "id": "d",
+            "text": "80 health"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What happens when a Survivor at full health tries to use a Medkit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Heals 80 HP"
+          },
+          {
+            "id": "b",
+            "text": "Blocked with a warning"
+          },
+          {
+            "id": "c",
+            "text": "Heals 40 HP"
+          },
+          {
+            "id": "d",
+            "text": "Used without healing"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How long is a Medkit's startup before it heals?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 seconds"
+          },
+          {
+            "id": "b",
+            "text": "5 seconds"
+          },
+          {
+            "id": "c",
+            "text": "7 seconds"
+          },
+          {
+            "id": "d",
+            "text": "9 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Can Elliot heal himself with his own Pizza Throw?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No, Elliot cannot use it"
+          },
+          {
+            "id": "b",
+            "text": "Yes, but only at full health"
+          },
+          {
+            "id": "c",
+            "text": "Yes, but only when the Killer is nearby"
+          },
+          {
+            "id": "d",
+            "text": "Yes, but only with Order Up active"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "After a Survivor takes damage that isn't from a status effect, how long does Elliot see that Survivor's aura?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6 seconds"
+          },
+          {
+            "id": "b",
+            "text": "10 seconds"
+          },
+          {
+            "id": "c",
+            "text": "15 seconds"
+          },
+          {
+            "id": "d",
+            "text": "12 seconds"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "What Noob level unlocks Milestone IV?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 25"
+          },
+          {
+            "id": "b",
+            "text": "Level 50"
+          },
+          {
+            "id": "c",
+            "text": "Level 100"
+          },
+          {
+            "id": "d",
+            "text": "Level 75"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which Noob level unlocks Milestone I?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 50"
+          },
+          {
+            "id": "b",
+            "text": "Level 25"
+          },
+          {
+            "id": "c",
+            "text": "Level 75"
+          },
+          {
+            "id": "d",
+            "text": "Level 100"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "How much does each stack of Speed increase movement speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5%"
+          },
+          {
+            "id": "b",
+            "text": "15%"
+          },
+          {
+            "id": "c",
+            "text": "20%"
+          },
+          {
+            "id": "d",
+            "text": "10%"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Which detection methods does Undetectable make ignore the player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Aura reading only"
+          },
+          {
+            "id": "b",
+            "text": "Minions and aura reading"
+          },
+          {
+            "id": "c",
+            "text": "Minions only"
+          },
+          {
+            "id": "d",
+            "text": "Neither"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "How transparent does Invisibility IV make a player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "92.5%"
+          },
+          {
+            "id": "b",
+            "text": "75%"
+          },
+          {
+            "id": "c",
+            "text": "90%"
+          },
+          {
+            "id": "d",
+            "text": "100%"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "How much overheal does each stack of Slateskin give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20 overheal"
+          },
+          {
+            "id": "b",
+            "text": "30 overheal"
+          },
+          {
+            "id": "c",
+            "text": "40 overheal"
+          },
+          {
+            "id": "d",
+            "text": "50 overheal"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "How much more damage does each stack of Vulnerable make a player take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10% more damage taken"
+          },
+          {
+            "id": "b",
+            "text": "20% more damage taken"
+          },
+          {
+            "id": "c",
+            "text": "25% more damage taken"
+          },
+          {
+            "id": "d",
+            "text": "50% more damage taken"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does each stack of Haste improve?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Movement speed"
+          },
+          {
+            "id": "b",
+            "text": "Maximum health"
+          },
+          {
+            "id": "c",
+            "text": "Damage dealt"
+          },
+          {
+            "id": "d",
+            "text": "Ability recharge rate"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "With no ability or outside effect, what happens to a player's health?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It slowly regenerates"
+          },
+          {
+            "id": "b",
+            "text": "It slowly drains"
+          },
+          {
+            "id": "c",
+            "text": "It stays the same"
+          },
+          {
+            "id": "d",
+            "text": "It drains while sprinting"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "If Noob's Slateskin effect runs out on its own, what does Noob gain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Speed II for 8 seconds"
+          },
+          {
+            "id": "b",
+            "text": "Speed II for 2 seconds"
+          },
+          {
+            "id": "c",
+            "text": "Speed II for 6 seconds"
+          },
+          {
+            "id": "d",
+            "text": "Speed II for 4 seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

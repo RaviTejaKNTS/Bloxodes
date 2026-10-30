@@ -1,0 +1,571 @@
+{
+  "page": {
+    "universe_id": 3808081382,
+    "code": "the-strongest-battlegrounds",
+    "title": "The Strongest Battlegrounds Roblox Quiz: 15 Combat Questions",
+    "description_md": "Think you know how The Strongest Battlegrounds plays? Easy questions start with the PC controls and the mobile Attack button. Medium ones cover blocking, stuns and the Awakening meter. Hard ones test a few character moves, where the small details decide the answer.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Strongest Battlegrounds knowledge with 15 questions on PC controls, blocks, stuns, the Awakening meter and character moves, easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "On PC, which key do you hold to block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "F"
+          },
+          {
+            "id": "b",
+            "text": "Q"
+          },
+          {
+            "id": "c",
+            "text": "G"
+          },
+          {
+            "id": "d",
+            "text": "B"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "On PC, which key starts a dash?",
+        "options": [
+          {
+            "id": "a",
+            "text": "G"
+          },
+          {
+            "id": "b",
+            "text": "Q"
+          },
+          {
+            "id": "c",
+            "text": "F"
+          },
+          {
+            "id": "d",
+            "text": "B"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "On PC, which key turns on ultimate mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "B"
+          },
+          {
+            "id": "b",
+            "text": "F"
+          },
+          {
+            "id": "c",
+            "text": "G"
+          },
+          {
+            "id": "d",
+            "text": "Q"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "On PC, which input throws a basic punch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Double Tap W"
+          },
+          {
+            "id": "b",
+            "text": "Hold F"
+          },
+          {
+            "id": "c",
+            "text": "Press B"
+          },
+          {
+            "id": "d",
+            "text": "Left Click"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "On PC, which key opens the emote wheel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "B"
+          },
+          {
+            "id": "b",
+            "text": "Q"
+          },
+          {
+            "id": "c",
+            "text": "F"
+          },
+          {
+            "id": "d",
+            "text": "G"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "On mobile, what does the Attack button do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It performs a dash"
+          },
+          {
+            "id": "b",
+            "text": "It performs a basic M1 attack"
+          },
+          {
+            "id": "c",
+            "text": "It opens the emote wheel"
+          },
+          {
+            "id": "d",
+            "text": "It does nothing on mobile"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "How many hits can a continuous M1 combo have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Up to two hits"
+          },
+          {
+            "id": "b",
+            "text": "Up to three hits"
+          },
+          {
+            "id": "c",
+            "text": "Up to four hits"
+          },
+          {
+            "id": "d",
+            "text": "Up to five hits"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What happens if the final hit of an M1 combo connects?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The target is guaranteed to ragdoll"
+          },
+          {
+            "id": "b",
+            "text": "The target stays on its feet, just stunned"
+          },
+          {
+            "id": "c",
+            "text": "The target regains health"
+          },
+          {
+            "id": "d",
+            "text": "The target takes damage and keeps moving"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "On PC, holding F blocks basic attacks from which area?",
+        "options": [
+          {
+            "id": "a",
+            "text": "All directions around you"
+          },
+          {
+            "id": "b",
+            "text": "A 180-degree arc in front of you"
+          },
+          {
+            "id": "c",
+            "text": "A 180-degree arc behind you"
+          },
+          {
+            "id": "d",
+            "text": "A 90-degree arc in front of you"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "On PC, which statement about being stunned is true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You can block, but you cannot move"
+          },
+          {
+            "id": "b",
+            "text": "You can move, but you cannot block"
+          },
+          {
+            "id": "c",
+            "text": "You cannot move with WASD, dash or block"
+          },
+          {
+            "id": "d",
+            "text": "You can use normal moves, but cannot dash"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What does a perfect block on an opponent's M1 do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It makes your next block a Critical Hit"
+          },
+          {
+            "id": "b",
+            "text": "It works on Training Dummies just as well"
+          },
+          {
+            "id": "c",
+            "text": "It makes your next dash a Critical Hit"
+          },
+          {
+            "id": "d",
+            "text": "It makes your next basic attack a Critical Hit"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "When does the Awakening meter fill up?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When you deal damage"
+          },
+          {
+            "id": "b",
+            "text": "When you activate Awakening"
+          },
+          {
+            "id": "c",
+            "text": "When it becomes empty"
+          },
+          {
+            "id": "d",
+            "text": "Only when you block an attack"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "For The Strongest Hero, which move is in Serious Mode (its Awakening)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cosmic Strike"
+          },
+          {
+            "id": "b",
+            "text": "Table Flip"
+          },
+          {
+            "id": "c",
+            "text": "Psychic Ricochet"
+          },
+          {
+            "id": "d",
+            "text": "Terrible Tornado"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "On PC, what does Q do while you are ragdolled?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Start blocking"
+          },
+          {
+            "id": "b",
+            "text": "Throw a basic punch"
+          },
+          {
+            "id": "c",
+            "text": "Cancel the ragdoll"
+          },
+          {
+            "id": "d",
+            "text": "Start running"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "What happens to the forward and back dash cooldowns?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They share one cooldown, so using either one puts both on cooldown"
+          },
+          {
+            "id": "b",
+            "text": "Each one has its own cooldown, so using one leaves the other ready"
+          },
+          {
+            "id": "c",
+            "text": "The side dash shares the same cooldown as the forward dash"
+          },
+          {
+            "id": "d",
+            "text": "The back dash works with no cooldown at all"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Suppose your Awakening meter is half full when you die. What is it when you respawn?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It goes back to empty"
+          },
+          {
+            "id": "b",
+            "text": "It stays half full"
+          },
+          {
+            "id": "c",
+            "text": "It fills all the way up"
+          },
+          {
+            "id": "d",
+            "text": "It drops below half"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What does having Armor stop?",
+        "options": [
+          {
+            "id": "a",
+            "text": "M1s but no moves"
+          },
+          {
+            "id": "b",
+            "text": "Moves but no M1s"
+          },
+          {
+            "id": "c",
+            "text": "M1s and most moves"
+          },
+          {
+            "id": "d",
+            "text": "Projectiles but no M1s"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "After an opponent's move misses or is blocked, what makes your counterhit a true punish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your hit lands after they can move again"
+          },
+          {
+            "id": "b",
+            "text": "Your move is unblockable, whenever it lands"
+          },
+          {
+            "id": "c",
+            "text": "Your counterattack misses during their stun"
+          },
+          {
+            "id": "d",
+            "text": "Your hit lands during that opponent's stun"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "When does The Strongest Hero's Serious Mode restore health?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When it damages or kills a player with an Awakening move"
+          },
+          {
+            "id": "b",
+            "text": "Right when Serious Mode activates, before any hits land"
+          },
+          {
+            "id": "c",
+            "text": "When it lands a basic M1 attack on any player"
+          },
+          {
+            "id": "d",
+            "text": "Steadily, for as long as Serious Mode lasts"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "For Destructive Cyborg's base Blitz Shot, how much charge does the shot itself need to break block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No charge"
+          },
+          {
+            "id": "b",
+            "text": "A full charge"
+          },
+          {
+            "id": "c",
+            "text": "A half charge"
+          },
+          {
+            "id": "d",
+            "text": "A quarter charge"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "For Martial Artist's base Vanishing Kick, which inputs bypass block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The double-press, not the base kick"
+          },
+          {
+            "id": "b",
+            "text": "Neither the base kick nor its double-press"
+          },
+          {
+            "id": "c",
+            "text": "Both the base kick and its double-press"
+          },
+          {
+            "id": "d",
+            "text": "The base kick, not the double-press"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "For Blade Master's base Pinpoint Cut, when can it go through block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Neither variant can go through block, even when landed from behind"
+          },
+          {
+            "id": "b",
+            "text": "Only its air variant can, and only when landed from behind"
+          },
+          {
+            "id": "c",
+            "text": "Its ground variant can never go through block, even when you circle around"
+          },
+          {
+            "id": "d",
+            "text": "Its air variant from behind, or its ground variant if you circle around"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "For Wild Psychic, what does Psychic Barrier do to projectiles?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It auto-deflects them, and they can't break it"
+          },
+          {
+            "id": "b",
+            "text": "Projectiles break it as soon as they hit"
+          },
+          {
+            "id": "c",
+            "text": "It has no effect on projectiles"
+          },
+          {
+            "id": "d",
+            "text": "It cannot block any move at all"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

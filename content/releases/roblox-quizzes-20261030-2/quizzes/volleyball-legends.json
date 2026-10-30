@@ -1,0 +1,595 @@
+{
+  "page": {
+    "universe_id": 6931042565,
+    "code": "volleyball-legends",
+    "title": "Volleyball Legends Roblox Quiz: 15 Questions on Styles and Skills",
+    "description_md": "Think you know how Volleyball Legends plays? Test your controls, serves, Styles, Abilities and Ranked knowledge. Each attempt has 15 questions: 5 easy, 5 medium and 5 hard. The easy ones check the basics, and the hard ones go deep on how specific Abilities work.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Volleyball Legends knowledge of controls, serves, Styles, Abilities and Ranked. 15 questions per attempt, from basics to hard Ability details.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "On console, which button bumps the ball or spikes it in midair?",
+        "options": [
+          {
+            "id": "a",
+            "text": "RT"
+          },
+          {
+            "id": "b",
+            "text": "LT"
+          },
+          {
+            "id": "c",
+            "text": "X"
+          },
+          {
+            "id": "d",
+            "text": "Click"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "On console, which button dives?",
+        "options": [
+          {
+            "id": "a",
+            "text": "RT"
+          },
+          {
+            "id": "b",
+            "text": "X"
+          },
+          {
+            "id": "c",
+            "text": "LT"
+          },
+          {
+            "id": "d",
+            "text": "Ctrl"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "On PC, what does clicking again choose after you start a serve?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bump or spike style"
+          },
+          {
+            "id": "b",
+            "text": "Jump timing"
+          },
+          {
+            "id": "c",
+            "text": "Serve power"
+          },
+          {
+            "id": "d",
+            "text": "Ball spin"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What does tilt change when you jump and spike?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Block strength"
+          },
+          {
+            "id": "b",
+            "text": "Jump height"
+          },
+          {
+            "id": "c",
+            "text": "Dive distance"
+          },
+          {
+            "id": "d",
+            "text": "The ball's direction"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How do you bump serve in Volleyball Legends?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Let the ball drop and bump it in"
+          },
+          {
+            "id": "b",
+            "text": "Jump up and spike it over"
+          },
+          {
+            "id": "c",
+            "text": "Set it straight from the ground"
+          },
+          {
+            "id": "d",
+            "text": "Dive to hit it over the net"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What does each Style change about your player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only how your character looks"
+          },
+          {
+            "id": "b",
+            "text": "A stat distribution for that Style"
+          },
+          {
+            "id": "c",
+            "text": "The same stats for every Style"
+          },
+          {
+            "id": "d",
+            "text": "A separate rank in each Ranked mode"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What can an Ability provide?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A stat spread that shapes your Style"
+          },
+          {
+            "id": "b",
+            "text": "A rank that carries into each season"
+          },
+          {
+            "id": "c",
+            "text": "A skill, sometimes with a passive effect"
+          },
+          {
+            "id": "d",
+            "text": "A cosmetic player card for your profile"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which Ability do you start the game with?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rolling Thunder"
+          },
+          {
+            "id": "b",
+            "text": "Team Spirit"
+          },
+          {
+            "id": "c",
+            "text": "Steel Block"
+          },
+          {
+            "id": "d",
+            "text": "Super Sprint"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "When does a point scored by your team add charge to your Ability?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When you had the last touch"
+          },
+          {
+            "id": "b",
+            "text": "When a teammate had the last touch"
+          },
+          {
+            "id": "c",
+            "text": "When you served, even if you weren't the last toucher"
+          },
+          {
+            "id": "d",
+            "text": "When the other team had the last touch"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "What happens to your Ability gauge when you aren't touching the ball during a match?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It fills completely after each rally"
+          },
+          {
+            "id": "b",
+            "text": "It keeps filling extremely slowly"
+          },
+          {
+            "id": "c",
+            "text": "It stops filling until you serve"
+          },
+          {
+            "id": "d",
+            "text": "It loses charge until your next touch"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What's the lowest account level that unlocks Ranked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 10"
+          },
+          {
+            "id": "b",
+            "text": "Level 20"
+          },
+          {
+            "id": "c",
+            "text": "Level 15"
+          },
+          {
+            "id": "d",
+            "text": "Level 30"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What rank does a player start with in a new Ranked mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bronze II at 100 ELO"
+          },
+          {
+            "id": "b",
+            "text": "Silver I at 300 ELO"
+          },
+          {
+            "id": "c",
+            "text": "Gold I at 600 ELO"
+          },
+          {
+            "id": "d",
+            "text": "Unranked at 0 ELO"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How many ranked games must you play in a mode before you get its initial rank?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Five games"
+          },
+          {
+            "id": "b",
+            "text": "Three games"
+          },
+          {
+            "id": "c",
+            "text": "Four games"
+          },
+          {
+            "id": "d",
+            "text": "Ten games"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "When you enter a Ranked mode for the first time, how is its rank tracked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your old rank carries over unchanged"
+          },
+          {
+            "id": "b",
+            "text": "It has a separate ranking from your other modes"
+          },
+          {
+            "id": "c",
+            "text": "The new mode copies your highest rank"
+          },
+          {
+            "id": "d",
+            "text": "Every mode shares your one rank"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What does Team Spirit boost for your whole team?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Spike power"
+          },
+          {
+            "id": "b",
+            "text": "Ability charge"
+          },
+          {
+            "id": "c",
+            "text": "Movement speed"
+          },
+          {
+            "id": "d",
+            "text": "Jump height"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "How long does Super Sprint's speed boost last?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four seconds"
+          },
+          {
+            "id": "b",
+            "text": "Two seconds"
+          },
+          {
+            "id": "c",
+            "text": "Six seconds"
+          },
+          {
+            "id": "d",
+            "text": "Eight seconds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "How does Boom Jump's jump height relate to your Style?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It scales with your Style's jump stat"
+          },
+          {
+            "id": "b",
+            "text": "Fixed height, unchanged by Styles"
+          },
+          {
+            "id": "c",
+            "text": "It grows with your serve power"
+          },
+          {
+            "id": "d",
+            "text": "It changes with your Ranked mode"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What's the furthest a Rolling Thunder dive can reach?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only as far as the attack line"
+          },
+          {
+            "id": "b",
+            "text": "About half the court"
+          },
+          {
+            "id": "c",
+            "text": "Far enough to cover the whole court"
+          },
+          {
+            "id": "d",
+            "text": "Only to the nearest sideline"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What happens when a ball touches your active Steel Block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It floats slowly across the court"
+          },
+          {
+            "id": "b",
+            "text": "It bends with the hitter's tilt"
+          },
+          {
+            "id": "c",
+            "text": "It gets pulled toward the hitter's head"
+          },
+          {
+            "id": "d",
+            "text": "It curves down to the floor fast"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Which action does Shield Breaker enhance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your next spike"
+          },
+          {
+            "id": "b",
+            "text": "Your next block"
+          },
+          {
+            "id": "c",
+            "text": "Your next set"
+          },
+          {
+            "id": "d",
+            "text": "Your next bump"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Once a ball enters Magnetic Pull's radius, where does it get pulled?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toward the net line"
+          },
+          {
+            "id": "b",
+            "text": "Toward the player, near their head"
+          },
+          {
+            "id": "c",
+            "text": "Toward the far back boundary"
+          },
+          {
+            "id": "d",
+            "text": "Toward a teammate's hands"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Who gets the extra touch when Extra Touch is activated?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only the player who activates it"
+          },
+          {
+            "id": "b",
+            "text": "Only the opposing team"
+          },
+          {
+            "id": "c",
+            "text": "You and your teammates"
+          },
+          {
+            "id": "d",
+            "text": "Anyone on either team"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "How many times at most can Extra Touch be activated per full charge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One time"
+          },
+          {
+            "id": "b",
+            "text": "Three times"
+          },
+          {
+            "id": "c",
+            "text": "Four times"
+          },
+          {
+            "id": "d",
+            "text": "Two times"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "After you use Zero Gravity Set, how does the ball move?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It rises slowly, drifting horizontally"
+          },
+          {
+            "id": "b",
+            "text": "It drops straight down at once"
+          },
+          {
+            "id": "c",
+            "text": "It snaps toward the net"
+          },
+          {
+            "id": "d",
+            "text": "It curves with the hitter's tilt"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,787 @@
+{
+  "page": {
+    "universe_id": 5361032378,
+    "code": "sols-rng",
+    "title": "Sol's RNG Roblox Quiz: 15 Questions on Auras, Gear and Biomes",
+    "description_md": "Can you read a biome shift, pick the right Gear and keep each recipe straight? Each run gives you 15 questions: five easy, five medium and five hard. They cover rolling, Auras, quests, biomes, Gear and crafting.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Sol's RNG knowledge with 15 questions on auras, gear, biomes, quests and crafting, from the first roll through advanced device recipes.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which action starts a roll for Auras?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Take a Quest Board quest"
+          },
+          {
+            "id": "b",
+            "text": "Press the Roll button"
+          },
+          {
+            "id": "c",
+            "text": "Offer an item to the Grail"
+          },
+          {
+            "id": "d",
+            "text": "Use Stella's Cauldron"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What kind of thing is an Aura?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Gear-making recipe"
+          },
+          {
+            "id": "b",
+            "text": "A Quest Board quest"
+          },
+          {
+            "id": "c",
+            "text": "A one-use potion boost"
+          },
+          {
+            "id": "d",
+            "text": "An equippable visual effect"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which two main ways do players get Auras?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rolling and crafting"
+          },
+          {
+            "id": "b",
+            "text": "Rolling and brewing potions"
+          },
+          {
+            "id": "c",
+            "text": "Brewing potions and equipping Gears"
+          },
+          {
+            "id": "d",
+            "text": "Equipping Gears and using Lucky Potions"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Which action stops an equipped Gear's buff?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Let a potion effect expire"
+          },
+          {
+            "id": "b",
+            "text": "Craft another Gear"
+          },
+          {
+            "id": "c",
+            "text": "Unequip the Gear"
+          },
+          {
+            "id": "d",
+            "text": "Turn Auto Roll back on"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Where is Pocket Gear equipped?",
+        "options": [
+          {
+            "id": "a",
+            "text": "On the left arm"
+          },
+          {
+            "id": "b",
+            "text": "On the right leg"
+          },
+          {
+            "id": "c",
+            "text": "On the right arm"
+          },
+          {
+            "id": "d",
+            "text": "On the left leg"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Where can you find Jake's Workshop?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By the mountain peak"
+          },
+          {
+            "id": "b",
+            "text": "Beside the waterfall"
+          },
+          {
+            "id": "c",
+            "text": "Inside Stella's cave"
+          },
+          {
+            "id": "d",
+            "text": "Next to the bridge near Spawn"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What Luck boost does the Luck Glove give while equipped?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+25% Luck"
+          },
+          {
+            "id": "b",
+            "text": "+15% Luck"
+          },
+          {
+            "id": "c",
+            "text": "+50% Luck"
+          },
+          {
+            "id": "d",
+            "text": "+100% Luck"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "How many quests can the Quest Board hold at once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 quests"
+          },
+          {
+            "id": "b",
+            "text": "4 quests"
+          },
+          {
+            "id": "c",
+            "text": "5 quests"
+          },
+          {
+            "id": "d",
+            "text": "6 quests"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "Which two jobs does Stella have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Potion brewer and Gear smith"
+          },
+          {
+            "id": "b",
+            "text": "Quest giver and potion brewer"
+          },
+          {
+            "id": "c",
+            "text": "Merchant and roll instructor"
+          },
+          {
+            "id": "d",
+            "text": "Quest giver and Gear smith"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "How are most Gears obtained?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Crafting at Jake's Workshop"
+          },
+          {
+            "id": "b",
+            "text": "Brewing potions at Stella's Cauldron"
+          },
+          {
+            "id": "c",
+            "text": "Offering items to the Grail of Resonance"
+          },
+          {
+            "id": "d",
+            "text": "Using a Lucky Potion"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How many Quest Board quests can be active at once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 quests"
+          },
+          {
+            "id": "b",
+            "text": "2 quests"
+          },
+          {
+            "id": "c",
+            "text": "4 quests"
+          },
+          {
+            "id": "d",
+            "text": "5 quests"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "How often does the Quest Board add a new quest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every 10 minutes"
+          },
+          {
+            "id": "b",
+            "text": "Every 30 minutes"
+          },
+          {
+            "id": "c",
+            "text": "Every hour"
+          },
+          {
+            "id": "d",
+            "text": "Every day"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "How often does the Biomes/Time system make its roll?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Once per minute"
+          },
+          {
+            "id": "b",
+            "text": "Once per second"
+          },
+          {
+            "id": "c",
+            "text": "Once per hour"
+          },
+          {
+            "id": "d",
+            "text": "Once per day"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which two biomes are exceptions to the spawn chat announcement?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Windy and Snowy"
+          },
+          {
+            "id": "b",
+            "text": "Daytime and Nighttime"
+          },
+          {
+            "id": "c",
+            "text": "Heaven and Null"
+          },
+          {
+            "id": "d",
+            "text": "Normal and Glitched"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "What Base Luck boost does the Solar Device give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+15% Base Luck"
+          },
+          {
+            "id": "b",
+            "text": "+25% Base Luck"
+          },
+          {
+            "id": "c",
+            "text": "+50% Base Luck"
+          },
+          {
+            "id": "d",
+            "text": "+100% Base Luck"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What Roll Speed boost does the Lunar Device give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+15% Roll Speed"
+          },
+          {
+            "id": "b",
+            "text": "+20% Roll Speed"
+          },
+          {
+            "id": "c",
+            "text": "+25% Roll Speed"
+          },
+          {
+            "id": "d",
+            "text": "+50% Roll Speed"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What two boosts does the Exo Gauntlet give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+50% Luck and +15% Roll Speed"
+          },
+          {
+            "id": "b",
+            "text": "+150% Luck and -10% Roll Speed"
+          },
+          {
+            "id": "c",
+            "text": "+75% Luck and no Roll Speed"
+          },
+          {
+            "id": "d",
+            "text": "+100% Luck and +20% Roll Speed"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What is an Aura obtained outside its native biome called?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A mutation"
+          },
+          {
+            "id": "b",
+            "text": "A Breakthrough"
+          },
+          {
+            "id": "c",
+            "text": "A Resonance"
+          },
+          {
+            "id": "d",
+            "text": "A Bonus Roll"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Which of these does not affect a roll?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The player's ping"
+          },
+          {
+            "id": "b",
+            "text": "The active biome"
+          },
+          {
+            "id": "c",
+            "text": "The equipped Gear"
+          },
+          {
+            "id": "d",
+            "text": "The player's Luck"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which biome or time is Solar native to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nighttime"
+          },
+          {
+            "id": "b",
+            "text": "Starfall"
+          },
+          {
+            "id": "c",
+            "text": "Daytime"
+          },
+          {
+            "id": "d",
+            "text": "Rainy"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which Auras can you select in the Aura Filter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every Aura in the catalog"
+          },
+          {
+            "id": "b",
+            "text": "Auras you have already rolled"
+          },
+          {
+            "id": "c",
+            "text": "Only Auras from the active biome"
+          },
+          {
+            "id": "d",
+            "text": "Auras you have never rolled"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "What Roll Speed does the Aqua Device give during Rainy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+10% Roll Speed"
+          },
+          {
+            "id": "b",
+            "text": "+15% Roll Speed"
+          },
+          {
+            "id": "c",
+            "text": "+50% Roll Speed"
+          },
+          {
+            "id": "d",
+            "text": "+100% Roll Speed"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "What Base Luck boost does Shining Star give during Starfall?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+250% Base Luck"
+          },
+          {
+            "id": "b",
+            "text": "+50% Base Luck"
+          },
+          {
+            "id": "c",
+            "text": "+100% Base Luck"
+          },
+          {
+            "id": "d",
+            "text": "+200% Base Luck"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Which set of factors affects an Aura's chance on each individual roll?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Equipped Gear, active effects, current coins and Luck"
+          },
+          {
+            "id": "b",
+            "text": "Equipped Gear, quest state, current biome and Luck"
+          },
+          {
+            "id": "c",
+            "text": "Equipped Gear, active effects, current biome and Roll Speed"
+          },
+          {
+            "id": "d",
+            "text": "Equipped Gear, active effects, current biome and Luck"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What changes if you use the same Lucky Potion twice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its duration doubles, but its +25% Luck stays the same"
+          },
+          {
+            "id": "b",
+            "text": "Its Luck boost doubles, but its duration stays the same"
+          },
+          {
+            "id": "c",
+            "text": "Its duration and Luck boost both double"
+          },
+          {
+            "id": "d",
+            "text": "The second use replaces the first effect"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "When can you add a biome-exclusive item to the Grail of Resonance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Any time, regardless of the biome"
+          },
+          {
+            "id": "b",
+            "text": "Only while Normal is active"
+          },
+          {
+            "id": "c",
+            "text": "After an active potion wears off"
+          },
+          {
+            "id": "d",
+            "text": "When its matching biome is active"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "What happens to the Resonance of Elements timer when a different biome-exclusive item is added?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It ends immediately"
+          },
+          {
+            "id": "b",
+            "text": "It resets to one hour"
+          },
+          {
+            "id": "c",
+            "text": "It changes to ten minutes"
+          },
+          {
+            "id": "d",
+            "text": "It keeps its remaining time"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Which three Auras make one Solar Device?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 Rare, 1 Divinus, 1 Solar"
+          },
+          {
+            "id": "b",
+            "text": "1 Rare, 1 Divinus, 1 Lunar"
+          },
+          {
+            "id": "c",
+            "text": "1 Solar, 1 Lunar, 1 Divinus"
+          },
+          {
+            "id": "d",
+            "text": "1 Gilded, 1 Solar, 1 Divinus"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Which three Auras make one Lunar Device?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 Rare, 1 Divinus, 1 Solar"
+          },
+          {
+            "id": "b",
+            "text": "1 Solar, 1 Lunar, 1 Divinus"
+          },
+          {
+            "id": "c",
+            "text": "1 Rare, 1 Divinus, 1 Lunar"
+          },
+          {
+            "id": "d",
+            "text": "1 Rare, 1 Lunar, 1 Eclipse Aura"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "Which materials make the crafted Eclipse Aura?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 Solar, 1 Rare, 1 Divinus"
+          },
+          {
+            "id": "b",
+            "text": "1 Lunar, 1 Solar, 1 Divinus"
+          },
+          {
+            "id": "c",
+            "text": "1 Divinus, 2 Solar, 1 Lunar"
+          },
+          {
+            "id": "d",
+            "text": "1 Lunar, 1 Solar, 1 Rare"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "What does the Eclipse Device recipe use?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 Lunar Device, 1 Solar Device, 1 Eclipse Aura"
+          },
+          {
+            "id": "b",
+            "text": "1 Solar Device, 1 Lunar Device, 1 Exo Gauntlet"
+          },
+          {
+            "id": "c",
+            "text": "1 Solar Device, 1 Solar Aura, 1 Eclipse Aura"
+          },
+          {
+            "id": "d",
+            "text": "1 Lunar Device, 1 Eclipse Aura, 1 Solar Aura"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "Where does Stella's Star spawn for her first portal quest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Outside the cave during Starfall"
+          },
+          {
+            "id": "b",
+            "text": "Inside the cave during Starfall"
+          },
+          {
+            "id": "c",
+            "text": "Inside the cave during Normal"
+          },
+          {
+            "id": "d",
+            "text": "Beside Spawn's bridge during Starfall"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

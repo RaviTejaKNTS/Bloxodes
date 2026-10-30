@@ -1,0 +1,763 @@
+{
+  "page": {
+    "universe_id": 4777817887,
+    "code": "blade-ball",
+    "title": "Blade Ball Roblox Quiz: 15 Questions on Modes and Abilities",
+    "description_md": "Can you read the ball and time your abilities? Take 15 random questions, five from each difficulty tier, drawn from a pool covering controls, modes and ability interactions.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Blade Ball knowledge with 15 random questions on controls, match rules and ability interactions, five from each difficulty tier.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which key performs Block by default on keyboard?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Q"
+          },
+          {
+            "id": "b",
+            "text": "F"
+          },
+          {
+            "id": "c",
+            "text": "Shift"
+          },
+          {
+            "id": "d",
+            "text": "R"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "Which input activates your equipped Ability by default on keyboard and mouse?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Q or right-click"
+          },
+          {
+            "id": "b",
+            "text": "F or left-click"
+          },
+          {
+            "id": "c",
+            "text": "Shift"
+          },
+          {
+            "id": "d",
+            "text": "R"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which controller input performs Block by default?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Button X"
+          },
+          {
+            "id": "b",
+            "text": "Button Y"
+          },
+          {
+            "id": "c",
+            "text": "L1"
+          },
+          {
+            "id": "d",
+            "text": "R1"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Which controller input activates your equipped Ability by default?",
+        "options": [
+          {
+            "id": "a",
+            "text": "R1"
+          },
+          {
+            "id": "b",
+            "text": "Button Y"
+          },
+          {
+            "id": "c",
+            "text": "Button X"
+          },
+          {
+            "id": "d",
+            "text": "L1"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Which touch input performs a normal Block?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tap the screen"
+          },
+          {
+            "id": "b",
+            "text": "Tap the Ability button"
+          },
+          {
+            "id": "c",
+            "text": "Tap the Emote button"
+          },
+          {
+            "id": "d",
+            "text": "Tap the Shift Lock button"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "In a normal single-ball round, how many players does the ball chase at one time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two players"
+          },
+          {
+            "id": "b",
+            "text": "Three players"
+          },
+          {
+            "id": "c",
+            "text": "One player"
+          },
+          {
+            "id": "d",
+            "text": "Four players"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "What color glow marks the player the ball has locked onto?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Blue"
+          },
+          {
+            "id": "b",
+            "text": "White"
+          },
+          {
+            "id": "c",
+            "text": "Green"
+          },
+          {
+            "id": "d",
+            "text": "Red"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "How do normal successful deflections change the ball's speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Each deflection makes it slower"
+          },
+          {
+            "id": "b",
+            "text": "Each deflection makes it faster"
+          },
+          {
+            "id": "c",
+            "text": "Every deflection leaves it unchanged"
+          },
+          {
+            "id": "d",
+            "text": "Deflections alternate between faster and slower"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "In Classic, what happens if the ball hits you with no ability protecting or automatically deflecting it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You are eliminated and return to the lobby"
+          },
+          {
+            "id": "b",
+            "text": "You stay in the round with less health"
+          },
+          {
+            "id": "c",
+            "text": "You respawn in the same round"
+          },
+          {
+            "id": "d",
+            "text": "You stay in the round with an extra life"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "What is Classic's basic match format?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two opposing teams"
+          },
+          {
+            "id": "b",
+            "text": "A race to capture a flag"
+          },
+          {
+            "id": "c",
+            "text": "A free-for-all"
+          },
+          {
+            "id": "d",
+            "text": "A match built around two balls"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "How many players are still alive when Classic enters Standoff?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Four"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Two"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "What decides the next round's mode during the countdown?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The winning mode vote"
+          },
+          {
+            "id": "b",
+            "text": "The first vote cast in the lobby"
+          },
+          {
+            "id": "c",
+            "text": "The player with the most wins"
+          },
+          {
+            "id": "d",
+            "text": "The previous round's last survivor"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What is the team victory rule in 4 Teams?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Have the most survivors when a fixed timer ends"
+          },
+          {
+            "id": "b",
+            "text": "Be the first team to get three eliminations"
+          },
+          {
+            "id": "c",
+            "text": "Be the last team with living players"
+          },
+          {
+            "id": "d",
+            "text": "Have the highest total elimination count"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "In 2 Teams, which targeting rule follows a Red player's normal deflection?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Target a player on Blue"
+          },
+          {
+            "id": "b",
+            "text": "Choose either team at random"
+          },
+          {
+            "id": "c",
+            "text": "Target another Red teammate"
+          },
+          {
+            "id": "d",
+            "text": "Target the Red deflector again"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What does Telekinesis do to the ball's targeting?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It must keep the previous target"
+          },
+          {
+            "id": "b",
+            "text": "It always targets the ability user"
+          },
+          {
+            "id": "c",
+            "text": "It removes all player targets until the round ends"
+          },
+          {
+            "id": "d",
+            "text": "It changes the ball to a new target"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "When the ball targets you and Block is cooling down, what can a well-timed Raging Deflection do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Parry the ball with no increase in speed"
+          },
+          {
+            "id": "b",
+            "text": "Parry the ball with an extra speed boost"
+          },
+          {
+            "id": "c",
+            "text": "Parry the ball only after Block has reset"
+          },
+          {
+            "id": "d",
+            "text": "Parry the ball only by slowing it down"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How does a built-up Qi-Charge aura affect movement and parrying?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It strengthens the next parry but lowers movement speed"
+          },
+          {
+            "id": "b",
+            "text": "It raises movement speed but weakens the next parry"
+          },
+          {
+            "id": "c",
+            "text": "It raises movement speed and strengthens the next parry"
+          },
+          {
+            "id": "d",
+            "text": "It boosts neither movement speed nor the next parry's strength"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What controls the ball's initial curve direction when you deflect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Where your opponent faces"
+          },
+          {
+            "id": "b",
+            "text": "Where the last deflector stands"
+          },
+          {
+            "id": "c",
+            "text": "Where you spawned in the arena"
+          },
+          {
+            "id": "d",
+            "text": "Where you are facing"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Before Standoff, you are targeted and the other players are visible. What happens when you use Invisibility?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The ball retargets a random other player"
+          },
+          {
+            "id": "b",
+            "text": "The ball must keep targeting you"
+          },
+          {
+            "id": "c",
+            "text": "The ball always retargets the nearest player"
+          },
+          {
+            "id": "d",
+            "text": "The ball waits in place until you become visible"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What must happen for Ninja Dash's automatic parry to work?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Normal Block must already be ready"
+          },
+          {
+            "id": "b",
+            "text": "The ball must already be targeting you"
+          },
+          {
+            "id": "c",
+            "text": "The dash must reach the ball"
+          },
+          {
+            "id": "d",
+            "text": "The ability must be upgraded first"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "What happens if you activate Raging Deflection while the ball is not targeting you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The use is saved and waits for your next target cue"
+          },
+          {
+            "id": "b",
+            "text": "The use is spent without a deflection"
+          },
+          {
+            "id": "c",
+            "text": "The use is spent and pulls the ball to you"
+          },
+          {
+            "id": "d",
+            "text": "The use is saved and sends the ball to another player"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Without Upgrade 2, what can you do while Qi-Charge is charging?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Neither move nor parry"
+          },
+          {
+            "id": "b",
+            "text": "Move, but not parry"
+          },
+          {
+            "id": "c",
+            "text": "Move and parry slowly"
+          },
+          {
+            "id": "d",
+            "text": "Parry, but not move"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "What happens to Invisibility during Standoff?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It stays available unchanged"
+          },
+          {
+            "id": "b",
+            "text": "It gains a shorter duration"
+          },
+          {
+            "id": "c",
+            "text": "It gains a longer cooldown"
+          },
+          {
+            "id": "d",
+            "text": "It becomes unavailable"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "How does the ball's speed change as more players use Telekinesis at once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It gets slower with more simultaneous users"
+          },
+          {
+            "id": "b",
+            "text": "It gets faster with more simultaneous users"
+          },
+          {
+            "id": "c",
+            "text": "It stays unchanged by extra simultaneous users"
+          },
+          {
+            "id": "d",
+            "text": "It alternates between faster and slower with extra users"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "Before Standoff, what does Guardian Angel do after a missed parry when a protection use remains?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It shields you and rebounds the ball"
+          },
+          {
+            "id": "b",
+            "text": "It shields you and holds the ball in place"
+          },
+          {
+            "id": "c",
+            "text": "It eliminates you and resets the ball"
+          },
+          {
+            "id": "d",
+            "text": "It hides you and retargets the ball"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "What happens when the ball enters a base Gale's Edge gust?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It stops in the gust, then picks a new target"
+          },
+          {
+            "id": "b",
+            "text": "It moves with the gust, then resumes its route"
+          },
+          {
+            "id": "c",
+            "text": "It parries off the gust, then reverses its route"
+          },
+          {
+            "id": "d",
+            "text": "It returns to the center, then starts a fresh route"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Telekinesis holds the ball still. A player who is not its target uses Pull. What happens immediately?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It moves toward the Pull user"
+          },
+          {
+            "id": "b",
+            "text": "It stays still with its previous target"
+          },
+          {
+            "id": "c",
+            "text": "It moves toward its previous target"
+          },
+          {
+            "id": "d",
+            "text": "It stays still but targets the Pull user"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "After deflecting toward a nearby opponent, which Pull fake sequence exploits their normal Block cooldown?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pull before their Block, then re-parry so the ball arrives after their cooldown ends"
+          },
+          {
+            "id": "b",
+            "text": "Pull before their Block, then re-parry so the ball arrives during their missed Block's cooldown"
+          },
+          {
+            "id": "c",
+            "text": "Pull while the ball targets you, then re-parry so it arrives after their cooldown ends"
+          },
+          {
+            "id": "d",
+            "text": "Pull while the ball targets you, then re-parry so it arrives during their missed Block's cooldown"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "While another player's Absolute Confidence is active, which of Pull and Telekinesis can still operate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both are disabled"
+          },
+          {
+            "id": "b",
+            "text": "Only Pull can operate"
+          },
+          {
+            "id": "c",
+            "text": "Only Telekinesis can operate"
+          },
+          {
+            "id": "d",
+            "text": "Both can operate"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Before Standoff, what does a successful Ninja Dash do to a ball held by Infinity?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Parry it straight back to the Infinity user"
+          },
+          {
+            "id": "b",
+            "text": "Change its target without parrying it"
+          },
+          {
+            "id": "c",
+            "text": "End Infinity without redirecting the ball"
+          },
+          {
+            "id": "d",
+            "text": "Parry it toward a different player"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Before Standoff, Guardian Angel activates while Block is cooling down. What happens to that Block cooldown?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every activation resets it"
+          },
+          {
+            "id": "b",
+            "text": "An upgraded activation resets it"
+          },
+          {
+            "id": "c",
+            "text": "The activation does not reset it"
+          },
+          {
+            "id": "d",
+            "text": "The final protection use resets it"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}
