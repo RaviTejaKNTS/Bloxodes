@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/3008",
+  "title": "3008 Music IDs",
+  "seo_title": "3008 Music IDs [32 Music Menu Songs]",
+  "meta_description": "Find 32 3008 music IDs for weekday themes, event tracks and volume releases. See where each number goes in the Music Menu and why a theme may stay silent.",
+  "intro_md": "3008 music IDs are Roblox audio numbers for the game's music themes. There are 32 songs: weekday themes, other themes, volume releases and event soundtracks.\n\nFind the day, event or theme you want, then copy its number. Paste it into the Music Menu when your version of 3008 accepts a custom audio asset.",
+  "description_md": "## What is a 3008 music ID?\n\nA 3008 music ID is the number for a Roblox audio asset. It works with a compatible 3008 music control. It isn't a redeemable reward, and it doesn't unlock bases, items or survival benefits.\n\nEach theme shows its name and asset ID. Some themes may not show an artist, album, length or cover art.\n\n## Paste a 3008 theme into the Music Menu\n\n1. Join [3008 on Roblox](https://www.roblox.com/games/2768379856/3008).\n2. Open the game mode and menu options your version offers.\n3. If the Mod Menu and Music Menu are available, select the theme or music slot you want to change.\n4. Open the asset input and paste the plain number, or the full asset link, from the theme you picked.\n5. Confirm the change, then go back into the game.\n\nOne route to the Music Menu runs through the single-player Mod Menu. Menu names and permissions can change, so follow the buttons you see in your own server.",
+  "how_it_works_md": "## When a 3008 theme won't play\n\n- **The menu changed.** A newer version may remove, rename or restrict the custom music slot.\n- **The asset is unavailable.** Roblox moderation, privacy, rights and audio changes can affect older uploads.\n- **The number belongs to another version.** Event and legacy themes may not show up in every release.\n- **The input format is wrong.** Try the plain digits, or the full asset link, whichever the field accepts.\n- **The game or device is muted.** Check your Roblox volume and 3008's music settings.\n\nTest a weekday theme and a second theme after you check the menu. If neither plays, the menu or the asset's permissions may have changed, not your number.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. The ID can point to a theme from a different 3008 version, and Roblox or the current Music Menu can block playback.",
+      "q": "Are these guaranteed working 3008 music codes?"
+    },
+    {
+      "a": "Use the Music Menu or compatible asset field shown by your current game mode. Paste the plain number or accepted asset link, then confirm the change.",
+      "q": "Where do I enter a 3008 Music ID?"
+    },
+    {
+      "a": "The Music Menu can be reached through a single-player Mod Menu route. Menu access can change between versions, so use the controls you see in your own server.",
+      "q": "Why does 3008 mention a Mod Menu?"
+    },
+    {
+      "a": "The asset may be moderated, the theme may belong to a legacy or event version, the input format may be wrong, or the game volume may be muted. Try a different theme and a built-in one.",
+      "q": "Why is a 3008 theme silent?"
+    },
+    {
+      "a": "Not necessarily. A 3008 soundtrack reference doesn't tell you who made the song or whether it plays in the current version.",
+      "q": "Are these all official 3008 soundtrack uploads?"
+    },
+    {
+      "a": "Some themes may not show an artist, album, length or cover art.",
+      "q": "Why doesn't a 3008 theme show an artist or album?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "3008 uses weekday, event, and environmental music themes alongside its survival systems. For the original experience, see [3008 on Roblox](https://www.roblox.com/games/2768379856/3008).",
+  "wiki_sort_order": null
+}

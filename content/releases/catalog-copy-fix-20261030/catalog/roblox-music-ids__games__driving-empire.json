@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/driving-empire",
+  "title": "Driving Empire Music IDs",
+  "seo_title": "Driving Empire Music IDs [67 Radio Songs]",
+  "meta_description": "Find 67 Driving Empire music IDs for the Car Radio. Learn where to paste a song number, what access you need and why a song may stay silent in your car.",
+  "intro_md": "Driving Empire music IDs are numbers for 67 Roblox audio tracks listed for the game. Find the track you want and copy its number.\n\nThe game also has built-in radio channels. Use a number only where your radio accepts a custom audio ID. Not every vehicle, server or version of the radio plays every ID.",
+  "description_md": "## What is a Driving Empire music ID?\n\nA Driving Empire music ID is the number for a Roblox audio asset. Players also call these numbers song codes or radio codes. They aren't redeemable rewards, and they don't unlock cars, cash or customization.\n\nEach song can show its title, artist, album, duration and cover art when those details exist. Use the search box to find a track by title or artist, then copy its number.\n\n## Add a song ID to a Driving Empire radio\n\n1. Join [Driving Empire on Roblox](https://www.roblox.com/games/3351674303/Driving-Empire).\n2. Check the shop for the Car Radio access shown by your current server.\n3. Enter a vehicle and open its radio or custom music control.\n4. If the control accepts an audio ID, paste the digits from the matching song and confirm.\n5. If it shows built-in channels or a song search instead, use those controls.\n\nThe radio can look different across platforms and updates. Don't assume an older keyboard shortcut still opens the radio. Follow the buttons you see in your current vehicle, since older directions and pass details may no longer match the live game.\n\nBeing tied to Driving Empire doesn't prove a song is an official Driving Empire composition. It also doesn't prove the song has played through a Car Radio in a live server, or that the ID works on every other Roblox radio.",
+  "how_it_works_md": "## Why a Driving Empire radio song fails\n\n- **The vehicle control uses channels or search.** A manual ID field may not be there in the current version.\n- **The audio is restricted or unavailable.** Roblox audio permissions, moderation, creator settings and copyright actions can change whether a song plays.\n- **Car Radio access is missing.** Check the shop and the access your server shows.\n- **The ID was copied with extra characters.** Paste only the numeric value when a field asks for an asset ID.\n- **The audio or vehicle is muted.** Check Roblox volume, the game's music setting and device output.\n\nTry a second song, then a built-in radio channel. The comparison shows whether one song is broken or whether the radio controls or your access are the problem.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. Car Radio access, the controls in your vehicle and Roblox audio permissions all affect playback.",
+      "q": "Are these guaranteed working Driving Empire radio codes?"
+    },
+    {
+      "a": "Open the radio or custom music control inside a vehicle. Paste plain digits only when the current control shows an ID field. Use built-in channels and search when that is all the radio offers.",
+      "q": "Where do I enter a Driving Empire Music ID?"
+    },
+    {
+      "a": "Access depends on what your current game shows, so check the shop. The Car Radio is a product for playing tunes in vehicles, and its price, sale status and controls can change.",
+      "q": "Do I need Car Radio access?"
+    },
+    {
+      "a": "Each vehicle can use a different radio control. One may show a song field while another only shows channels. The song may also be restricted, your access may be missing, or the game or device may be muted. Test a built-in channel and a second song before you assume the ID is wrong.",
+      "q": "Why does a Driving Empire song fail in one car?"
+    },
+    {
+      "a": "Not necessarily. Not every song is a Driving Empire composition, and a listed song isn't guaranteed to be in the built-in radio channels.",
+      "q": "Are these official Driving Empire soundtrack songs?"
+    },
+    {
+      "a": "Not always. A song tied to Driving Empire doesn't make it work on every Roblox radio.",
+      "q": "Can I use these IDs on other Roblox radios?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Driving Empire combines open-world driving, racing, vehicles, and roleplay with radio controls that can change over time. For the full vehicle experience, see [Driving Empire on Roblox](https://www.roblox.com/games/3351674303/Driving-Empire).",
+  "wiki_sort_order": null
+}

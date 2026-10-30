@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "catalog",
+      "file": "catalog/admin-commands__adonis-admin.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/admin-commands__basic-admin.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/admin-commands.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/admin-commands__hd-admin.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/admin-commands__kohls-admin.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-decal-ids__games__berry-avenue.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-items-and-bundles.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__3008.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__basketball-zero.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__brookhaven-rp.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__da-hood.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__driving-empire.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__forsaken.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__evade.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__fisch.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__grand-piece-online.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__nicos-nextbots.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__retail-tycoon-2.json"
+    },
+    {
+      "publisher": "catalog",
+      "file": "catalog/roblox-music-ids__games__a-dusty-trip.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/catalog/admin-commands/adonis-admin",
+      "contains": "It has 509 commands, grouped by admin level, with their aliases and arguments."
+    },
+    {
+      "path": "/catalog/admin-commands/basic-admin",
+      "contains": "If you want a GUI-first system with a rank ladder, look at"
+    },
+    {
+      "path": "/catalog/admin-commands",
+      "contains": "Four admin systems each have their own command list:"
+    },
+    {
+      "path": "/catalog/admin-commands/hd-admin",
+      "contains": "Booster entries in the command list use inline"
+    },
+    {
+      "path": "/catalog/admin-commands/kohls-admin",
+      "contains": "Today it is a fully rebuilt, role-based admin system."
+    },
+    {
+      "path": "/catalog/roblox-decal-ids/games/berry-avenue",
+      "contains": "How to use picture codes in Berry Avenue"
+    },
+    {
+      "path": "/catalog/roblox-items-and-bundles",
+      "contains": "Regular items have one Robux price set by the creator."
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/3008",
+      "contains": "What is a 3008 music ID?"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/basketball-zero",
+      "contains": "Why a Basketball Zero song may stay silent"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/brookhaven-rp",
+      "contains": "What stops a Brookhaven song from playing"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/da-hood",
+      "contains": "What to check when a Da Hood song is silent"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/driving-empire",
+      "contains": "Why a Driving Empire radio song fails"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/forsaken",
+      "contains": "What stops a Forsaken sound ID from working"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/evade",
+      "contains": "Why an Evade song might not play"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/fisch",
+      "contains": "Why a Fisch song stays silent"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/grand-piece-online",
+      "contains": "Troubleshooting a Music Snail song"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/nicos-nextbots",
+      "contains": "They cover locations, events, safe zones and other game audio."
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/retail-tycoon-2",
+      "contains": "What stops a Custom Radio song from playing"
+    },
+    {
+      "path": "/catalog/roblox-music-ids/games/a-dusty-trip",
+      "contains": "Why an A Dusty Trip song might not play"
+    }
+  ],
+  "events": [
+    {
+      "type": "catalog",
+      "slug": "admin-commands/adonis-admin"
+    },
+    {
+      "type": "catalog",
+      "slug": "admin-commands/basic-admin"
+    },
+    {
+      "type": "catalog",
+      "slug": "admin-commands"
+    },
+    {
+      "type": "catalog",
+      "slug": "admin-commands/hd-admin"
+    },
+    {
+      "type": "catalog",
+      "slug": "admin-commands/kohls-admin"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-decal-ids/games/berry-avenue"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-items-and-bundles"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/3008"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/basketball-zero"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/brookhaven-rp"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/da-hood"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/driving-empire"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/forsaken"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/evade"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/fisch"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/grand-piece-online"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/nicos-nextbots"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/retail-tycoon-2"
+    },
+    {
+      "type": "catalog",
+      "slug": "roblox-music-ids/games/a-dusty-trip"
+    }
+  ]
+}
