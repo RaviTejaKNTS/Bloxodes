@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -691,7 +692,7 @@ function applyAvatarCatalogFilters(query: any, filters: AvatarCatalogResolvedSea
   let nextQuery = query;
 
   if (filters.search) {
-    const pattern = buildSearchPattern(filters.search);
+    const pattern = quotePostgrestPattern(buildSearchPattern(filters.search));
     const orParts = [
       `name.ilike.${pattern}`,
       `description.ilike.${pattern}`,

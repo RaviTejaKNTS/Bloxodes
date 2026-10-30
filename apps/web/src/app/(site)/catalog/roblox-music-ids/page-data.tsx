@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyMusicSort } from "@/lib/catalog-id-sorts";
 import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
@@ -342,7 +343,7 @@ async function loadMusicIdsPage(
 
     const searchTerm = normalizeSearchQuery(options?.search);
     if (searchTerm) {
-      const pattern = buildLoosePattern(searchTerm);
+      const pattern = quotePostgrestPattern(buildLoosePattern(searchTerm));
       const orParts = [
         `title.ilike.${pattern}`,
         `artist.ilike.${pattern}`,
@@ -478,7 +479,7 @@ export async function loadGameMusicIdsPageData(
 
     const searchTerm = normalizeSearchQuery(options?.search);
     if (searchTerm) {
-      const pattern = buildLoosePattern(searchTerm);
+      const pattern = quotePostgrestPattern(buildLoosePattern(searchTerm));
       const orParts = [
         `title.ilike.${pattern}`,
         `artist.ilike.${pattern}`,

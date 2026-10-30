@@ -7,7 +7,7 @@ Last verified: 2026-10-19
 | Endpoint | Checks |
 | --- | --- |
 | `/api/health?scope=deploy` | Live build SHA and database. Used by the Docker health check and deploys. Light and fast. |
-| `/api/health` | Full operational health, including stats freshness (for example WARM refresh outcomes and overdue ratios). Can be unhealthy while the site is fine. |
+| `/api/health` | Full operational health, including stats freshness (for example WARM refresh outcomes and overdue ratios). Can be unhealthy while the site is fine. `warm_refresh_outcome_6h` looks back 7 hours, because WARM runs every 6 hours and can wait 30 minutes for its lock; COLD looks back 6 hours. |
 
 ## Alerts
 

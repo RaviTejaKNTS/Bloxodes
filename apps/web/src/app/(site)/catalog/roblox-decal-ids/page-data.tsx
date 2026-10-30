@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyDecalSort } from "@/lib/catalog-id-sorts";
 import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
@@ -240,7 +241,7 @@ export async function loadRobloxDecalIdsPageData(
     }
 
     if (search.search) {
-      const pattern = buildLoosePattern(search.search);
+      const pattern = quotePostgrestPattern(buildLoosePattern(search.search));
       const orParts = [
         `name.ilike.${pattern}`,
         `description.ilike.${pattern}`,
@@ -300,7 +301,7 @@ export async function loadGameDecalIdsPageData(
     }
 
     if (search.search) {
-      const pattern = buildLoosePattern(search.search);
+      const pattern = quotePostgrestPattern(buildLoosePattern(search.search));
       const orParts = [
         `name.ilike.${pattern}`,
         `description.ilike.${pattern}`,
