@@ -23,7 +23,7 @@ Automation reports problems as GitHub issues labeled `incident`, not Telegram. T
 | --- | --- |
 | Did a VPS job really work? | `stats_job_runs` in production. Wrapper state files under the worker's `state/` can say "success" for a skipped job. |
 | Is the cache draining? | `revalidation_events`, `cache_warm_events` and their `*_worker_runs` tables. |
-| Did an article publish? | The homelab `tmp/article-publication/health.json` and the queue row in managed development. |
+| Did an article publish? | The MacBook Pro checkout's `tmp/article-publication/health.json` and the queue row in managed development. |
 | What's deployed? | `/api/health?scope=deploy`, or the Dokploy service image. |
 | Is a nightly T3 run done? | The T3 scheduler and the Notion queue row's status and Run report. |
 
