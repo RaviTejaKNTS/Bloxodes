@@ -1,0 +1,811 @@
+{
+  "page": {
+    "universe_id": 5203828273,
+    "code": "dress-to-impress",
+    "title": "Dress To Impress Roblox Quiz: 15 Questions on Style and Showdown",
+    "description_md": "Think you know Dress To Impress? Take 15 random questions, five from each tier. Topics range from styling rounds and rank progress to packs, patterns and Style Showdown rules.",
+    "seo_title": null,
+    "seo_description": "Take 15 random Roblox Dress To Impress questions, five per tier. Test what you know about ranks, Pose Packs, Walk Packs, patterns and Style Showdown rules.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "DTI-E02",
+        "question": "What advances the standard Dress To Impress ranks?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Cash"
+          },
+          {
+            "id": "B",
+            "text": "Stars"
+          },
+          {
+            "id": "C",
+            "text": "Robux"
+          },
+          {
+            "id": "D",
+            "text": "Style Stars"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-E03",
+        "question": "Which currency buys the year-round Pose Packs and Walk Packs in the Shop?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Stars"
+          },
+          {
+            "id": "B",
+            "text": "Robux"
+          },
+          {
+            "id": "C",
+            "text": "Seasonal Currency"
+          },
+          {
+            "id": "D",
+            "text": "Cash"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-E04",
+        "question": "Which area connected to the Standard Dressing Room handles hair, makeup and nails?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Lana's Salon"
+          },
+          {
+            "id": "B",
+            "text": "Dressing Booths"
+          },
+          {
+            "id": "C",
+            "text": "VIP Lounge"
+          },
+          {
+            "id": "D",
+            "text": "Freeplay Runway"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-E05",
+        "question": "Which Dressing Room area offers free items to all players?",
+        "options": [
+          {
+            "id": "A",
+            "text": "VIP Dressing Room"
+          },
+          {
+            "id": "B",
+            "text": "VIP Lounge"
+          },
+          {
+            "id": "C",
+            "text": "Standard Dressing Room"
+          },
+          {
+            "id": "D",
+            "text": "Dressing Booths"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-E06",
+        "question": "What comes immediately after the styling timer ends in a standard round?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Runway walks and player voting"
+          },
+          {
+            "id": "B",
+            "text": "Intermission and next-theme selection"
+          },
+          {
+            "id": "C",
+            "text": "Podium results and round rewards"
+          },
+          {
+            "id": "D",
+            "text": "Dressing Room arrival and item selection"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-E07",
+        "question": "What do Pose Packs add to your options?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Additional walks"
+          },
+          {
+            "id": "B",
+            "text": "Additional poses"
+          },
+          {
+            "id": "C",
+            "text": "Additional idles"
+          },
+          {
+            "id": "D",
+            "text": "Additional saved outfits"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-E10",
+        "question": "What is a theme in a standard round?",
+        "options": [
+          {
+            "id": "A",
+            "text": "A title showing your rank"
+          },
+          {
+            "id": "B",
+            "text": "A string for redeeming an item"
+          },
+          {
+            "id": "C",
+            "text": "A folder grouping owned items"
+          },
+          {
+            "id": "D",
+            "text": "A prompt for your outfit"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-E12",
+        "question": "Which mode lets you dress without an assigned theme or styling time limit?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pro Server"
+          },
+          {
+            "id": "B",
+            "text": "Regular Server"
+          },
+          {
+            "id": "C",
+            "text": "Freeplay"
+          },
+          {
+            "id": "D",
+            "text": "Style Showdown"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-M01",
+        "question": "Where is your standard rank displayed during play?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Beside prices in the Cash Shop"
+          },
+          {
+            "id": "B",
+            "text": "On your player's nametag"
+          },
+          {
+            "id": "C",
+            "text": "In the Poses menu"
+          },
+          {
+            "id": "D",
+            "text": "Beside the Codes entry box"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-M07",
+        "question": "Which Dressing Room section contains your Closet collections?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Dressing Booths"
+          },
+          {
+            "id": "B",
+            "text": "Lana's Salon"
+          },
+          {
+            "id": "C",
+            "text": "Runway stage"
+          },
+          {
+            "id": "D",
+            "text": "VIP Lounge"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-M11",
+        "question": "Which Dressing Booth collection groups Gamepass items bought with Robux?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Currency Collection"
+          },
+          {
+            "id": "B",
+            "text": "Codes Collection"
+          },
+          {
+            "id": "C",
+            "text": "Robux Collection"
+          },
+          {
+            "id": "D",
+            "text": "Achievements Collection"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-E13",
+        "question": "During which standard-round phase can you use Runway Effects?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Dressing Room styling"
+          },
+          {
+            "id": "B",
+            "text": "Lobby intermission"
+          },
+          {
+            "id": "C",
+            "text": "Post-round results"
+          },
+          {
+            "id": "D",
+            "text": "Final Runway and voting stage"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "DTI-M02",
+        "question": "Which standard rank starts at 1,500 Stars?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Glamourista"
+          },
+          {
+            "id": "B",
+            "text": "Trend Setter"
+          },
+          {
+            "id": "C",
+            "text": "Fashion Maven"
+          },
+          {
+            "id": "D",
+            "text": "Runway Queen"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-M03",
+        "question": "What is the minimum standard rank and Star total needed to enter a Pro Server?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Runway Queen at 3,000 Stars"
+          },
+          {
+            "id": "B",
+            "text": "Fashion Maven at 2,500 Stars"
+          },
+          {
+            "id": "C",
+            "text": "Trend Setter at 5,000 Stars"
+          },
+          {
+            "id": "D",
+            "text": "Glamourista at 2,000 Stars"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-M04",
+        "question": "Which standard Pose Pack costs 5,000 Cash?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Editorial Pose Pack"
+          },
+          {
+            "id": "B",
+            "text": "Duo Pose Pack"
+          },
+          {
+            "id": "C",
+            "text": "Hand Pose Pack"
+          },
+          {
+            "id": "D",
+            "text": "Gala Pose Pack"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-M05",
+        "question": "Which standard Walk Pack costs 9,000 Cash?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Elegant Walk Pack"
+          },
+          {
+            "id": "B",
+            "text": "Attitude Walk Pack"
+          },
+          {
+            "id": "C",
+            "text": "Cutesy Walk Pack"
+          },
+          {
+            "id": "D",
+            "text": "Diva Walk Pack"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-M08",
+        "question": "Which standard Runway Effect Pack costs 89 Robux?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Runway Tomato Pack"
+          },
+          {
+            "id": "B",
+            "text": "Runway Explode Pack"
+          },
+          {
+            "id": "C",
+            "text": "Runway Roses Pack"
+          },
+          {
+            "id": "D",
+            "text": "Runway Spotlight Pack"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-M12",
+        "question": "Which rule applies when selecting an unlocked Walk and Idle in the Walks menu?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only the Walk can change; the Idle always stays default"
+          },
+          {
+            "id": "B",
+            "text": "The Walk and Idle must be selected as one fixed pair"
+          },
+          {
+            "id": "C",
+            "text": "Only the Idle can change; the Walk always stays default"
+          },
+          {
+            "id": "D",
+            "text": "The Walk and Idle can be selected separately"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-H01",
+        "question": "Which rank starts at 6,000 Stars and is immediately followed by Runway Diva?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Trend Setter"
+          },
+          {
+            "id": "B",
+            "text": "Runway Diva"
+          },
+          {
+            "id": "C",
+            "text": "Top Model"
+          },
+          {
+            "id": "D",
+            "text": "Fashion Mogul"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-H02",
+        "question": "Which rank reward unlocks at 25,000 standard Stars?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Runway Diva Crown"
+          },
+          {
+            "id": "B",
+            "text": "Trend-Setter Skirt"
+          },
+          {
+            "id": "C",
+            "text": "Top Model Silk Robe"
+          },
+          {
+            "id": "D",
+            "text": "Runway Queen Bag"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-H03",
+        "question": "How many standard Stars unlock the Supernova Crown?",
+        "options": [
+          {
+            "id": "A",
+            "text": "50,000 Stars"
+          },
+          {
+            "id": "B",
+            "text": "75,000 Stars"
+          },
+          {
+            "id": "C",
+            "text": "150,000 Stars"
+          },
+          {
+            "id": "D",
+            "text": "100,000 Stars"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-M13",
+        "question": "Which standard Pose Pack costs 1,800 Cash?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pop Culture Pose Pack"
+          },
+          {
+            "id": "B",
+            "text": "Dance Pose Pack"
+          },
+          {
+            "id": "C",
+            "text": "Editorial Pose Pack"
+          },
+          {
+            "id": "D",
+            "text": "Gala Pose Pack"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-M14",
+        "question": "What is the Saved Outfits limit and mode restriction?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Up to 35 outfits; all modes"
+          },
+          {
+            "id": "B",
+            "text": "Up to 35 outfits; Freeplay only"
+          },
+          {
+            "id": "C",
+            "text": "Up to 10 outfits; Freeplay only"
+          },
+          {
+            "id": "D",
+            "text": "Up to 10 outfits; all modes"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-M15",
+        "question": "In the Patterns menu, what do the arrows at the top change?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The selected item's pattern scale"
+          },
+          {
+            "id": "B",
+            "text": "The selected item's pattern rotation"
+          },
+          {
+            "id": "C",
+            "text": "The selected item's target part"
+          },
+          {
+            "id": "D",
+            "text": "The selected item's color palette"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-M16",
+        "question": "How many players must be queued in the Style Showdown ring for the group teleport?",
+        "options": [
+          {
+            "id": "A",
+            "text": "6 players"
+          },
+          {
+            "id": "B",
+            "text": "4 players"
+          },
+          {
+            "id": "C",
+            "text": "5 players"
+          },
+          {
+            "id": "D",
+            "text": "7 players"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-M17",
+        "question": "Under Style Showdown's normal elimination rule, who leaves after voting when more than three players remain?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The player with the most votes"
+          },
+          {
+            "id": "B",
+            "text": "The player wearing the fewest items"
+          },
+          {
+            "id": "C",
+            "text": "The player wearing the most items"
+          },
+          {
+            "id": "D",
+            "text": "The player with the fewest votes"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-M18",
+        "question": "Starting with none of the three Style Showdown set pieces, how do wins award the full set?",
+        "options": [
+          {
+            "id": "A",
+            "text": "One win awards all three pieces together as a bundle"
+          },
+          {
+            "id": "B",
+            "text": "Three wins award one player-chosen piece per win"
+          },
+          {
+            "id": "C",
+            "text": "Three wins each award one random piece not yet owned"
+          },
+          {
+            "id": "D",
+            "text": "Three wins each award one random piece that may repeat"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-M19",
+        "question": "How many remaining players trigger the Style Showdown Grand Finale?",
+        "options": [
+          {
+            "id": "A",
+            "text": "2 players"
+          },
+          {
+            "id": "B",
+            "text": "3 players"
+          },
+          {
+            "id": "C",
+            "text": "4 players"
+          },
+          {
+            "id": "D",
+            "text": "5 players"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "DTI-H13",
+        "question": "In Style Showdown, what happens to votes you leave unused during voting?",
+        "options": [
+          {
+            "id": "A",
+            "text": "They carry into your next voting turn"
+          },
+          {
+            "id": "B",
+            "text": "They are added to the leading player's total"
+          },
+          {
+            "id": "C",
+            "text": "They are deducted from the lowest player's total"
+          },
+          {
+            "id": "D",
+            "text": "They are deducted from your own vote total"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "DTI-H14",
+        "question": "With no tied scores, what decides the Style Showdown Grand Finale winner?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Accumulated Style Stars from the rounds"
+          },
+          {
+            "id": "B",
+            "text": "A jury vote from eliminated players"
+          },
+          {
+            "id": "C",
+            "text": "Votes from the final runway alone"
+          },
+          {
+            "id": "D",
+            "text": "A random draw among the finalists"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "DTI-H15",
+        "question": "In Style Showdown, how do Random Item and Item Lock differ?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Random Item locks your colors; Item Lock locks your Walk and Idle"
+          },
+          {
+            "id": "B",
+            "text": "Random Item prevents removing items you equip that round; Item Lock prevents removing the assigned item"
+          },
+          {
+            "id": "C",
+            "text": "Random Item prevents removing the assigned item; Item Lock prevents removing items you equip that round"
+          },
+          {
+            "id": "D",
+            "text": "Random Item locks your hair; Item Lock locks your makeup and nails"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "DTI-H16",
+        "question": "Which pair of rules applies in Style Showdown's Lock In challenge?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The button stops outfit edits; round time is longer"
+          },
+          {
+            "id": "B",
+            "text": "The button stops outfit edits; round time is shorter"
+          },
+          {
+            "id": "C",
+            "text": "The button resets your outfit; round time is shorter"
+          },
+          {
+            "id": "D",
+            "text": "The button resets your outfit; round time is longer"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "DTI-H17",
+        "question": "With at least two items equipped, what penalty follows moving during the red screen in Style Showdown's Red Light Green Light?",
+        "options": [
+          {
+            "id": "A",
+            "text": "A brief stun and one equipped item lost"
+          },
+          {
+            "id": "B",
+            "text": "A brief stun and all equipped items lost"
+          },
+          {
+            "id": "C",
+            "text": "Immediate elimination and one equipped item lost"
+          },
+          {
+            "id": "D",
+            "text": "Immediate elimination and all equipped items lost"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      }
+    ]
+  }
+}

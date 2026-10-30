@@ -1,0 +1,571 @@
+{
+  "page": {
+    "universe_id": 5569032992,
+    "code": "dandys-world",
+    "title": "Dandy's World Roblox Quiz: 15 Questions on Runs and Research",
+    "description_md": "Think you know Dandy's World? Easy questions cover how a run works, Tapes and Research. Medium questions get into Research Capsules and character abilities, and the hard ones test specific Twisted stats and behaviors. Each try draws five questions from each difficulty.",
+    "seo_title": null,
+    "seo_description": "Test how well you know Roblox Dandy's World with 15 easy, medium and hard questions on runs, Research Capsules, character abilities and Twisted stats.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What are the playable characters in Dandy's World called?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Twisteds"
+          },
+          {
+            "id": "b",
+            "text": "Toons"
+          },
+          {
+            "id": "c",
+            "text": "Trinkets"
+          },
+          {
+            "id": "d",
+            "text": "Research Capsules"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What are Twisteds in Dandy's World?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Playable starter characters"
+          },
+          {
+            "id": "b",
+            "text": "Currencies"
+          },
+          {
+            "id": "c",
+            "text": "Shop items"
+          },
+          {
+            "id": "d",
+            "text": "Monsters that chase players"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What do Toons extract on each floor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Machines"
+          },
+          {
+            "id": "b",
+            "text": "Research Capsules"
+          },
+          {
+            "id": "c",
+            "text": "Dandy's Store"
+          },
+          {
+            "id": "d",
+            "text": "Badges"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Once every Machine on a floor is done, what opens for only a few seconds?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The next floor's Machines"
+          },
+          {
+            "id": "b",
+            "text": "Twisteds"
+          },
+          {
+            "id": "c",
+            "text": "The elevator"
+          },
+          {
+            "id": "d",
+            "text": "Research Capsules"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What happens when you fail a Skill Check?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It makes noise that draws Twisteds"
+          },
+          {
+            "id": "b",
+            "text": "It grants Research"
+          },
+          {
+            "id": "c",
+            "text": "It completes the Machine"
+          },
+          {
+            "id": "d",
+            "text": "It opens the elevator"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What happens to unused Tapes when a run ends?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They carry into the next run"
+          },
+          {
+            "id": "b",
+            "text": "They turn into Ichor"
+          },
+          {
+            "id": "c",
+            "text": "They become Research"
+          },
+          {
+            "id": "d",
+            "text": "They are lost"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What action grants Research besides picking up a capsule?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Buying Trinkets"
+          },
+          {
+            "id": "b",
+            "text": "Encountering a Twisted"
+          },
+          {
+            "id": "c",
+            "text": "Using any Toon ability"
+          },
+          {
+            "id": "d",
+            "text": "Opening the elevator"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Without playable Rodger's bonus, how much Research and Ichor does one Research Capsule give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5% Research and no Ichor"
+          },
+          {
+            "id": "b",
+            "text": "10% Research and 2 Ichor"
+          },
+          {
+            "id": "c",
+            "text": "1% Research and 2 Ichor"
+          },
+          {
+            "id": "d",
+            "text": "1% Research and 5 Ichor"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "How many Research Capsules spawn for each Twisted type present on a floor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two"
+          },
+          {
+            "id": "b",
+            "text": "One"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "In a team run, how do Research Capsules work for each player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only the host can collect a capsule"
+          },
+          {
+            "id": "b",
+            "text": "One pickup gives the whole team shared Research"
+          },
+          {
+            "id": "c",
+            "text": "Only playable Rodger can collect a capsule"
+          },
+          {
+            "id": "d",
+            "text": "Each player can collect the same capsule"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What speed boost does Poppy's Panic Pop give, and when?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A 25% Speed boost for 10 seconds when a Machine is completed"
+          },
+          {
+            "id": "b",
+            "text": "A 50% Speed boost for 3 seconds when attacked"
+          },
+          {
+            "id": "c",
+            "text": "A 20% Speed boost for 5 seconds on even floors"
+          },
+          {
+            "id": "d",
+            "text": "A 50% Speed boost for 5 seconds when the elevator opens"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "What does Razzle & Dazzle's ability give on odd-numbered floors and on even-numbered floors?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Extraction Speed on odd floors; Movement Speed on even floors"
+          },
+          {
+            "id": "b",
+            "text": "Extraction Speed on odd floors; Extraction Speed on even floors"
+          },
+          {
+            "id": "c",
+            "text": "Movement Speed on odd floors; Extraction Speed on even floors"
+          },
+          {
+            "id": "d",
+            "text": "Movement Speed on odd floors; Movement Speed on even floors"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What resource does Cosmo's Sharing is Caring give up to heal a targeted Toon?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ichor"
+          },
+          {
+            "id": "b",
+            "text": "Tapes"
+          },
+          {
+            "id": "c",
+            "text": "A Trinket"
+          },
+          {
+            "id": "d",
+            "text": "One Heart"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "What is Twisted Brusha's hearing radius?",
+        "options": [
+          {
+            "id": "a",
+            "text": "125 units"
+          },
+          {
+            "id": "b",
+            "text": "70 units"
+          },
+          {
+            "id": "c",
+            "text": "150 units"
+          },
+          {
+            "id": "d",
+            "text": "200 units"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Which action inside the dark red ribbon circle makes Twisted Razzle & Dazzle hostile?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Walking"
+          },
+          {
+            "id": "b",
+            "text": "Failing a Skill Check"
+          },
+          {
+            "id": "c",
+            "text": "Sprinting"
+          },
+          {
+            "id": "d",
+            "text": "Using an Air Horn"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "Which item is Twisted Rodger disguised as?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Machine"
+          },
+          {
+            "id": "b",
+            "text": "A Research Capsule"
+          },
+          {
+            "id": "c",
+            "text": "A Trinket"
+          },
+          {
+            "id": "d",
+            "text": "An elevator button"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What does Twisted Astro do when a Skill Check fails and no Toons are spotted?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It drains all of the Machine's progress"
+          },
+          {
+            "id": "b",
+            "text": "It drains half of the player's Ichor"
+          },
+          {
+            "id": "c",
+            "text": "It drains progress from every Machine"
+          },
+          {
+            "id": "d",
+            "text": "It drains roughly half of the Machine's progress"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "What is Twisted Toodles' attention span?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One second"
+          },
+          {
+            "id": "b",
+            "text": "Half a second"
+          },
+          {
+            "id": "c",
+            "text": "Three seconds"
+          },
+          {
+            "id": "d",
+            "text": "Five seconds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does Twisted Scraps use to strike a distant player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Her arms"
+          },
+          {
+            "id": "b",
+            "text": "Floor vines"
+          },
+          {
+            "id": "c",
+            "text": "Her tail"
+          },
+          {
+            "id": "d",
+            "text": "A paintbrush"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "How does Twisted Goob seize a Toon from far away?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He throws a vine trap at the Toon"
+          },
+          {
+            "id": "b",
+            "text": "He pulls the Toon in with his arms"
+          },
+          {
+            "id": "c",
+            "text": "He steals an item from the Toon"
+          },
+          {
+            "id": "d",
+            "text": "He swaps places with the Toon"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "Who gets Slow III from Twisted Finn, and for how long?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The player who fails a Skill Check, for 5 seconds"
+          },
+          {
+            "id": "b",
+            "text": "Everyone on the team, for 10 seconds"
+          },
+          {
+            "id": "c",
+            "text": "The Research Capsule collector, for 5 seconds"
+          },
+          {
+            "id": "d",
+            "text": "The player who completes a Machine, for 5 seconds"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "What is the only way to lower Twisted Glisten's meter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No Toons are visible to him"
+          },
+          {
+            "id": "b",
+            "text": "A Toon completes every Machine"
+          },
+          {
+            "id": "c",
+            "text": "A visible Toon in his detection range"
+          },
+          {
+            "id": "d",
+            "text": "A player collects a Research Capsule"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "What is Twisted Pebble's direct vision range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "125 units"
+          },
+          {
+            "id": "b",
+            "text": "50 units"
+          },
+          {
+            "id": "c",
+            "text": "75 units"
+          },
+          {
+            "id": "d",
+            "text": "150 units"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

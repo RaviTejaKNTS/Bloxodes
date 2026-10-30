@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 7018190066,
+    "code": "dead-rails",
+    "title": "Dead Rails Roblox Quiz: 15 Questions on Train Survival",
+    "description_md": "Think you know the train run? Each attempt pulls five easy, five medium and five hard questions at random. The easy ones cover the basics of the route, supplies and classes. The hard ones dig into zombie behavior and the final bridge.",
+    "seo_title": null,
+    "seo_description": "How well do you know the Roblox Dead Rails train run? Test fuel, safe towns, the bank vault, classes, zombies and the final bridge in 15 random questions.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-e01",
+        "question": "In Dead Rails' story, where do you travel to find the cure for the zombie plague?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Canada"
+          },
+          {
+            "id": "b",
+            "text": "Mexico"
+          },
+          {
+            "id": "c",
+            "text": "Brazil"
+          },
+          {
+            "id": "d",
+            "text": "Argentina"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e02",
+        "question": "Which common material can the crew buy to power the train?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bandages"
+          },
+          {
+            "id": "b",
+            "text": "Rifle ammo"
+          },
+          {
+            "id": "c",
+            "text": "Coal"
+          },
+          {
+            "id": "d",
+            "text": "Snake Oil"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e03",
+        "question": "Which shop at a safe town sells Fire Torch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "General Store"
+          },
+          {
+            "id": "b",
+            "text": "Doctor's shop"
+          },
+          {
+            "id": "c",
+            "text": "Weapon Shop"
+          },
+          {
+            "id": "d",
+            "text": "Tailor"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e04",
+        "question": "What can you put in the train's furnace as backup fuel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A live zombie"
+          },
+          {
+            "id": "b",
+            "text": "A Bandage"
+          },
+          {
+            "id": "c",
+            "text": "Snake Oil"
+          },
+          {
+            "id": "d",
+            "text": "A dead zombie's body"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e05",
+        "question": "On the full-length route, how far is the final bridge from the start?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40 km"
+          },
+          {
+            "id": "b",
+            "text": "60 km"
+          },
+          {
+            "id": "c",
+            "text": "80 km"
+          },
+          {
+            "id": "d",
+            "text": "100 km"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e06",
+        "question": "On the full-length route, how far apart are the safe towns?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every 5 km"
+          },
+          {
+            "id": "b",
+            "text": "Every 10 km"
+          },
+          {
+            "id": "c",
+            "text": "Every 20 km"
+          },
+          {
+            "id": "d",
+            "text": "Every 8 km"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e07",
+        "question": "Where at a safe town can you buy healing items?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Weapon Shop"
+          },
+          {
+            "id": "b",
+            "text": "General Store"
+          },
+          {
+            "id": "c",
+            "text": "Tailor"
+          },
+          {
+            "id": "d",
+            "text": "Doctor's shop"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e08",
+        "question": "Which Dead Rails mode has no special rules or restrictions?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nightmare"
+          },
+          {
+            "id": "b",
+            "text": "Normal"
+          },
+          {
+            "id": "c",
+            "text": "Bite-Size"
+          },
+          {
+            "id": "d",
+            "text": "Scorched Earth"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e09",
+        "question": "Which healing item can revive another player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bandage"
+          },
+          {
+            "id": "b",
+            "text": "Coal"
+          },
+          {
+            "id": "c",
+            "text": "Snake Oil"
+          },
+          {
+            "id": "d",
+            "text": "Barbed Wire"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e10",
+        "question": "Which lobby building lets you buy or choose a class?",
+        "options": [
+          {
+            "id": "a",
+            "text": "General Store"
+          },
+          {
+            "id": "b",
+            "text": "Train Station"
+          },
+          {
+            "id": "c",
+            "text": "Tailor"
+          },
+          {
+            "id": "d",
+            "text": "Weapon Shop"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-m02",
+        "question": "What does a Doctor give up to revive a teammate with the class's own ability?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A quarter of the Doctor's health"
+          },
+          {
+            "id": "b",
+            "text": "Half of the Doctor's health"
+          },
+          {
+            "id": "c",
+            "text": "A third of the Doctor's health"
+          },
+          {
+            "id": "d",
+            "text": "All of the Doctor's health"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m04",
+        "question": "Which enemy should you defeat to find an in-run bank's combination note?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Banker Zombie"
+          },
+          {
+            "id": "b",
+            "text": "Miner Zombie"
+          },
+          {
+            "id": "c",
+            "text": "Sheriff Zombie"
+          },
+          {
+            "id": "d",
+            "text": "Runner Zombie"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m05",
+        "question": "What should you expect about a bank code from a previous run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It opens every bank"
+          },
+          {
+            "id": "b",
+            "text": "It stays the same in every run"
+          },
+          {
+            "id": "c",
+            "text": "It changes every run"
+          },
+          {
+            "id": "d",
+            "text": "It opens the lobby bank"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-m06",
+        "question": "How do you enter the bank code on the vault?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Type each digit into a keypad one at a time"
+          },
+          {
+            "id": "b",
+            "text": "Turn a key in the vault's lock to open it"
+          },
+          {
+            "id": "c",
+            "text": "Pull a lever beside the vault door to open it"
+          },
+          {
+            "id": "d",
+            "text": "Line up the wheel's arrow with each digit"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-m07",
+        "question": "Besides the vault code, which item can open a bank vault?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Snake Oil"
+          },
+          {
+            "id": "b",
+            "text": "Dynamite"
+          },
+          {
+            "id": "c",
+            "text": "Sheet Metal"
+          },
+          {
+            "id": "d",
+            "text": "Rifle"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m08",
+        "question": "Which statement about a safe town's turrets is true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They have limited ammunition"
+          },
+          {
+            "id": "b",
+            "text": "They cannot shoot zombies"
+          },
+          {
+            "id": "c",
+            "text": "They are controlled from the train cab"
+          },
+          {
+            "id": "d",
+            "text": "They never run out of ammunition"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m09",
+        "question": "What does Snake Oil do when a player uses it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It revives another player over time"
+          },
+          {
+            "id": "b",
+            "text": "It refills the train's fuel over time"
+          },
+          {
+            "id": "c",
+            "text": "It heals the user to max health over time"
+          },
+          {
+            "id": "d",
+            "text": "It restores the player's ammo over time"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-rq01",
+        "question": "Where do you turn in an outlaw's body for a bounty?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Doctor's shop"
+          },
+          {
+            "id": "b",
+            "text": "Sheriff's Office"
+          },
+          {
+            "id": "c",
+            "text": "Tailor"
+          },
+          {
+            "id": "d",
+            "text": "General Store"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-rq03",
+        "question": "Which shop at a safe town sells ammunition?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Doctor's shop"
+          },
+          {
+            "id": "b",
+            "text": "General Store"
+          },
+          {
+            "id": "c",
+            "text": "Tailor"
+          },
+          {
+            "id": "d",
+            "text": "Weapon Shop"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-n01",
+        "question": "Which class has neither a passive ability nor starting gear of its own?",
+        "options": [
+          {
+            "id": "a",
+            "text": "None"
+          },
+          {
+            "id": "b",
+            "text": "Miner"
+          },
+          {
+            "id": "c",
+            "text": "Doctor"
+          },
+          {
+            "id": "d",
+            "text": "Werewolf"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-h01",
+        "question": "Which class gets big speed, attack and health boosts at night but weakens during the day?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Werewolf"
+          },
+          {
+            "id": "b",
+            "text": "Miner"
+          },
+          {
+            "id": "c",
+            "text": "Conductor"
+          },
+          {
+            "id": "d",
+            "text": "Demolitionist"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-h02",
+        "question": "Which class is immune to all explosion damage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Conductor"
+          },
+          {
+            "id": "b",
+            "text": "Necromancer"
+          },
+          {
+            "id": "c",
+            "text": "Alamo"
+          },
+          {
+            "id": "d",
+            "text": "Demolitionist"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-h03",
+        "question": "Which class protects against lightning strikes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Werewolf"
+          },
+          {
+            "id": "b",
+            "text": "Conductor"
+          },
+          {
+            "id": "c",
+            "text": "Priest"
+          },
+          {
+            "id": "d",
+            "text": "Doctor"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h04",
+        "question": "Who controls the turrets at a safe town's entrance and exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Sheriff stationed at the gates"
+          },
+          {
+            "id": "b",
+            "text": "The soldiers stationed at the gates"
+          },
+          {
+            "id": "c",
+            "text": "The train crew inside the cab"
+          },
+          {
+            "id": "d",
+            "text": "No one, the turrets fire on their own"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h05",
+        "question": "What does a Miner Zombie do when a player gets close?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It draws a revolver and fires at you"
+          },
+          {
+            "id": "b",
+            "text": "It slips into buildings that block other zombies"
+          },
+          {
+            "id": "c",
+            "text": "It lights its dynamite and self-destructs"
+          },
+          {
+            "id": "d",
+            "text": "It takes less damage from long-range attacks"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h08",
+        "question": "Which weapon does a Sheriff Zombie carry?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Revolver"
+          },
+          {
+            "id": "b",
+            "text": "Pickaxe"
+          },
+          {
+            "id": "c",
+            "text": "Dynamite"
+          },
+          {
+            "id": "d",
+            "text": "Rifle"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-h09",
+        "question": "On PC, while at the final bridge crank, which key do you hold to lower it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "F"
+          },
+          {
+            "id": "b",
+            "text": "E"
+          },
+          {
+            "id": "c",
+            "text": "R"
+          },
+          {
+            "id": "d",
+            "text": "Space"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h10",
+        "question": "After the final bridge crank is turned, how long does the attack timer run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two minutes"
+          },
+          {
+            "id": "b",
+            "text": "One minute"
+          },
+          {
+            "id": "c",
+            "text": "Five minutes"
+          },
+          {
+            "id": "d",
+            "text": "Four minutes"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-rq02",
+        "question": "When the attack timer runs out at the final bridge, what does the game show next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A failure result, then a lobby return"
+          },
+          {
+            "id": "b",
+            "text": "A failure result, then a train restart"
+          },
+          {
+            "id": "c",
+            "text": "An escape result, then a lobby return"
+          },
+          {
+            "id": "d",
+            "text": "An escape result, then the train keeps going"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}

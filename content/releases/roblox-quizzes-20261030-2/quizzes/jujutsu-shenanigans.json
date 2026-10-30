@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 3508322461,
+    "code": "jujutsu-shenanigans",
+    "title": "Jujutsu Shenanigans Roblox Quiz: 15 Questions on Combat and Modes",
+    "description_md": "Think you know Jujutsu Shenanigans? See how much you remember beyond your usual combos. Each attempt draws 15 random questions, five from each difficulty tier.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Jujutsu Shenanigans knowledge with 15 random questions, from everyday combat basics to Domain Expansions, modes and tricky mechanics.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "JJS-E1",
+        "question": "With the default PC keybinds, what does G activate?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Block"
+          },
+          {
+            "id": "B",
+            "text": "Awakening"
+          },
+          {
+            "id": "C",
+            "text": "Dash"
+          },
+          {
+            "id": "D",
+            "text": "Special"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-E2",
+        "question": "In standard combat, what does M1 start?",
+        "options": [
+          {
+            "id": "A",
+            "text": "A front-facing block"
+          },
+          {
+            "id": "B",
+            "text": "A dash"
+          },
+          {
+            "id": "C",
+            "text": "The character's special move"
+          },
+          {
+            "id": "D",
+            "text": "A normal melee combo"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-E3",
+        "question": "Which character uses Malevolent Shrine?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Vessel"
+          },
+          {
+            "id": "B",
+            "text": "Honored One"
+          },
+          {
+            "id": "C",
+            "text": "Restless Gambler"
+          },
+          {
+            "id": "D",
+            "text": "Switcher"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-E4",
+        "question": "Which item can you buy from vending machines to heal?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Coin"
+          },
+          {
+            "id": "B",
+            "text": "Tinted Glasses"
+          },
+          {
+            "id": "C",
+            "text": "Soda"
+          },
+          {
+            "id": "D",
+            "text": "Jet Black"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-E5",
+        "question": "Which menu option takes you to the regular city fighting map?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Public Servers"
+          },
+          {
+            "id": "B",
+            "text": "Duels"
+          },
+          {
+            "id": "C",
+            "text": "Custom Servers"
+          },
+          {
+            "id": "D",
+            "text": "Roulette"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-E6",
+        "question": "Which mode family offers Casual and Ranked queues?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Roulette"
+          },
+          {
+            "id": "B",
+            "text": "Custom Servers"
+          },
+          {
+            "id": "C",
+            "text": "Creator Clash"
+          },
+          {
+            "id": "D",
+            "text": "Duels"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-E7",
+        "question": "Which character uses Infinite Void?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Defense Attorney"
+          },
+          {
+            "id": "B",
+            "text": "Head of the Hei"
+          },
+          {
+            "id": "C",
+            "text": "Honored One"
+          },
+          {
+            "id": "D",
+            "text": "Cursed Partners"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-E8",
+        "question": "What can you do with Build Mode in a private server?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Queue for Ranked matches"
+          },
+          {
+            "id": "B",
+            "text": "Build structures and logic-based creations"
+          },
+          {
+            "id": "C",
+            "text": "Buy random shop emotes"
+          },
+          {
+            "id": "D",
+            "text": "View achievement rewards"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-E9",
+        "question": "Which Main Map landmark has a control panel that can call a train?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Towers"
+          },
+          {
+            "id": "B",
+            "text": "The Sewers"
+          },
+          {
+            "id": "C",
+            "text": "Convenience Store"
+          },
+          {
+            "id": "D",
+            "text": "Shinjuku Station"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-E10",
+        "question": "Which editor is specifically used to make custom abilities?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Skill Builder"
+          },
+          {
+            "id": "B",
+            "text": "Build Mode"
+          },
+          {
+            "id": "C",
+            "text": "The title menu"
+          },
+          {
+            "id": "D",
+            "text": "The emote wheel"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-M3",
+        "question": "Which matchmaking choice tracks Elo?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Casual"
+          },
+          {
+            "id": "B",
+            "text": "Public Servers"
+          },
+          {
+            "id": "C",
+            "text": "Ranked"
+          },
+          {
+            "id": "D",
+            "text": "Creator Clash"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-M9",
+        "question": "Which button opens the achievements menu?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Character menu"
+          },
+          {
+            "id": "B",
+            "text": "Trophy icon"
+          },
+          {
+            "id": "C",
+            "text": "Emote wheel"
+          },
+          {
+            "id": "D",
+            "text": "Build toolbar"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "JJS-M1",
+        "question": "When Ten Shadows uses Shadow Swarm at a domain border, which domain creates the entry portal?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Incomplete Shrine"
+          },
+          {
+            "id": "B",
+            "text": "0.2 Domain"
+          },
+          {
+            "id": "C",
+            "text": "Time Cell Moon Palace"
+          },
+          {
+            "id": "D",
+            "text": "Chimera Shadow Garden"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-M2",
+        "question": "What must you do in Authentic Mutual Love to unlock Jacob's Ladder?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pick up four katanas"
+          },
+          {
+            "id": "B",
+            "text": "Land four katanas"
+          },
+          {
+            "id": "C",
+            "text": "Wait for four katanas to spawn"
+          },
+          {
+            "id": "D",
+            "text": "Finish four M1 chains"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-M4",
+        "question": "Which Roulette minigame is a boss fight against Strongest of History?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Final Showdown"
+          },
+          {
+            "id": "B",
+            "text": "Brain Swap"
+          },
+          {
+            "id": "C",
+            "text": "Prison Realm"
+          },
+          {
+            "id": "D",
+            "text": "End of Journey"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-M5",
+        "question": "Excluding Hired Killer, what information do Tinted Glasses reveal about players within 85 studs of your camera?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Health, domain time and evasive progress"
+          },
+          {
+            "id": "B",
+            "text": "Cooldowns, cash and Elo"
+          },
+          {
+            "id": "C",
+            "text": "Cooldowns, Awakening and evasive progress"
+          },
+          {
+            "id": "D",
+            "text": "Health, titles and duel wins"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-M7",
+        "question": "Which Domain Expansion includes a trial minigame?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Deadly Sentencing"
+          },
+          {
+            "id": "B",
+            "text": "Infinite Void"
+          },
+          {
+            "id": "C",
+            "text": "Idle Death Gamble"
+          },
+          {
+            "id": "D",
+            "text": "Time Cell Moon Palace"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-M8",
+        "question": "Which private-server feature can give you both Broom and Flashlight?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Teleport Block"
+          },
+          {
+            "id": "B",
+            "text": "Scale Block"
+          },
+          {
+            "id": "C",
+            "text": "Item Block"
+          },
+          {
+            "id": "D",
+            "text": "Speed Block"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-M10",
+        "question": "In Skill Builder, which tab contains the node sequence?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Conditions"
+          },
+          {
+            "id": "B",
+            "text": "Properties"
+          },
+          {
+            "id": "C",
+            "text": "Variant triggers"
+          },
+          {
+            "id": "D",
+            "text": "Timeline"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-H9",
+        "question": "What is the minimum kill count needed for Special Grade?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5,000"
+          },
+          {
+            "id": "B",
+            "text": "7,500"
+          },
+          {
+            "id": "C",
+            "text": "10,000"
+          },
+          {
+            "id": "D",
+            "text": "15,000"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-M11",
+        "question": "How can you force Playful Cloud to break before its natural durability runs out?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Hold block while starting the third M1"
+          },
+          {
+            "id": "B",
+            "text": "Hold block while starting the fourth M1"
+          },
+          {
+            "id": "C",
+            "text": "Hold special while starting the fourth M1"
+          },
+          {
+            "id": "D",
+            "text": "Hold special while starting the third M1"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-M12",
+        "question": "Who is affected when Voice Recorder plays Don't Move?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Everyone within 15 studs, including the user"
+          },
+          {
+            "id": "B",
+            "text": "Only enemies within 15 studs, excluding the user"
+          },
+          {
+            "id": "C",
+            "text": "Everyone within 30 studs, including the user"
+          },
+          {
+            "id": "D",
+            "text": "Only enemies within 30 studs, excluding the user"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "JJS-H1",
+        "question": "What are Malevolent Shrine's base slash damage values against a target other than Hired Killer, unblocked and blocked?",
+        "options": [
+          {
+            "id": "A",
+            "text": "2 HP unblocked; 0.5 HP blocked"
+          },
+          {
+            "id": "B",
+            "text": "2 HP unblocked; 1 HP blocked"
+          },
+          {
+            "id": "C",
+            "text": "3 HP unblocked; 0.5 HP blocked"
+          },
+          {
+            "id": "D",
+            "text": "3 HP unblocked; 1 HP blocked"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "JJS-H3",
+        "question": "Which resource drains while Ten Shadows keeps a domain-invasion portal open?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The invaded barrier's health"
+          },
+          {
+            "id": "B",
+            "text": "The caster's Awakening"
+          },
+          {
+            "id": "C",
+            "text": "Every trapped player's Awakening"
+          },
+          {
+            "id": "D",
+            "text": "The caster's health"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-H4",
+        "question": "How long does Deadly Sentencing's Confiscation keep affected abilities locked?",
+        "options": [
+          {
+            "id": "A",
+            "text": "60 seconds"
+          },
+          {
+            "id": "B",
+            "text": "90 seconds"
+          },
+          {
+            "id": "C",
+            "text": "75 seconds"
+          },
+          {
+            "id": "D",
+            "text": "120 seconds"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-H5",
+        "question": "How much Awakening progress does Jacob's Ladder drain from a target who is already awakened?",
+        "options": [
+          {
+            "id": "A",
+            "text": "35%"
+          },
+          {
+            "id": "B",
+            "text": "45%"
+          },
+          {
+            "id": "C",
+            "text": "50%"
+          },
+          {
+            "id": "D",
+            "text": "60%"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "JJS-H8",
+        "question": "In First to Twelve, what happens to your moveset when you reach 11 kills?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Your previous four moves remain unchanged"
+          },
+          {
+            "id": "B",
+            "text": "Head Splitter becomes your only move"
+          },
+          {
+            "id": "C",
+            "text": "One random base move becomes your only move"
+          },
+          {
+            "id": "D",
+            "text": "Four new random base moves replace the old ones"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "JJS-H10",
+        "question": "A Skill Builder branch has no recent activity and No Cancel is off. Counted nodes must be scheduled strictly before which exact cutoff?",
+        "options": [
+          {
+            "id": "A",
+            "text": "90 seconds"
+          },
+          {
+            "id": "B",
+            "text": "120 seconds"
+          },
+          {
+            "id": "C",
+            "text": "180 seconds"
+          },
+          {
+            "id": "D",
+            "text": "150 seconds"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "JJS-H11",
+        "question": "What are Voice Recorder's base damage values for Plummet and Blast Away, respectively?",
+        "options": [
+          {
+            "id": "A",
+            "text": "14 and 20"
+          },
+          {
+            "id": "B",
+            "text": "20 and 14"
+          },
+          {
+            "id": "C",
+            "text": "10 and 20"
+          },
+          {
+            "id": "D",
+            "text": "14 and 24"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      }
+    ]
+  }
+}

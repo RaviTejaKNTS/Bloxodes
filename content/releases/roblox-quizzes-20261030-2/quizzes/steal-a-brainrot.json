@@ -1,0 +1,451 @@
+{
+  "page": {
+    "universe_id": 7709344486,
+    "code": "steal-a-brainrot",
+    "title": "Steal a Brainrot Roblox Quiz: 15 Questions on Bases and Rebirths",
+    "description_md": "Think you know Steal a Brainrot? Easy questions cover bases, the Red Carpet, Mutations and Lucky Blocks. The harder ones get into base locks, Traits, spawn announcements and the first two Rebirths, so bring your best Brainrot knowledge.",
+    "seo_title": null,
+    "seo_description": "Test how well you know Roblox Steal a Brainrot with 15 questions on bases, the Red Carpet, Mutations, Traits and the first two Rebirths, from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What do Brainrots inside your base do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Periodically generate cash for you"
+          },
+          {
+            "id": "b",
+            "text": "Cost you cash to keep them in the base"
+          },
+          {
+            "id": "c",
+            "text": "Generate cash only once, when you place them"
+          },
+          {
+            "id": "d",
+            "text": "Only earn while held in your inventory"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What is the Red Carpet also called?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Base Lock"
+          },
+          {
+            "id": "b",
+            "text": "The Live Spawns panel"
+          },
+          {
+            "id": "c",
+            "text": "The Conveyor Belt"
+          },
+          {
+            "id": "d",
+            "text": "The default base"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Where do most Brainrots in the game come out?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your base"
+          },
+          {
+            "id": "b",
+            "text": "The Cave entrance"
+          },
+          {
+            "id": "c",
+            "text": "The Live Spawns panel"
+          },
+          {
+            "id": "d",
+            "text": "A Lucky Block"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What does a Mutation change on a Brainrot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only its appearance"
+          },
+          {
+            "id": "b",
+            "text": "Only its income"
+          },
+          {
+            "id": "c",
+            "text": "Its base lock time"
+          },
+          {
+            "id": "d",
+            "text": "Its appearance and income"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How can players get Lucky Blocks?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only by stealing them, never buying them"
+          },
+          {
+            "id": "b",
+            "text": "Buy them or steal them, like normal Brainrots"
+          },
+          {
+            "id": "c",
+            "text": "Only by buying them, never stealing them"
+          },
+          {
+            "id": "d",
+            "text": "Only from a Rebirth reward"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "A Brainrot is already walking to its owner's base. How much can another player pay to buy it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50% of its base cost"
+          },
+          {
+            "id": "b",
+            "text": "100% of its base cost"
+          },
+          {
+            "id": "c",
+            "text": "150% of its base cost"
+          },
+          {
+            "id": "d",
+            "text": "200% of its base cost"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Which spawn type appears globally on the Live Spawns panel by the entrance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Brainrot God"
+          },
+          {
+            "id": "b",
+            "text": "Secret"
+          },
+          {
+            "id": "c",
+            "text": "Mythic Lucky Block"
+          },
+          {
+            "id": "d",
+            "text": "OG"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "How long does a base lock last before any bonuses are added?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30 seconds"
+          },
+          {
+            "id": "b",
+            "text": "60 seconds"
+          },
+          {
+            "id": "c",
+            "text": "90 seconds"
+          },
+          {
+            "id": "d",
+            "text": "120 seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "How much base lock time does each Rebirth add?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5 seconds"
+          },
+          {
+            "id": "b",
+            "text": "15 seconds"
+          },
+          {
+            "id": "c",
+            "text": "10 seconds"
+          },
+          {
+            "id": "d",
+            "text": "20 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "What limits apply to Mutations and Traits on one Brainrot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One Mutation and one Trait"
+          },
+          {
+            "id": "b",
+            "text": "Several Mutations and one Trait"
+          },
+          {
+            "id": "c",
+            "text": "One Mutation at a time, but multiple Traits"
+          },
+          {
+            "id": "d",
+            "text": "Several Mutations and several Traits"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "When do you first get the default base?",
+        "options": [
+          {
+            "id": "a",
+            "text": "After your first Rebirth"
+          },
+          {
+            "id": "b",
+            "text": "After you buy your first Brainrot"
+          },
+          {
+            "id": "c",
+            "text": "After you steal your first Brainrot"
+          },
+          {
+            "id": "d",
+            "text": "The first time you enter the game"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Which set of requirements does Rebirth 1 need?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$500,000, Trulimero Trulicina, and Chimpanzini Bananini"
+          },
+          {
+            "id": "b",
+            "text": "$500,000, Trippi Troppi, and Gangster Footera"
+          },
+          {
+            "id": "c",
+            "text": "$500,000, Chef Crabracadabra, and Glorbo Fruttodrillo"
+          },
+          {
+            "id": "d",
+            "text": "$500,000, Frigo Camelo, and Orangutini Ananassini"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "How much cash bonus does Rebirth 1 pay?",
+        "options": [
+          {
+            "id": "a",
+            "text": "$5,000"
+          },
+          {
+            "id": "b",
+            "text": "$25,000"
+          },
+          {
+            "id": "c",
+            "text": "$50,000"
+          },
+          {
+            "id": "d",
+            "text": "$250,000"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What base slot bonus does Rebirth 1 give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One extra slot"
+          },
+          {
+            "id": "b",
+            "text": "Two extra slots"
+          },
+          {
+            "id": "c",
+            "text": "No extra slot"
+          },
+          {
+            "id": "d",
+            "text": "Three extra slots"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Which of these items does Rebirth 1 unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Diamond Slap"
+          },
+          {
+            "id": "b",
+            "text": "Grapple Hook"
+          },
+          {
+            "id": "c",
+            "text": "Friend Controller"
+          },
+          {
+            "id": "d",
+            "text": "Medusa's Head"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Which two Brainrots does Rebirth 2 require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Trulimero Trulicina and Chimpanzini Bananini"
+          },
+          {
+            "id": "b",
+            "text": "Boneca Ambalabu and Brr Brr Patapim"
+          },
+          {
+            "id": "c",
+            "text": "Chef Crabracadabra and Glorbo Fruttodrillo"
+          },
+          {
+            "id": "d",
+            "text": "Frigo Camelo and Orangutini Ananassini"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Which of these items does Rebirth 2 unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Emerald Slap"
+          },
+          {
+            "id": "b",
+            "text": "Invisibility Cloak"
+          },
+          {
+            "id": "c",
+            "text": "Web Slinger"
+          },
+          {
+            "id": "d",
+            "text": "Gold Slap"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What multiplier does the Rainbow Mutation have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10x"
+          },
+          {
+            "id": "b",
+            "text": "1x"
+          },
+          {
+            "id": "c",
+            "text": "1.25x"
+          },
+          {
+            "id": "d",
+            "text": "1.5x"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,643 @@
+{
+  "page": {
+    "universe_id": 3317771874,
+    "code": "pet-simulator-99",
+    "title": "Pet Simulator 99 Roblox Quiz: 15 Questions on Pets and Progress",
+    "description_md": "You know the eggs. How well do you know the Garden, the machines and the Rebirth gates? Take 15 mixed-difficulty questions on Pet Simulator 99, from easy basics to hard Mastery and Rebirth rules.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Pet Simulator 99 knowledge on eggs, the Garden, machines, Mastery and Rebirth. Each run gives you 15 mixed questions, from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What does each new rank unlock in Pet Simulator 99?",
+        "options": [
+          {
+            "id": "a",
+            "text": "More Pet Damage and Pet Speed"
+          },
+          {
+            "id": "b",
+            "text": "Free access to the next area"
+          },
+          {
+            "id": "c",
+            "text": "More egg opens and pet equips"
+          },
+          {
+            "id": "d",
+            "text": "An automatic Rebirth with every rank"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which currency pays the mailbox's sending fee?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Gold Coins"
+          },
+          {
+            "id": "b",
+            "text": "Diamonds"
+          },
+          {
+            "id": "c",
+            "text": "Tech Coins"
+          },
+          {
+            "id": "d",
+            "text": "Tech Bars"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What happens to a Garden plant after you plant it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It hatches into a pet once it's fully grown"
+          },
+          {
+            "id": "b",
+            "text": "It drops loot as soon as it's planted"
+          },
+          {
+            "id": "c",
+            "text": "It opens a random egg when you tap it"
+          },
+          {
+            "id": "d",
+            "text": "It grows over time, then drops loot at harvest"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Which four seed types can be planted in the Garden?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Coin, Potion, Diamond and Pet Seeds"
+          },
+          {
+            "id": "b",
+            "text": "Coin, Enchant, Gift and Egg Seeds"
+          },
+          {
+            "id": "c",
+            "text": "Coin, Potion, Diamond and Gift Seeds"
+          },
+          {
+            "id": "d",
+            "text": "Potion, Diamond, Fruit and Key Seeds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Where do you find the Garden Merchant?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Flower Field"
+          },
+          {
+            "id": "b",
+            "text": "Bamboo Forest"
+          },
+          {
+            "id": "c",
+            "text": "Samurai Village"
+          },
+          {
+            "id": "d",
+            "text": "Royal Kingdom"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Where is the Pets Equipped machine?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Area 2, Colorful Forest"
+          },
+          {
+            "id": "b",
+            "text": "Area 4, Green Forest"
+          },
+          {
+            "id": "c",
+            "text": "Area 12, Dead Forest"
+          },
+          {
+            "id": "d",
+            "text": "Area 14, Mushroom Field"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which area is the Classic Obby in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Area 9, Misty Falls"
+          },
+          {
+            "id": "b",
+            "text": "Area 18, Jungle Temple"
+          },
+          {
+            "id": "c",
+            "text": "Area 23, Atlantis"
+          },
+          {
+            "id": "d",
+            "text": "Area 5, Autumn"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "In World 1, which area has the Gold Pets machine?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Area 3, Castle"
+          },
+          {
+            "id": "b",
+            "text": "Area 20, Beach"
+          },
+          {
+            "id": "c",
+            "text": "Area 10, Mine"
+          },
+          {
+            "id": "d",
+            "text": "Area 14, Mushroom Field"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What area is Minefield in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Area 6, Cherry Blossom"
+          },
+          {
+            "id": "b",
+            "text": "Area 11, Crystal Caverns"
+          },
+          {
+            "id": "c",
+            "text": "Area 17, Jungle"
+          },
+          {
+            "id": "d",
+            "text": "Area 21, Coral Reef"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How many Tech Coins does one Tech Bar equal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1,000 Tech Coins"
+          },
+          {
+            "id": "b",
+            "text": "100,000 Tech Coins"
+          },
+          {
+            "id": "c",
+            "text": "10,000,000 Tech Coins"
+          },
+          {
+            "id": "d",
+            "text": "1,000,000 Tech Coins"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Which Enchantment slot does Rank 20 unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The fifth Enchantment slot"
+          },
+          {
+            "id": "b",
+            "text": "The fourth Enchantment slot"
+          },
+          {
+            "id": "c",
+            "text": "The sixth Enchantment slot"
+          },
+          {
+            "id": "d",
+            "text": "The seventh Enchantment slot"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Quest machines in World 1 and World 2 offer Daily and Weekly quests. What is their third quest type?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5-Day quests"
+          },
+          {
+            "id": "b",
+            "text": "2-Day quests"
+          },
+          {
+            "id": "c",
+            "text": "3-Day quests"
+          },
+          {
+            "id": "d",
+            "text": "10-Day quests"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What determines the quest the Item Creator gives you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The player's current rank"
+          },
+          {
+            "id": "b",
+            "text": "The value of the selected item"
+          },
+          {
+            "id": "c",
+            "text": "The area you are standing in"
+          },
+          {
+            "id": "d",
+            "text": "The number of pets you equipped"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How does a Sprinkler change how quickly breakables respawn?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50% faster"
+          },
+          {
+            "id": "b",
+            "text": "10% faster"
+          },
+          {
+            "id": "c",
+            "text": "25% faster"
+          },
+          {
+            "id": "d",
+            "text": "50% slower"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What do you use with the Tech Spinny Wheel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Diamonds"
+          },
+          {
+            "id": "b",
+            "text": "Tech Coins"
+          },
+          {
+            "id": "c",
+            "text": "A Tech Spinny Wheel Ticket"
+          },
+          {
+            "id": "d",
+            "text": "A quest card"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What can the Supercomputer give you instant access to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only Tech World machines"
+          },
+          {
+            "id": "b",
+            "text": "Any machine in World 1"
+          },
+          {
+            "id": "c",
+            "text": "Only vending machines"
+          },
+          {
+            "id": "d",
+            "text": "Only the current area's machine"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "How do Tech Vending Machines compare with their World 1 versions?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The same loot as World 1 versions"
+          },
+          {
+            "id": "b",
+            "text": "Less loot than World 1 versions"
+          },
+          {
+            "id": "c",
+            "text": "Only cosmetic items, no real loot"
+          },
+          {
+            "id": "d",
+            "text": "Better loot than World 1 versions"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "How do you gain XP in Fruit Mastery?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hatching eggs and opening gifts"
+          },
+          {
+            "id": "b",
+            "text": "Consuming and combining fruit"
+          },
+          {
+            "id": "c",
+            "text": "Breaking breakables in an area"
+          },
+          {
+            "id": "d",
+            "text": "Drinking Potions for a quick boost"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Which area must you unlock before you can use Rebirth One?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Area 50"
+          },
+          {
+            "id": "b",
+            "text": "Area 60"
+          },
+          {
+            "id": "c",
+            "text": "Area 75"
+          },
+          {
+            "id": "d",
+            "text": "Area 25"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What does Rebirth One's Strength perk permanently boost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+75% Pet Speed"
+          },
+          {
+            "id": "b",
+            "text": "+75% Egg Luck"
+          },
+          {
+            "id": "c",
+            "text": "+75% Pet Damage"
+          },
+          {
+            "id": "d",
+            "text": "+75% Tap Damage"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "Before you can travel to Tech World, what do you need?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rebirth 4 and Area 99"
+          },
+          {
+            "id": "b",
+            "text": "Rebirth 4 alone"
+          },
+          {
+            "id": "c",
+            "text": "Area 99 alone"
+          },
+          {
+            "id": "d",
+            "text": "Rebirth 2 and Area 50"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What charges an Ultimate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hatching eggs"
+          },
+          {
+            "id": "b",
+            "text": "Tapping breakables"
+          },
+          {
+            "id": "c",
+            "text": "Equipping pets"
+          },
+          {
+            "id": "d",
+            "text": "Opening gifts"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "At which levels do the four Ultimate tiers unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Levels 1, 20, 50 and 99"
+          },
+          {
+            "id": "b",
+            "text": "Levels 10, 25, 60 and 90"
+          },
+          {
+            "id": "c",
+            "text": "Levels 1, 25, 60 and 99"
+          },
+          {
+            "id": "d",
+            "text": "Levels 1, 30, 60 and 100"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does the Ultra Mastery Potion do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 99 to a chosen Mastery"
+          },
+          {
+            "id": "b",
+            "text": "Level 99 to every Mastery"
+          },
+          {
+            "id": "c",
+            "text": "Level 70 to a chosen Mastery"
+          },
+          {
+            "id": "d",
+            "text": "A permanent +99% Pet Damage boost"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Leveling up one Mastery skill earns what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Temporary boosts that expire"
+          },
+          {
+            "id": "b",
+            "text": "Extra egg openings and nothing more"
+          },
+          {
+            "id": "c",
+            "text": "Free unlocks for the next area"
+          },
+          {
+            "id": "d",
+            "text": "Permanent perks that stay with you"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "The Supercomputer Radio is a Rebirth 9 reward. What does it do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It opens the Supercomputer anytime, anywhere"
+          },
+          {
+            "id": "b",
+            "text": "It teleports your pets between any two Worlds"
+          },
+          {
+            "id": "c",
+            "text": "It opens only the map, and nothing else"
+          },
+          {
+            "id": "d",
+            "text": "It works only inside the Tech World Shop"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "content-final",
+      "file": "quizzes/fish-it.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/flee-the-facility.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/forsaken.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/hypershot.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/illegal-soccer.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/jujutsu-shenanigans.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/murder-mystery-2.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/natural-disaster-survival.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/pet-simulator-99.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/piggy.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/rivals.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/sols-rng.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/steal-a-brainrot.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/the-mimic.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/the-strongest-battlegrounds.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/tower-defense-simulator.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/violence-district.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/volleyball-legends.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/quizzes/fish-it",
+      "contains": "Fish It Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/flee-the-facility",
+      "contains": "Flee the Facility Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/forsaken",
+      "contains": "Forsaken Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/hypershot",
+      "contains": "Hypershot Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/illegal-soccer",
+      "contains": "Illegal Soccer Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/jujutsu-shenanigans",
+      "contains": "Jujutsu Shenanigans Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/murder-mystery-2",
+      "contains": "Murder Mystery 2 Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/natural-disaster-survival",
+      "contains": "Natural Disaster Survival Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/pet-simulator-99",
+      "contains": "Pet Simulator 99 Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/piggy",
+      "contains": "Piggy Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/rivals",
+      "contains": "RIVALS Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/sols-rng",
+      "contains": "RNG Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/steal-a-brainrot",
+      "contains": "Steal a Brainrot Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/the-mimic",
+      "contains": "The Mimic Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/the-strongest-battlegrounds",
+      "contains": "The Strongest Battlegrounds Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/tower-defense-simulator",
+      "contains": "Tower Defense Simulator Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/violence-district",
+      "contains": "Violence District Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/volleyball-legends",
+      "contains": "Volleyball Legends Roblox Quiz"
+    }
+  ],
+  "events": [
+    {
+      "type": "quiz",
+      "slug": "fish-it"
+    },
+    {
+      "type": "quiz",
+      "slug": "flee-the-facility"
+    },
+    {
+      "type": "quiz",
+      "slug": "forsaken"
+    },
+    {
+      "type": "quiz",
+      "slug": "hypershot"
+    },
+    {
+      "type": "quiz",
+      "slug": "illegal-soccer"
+    },
+    {
+      "type": "quiz",
+      "slug": "jujutsu-shenanigans"
+    },
+    {
+      "type": "quiz",
+      "slug": "murder-mystery-2"
+    },
+    {
+      "type": "quiz",
+      "slug": "natural-disaster-survival"
+    },
+    {
+      "type": "quiz",
+      "slug": "pet-simulator-99"
+    },
+    {
+      "type": "quiz",
+      "slug": "piggy"
+    },
+    {
+      "type": "quiz",
+      "slug": "rivals"
+    },
+    {
+      "type": "quiz",
+      "slug": "sols-rng"
+    },
+    {
+      "type": "quiz",
+      "slug": "steal-a-brainrot"
+    },
+    {
+      "type": "quiz",
+      "slug": "the-mimic"
+    },
+    {
+      "type": "quiz",
+      "slug": "the-strongest-battlegrounds"
+    },
+    {
+      "type": "quiz",
+      "slug": "tower-defense-simulator"
+    },
+    {
+      "type": "quiz",
+      "slug": "violence-district"
+    },
+    {
+      "type": "quiz",
+      "slug": "volleyball-legends"
+    }
+  ]
+}

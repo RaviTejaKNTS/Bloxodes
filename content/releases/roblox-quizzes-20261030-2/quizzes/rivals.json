@@ -1,0 +1,691 @@
+{
+  "page": {
+    "universe_id": 6035872082,
+    "code": "rivals",
+    "title": "RIVALS Roblox Quiz: 15 Questions on Weapons, Maps and Ranked",
+    "description_md": "Think you know RIVALS? Take on 15 random questions per attempt, five each at Easy, Medium, and Hard. See how you fare on duel basics, loadouts, weapon effects, map hazards, and Ranked rules.",
+    "seo_title": null,
+    "seo_description": "Take 15 random Roblox RIVALS questions per attempt, five per difficulty. Test what you know about loadouts, Ranked rules, map hazards and weapon mechanics.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "RV-E2",
+        "question": "In a standard RIVALS duel, how many round wins does a team need to win?",
+        "options": [
+          {
+            "id": "A",
+            "text": "3"
+          },
+          {
+            "id": "B",
+            "text": "4"
+          },
+          {
+            "id": "C",
+            "text": "5"
+          },
+          {
+            "id": "D",
+            "text": "7"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-E3",
+        "question": "Which currency earned from Beginner Tasks can buy weapons and cosmetics?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Glory"
+          },
+          {
+            "id": "B",
+            "text": "Robux"
+          },
+          {
+            "id": "C",
+            "text": "Jump Shards"
+          },
+          {
+            "id": "D",
+            "text": "Keys"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-E4",
+        "question": "How many weapon slots are in a normal RIVALS loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Four"
+          },
+          {
+            "id": "B",
+            "text": "Two"
+          },
+          {
+            "id": "C",
+            "text": "Three"
+          },
+          {
+            "id": "D",
+            "text": "Five"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-E5",
+        "question": "Which weapon fills the Primary slot in the starting free loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Minigun"
+          },
+          {
+            "id": "B",
+            "text": "Assault Rifle"
+          },
+          {
+            "id": "C",
+            "text": "Paintball Gun"
+          },
+          {
+            "id": "D",
+            "text": "Distortion"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-E6",
+        "question": "Which weapon fills the Secondary slot in the starting free loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Handgun"
+          },
+          {
+            "id": "B",
+            "text": "Exogun"
+          },
+          {
+            "id": "C",
+            "text": "Revolver"
+          },
+          {
+            "id": "D",
+            "text": "Energy Pistols"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-E7",
+        "question": "Which weapon fills the Melee slot in the starting free loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Katana"
+          },
+          {
+            "id": "B",
+            "text": "Scythe"
+          },
+          {
+            "id": "C",
+            "text": "Maul"
+          },
+          {
+            "id": "D",
+            "text": "Fists"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-E8",
+        "question": "Which weapon fills the Utility slot in the starting free loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Jump Pad"
+          },
+          {
+            "id": "B",
+            "text": "War Horn"
+          },
+          {
+            "id": "C",
+            "text": "Grenade"
+          },
+          {
+            "id": "D",
+            "text": "Medkit"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-E9",
+        "question": "What are official RIVALS UGC items?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Weapon skins for RIVALS matches"
+          },
+          {
+            "id": "B",
+            "text": "Avatar items for Roblox characters"
+          },
+          {
+            "id": "C",
+            "text": "Weapon charms for RIVALS loadouts"
+          },
+          {
+            "id": "D",
+            "text": "Finisher effects for RIVALS eliminations"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-M3",
+        "question": "Which category does Warper belong to in a normal loadout?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Primary"
+          },
+          {
+            "id": "B",
+            "text": "Melee"
+          },
+          {
+            "id": "C",
+            "text": "Utility"
+          },
+          {
+            "id": "D",
+            "text": "Secondary"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-E11",
+        "question": "Where do you stand in the lobby's Duel Zone to challenge another player?",
+        "options": [
+          {
+            "id": "A",
+            "text": "On a duel pad"
+          },
+          {
+            "id": "B",
+            "text": "At the weapon shop"
+          },
+          {
+            "id": "C",
+            "text": "At the shooting range"
+          },
+          {
+            "id": "D",
+            "text": "At the Ranked hologram"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "RV-M1",
+        "question": "How many Jump Shards does Jump Pad cost?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5 Jump Shards"
+          },
+          {
+            "id": "B",
+            "text": "9 Jump Shards"
+          },
+          {
+            "id": "C",
+            "text": "12 Jump Shards"
+          },
+          {
+            "id": "D",
+            "text": "15 Jump Shards"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-M4",
+        "question": "What does Distortion's Vortex do to nearby enemies?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Pushes them away from its center"
+          },
+          {
+            "id": "B",
+            "text": "Freezes them in their current position"
+          },
+          {
+            "id": "C",
+            "text": "Slows them without changing their position"
+          },
+          {
+            "id": "D",
+            "text": "Pulls them toward its center"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-M5",
+        "question": "Which of these maps is restricted to private-server matches?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Arena"
+          },
+          {
+            "id": "B",
+            "text": "Big Crossroads"
+          },
+          {
+            "id": "C",
+            "text": "Baseplate"
+          },
+          {
+            "id": "D",
+            "text": "Docks"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-M7",
+        "question": "Which list gives all of RIVALS Ranked's team formats?",
+        "options": [
+          {
+            "id": "A",
+            "text": "1v1, 2v2, and 3v3"
+          },
+          {
+            "id": "B",
+            "text": "1v1, 2v2, and 4v4"
+          },
+          {
+            "id": "C",
+            "text": "1v1, 3v3, and 5v5"
+          },
+          {
+            "id": "D",
+            "text": "2v2, 3v3, and 4v4"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-M8",
+        "question": "Which of these maps has stone platforms surrounded by lava?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Backrooms"
+          },
+          {
+            "id": "B",
+            "text": "Onyx"
+          },
+          {
+            "id": "C",
+            "text": "Chess"
+          },
+          {
+            "id": "D",
+            "text": "Village"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-H3",
+        "question": "How many placement matches must you complete before your starting Ranked rank is revealed?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5"
+          },
+          {
+            "id": "B",
+            "text": "8"
+          },
+          {
+            "id": "C",
+            "text": "12"
+          },
+          {
+            "id": "D",
+            "text": "10"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-H10",
+        "question": "What is the maximum ELO difference allowed between Ranked party members?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Up to and including 400 ELO"
+          },
+          {
+            "id": "B",
+            "text": "Up to and including 600 ELO"
+          },
+          {
+            "id": "C",
+            "text": "Up to and including 800 ELO"
+          },
+          {
+            "id": "D",
+            "text": "Up to and including 1,000 ELO"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-M11",
+        "question": "After how long does a placed Jump Pad expire on its normal timer?",
+        "options": [
+          {
+            "id": "A",
+            "text": "30 seconds"
+          },
+          {
+            "id": "B",
+            "text": "90 seconds"
+          },
+          {
+            "id": "C",
+            "text": "60 seconds"
+          },
+          {
+            "id": "D",
+            "text": "120 seconds"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-M12",
+        "question": "Which rule applies to interrupting an active Medkit heal?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Taking damage interrupts it; swapping weapons does not"
+          },
+          {
+            "id": "B",
+            "text": "Swapping weapons interrupts it; taking damage does not"
+          },
+          {
+            "id": "C",
+            "text": "Damage and a weapon swap must happen together"
+          },
+          {
+            "id": "D",
+            "text": "Either damage or a weapon swap can interrupt it"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-M13",
+        "question": "An enemy steps on a Subspace Tripmine. How does the blast move them?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Launches them into the air"
+          },
+          {
+            "id": "B",
+            "text": "Holds them on the ground"
+          },
+          {
+            "id": "C",
+            "text": "Pulls them toward the mine"
+          },
+          {
+            "id": "D",
+            "text": "Moves them back to spawn"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-M14",
+        "question": "What movement does a Grappler hook cause when it hits an enemy?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The enemy is pulled toward you"
+          },
+          {
+            "id": "B",
+            "text": "You are pulled toward the enemy"
+          },
+          {
+            "id": "C",
+            "text": "You are pushed away from the enemy"
+          },
+          {
+            "id": "D",
+            "text": "The enemy is pushed away from you"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-M15",
+        "question": "After you place a Subspace Tripmine, how does its visibility differ for your teammates and enemies?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Teammates see it; enemies see it"
+          },
+          {
+            "id": "B",
+            "text": "Teammates cannot see it; enemies can"
+          },
+          {
+            "id": "C",
+            "text": "Teammates see it; enemies cannot"
+          },
+          {
+            "id": "D",
+            "text": "Neither teammates nor enemies can see it"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "RV-H1",
+        "question": "Before the performance cap and Ranked Contract bonus, which formula gives season-end Glory?",
+        "options": [
+          {
+            "id": "A",
+            "text": "1,250 × (Ranked wins ÷ 3,600) + 1,250 × (final ELO ÷ 250)"
+          },
+          {
+            "id": "B",
+            "text": "1,250 × (Ranked matches ÷ 250) + 1,250 × (highest ELO ÷ 3,600)"
+          },
+          {
+            "id": "C",
+            "text": "1,250 × (Ranked wins ÷ 250) + 1,250 × (final ELO ÷ 3,600)"
+          },
+          {
+            "id": "D",
+            "text": "1,250 × (current ELO ÷ 250) + 1,250 × (Ranked wins ÷ 3,600)"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-H4",
+        "question": "What are the minimum ELO thresholds for Onyx I and Nemesis, in that order?",
+        "options": [
+          {
+            "id": "A",
+            "text": "2,400 and 3,000"
+          },
+          {
+            "id": "B",
+            "text": "3,000 and 3,600"
+          },
+          {
+            "id": "C",
+            "text": "2,800 and 3,400"
+          },
+          {
+            "id": "D",
+            "text": "3,200 and 3,800"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "RV-H5",
+        "question": "What is each team's full pre-match ban allowance in Ranked?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Two maps and one weapon"
+          },
+          {
+            "id": "B",
+            "text": "One map and one weapon"
+          },
+          {
+            "id": "C",
+            "text": "Two maps and two weapons"
+          },
+          {
+            "id": "D",
+            "text": "One map and two weapons"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "RV-H7",
+        "question": "Which pair of contract goals belongs to Warper?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Portals Spawned and Playtime"
+          },
+          {
+            "id": "B",
+            "text": "Players Warped and Playtime"
+          },
+          {
+            "id": "C",
+            "text": "Distance Warped and Playtime"
+          },
+          {
+            "id": "D",
+            "text": "Duels Won and Playtime"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "RV-H11",
+        "question": "What is the complete additional ownership rule for banning a default weapon in Ranked?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Every player on the banning team owns more than four weapons in that weapon's category"
+          },
+          {
+            "id": "B",
+            "text": "Every player in the match owns more than four weapons across all categories"
+          },
+          {
+            "id": "C",
+            "text": "Every player in the match owns more than four weapons in that weapon's category"
+          },
+          {
+            "id": "D",
+            "text": "Every player in the match owns at least four weapons in that weapon's category"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "RV-H12",
+        "question": "After you travel through the portals you made with Warper, what happens to that portal pair?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The exit closes; the entry stays open"
+          },
+          {
+            "id": "B",
+            "text": "Both disappear after you pass through"
+          },
+          {
+            "id": "C",
+            "text": "Both remain open for another trip"
+          },
+          {
+            "id": "D",
+            "text": "The entry closes; the exit stays open"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      }
+    ]
+  }
+}
