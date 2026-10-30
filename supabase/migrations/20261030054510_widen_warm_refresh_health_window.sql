@@ -81,10 +81,9 @@ as $$
       -- WARM runs every six hours and can wait 30 minutes for the job lock.
       -- Keep the previous run while its replacement starts and records rows.
       -- COLD is hourly and NEW every two hours, so six hours already has slack.
-      where started_at >= now() - case
-          when job_name = 'stats_refresh_warm' then interval '7 hours'
-          else interval '6 hours'
-        end
+      -- The fixed 7-hour bound keeps the (job_name, started_at) index usable.
+      where started_at >= now() - interval '7 hours'
+        and (job_name = 'stats_refresh_warm' or started_at >= now() - interval '6 hours')
         and job_name in ('stats_refresh_new', 'stats_refresh_warm', 'stats_refresh_cold')
       group by job_name
     ) grouped
