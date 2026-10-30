@@ -1,6 +1,6 @@
 # Stats
 
-Last verified: 2026-10-23
+Last verified: 2026-10-30
 
 Live Roblox game stats at `/stats` (players, visits, ranks, risers, genres, creators) and the monthly Roblox reports. Metric meanings and chart rules are in [stats metrics](stats-metrics.md).
 
@@ -73,7 +73,7 @@ All VPS stats and data jobs run in short-lived `bloxodes-stats-worker:production
 - `bin/run-job.sh` (`scripts/ops/vps-run-job.sh`) repeats the smoke before every job and falls back to `last-known-good` if needed. It also handles locks, timeouts, state files and logs under `/home/ravitejaknts/bloxodes-stats-worker/logs`.
 - Northflank rebuilds only when worker runtime paths change (Dockerfile, package manifests, `scripts/`, needed web source, `types/`, `data/`, `env/config.json`).
 
-The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `814feb20538e2431ee27b1d35121e59e5eecb411` (promoted 2026-10-23).
+The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `92c735900f9371648b2923f7a475827c5b6fc43e` (promoted 2026-10-30, decal discovery fixes from #153 and #155).
 
 A worker change is done only when the Northflank build succeeds, one HOT run succeeds, the VPS image is promoted, and a VPS job plus index rebuild move production health forward.
 
