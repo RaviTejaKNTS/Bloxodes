@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { supabaseAdmin } from "@/lib/supabase";
 import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 import { catalogRangeTotal } from "@/lib/catalog-pagination";
@@ -82,9 +83,10 @@ export async function loadRobloxMeshIdsPageData(
       .not("thumbnail_url", "is", null);
 
     if (normalizedQuery) {
+      const pattern = quotePostgrestPattern(buildLoosePattern(normalizedQuery));
       const filters = [
-        `name.ilike.${buildLoosePattern(normalizedQuery)}`,
-        `creator_name.ilike.${buildLoosePattern(normalizedQuery)}`
+        `name.ilike.${pattern}`,
+        `creator_name.ilike.${pattern}`
       ];
       if (/^\d+$/.test(normalizedQuery)) {
         filters.unshift(

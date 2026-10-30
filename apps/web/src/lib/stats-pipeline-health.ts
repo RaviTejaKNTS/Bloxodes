@@ -102,7 +102,7 @@ export function evaluateStatsPipelineHealth(snapshot: StatsPipelineHealthSnapsho
       "warm_refresh_outcome_6h",
       refresh("stats_refresh_warm").rows_succeeded ?? 0,
       (refresh("stats_refresh_warm").started ?? 0) >= 1 && (refresh("stats_refresh_warm").rows_succeeded ?? 0) > 0 ? "pass" : "fail",
-      ">= 1 WARM start and at least one successful row in 6 hours"
+      ">= 1 WARM start and at least one successful row in 7 hours (6-hour schedule plus lock and completion grace)"
     ),
     check(
       "current_index_freshness_hours",
