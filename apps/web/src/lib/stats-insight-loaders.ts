@@ -20,7 +20,8 @@ async function insightRead<T>(key: string, load: (signal: AbortSignal) => Promis
     const controller = new AbortController();
     let timer: ReturnType<typeof setTimeout>;
     // Bound the complete panel load as well as aborting its database requests.
-    // Even a transport that fails to settle after abort cannot hold up the page.
+    // A cache miss can delay the page by at most the deadline, even when the
+    // transport fails to settle after abort.
     const deadline = new Promise<never>((_resolve, reject) => {
       timer = setTimeout(() => {
         controller.abort();

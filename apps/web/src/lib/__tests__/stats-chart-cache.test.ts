@@ -90,3 +90,14 @@ it("keeps a regularly refreshed key when newer keys fill the cache", async () =>
   await expect(cachedStatsChart("refreshed-hot", load, 1000, time.now)).resolves.toBe("hot");
   expect(load).toHaveBeenCalledTimes(2);
 });
+
+it("keeps a key that is read often while newer keys fill the cache", async () => {
+  const time = clock();
+  const load = vi.fn(async () => "read");
+  await cachedStatsChart("read-often", load, 60_000, time.now);
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 1000; j++) await cachedStatsChart(`read-filler:${i}:${j}`, async () => j);
+    await cachedStatsChart("read-often", load, 60_000, time.now);
+  }
+  expect(load).toHaveBeenCalledTimes(1);
+});

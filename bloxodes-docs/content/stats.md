@@ -62,7 +62,7 @@ The Game Passes section on wiki hubs (and the mobile API) and the stats game pag
 
 - **Game page**, after the main chart: Players by month at full width; after rank history: How updates did and Votes per day; then Estimated session length and the genre scatter; then Badge rarity and Game pass prices. Paired cards sit two to a row from `md` up and stack on phones.
 - **`/stats`:** Biggest moves this week after Fastest risers; Players by day (13-week calendar) after the Platform CCU trend.
-- **Reads:** existing tables and indexes only, each with a short abort deadline and its own five-minute last-good cache in `stats-chart-cache.ts` (capped at 2,048 keys). A slow or failed read hides only its own card. A card with too little data hides instead of showing an empty state.
+- **Reads:** existing tables and indexes only, each with a 3-second abort deadline and its own five-minute last-good cache in `stats-chart-cache.ts` (capped at 2,048 keys, least recently used dropped first). On a cache miss the page waits for these reads, so a slow database can delay it by up to 3 seconds. A slow or failed read hides only its own card. A card with too little data hides instead of showing an empty state.
 
 ## The stats worker
 

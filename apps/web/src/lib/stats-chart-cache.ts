@@ -23,6 +23,12 @@ export async function cachedStatsChart<T>(
   now: () => number = Date.now
 ): Promise<T | null> {
   const entry = values.get(key);
+  if (entry) {
+    // Least recently used goes first: a shared chart read on every request
+    // stays cached while one-off per-game insight keys age out.
+    values.delete(key);
+    values.set(key, entry);
+  }
   if (entry && now() - entry.storedAt < ttlMs) return entry.value as T;
 
   let request = pending.get(key) as Promise<T | null> | undefined;
@@ -32,8 +38,7 @@ export async function cachedStatsChart<T>(
         if (value != null) {
           // Per-game insights add variable keys; bound process memory while
           // keeping the same last-good/stale-while-revalidate contract.
-          // Re-inserting moves a refreshed key to the end, so eviction drops
-          // the least recently refreshed answer, not a hot shared chart.
+          // Re-inserting moves a refreshed key to the end as well.
           values.delete(key);
           if (values.size >= 2048) values.delete(values.keys().next().value!);
           values.set(key, { value, storedAt: now() });
