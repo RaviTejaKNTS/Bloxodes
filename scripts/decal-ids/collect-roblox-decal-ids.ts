@@ -134,6 +134,9 @@ async function collect() {
   let totalAlreadyKnown = 0;
   let totalConfigs = 0;
   let stoppedEarly: string | null = null;
+  let requestCount = 0;
+  // Roblox ignores the requested sort, so a later sort of the same query often returns the same first page.
+  const firstPageSignatures = new Map<string, Set<string>>();
 
   console.log(
     `Roblox decal discovery starting (${queries.length} queries, ${sortCategories.length} sort categories, max ${
@@ -154,11 +157,14 @@ async function collect() {
         let pageToken: string | null = null;
         let pageNumber = 0;
         const seenTokens = new Set<string>();
+        const configAssetIds = new Set<number>();
 
         while (pageNumber < MAX_PAGES_PER_QUERY && totalInserted < maxAssets) {
           if (pageToken && seenTokens.has(pageToken)) break;
           if (pageToken) seenTokens.add(pageToken);
 
+          if (requestCount > 0) await sleep(DELAY_MS);
+          requestCount += 1;
           let payload: ToolboxResponse;
           try {
             payload = await fetchToolboxDecalPage(pageToken, {
@@ -178,9 +184,24 @@ async function collect() {
           const assets = Array.isArray(payload.creatorStoreAssets) ? payload.creatorStoreAssets : [];
           if (!assets.length) break;
 
-          const rows = assets
+          const pageRows = assets
             .map((entry) => buildDecalRowFromToolbox(entry, fetchedAt, "roblox_toolbox_decal_search"))
-            .filter((row): row is NonNullable<typeof row> => Boolean(row))
+            .filter((row): row is NonNullable<typeof row> => Boolean(row));
+          if (pageNumber === 0) {
+            const signature = pageRows.map((row) => row.asset_id).join(",");
+            const signatures = firstPageSignatures.get(query) ?? new Set<string>();
+            if (signatures.has(signature)) {
+              console.log("  same first page as an earlier sort; skipping this sort.");
+              break;
+            }
+            signatures.add(signature);
+            firstPageSignatures.set(query, signatures);
+          }
+          // A page with nothing new for this query means the pagination is repeating itself.
+          const repeatedPage = pageRows.every((row) => configAssetIds.has(row.asset_id));
+          for (const row of pageRows) configAssetIds.add(row.asset_id);
+
+          const rows = pageRows
             .filter((row) => {
               if (seenAssetIds.has(row.asset_id)) return false;
               seenAssetIds.add(row.asset_id);
@@ -205,8 +226,6 @@ async function collect() {
           const skippedIds = new Set(insertResult.skippedAssetIds);
           await upsertSourceRows(sources.filter((source) => !skippedIds.has(source.asset_id)), { dryRun: DRY_RUN });
           totalDiscovered += rows.length;
-          // Roblox ignores the sort order, so a page with nothing unseen means later pages and sorts repeat it.
-          const exhausted = rows.length === 0;
           totalInserted += insertResult.inserted;
           totalAlreadyKnown += insertResult.existing;
           pageNumber += 1;
@@ -217,8 +236,7 @@ async function collect() {
           );
 
           pageToken = payload.nextPageToken ?? null;
-          if (!pageToken || exhausted) break;
-          await sleep(DELAY_MS);
+          if (!pageToken || repeatedPage) break;
         }
       }
     }

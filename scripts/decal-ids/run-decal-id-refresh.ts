@@ -111,7 +111,7 @@ async function main() {
       const startedAt = Date.now();
       try {
         const counts = await runStep(step);
-        stepResults.push({ name: step.name, status: "success", ...counts, duration_ms: Date.now() - startedAt });
+        stepResults.push({ name: step.name, status: counts.rate_limited ? "partial" : "success", ...counts, duration_ms: Date.now() - startedAt });
       } catch (error) {
         stepResults.push({ name: step.name, status: "failed", duration_ms: Date.now() - startedAt });
         throw error;
@@ -122,18 +122,22 @@ async function main() {
     if (error) throw new Error(`Failed to read decal discovery health: ${error.message}`);
     const latestSeenAt = data?.[0]?.first_seen_at ?? null;
     const healthError = decalDiscoveryHealth(latestSeenAt);
+    // A rate-limited discovery is partial but still exits 0; only the stall check fails the job.
+    const rateLimited = stepResults.some((step) => step.rate_limited);
+    const partialReason = [healthError, rateLimited ? "Discovery stopped early: Roblox rate limited Toolbox search (429)." : null]
+      .filter(Boolean).join(" ") || null;
     await finishStatsJobRun(run, {
-      status: healthError ? "partial" : "success",
+      status: partialReason ? "partial" : "success",
       rowsClaimed: stepResults.reduce((sum, step) => sum + Number(step.candidates ?? 0), 0),
       rowsSucceeded: stepResults.reduce((sum, step) => sum + Number(step.inserted ?? 0), 0),
-      error: healthError,
+      error: partialReason,
       metadata: { steps: stepResults, latest_first_seen_at: latestSeenAt, discovery_stall_days: 7 }
     });
     if (healthError) {
       console.error(healthError);
       process.exitCode = 1;
     }
-    console.log(`Decal ID refresh finished. Outcome: ${healthError ? "partial" : "success"}.`);
+    console.log(`Decal ID refresh finished. Outcome: ${partialReason ? "partial" : "success"}.`);
   } catch (error) {
     if (run) await finishStatsJobRun(run, { status: "failed", error, metadata: { steps: stepResults } });
     throw error;
