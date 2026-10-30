@@ -32,5 +32,6 @@ export function parseDecalStepCounts(output: string): Record<string, number> {
     const match = output.match(pattern);
     if (match) counts[name] = Number(match[1]);
   }
+  if (/Stopped early: .*\(429\)/.test(output)) counts.rate_limited = 1;
   return counts;
 }

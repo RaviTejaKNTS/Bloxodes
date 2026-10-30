@@ -1,0 +1,36 @@
+{
+  "code": "admin-commands/kohls-admin",
+  "title": "250+ Roblox Kohl's Admin Commands List",
+  "seo_title": "250+ Roblox Kohl's Admin Commands List",
+  "meta_description": "Browse 250 Kohl's Admin commands with aliases and arguments, grouped by category. Learn the default ; and : prefixes and configurable role system.",
+  "intro_md": "Kohl's Admin is a classic Roblox admin script associated with the admin house genre and chat-driven commands. Today it is a fully rebuilt, role-based admin system. It has 250 commands, grouped by category, with aliases and arguments.\n\nCommands are chat-driven and accept two default prefixes, `;` and `:`, so `;fly me` and `:fly me` both work in a default setup.\n\nIf you are not sure which admin system your game runs, start at the [Roblox admin commands hub](https://bloxodes.com/catalog/admin-commands).",
+  "description_md": "## What is Kohl's Admin?\n\nKohl's Admin started as one of the earliest widely shared admin scripts on Roblox, created by Kohltastrophe. Its \"Kohl's Admin Infinite\" version appeared in many legacy games, including admin house experiences where visitors could try commands. The system has since been rebuilt as a modern, modular admin with role-based permissions, addons, and a command palette, while keeping the fast chat-command feel.\n\nThe command list follows the system's own groups: Administration, Moderation, Environment, Fun, General, Utility, VIP, SuperAdmin, and Creator commands.\n\n## Roles and permissions\n\nKohl's Admin is built around **roles** rather than a fixed rank ladder. A default setup behaves roughly like this:\n\n- **Creator / Owner:** full access, including running scripts and managing roles.\n- **Admin:** server management, teleports, gear, inserts, and moderation.\n- **Moderator:** player control and standard moderation actions.\n- **VIP / Player:** fun and cosmetic commands, when the game enables them.\n\nOwners assign roles in the configuration or with the `;role` command, and roles can be granted permanently or only for the current server (`;temprole`). Because roles are fully configurable, the same command can need different roles in different games.\n\n## How to use Kohl's Admin commands\n\n1. Type the prefix `;` or `:` followed by the command in chat, for example `;bring PlayerName` or `:tp me PlayerName`.\n2. Player arguments accept `me`, `all`, `others`, and partial names, and many commands accept multiple targets at once.\n3. Aliases cover short forms, such as `;slock` for `;serverlock` and `;ins` for `;insert`, and each command card lists its aliases.\n4. Some commands need asset IDs, such as `;gear`. These load items from Roblox, and some games restrict which IDs are allowed.\n\n## Kohl's Admin in your own game\n\nKohl's Admin is free on the Roblox Creator Store and is open source. Install it, set your roles in the configuration, and optionally add addons for extra commands and features. The modern version supports saving roles and bans through data stores, so staff keep their access across servers.\n\nWant to compare systems before choosing? See [HD Admin](https://bloxodes.com/catalog/admin-commands/hd-admin) for a GUI-first setup, [Basic Admin Essentials](https://bloxodes.com/catalog/admin-commands/basic-admin) for a lightweight pack, or [Adonis](https://bloxodes.com/catalog/admin-commands/adonis-admin) for a heavy-duty suite.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "The default prefixes are ; and : so both ;fly me and :fly me work in a default setup. Game owners can change or restrict prefixes in the configuration.",
+      "q": "What is the Kohl's Admin prefix?"
+    },
+    {
+      "a": "The game owner assigns roles, either in the configuration or in game with the ;role command. Roles can be permanent or temporary for one server. Some games also map roles to group ranks or sell them as gamepasses.",
+      "q": "How do I get admin with Kohl's Admin?"
+    },
+    {
+      "a": "Kohl's Admin Infinite is the classic version found in many legacy games. The project has since been rebuilt as modern Kohl's Admin with role-based permissions, addons, and data-store features while keeping chat commands at the core.",
+      "q": "What happened to Kohl's Admin Infinite?"
+    },
+    {
+      "a": "Usually the prefix is wrong, your role does not include that command, or the owner disabled it. Commands that load assets, such as gear or insert, also fail when the asset ID is restricted or not available to the game.",
+      "q": "Why does a Kohl's Admin command fail for me?"
+    },
+    {
+      "a": "Yes. Kohl's Admin is free and open source, available from the Roblox Creator Store. You install it in your place, configure roles, and optionally extend it with addons.",
+      "q": "Is Kohl's Admin free?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}

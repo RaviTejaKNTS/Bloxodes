@@ -1,0 +1,40 @@
+{
+  "code": "admin-commands/adonis-admin",
+  "title": "500+ Roblox Adonis Admin Commands List",
+  "seo_title": "500+ Roblox Adonis Admin Commands List",
+  "meta_description": "Browse 509 Adonis Admin commands by permission group, with default prefixes, aliases, arguments, descriptions, plugins, and logging details.",
+  "intro_md": "Adonis is the heavy-duty option among Roblox admin systems: an open-source moderation suite with hundreds of commands, detailed logging, themes, and a plugin API. It has 509 commands, grouped by admin level, with their aliases and arguments.\n\nAdmin commands use the default prefixes `:` and `;`, while player commands use `!`, so `:fly me`, `;fly me`, and `!rejoin` are all valid in a default setup.\n\nNew to admin systems? Start at the [Roblox admin commands hub](https://bloxodes.com/catalog/admin-commands) to see how Adonis compares to the other major systems.",
+  "description_md": "## What is Adonis Admin?\n\nAdonis is a community-maintained server administration system created by Sceleratis and now developed under Epix Incorporated. It is open source under the MIT license and distributed through an official loader, and its code can be reviewed publicly.\n\nWhat sets Adonis apart from lighter systems:\n\n- **Hundreds of commands** covering moderation, utility, environment, and optional fun commands.\n- **Deep logging:** chat logs, command logs, join logs, and even shutdown logs, all reviewable in game.\n- **Customization:** configurable ranks, custom themes, and a plugin API for adding your own commands.\n- **Cross-server tools** for supported administrative actions.\n\n## Adonis admin levels\n\nCommands are gated by admin level, and the command list is grouped by those levels:\n\n- **Players:** public commands like `!rejoin`, using the `!` prefix.\n- **Donors:** small cosmetic perks, when the game enables them.\n- **Moderators:** player actions and basic server controls.\n- **Admins:** bans, server management, teams, notes, and utilities.\n- **HeadAdmins:** stronger management and global actions.\n- **Creators:** top-level access, including settings and script tools.\n\nOwners can rank users permanently or per-server (`:setrank`, `:settemprank`), move commands between levels, and disable anything in settings, so exact access varies by game.\n\n## How to use Adonis commands\n\n1. Type `:` or `;` followed by the command, for example `:bring PlayerName` or `;slock on`. Player commands use `!`.\n2. Player arguments accept selectors like `me`, `all`, `others`, and partial names, and many commands take multiple targets in one line.\n3. Commands often have several aliases, such as `:sm` for `:systemmessage` and `:btools` for building tools. Each command's aliases are listed with it.\n4. Open `:cmds` in game for the built-in list, which reflects the exact configuration of the game you are in.\n\nIf a command fails, the usual causes are a level that is too low, a setting that disables the command, or a prefix mismatch when a game changed defaults.\n\n## Adonis in your own game\n\nInstall the official **Adonis Loader** from the Roblox Creator Store (published by Epix Incorporated), set your ranks in the loader's settings module, and publish. Plugins let you add custom commands without touching the core, and themes reskin the UI. Review the official setup instructions and release notes when installing or updating Adonis.\n\nWant something simpler? [Basic Admin Essentials](https://bloxodes.com/catalog/admin-commands/basic-admin) covers small teams with five clean levels, and [HD Admin](https://bloxodes.com/catalog/admin-commands/hd-admin) offers an easier GUI-first setup.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "Admin commands use : or ; by default, so :fly me and ;fly me both work. Player-level commands use the ! prefix, such as !rejoin. Games can change these in settings.",
+      "q": "What is the Adonis prefix?"
+    },
+    {
+      "a": "The default ladder is Players, Donors, Moderators, Admins, HeadAdmins, and Creators. Each command requires a minimum level, and the command list is grouped by those levels.",
+      "q": "What are the Adonis admin levels?"
+    },
+    {
+      "a": "An existing admin or the owner ranks you, either permanently with :setrank or just for the current server with :settemprank. Many games also map levels to group ranks or sell donor perks.",
+      "q": "How do I get ranked in a game that runs Adonis?"
+    },
+    {
+      "a": "Adonis is open source under the MIT license and free to use. Install it through the official Adonis Loader from Epix Incorporated, and review the settings and release notes for the version you use.",
+      "q": "Is Adonis safe and free?"
+    },
+    {
+      "a": "Games can disable commands or whole categories in settings, so a command in the list may be off in a specific game. Otherwise check your admin level and the prefix; :cmds in game shows exactly what is enabled for you.",
+      "q": "Why is an Adonis command missing or failing?"
+    },
+    {
+      "a": "Yes. Adonis has a plugin API designed for custom commands and features, so developers can extend the system without editing the core module.",
+      "q": "Can I add my own commands to Adonis?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}

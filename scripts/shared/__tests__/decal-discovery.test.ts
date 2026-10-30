@@ -33,5 +33,9 @@ test("the refresh ledger records real step counts including zero inserts", () =>
   assert.deepEqual(parseDecalStepCounts("Done. Candidate rows: 42. Inserted: 2. Already known: 40. Source rows: 42."),
     { candidates: 42, inserted: 2, already_known: 40 });
   assert.deepEqual(parseDecalStepCounts("Done. Total verified: 5000."), { verified: 5000 });
+  assert.deepEqual(
+    parseDecalStepCounts("Done. Configs: 50. Unique candidates this run: 14903. Inserted: 490. Already known: 14413. Stopped early: Roblox rate limited Toolbox search (429)."),
+    { candidates: 14903, inserted: 490, already_known: 14413, configs: 50, rate_limited: 1 }
+  );
   assert.deepEqual(parseDecalStepCounts("Done. Reranked 38138 active decal rows (982 curated)."), { reranked: 38138 });
 });

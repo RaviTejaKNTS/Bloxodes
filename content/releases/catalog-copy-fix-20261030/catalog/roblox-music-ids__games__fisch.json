@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/fisch",
+  "title": "Fisch Music IDs",
+  "seo_title": "Fisch Music IDs [85 Radio Songs]",
+  "meta_description": "Find 85 Fisch music IDs for the radio. Search by title or artist, copy the number, and check the Radio Pass and common reasons a song stays silent.",
+  "intro_md": "These 85 Fisch songs are Roblox audio tracks tied to the game. Search by title or artist, copy the number, and paste it into the radio's ID field when one shows up.\n\nFisch's Radio Pass gives players a dedicated way to listen while fishing, but access and price can change.",
+  "description_md": "## Fisch music IDs are not rewards\n\nA Fisch Music ID is the number for one Roblox audio track. Players may also call these Fisch song codes or radio codes. They aren't redeemable rewards, and they don't give you rods, cash, bait or luck. Track details may include an artist, album, duration or cover art.\n\n## Radio controls in Fisch\n\nThe radio's buttons and access rules can differ between desktop, mobile and console, so follow the labels on your screen. If there's no ID box, the radio usually expects you to pick from its own list. That doesn't mean you copied the number wrong.\n\n## Entering a Fisch music ID\n\n1. Join [Fisch on Roblox](https://www.roblox.com/games/16732694052/Fisch).\n2. Open the in-game shop and read the Radio Pass requirement your server shows.\n3. Equip the radio or open its music control.\n4. If the control has an ID field, paste the digits from a song and confirm.\n5. If it uses a built-in search or song list instead, search there by title or artist.",
+  "how_it_works_md": "## Why a Fisch song stays silent\n\n- **There's no ID box to type in.** Use the radio's built-in list or search instead.\n- **The track changed.** Roblox can moderate, make private, replace or restrict an upload.\n- **Your access is missing.** The Radio Pass or another game permission can control whether the radio appears.\n- **The ID has extra text.** Paste only the digits.\n- **Your volume is muted.** Check Roblox volume, device output and the in-game music setting.\n\nTry a second song after you check the radio controls. If several IDs fail while the rest of Fisch's audio works, access or the track's availability is more likely the problem than the number.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. The radio may show only its built-in songs, and the Radio Pass or Roblox audio permissions can limit playback.",
+      "q": "Are these guaranteed working Fisch music codes?"
+    },
+    {
+      "a": "Open the radio's music control once you have the access it needs. If the control has an ID field, paste only the digits. If Fisch shows a built-in search or song list instead, use that.",
+      "q": "Where do I enter a Fisch Music ID?"
+    },
+    {
+      "a": "The requirement is shown by your server, so check the in-game shop. Access, price and controls can change.",
+      "q": "Do I need the Radio Pass in Fisch?"
+    },
+    {
+      "a": "The track may be unavailable, the radio may have no ID box, access may be missing, or Roblox or device volume may be muted. Try the built-in list and a second song to narrow it down.",
+      "q": "Why does a Fisch song stay silent?"
+    },
+    {
+      "a": "Not necessarily. A song tied to Fisch isn't automatically an official recording, and it may not appear in every radio menu.",
+      "q": "Are these part of the official Fisch soundtrack?"
+    },
+    {
+      "a": "Not guaranteed. Test the ID in the other game before you rely on it.",
+      "q": "Can I use a Fisch Music ID in other Roblox games?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Fisch's radio feature lets players add music to fishing sessions when the current access and control support it. For the wider fishing, exploration, and progression systems, see the [Fisch experience](https://www.roblox.com/games/16732694052/Fisch).",
+  "wiki_sort_order": null
+}
