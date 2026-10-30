@@ -1,6 +1,6 @@
 # Catalog
 
-Last verified: 2026-10-23
+Last verified: 2026-10-30
 
 Global Roblox reference pages at `/catalog/<slug>`: item IDs, music IDs, decals, emotes, admin commands, color codes, error codes, the Roblox dictionary and more. Game-specific item lists are wiki collections, not catalog pages.
 
@@ -22,7 +22,7 @@ Each page's loader combines its copy with live database data or a small committe
 
 | Data | Source | Refresh |
 | --- | --- | --- |
-| Marketplace items, free items, promo rewards, music and decal IDs | `roblox_*` tables | VPS cron. See [data refreshes](data-refreshes.md). |
+| Marketplace items, free items, promo rewards, music and decal IDs | `roblox_*` tables | VPS cron. See [data refreshes](data-refreshes.md). Decal discovery health is the `decal_ids_refresh` row in `stats_job_runs`; `first_seen_at` is discovery, `verified_at` is only the recheck. |
 | Emote commands | `roblox_emote_commands`, seeded from `data/roblox-emotes/commands.json` | By hand: `seed:emote-commands`, `audit:emote-commands`. |
 | Fonts and meshes | `roblox_font_ids`, `roblox_mesh_ids` | By hand: `collect:font-ids`, `collect:mesh-ids`. |
 | Admin commands, color codes, error codes, dictionary | `data/Admin commands/*.md`, `data/Color Codes/`, `data/roblox-errors/`, `data/roblox-dictionary/` | By hand, shipped with web deploys. |

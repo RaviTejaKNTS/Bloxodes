@@ -266,13 +266,8 @@ export async function insertMissingDecalRows(
   };
 
   if (!rows.length) return result;
-  if (options?.dryRun) {
-    console.log(`Dry run: would insert ${rows.length} missing decal rows.`);
-    result.inserted = Math.min(rows.length, options.maxInserts ?? rows.length);
-    result.skippedAssetIds = rows.slice(result.inserted).map((row) => row.asset_id);
-    return result;
-  }
 
+  // Dry runs still read existing IDs so known candidates never spend the insert budget.
   const sb = supabaseAdmin();
   for (const chunk of chunkArray(rows, 200)) {
     const ids = chunk.map((row) => row.asset_id);
@@ -288,6 +283,11 @@ export async function insertMissingDecalRows(
     const retainedIds = new Set([...existingIds, ...missingRows.map((row) => row.asset_id)]);
     result.skippedAssetIds.push(...chunk.filter((row) => !retainedIds.has(row.asset_id)).map((row) => row.asset_id));
     if (!missingRows.length) continue;
+    if (options?.dryRun) {
+      console.log(`Dry run: would insert ${missingRows.length} missing decal rows.`);
+      result.inserted += missingRows.length;
+      continue;
+    }
 
     const { error } = await sb.from("roblox_decal_ids").insert(missingRows);
     if (error) throw new Error(`Failed to insert missing decal rows: ${error.message}`);
