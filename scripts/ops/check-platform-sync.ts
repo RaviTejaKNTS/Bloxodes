@@ -104,11 +104,11 @@ if (!localOnly) {
       `printf '%s|' "$(git -C ${homelabRoot} status --porcelain | wc -l | tr -d ' ')"; ` +
       `systemctl is-active bloxodes-article-discovery.timer`
   ]);
-  const [homelabSha, homelabDirty, timer] = homelabRaw.split("|");
+  const [homelabSha, homelabDirty, discoveryTimer] = homelabRaw.split("|");
   add(
     "homelab",
-    homelabSha === originProduction && homelabDirty === "0" && timer === "active",
-    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} timer=${timer}`
+    homelabSha === originProduction && homelabDirty === "0" && discoveryTimer === "active",
+    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} discovery_timer=${discoveryTimer}`
   );
 
   const vpsTarget = safeSshTarget(

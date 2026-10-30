@@ -20,15 +20,14 @@ The prompts live in the T3 scheduler, not the repo. Keep them short: the selecti
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current`. The article units read `/etc/bloxodes/article-automation.env`.
+All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env`.
 
 | Unit | When | Does |
 | --- | --- | --- |
-| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the T3 article run writes from. |
-| `bloxodes-article-writer.service` | paused | `articles:writer:batch -- --apply --limit 6`. Writing moved to the T3 article run. Discovery still triggers it, but the drop-in `/etc/systemd/system/bloxodes-article-writer.service.d/paused.conf` (`ConditionPathExists=/etc/bloxodes/article-writer.enabled`) skips it cleanly. `sudo touch /etc/bloxodes/article-writer.enabled` brings it back. |
-| `bloxodes-article-publication.timer` | every 15 minutes | `articles:publication:drain -- --apply` for articles the homelab wrote. Then runs the audit. |
-| `bloxodes-article-audit.service` | after publication | `articles:automation:audit`. |
+| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the Content Factory article run writes from. Starts nothing else. |
 | `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
+
+Article writing and publication run in the Content Factory. The homelab writer, publication and audit units were removed on 2026-10-30; the installer removes them if it finds them, and restores the old units if activation fails.
 
 The runtime is a separate release from the repo. Merging code doesn't change it. See [articles](../content/articles.md#runtime-releases).
 
