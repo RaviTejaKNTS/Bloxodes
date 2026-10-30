@@ -1,0 +1,48 @@
+{
+  "code": "roblox-music-ids/games/forsaken",
+  "title": "Forsaken Sound IDs",
+  "seo_title": "Forsaken Sound IDs [Hit & Kill Sounds]",
+  "meta_description": "Find short Roblox sound IDs for Forsaken hit and kill effects. See where each number goes in Customization, and why a sound may stay silent in game.",
+  "intro_md": "Forsaken sound IDs turn a landed hit or completed kill into a sound you picked. Short effects work best because combat moves quickly, and a five-minute speech tends to miss the moment.\n\nA public Roblox audio asset is a useful candidate. Test the exact number in Forsaken before you rely on it.",
+  "description_md": "## What is a Forsaken sound ID?\n\nA Forsaken sound ID is the numeric asset ID attached to a Roblox audio upload. You paste the number into a supported sound field in the game's Customization settings.\n\nThese numbers identify audio assets. They aren't redemption codes and don't award money, skins, characters or other rewards.\n\n## Hit sounds in Forsaken\n\nForsaken has a **Hitsound ID** field for the effect played when you land a hit.\n\n1. Join Forsaken and open the Settings menu with the cog button.\n2. Scroll to the **Customization** section.\n3. Turn on **Hitsounds Enabled**.\n4. Find the **Hitsound ID** field.\n5. Copy a numeric Sound ID and paste it into the field.\n6. Land a hit in game to test the effect.\n\nPaste only the digits. A full Creator Store link, an extra space or one missing number can leave the field with nothing useful to play.\n\n## Kill sounds in Forsaken\n\nForsaken also has a kill sound setting, which plays after you eliminate a survivor. It's newer, and its name or behavior may change between updates. Look for it in Customization, paste a numeric Roblox audio ID, and test it after you eliminate a survivor.\n\n\n\nThe same number can go in either field. Test it in each field you plan to use, because a sound that works for hits hasn't been proven for kills.",
+  "how_it_works_md": "## What stops a Forsaken sound ID from working\n\nRoblox gives every audio upload its own ID, but that ID alone doesn't make the audio available everywhere. The uploader can restrict access, Roblox can moderate or archive a file, and a game can only play audio it has permission to use. Only a test in game shows whether the Forsaken build accepts a number.\n\n- **The audio is private or restricted.** A valid Roblox asset can still be unavailable to Forsaken.\n- **The upload was removed, archived or moderated.** An old list can outlive the audio it points to.\n- **The number is for another asset type.** Sound fields need a Roblox audio ID, not an image, model, place or user ID.\n- **Hitsounds are off.** Turn on Hitsounds Enabled before you test the hit field.\n- **The pasted value has extra text.** Copy the numeric ID, not the whole Creator Store link.\n- **The game changed its audio rules.** Creator Store availability doesn't prove the current Forsaken build can play an asset.\n- **The clip is too long.** It may play, but it can overlap later hits or keep going after the moment has passed. Short effects are easier to read during combat.\n\nTry a short clip in game. If it loads on Roblox but stays silent in Forsaken, the game may not have permission to play it. Then switch to another short clip.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "A hit sound plays when you land a hit. A kill sound plays after you eliminate a survivor. The hit setting is the established one. The kill setting is newer, and its name or behavior may change between updates.",
+      "q": "What is the difference between a Forsaken hit sound and kill sound?"
+    },
+    {
+      "a": "Forsaken's gamepass list doesn't include a sound pass, so look under Settings and Customization first. The game can change access rules or menu options in a later update.",
+      "q": "Do I need a gamepass to use Forsaken Sound IDs?"
+    },
+    {
+      "a": "Yes, the same number can go in either field. Test it in each field you plan to use. A sound that works for hits hasn't been proven for kills.",
+      "q": "Can I use the same Sound ID for hits and kills?"
+    },
+    {
+      "a": "No. A public sound can still fail if Forsaken lacks permission to use it, Roblox changes its availability, the upload is moderated, or the game changes its audio rules. A test in the game is the stronger check.",
+      "q": "Will every public Roblox audio ID play in Forsaken?"
+    },
+    {
+      "a": "The kill sound may play only for the player who picked it. It isn't clear whether other players can hear it, so don't count on that.",
+      "q": "Can other players hear my Forsaken kill sound?"
+    },
+    {
+      "a": "No. Sound IDs go into a sound setting. Forsaken codes are redeemed through the game's code system for rewards the developers attach to them. Sound IDs don't award money, skins, characters or other rewards.",
+      "q": "Are Forsaken Sound IDs the same as Forsaken codes?"
+    },
+    {
+      "a": "Silence, the wrong audio and an authorization message each point to a different problem. Note which one you get, then try a different short clip.",
+      "q": "What does it mean if a Sound ID is silent or gives an authorization message?"
+    },
+    {
+      "a": "Include the numeric ID, whether you tested it as a hit or kill sound, the test date, and what happened. Silence, the wrong audio, or a Roblox authorization message each suggests a different problem.",
+      "q": "What should I include when reporting a broken Sound ID?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "The [Forsaken wiki](https://bloxodes.com/wiki/forsaken) covers the game's killers, survivors, maps, skins, emotes, and core mechanics when you need more than an audio ID.",
+  "wiki_sort_order": null
+}

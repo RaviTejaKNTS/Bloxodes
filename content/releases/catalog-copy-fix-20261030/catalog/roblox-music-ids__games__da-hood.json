@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/da-hood",
+  "title": "Da Hood Music IDs",
+  "seo_title": "Da Hood Music IDs [28 Boombox Songs]",
+  "meta_description": "Find 28 Da Hood music IDs for the Boombox. Learn how to paste a number, what access you need, and why a song may stay silent in your server.",
+  "intro_md": "Da Hood music IDs point to 28 Roblox audio tracks listed for the game. Each song has its own number, so find the track you want and copy its digits.\n\nThese numbers are separate from Da Hood crosshair IDs, so don't mix the two up. Don't count on every old Boombox code still playing.",
+  "description_md": "## What is a Da Hood music ID?\n\nA Da Hood music ID is the number that identifies a Roblox audio asset. Players also call these numbers Boombox codes or song codes. They don't redeem cash, weapons, emotes or other Da Hood rewards.\n\nEach song can show its title, artist, album, duration and artwork when those details exist.\n\n## Enter a song ID in the Boombox\n\n1. Join [Da Hood on Roblox](https://www.roblox.com/games/2788229376/Da-Hood).\n2. Check the current shop or inventory for the Boombox and any access it needs.\n3. Equip the Boombox and open its music input.\n4. Find the song by name or artist. If the Boombox accepts IDs, paste the digits and confirm.\n5. Check Roblox, game and device volume if the song is quiet.\n\nThe exact item flow can change between updates and devices. If the Boombox offers search, favorites or another menu instead of a number field, use that.\n\nBeing tied to Da Hood doesn't prove a song has played in a live Da Hood server. An ID tied to Da Hood may also not work in every Roblox game.",
+  "how_it_works_md": "## What to check when a Da Hood song is silent\n\n- **The Boombox controls changed.** Follow the current input, search or favorites option.\n- **The audio is restricted.** Roblox can moderate, make private, replace or limit an upload.\n- **The item or access is unavailable.** Check your inventory and the current shop.\n- **The ID was copied incorrectly.** Paste only the numeric value.\n- **Volume or mute is on.** Check Da Hood, Roblox and device audio.\n\nTest the Boombox with a built-in option first, then try a second song. That shows whether one audio file is the problem or the Boombox controls are.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. The Boombox must accept typed IDs, you need access to the item, and Roblox must allow the audio to play.",
+      "q": "Are these guaranteed working Da Hood Boombox codes?"
+    },
+    {
+      "a": "Equip the Boombox and use its visible ID or search field. Paste only the digits when a number field is available.",
+      "q": "Where do I enter a Da Hood Music ID?"
+    },
+    {
+      "a": "Generic lists aren't tied to one game. These 28 songs are tied to Da Hood, so the two lists can have different songs.",
+      "q": "Why do generic Roblox Boombox lists have different songs?"
+    },
+    {
+      "a": "The asset may be unavailable, the Boombox may have changed, access may be missing, or a mute setting may be active. Test a built-in option and another song.",
+      "q": "Why is my Da Hood song silent?"
+    },
+    {
+      "a": "Not necessarily. Being tied to Da Hood doesn't tell you who made a song, and it doesn't mean every track is on the official soundtrack.",
+      "q": "Are these official Da Hood soundtrack songs?"
+    },
+    {
+      "a": "Not always. An ID tied to Da Hood may not work in every Roblox game.",
+      "q": "Can I use these IDs in other Roblox games?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Da Hood's Boombox is a separate audio use case from its combat, cash, and crosshair systems. For the main experience, see [Da Hood on Roblox](https://www.roblox.com/games/2788229376/Da-Hood).",
+  "wiki_sort_order": null
+}
