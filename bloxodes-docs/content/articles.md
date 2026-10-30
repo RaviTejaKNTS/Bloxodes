@@ -87,4 +87,4 @@ Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and 
 
 ## Known issues
 
-- Queue row `223c7ae8-9eda-45f0-ab66-d04995fb3e4f` in `article_generation_queue` is stuck in `processing` from the retired homelab writer. Nothing picks it up.
+- None known. A Content Factory claim that produces no article stays `processing`; nothing releases it, so check for old `processing` rows (`locked_by = t3-content-factory`) when a topic goes missing.
