@@ -13,32 +13,40 @@ export const getGameRoot = cache(async (namespace: string): Promise<SharedGameGa
   if (error) throw new Error(`Game registry read failed: ${error.message}`);
   return data as SharedGameGame | null;
 });
-export const getGameWikiByPath = cache(async (namespace: string, path: string): Promise<SharedGameWikiPage | null> => {
+const readGameWiki = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<SharedGameWikiPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
-  const { data, error } = await supabaseAdmin().from("game_wiki_pages_view").select("*").eq("namespace", namespace).eq("canonical_path", path).eq("is_published", true).maybeSingle();
+  const { data, error } = await supabaseAdmin().from("game_wiki_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
   if (error) throw new Error(`Game wiki read failed: ${error.message}`);
   return data as SharedGameWikiPage | null;
 });
-export const getGameCollectionByPath = cache(async (namespace: string, path: string): Promise<SharedGameWikiCollectionPage | null> => {
+export const getGameWikiByPath = cache((namespace: string, path: string) => readGameWiki(namespace, path, "canonical_path"));
+export const getGameWikiById = cache((namespace: string, id: string) => readGameWiki(namespace, id, "id"));
+const readGameCollection = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<SharedGameWikiCollectionPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
-  const { data, error } = await supabaseAdmin().from("game_collection_pages_view").select("*").eq("namespace", namespace).eq("canonical_path", path).eq("is_published", true).maybeSingle();
+  const { data, error } = await supabaseAdmin().from("game_collection_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
   if (error) throw new Error(`Game collection read failed: ${error.message}`);
   return data as SharedGameWikiCollectionPage | null;
 });
+export const getGameCollectionByPath = cache((namespace: string, path: string) => readGameCollection(namespace, path, "canonical_path"));
+export const getGameCollectionById = cache((namespace: string, id: string) => readGameCollection(namespace, id, "id"));
 export type GameToolPage = ToolContent & { game_id: string; id: string; namespace: string; canonical_path: string; tool_key: string; rules_json: Record<string, unknown> };
-export const getGameToolByPath = cache(async (namespace: string, path: string): Promise<GameToolPage | null> => {
+const readGameTool = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<GameToolPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
-  const { data, error } = await supabaseAdmin().from("game_tool_pages_view").select("*").eq("namespace", namespace).eq("canonical_path", path).eq("is_published", true).maybeSingle();
+  const { data, error } = await supabaseAdmin().from("game_tool_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
   if (error) throw new Error(`Game tool read failed: ${error.message}`);
   return data ? { ...data, thumb_url: resolveGameCoverImage({ ...data, game_cover_image: (await getGameArtwork(namespace, data.game_id))?.cover_image }) } as GameToolPage : null;
 });
+export const getGameToolByPath = cache((namespace: string, path: string) => readGameTool(namespace, path, "canonical_path"));
+export const getGameToolById = cache((namespace: string, id: string) => readGameTool(namespace, id, "id"));
 export type GameCodePage = { image?: string | null; id: string; namespace: string; game_id: string; canonical_path: string; title: string; seo_title: string | null; meta_description: string | null; intro_md: string | null; redeem_md: string | null; rewards_md: string | null; troubleshoot_md: string | null; find_codes_md: string | null; faq_json: Array<{q:string;a:string}> | null; updated_at: string | null; published_at: string | null };
-export const getGameCodeByPath = cache(async (namespace: string, path: string): Promise<GameCodePage | null> => {
+const readGameCode = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<GameCodePage | null> => {
   if (!(await getGameRoot(namespace))) return null;
-  const { data, error } = await supabaseAdmin().from("game_code_pages_view").select("*").eq("namespace", namespace).eq("canonical_path", path).eq("is_published", true).maybeSingle();
+  const { data, error } = await supabaseAdmin().from("game_code_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
   if (error) throw new Error(`Game codes page read failed: ${error.message}`);
   return data ? { ...data, image: (await getGameArtwork(namespace, data.game_id))?.cover_image } as GameCodePage : null;
 });
+export const getGameCodeByPath = cache((namespace: string, path: string) => readGameCode(namespace, path, "canonical_path"));
+export const getGameCodeById = cache((namespace: string, id: string) => readGameCode(namespace, id, "id"));
 
 export const getGameArtwork = cache(readGameArtwork);
 

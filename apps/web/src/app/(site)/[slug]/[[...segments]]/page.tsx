@@ -1,4 +1,5 @@
-import { getGameExtendedPage, getGameChecklistByPath } from "@/lib/game-extra-pages";
+import { getLiveSiteRoute } from "@/lib/site-route-page";
+import { getGameExtendedPage, getGameChecklistByPath, getGameExtendedPageById, getGameChecklistById } from "@/lib/game-extra-pages";
 import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
 import { GameMap } from "@/components/games/GameMap";
 import { GameCatalog } from "@/components/games/GameCatalog";
@@ -7,7 +8,7 @@ import { ChecklistPageTemplate, checklistMetadata } from "@/components/Checklist
 import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getGameDirectoryPages, getGameRoot, getGameWikiByPath, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath } from "@/lib/game-registry";
+import { getGameDirectoryPages, getGameRoot, getGameWikiByPath, getGameWikiById, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath, getGameCollectionById, getGameCodeById, getGameToolById } from "@/lib/game-registry";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 import { getGameLandingForLinks } from "@/lib/game-landing";
@@ -32,7 +33,31 @@ async function context(params: Props["params"]) {
   const currentPage = match ? Number(match[1]) : 1;
   const basePath = match ? path.slice(0, match.index) : path;
   if (!Number.isSafeInteger(currentPage)) notFound();
-  const [wiki, collection, codes, tool, map, quiz, catalog, checklist] = await Promise.all([getGameWikiByPath(slug, basePath), getGameCollectionByPath(slug, basePath), getGameCodeByPath(slug, basePath), getGameToolByPath(slug, basePath), getGameExtendedPage(slug,basePath,"map"),getGameExtendedPage(slug,basePath,"quiz"),getGameExtendedPage(slug,basePath,"catalog"),getGameChecklistByPath(slug,basePath)]);
+  const route = await getLiveSiteRoute(basePath);
+  let wiki = null, collection = null, codes = null, tool = null;
+  let map = null, quiz = null, catalog = null, checklist = null;
+  if (route === undefined) {
+    [wiki, collection, codes, tool, map, quiz, catalog, checklist] = await Promise.all([
+      getGameWikiByPath(slug, basePath), getGameCollectionByPath(slug, basePath),
+      getGameCodeByPath(slug, basePath), getGameToolByPath(slug, basePath),
+      getGameExtendedPage(slug, basePath, "map"), getGameExtendedPage(slug, basePath, "quiz"),
+      getGameExtendedPage(slug, basePath, "catalog"), getGameChecklistByPath(slug, basePath),
+    ]);
+  } else if (route) {
+    if (route.source !== "game") notFound();
+    switch (route.page_type) {
+      case "wiki": wiki = await getGameWikiById(slug, route.page_id); break;
+      case "collection": collection = await getGameCollectionById(slug, route.page_id); break;
+      case "code": codes = await getGameCodeById(slug, route.page_id); break;
+      case "tool": tool = await getGameToolById(slug, route.page_id); break;
+      case "map": map = await getGameExtendedPageById(slug, route.page_id, "map"); break;
+      case "quiz": quiz = await getGameExtendedPageById(slug, route.page_id, "quiz"); break;
+      case "catalog": catalog = await getGameExtendedPageById(slug, route.page_id, "catalog"); break;
+      case "checklist": checklist = await getGameChecklistById(slug, route.page_id); break;
+      case "hub": if (segments.length || route.page_id !== root.id || route.game_id !== root.id) notFound(); break;
+      default: notFound();
+    }
+  }
   if (match && !collection) notFound();
   const rootWiki = segments.length ? null : await getGameWikiByPath(slug, `/${slug}/wiki`);
   return { root, rootWiki, path, basePath, segments, currentPage, wiki, collection, codes, tool, map, quiz, catalog, checklist };

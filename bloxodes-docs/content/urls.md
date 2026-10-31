@@ -60,7 +60,7 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 
 ## Route table
 
-`public.site_routes` maps every page URL to the page that owns it. Redirects are served from it (above); pages still render through their own route readers.
+`public.site_routes` maps every page URL to the page that owns it. Redirects are served from it (above). The shared game route also uses it to pick the page (see [franchise](franchise.md#routes)); every other route still finds its page with its own reader.
 
 - **Live rows:** every page in the Roblox page tables, `puzzle_pages`, the eight `game_*` page tables, and a `hub` row for each namespace root in `games`, drafts included. `source` and `page_type` name the owning table; `page_id` is its row ID. A page has one live URL.
 - **Old rows:** a redirect. With a `page_id`, it follows that page's current live URL, so a page that moves twice never builds a redirect chain. Without one, it uses `target_url`.
