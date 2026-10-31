@@ -86,7 +86,8 @@ export function registryRequestRedirect(snapshot: RedirectSnapshot, pathname: st
       let target: string | null = null;
       if (parts.length <= 2) target = row.target_url + '/' + parts.map(encodeURIComponent).join('/');
       else if ((parts.length === 3 && parts[1] === 'page') || (parts.length === 4 && parts[2] === 'page')) {
-        const parsed = Number.parseInt(parts[parts.length - 1], 10);
+        // Next keeps '+' encoded (%2B) in route params, so '+3' parsed as NaN and fell back to page 1.
+        const parsed = Number.parseInt(parts[parts.length - 1].replace(/\+/g, '%2B'), 10);
         const page = Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
         target = `${row.target_url}/${parts.slice(0, -2).map(encodeURIComponent).join('/')}/page/${page}`;
       }

@@ -25,15 +25,13 @@ describe("retired music game", () => {
     expect(isRetiredMusicGameCatalogUrl("/codes/work-at-a-pizza-place")).toBe(false);
   });
 
-  it("permanently redirects the old page and its descendants", async () => {
+  it("permanently redirects the old page and its descendants", () => {
+    // Served from site_routes since the redirect moved out of next.config.js.
     const require = createRequire(import.meta.url);
-    const config = require("../../../next.config.js");
-    const redirects = await config.redirects();
-    expect(redirects).toContainEqual({
-      source: `/catalog/${retiredCode}/:path*`,
-      destination: "/catalog/roblox-music-ids",
-      permanent: true
-    });
+    const { cases } = require("../../../../../scripts/routes/fixtures/phase-2-redirects.json") as { cases: { url: string; status: number; location: string }[] };
+    for (const url of [`/catalog/${retiredCode}`, `/catalog/${retiredCode}/deep/path`]) {
+      expect(cases).toContainEqual({ url, status: 308, location: "/catalog/roblox-music-ids" });
+    }
   });
 
   it.each([false, true])("excludes a still-published DB row from related links, fallback=%s", async fallback => {

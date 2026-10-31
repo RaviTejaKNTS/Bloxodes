@@ -126,7 +126,7 @@ it('canonical host and root aliases preserve their combined redirect', async () 
   expect(minecraft.headers.get('location')).toBe('https://bloxodes.com/minecraft/wiki/mobs?edition=bedrock');
 });
 it('codes namespace aliases are now handled by the registry without root normalization', async () => {
-  const owner={...rows[0],path:'/codes/previous-name',page_id:'page-id',target_url:null,resolved_target:'/codes/current-name'};
+  const owner={...rows[0],path:'/codes/previous-name',page_id:'page-id',target_url:null,resolved_target:'/codes/current-name',redirect_code:301};
   state.snapshot=buildRedirectSnapshot([owner]);
   const response=(await proxy(new NextRequest(base+'/codes/previous-name?ref=old')));
   expect(response.status).toBe(301);
