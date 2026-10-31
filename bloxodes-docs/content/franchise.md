@@ -40,6 +40,8 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 | Collection | the owning wiki URL plus `/<collection-slug>` |
 | Maps, quizzes, catalogs, checklists | `/<namespace>/maps|quizzes|catalog|checklists/<slug>` |
 
+Slug rules and the planned move to page-type URLs are in [URLs](urls.md).
+
 New namespaces use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
 
 ## Data

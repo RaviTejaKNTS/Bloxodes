@@ -41,6 +41,7 @@ If you find the same fact in two places, keep it in its owner and replace the co
 **Content pipelines**
 
 - [Page standards](content/page-standards.md): titles, headings, depth, images and layout every page must meet.
+- [URLs](content/urls.md): URL patterns, slug rules and where redirects live.
 - [Articles](content/articles.md)
 - [Codes](content/codes.md)
 - [Roblox wiki and collections](content/roblox-wiki.md)
