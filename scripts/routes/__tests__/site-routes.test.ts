@@ -3,6 +3,7 @@ import { execFileSync, spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { buildRedirectSnapshot, resolveSiteRoute, type RedirectRoute } from "../../../apps/web/src/lib/site-route-resolver";
 import { minecraftLegacyRedirect } from "../../../apps/web/src/lib/minecraft-paths";
 
 // Executes the actual migration and row triggers in GitHub's disposable Postgres.
@@ -116,6 +117,21 @@ test("site route backfill, selective update locks, hub restoration, ownership an
     // A failed lock attempt leaves no partial registry objects. Retry the full
     // migration after the publisher ends, then run the SQL ownership assertions.
     psql(fixtureUrl.toString(), `begin; ${migration} commit; begin; ${fixture} rollback;`);
+    const jsonQuery = (statement: string) => JSON.parse(execFileSync("psql", [fixtureUrl.toString(), "-X", "-A", "-t", "-v", "ON_ERROR_STOP=1", "-c", statement], {encoding:"utf8"}).trim());
+    const readSnapshot = () => buildRedirectSnapshot(jsonQuery(`select jsonb_agg(to_jsonb(r)||jsonb_build_object('resolved_target',public.site_route_target(r,r.path))) from public.site_routes r`) as RedirectRoute[]);
+    const snapshot = readSnapshot();
+    const frozen = JSON.parse(readFileSync(new URL("../fixtures/phase-2-redirects.json", import.meta.url), "utf8")) as {cases: {url:string}[]};
+    const paths = [...new Set(frozen.cases.map(entry => new URL(entry.url,"https://bloxodes.com").pathname))];
+    const results = jsonQuery(`select jsonb_agg(jsonb_build_object('path',p.path,'target',(select resolved_target from public.resolve_site_route(p.path)))) from unnest(array[${paths.map(path => "'"+path.replaceAll("'","''")+"'").join(',')}]) p(path)`) as {path:string;target:string|null}[];
+    for (const result of results) assert.equal(resolveSiteRoute(snapshot,result.path)?.target ?? null,result.target,result.path);
+    // Actual rename trigger -> service-role view shape -> cached snapshot -> URL.
+    // TTL/single-flight and proxy response behavior are exercised in Vitest.
+    const beforeRename = readSnapshot();
+    psql(fixtureUrl.toString(), "update public.code_pages set slug='slap-battles-renamed' where slug='slap-battles';");
+    assert.equal(resolveSiteRoute(beforeRename,"/codes/slap-battles")?.target,null);
+    const afterRename = readSnapshot();
+    assert.equal(resolveSiteRoute(afterRename,"/codes/slap-battles")?.target,"/codes/slap-battles-renamed");
+    assert.equal(resolveSiteRoute(afterRename,"/codes/previous-slap")?.target,"/codes/slap-battles-renamed");
   } finally {
     psql(url, `drop database "${database}" with (force);`);
   }

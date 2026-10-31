@@ -1,0 +1,5703 @@
+{
+  "capturedAt": "2026-10-31T20:59:33.742Z",
+  "origin": "https://bloxodes.com",
+  "productionSHA": "6f71d378d64fd654fe5bfefd2ee73b4a1957b175",
+  "counts": {
+    "articles": 12,
+    "legacyCodeSlugs": 360,
+    "retiredLists": 61
+  },
+  "failures": [],
+  "cases": [
+    {
+      "url": "/when-does-the-museum-open-in-jailbreak-roblox",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox"
+    },
+    {
+      "url": "/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/how-to-level-up-fast-in-jailbreak-criminal-vs-cop",
+      "status": 301,
+      "location": "/articles/how-to-level-up-fast-in-jailbreak-criminal-vs-cop"
+    },
+    {
+      "url": "/how-to-level-up-fast-in-jailbreak-criminal-vs-cop?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/how-to-level-up-fast-in-jailbreak-criminal-vs-cop?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/how-to-get-a-mansion-invite-in-jailbreak-roblox",
+      "status": 301,
+      "location": "/articles/how-to-get-a-mansion-invite-in-jailbreak-roblox"
+    },
+    {
+      "url": "/how-to-get-a-mansion-invite-in-jailbreak-roblox?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/how-to-get-a-mansion-invite-in-jailbreak-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/steal-a-brainrot-dealer-update-guide",
+      "status": 301,
+      "location": "/articles/steal-a-brainrot-dealer-update-guide"
+    },
+    {
+      "url": "/steal-a-brainrot-dealer-update-guide?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/steal-a-brainrot-dealer-update-guide?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/why-roblox-s-simple-graphics-still-beat-every-realistic-game",
+      "status": 301,
+      "location": "/articles/why-roblox-s-simple-graphics-still-beat-every-realistic-game"
+    },
+    {
+      "url": "/why-roblox-s-simple-graphics-still-beat-every-realistic-game?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/why-roblox-s-simple-graphics-still-beat-every-realistic-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/where-to-find-criminal-base-on-roblox-jailbreak",
+      "status": 301,
+      "location": "/articles/where-to-find-criminal-base-on-roblox-jailbreak"
+    },
+    {
+      "url": "/where-to-find-criminal-base-on-roblox-jailbreak?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/where-to-find-criminal-base-on-roblox-jailbreak?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/how-to-get-robux-free-and-paid",
+      "status": 301,
+      "location": "/articles/how-to-get-robux-free-and-paid"
+    },
+    {
+      "url": "/how-to-get-robux-free-and-paid?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/how-to-get-robux-free-and-paid?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/best-simple-roblox-games-for-beginners",
+      "status": 301,
+      "location": "/articles/best-simple-roblox-games-for-beginners"
+    },
+    {
+      "url": "/best-simple-roblox-games-for-beginners?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/best-simple-roblox-games-for-beginners?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/how-to-get-spooky-chest-in-grow-a-garden",
+      "status": 301,
+      "location": "/articles/how-to-get-spooky-chest-in-grow-a-garden"
+    },
+    {
+      "url": "/how-to-get-spooky-chest-in-grow-a-garden?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/how-to-get-spooky-chest-in-grow-a-garden?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/roblox-halloween-spotlight-event-2025",
+      "status": 301,
+      "location": "/articles/roblox-halloween-spotlight-event-2025"
+    },
+    {
+      "url": "/roblox-halloween-spotlight-event-2025?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/roblox-halloween-spotlight-event-2025?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/create-and-publish-roblox-game",
+      "status": 301,
+      "location": "/articles/create-and-publish-roblox-game"
+    },
+    {
+      "url": "/create-and-publish-roblox-game?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/create-and-publish-roblox-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/all-fisch-enchantments-guide",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide"
+    },
+    {
+      "url": "/all-fisch-enchantments-guide?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/slap-battles-codes",
+      "status": 301,
+      "location": "/codes/slap-battles"
+    },
+    {
+      "url": "/slap-battles-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slap-battles?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bikeworld-codes",
+      "status": 301,
+      "location": "/codes/bikeworld"
+    },
+    {
+      "url": "/bikeworld-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bikeworld?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-rangers-x-codes",
+      "status": 301,
+      "location": "/codes/anime-rangers-x"
+    },
+    {
+      "url": "/anime-rangers-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rangers-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/go-fishing-codes",
+      "status": 301,
+      "location": "/codes/go-fishing"
+    },
+    {
+      "url": "/go-fishing-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/go-fishing?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-fighters-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-fighters-simulator"
+    },
+    {
+      "url": "/anime-fighters-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-fighters-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bladers-rebirth-codes",
+      "status": 301,
+      "location": "/codes/bladers-rebirth"
+    },
+    {
+      "url": "/bladers-rebirth-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bladers-rebirth?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/human-kebabs-codes",
+      "status": 301,
+      "location": "/codes/human-kebabs"
+    },
+    {
+      "url": "/human-kebabs-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/human-kebabs?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/build-a-scam-empire-codes",
+      "status": 301,
+      "location": "/codes/build-a-scam-empire"
+    },
+    {
+      "url": "/build-a-scam-empire-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/build-a-scam-empire?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/demon-slayer-legacy-codes",
+      "status": 301,
+      "location": "/codes/demon-slayer-legacy"
+    },
+    {
+      "url": "/demon-slayer-legacy-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/demon-slayer-legacy?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/climbing-game-codes",
+      "status": 301,
+      "location": "/codes/climbing-game"
+    },
+    {
+      "url": "/climbing-game-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/climbing-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/lost-currents-codes",
+      "status": 301,
+      "location": "/codes/lost-currents"
+    },
+    {
+      "url": "/lost-currents-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/lost-currents?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-dungeon-fighters-codes",
+      "status": 301,
+      "location": "/codes/anime-dungeon-fighters"
+    },
+    {
+      "url": "/anime-dungeon-fighters-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-dungeon-fighters?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/monster-race-codes",
+      "status": 301,
+      "location": "/codes/monster-race"
+    },
+    {
+      "url": "/monster-race-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/monster-race?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/the-mall-game-codes",
+      "status": 301,
+      "location": "/codes/the-mall-game"
+    },
+    {
+      "url": "/the-mall-game-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/the-mall-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/my-anime-life-codes",
+      "status": 301,
+      "location": "/codes/my-anime-life"
+    },
+    {
+      "url": "/my-anime-life-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/my-anime-life?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blade-ball-codes",
+      "status": 301,
+      "location": "/codes/blade-ball"
+    },
+    {
+      "url": "/blade-ball-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blade-ball?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-slashing-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-slashing-simulator"
+    },
+    {
+      "url": "/anime-slashing-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-slashing-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/all-star-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/all-star-tower-defense"
+    },
+    {
+      "url": "/all-star-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/all-star-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/clothing-store-simulator-codes",
+      "status": 301,
+      "location": "/codes/clothing-store-simulator"
+    },
+    {
+      "url": "/clothing-store-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/clothing-store-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/eating-simulator-codes",
+      "status": 301,
+      "location": "/codes/eating-simulator"
+    },
+    {
+      "url": "/eating-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/eating-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/be-a-nurse-codes",
+      "status": 301,
+      "location": "/codes/be-a-nurse"
+    },
+    {
+      "url": "/be-a-nurse-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/be-a-nurse?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/grand-kaizen-codes",
+      "status": 301,
+      "location": "/codes/grand-kaizen"
+    },
+    {
+      "url": "/grand-kaizen-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/grand-kaizen?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-slaying-codes",
+      "status": 301,
+      "location": "/codes/anime-slaying"
+    },
+    {
+      "url": "/anime-slaying-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-slaying?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/aura-rng-codes",
+      "status": 301,
+      "location": "/codes/aura-rng"
+    },
+    {
+      "url": "/aura-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/aura-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/arsenal-codes",
+      "status": 301,
+      "location": "/codes/arsenal"
+    },
+    {
+      "url": "/arsenal-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/arsenal?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hunters-codes",
+      "status": 301,
+      "location": "/codes/hunters"
+    },
+    {
+      "url": "/hunters-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hunters?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/lost-souls-codes",
+      "status": 301,
+      "location": "/codes/lost-souls"
+    },
+    {
+      "url": "/lost-souls-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/lost-souls?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-sails-dragon-event-codes",
+      "status": 301,
+      "location": "/codes/dead-sails-dragon-event"
+    },
+    {
+      "url": "/dead-sails-dragon-event-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-sails-dragon-event?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/claw-machine-simulator-codes",
+      "status": 301,
+      "location": "/codes/claw-machine-simulator"
+    },
+    {
+      "url": "/claw-machine-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/claw-machine-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/new-bikes-the-ride-codes",
+      "status": 301,
+      "location": "/codes/new-bikes-the-ride"
+    },
+    {
+      "url": "/new-bikes-the-ride-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/new-bikes-the-ride?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-camp-codes",
+      "status": 301,
+      "location": "/codes/dead-camp"
+    },
+    {
+      "url": "/dead-camp-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-camp?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/flex-ugc-codes",
+      "status": 301,
+      "location": "/codes/flex-ugc"
+    },
+    {
+      "url": "/flex-ugc-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/flex-ugc?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-fantasy-kingdom-codes",
+      "status": 301,
+      "location": "/codes/anime-fantasy-kingdom"
+    },
+    {
+      "url": "/anime-fantasy-kingdom-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-fantasy-kingdom?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/mosquitoes-vs-humans-codes",
+      "status": 301,
+      "location": "/codes/mosquitoes-vs-humans"
+    },
+    {
+      "url": "/mosquitoes-vs-humans-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/mosquitoes-vs-humans?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-switch-codes",
+      "status": 301,
+      "location": "/codes/anime-switch"
+    },
+    {
+      "url": "/anime-switch-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-switch?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-impact-codes",
+      "status": 301,
+      "location": "/codes/anime-impact"
+    },
+    {
+      "url": "/anime-impact-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-impact?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/ascender-incremental-codes",
+      "status": 301,
+      "location": "/codes/ascender-incremental"
+    },
+    {
+      "url": "/ascender-incremental-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/ascender-incremental?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/paper-plane-simulator-codes",
+      "status": 301,
+      "location": "/codes/paper-plane-simulator"
+    },
+    {
+      "url": "/paper-plane-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/paper-plane-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/prison-pump-codes",
+      "status": 301,
+      "location": "/codes/prison-pump"
+    },
+    {
+      "url": "/prison-pump-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/prison-pump?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/train-dog-to-fight-codes",
+      "status": 301,
+      "location": "/codes/train-dog-to-fight"
+    },
+    {
+      "url": "/train-dog-to-fight-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/train-dog-to-fight?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fishing-simulator-codes",
+      "status": 301,
+      "location": "/codes/fishing-simulator"
+    },
+    {
+      "url": "/fishing-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fishing-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/horror-rng-codes",
+      "status": 301,
+      "location": "/codes/horror-rng"
+    },
+    {
+      "url": "/horror-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/horror-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/card-rng-codes",
+      "status": 301,
+      "location": "/codes/card-rng"
+    },
+    {
+      "url": "/card-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/card-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hunty-zombie-codes",
+      "status": 301,
+      "location": "/codes/hunty-zombie"
+    },
+    {
+      "url": "/hunty-zombie-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hunty-zombie?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-card-clash-codes",
+      "status": 301,
+      "location": "/codes/anime-card-clash"
+    },
+    {
+      "url": "/anime-card-clash-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-card-clash?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/island-of-move-codes",
+      "status": 301,
+      "location": "/codes/island-of-move"
+    },
+    {
+      "url": "/island-of-move-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/island-of-move?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-fantasy-codes",
+      "status": 301,
+      "location": "/codes/anime-fantasy"
+    },
+    {
+      "url": "/anime-fantasy-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-fantasy?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pets-go-codes",
+      "status": 301,
+      "location": "/codes/pets-go"
+    },
+    {
+      "url": "/pets-go-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pets-go?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/garden-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/garden-tower-defense"
+    },
+    {
+      "url": "/garden-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/garden-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/drag-project-future-codes",
+      "status": 301,
+      "location": "/codes/drag-project-future"
+    },
+    {
+      "url": "/drag-project-future-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/drag-project-future?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fruit-reborn-codes",
+      "status": 301,
+      "location": "/codes/fruit-reborn"
+    },
+    {
+      "url": "/fruit-reborn-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fruit-reborn?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pressure-codes",
+      "status": 301,
+      "location": "/codes/pressure"
+    },
+    {
+      "url": "/pressure-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pressure?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/kengan-codes",
+      "status": 301,
+      "location": "/codes/kengan"
+    },
+    {
+      "url": "/kengan-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/kengan?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/build-a-zoo-codes",
+      "status": 301,
+      "location": "/codes/build-a-zoo"
+    },
+    {
+      "url": "/build-a-zoo-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/build-a-zoo?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/cookie-kingdom-world-codes",
+      "status": 301,
+      "location": "/codes/cookie-kingdom-world"
+    },
+    {
+      "url": "/cookie-kingdom-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/cookie-kingdom-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/spongebob-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/spongebob-tower-defense"
+    },
+    {
+      "url": "/spongebob-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/spongebob-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/beaks-codes",
+      "status": 301,
+      "location": "/codes/beaks"
+    },
+    {
+      "url": "/beaks-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/beaks?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/ultimate-town-multiplayer-codes",
+      "status": 301,
+      "location": "/codes/ultimate-town-multiplayer"
+    },
+    {
+      "url": "/ultimate-town-multiplayer-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/ultimate-town-multiplayer?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fruit-defenders-codes",
+      "status": 301,
+      "location": "/codes/fruit-defenders"
+    },
+    {
+      "url": "/fruit-defenders-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fruit-defenders?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/neighbors-codes",
+      "status": 301,
+      "location": "/codes/neighbors"
+    },
+    {
+      "url": "/neighbors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/neighbors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/basketball-zero-codes",
+      "status": 301,
+      "location": "/codes/basketball-zero"
+    },
+    {
+      "url": "/basketball-zero-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/basketball-zero?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pixel-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/pixel-tower-defense"
+    },
+    {
+      "url": "/pixel-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pixel-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/grow-a-garden-codes",
+      "status": 301,
+      "location": "/codes/grow-a-garden"
+    },
+    {
+      "url": "/grow-a-garden-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/grow-a-garden?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/motorcycle-racing-codes",
+      "status": 301,
+      "location": "/codes/motorcycle-racing"
+    },
+    {
+      "url": "/motorcycle-racing-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/motorcycle-racing?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dragon-soul-codes",
+      "status": 301,
+      "location": "/codes/dragon-soul"
+    },
+    {
+      "url": "/dragon-soul-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dragon-soul?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bounce-a-brainrot-codes",
+      "status": 301,
+      "location": "/codes/bounce-a-brainrot"
+    },
+    {
+      "url": "/bounce-a-brainrot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bounce-a-brainrot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-kingdom-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-kingdom-simulator"
+    },
+    {
+      "url": "/anime-kingdom-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-kingdom-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dig-codes",
+      "status": 301,
+      "location": "/codes/dig"
+    },
+    {
+      "url": "/dig-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dig?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/football-legends-codes",
+      "status": 301,
+      "location": "/codes/football-legends"
+    },
+    {
+      "url": "/football-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/football-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/zombie-war-tycoon-codes",
+      "status": 301,
+      "location": "/codes/zombie-war-tycoon"
+    },
+    {
+      "url": "/zombie-war-tycoon-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/zombie-war-tycoon?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/clicking-universe-codes",
+      "status": 301,
+      "location": "/codes/clicking-universe"
+    },
+    {
+      "url": "/clicking-universe-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/clicking-universe?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/type-soul-codes",
+      "status": 301,
+      "location": "/codes/type-soul"
+    },
+    {
+      "url": "/type-soul-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/type-soul?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/collect-all-pets-codes",
+      "status": 301,
+      "location": "/codes/collect-all-pets"
+    },
+    {
+      "url": "/collect-all-pets-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/collect-all-pets?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-ascend-codes",
+      "status": 301,
+      "location": "/codes/anime-ascend"
+    },
+    {
+      "url": "/anime-ascend-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-ascend?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/slayers-unleashed-codes",
+      "status": 301,
+      "location": "/codes/slayers-unleashed"
+    },
+    {
+      "url": "/slayers-unleashed-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slayers-unleashed?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-geek-codes",
+      "status": 301,
+      "location": "/codes/anime-geek"
+    },
+    {
+      "url": "/anime-geek-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-geek?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/baddies-codes",
+      "status": 301,
+      "location": "/codes/baddies"
+    },
+    {
+      "url": "/baddies-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/baddies?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/all-star-tower-defense-x-codes",
+      "status": 301,
+      "location": "/codes/all-star-tower-defense-x"
+    },
+    {
+      "url": "/all-star-tower-defense-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/all-star-tower-defense-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/five-nights-hunted-codes",
+      "status": 301,
+      "location": "/codes/five-nights-hunted"
+    },
+    {
+      "url": "/five-nights-hunted-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/five-nights-hunted?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-unlimited-codes",
+      "status": 301,
+      "location": "/codes/anime-unlimited"
+    },
+    {
+      "url": "/anime-unlimited-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-unlimited?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dudes-battlegrounds-codes",
+      "status": 301,
+      "location": "/codes/dudes-battlegrounds"
+    },
+    {
+      "url": "/dudes-battlegrounds-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dudes-battlegrounds?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/haze-piece-codes",
+      "status": 301,
+      "location": "/codes/haze-piece"
+    },
+    {
+      "url": "/haze-piece-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/haze-piece?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/survive-the-killer-codes",
+      "status": 301,
+      "location": "/codes/survive-the-killer"
+    },
+    {
+      "url": "/survive-the-killer-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/survive-the-killer?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/infinite-mining-incremental-codes",
+      "status": 301,
+      "location": "/codes/infinite-mining-incremental"
+    },
+    {
+      "url": "/infinite-mining-incremental-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/infinite-mining-incremental?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/legends-re-written-codes",
+      "status": 301,
+      "location": "/codes/legends-re-written"
+    },
+    {
+      "url": "/legends-re-written-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/legends-re-written?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/super-eleven-codes",
+      "status": 301,
+      "location": "/codes/super-eleven"
+    },
+    {
+      "url": "/super-eleven-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/super-eleven?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/divine-duality-elemental-codes",
+      "status": 301,
+      "location": "/codes/divine-duality-elemental"
+    },
+    {
+      "url": "/divine-duality-elemental-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/divine-duality-elemental?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/restaurant-tycoon-2-codes",
+      "status": 301,
+      "location": "/codes/restaurant-tycoon-2"
+    },
+    {
+      "url": "/restaurant-tycoon-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/restaurant-tycoon-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/popmarket-simulator-codes",
+      "status": 301,
+      "location": "/codes/popmarket-simulator"
+    },
+    {
+      "url": "/popmarket-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/popmarket-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rensselaer-county-codes",
+      "status": 301,
+      "location": "/codes/rensselaer-county"
+    },
+    {
+      "url": "/rensselaer-county-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rensselaer-county?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fish-it-codes",
+      "status": 301,
+      "location": "/codes/fish-it"
+    },
+    {
+      "url": "/fish-it-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fish-it?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-apex-codes",
+      "status": 301,
+      "location": "/codes/anime-apex"
+    },
+    {
+      "url": "/anime-apex-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-apex?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/cabin-crew-simulator-codes",
+      "status": 301,
+      "location": "/codes/cabin-crew-simulator"
+    },
+    {
+      "url": "/cabin-crew-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/cabin-crew-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/combat-warriors-codes",
+      "status": 301,
+      "location": "/codes/combat-warriors"
+    },
+    {
+      "url": "/combat-warriors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/combat-warriors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/doors-codes",
+      "status": 301,
+      "location": "/codes/doors"
+    },
+    {
+      "url": "/doors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/doors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/katana-simulator-codes",
+      "status": 301,
+      "location": "/codes/katana-simulator"
+    },
+    {
+      "url": "/katana-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/katana-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/water-pumping-incremental-2-codes",
+      "status": 301,
+      "location": "/codes/water-pumping-incremental-2"
+    },
+    {
+      "url": "/water-pumping-incremental-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/water-pumping-incremental-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fly-to-space-codes",
+      "status": 301,
+      "location": "/codes/fly-to-space"
+    },
+    {
+      "url": "/fly-to-space-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fly-to-space?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-fate-echoes-codes",
+      "status": 301,
+      "location": "/codes/anime-fate-echoes"
+    },
+    {
+      "url": "/anime-fate-echoes-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-fate-echoes?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fisch-codes",
+      "status": 301,
+      "location": "/codes/fisch"
+    },
+    {
+      "url": "/fisch-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fisch?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/lumberjack-simulator-codes",
+      "status": 301,
+      "location": "/codes/lumberjack-simulator"
+    },
+    {
+      "url": "/lumberjack-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/lumberjack-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-final-strike-codes",
+      "status": 301,
+      "location": "/codes/anime-final-strike"
+    },
+    {
+      "url": "/anime-final-strike-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-final-strike?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/majika-codes",
+      "status": 301,
+      "location": "/codes/majika"
+    },
+    {
+      "url": "/majika-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/majika?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-storm-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-storm-simulator"
+    },
+    {
+      "url": "/anime-storm-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-storm-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/home-run-simulator-codes",
+      "status": 301,
+      "location": "/codes/home-run-simulator"
+    },
+    {
+      "url": "/home-run-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/home-run-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/brainrot-training-codes",
+      "status": 301,
+      "location": "/codes/brainrot-training"
+    },
+    {
+      "url": "/brainrot-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/brainrot-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/arcane-seas-codes",
+      "status": 301,
+      "location": "/codes/arcane-seas"
+    },
+    {
+      "url": "/arcane-seas-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/arcane-seas?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-venture-codes",
+      "status": 301,
+      "location": "/codes/anime-venture"
+    },
+    {
+      "url": "/anime-venture-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-venture?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/car-crushers-2-codes",
+      "status": 301,
+      "location": "/codes/car-crushers-2"
+    },
+    {
+      "url": "/car-crushers-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/car-crushers-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-royale-codes",
+      "status": 301,
+      "location": "/codes/anime-royale"
+    },
+    {
+      "url": "/anime-royale-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-royale?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/heroes-online-world-codes",
+      "status": 301,
+      "location": "/codes/heroes-online-world"
+    },
+    {
+      "url": "/heroes-online-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/heroes-online-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fight-squiddy-game-codes",
+      "status": 301,
+      "location": "/codes/squiddy-game"
+    },
+    {
+      "url": "/fight-squiddy-game-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/squiddy-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/labubu-evolution-codes",
+      "status": 301,
+      "location": "/codes/labubu-evolution"
+    },
+    {
+      "url": "/labubu-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/labubu-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-sewers-codes",
+      "status": 301,
+      "location": "/codes/dead-sewers"
+    },
+    {
+      "url": "/dead-sewers-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-sewers?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dalgona-tycoon-codes",
+      "status": 301,
+      "location": "/codes/dalgona-tycoon"
+    },
+    {
+      "url": "/dalgona-tycoon-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dalgona-tycoon?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/re-xl-codes",
+      "status": 301,
+      "location": "/codes/re-xl"
+    },
+    {
+      "url": "/re-xl-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/re-xl?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/volleyball-legends-codes",
+      "status": 301,
+      "location": "/codes/volleyball-legends"
+    },
+    {
+      "url": "/volleyball-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/volleyball-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-vanguards-codes",
+      "status": 301,
+      "location": "/codes/anime-vanguards"
+    },
+    {
+      "url": "/anime-vanguards-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-vanguards?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fruit-seas-codes",
+      "status": 301,
+      "location": "/codes/fruit-seas"
+    },
+    {
+      "url": "/fruit-seas-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fruit-seas?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/highschool-hoops-codes",
+      "status": 301,
+      "location": "/codes/highschool-hoops"
+    },
+    {
+      "url": "/highschool-hoops-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/highschool-hoops?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/divaz-codes",
+      "status": 301,
+      "location": "/codes/divaz"
+    },
+    {
+      "url": "/divaz-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/divaz?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/drag-drive-simulator-codes",
+      "status": 301,
+      "location": "/codes/drag-drive-simulator"
+    },
+    {
+      "url": "/drag-drive-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/drag-drive-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/jujutsu-infinite-codes",
+      "status": 301,
+      "location": "/codes/jujutsu-infinite"
+    },
+    {
+      "url": "/jujutsu-infinite-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/jujutsu-infinite?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/untitled-boxing-game-codes",
+      "status": 301,
+      "location": "/codes/untitled-boxing-game"
+    },
+    {
+      "url": "/untitled-boxing-game-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/untitled-boxing-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/enchanted-codes",
+      "status": 301,
+      "location": "/codes/enchanted"
+    },
+    {
+      "url": "/enchanted-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/enchanted?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/project-basketball-codes",
+      "status": 301,
+      "location": "/codes/project-basketball"
+    },
+    {
+      "url": "/project-basketball-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/project-basketball?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/kick-a-brainrot-codes",
+      "status": 301,
+      "location": "/codes/kick-a-brainrot"
+    },
+    {
+      "url": "/kick-a-brainrot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/kick-a-brainrot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bee-swarm-simulator-codes",
+      "status": 301,
+      "location": "/codes/bee-swarm-simulator"
+    },
+    {
+      "url": "/bee-swarm-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bee-swarm-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gym-league-codes",
+      "status": 301,
+      "location": "/codes/gym-league"
+    },
+    {
+      "url": "/gym-league-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gym-league?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/ice-tycoon-codes",
+      "status": 301,
+      "location": "/codes/ice-tycoon"
+    },
+    {
+      "url": "/ice-tycoon-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/ice-tycoon?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-immortals-codes",
+      "status": 301,
+      "location": "/codes/anime-immortals"
+    },
+    {
+      "url": "/anime-immortals-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-immortals?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/plants-evolution-codes",
+      "status": 301,
+      "location": "/codes/plants-evolution"
+    },
+    {
+      "url": "/plants-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/plants-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/tennis-zero-codes",
+      "status": 301,
+      "location": "/codes/tennis-zero"
+    },
+    {
+      "url": "/tennis-zero-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/tennis-zero?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fix-it-up-codes",
+      "status": 301,
+      "location": "/codes/fix-it-up"
+    },
+    {
+      "url": "/fix-it-up-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fix-it-up?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/one-fruit-codes",
+      "status": 301,
+      "location": "/codes/one-fruit"
+    },
+    {
+      "url": "/one-fruit-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/one-fruit?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/elemental-warzone-codes",
+      "status": 301,
+      "location": "/codes/elemental-warzone"
+    },
+    {
+      "url": "/elemental-warzone-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/elemental-warzone?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/demon-soul-simulator-codes",
+      "status": 301,
+      "location": "/codes/demon-soul-simulator"
+    },
+    {
+      "url": "/demon-soul-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/demon-soul-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-simulator"
+    },
+    {
+      "url": "/anime-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-card-master-codes",
+      "status": 301,
+      "location": "/codes/anime-card-master"
+    },
+    {
+      "url": "/anime-card-master-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-card-master?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dig-it-codes",
+      "status": 301,
+      "location": "/codes/dig-it"
+    },
+    {
+      "url": "/dig-it-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dig-it?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dodgeball-x-codes",
+      "status": 301,
+      "location": "/codes/dodgeball-x"
+    },
+    {
+      "url": "/dodgeball-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dodgeball-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/creatures-of-sonaria-codes",
+      "status": 301,
+      "location": "/codes/creatures-of-sonaria"
+    },
+    {
+      "url": "/creatures-of-sonaria-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/creatures-of-sonaria?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/king-legacy-codes",
+      "status": 301,
+      "location": "/codes/king-legacy"
+    },
+    {
+      "url": "/king-legacy-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/king-legacy?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/spts-return-of-the-reaper-codes",
+      "status": 301,
+      "location": "/codes/spts-return-of-the-reaper"
+    },
+    {
+      "url": "/spts-return-of-the-reaper-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/spts-return-of-the-reaper?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/squid-evolution-codes",
+      "status": 301,
+      "location": "/codes/squid-evolution"
+    },
+    {
+      "url": "/squid-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/squid-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/mighty-omega-codes",
+      "status": 301,
+      "location": "/codes/mighty-omega"
+    },
+    {
+      "url": "/mighty-omega-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/mighty-omega?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blue-lock-rivals-codes",
+      "status": 301,
+      "location": "/codes/blue-lock-rivals"
+    },
+    {
+      "url": "/blue-lock-rivals-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blue-lock-rivals?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/desert-detectors-codes",
+      "status": 301,
+      "location": "/codes/desert-detectors"
+    },
+    {
+      "url": "/desert-detectors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/desert-detectors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/motorush-codes",
+      "status": 301,
+      "location": "/codes/motorush"
+    },
+    {
+      "url": "/motorush-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/motorush?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/mermaid-isle-codes",
+      "status": 301,
+      "location": "/codes/mermaid-isle"
+    },
+    {
+      "url": "/mermaid-isle-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/mermaid-isle?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/greenville-codes",
+      "status": 301,
+      "location": "/codes/greenville"
+    },
+    {
+      "url": "/greenville-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/greenville?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bee-masters-simulator-codes",
+      "status": 301,
+      "location": "/codes/bee-masters-simulator"
+    },
+    {
+      "url": "/bee-masters-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bee-masters-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gym-star-simulator-codes",
+      "status": 301,
+      "location": "/codes/gym-star-simulator"
+    },
+    {
+      "url": "/gym-star-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gym-star-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rng-odyssey-codes",
+      "status": 301,
+      "location": "/codes/rng-odyssey"
+    },
+    {
+      "url": "/rng-odyssey-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rng-odyssey?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/level-below-codes",
+      "status": 301,
+      "location": "/codes/level-below"
+    },
+    {
+      "url": "/level-below-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/level-below?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/build-defense-codes",
+      "status": 301,
+      "location": "/codes/build-defense"
+    },
+    {
+      "url": "/build-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/build-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/escape-room-codes",
+      "status": 301,
+      "location": "/codes/escape-room"
+    },
+    {
+      "url": "/escape-room-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/escape-room?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/energy-drink-simulator-codes",
+      "status": 301,
+      "location": "/codes/energy-drink-simulator"
+    },
+    {
+      "url": "/energy-drink-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/energy-drink-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/boxing-beta-codes",
+      "status": 301,
+      "location": "/codes/boxing-beta"
+    },
+    {
+      "url": "/boxing-beta-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/boxing-beta?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/project-xl-codes",
+      "status": 301,
+      "location": "/codes/project-xl"
+    },
+    {
+      "url": "/project-xl-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/project-xl?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/99-nights-in-the-forest-codes",
+      "status": 301,
+      "location": "/codes/99-nights-in-the-forest"
+    },
+    {
+      "url": "/99-nights-in-the-forest-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/99-nights-in-the-forest?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/epic-minigames-codes",
+      "status": 301,
+      "location": "/codes/epic-minigames"
+    },
+    {
+      "url": "/epic-minigames-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/epic-minigames?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gubby-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/gubby-tower-defense"
+    },
+    {
+      "url": "/gubby-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gubby-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/ice-fishing-simulator-codes",
+      "status": 301,
+      "location": "/codes/ice-fishing-simulator"
+    },
+    {
+      "url": "/ice-fishing-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/ice-fishing-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-hunters-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-hunters-simulator"
+    },
+    {
+      "url": "/anime-hunters-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-hunters-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/shindo-life-codes",
+      "status": 301,
+      "location": "/codes/shindo-life"
+    },
+    {
+      "url": "/shindo-life-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/shindo-life?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/meme-sea-codes",
+      "status": 301,
+      "location": "/codes/meme-sea"
+    },
+    {
+      "url": "/meme-sea-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/meme-sea?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-fruit-world-codes",
+      "status": 301,
+      "location": "/codes/anime-fruit-world"
+    },
+    {
+      "url": "/anime-fruit-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-fruit-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gather-speed-codes",
+      "status": 301,
+      "location": "/codes/gather-speed"
+    },
+    {
+      "url": "/gather-speed-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gather-speed?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/make-your-pets-famous-codes",
+      "status": 301,
+      "location": "/codes/make-your-pets-famous"
+    },
+    {
+      "url": "/make-your-pets-famous-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/make-your-pets-famous?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pop-starz-codes",
+      "status": 301,
+      "location": "/codes/pop-starz"
+    },
+    {
+      "url": "/pop-starz-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pop-starz?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/race-a-brainrot-codes",
+      "status": 301,
+      "location": "/codes/race-a-brainrot"
+    },
+    {
+      "url": "/race-a-brainrot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/race-a-brainrot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-rng-td-codes",
+      "status": 301,
+      "location": "/codes/anime-rng-td"
+    },
+    {
+      "url": "/anime-rng-td-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rng-td?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/poop-a-brainrot-codes",
+      "status": 301,
+      "location": "/codes/poop-a-brainrot"
+    },
+    {
+      "url": "/poop-a-brainrot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/poop-a-brainrot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/multicrew-tank-combat-codes",
+      "status": 301,
+      "location": "/codes/multicrew-tank-combat"
+    },
+    {
+      "url": "/multicrew-tank-combat-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/multicrew-tank-combat?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bike-league-codes",
+      "status": 301,
+      "location": "/codes/bike-league"
+    },
+    {
+      "url": "/bike-league-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bike-league?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/ijul-piece-2-codes",
+      "status": 301,
+      "location": "/codes/ijul-piece-2"
+    },
+    {
+      "url": "/ijul-piece-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/ijul-piece-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/aura-battles-codes",
+      "status": 301,
+      "location": "/codes/aura-battles"
+    },
+    {
+      "url": "/aura-battles-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/aura-battles?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/effortless-tower-codes",
+      "status": 301,
+      "location": "/codes/effortless-tower"
+    },
+    {
+      "url": "/effortless-tower-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/effortless-tower?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rh2-the-journey-codes",
+      "status": 301,
+      "location": "/codes/rh2-the-journey"
+    },
+    {
+      "url": "/rh2-the-journey-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rh2-the-journey?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/kurokus-basket-showdown-codes",
+      "status": 301,
+      "location": "/codes/kurokus-basket-showdown"
+    },
+    {
+      "url": "/kurokus-basket-showdown-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/kurokus-basket-showdown?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dungeons-incremental-2-codes",
+      "status": 301,
+      "location": "/codes/dungeons-incremental-2"
+    },
+    {
+      "url": "/dungeons-incremental-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dungeons-incremental-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/drive-world-codes",
+      "status": 301,
+      "location": "/codes/drive-world"
+    },
+    {
+      "url": "/drive-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/drive-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blox-fruits-codes",
+      "status": 301,
+      "location": "/codes/blox-fruits"
+    },
+    {
+      "url": "/blox-fruits-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blox-fruits?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/delay-latch-codes",
+      "status": 301,
+      "location": "/codes/delay-latch"
+    },
+    {
+      "url": "/delay-latch-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/delay-latch?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fruit-battlegrounds-codes",
+      "status": 301,
+      "location": "/codes/fruit-battlegrounds"
+    },
+    {
+      "url": "/fruit-battlegrounds-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fruit-battlegrounds?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/legends-of-speed-codes",
+      "status": 301,
+      "location": "/codes/legends-of-speed"
+    },
+    {
+      "url": "/legends-of-speed-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/legends-of-speed?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/da-hood-codes",
+      "status": 301,
+      "location": "/codes/da-hood"
+    },
+    {
+      "url": "/da-hood-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/da-hood?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/magnet-simulator-2-codes",
+      "status": 301,
+      "location": "/codes/magnet-simulator-2"
+    },
+    {
+      "url": "/magnet-simulator-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/magnet-simulator-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-last-stand-codes",
+      "status": 301,
+      "location": "/codes/anime-last-stand"
+    },
+    {
+      "url": "/anime-last-stand-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-last-stand?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-roulette-codes",
+      "status": 301,
+      "location": "/codes/anime-roulette"
+    },
+    {
+      "url": "/anime-roulette-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-roulette?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-rails-codes",
+      "status": 301,
+      "location": "/codes/dead-rails"
+    },
+    {
+      "url": "/dead-rails-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-rails?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-world-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/anime-world-tower-defense"
+    },
+    {
+      "url": "/anime-world-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-world-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/frigid-dusk-codes",
+      "status": 301,
+      "location": "/codes/frigid-dusk"
+    },
+    {
+      "url": "/frigid-dusk-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/frigid-dusk?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/criminality-codes",
+      "status": 301,
+      "location": "/codes/criminality"
+    },
+    {
+      "url": "/criminality-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/criminality?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/car-driving-indonesia-codes",
+      "status": 301,
+      "location": "/codes/car-driving-indonesia"
+    },
+    {
+      "url": "/car-driving-indonesia-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/car-driving-indonesia?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-crossover-defense-codes",
+      "status": 301,
+      "location": "/codes/anime-crossover-defense"
+    },
+    {
+      "url": "/anime-crossover-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-crossover-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/grow-a-business-codes",
+      "status": 301,
+      "location": "/codes/grow-a-business"
+    },
+    {
+      "url": "/grow-a-business-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/grow-a-business?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/grow-crystals-codes",
+      "status": 301,
+      "location": "/codes/grow-crystals"
+    },
+    {
+      "url": "/grow-crystals-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/grow-crystals?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/superhero-legends-codes",
+      "status": 301,
+      "location": "/codes/superhero-legends"
+    },
+    {
+      "url": "/superhero-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/superhero-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/battle-cat-evolution-codes",
+      "status": 301,
+      "location": "/codes/battle-cat-evolution"
+    },
+    {
+      "url": "/battle-cat-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/battle-cat-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/duel-warriors-codes",
+      "status": 301,
+      "location": "/codes/duel-warriors"
+    },
+    {
+      "url": "/duel-warriors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/duel-warriors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/korrupt-zombies-codes",
+      "status": 301,
+      "location": "/codes/korrupt-zombies"
+    },
+    {
+      "url": "/korrupt-zombies-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/korrupt-zombies?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/arm-wrestle-simulator-codes",
+      "status": 301,
+      "location": "/codes/arm-wrestle-simulator"
+    },
+    {
+      "url": "/arm-wrestle-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/arm-wrestle-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/it-girl-codes",
+      "status": 301,
+      "location": "/codes/it-girl"
+    },
+    {
+      "url": "/it-girl-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/it-girl?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dinosaur-simulator-codes",
+      "status": 301,
+      "location": "/codes/dinosaur-simulator"
+    },
+    {
+      "url": "/dinosaur-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dinosaur-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/reborn-as-swordsman-codes",
+      "status": 301,
+      "location": "/codes/reborn-as-swordsman"
+    },
+    {
+      "url": "/reborn-as-swordsman-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/reborn-as-swordsman?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/clover-retribution-codes",
+      "status": 301,
+      "location": "/codes/clover-retribution"
+    },
+    {
+      "url": "/clover-retribution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/clover-retribution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dance-for-ugc-codes",
+      "status": 301,
+      "location": "/codes/dance-for-ugc"
+    },
+    {
+      "url": "/dance-for-ugc-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dance-for-ugc?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/make-a-boat-codes",
+      "status": 301,
+      "location": "/codes/make-a-boat"
+    },
+    {
+      "url": "/make-a-boat-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/make-a-boat?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/squid-game-the-final-games-codes",
+      "status": 301,
+      "location": "/codes/squid-game-the-final-games"
+    },
+    {
+      "url": "/squid-game-the-final-games-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/squid-game-the-final-games?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/five-nights-td-2-codes",
+      "status": 301,
+      "location": "/codes/five-nights-td-2"
+    },
+    {
+      "url": "/five-nights-td-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/five-nights-td-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-reborn-codes",
+      "status": 301,
+      "location": "/codes/anime-reborn"
+    },
+    {
+      "url": "/anime-reborn-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-reborn?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/loot-fish-codes",
+      "status": 301,
+      "location": "/codes/loot-fish"
+    },
+    {
+      "url": "/loot-fish-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/loot-fish?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/paradox-codes",
+      "status": 301,
+      "location": "/codes/paradox"
+    },
+    {
+      "url": "/paradox-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/paradox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/sell-junk-codes",
+      "status": 301,
+      "location": "/codes/sell-junk"
+    },
+    {
+      "url": "/sell-junk-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/sell-junk?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/a-universal-time-aut-codes",
+      "status": 301,
+      "location": "/codes/a-universal-time-aut"
+    },
+    {
+      "url": "/a-universal-time-aut-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/a-universal-time-aut?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gym-showdown-simulator-codes",
+      "status": 301,
+      "location": "/codes/gym-showdown-simulator"
+    },
+    {
+      "url": "/gym-showdown-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gym-showdown-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-defenders-codes",
+      "status": 301,
+      "location": "/codes/anime-defenders"
+    },
+    {
+      "url": "/anime-defenders-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-defenders?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-ultimate-battlegrounds-codes",
+      "status": 301,
+      "location": "/codes/anime-ultimate-battlegrounds"
+    },
+    {
+      "url": "/anime-ultimate-battlegrounds-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-ultimate-battlegrounds?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/catch-a-bee-codes",
+      "status": 301,
+      "location": "/codes/catch-a-bee"
+    },
+    {
+      "url": "/catch-a-bee-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/catch-a-bee?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rebirth-champions-ultimate-codes",
+      "status": 301,
+      "location": "/codes/rebirth-champions-ultimate"
+    },
+    {
+      "url": "/rebirth-champions-ultimate-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rebirth-champions-ultimate?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/elemental-duels-codes",
+      "status": 301,
+      "location": "/codes/elemental-duels"
+    },
+    {
+      "url": "/elemental-duels-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/elemental-duels?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/cultivation-simulator-codes",
+      "status": 301,
+      "location": "/codes/cultivation-simulator"
+    },
+    {
+      "url": "/cultivation-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/cultivation-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pls-donate-codes",
+      "status": 301,
+      "location": "/codes/pls-donate"
+    },
+    {
+      "url": "/pls-donate-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pls-donate?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-anexus-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-anexus-simulator"
+    },
+    {
+      "url": "/anime-anexus-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-anexus-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-verse-x-codes",
+      "status": 301,
+      "location": "/codes/anime-verse-x"
+    },
+    {
+      "url": "/anime-verse-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-verse-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dragon-blox-codes",
+      "status": 301,
+      "location": "/codes/dragon-blox"
+    },
+    {
+      "url": "/dragon-blox-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dragon-blox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/gubby-rng-codes",
+      "status": 301,
+      "location": "/codes/gubby-rng"
+    },
+    {
+      "url": "/gubby-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/gubby-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/locked-codes",
+      "status": 301,
+      "location": "/codes/locked"
+    },
+    {
+      "url": "/locked-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/locked?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/goal-kick-simulator-codes",
+      "status": 301,
+      "location": "/codes/goal-kick-simulator"
+    },
+    {
+      "url": "/goal-kick-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/goal-kick-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pull-a-sword-codes",
+      "status": 301,
+      "location": "/codes/pull-a-sword"
+    },
+    {
+      "url": "/pull-a-sword-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pull-a-sword?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/weak-legacy-2-codes",
+      "status": 301,
+      "location": "/codes/weak-legacy-2"
+    },
+    {
+      "url": "/weak-legacy-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/weak-legacy-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-sword-master-codes",
+      "status": 301,
+      "location": "/codes/anime-sword-master"
+    },
+    {
+      "url": "/anime-sword-master-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-sword-master?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-crusaders-codes",
+      "status": 301,
+      "location": "/codes/anime-crusaders"
+    },
+    {
+      "url": "/anime-crusaders-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-crusaders?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/southwest-florida-codes",
+      "status": 301,
+      "location": "/codes/southwest-florida"
+    },
+    {
+      "url": "/southwest-florida-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/southwest-florida?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/drop-a-poop-codes",
+      "status": 301,
+      "location": "/codes/drop-a-poop"
+    },
+    {
+      "url": "/drop-a-poop-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/drop-a-poop?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/astral-rng-codes",
+      "status": 301,
+      "location": "/codes/astral-rng"
+    },
+    {
+      "url": "/astral-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/astral-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-realms-codes",
+      "status": 301,
+      "location": "/codes/anime-realms"
+    },
+    {
+      "url": "/anime-realms-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-realms?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/meta-lock-codes",
+      "status": 301,
+      "location": "/codes/meta-lock"
+    },
+    {
+      "url": "/meta-lock-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/meta-lock?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/military-tycoon-codes",
+      "status": 301,
+      "location": "/codes/military-tycoon"
+    },
+    {
+      "url": "/military-tycoon-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/military-tycoon?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-dimensions-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-dimensions-simulator"
+    },
+    {
+      "url": "/anime-dimensions-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-dimensions-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-spells-codes",
+      "status": 301,
+      "location": "/codes/dead-spells"
+    },
+    {
+      "url": "/dead-spells-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-spells?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hollow-era-codes",
+      "status": 301,
+      "location": "/codes/hollow-era"
+    },
+    {
+      "url": "/hollow-era-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hollow-era?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/a-hero-s-destiny-codes",
+      "status": 301,
+      "location": "/codes/a-hero-s-destiny"
+    },
+    {
+      "url": "/a-hero-s-destiny-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/a-hero-s-destiny?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hide-and-sneak-codes",
+      "status": 301,
+      "location": "/codes/hide-and-sneak"
+    },
+    {
+      "url": "/hide-and-sneak-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hide-and-sneak?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hoop-heroes-codes",
+      "status": 301,
+      "location": "/codes/hoop-heroes"
+    },
+    {
+      "url": "/hoop-heroes-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hoop-heroes?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/quest-mutation-dead-tales-codes",
+      "status": 301,
+      "location": "/codes/dead-tales"
+    },
+    {
+      "url": "/quest-mutation-dead-tales-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-tales?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/roblox-is-unbreakable-codes",
+      "status": 301,
+      "location": "/codes/roblox-is-unbreakable"
+    },
+    {
+      "url": "/roblox-is-unbreakable-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/roblox-is-unbreakable?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/brainrot-evolution-codes",
+      "status": 301,
+      "location": "/codes/brainrot-evolution"
+    },
+    {
+      "url": "/brainrot-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/brainrot-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/grow-a-friend-codes",
+      "status": 301,
+      "location": "/codes/grow-a-friend"
+    },
+    {
+      "url": "/grow-a-friend-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/grow-a-friend?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/monkey-ascension-codes",
+      "status": 301,
+      "location": "/codes/monkey-ascension"
+    },
+    {
+      "url": "/monkey-ascension-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/monkey-ascension?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-revolution-x-codes",
+      "status": 301,
+      "location": "/codes/anime-revolution-x"
+    },
+    {
+      "url": "/anime-revolution-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-revolution-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rogueblox-codes",
+      "status": 301,
+      "location": "/codes/rogueblox"
+    },
+    {
+      "url": "/rogueblox-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rogueblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/forge-a-weapon-codes",
+      "status": 301,
+      "location": "/codes/forge-a-weapon"
+    },
+    {
+      "url": "/forge-a-weapon-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/forge-a-weapon?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/piggy-branched-realities-codes",
+      "status": 301,
+      "location": "/codes/piggy-branched-realities"
+    },
+    {
+      "url": "/piggy-branched-realities-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/piggy-branched-realities?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-infinity-codes",
+      "status": 301,
+      "location": "/codes/anime-infinity"
+    },
+    {
+      "url": "/anime-infinity-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-infinity?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/driving-empire-codes",
+      "status": 301,
+      "location": "/codes/driving-empire"
+    },
+    {
+      "url": "/driving-empire-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/driving-empire?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/kayak-racing-codes",
+      "status": 301,
+      "location": "/codes/kayak-racing"
+    },
+    {
+      "url": "/kayak-racing-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/kayak-racing?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blood-of-punch-codes",
+      "status": 301,
+      "location": "/codes/blood-of-punch"
+    },
+    {
+      "url": "/blood-of-punch-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blood-of-punch?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blades-rng-blades-of-chance-codes",
+      "status": 301,
+      "location": "/codes/blades-rng-blades-of-chance"
+    },
+    {
+      "url": "/blades-rng-blades-of-chance-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blades-rng-blades-of-chance?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/my-pet-farm-codes",
+      "status": 301,
+      "location": "/codes/my-pet-farm"
+    },
+    {
+      "url": "/my-pet-farm-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/my-pet-farm?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/build-a-factory-codes",
+      "status": 301,
+      "location": "/codes/build-a-factory"
+    },
+    {
+      "url": "/build-a-factory-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/build-a-factory?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/doodle-world-codes",
+      "status": 301,
+      "location": "/codes/doodle-world"
+    },
+    {
+      "url": "/doodle-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/doodle-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/heroes-battlegrounds-codes",
+      "status": 301,
+      "location": "/codes/heroes-battlegrounds"
+    },
+    {
+      "url": "/heroes-battlegrounds-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/heroes-battlegrounds?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-card-battle-codes",
+      "status": 301,
+      "location": "/codes/anime-card-battle"
+    },
+    {
+      "url": "/anime-card-battle-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-card-battle?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/cali-shootout-codes",
+      "status": 301,
+      "location": "/codes/cali-shootout"
+    },
+    {
+      "url": "/cali-shootout-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/cali-shootout?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/schlap-codes",
+      "status": 301,
+      "location": "/codes/schlap"
+    },
+    {
+      "url": "/schlap-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/schlap?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/race-clicker-codes",
+      "status": 301,
+      "location": "/codes/race-clicker"
+    },
+    {
+      "url": "/race-clicker-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/race-clicker?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/flying-rng-codes",
+      "status": 301,
+      "location": "/codes/flying-rng"
+    },
+    {
+      "url": "/flying-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/flying-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/cake-off-codes",
+      "status": 301,
+      "location": "/codes/cake-off"
+    },
+    {
+      "url": "/cake-off-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/cake-off?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dragon-ball-rage-codes",
+      "status": 301,
+      "location": "/codes/dragon-ball-rage"
+    },
+    {
+      "url": "/dragon-ball-rage-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dragon-ball-rage?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/steal-a-fish-codes",
+      "status": 301,
+      "location": "/codes/steal-a-fish"
+    },
+    {
+      "url": "/steal-a-fish-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/steal-a-fish?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/asylum-life-codes",
+      "status": 301,
+      "location": "/codes/asylum-life"
+    },
+    {
+      "url": "/asylum-life-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/asylum-life?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-rising-codes",
+      "status": 301,
+      "location": "/codes/anime-rising"
+    },
+    {
+      "url": "/anime-rising-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rising?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-mania-codes",
+      "status": 301,
+      "location": "/codes/anime-mania"
+    },
+    {
+      "url": "/anime-mania-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-mania?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/sorcery-codes",
+      "status": 301,
+      "location": "/codes/sorcery"
+    },
+    {
+      "url": "/sorcery-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/sorcery?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hell-to-heaven-climb-codes",
+      "status": 301,
+      "location": "/codes/hell-to-heaven-climb"
+    },
+    {
+      "url": "/hell-to-heaven-climb-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hell-to-heaven-climb?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/goalbound-codes",
+      "status": 301,
+      "location": "/codes/goalbound"
+    },
+    {
+      "url": "/goalbound-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/goalbound?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/catch-critters-codes",
+      "status": 301,
+      "location": "/codes/catch-critters"
+    },
+    {
+      "url": "/catch-critters-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/catch-critters?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/jailbreak-codes",
+      "status": 301,
+      "location": "/codes/jailbreak"
+    },
+    {
+      "url": "/jailbreak-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/jailbreak?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/evade-codes",
+      "status": 301,
+      "location": "/codes/evade"
+    },
+    {
+      "url": "/evade-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/evade?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-boss-raid-codes",
+      "status": 301,
+      "location": "/codes/anime-boss-raid"
+    },
+    {
+      "url": "/anime-boss-raid-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-boss-raid?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-waters-codes",
+      "status": 301,
+      "location": "/codes/dead-waters"
+    },
+    {
+      "url": "/dead-waters-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-waters?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/demon-warriors-codes",
+      "status": 301,
+      "location": "/codes/demon-warriors"
+    },
+    {
+      "url": "/demon-warriors-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/demon-warriors?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dodgeball-legends-codes",
+      "status": 301,
+      "location": "/codes/dodgeball-legends"
+    },
+    {
+      "url": "/dodgeball-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dodgeball-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/adopt-me-codes",
+      "status": 301,
+      "location": "/codes/adopt-me"
+    },
+    {
+      "url": "/adopt-me-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/adopt-me?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/infinity-fighters-codes",
+      "status": 301,
+      "location": "/codes/infinity-fighters"
+    },
+    {
+      "url": "/infinity-fighters-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/infinity-fighters?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/superstar-baseball-codes",
+      "status": 301,
+      "location": "/codes/superstar-baseball"
+    },
+    {
+      "url": "/superstar-baseball-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/superstar-baseball?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/plants-vs-brainrots-codes",
+      "status": 301,
+      "location": "/codes/plants-vs-brainrots"
+    },
+    {
+      "url": "/plants-vs-brainrots-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/plants-vs-brainrots?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bad-business-codes",
+      "status": 301,
+      "location": "/codes/bad-business"
+    },
+    {
+      "url": "/bad-business-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bad-business?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blockspin-codes",
+      "status": 301,
+      "location": "/codes/blockspin"
+    },
+    {
+      "url": "/blockspin-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blockspin?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/force-battlegrounds-codes",
+      "status": 301,
+      "location": "/codes/force-battlegrounds"
+    },
+    {
+      "url": "/force-battlegrounds-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/force-battlegrounds?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/emergency-hamburg-codes",
+      "status": 301,
+      "location": "/codes/emergency-hamburg"
+    },
+    {
+      "url": "/emergency-hamburg-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/emergency-hamburg?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-adventures-codes",
+      "status": 301,
+      "location": "/codes/anime-adventures"
+    },
+    {
+      "url": "/anime-adventures-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-adventures?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/murder-mystery-2-codes",
+      "status": 301,
+      "location": "/codes/murder-mystery-2"
+    },
+    {
+      "url": "/murder-mystery-2-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/murder-mystery-2?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/sisyphus-training-codes",
+      "status": 301,
+      "location": "/codes/sisyphus-training"
+    },
+    {
+      "url": "/sisyphus-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/sisyphus-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/arcade-basketball-codes",
+      "status": 301,
+      "location": "/codes/arcade-basketball"
+    },
+    {
+      "url": "/arcade-basketball-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/arcade-basketball?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/a-one-piece-game-aopg-codes",
+      "status": 301,
+      "location": "/codes/a-one-piece-game-aopg"
+    },
+    {
+      "url": "/a-one-piece-game-aopg-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/a-one-piece-game-aopg?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rng-anime-rarities-codes",
+      "status": 301,
+      "location": "/codes/rng-anime-rarities"
+    },
+    {
+      "url": "/rng-anime-rarities-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rng-anime-rarities?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/rng-war-td-codes",
+      "status": 301,
+      "location": "/codes/rng-war-td"
+    },
+    {
+      "url": "/rng-war-td-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/rng-war-td?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-climb-and-jump-codes",
+      "status": 301,
+      "location": "/codes/anime-climb-and-jump"
+    },
+    {
+      "url": "/anime-climb-and-jump-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-climb-and-jump?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fish-a-brainrot-codes",
+      "status": 301,
+      "location": "/codes/fish-a-brainrot"
+    },
+    {
+      "url": "/fish-a-brainrot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fish-a-brainrot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/brainrot-fighting-codes",
+      "status": 301,
+      "location": "/codes/brainrot-fighting"
+    },
+    {
+      "url": "/brainrot-fighting-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/brainrot-fighting?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bayside-high-school-codes",
+      "status": 301,
+      "location": "/codes/bayside-high-school"
+    },
+    {
+      "url": "/bayside-high-school-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bayside-high-school?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dress-to-impress-codes",
+      "status": 301,
+      "location": "/codes/dress-to-impress"
+    },
+    {
+      "url": "/dress-to-impress-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dress-to-impress?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-chefs-codes",
+      "status": 301,
+      "location": "/codes/anime-chefs"
+    },
+    {
+      "url": "/anime-chefs-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-chefs?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/lockover-codes",
+      "status": 301,
+      "location": "/codes/lockover"
+    },
+    {
+      "url": "/lockover-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/lockover?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pet-simulator-99-codes",
+      "status": 301,
+      "location": "/codes/pet-simulator-99"
+    },
+    {
+      "url": "/pet-simulator-99-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pet-simulator-99?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-arise-evolution-codes",
+      "status": 301,
+      "location": "/codes/anime-arise-evolution"
+    },
+    {
+      "url": "/anime-arise-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-arise-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/slayer-training-codes",
+      "status": 301,
+      "location": "/codes/slayer-training"
+    },
+    {
+      "url": "/slayer-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slayer-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-chaos-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-chaos-simulator"
+    },
+    {
+      "url": "/anime-chaos-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-chaos-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-champions-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-champions-simulator"
+    },
+    {
+      "url": "/anime-champions-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-champions-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/attack-on-titan-evolution-codes",
+      "status": 301,
+      "location": "/codes/attack-on-titan-evolution"
+    },
+    {
+      "url": "/attack-on-titan-evolution-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/attack-on-titan-evolution?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/inhuman-codes",
+      "status": 301,
+      "location": "/codes/inhuman"
+    },
+    {
+      "url": "/inhuman-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/inhuman?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/sonic-speed-simulator-codes",
+      "status": 301,
+      "location": "/codes/sonic-speed-simulator"
+    },
+    {
+      "url": "/sonic-speed-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/sonic-speed-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/asura-codes",
+      "status": 301,
+      "location": "/codes/asura"
+    },
+    {
+      "url": "/asura-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/asura?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/octopus-game-codes",
+      "status": 301,
+      "location": "/codes/octopus-game"
+    },
+    {
+      "url": "/octopus-game-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/octopus-game?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fat-race-codes",
+      "status": 301,
+      "location": "/codes/fat-race"
+    },
+    {
+      "url": "/fat-race-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fat-race?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-eternal-codes",
+      "status": 301,
+      "location": "/codes/anime-eternal"
+    },
+    {
+      "url": "/anime-eternal-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-eternal?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hide-or-die-codes",
+      "status": 301,
+      "location": "/codes/hide-or-die"
+    },
+    {
+      "url": "/hide-or-die-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hide-or-die?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-showdown-codes",
+      "status": 301,
+      "location": "/codes/anime-showdown"
+    },
+    {
+      "url": "/anime-showdown-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-showdown?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/blades-codes",
+      "status": 301,
+      "location": "/codes/blades"
+    },
+    {
+      "url": "/blades-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/blades?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/duck-army-codes",
+      "status": 301,
+      "location": "/codes/duck-army"
+    },
+    {
+      "url": "/duck-army-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/duck-army?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-rush-codes",
+      "status": 301,
+      "location": "/codes/anime-rush"
+    },
+    {
+      "url": "/anime-rush-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rush?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/brainrot-tower-defense-codes",
+      "status": 301,
+      "location": "/codes/brainrot-tower-defense"
+    },
+    {
+      "url": "/brainrot-tower-defense-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/brainrot-tower-defense?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/club-roblox-codes",
+      "status": 301,
+      "location": "/codes/club-roblox"
+    },
+    {
+      "url": "/club-roblox-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/club-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/build-a-tractor-codes",
+      "status": 301,
+      "location": "/codes/build-a-tractor"
+    },
+    {
+      "url": "/build-a-tractor-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/build-a-tractor?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/investor-city-codes",
+      "status": 301,
+      "location": "/codes/investor-city"
+    },
+    {
+      "url": "/investor-city-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/investor-city?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/squid-game-x-codes",
+      "status": 301,
+      "location": "/codes/squid-game-x"
+    },
+    {
+      "url": "/squid-game-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/squid-game-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/clean-a-house-codes",
+      "status": 301,
+      "location": "/codes/clean-a-house"
+    },
+    {
+      "url": "/clean-a-house-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/clean-a-house?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dragon-training-codes",
+      "status": 301,
+      "location": "/codes/dragon-training"
+    },
+    {
+      "url": "/dragon-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dragon-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-strike-simulator-codes",
+      "status": 301,
+      "location": "/codes/anime-strike-simulator"
+    },
+    {
+      "url": "/anime-strike-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-strike-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/car-training-codes",
+      "status": 301,
+      "location": "/codes/car-training"
+    },
+    {
+      "url": "/car-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/car-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/superpower-simulator-chakra-codes",
+      "status": 301,
+      "location": "/codes/superpower-simulator-chakra"
+    },
+    {
+      "url": "/superpower-simulator-chakra-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/superpower-simulator-chakra?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/basketball-legends-codes",
+      "status": 301,
+      "location": "/codes/basketball-legends"
+    },
+    {
+      "url": "/basketball-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/basketball-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-multiverse-codes",
+      "status": 301,
+      "location": "/codes/anime-multiverse"
+    },
+    {
+      "url": "/anime-multiverse-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-multiverse?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/flying-wings-race-simulator-codes",
+      "status": 301,
+      "location": "/codes/flying-wings-race-simulator"
+    },
+    {
+      "url": "/flying-wings-race-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/flying-wings-race-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pet-mine-codes",
+      "status": 301,
+      "location": "/codes/pet-mine"
+    },
+    {
+      "url": "/pet-mine-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pet-mine?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/jujutsu-shenanigans-codes",
+      "status": 301,
+      "location": "/codes/jujutsu-shenanigans"
+    },
+    {
+      "url": "/jujutsu-shenanigans-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/jujutsu-shenanigans?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/pixel-slayer-codes",
+      "status": 301,
+      "location": "/codes/pixel-slayer"
+    },
+    {
+      "url": "/pixel-slayer-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/pixel-slayer?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/strongman-simulator-codes",
+      "status": 301,
+      "location": "/codes/strongman-simulator"
+    },
+    {
+      "url": "/strongman-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/strongman-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/aura-farm-simulator-codes",
+      "status": 301,
+      "location": "/codes/aura-farm-simulator"
+    },
+    {
+      "url": "/aura-farm-simulator-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/aura-farm-simulator?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-defense-rng-codes",
+      "status": 301,
+      "location": "/codes/anime-defense-rng"
+    },
+    {
+      "url": "/anime-defense-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-defense-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/demonfall-codes",
+      "status": 301,
+      "location": "/codes/demonfall"
+    },
+    {
+      "url": "/demonfall-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/demonfall?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/exiled-codes",
+      "status": 301,
+      "location": "/codes/exiled"
+    },
+    {
+      "url": "/exiled-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/exiled?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/midnight-game-show-codes",
+      "status": 301,
+      "location": "/codes/midnight-game-show"
+    },
+    {
+      "url": "/midnight-game-show-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/midnight-game-show?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/highway-legends-codes",
+      "status": 301,
+      "location": "/codes/highway-legends"
+    },
+    {
+      "url": "/highway-legends-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/highway-legends?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/aura-farm-boat-racing-codes",
+      "status": 301,
+      "location": "/codes/aura-farm-boat-racing"
+    },
+    {
+      "url": "/aura-farm-boat-racing-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/aura-farm-boat-racing?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/fish-training-codes",
+      "status": 301,
+      "location": "/codes/fish-training"
+    },
+    {
+      "url": "/fish-training-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/fish-training?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/tsubasa-final-shot-codes",
+      "status": 301,
+      "location": "/codes/tsubasa-final-shot"
+    },
+    {
+      "url": "/tsubasa-final-shot-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/tsubasa-final-shot?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/boku-no-roblox-remastered-codes",
+      "status": 301,
+      "location": "/codes/boku-no-roblox-remastered"
+    },
+    {
+      "url": "/boku-no-roblox-remastered-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/boku-no-roblox-remastered?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/multiverse-defenders-codes",
+      "status": 301,
+      "location": "/codes/multiverse-defenders"
+    },
+    {
+      "url": "/multiverse-defenders-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/multiverse-defenders?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dead-space-event-codes",
+      "status": 301,
+      "location": "/codes/dead-space-event"
+    },
+    {
+      "url": "/dead-space-event-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dead-space-event?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/dandy-s-world-codes",
+      "status": 301,
+      "location": "/codes/dandy-s-world"
+    },
+    {
+      "url": "/dandy-s-world-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/dandy-s-world?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/jujutsu-beatdown-codes",
+      "status": 301,
+      "location": "/codes/jujutsu-beatdown"
+    },
+    {
+      "url": "/jujutsu-beatdown-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/jujutsu-beatdown?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-strikers-codes",
+      "status": 301,
+      "location": "/codes/anime-strikers"
+    },
+    {
+      "url": "/anime-strikers-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-strikers?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/garden-rng-codes",
+      "status": 301,
+      "location": "/codes/garden-rng"
+    },
+    {
+      "url": "/garden-rng-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/garden-rng?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/mine-codes",
+      "status": 301,
+      "location": "/codes/mine"
+    },
+    {
+      "url": "/mine-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/mine?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/hunter-era-codes",
+      "status": 301,
+      "location": "/codes/hunter-era"
+    },
+    {
+      "url": "/hunter-era-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/hunter-era?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/WHEN-DOES-THE-MUSEUM-OPEN-IN-JAILBREAK-ROBLOX",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox"
+    },
+    {
+      "url": "/WHEN-DOES-THE-MUSEUM-OPEN-IN-JAILBREAK-ROBLOX?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%20when-does-the-museum-open-in-jailbreak-roblox%20",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox"
+    },
+    {
+      "url": "/%20when-does-the-museum-open-in-jailbreak-roblox%20?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%77hen-does-the-museum-open-in-jailbreak-roblox",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox"
+    },
+    {
+      "url": "/%77hen-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/articles/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/when-does-the-museum-open-in-jailbreak-roblox/",
+      "status": 308,
+      "location": "/when-does-the-museum-open-in-jailbreak-roblox"
+    },
+    {
+      "url": "/when-does-the-museum-open-in-jailbreak-roblox/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/when-does-the-museum-open-in-jailbreak-roblox?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/SLAP-BATTLES-CODES",
+      "status": 301,
+      "location": "/codes/slap-battles"
+    },
+    {
+      "url": "/SLAP-BATTLES-CODES?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slap-battles?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%20slap-battles-codes%20",
+      "status": 301,
+      "location": "/codes/slap-battles"
+    },
+    {
+      "url": "/%20slap-battles-codes%20?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slap-battles?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%73lap-battles-codes",
+      "status": 301,
+      "location": "/codes/slap-battles"
+    },
+    {
+      "url": "/%73lap-battles-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/slap-battles?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/slap-battles-codes/",
+      "status": 308,
+      "location": "/slap-battles-codes"
+    },
+    {
+      "url": "/slap-battles-codes/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/slap-battles-codes?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/BIKEWORLD-CODES",
+      "status": 301,
+      "location": "/codes/bikeworld"
+    },
+    {
+      "url": "/BIKEWORLD-CODES?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bikeworld?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%20bikeworld-codes%20",
+      "status": 301,
+      "location": "/codes/bikeworld"
+    },
+    {
+      "url": "/%20bikeworld-codes%20?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bikeworld?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%62ikeworld-codes",
+      "status": 301,
+      "location": "/codes/bikeworld"
+    },
+    {
+      "url": "/%62ikeworld-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/bikeworld?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/bikeworld-codes/",
+      "status": 308,
+      "location": "/bikeworld-codes"
+    },
+    {
+      "url": "/bikeworld-codes/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/bikeworld-codes?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/ANIME-RANGERS-X-CODES",
+      "status": 301,
+      "location": "/codes/anime-rangers-x"
+    },
+    {
+      "url": "/ANIME-RANGERS-X-CODES?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rangers-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%20anime-rangers-x-codes%20",
+      "status": 301,
+      "location": "/codes/anime-rangers-x"
+    },
+    {
+      "url": "/%20anime-rangers-x-codes%20?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rangers-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/%61nime-rangers-x-codes",
+      "status": 301,
+      "location": "/codes/anime-rangers-x"
+    },
+    {
+      "url": "/%61nime-rangers-x-codes?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "/codes/anime-rangers-x?ref=old&genre=ignored&x=a+b&x=two"
+    },
+    {
+      "url": "/anime-rangers-x-codes/",
+      "status": 308,
+      "location": "/anime-rangers-x-codes"
+    },
+    {
+      "url": "/anime-rangers-x-codes/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/anime-rangers-x-codes?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/lists/top-trending-roblox-games",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battlegrounds-fighting-games",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Battlegrounds+%26+Fighting"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battlegrounds-fighting-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Battlegrounds+%26+Fighting"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battlegrounds-fighting-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Battlegrounds+%26+Fighting"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battlegrounds-fighting-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Battlegrounds+%26+Fighting"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-rhythm-games",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Music+%26+Rhythm"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-rhythm-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Music+%26+Rhythm"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-rhythm-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Music+%26+Rhythm"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-rhythm-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Music+%26+Rhythm"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-action-games",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Open+World+Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-action-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Open+World+Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-action-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Open+World+Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-action-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action&subgenre=Open+World+Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-adventure-games",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure"
+    },
+    {
+      "url": "/lists/top-trending-roblox-adventure-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure"
+    },
+    {
+      "url": "/lists/top-trending-roblox-adventure-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure"
+    },
+    {
+      "url": "/lists/top-trending-roblox-adventure-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure"
+    },
+    {
+      "url": "/lists/top-trending-roblox-exploration-games",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Exploration"
+    },
+    {
+      "url": "/lists/top-trending-roblox-exploration-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Exploration"
+    },
+    {
+      "url": "/lists/top-trending-roblox-exploration-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Exploration"
+    },
+    {
+      "url": "/lists/top-trending-roblox-exploration-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Exploration"
+    },
+    {
+      "url": "/lists/top-trending-roblox-scavenger-hunt-games",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Scavenger+Hunt"
+    },
+    {
+      "url": "/lists/top-trending-roblox-scavenger-hunt-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Scavenger+Hunt"
+    },
+    {
+      "url": "/lists/top-trending-roblox-scavenger-hunt-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Scavenger+Hunt"
+    },
+    {
+      "url": "/lists/top-trending-roblox-scavenger-hunt-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Scavenger+Hunt"
+    },
+    {
+      "url": "/lists/top-trending-roblox-story-games",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Story"
+    },
+    {
+      "url": "/lists/top-trending-roblox-story-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Story"
+    },
+    {
+      "url": "/lists/top-trending-roblox-story-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Story"
+    },
+    {
+      "url": "/lists/top-trending-roblox-story-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Adventure&subgenre=Story"
+    },
+    {
+      "url": "/lists/top-trending-roblox-education-games",
+      "status": 308,
+      "location": "/stats/games?genre=Education"
+    },
+    {
+      "url": "/lists/top-trending-roblox-education-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Education"
+    },
+    {
+      "url": "/lists/top-trending-roblox-education-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Education"
+    },
+    {
+      "url": "/lists/top-trending-roblox-education-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Education"
+    },
+    {
+      "url": "/lists/top-trending-roblox-entertainment-games",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment"
+    },
+    {
+      "url": "/lists/top-trending-roblox-entertainment-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment"
+    },
+    {
+      "url": "/lists/top-trending-roblox-entertainment-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment"
+    },
+    {
+      "url": "/lists/top-trending-roblox-entertainment-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-audio-games",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Music+%26+Audio"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-audio-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Music+%26+Audio"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-audio-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Music+%26+Audio"
+    },
+    {
+      "url": "/lists/top-trending-roblox-music-audio-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Music+%26+Audio"
+    },
+    {
+      "url": "/lists/top-trending-roblox-showcase-hub-games",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Showcase+%26+Hub"
+    },
+    {
+      "url": "/lists/top-trending-roblox-showcase-hub-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Showcase+%26+Hub"
+    },
+    {
+      "url": "/lists/top-trending-roblox-showcase-hub-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Showcase+%26+Hub"
+    },
+    {
+      "url": "/lists/top-trending-roblox-showcase-hub-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Showcase+%26+Hub"
+    },
+    {
+      "url": "/lists/top-trending-roblox-video-games",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Video"
+    },
+    {
+      "url": "/lists/top-trending-roblox-video-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Video"
+    },
+    {
+      "url": "/lists/top-trending-roblox-video-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Video"
+    },
+    {
+      "url": "/lists/top-trending-roblox-video-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Entertainment&subgenre=Video"
+    },
+    {
+      "url": "/lists/top-trending-roblox-obby-platformer-games",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer"
+    },
+    {
+      "url": "/lists/top-trending-roblox-obby-platformer-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer"
+    },
+    {
+      "url": "/lists/top-trending-roblox-obby-platformer-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer"
+    },
+    {
+      "url": "/lists/top-trending-roblox-obby-platformer-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer"
+    },
+    {
+      "url": "/lists/top-trending-roblox-classic-obby-games",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Classic+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-classic-obby-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Classic+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-classic-obby-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Classic+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-classic-obby-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Classic+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-runner-games",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Runner"
+    },
+    {
+      "url": "/lists/top-trending-roblox-runner-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Runner"
+    },
+    {
+      "url": "/lists/top-trending-roblox-runner-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Runner"
+    },
+    {
+      "url": "/lists/top-trending-roblox-runner-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Runner"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-obby-games",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Tower+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-obby-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Tower+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-obby-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Tower+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-obby-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Obby+%26+Platformer&subgenre=Tower+Obby"
+    },
+    {
+      "url": "/lists/top-trending-roblox-party-casual-games",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual"
+    },
+    {
+      "url": "/lists/top-trending-roblox-party-casual-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual"
+    },
+    {
+      "url": "/lists/top-trending-roblox-party-casual-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual"
+    },
+    {
+      "url": "/lists/top-trending-roblox-party-casual-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual"
+    },
+    {
+      "url": "/lists/top-trending-roblox-childhood-game-games",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Childhood+Game"
+    },
+    {
+      "url": "/lists/top-trending-roblox-childhood-game-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Childhood+Game"
+    },
+    {
+      "url": "/lists/top-trending-roblox-childhood-game-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Childhood+Game"
+    },
+    {
+      "url": "/lists/top-trending-roblox-childhood-game-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Childhood+Game"
+    },
+    {
+      "url": "/lists/top-trending-roblox-coloring-drawing-games",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Coloring+%26+Drawing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-coloring-drawing-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Coloring+%26+Drawing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-coloring-drawing-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Coloring+%26+Drawing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-coloring-drawing-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Coloring+%26+Drawing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-minigame-games",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Minigame"
+    },
+    {
+      "url": "/lists/top-trending-roblox-minigame-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Minigame"
+    },
+    {
+      "url": "/lists/top-trending-roblox-minigame-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Minigame"
+    },
+    {
+      "url": "/lists/top-trending-roblox-minigame-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Minigame"
+    },
+    {
+      "url": "/lists/top-trending-roblox-quiz-games",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Quiz"
+    },
+    {
+      "url": "/lists/top-trending-roblox-quiz-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Quiz"
+    },
+    {
+      "url": "/lists/top-trending-roblox-quiz-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Quiz"
+    },
+    {
+      "url": "/lists/top-trending-roblox-quiz-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Party+%26+Casual&subgenre=Quiz"
+    },
+    {
+      "url": "/lists/top-trending-roblox-puzzle-games",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-puzzle-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-puzzle-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-puzzle-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-room-games",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Escape+Room"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-room-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Escape+Room"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-room-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Escape+Room"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-room-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Escape+Room"
+    },
+    {
+      "url": "/lists/top-trending-roblox-match-merge-games",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Match+%26+Merge"
+    },
+    {
+      "url": "/lists/top-trending-roblox-match-merge-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Match+%26+Merge"
+    },
+    {
+      "url": "/lists/top-trending-roblox-match-merge-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Match+%26+Merge"
+    },
+    {
+      "url": "/lists/top-trending-roblox-match-merge-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Match+%26+Merge"
+    },
+    {
+      "url": "/lists/top-trending-roblox-word-games",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Word"
+    },
+    {
+      "url": "/lists/top-trending-roblox-word-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Word"
+    },
+    {
+      "url": "/lists/top-trending-roblox-word-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Word"
+    },
+    {
+      "url": "/lists/top-trending-roblox-word-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Puzzle&subgenre=Word"
+    },
+    {
+      "url": "/lists/top-trending-roblox-rpg-games",
+      "status": 308,
+      "location": "/stats/games?genre=RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-rpg-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-rpg-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-rpg-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-rpg-games",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Action+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-rpg-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Action+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-rpg-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Action+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-rpg-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Action+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-survival-rpg-games",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Open+World+%26+Survival+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-survival-rpg-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Open+World+%26+Survival+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-survival-rpg-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Open+World+%26+Survival+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-open-world-survival-rpg-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Open+World+%26+Survival+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-turn-based-rpg-games",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Turn-based+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-turn-based-rpg-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Turn-based+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-turn-based-rpg-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Turn-based+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-turn-based-rpg-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=RPG&subgenre=Turn-based+RPG"
+    },
+    {
+      "url": "/lists/top-trending-roblox-roleplay-avatar-sim-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-roleplay-avatar-sim-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-roleplay-avatar-sim-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-roleplay-avatar-sim-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-animal-sim-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Animal+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-animal-sim-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Animal+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-animal-sim-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Animal+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-animal-sim-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Animal+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-dress-up-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Dress+Up"
+    },
+    {
+      "url": "/lists/top-trending-roblox-dress-up-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Dress+Up"
+    },
+    {
+      "url": "/lists/top-trending-roblox-dress-up-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Dress+Up"
+    },
+    {
+      "url": "/lists/top-trending-roblox-dress-up-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Dress+Up"
+    },
+    {
+      "url": "/lists/top-trending-roblox-life-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Life"
+    },
+    {
+      "url": "/lists/top-trending-roblox-life-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Life"
+    },
+    {
+      "url": "/lists/top-trending-roblox-life-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Life"
+    },
+    {
+      "url": "/lists/top-trending-roblox-life-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Life"
+    },
+    {
+      "url": "/lists/top-trending-roblox-morph-roleplay-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Morph+Roleplay"
+    },
+    {
+      "url": "/lists/top-trending-roblox-morph-roleplay-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Morph+Roleplay"
+    },
+    {
+      "url": "/lists/top-trending-roblox-morph-roleplay-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Morph+Roleplay"
+    },
+    {
+      "url": "/lists/top-trending-roblox-morph-roleplay-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Morph+Roleplay"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pet-care-games",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Pet+Care"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pet-care-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Pet+Care"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pet-care-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Pet+Care"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pet-care-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Roleplay+%26+Avatar+Sim&subgenre=Pet+Care"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shooter-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shooter-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shooter-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shooter-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battle-royale-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Battle+Royale"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battle-royale-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Battle+Royale"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battle-royale-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Battle+Royale"
+    },
+    {
+      "url": "/lists/top-trending-roblox-battle-royale-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Battle+Royale"
+    },
+    {
+      "url": "/lists/top-trending-roblox-deathmatch-shooter-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Deathmatch+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-deathmatch-shooter-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Deathmatch+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-deathmatch-shooter-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Deathmatch+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-deathmatch-shooter-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=Deathmatch+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pve-shooter-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=PvE+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pve-shooter-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=PvE+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pve-shooter-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=PvE+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-pve-shooter-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shooter&subgenre=PvE+Shooter"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shopping-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shopping-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shopping-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-shopping-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-avatar-shopping-games",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping&subgenre=Avatar+Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-avatar-shopping-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping&subgenre=Avatar+Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-avatar-shopping-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping&subgenre=Avatar+Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-avatar-shopping-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Shopping&subgenre=Avatar+Shopping"
+    },
+    {
+      "url": "/lists/top-trending-roblox-simulation-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation"
+    },
+    {
+      "url": "/lists/top-trending-roblox-simulation-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation"
+    },
+    {
+      "url": "/lists/top-trending-roblox-simulation-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation"
+    },
+    {
+      "url": "/lists/top-trending-roblox-simulation-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation"
+    },
+    {
+      "url": "/lists/top-trending-roblox-idle-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Idle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-idle-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Idle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-idle-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Idle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-idle-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Idle"
+    },
+    {
+      "url": "/lists/top-trending-roblox-incremental-simulator-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Incremental+Simulator"
+    },
+    {
+      "url": "/lists/top-trending-roblox-incremental-simulator-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Incremental+Simulator"
+    },
+    {
+      "url": "/lists/top-trending-roblox-incremental-simulator-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Incremental+Simulator"
+    },
+    {
+      "url": "/lists/top-trending-roblox-incremental-simulator-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Incremental+Simulator"
+    },
+    {
+      "url": "/lists/top-trending-roblox-physics-sim-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Physics+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-physics-sim-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Physics+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-physics-sim-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Physics+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-physics-sim-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Physics+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sandbox-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Sandbox"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sandbox-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Sandbox"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sandbox-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Sandbox"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sandbox-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Sandbox"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tycoon-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Tycoon"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tycoon-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Tycoon"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tycoon-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Tycoon"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tycoon-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Tycoon"
+    },
+    {
+      "url": "/lists/top-trending-roblox-vehicle-sim-games",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Vehicle+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-vehicle-sim-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Vehicle+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-vehicle-sim-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Vehicle+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-vehicle-sim-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Simulation&subgenre=Vehicle+Sim"
+    },
+    {
+      "url": "/lists/top-trending-roblox-social-games",
+      "status": 308,
+      "location": "/stats/games?genre=Social"
+    },
+    {
+      "url": "/lists/top-trending-roblox-social-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Social"
+    },
+    {
+      "url": "/lists/top-trending-roblox-social-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Social"
+    },
+    {
+      "url": "/lists/top-trending-roblox-social-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Social"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-racing-games",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-racing-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-racing-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-racing-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-racing-games",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-racing-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-racing-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-racing-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Racing"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-games",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Sports"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Sports"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Sports"
+    },
+    {
+      "url": "/lists/top-trending-roblox-sports-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Sports+%26+Racing&subgenre=Sports"
+    },
+    {
+      "url": "/lists/top-trending-roblox-strategy-games",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy"
+    },
+    {
+      "url": "/lists/top-trending-roblox-strategy-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy"
+    },
+    {
+      "url": "/lists/top-trending-roblox-strategy-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy"
+    },
+    {
+      "url": "/lists/top-trending-roblox-strategy-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy"
+    },
+    {
+      "url": "/lists/top-trending-roblox-board-card-games",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Board+%26+Card+Games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-board-card-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Board+%26+Card+Games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-board-card-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Board+%26+Card+Games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-board-card-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Board+%26+Card+Games"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-defense-games",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Tower+Defense"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-defense-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Tower+Defense"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-defense-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Tower+Defense"
+    },
+    {
+      "url": "/lists/top-trending-roblox-tower-defense-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Strategy&subgenre=Tower+Defense"
+    },
+    {
+      "url": "/lists/top-trending-roblox-survival-games",
+      "status": 308,
+      "location": "/stats/games?genre=Survival"
+    },
+    {
+      "url": "/lists/top-trending-roblox-survival-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival"
+    },
+    {
+      "url": "/lists/top-trending-roblox-survival-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Survival"
+    },
+    {
+      "url": "/lists/top-trending-roblox-survival-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival"
+    },
+    {
+      "url": "/lists/top-trending-roblox-1-vs-all-games",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=1+vs+All"
+    },
+    {
+      "url": "/lists/top-trending-roblox-1-vs-all-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=1+vs+All"
+    },
+    {
+      "url": "/lists/top-trending-roblox-1-vs-all-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=1+vs+All"
+    },
+    {
+      "url": "/lists/top-trending-roblox-1-vs-all-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=1+vs+All"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-games",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=Escape"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=Escape"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=Escape"
+    },
+    {
+      "url": "/lists/top-trending-roblox-escape-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Survival&subgenre=Escape"
+    },
+    {
+      "url": "/lists/top-trending-roblox-utility-other-games",
+      "status": 308,
+      "location": "/stats/games?genre=Utility+%26+Other"
+    },
+    {
+      "url": "/lists/top-trending-roblox-utility-other-games?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Utility+%26+Other"
+    },
+    {
+      "url": "/lists/top-trending-roblox-utility-other-games/extra/deep",
+      "status": 308,
+      "location": "/stats/games?genre=Utility+%26+Other"
+    },
+    {
+      "url": "/lists/top-trending-roblox-utility-other-games/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Utility+%26+Other"
+    },
+    {
+      "url": "/lists/unknown-list",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/unknown-list?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/unknown-list/extra/deep",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/unknown-list/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/extra/deep",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/extra/deep?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/lists/TOP-TRENDING-ROBLOX-GAMES",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/TOP-TRENDING-ROBLOX-GAMES?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games"
+    },
+    {
+      "url": "/lists/TOP-TRENDING-ROBLOX-ACTION-GAMES",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/TOP-TRENDING-ROBLOX-ACTION-GAMES?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep/path",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep/path?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/ads.txt",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt"
+    },
+    {
+      "url": "/ads.txt?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/CATALOG/ROBLOX-MUSIC-IDS/GAMES/WORK-AT-A-PIZZA-PLACE",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids"
+    },
+    {
+      "url": "/CATALOG/ROBLOX-MUSIC-IDS/GAMES/WORK-AT-A-PIZZA-PLACE?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/ADS.TXT",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt"
+    },
+    {
+      "url": "/ADS.TXT?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories",
+      "status": 308,
+      "location": "/catalog/free-roblox-items"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/0",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/0?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/0",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/0?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/-2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/-2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/-2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/-2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/nope",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/nope?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/nope",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/nope?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/2abc",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/2abc?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/2abc",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/2abc?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/2"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/+03",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/+03?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/+03",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/+03?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/999999999999999999999",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1e+21"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/999999999999999999999?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1e+21"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/999999999999999999999",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1e+21"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/999999999999999999999?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1e+21"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/1e2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/page/1e2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/1e2",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/hats/page/1e2?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories/hats/page/1"
+    },
+    {
+      "url": "/minecraft/wiki?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki?ref=a+b"
+    },
+    {
+      "url": "/minecraft/wiki?edition=java",
+      "status": 308,
+      "location": "/minecraft/java/wiki"
+    },
+    {
+      "url": "/minecraft/wiki?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/java/wiki"
+    },
+    {
+      "url": "/minecraft/wiki/mobs",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/mobs?ref=a+b"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?edition=java",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?ref=old",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?ref=old"
+    },
+    {
+      "url": "/minecraft/wiki/achievements",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements"
+    },
+    {
+      "url": "/minecraft/wiki/achievements?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements?ref=a+b"
+    },
+    {
+      "url": "/minecraft/wiki/achievements?edition=java",
+      "status": 308,
+      "location": "/minecraft/java/wiki/achievements"
+    },
+    {
+      "url": "/minecraft/wiki/achievements?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements"
+    },
+    {
+      "url": "/minecraft/wiki/achievements?ref=old",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements?ref=old"
+    },
+    {
+      "url": "/minecraft/wiki/achievements/page/2",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements/page/2"
+    },
+    {
+      "url": "/minecraft/wiki/achievements/page/2?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements/page/2?ref=a+b"
+    },
+    {
+      "url": "/minecraft/wiki/achievements/page/2?edition=java",
+      "status": 308,
+      "location": "/minecraft/java/wiki/achievements/page/2"
+    },
+    {
+      "url": "/minecraft/wiki/achievements/page/2?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements/page/2"
+    },
+    {
+      "url": "/minecraft/wiki/achievements/page/2?ref=old",
+      "status": 308,
+      "location": "/minecraft/bedrock/wiki/achievements/page/2?ref=old"
+    },
+    {
+      "url": "/minecraft/java/wiki/mobs?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?ref=a+b"
+    },
+    {
+      "url": "/minecraft/java/wiki/mobs?edition=java",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs"
+    },
+    {
+      "url": "/minecraft/java/wiki/mobs?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs"
+    },
+    {
+      "url": "/minecraft/tools/test?edition=bedrock&ref=a%20b",
+      "status": 308,
+      "location": "/minecraft/tools/test?ref=a+b"
+    },
+    {
+      "url": "/minecraft/tools/test?edition=java",
+      "status": 308,
+      "location": "/minecraft/tools/test"
+    },
+    {
+      "url": "/minecraft/tools/test?edition=invalid",
+      "status": 308,
+      "location": "/minecraft/tools/test"
+    },
+    {
+      "url": "/lists/",
+      "status": 308,
+      "location": "/lists"
+    },
+    {
+      "url": "/lists/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/lists?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/ads.txt/",
+      "status": 308,
+      "location": "/ads.txt"
+    },
+    {
+      "url": "/ads.txt/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/ads.txt?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/categories/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/categories/accessories?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids/games/work-at-a-pizza-place"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/?ref=old&genre=ignored&x=a%20b&x=two",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids/games/work-at-a-pizza-place?ref=old&genre=ignored&x=a%20b&x=two"
+    },
+    {
+      "url": "/ads.txt?x=a+b",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?x=a%20b"
+    },
+    {
+      "url": "/ads.txt?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
+    },
+    {
+      "url": "/ads.txt?empty=&bare&x=",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?empty=&bare=&x="
+    },
+    {
+      "url": "/ads.txt?x=one&y=middle&x=two&y=&x=three",
+      "status": 301,
+      "location": "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt?x=one&x=two&x=three&y=middle&y="
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep?x=a+b",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?x=a%20b"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep?empty=&bare&x=",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?empty=&bare=&x="
+    },
+    {
+      "url": "/catalog/roblox-music-ids/games/work-at-a-pizza-place/deep?x=one&y=middle&x=two&y=&x=three",
+      "status": 308,
+      "location": "/catalog/roblox-music-ids?x=one&x=two&x=three&y=middle&y="
+    },
+    {
+      "url": "/all-fisch-enchantments-guide?x=a+b",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide?x=a+b"
+    },
+    {
+      "url": "/all-fisch-enchantments-guide?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
+    },
+    {
+      "url": "/all-fisch-enchantments-guide?empty=&bare&x=",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide?empty=&bare=&x="
+    },
+    {
+      "url": "/all-fisch-enchantments-guide?x=one&y=middle&x=two&y=&x=three",
+      "status": 301,
+      "location": "/articles/all-fisch-enchantments-guide?x=one&x=two&x=three&y=middle&y="
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games?x=a+b",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games?empty=&bare&x=",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games?x=one&y=middle&x=two&y=&x=three",
+      "status": 308,
+      "location": "/stats/games?genre=Action"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories?x=a+b",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories?empty=&bare&x=",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/accessories?x=one&y=middle&x=two&y=&x=three",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/accessories"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?x=a+b",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?x=a+b"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
+    },
+    {
+      "url": "/minecraft/wiki/mobs?empty=&bare&x=",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?empty=&bare=&x="
+    },
+    {
+      "url": "/minecraft/wiki/mobs?x=one&y=middle&x=two&y=&x=three",
+      "status": 308,
+      "location": "/minecraft/java/wiki/mobs?x=one&x=two&x=three&y=middle&y="
+    },
+    {
+      "url": "/lists/top-trending-roblox-action-games%2Fextra",
+      "status": 308,
+      "location": "/stats"
+    },
+    {
+      "url": "/catalog/free-roblox-items/categories/a%2Fb/c",
+      "status": 308,
+      "location": "/catalog/free-roblox-items/a%2Fb/c"
+    }
+  ]
+}

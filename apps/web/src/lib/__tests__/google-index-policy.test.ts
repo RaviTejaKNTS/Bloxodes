@@ -1,3 +1,4 @@
+vi.mock('@/lib/site-route-snapshot', () => ({readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
 import { readFileSync } from "node:fs";
 import { NextRequest } from "next/server";
 import { describe, expect, it, vi } from "vitest";
@@ -113,34 +114,34 @@ describe("Google index policy", () => {
     "/sitemap.xml", "/sitemaps/stats.xml", "/feed.xml", "/feed.rss",
     "/robots.txt", "/ads.txt", "/images/cover", "/media/cover",
     "/articles/unlisted/cover.webp", "/favicon.ico", "/site.webmanifest", "/fonts/site.woff2"
-  ])("leaves the non-HTML route %s alone", (path) => {
+  ])("leaves the non-HTML route %s alone", async (path) => {
     expect(isGooglePolicyHtmlPath(path)).toBe(false);
     expect(googleIndexHeader(path)).toBeNull();
-    expect(proxy(new NextRequest(`https://bloxodes.com${path}`)).headers.get("x-robots-tag")).toBeNull();
+    expect((await proxy(new NextRequest(`https://bloxodes.com${path}`))).headers.get("x-robots-tag")).toBeNull();
   });
 
-  it("returns the same scoped header for Google, Bing and visitors", () => {
+  it("returns the same scoped header for Google, Bing and visitors", async () => {
     for (const userAgent of ["Googlebot", "bingbot", "Mozilla/5.0"]) {
-      const response = proxy(new NextRequest("https://bloxodes.com/future-route", {
+      const response = (await proxy(new NextRequest("https://bloxodes.com/future-route", {
         headers: { "user-agent": userAgent }
-      }));
+      })));
       expect(response.headers.get("x-robots-tag")).toBe("googlebot: noindex, follow");
     }
     for (const path of [
       "/codes/doors", "/articles/page/2", "/catalog/roblox-decal-ids/page/2",
       "/wiki/rivals/weapons/page/2", "/quizzes/rivals", "/checklists/rivals"
     ]) {
-      expect(proxy(new NextRequest(`https://bloxodes.com${path}`)).headers.get("x-robots-tag")).toBeNull();
-      expect(proxy(new NextRequest(`https://bloxodes.com${path}?page=2`)).headers.get("x-robots-tag")).toBe(GOOGLE_NOINDEX_HEADER);
+      expect((await proxy(new NextRequest(`https://bloxodes.com${path}`))).headers.get("x-robots-tag")).toBeNull();
+      expect((await proxy(new NextRequest(`https://bloxodes.com${path}?page=2`))).headers.get("x-robots-tag")).toBe(GOOGLE_NOINDEX_HEADER);
     }
   });
 
-  it("keeps the all-engine robots header on private routes for every crawler", () => {
+  it("keeps the all-engine robots header on private routes for every crawler", async () => {
     for (const path of ["/login", "/account", "/auth/callback", "/admin/tools"]) {
       for (const userAgent of ["Googlebot", "bingbot", "Mozilla/5.0"]) {
-        const response = proxy(new NextRequest(`https://bloxodes.com${path}`, {
+        const response = (await proxy(new NextRequest(`https://bloxodes.com${path}`, {
           headers: { "user-agent": userAgent }
-        }));
+        })));
         expect(response.headers.get("x-robots-tag")).toMatch(/^noindex, nofollow/);
       }
     }

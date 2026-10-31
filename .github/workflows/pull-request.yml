@@ -149,8 +149,11 @@ jobs:
       - name: Verify cold catalog pagination, filters and failure behavior
         if: needs.scope.outputs.web == 'true'
         run: node scripts/ci/catalog-route-regression.mjs
+      - name: Verify the first request on fresh servers redirects
+        if: needs.scope.outputs.web == 'true'
+        run: node scripts/routes/cold-start-redirects.mjs
       - if: needs.scope.outputs.web == 'true'
-        run: npx playwright test apps/web/e2e/release-smoke.spec.ts
+        run: npx playwright test apps/web/e2e/release-smoke.spec.ts apps/web/e2e/site-route-parity.spec.ts
       - uses: actions/upload-artifact@v4
         if: always() && needs.scope.outputs.web == 'true'
         with:

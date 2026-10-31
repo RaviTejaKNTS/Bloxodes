@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import legacySlugs from "@/data/slug_oldslugs.json";
+import { registryRequestRedirect } from "@/lib/site-route-resolver";
+import { readRedirectSnapshot } from "@/lib/site-route-snapshot";
+import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
 import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
@@ -24,36 +26,6 @@ function resolveCanonicalHost() {
 }
 
 const CANONICAL_HOST = resolveCanonicalHost();
-
-const ARTICLE_REDIRECT_SLUGS = new Set([
-  "when-does-the-museum-open-in-jailbreak-roblox",
-  "how-to-level-up-fast-in-jailbreak-criminal-vs-cop",
-  "how-to-get-a-mansion-invite-in-jailbreak-roblox",
-  "steal-a-brainrot-dealer-update-guide",
-  "why-roblox-s-simple-graphics-still-beat-every-realistic-game",
-  "where-to-find-criminal-base-on-roblox-jailbreak",
-  "how-to-get-robux-free-and-paid",
-  "best-simple-roblox-games-for-beginners",
-  "how-to-get-spooky-chest-in-grow-a-garden",
-  "roblox-halloween-spotlight-event-2025",
-  "create-and-publish-roblox-game",
-  "all-fisch-enchantments-guide"
-]);
-
-type LegacySlugEntry = {
-  slug: string;
-  old_slugs: string[];
-};
-
-const LEGACY_SLUG_MAP = new Map<string, string>(
-  (legacySlugs as LegacySlugEntry[]).flatMap(({ slug, old_slugs }) => {
-    const canonical = slug.trim().toLowerCase();
-    return old_slugs
-      .map((oldSlug) => oldSlug?.trim().toLowerCase())
-      .filter((oldSlug): oldSlug is string => Boolean(oldSlug) && oldSlug !== canonical)
-      .map((oldSlug) => [oldSlug, canonical]);
-  })
-);
 
 function applySecurityHeaders(res: NextResponse, pathname: string, hostname: string) {
   for (const { key, value } of buildSecurityHeaders(pathname, undefined, {
@@ -88,40 +60,6 @@ function isDevelopmentTailscaleHostname(hostname: string) {
   return octets.length === 4 && octets[0] === 100 && octets[1] >= 64 && octets[1] <= 127 && octets.every((octet) => Number.isInteger(octet) && octet >= 0 && octet <= 255);
 }
 
-function normalizeSlugSegment(value: string) {
-  let decoded = value;
-  try {
-    decoded = decodeURIComponent(value);
-  } catch {
-    decoded = value;
-  }
-  decoded = decoded.trim().toLowerCase();
-  return decoded;
-}
-
-function resolveLegacyRedirectPath(pathname: string): string | null {
-  const normalizedPath = pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
-  // Never canonicalize legacy slugs inside the `/codes/*` namespace.
-  // We only support legacy root slugs here.
-  if (/^\/codes(?:\/|$)/i.test(normalizedPath)) {
-    return null;
-  }
-
-  const rootMatch = normalizedPath.match(/^\/([^/]+)$/);
-  if (rootMatch) {
-    const slug = normalizeSlugSegment(rootMatch[1]);
-    if (ARTICLE_REDIRECT_SLUGS.has(slug)) {
-      return `/articles/${slug}`;
-    }
-    const canonical = LEGACY_SLUG_MAP.get(slug);
-    if (canonical) {
-      return `/codes/${canonical}`;
-    }
-  }
-
-  return null;
-}
-
 function getRequestHostname(req: NextRequest) {
   const host =
     req.headers.get("x-forwarded-host") ||
@@ -148,12 +86,39 @@ function shouldRedirectToCanonicalHost(hostname: string) {
   return true;
 }
 
-export function proxy(req: NextRequest) {
+function registryRedirectResponse(registry: NonNullable<ReturnType<typeof registryRequestRedirect>>, url: NextRequest['nextUrl'], hostname: string) {
+  const target = new URL(registry.target, url);
+  if (registry.query) {
+    if (registry.origin === 'next.config') {
+      // Next config redirects group duplicate keys and serialize with Node's
+      // querystring encoding (spaces are %20, not URLSearchParams' +).
+      const incoming = new URLSearchParams(registry.query);
+      const encode = (value: string) => encodeURIComponent(value);
+      const pairs: string[] = [];
+      for (const key of new Set(incoming.keys())) {
+        if (!target.searchParams.has(key)) for (const value of incoming.getAll(key)) pairs.push(`${encode(key)}=${encode(value)}`);
+      }
+      target.search = [target.search.slice(1), ...pairs].filter(Boolean).join('&');
+    } else if (!target.search) target.search = registry.query;
+  }
+  // Next 16's middleware adapter requires an absolute Location.
+  const response = redirectWithStatus(target, registry.code);
+  return applySecurityHeaders(response, target.pathname, hostname);
+}
+
+export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   const requiresConsent = resolveRequiresConsent(req.headers, (req as any).geo?.country);
   const url = req.nextUrl;
   const hostname = getRequestHostname(req);
   const hostRedirectNeeded = shouldRedirectToCanonicalHost(hostname);
-  const legacyPath = resolveLegacyRedirectPath(url.pathname);
+  const snapshot = await readRedirectSnapshot(event ? work => event.waitUntil(work) : undefined);
+  // Only root aliases participate in the old combined host/path correction.
+  let registry = (/^\/[^/]+$/.test(url.pathname.replace(/\/+$/, '')) || url.pathname.toLowerCase().startsWith('/catalog/'))
+    ? registryRequestRedirect(snapshot, url.pathname, url.search) : null;
+  // These rules previously ran in Next's config redirect stage, before host correction.
+  if (registry?.origin === 'next.config') return registryRedirectResponse(registry, url, hostname);
+  // Root aliases previously combined the path and host correction in one 301.
+  const legacyPath = registry?.rootAlias ? registry.target : null;
   const pathRedirectNeeded = Boolean(legacyPath && legacyPath !== url.pathname);
 
   if (hostRedirectNeeded || pathRedirectNeeded) {
@@ -165,12 +130,17 @@ export function proxy(req: NextRequest) {
     if (legacyPath) {
       redirectUrl.pathname = legacyPath;
     }
-    return applySecurityHeaders(redirectWithStatus(redirectUrl, 301), redirectUrl.pathname, hostname);
+    return applySecurityHeaders(redirectWithStatus(redirectUrl, hostRedirectNeeded ? 301 : registry!.code), redirectUrl.pathname, hostname);
   }
 
   const editionPath = minecraftLegacyRedirect(url.pathname, url.search);
   if (editionPath) {
     return applySecurityHeaders(redirectWithStatus(new URL(editionPath, url), 308), url.pathname, hostname);
+  }
+
+  registry ??= registryRequestRedirect(snapshot, url.pathname, url.search);
+  if (registry) {
+    return registryRedirectResponse(registry, url, hostname);
   }
 
   // Pass a header downstream for routes that need request-time consent context.

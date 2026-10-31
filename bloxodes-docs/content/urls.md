@@ -47,28 +47,27 @@ Every new page follows these:
 
 ## Redirects
 
-Redirects live in six places today:
+All redirects come from the [route table](#route-table). `apps/web/src/proxy.ts`, called by `apps/web/middleware.ts`, matches each request against an in-memory copy of it (`apps/web/src/lib/site-route-snapshot.ts`, matching rules in `site-route-resolver.ts`). There's no database read per request.
 
-| Where | What it redirects |
-| --- | --- |
-| `apps/web/next.config.js` | `/catalog/roblox-music-ids/games/work-at-a-pizza-place/*` and `/ads.txt` |
-| `ARTICLE_REDIRECT_SLUGS` in `apps/web/src/proxy.ts` | 12 root-level article slugs to `/articles/<slug>` |
-| `apps/web/src/data/slug_oldslugs.json`, read by `src/proxy.ts` | Old root-level codes slugs to `/codes/<slug>` |
-| `minecraftLegacyRedirect` in `apps/web/src/lib/minecraft-paths.ts` | `/minecraft/wiki/*` and `?edition=` links to an edition URL |
-| `(site)/lists/[[...slug]]/page.tsx` | Retired trending lists to filtered stats pages |
-| `(site)/catalog/free-roblox-items/categories/` | Old category URLs to `/catalog/free-roblox-items/<category>` |
+- Only `old` rows redirect. Each uses its row's status code (301 or 308) and an absolute `Location`; Next.js 16.2 throws on a relative one from middleware.
+- Root article and codes aliases decode, trim and lowercase the slug and keep the incoming query. The former `next.config.js` rules (pizza-place and `/ads.txt`) keep the incoming query in Next's serialization and run before the canonical-host redirect. Retired lists and free-items categories drop the incoming query and use their own.
+- Paths are split into segments before decoding, so an encoded `/` never creates a new segment.
+- `minecraftLegacyRedirect` (`apps/web/src/lib/minecraft-paths.ts`) still runs ahead of the table. It handles `?edition=` links and the Minecraft conflicts below.
+- A codes page rename redirects its old `/codes/<slug>` once each server refreshes its copy (up to 5 minutes).
+- `scripts/routes/fixtures/` holds a baseline of 1,138 responses captured from production before the switch. PR checks replay it against the new middleware, including the first request to a fresh server.
 
 Some pages also redirect inside their own route, for example `/page/1` to the list's first page. Those stay with the page.
 
 ## Route table
 
-`public.site_routes` maps every page URL to the page that owns it. The web app doesn't read it yet; the six sources above still serve redirects.
+`public.site_routes` maps every page URL to the page that owns it. Redirects are served from it (above); pages still render through their own route readers.
 
 - **Live rows:** every page in the Roblox page tables, `puzzle_pages`, the eight `game_*` page tables, and a `hub` row for each namespace root in `games`, drafts included. `source` and `page_type` name the owning table; `page_id` is its row ID. A page has one live URL.
 - **Old rows:** a redirect. With a `page_id`, it follows that page's current live URL, so a page that moves twice never builds a redirect chain. Without one, it uses `target_url`.
 - **Gone rows:** a deleted page's last URL.
 - **Prefix rows** match a path and everything below it. Exact beats prefix, and the longest prefix wins. `tail_mode` says whether the rest of the path is appended or dropped; `match_self = false` leaves the bare path alone (used for `/minecraft/wiki`).
-- The redirects from all six sources are imported, plus `/codes/<old-slug>` rows from `code_pages.old_slugs`. Minecraft `?edition=` handling can't be a row and stays in `minecraftLegacyRedirect`.
+- Imported redirects: the former `next.config.js` rules, 12 root article slugs, 360 old root codes slugs, retired lists, free-items category URLs, Minecraft paths, and `/codes/<old-slug>` rows from `code_pages.old_slugs`. Minecraft `?edition=` handling can't be a row and stays in `minecraftLegacyRedirect`.
+- Exact `live` and `gone` rows block any broader prefix, so a page under a prefix rule never redirects.
 - Triggers keep the table current. They run only when a URL column changes (`slug`, `code`, `canonical_path` and the like). A rename keeps the old URL as an old row; a delete marks it gone. A new page can't take another page's live URL; taking over an old or gone URL is logged in `site_route_conflicts`.
 - Retired catalog pages get no live row, so their redirect wins. When a legacy `roblox-free-items` code and a canonical `free-roblox-items` code map to one URL, the canonical page owns it, the same as the reader.
 - `resolve_site_route(path)` returns the matching row and its final target. `site_route_redirects` lists every redirect row.
