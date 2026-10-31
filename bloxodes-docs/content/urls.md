@@ -76,4 +76,5 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 
 ## Known issues
 
+- The Minecraft root wiki and its `achievements` collection still store the legacy paths `/minecraft/wiki` and `/minecraft/wiki/achievements` in `canonical_path`. So `site_routes` lists them as live, and the two Minecraft redirect rows lose to them (logged in `site_route_conflicts`). `minecraftLegacyRedirect` still serves those redirects, so it must keep running ahead of any route table lookup until Minecraft moves.
 - Other games use three route systems for the same page types, and their URLs put the namespace first, unlike Roblox. The owner has approved a move to page-type URLs (`/wiki/<game>`, `/maps/<slug>`, `/games/<franchise>` for franchise hubs) backed by one route table that also holds every redirect. Until a game moves, publish it under its current routes and don't add route code for a single namespace.

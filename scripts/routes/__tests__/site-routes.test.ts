@@ -8,9 +8,10 @@ import { minecraftLegacyRedirect } from "../../../apps/web/src/lib/minecraft-pat
 // Executes the actual migration and row triggers in GitHub's disposable Postgres.
 // Never connects to managed development or production. No local execution.
 test("site route backfill, selective update locks, hub restoration, ownership and permissions", {
-  skip: process.env.CI !== "true" || !process.env.CI_TRANSACTION_DATABASE_URL
+  skip: process.env.CI !== "true"
 }, async () => {
-  const url = process.env.CI_TRANSACTION_DATABASE_URL!;
+  const url = process.env.CI_TRANSACTION_DATABASE_URL;
+  assert.ok(url, "CI_TRANSACTION_DATABASE_URL must be set in CI; refusing to skip the route migration test");
   assert.ok(["localhost", "127.0.0.1"].includes(new URL(url).hostname));
   const migration = readFileSync(new URL("../../../supabase/migrations/20261031194915_site_routes_registry.sql", import.meta.url), "utf8")
     .replace(/^begin;\s*/i, "").replace(/commit;\s*$/i, "");
