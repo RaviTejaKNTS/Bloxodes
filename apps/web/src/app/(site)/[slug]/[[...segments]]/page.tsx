@@ -57,6 +57,9 @@ async function context(params: Props["params"]) {
       case "hub": if (segments.length || route.page_id !== root.id || route.game_id !== root.id) notFound(); break;
       default: notFound();
     }
+    // By-path readers only matched a page at its own canonical path; keep that guarantee for ID reads.
+    const loaded: { canonical_path?: string | null } | null = wiki ?? collection ?? codes ?? tool ?? map ?? quiz ?? catalog ?? checklist;
+    if (loaded?.canonical_path && loaded.canonical_path !== basePath) wiki = collection = codes = tool = map = quiz = catalog = checklist = null;
   }
   if (match && !collection) notFound();
   const rootWiki = segments.length ? null : await getGameWikiByPath(slug, `/${slug}/wiki`);
