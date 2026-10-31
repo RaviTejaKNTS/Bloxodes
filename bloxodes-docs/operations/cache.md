@@ -1,6 +1,6 @@
 # Cache
 
-Last verified: 2026-10-19
+Last verified: 2026-11-01
 
 How a database change becomes a fresh public page.
 
@@ -30,6 +30,12 @@ Revalidation and warming are separate on purpose, so a big stats purge doesn't w
 The Edge Function forwards event types it doesn't know, so new content types only need mapping in the web app.
 
 Stats chart APIs are the one origin exception: the platform player and visit-share charts keep each result in the web process for 5 minutes and share one query between concurrent requests (`apps/web/src/lib/stats-chart-cache.ts`). See [stats](../content/stats.md). Don't add `unstable_cache` for other public reads.
+
+Redirects are the other in-process cache (`apps/web/src/lib/site-route-snapshot.ts`). Each server process holds a copy of the `site_route_redirects` rows plus the live and gone paths under a prefix rule:
+
+- The first request in a fresh process waits for one shared load, at most 2 seconds. If it fails or times out, that request continues without redirects, and the next requests retry after 2, 4, 8, 16, then every 30 seconds.
+- Once loaded, requests use the copy and a background refresh runs every 5 minutes (15-second limit). A failed refresh keeps the last copy.
+- `/api/revalidate` doesn't clear it. Route changes show up after the next refresh.
 
 ## Runtime variables
 

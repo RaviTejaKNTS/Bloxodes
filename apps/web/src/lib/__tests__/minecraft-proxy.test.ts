@@ -1,21 +1,22 @@
+vi.mock('@/lib/site-route-snapshot', () => ({readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
 import { NextRequest } from "next/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { proxy } from "@/proxy";
 import { buildMinecraftCollectionPath, minecraftLegacyRedirect } from "@/lib/minecraft-paths";
 
 describe("permanent Minecraft edition routes", () => {
-  it("migrates explicit legacy links and preserves pagination and useful queries", () => {
-    const response = proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/recipes/page/2?edition=bedrock&view=list"));
+  it("migrates explicit legacy links and preserves pagination and useful queries", async () => {
+    const response = (await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/recipes/page/2?edition=bedrock&view=list")));
     expect(response.status).toBe(308);
     expect(response.headers.get("location")).toBe("https://bloxodes.com/minecraft/bedrock/wiki/recipes/page/2?view=list");
     expect(response.headers.get("set-cookie")).toBeNull();
   });
-  it("ignores remembered editions for the directory and fixed legacy migration", () => {
+  it("ignores remembered editions for the directory and fixed legacy migration", async () => {
     for (const cookie of ["", "minecraft-edition=java", "minecraft-edition=bedrock"]) {
       const headers = { cookie };
-      expect(proxy(new NextRequest("https://bloxodes.com/minecraft/wiki", { headers })).headers.get("location")).toBeNull();
-      expect(proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/fuels", { headers })).headers.get("location")).toBe("https://bloxodes.com/minecraft/java/wiki/fuels");
-      expect(proxy(new NextRequest("https://bloxodes.com/minecraft/bedrock/wiki/fuels", { headers })).headers.get("location")).toBeNull();
+      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki", { headers }))).headers.get("location")).toBeNull();
+      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/fuels", { headers }))).headers.get("location")).toBe("https://bloxodes.com/minecraft/java/wiki/fuels");
+      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/bedrock/wiki/fuels", { headers }))).headers.get("location")).toBeNull();
     }
   });
   it("routes exclusive objectives to their fixed edition and strips obsolete queries", () => {
