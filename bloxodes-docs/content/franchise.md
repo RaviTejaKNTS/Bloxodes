@@ -1,6 +1,6 @@
 # Franchise games
 
-Last verified: 2026-10-21
+Last verified: 2026-11-01
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
@@ -43,6 +43,15 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 Slug rules and the planned move to page-type URLs are in [URLs](urls.md).
 
 New namespaces use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
+
+How the shared route picks a page (`apps/web/src/lib/site-route-page.ts`):
+
+1. Check the namespace root is published (`getGameRoot`).
+2. Read the one `live` row for the path (collections look up the URL without `/page/<n>`; other types 404 on `/page/<n>`).
+3. Load only that page by ID through its usual published view, so drafts and hidden games stay hidden. A row whose page isn't visible gets the namespace's fallback metadata and a 404.
+4. No row: the namespace root falls back to its built-in hub, the `/<namespace>/codes|tools|maps|quizzes|checklists|catalog` listings render from their lists, and anything else 404s.
+
+The route table read has a 2-second limit. If it fails or times out, that request falls back to the eight by-path readers.
 
 ## Data
 
