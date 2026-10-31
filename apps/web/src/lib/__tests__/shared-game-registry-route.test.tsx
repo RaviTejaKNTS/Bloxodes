@@ -49,7 +49,8 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
     if (table === "game_checklist_items") return [{ id: "task", namespace: "example", page_id: "page-id", section_code: "1.1.1", title: "Task" }];
     if (table !== `game_${state.kind}_pages_view` && !(table === "game_wiki_pages_view" && state.kind === "hub")) return [];
     const pages = [row,
-      { ...row, id: "sibling-page", title: "Sibling title", seo_title: "Sibling SEO", canonical_path: "/example/sibling" },
+      { ...row, id: "sibling-page", title: "Sibling title", seo_title: "Sibling SEO" },
+      { ...row, id: "moved-page", title: "Moved title", canonical_path: "/example/moved" },
       { ...row, id: "foreign-page", namespace: "other", game_id: "other-root-id", title: "Foreign title", canonical_path: "/other/detail" },
       ...(state.kind === "hub" ? [{ ...row, id: "root-wiki", game_id: "root-id", canonical_path: "/example/wiki" }] : []),
     ];
@@ -180,6 +181,11 @@ describe("shared registry route", () => {
     await SharedGamePage(props());
     expect(state.render.mock.calls[0][0].page.title).toBe("Sibling title");
     expect(await generateMetadata(props())).toMatchObject({ title: "Sibling SEO" });
+  });
+  it("rejects an ID page whose own canonical path is not the requested path", async () => {
+    state.selectedId = "moved-page";
+    await expect(SharedGamePage(props())).rejects.toThrow();
+    expect(state.render).not.toHaveBeenCalled();
   });
   it("selects the correct namespace root and child artwork", async () => {
     state.kind = "code";

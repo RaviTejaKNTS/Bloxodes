@@ -40,6 +40,8 @@ vi.mock("@/components/games/GameMap", () => ({ GameMap: () => null }));
 vi.mock("@/components/games/GameCatalog", () => ({ GameCatalog: () => null }));
 vi.mock("@/components/ChecklistPageTemplate", () => ({ ChecklistPageTemplate: () => null, checklistMetadata: vi.fn() }));
 vi.mock("@/lib/game-extra-pages", () => ({ getGameExtendedPage: async () => null, getGameChecklistByPath: async () => null }));
+// These cases cover the by-path readers, so the route table read reports "unavailable".
+vi.mock("@/lib/site-route-page", () => ({ getLiveSiteRoute: async () => undefined }));
 
 import GtaRoot, { generateMetadata as gtaMetadata } from "@/app/(site)/gta/page";
 import RedDeadRoot, { generateMetadata as redDeadMetadata } from "@/app/(site)/red-dead/page";
