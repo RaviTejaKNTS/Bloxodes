@@ -5,6 +5,7 @@ import { buildRedirectSnapshot, type RedirectRoute, type RedirectSnapshot } from
 export const SITE_ROUTE_SNAPSHOT_TTL = 5 * 60_000;
 export const SITE_ROUTE_INITIAL_TIMEOUT = 2_000;
 export const SITE_ROUTE_INITIAL_RETRY = 2_000;
+const PAGE_SIZE = 500;
 /** Cold readers share a bounded initial load; warm readers use stale-while-revalidate. */
 export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promise<RedirectRoute[]>, now = Date.now) {
   let snapshot: RedirectSnapshot = buildRedirectSnapshot([]);
@@ -50,7 +51,7 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
     let after: string | undefined;
     for (;;) {
       const columns = blockers ? 'path,status,match_type' : 'path,status,match_type,tail_mode,match_self,page_id,target_url,resolved_target,redirect_code,origin';
-      let query = client.from(table).select(columns).order('path').limit(1000).abortSignal(signal);
+      let query = client.from(table).select(columns).order('path').limit(PAGE_SIZE).abortSignal(signal);
       if (blockers) query = query.in('status', ['live', 'gone']).eq('match_type', 'exact').or(blockers);
       if (after) query = query.gt('path', after);
       const { data, error } = await query;
@@ -58,6 +59,9 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
       if (data.length === 0) break;
       const page = data as unknown as RedirectRoute[];
       rows.push(...page);
+      // A short page is the last one; skip the extra empty round trip. PAGE_SIZE
+      // stays below the PostgREST row cap (1000) so a capped page never looks short.
+      if (page.length < PAGE_SIZE) break;
       after = page[page.length - 1].path;
     }
   }
