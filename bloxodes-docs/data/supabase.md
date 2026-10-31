@@ -41,6 +41,7 @@ Two Supabase databases: production (self-hosted on the VPS) and managed developm
 | Puzzles | `puzzle_pages`, `puzzle_answers`, `puzzle_sync_runs` |
 | Users | accounts and sessions, `comments`, `user_*_progress`, `game_*_progress` |
 | Cache | `revalidation_events`, `cache_warm_events` and their worker run tables |
+| Routes | `site_routes`, `site_route_conflicts` (see [URLs](../content/urls.md#route-table)) |
 
 Generated types for the shared game tables live in `supabase/types/shared-games.ts`. `supabase/schema.sql` is a dump of the production public schema.
 
@@ -50,6 +51,7 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
 - Collection and quiz data lives only in the database. The repo holds no runtime content JSON.
+- `site_routes` triggers serialize URL changes with one transaction advisory lock. A transaction that writes several page tables must write them in the route migration's lock order: `games`, then `game_*` pages (collections last), then Roblox pages.
 
 ## Known issues
 
