@@ -28,7 +28,13 @@ async function query(sql: string): Promise<Array<Record<string, unknown>>> {
     body: JSON.stringify({ query: sql }), signal: AbortSignal.timeout(240_000)
   });
   const result = await response.json();
-  if (!response.ok || !Array.isArray(result)) throw new Error(`Managed-development SQL failed with HTTP ${response.status}.`);
+  if (!response.ok || !Array.isArray(result)) {
+    // Surface this actionable failure without logging the API body or SQL text.
+    if (/55P03|canceling statement due to lock timeout/i.test(JSON.stringify(result))) {
+      throw new Error("Managed-development SQL failed: lock timeout (55P03). The schema transaction was rolled back; retry after the active publisher finishes.");
+    }
+    throw new Error(`Managed-development SQL failed with HTTP ${response.status}.`);
+  }
   return result;
 }
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;

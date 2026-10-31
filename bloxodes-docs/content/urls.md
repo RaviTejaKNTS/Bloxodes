@@ -60,6 +60,20 @@ Redirects live in six places today:
 
 Some pages also redirect inside their own route, for example `/page/1` to the list's first page. Those stay with the page.
 
+## Route table
+
+`public.site_routes` maps every page URL to the page that owns it. The web app doesn't read it yet; the six sources above still serve redirects.
+
+- **Live rows:** every page in the Roblox page tables, `puzzle_pages`, the eight `game_*` page tables, and a `hub` row for each namespace root in `games`, drafts included. `source` and `page_type` name the owning table; `page_id` is its row ID. A page has one live URL.
+- **Old rows:** a redirect. With a `page_id`, it follows that page's current live URL, so a page that moves twice never builds a redirect chain. Without one, it uses `target_url`.
+- **Gone rows:** a deleted page's last URL.
+- **Prefix rows** match a path and everything below it. Exact beats prefix, and the longest prefix wins. `tail_mode` says whether the rest of the path is appended or dropped; `match_self = false` leaves the bare path alone (used for `/minecraft/wiki`).
+- The redirects from all six sources are imported, plus `/codes/<old-slug>` rows from `code_pages.old_slugs`. Minecraft `?edition=` handling can't be a row and stays in `minecraftLegacyRedirect`.
+- Triggers keep the table current. They run only when a URL column changes (`slug`, `code`, `canonical_path` and the like). A rename keeps the old URL as an old row; a delete marks it gone. A new page can't take another page's live URL; taking over an old or gone URL is logged in `site_route_conflicts`.
+- Retired catalog pages get no live row, so their redirect wins. When a legacy `roblox-free-items` code and a canonical `free-roblox-items` code map to one URL, the canonical page owns it, the same as the reader.
+- `resolve_site_route(path)` returns the matching row and its final target. `site_route_redirects` lists every redirect row.
+- `npm run routes:report` prints counts, conflicts, missing owners, orphaned redirects and unmapped catalog codes. It's read-only and defaults to managed development; production needs `BLOXODES_ENV_PROFILE=production-preview` and `--allow-prod`. Each schema release saves the managed-development report with its receipt.
+
 ## Known issues
 
 - Other games use three route systems for the same page types, and their URLs put the namespace first, unlike Roblox. The owner has approved a move to page-type URLs (`/wiki/<game>`, `/maps/<slug>`, `/games/<franchise>` for franchise hubs) backed by one route table that also holds every redirect. Until a game moves, publish it under its current routes and don't add route code for a single namespace.

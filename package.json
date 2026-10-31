@@ -25,6 +25,8 @@
     "dev:mobile": "npm run dev -w @bloxodes/mobile",
     "android": "npm run android -w @bloxodes/mobile",
     "ios": "npm run ios -w @bloxodes/mobile",
+    "routes:report": "node --import tsx scripts/routes/site-routes-report.ts",
+    "test:site-routes": "node --import tsx --test scripts/routes/__tests__/*.test.ts",
     "supabase:migrations:check": "node --import tsx scripts/dev/check-migration-integrity.ts",
     "supabase:managed-dev:check": "node --import tsx scripts/dev/check-managed-dev-readiness.ts",
     "supabase:production:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps,dokploy node --import tsx scripts/ops/release-production-schema.ts",
