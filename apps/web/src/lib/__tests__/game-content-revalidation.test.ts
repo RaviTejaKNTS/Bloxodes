@@ -11,11 +11,11 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   const root = { id: "root", namespace: state.namespace, parent_id: null, url_style: "page_type" };
   const child = { ...root, id: "child", parent_id: "root" };
   const routes = [
-    { id: "live", source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/wiki/risk-of-rain-2/items", status: "live" },
-    { id: "old", source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/risk-of-rain/wiki/second/items", status: "old" },
-    { id: "sibling", source: "game", game_id: "child", page_type: "tool", page_id: "tool", path: "/tools/risk-of-rain-cost", status: "live" },
-    { id: "hub", source: "game", game_id: "root", page_type: "wiki", page_id: "root-wiki", path: "/games/risk-of-rain", status: "live" },
-    { id: "namespace-hub", source: "game", game_id: "root", page_type: "hub", page_id: "root", path: `/${state.namespace}`, status: "live" }
+    { source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/wiki/risk-of-rain-2/items", status: "live" },
+    { source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/risk-of-rain/wiki/second/items", status: "old" },
+    { source: "game", game_id: "child", page_type: "tool", page_id: "tool", path: "/tools/risk-of-rain-cost", status: "live" },
+    { source: "game", game_id: "root", page_type: "wiki", page_id: "root-wiki", path: "/games/risk-of-rain", status: "live" },
+    { source: "game", game_id: "root", page_type: "hub", page_id: "root", path: `/${state.namespace}`, status: "live" }
   ];
   const all: Record<string, Array<Record<string, unknown>>> = {
     games: [root, child], site_routes: routes,
@@ -26,9 +26,16 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
     game_collection_pages_view: [{ id: "items", namespace: "risk-of-rain", page_type: "database" }]
   };
   const result = () => (all[table] ?? []).filter(row => Object.entries(filters).every(([key, value]) => row[key] === value));
+  // Like the real table, site_routes has no id column: selecting or ordering by it fails.
+  let usesMissingId = false;
+  const missingId = (columns: string) => table === "site_routes" && columns.split(",").map(column => column.trim()).includes("id");
   const query = {
-    select: () => query, eq: (key: string, value: unknown) => { filters[key] = value; return query; },
-    order: () => query, range: async (start: number, end: number) => ({ data: result().slice(start, end + 1), error: null }),
+    select: (columns = "*") => { usesMissingId ||= missingId(columns); return query; },
+    eq: (key: string, value: unknown) => { filters[key] = value; return query; },
+    order: (column: string) => { usesMissingId ||= missingId(column); return query; },
+    range: async (start: number, end: number) => usesMissingId
+      ? { data: null, error: { message: "column site_routes.id does not exist" } }
+      : { data: result().slice(start, end + 1), error: null },
     maybeSingle: async () => ({ data: result()[0] ?? null, error: null })
   };
   return query;
