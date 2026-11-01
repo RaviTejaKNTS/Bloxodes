@@ -105,8 +105,18 @@ describe("published landing reader and sitemap entries", () => {
     db[reader].mockRejectedValue(new Error("Required content unavailable"));
     await expect(getGameLanding(root.namespace)).rejects.toThrow("Required content unavailable");
     const landing = await getGameLandingForLinks(root.namespace);
-    expect(landing).toMatchObject({ path: "/games", isAlias: false, lookupFailed: true });
-    expect(gameLandingSitemapEntries(landing)).toEqual([]);
+    expect(landing).toMatchObject({ path: "/future-game", isAlias: false, lookupFailed: true });
+    expect(gameLandingSitemapEntries(landing)).toEqual([expect.objectContaining({ loc: "https://bloxodes.com/future-game" })]);
+  });
+
+  it.each(["game", "franchise"] as const)("keeps a known page-type %s destination when the optional wiki read fails", async kind => {
+    db.root.mockResolvedValue({ ...root, kind, url_style: "page_type" });
+    db.wiki.mockRejectedValue(new Error("Wiki unavailable"));
+    const path = kind === "franchise" ? "/games/future-game" : "/wiki/future-game";
+    const landing = await getGameLandingForLinks(root.namespace);
+    expect(landing).toMatchObject({ path, lookupFailed: true });
+    expect(gameLandingSitemapEntries(landing)).toEqual([expect.objectContaining({ loc: `https://bloxodes.com${path}` })]);
+    await expect(getGameLanding(root.namespace)).rejects.toThrow("Wiki unavailable");
   });
 
   it("retains a published fallback root without inventing a wiki URL", async () => {

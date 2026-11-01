@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 
+vi.mock("@/components/games/OtherGamesSection", () => ({ OtherGamesSection: () => null }));
 vi.mock("next/navigation", () => ({
   notFound: () => { throw new Error("NOT_FOUND"); },
   permanentRedirect: (path: string) => { throw new Error(`REDIRECT:${path}`); }
@@ -32,7 +33,8 @@ describe.each([
   });
 
   it("renders page two with its actual page number", async () => {
-    expect(await render(props("2"))).toMatchObject({ currentPage: 2, totalPages: 3 });
+    const result = await render(props("2"));
+    expect(result.props.children[0]).toMatchObject({ currentPage: 2, totalPages: 3 });
   });
 
   it("uses a distinct canonical and social URL without forcing noindex", async () => {

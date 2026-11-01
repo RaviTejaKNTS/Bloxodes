@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { getGameRoot, getGameWikiByPath } from "./game-registry";
 import { gameLandingPath } from "./game-root-page";
+import type { SharedGameGame } from "./shared-game-reader";
 import { supabaseAdmin } from "./supabase";
 import { toIsoDate, withSiteUrl, type SitemapUrlSetEntry } from "./sitemap";
 
@@ -23,8 +24,7 @@ const hasIndependentRootPage = cache(async (namespace: string): Promise<boolean>
   return matches.some(Boolean);
 });
 
-export const getGameLanding = cache(async (namespace: string) => {
-  const root = await getGameRoot(namespace);
+const readGameLanding = cache(async (namespace: string, root: SharedGameGame | null) => {
   if (!root) return { root: null, wiki: null, path: `/${namespace}`, isAlias: false, hasIndependentRoot: false };
   const wiki = await getGameWikiByPath(namespace, root.url_style === "page_type" ? gameLandingPath(root) : `/${namespace}/wiki`);
   const hasIndependentRoot = root.url_style !== "page_type" && gameLandingPath(root, wiki) !== `/${namespace}` ? await hasIndependentRootPage(namespace) : false;
@@ -32,22 +32,27 @@ export const getGameLanding = cache(async (namespace: string) => {
   return { root, wiki, path, isAlias: path !== `/${namespace}`, hasIndependentRoot };
 });
 
+export const getGameLanding = cache(async (namespace: string) => readGameLanding(namespace, await getGameRoot(namespace)));
+
 type GameLandingForLinks = Awaited<ReturnType<typeof getGameLanding>> & { lookupFailed?: boolean };
 
 // Navigation is optional. Required page-content readers keep their existing errors.
 export const getGameLandingForLinks = cache(async (namespace: string): Promise<GameLandingForLinks> => {
+  let root: SharedGameGame | null = null;
   try {
-    return await getGameLanding(namespace);
+    root = await getGameRoot(namespace);
+    return await readGameLanding(namespace, root);
   } catch {
-    // With identity unavailable, use the stable directory rather than guessing
-    // an old namespace URL that may already redirect.
-    return { root: null, wiki: null, path: "/games", isAlias: false, hasIndependentRoot: false, lookupFailed: true };
+    // Preserve namespace links when optional identity reads fail. A known moved
+    // root can still supply its page-type destination if the wiki read fails.
+    const path = root?.url_style === "page_type" ? gameLandingPath(root) : `/${namespace}`;
+    return { root: null, wiki: null, path, isAlias: false, hasIndependentRoot: true, lookupFailed: true };
   }
 });
 
 export function gameLandingSitemapEntries(landing: GameLandingForLinks): SitemapUrlSetEntry[] {
   const { root, wiki, path } = landing;
-  if (!root) return [];
+  if (!root) return landing.lookupFailed ? [{ loc: withSiteUrl(path), changefreq: "weekly", priority: "0.9" }] : [];
   const lastmod = landing.isAlias
     ? wiki?.content_updated_at ?? wiki?.updated_at ?? wiki?.published_at
     : root.updated_at ?? root.published_at;
