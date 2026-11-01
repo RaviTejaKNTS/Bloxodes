@@ -105,6 +105,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    create temporary table search_before as select * from public.search_index;
    create table public.revalidation_events(entity_type text);
    ${migration("20261102210000_unify_game_discovery_and_comments.sql")}
+   ${migration("20261102215000_minecraft_wiki_alias_to_hub.sql")}
    select pg_temp.url_assert(not exists((select * from search_before except select * from public.search_index) union all (select * from public.search_index except select * from search_before)),'cutover leaves all search rows unchanged');
    select pg_temp.url_assert((select count(*)=1 from public.comments c join comment_before b using(id) where c.entity_type='game_wiki' and (c.entity_id,c.parent_id,c.body_md,c.status) is not distinct from (b.entity_id,b.parent_id,b.body_md,b.status)),'comment identity and content preserved');
    set local bloxodes.plumbing_phase='legacy';

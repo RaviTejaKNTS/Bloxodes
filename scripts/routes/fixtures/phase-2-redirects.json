@@ -5412,17 +5412,17 @@
     {
       "url": "/minecraft/wiki?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-java?edition=bedrock&ref=a%20b"
+      "location": "/games/minecraft?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki?edition=java",
       "status": 308,
-      "location": "/wiki/minecraft-java?edition=java"
+      "location": "/games/minecraft?edition=java"
     },
     {
       "url": "/minecraft/wiki?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-java?edition=invalid"
+      "location": "/games/minecraft?edition=invalid"
     },
     {
       "url": "/minecraft/wiki/mobs",

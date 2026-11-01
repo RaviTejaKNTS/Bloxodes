@@ -9,7 +9,7 @@ select pg_temp.assert_plumbing(
  else not exists(select 1 from public.search_index where entity_type ~ '^(gta|red_dead|minecraft)_') end,
  'search identities match the selected release phase');
 select pg_temp.assert_plumbing(not exists(select 1 from public.comments where entity_type ~ '^(gta|red_dead|minecraft)_'),'all comment identities migrated');
-select pg_temp.assert_plumbing((select resolved_target='/wiki/minecraft-java' from public.resolve_site_route('/minecraft/wiki')),'bare legacy wiki defaults to Java');
+select pg_temp.assert_plumbing((select resolved_target='/games/minecraft' from public.resolve_site_route('/minecraft/wiki')),'bare legacy wiki goes to the Minecraft hub');
 select pg_temp.assert_plumbing((select resolved_target='/wiki/minecraft-bedrock/achievements/page/2' from public.resolve_site_route('/minecraft/wiki/achievements/page/2')),'Bedrock objectives and pagination in one hop');
 select pg_temp.assert_plumbing((select count(*)>0 from public.site_routes where status='old' and source='game' and page_id is not null),'moved recrawl sitemap data preserved');
 -- Expected identities come from stored owners and paths, never URL builders.
