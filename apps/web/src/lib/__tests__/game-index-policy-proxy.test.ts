@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { buildRedirectSnapshot, type RedirectRoute } from "../site-route-resolver";
 import { googleIndexHeader } from "../seo/google-index-policy";
 
-const state = vi.hoisted(() => ({ policy: vi.fn() }));
+const state = vi.hoisted(() => ({ policy: vi.fn(), redirects: [] as RedirectRoute[] }));
 vi.mock("server-only", () => ({}));
 vi.mock("../supabase-admin", () => ({ supabaseAdmin: vi.fn() }));
 vi.mock("../site-config", () => ({ SEARCH_INDEXING_ENABLED: true }));
@@ -12,7 +12,7 @@ vi.mock("../site-route-snapshot", async importOriginal => {
   return {
     ...actual,
     readGameIndexPaths: (...args: Parameters<typeof actual.readGameIndexPaths>) => state.policy(...args),
-    readRedirectSnapshot: async () => buildRedirectSnapshot([])
+    readRedirectSnapshot: async () => buildRedirectSnapshot(state.redirects)
   };
 });
 import { createGameIndexPolicyCache, SITE_ROUTE_SNAPSHOT_TTL } from "../site-route-snapshot";
@@ -26,7 +26,7 @@ function deferredLoad() {
   return { load, resolve: (rows = published) => resolve(rows) };
 }
 
-beforeEach(() => { vi.useFakeTimers(); state.policy.mockReset(); });
+beforeEach(() => { vi.useFakeTimers(); state.policy.mockReset(); state.redirects = []; });
 afterEach(() => { vi.useRealTimers(); });
 
 it("cold HTML requests share one policy load before setting Google's header", async () => {
@@ -93,4 +93,30 @@ it("paths outside HTML game pages do not request a cold-policy wait", async () =
     await proxy(request(path));
     expect(state.policy).toHaveBeenLastCalledWith(undefined, false);
   }
+});
+
+// Exercise the proxy ordering, rather than only minecraftLegacyRedirect in isolation.
+it.each([
+  ["/minecraft/wiki/achievements/page/2?ref=guide", "/wiki/minecraft-bedrock/achievements/page/2?ref=guide"],
+  ["/minecraft/wiki/achievements?page=2", "/wiki/minecraft-bedrock/achievements?page=2"],
+  ["/minecraft/wiki/mobs?edition=java&ref=guide", "/wiki/minecraft-java/mobs?ref=guide"],
+  ["/minecraft/tools/xp-calculator?edition=bedrock", "/tools/minecraft-xp-calculator"],
+])("moved snapshot redirects %s directly to its final owner", async (oldPath, finalPath) => {
+  state.redirects = [
+    ["/minecraft/wiki/achievements", "/wiki/minecraft-bedrock/achievements"],
+    ["/minecraft/java/wiki/mobs", "/wiki/minecraft-java/mobs"],
+    ["/minecraft/tools/xp-calculator", "/tools/minecraft-xp-calculator"],
+  ].map(([path, target_url]) => ({ path, target_url, page_id: path.endsWith("achievements") ? "achievements-id" : null, page_type: "collection", resolved_target: target_url, tail_mode: "drop", match_self: true, origin: "fixture", status: "old", match_type: "exact", redirect_code: 308 } as RedirectRoute));
+  state.policy.mockResolvedValue(new Set());
+  const response = await proxy(request(oldPath));
+  expect(response.status).toBe(308);
+  expect(response.headers.get("location")).toBe(`http://localhost:3000${finalPath}`);
+  expect(state.policy).not.toHaveBeenCalled();
+});
+
+it("without moved aliases the proxy preserves the namespace edition destination", async () => {
+  const response = await proxy(request("/minecraft/wiki/mobs?edition=bedrock&ref=guide"));
+  expect(response.status).toBe(308);
+  expect(response.headers.get("location")).toBe("http://localhost:3000/minecraft/bedrock/wiki/mobs?ref=guide");
+  expect(state.policy).not.toHaveBeenCalled();
 });

@@ -37,6 +37,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
+   ${migration("20261102130000_specialized_franchise_page_type_urls.sql")}
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
    alter table public.games add unique(namespace,slug,kind);
    ${['wiki','code'].map(kind=>`alter table public.game_${kind}_pages add unique(game_id);`).join('\n')}
@@ -46,6 +47,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${["wiki","collection","code","tool","checklist"].map(kind=>`create trigger prepare_game_content before insert or update on public.game_${kind}_pages for each row execute function public.prepare_game_content();`).join("\n")}
    ${["map","quiz","catalog"].map(kind=>`create trigger prepare_game_extended_page before insert or update on public.game_${kind}_pages for each row execute function public.prepare_game_extended_page();`).join("\n")}
    ${readFileSync(new URL("../../../supabase/tests/game_page_type_urls.sql",import.meta.url),"utf8")}
+   ${readFileSync(new URL("../../../supabase/tests/specialized_franchise_page_type_urls.sql",import.meta.url),"utf8")}
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });

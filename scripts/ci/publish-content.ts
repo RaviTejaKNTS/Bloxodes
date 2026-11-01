@@ -160,11 +160,17 @@ async function main() {
   }
   const routeDb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {auth: {persistSession: false}});
   for (const url of batch.urls) {
-    const owner = await routeDb.from("site_routes").select("source").eq("path", url.path).eq("status", "live").maybeSingle();
+    const owner = await routeDb.from("site_routes").select("source,game_id,page_type").eq("path", url.path).eq("status", "live").maybeSingle();
     if (owner.error) throw owner.error;
+    let namespace: string | undefined;
+    if (owner.data?.source === "game") {
+      const game = await routeDb.from("games").select("namespace").eq("id", owner.data.game_id).single();
+      if (game.error) throw game.error;
+      namespace = game.data.namespace;
+    }
     await verifyPublicText(url.path, url.contains);
     console.log(`Verified https://bloxodes.com${url.path}`);
-    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", publicationSitemap(url.path, owner.data?.source), "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
+    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", publicationSitemap(url.path, owner.data?.source, namespace, owner.data?.page_type), "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
   }
   // Queue acknowledgement follows the selected desktop/mobile browser checks.
   execFileSync("npx", ["playwright", "test", "apps/web/e2e/release-smoke.spec.ts"], {

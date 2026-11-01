@@ -53,7 +53,11 @@ Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(g
 
 ### Moving a namespace
 
-Only a reviewed migration moves a namespace, by calling `move_game_namespace_to_page_type_urls(namespace)`. It switches every game in the namespace to `page_type` and rewrites each page's `canonical_path`; the `site_routes` triggers turn every old URL into a redirect to the new one. It also adds redirects for the namespace root, `/<namespace>/wiki` and the old directory listings, and old collection `/page/<n>` URLs keep their page number. It refuses unknown namespaces, namespaces without a root wiki, and `gta`, `red-dead` and `minecraft` (their renderers move with them).
+Only a reviewed migration moves a namespace, by calling `move_game_namespace_to_page_type_urls(namespace)`. It switches every game in the namespace to `page_type` and rewrites each page's `canonical_path`; the `site_routes` triggers turn every old URL into a redirect to the new one. It also adds redirects for the namespace root, `/<namespace>/wiki` and the old directory listings, and old collection `/page/<n>` URLs keep their page number. It refuses unknown namespaces and namespaces without a root wiki.
+
+GTA, Red Dead and Minecraft keep their specialized pages after a move: the page-type routes hand each page to the same renderer the old route uses (GTA map engines and collectible collections, GTA checklists with their `gta:<slug>` progress keys, Red Dead collections, Minecraft edition pages and calculators). Curated nav, home links, search, sitemaps and the feed follow `url_style`, so nothing changes until a namespace moves.
+
+Minecraft's legacy child game (`minecraft`, wiki `/minecraft/wiki/legacy-minecraft`, 25 collections at `/minecraft/wiki/<slug>`) duplicates the Java and Bedrock editions. Moving Minecraft archives it: the game is unpublished, its rows, datasets and progress stay, and its old URLs redirect to the edition page (achievements to Bedrock, the rest to Java, or Bedrock when only Bedrock has it). The move refuses to run if Minecraft's data doesn't have exactly that shape. `minecraftLegacyRedirect` resolves `?edition=` links through the route table, so they take one hop after the move.
 
 `rewrite_moved_game_links(namespace)` then rewrites internal links to the old URLs in stored page text. It takes only row locks, so it runs in a later schema release than the move: the schema runner applies all pending migrations in one transaction.
 

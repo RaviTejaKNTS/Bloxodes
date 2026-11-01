@@ -60,7 +60,7 @@ async function main() {
     { BLOXODES_ENV_OVERLAYS: "cloudflare" }
   );
   const sb = supabaseAdmin();
-  const page = await gameDatabase(sb, "gta").from("wiki_collection_pages").select("id, title, display_name, item_count, published_dataset_id, is_published, page_type").eq("wiki_slug", options.game).eq("collection_slug", options.collection).single();
+  const page = await gameDatabase(sb, "gta").from("wiki_collection_pages").select("id, title, display_name, item_count, published_dataset_id, is_published, page_type, canonical_path").eq("wiki_slug", options.game).eq("collection_slug", options.collection).single();
   if (page.error) throw page.error;
   if (!page.data.is_published || !page.data.published_dataset_id || page.data.item_count < 1) throw new Error("GTA collection page readback failed.");
   if (page.data.page_type !== expectedPageType) throw new Error(`GTA collection page type mismatch: ${page.data.page_type ?? "missing"} != ${expectedPageType}.`);
@@ -70,7 +70,7 @@ async function main() {
   const expectedTitle = final.title?.replaceAll("{count}", page.data.item_count.toLocaleString("en-US"));
   if (expectedTitle && page.data.title !== expectedTitle) throw new Error("GTA collection title token was not resolved correctly.");
   if (final.display_name && page.data.display_name !== final.display_name) throw new Error("GTA collection display name mismatch.");
-  const url = `${options.baseUrl}/gta/wiki/${options.game}/${options.collection}`;
+  const url = `${options.baseUrl}${page.data.canonical_path}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || (expectedTitle && !html.includes(expectedTitle))) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);

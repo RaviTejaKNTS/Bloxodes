@@ -1,3 +1,5 @@
+import { getGameRoot } from "@/lib/game-registry";
+import { getGameMapBySlug } from "@/lib/game-extra-pages";
 import { isRetiredMusicGameCatalogUrl } from "@/lib/game-specific-id-pages";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { NextResponse } from "next/server";
@@ -188,19 +190,32 @@ function rowKey(row: SearchRow): string {
   return `${row.entity_type}:${row.entity_id}`;
 }
 
-function gta5MapSearchRow(query: string, entityTypes: string[] | null): SearchRow[] {
+async function gta5MapSearchRow(query: string, entityTypes: string[] | null): Promise<SearchRow[]> {
   if (entityTypes?.length && !entityTypes.includes("gta_wiki")) return [];
   const title = "GTA 5 Interactive Map";
   const searchText = "gta 5 gta v interactive map los santos blaine county story mode spaceship parts letter scraps nuclear waste submarine pieces monkey mosaics peyote plants epsilon tracts hidden packages stunt jumps under the bridge knife flights landmarks hospitals travel collectible locations";
   const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
   if (!terms.length || !terms.every((term) => searchText.includes(term))) return [];
+  let url = "/gta/maps/gta5";
+  try {
+    const root = await getGameRoot("gta").catch(() => null);
+    if (root?.url_style === "page_type") {
+      const page = await getGameMapBySlug("gta", "gta5");
+      if (!page) return [];
+      url = page.canonical_path;
+    }
+  } catch {
+    // This optional result must never discard the other search results.
+    // A known moved namespace must not emit the old static URL.
+    return [];
+  }
   return [{
     entity_type: "gta_wiki",
     entity_id: "gta5-interactive-map",
     slug: "gta5-interactive-map",
     title,
     subtitle: "377 Story Mode collection locations, 92 places, and progress tracking",
-    url: "/gta/maps/gta5",
+    url,
     updated_at: null,
     active_code_count: null,
     search_text: searchText
@@ -295,7 +310,7 @@ export async function GET(request: Request) {
       searchStatsGames(rawQuery, safeLimit, entityTypes)
     ]);
     const rpcRows = error ? [] : ((data ?? []) as SearchRow[]);
-    const rows = mergeAndRankRows(rawQuery, [...gta5MapSearchRow(rawQuery, entityTypes), ...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
+    const rows = mergeAndRankRows(rawQuery, [...await gta5MapSearchRow(rawQuery, entityTypes), ...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

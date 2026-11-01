@@ -52,3 +52,14 @@ test("moved and new shared pages use the shared sitemap while Roblox and unmoved
   assert.equal(publicationSitemap("/wiki/blox-fruits", "roblox"), "/sitemaps/wiki.xml");
   assert.equal(publicationSitemap("/minecraft/tools/crafting", "game"), "/sitemaps/minecraft.xml");
 });
+
+test("moved specialists retain their sitemap owner, independent of global slug", () => {
+  for (const [namespace, type, path] of [
+    ["gta", "wiki", "/games/gta"], ["gta", "collection", "/wiki/gta-5/items"],
+    ["gta", "map", "/maps/gta5"], ["gta", "checklist", "/checklists/gta-5"],
+    ["red-dead", "wiki", "/wiki/red-dead-redemption-2"], ["red-dead", "collection", "/wiki/red-dead-redemption-2/horses"],
+    ["minecraft", "wiki", "/wiki/minecraft-java"], ["minecraft", "tool", "/tools/minecraft-xp-calculator"],
+  ]) assert.equal(publicationSitemap(path, "game", namespace, type), `/sitemaps/${namespace}.xml`);
+  assert.equal(publicationSitemap("/catalog/gta-items", "game", "gta", "catalog"), "/sitemaps/games.xml");
+  assert.equal(publicationSitemap("/wiki/unrelated", "game", "unrelated", "wiki"), "/sitemaps/games.xml");
+});

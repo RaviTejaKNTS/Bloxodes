@@ -9,6 +9,7 @@ import { GTA_CHECKLISTS } from "@/lib/engagement/config";
 export const GTA_CHECKLISTS_DESCRIPTION = GTA_CHECKLISTS.description;
 export type GtaChecklistPage = ChecklistTemplatePage & {
   game_id: string;
+  canonical_path: string;
   game_title: string;
   game_slug: string;
   leaf_item_count: number;

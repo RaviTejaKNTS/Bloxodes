@@ -77,12 +77,19 @@ export const minecraftNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
-export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
+function originalGamePath(path: string, paths: Record<string, string>): string {
+  return Object.entries(paths)
+    .filter(([old, live]) => /^\/(gta|red-dead|minecraft)(\/|$)/.test(old) && (path === live || path.startsWith(live + "/")))
+    .sort((a, b) => b[1].length - a[1].length)[0]?.[0] ?? path;
+}
+
+export function siteNavLinksForPath(pathname: string | null | undefined, paths: Record<string, string> = {}): SiteNavLink[] {
   const path = pathname ?? "";
-  if (path === "/minecraft" || path.startsWith("/minecraft/")) return minecraftNavLinks;
-  if (path.startsWith("/gta")) return gtaNavLinks;
-  if (path.startsWith("/red-dead")) return redDeadNavLinks;
-  return siteNavLinks;
+  const original = originalGamePath(path, paths);
+  const links = /^\/minecraft(?:\/|$)/.test(original) ? minecraftNavLinks
+    : original.startsWith("/gta") ? gtaNavLinks
+    : original.startsWith("/red-dead") ? redDeadNavLinks : siteNavLinks;
+  return Object.keys(paths).length ? links.map(link => ({ ...link, href: paths[link.href] ?? link.href })) : links;
 }
 
 export type SiteNavGroup = {
@@ -94,10 +101,10 @@ export type SiteNavGroup = {
  * Link groups for the More drawer. Franchise sections list their own pages first, then every
  * site section, so each primary link is in the page HTML on every route.
  */
-export function siteNavGroupsForPath(pathname: string | null | undefined): SiteNavGroup[] {
-  const links = siteNavLinksForPath(pathname);
-  if (links === siteNavLinks) return [{ label: "Browse", links: siteNavLinks }];
-  const label = links === gtaNavLinks ? "GTA" : links === redDeadNavLinks ? "Red Dead" : "Minecraft";
+export function siteNavGroupsForPath(pathname: string | null | undefined, paths: Record<string, string> = {}): SiteNavGroup[] {
+  const links = siteNavLinksForPath(pathname, paths);
+  if (links[0]?.label === "Home") return [{ label: "Browse", links: siteNavLinks }];
+  const label = links[0]?.label === "GTA Home" ? "GTA" : links[0]?.label === "Red Dead Home" ? "Red Dead" : "Minecraft";
   const shown = new Set(links.map((link) => link.href));
   return [
     { label, links },
@@ -120,8 +127,8 @@ export function isNavLinkActive(pathname: string | null | undefined, href: strin
   return path === href || (href !== "/" && path.startsWith(`${href}/`));
 }
 
-export function resolveSearchScope(pathname: string | null | undefined): SearchScope {
-  const path = pathname ?? "/";
+export function resolveSearchScope(pathname: string | null | undefined, paths: Record<string, string> = {}): SearchScope {
+  const path = originalGamePath(pathname ?? "/", paths);
   if (path === "/minecraft" || path.startsWith("/minecraft/")) return { scope: "minecraft", label: "Minecraft" };
   if (path.startsWith("/gta/checklists")) return { scope: "gta-checklists", label: "checklists" };
   if (path.startsWith("/gta")) return { scope: "gta", label: "GTA" };

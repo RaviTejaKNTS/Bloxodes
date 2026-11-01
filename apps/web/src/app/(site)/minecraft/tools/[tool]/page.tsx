@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tool: slug } = await params;
   const tool = await loadMinecraftTool(slug);
   if (!tool) return { title: "Minecraft tool not found", robots: { index: false, follow: false } };
-  return buildDedicatedToolMetadata({ toolCode: slug, fallbackTitle: tool.title, fallbackDescription: tool.meta_description, content: tool, canonicalPath: `/minecraft/tools/${slug}` });
+  return buildDedicatedToolMetadata({ toolCode: slug, fallbackTitle: tool.title, fallbackDescription: tool.meta_description, content: tool, canonicalPath: tool.canonical_path });
 }
 export default async function MinecraftToolPage({ params }: Props) {
   const { tool: slug } = await params;
@@ -21,7 +21,7 @@ export default async function MinecraftToolPage({ params }: Props) {
   if (!tool || !isMinecraftToolSlug(slug)) notFound();
   const rules = toolRules(tool);
   const landing = await getGameLandingForLinks("minecraft");
-  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={`/minecraft/tools/${slug}`} commentEntityType="minecraft_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools", href: "/minecraft/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
+  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="minecraft_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools", href: tool.canonical_path.startsWith("/tools/") ? "/tools" : "/minecraft/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
     <MinecraftToolClient slug={slug} rules={rules} />
   </DedicatedToolPage>;
 }

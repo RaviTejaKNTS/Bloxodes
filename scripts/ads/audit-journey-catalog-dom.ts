@@ -1,3 +1,4 @@
+import { specialistMapAndToolPaths } from "../shared/specialist-public-paths";
 import { load } from "cheerio";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:3000";
@@ -43,6 +44,7 @@ function isIndexablePath(pathname: string): boolean {
     /^\/articles\/[^/]+$/,
     /^\/articles\/games\/[^/]+$/,
     /^\/wiki\/[^/]+$/,
+    /^\/(?:games|maps)\/[^/]+$/,
     /^\/wiki\/[^/]+\/[^/]+$/,
     /^\/puzzles\/[^/]+$/,
     /^\/authors\/[^/]+$/,
@@ -159,7 +161,7 @@ function auditPage(snapshot: PageSnapshot) {
   }
 
   const widgets = $(".ads-tools-widget");
-  if (widgets.length || /^\/(?:catalog|tools|gta\/maps|minecraft\/tools)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
+  if (widgets.length || /^\/(?:catalog|tools|maps|gta\/maps|minecraft\/tools)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
     const sidebar = $("aside.space-y-4");
     if (sidebar.length !== 1 || !sidebar.is("aside#sidebar") || $("aside#sidebar").length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
       failures.push("sidebar must be one direct grid child outside the article body");
@@ -391,6 +393,7 @@ async function main() {
     await fetchPage(baseUrl, "/catalog/roblox-items-and-bundles"),
     "/catalog/roblox-items-and-bundles/"
   );
+  for (const canonicalPath of await specialistMapAndToolPaths(baseUrl)) requestedPaths.add(canonicalPath);
   const structuredDetailRoots = [
     { root: "/articles", prefix: "/articles/" },
     { root: "/wiki", prefix: "/wiki/" },

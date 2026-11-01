@@ -63,7 +63,7 @@ export async function generateGtaCollectionMetadata({
   currentPage: number;
 }): Promise<Metadata> {
   const page = await getGtaWikiCollectionPageByPath(normalize(slug), normalize(collection));
-  const basePath = buildGtaCollectionPath(slug, collection);
+  const basePath = page?.canonical_path ?? buildGtaCollectionPath(slug, collection);
   const canonicalPath = currentPage === 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   if (!page) {
@@ -118,10 +118,10 @@ export async function renderGtaCollectionPage({
   const collectionOptions = collections.map((entry) => ({
     value: entry.code,
     label: entry.display_name,
-    href: buildGtaCollectionPath(entry.wiki_slug, entry.collection_slug),
+    href: entry.canonical_path,
     pageType: entry.page_type
   }));
-  const wikiPath = `/gta/wiki/${context.page.wiki_slug}`;
+  const wikiPath = context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/"));
   const rendered = context.page.page_type === "collectible"
     ? renderGtaCollectibleCollectionPage({
         page: context.page,
@@ -138,6 +138,9 @@ export async function renderGtaCollectionPage({
         currentPage,
         prepared: context.prepared,
         routeBase: "/gta/wiki",
+        collectionBasePath: context.page.canonical_path,
+        wikiHomePath: context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/")),
+        wikiIndexPath: context.page.canonical_path.startsWith("/wiki/") ? "/games/gta" : "/gta/wiki",
         wikiLabel: "GTA Wiki",
         collectionOptions,
         commentsEntityType: "gta_wiki_collection",
@@ -147,12 +150,12 @@ export async function renderGtaCollectionPage({
       });
   return (
     <GameCollectionSidebarLayout
-      canonicalPath={buildGtaCollectionPath(context.page.wiki_slug, context.page.collection_slug)}
+      canonicalPath={context.page.canonical_path}
       title={context.page.title}
       code={context.page.code}
       gameName={context.page.game_short_title || context.config.gameName}
       wikiPath={wikiPath}
-      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildGtaCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: entry.canonical_path, description: entry.meta_description }))}
     >
       {rendered}
     </GameCollectionSidebarLayout>

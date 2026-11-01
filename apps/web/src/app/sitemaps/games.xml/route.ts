@@ -21,7 +21,9 @@ export async function GET() {
     }
    }
   }
-  for (const landing of landings.values()) {
+  for (const [namespace, landing] of landings) {
+   // After a move, specialist sitemaps own their landing. Preserve the old entries until then.
+   if (["gta", "red-dead", "minecraft"].includes(namespace) && landing.root?.url_style === "page_type") continue;
    if (landing.isAlias && landing.root) paths.delete(`/${landing.root.namespace}`);
    for (const entry of gameLandingSitemapEntries(landing)) paths.set(new URL(entry.loc).pathname, entry.lastmod);
   }

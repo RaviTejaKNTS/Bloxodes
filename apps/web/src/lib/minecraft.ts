@@ -69,6 +69,7 @@ export type MinecraftToolPage = import("@/lib/tools").ToolContent & {
   id: string;
   slug: string;
   tool_key: string;
+  canonical_path: string;
   rules_json: Record<string, unknown>;
   description_md?: string | null;
 };

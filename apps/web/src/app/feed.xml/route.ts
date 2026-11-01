@@ -1,3 +1,5 @@
+import { getGameRoot } from "@/lib/game-registry";
+import { listPublishedRedDeadWikiPages, listPublishedRedDeadWikiCollections } from "@/lib/red-dead";
 import { gameDatabase } from "@/lib/game-content-db";
 import { listSharedGameDiscoveryPages } from "@/lib/game-content-index";
 import { NextResponse } from "next/server";
@@ -8,7 +10,7 @@ import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 import { listPublishedGtaWikiPages, listPublishedGtaWikiCollections } from "@/lib/gta";
-import { buildMinecraftWikiPath, buildMinecraftCollectionPath, listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
+import { listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -39,6 +41,7 @@ type GameRow = {
 };
 
 type ChecklistRow = {
+  canonical_path?: string;
   slug: string | null;
   title: string | null;
   updated_at: string | null;
@@ -104,7 +107,9 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools, gtaWiki, gtaCollections] = await Promise.all([
+  // Red Dead was excluded from discovery before its namespace move.
+  const redDeadMoved = (await getGameRoot("red-dead").catch(() => null))?.url_style === "page_type";
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools, gtaWiki, gtaCollections, redDeadWiki, redDeadCollections] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at, created_at")
@@ -140,12 +145,14 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .not("slug", "is", null)
       .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40),
-    gameDatabase(sb, "gta").from("checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
+    gameDatabase(sb, "gta").from("checklist_pages_view").select("slug,title,canonical_path,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
     listPublishedMinecraftWikiPages(),
     listPublishedMinecraftCollections(),
     listPublishedMinecraftTools(),
     listPublishedGtaWikiPages(),
-    listPublishedGtaWikiCollections()
+    listPublishedGtaWikiCollections(),
+    redDeadMoved ? listPublishedRedDeadWikiPages() : [],
+    redDeadMoved ? listPublishedRedDeadWikiCollections() : []
   ]);
 
   const firstError =
@@ -164,7 +171,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
     if (item) items.push(item);
   }
-  for (const page of [...gtaWiki, ...gtaCollections]) {
+  for (const page of [...gtaWiki, ...gtaCollections, ...redDeadWiki, ...redDeadCollections]) {
     const item = toFeedItem({
       title: page.title,
       path: page.canonical_path,
@@ -176,9 +183,9 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     if (item) items.push(item);
   }
   const minecraftPages = [
-    ...minecraftWiki.filter(page => page.slug !== "minecraft").map(page => ({ ...page, path: buildMinecraftWikiPath(page.slug) })),
-    ...minecraftCollections.map((page) => ({ ...page, path: buildMinecraftCollectionPath(page.wiki_slug, page.collection_slug) })),
-    ...minecraftTools.map((page) => ({ ...page, path: `/minecraft/tools/${page.slug}` }))
+    ...minecraftWiki.filter(page => page.slug !== "minecraft").map(page => ({ ...page, path: page.canonical_path })),
+    ...minecraftCollections.map((page) => ({ ...page, path: page.canonical_path })),
+    ...minecraftTools.map((page) => ({ ...page, path: page.canonical_path }))
   ];
   for (const page of minecraftPages) {
     const item = toFeedItem({
@@ -243,10 +250,10 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   }
 
   for (const checklist of (gtaChecklistsRes.data ?? []) as ChecklistRow[]) {
-    if (!checklist.slug || !checklist.title) continue;
+    if (!checklist.slug || !checklist.title || !checklist.canonical_path) continue;
     const item = toFeedItem({
         title: checklist.title,
-        path: `/gta/checklists/${checklist.slug}`,
+        path: checklist.canonical_path,
         description: "Checklist update.",
         updatedAt: checklist.updated_at,
         publishedAt: checklist.published_at,

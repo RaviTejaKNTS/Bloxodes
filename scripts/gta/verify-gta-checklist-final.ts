@@ -69,11 +69,11 @@ async function readFinal(file: string): Promise<ChecklistFinal> {
 async function verifyPage(baseUrl: string, final: ChecklistFinal, file: string) {
   const sb = supabaseAdmin();
   const pageResult = await gameDatabase(sb, "gta").from("checklist_pages_view")
-    .select("id, slug, title, game_slug, is_public, leaf_item_count")
+    .select("id, slug, title, game_slug, is_public, leaf_item_count, canonical_path")
     .eq("slug", final.slug)
     .maybeSingle();
   if (pageResult.error) throw pageResult.error;
-  const page = pageResult.data as { id: string; slug: string; title: string; game_slug: string; is_public: boolean; leaf_item_count: number } | null;
+  const page = pageResult.data as { id: string; slug: string; title: string; game_slug: string; is_public: boolean; leaf_item_count: number; canonical_path: string } | null;
   if (!page || !page.is_public || page.slug !== final.slug || page.game_slug !== final.game_slug || page.title !== final.title) {
     throw new Error(`Managed-development page readback failed for ${final.slug} (${file}).`);
   }
@@ -93,7 +93,7 @@ async function verifyPage(baseUrl: string, final: ChecklistFinal, file: string) 
   const leafCount = final.items.filter((item) => item.is_required).length;
   if (page.leaf_item_count !== leafCount) throw new Error(`Leaf count mismatch for ${final.slug}.`);
 
-  const url = `${baseUrl}/gta/checklists/${final.slug}`;
+  const url = `${baseUrl}${page.canonical_path}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || !html.includes(final.title) || !html.includes(`\"numberOfItems\":${leafCount}`)) {

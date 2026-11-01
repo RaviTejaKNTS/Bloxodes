@@ -35,7 +35,7 @@ export function MinecraftToolCards({ tools, hub = false }: { tools: MinecraftToo
           data-analytics-position={index + 1}
           data-analytics-content-type="tool"
         >
-          <ToolCard tool={tool} href={`/minecraft/tools/${tool.slug}`} />
+          <ToolCard tool={tool} href={tool.canonical_path} />
         </div>
       ))}
     </section>
@@ -44,7 +44,7 @@ export function MinecraftToolCards({ tools, hub = false }: { tools: MinecraftToo
 export async function RelatedMinecraftTools({ exclude, collection }: { exclude?: string; collection?: string }) {
   const tools = (await listMinecraftTools()).filter(tool => tool.slug !== exclude && isMinecraftToolSlug(tool.slug) && (!collection || MINECRAFT_TOOL_COLLECTIONS[tool.slug].includes(collection)));
   if (!tools.length) return null;
-  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">{collection ? "Tools for this collection" : "More Minecraft tools"}</h2><MinecraftToolCards tools={tools.slice(0, 4)} /><Link href="/minecraft/tools" className="text-sm text-accent hover:underline">View all Minecraft tools</Link></section>;
+  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">{collection ? "Tools for this collection" : "More Minecraft tools"}</h2><MinecraftToolCards tools={tools.slice(0, 4)} /><Link href={tools[0].canonical_path.startsWith("/tools/") ? "/tools" : "/minecraft/tools"} className="text-sm text-accent hover:underline">View all Minecraft tools</Link></section>;
 }
 
 export async function RelatedMinecraftCollections({ tool }: { tool: string }) {
@@ -52,5 +52,5 @@ export async function RelatedMinecraftCollections({ tool }: { tool: string }) {
   const relevant = MINECRAFT_TOOL_COLLECTIONS[tool];
   const collections = (await listPublishedMinecraftCollections()).filter(entry => relevant.includes(entry.collection_slug));
   if (!collections.length) return null;
-  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">Minecraft reference collections</h2><div className="space-y-3">{collections.map(entry => <ContentCard key={entry.code} type="wiki" variant="bar" href={buildMinecraftCollectionPath(entry.wiki_slug, entry.collection_slug)} title={entry.title} subtitle={entry.meta_description} />)}</div></section>;
+  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">Minecraft reference collections</h2><div className="space-y-3">{collections.map(entry => <ContentCard key={entry.code} type="wiki" variant="bar" href={entry.canonical_path} title={entry.title} subtitle={entry.meta_description} />)}</div></section>;
 }

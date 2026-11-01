@@ -2,7 +2,11 @@ import { load } from "cheerio";
 
 const legacyFamilies = new Set(["articles", "authors", "catalog", "checklists", "codes", "events", "puzzles", "quizzes", "stats", "tools", "wiki"]);
 
-export function publicationSitemap(pathname, source) {
+export function publicationSitemap(pathname, source, namespace, pageType) {
+  if (source === "game" && ["gta", "red-dead", "minecraft"].includes(namespace)) {
+    const types = namespace === "gta" ? ["wiki", "collection", "map", "checklist"] : namespace === "minecraft" ? ["wiki", "collection", "tool"] : ["wiki", "collection"];
+    if (types.includes(pageType)) return `/sitemaps/${namespace}.xml`;
+  }
   if (source === "game" && /^\/(games|wiki|maps|codes|tools|quizzes|checklists|catalog)\//.test(pathname)) return "/sitemaps/games.xml";
   const [, family, section, subsection] = pathname.split("/");
   if (!family || family === "games") return "/sitemaps/main.xml";

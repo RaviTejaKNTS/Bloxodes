@@ -5,7 +5,7 @@ import { getGameArtwork, getGameRoot } from "./game-registry";
 import type { GameExtendedPage } from "./game-page-data";
 import type { ChecklistTemplateData } from "./engagement/types";
 
-const readGameExtendedPage = cache(async (namespace: string, value: string, column: "canonical_path" | "id", kind: "map" | "quiz" | "catalog"): Promise<GameExtendedPage | null> => {
+const readGameExtendedPage = cache(async (namespace: string, value: string, column: "canonical_path" | "id" | "slug", kind: "map" | "quiz" | "catalog"): Promise<GameExtendedPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
   const { data, error } = await supabaseAdmin().from(`game_${kind}_pages_view`).select("*").eq("namespace",namespace).eq(column,value).maybeSingle();
   if (error) throw new Error(`Game ${kind} read failed: ${error.message}`);
@@ -34,3 +34,6 @@ export const getGameExtendedPage = cache((namespace: string, path: string, kind:
 export const getGameExtendedPageById = cache((namespace: string, id: string, kind: "map" | "quiz" | "catalog") => readGameExtendedPage(namespace, id, "id", kind));
 export const getGameChecklistByPath = cache((namespace: string, path: string) => readGameChecklist(namespace, path, "canonical_path"));
 export const getGameChecklistById = cache((namespace: string, id: string) => readGameChecklist(namespace, id, "id"));
+
+/** Stable namespace and stored slug, independent of the public URL style. */
+export const getGameMapBySlug = cache((namespace: string, slug: string) => readGameExtendedPage(namespace, slug, "slug", "map"));

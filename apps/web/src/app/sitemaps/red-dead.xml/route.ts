@@ -1,8 +1,6 @@
 import { getGameLandingForLinks, gameLandingSitemapEntries } from "@/lib/game-landing";
 import { NextResponse } from "next/server";
 import {
-  buildRedDeadCollectionPath,
-  buildRedDeadWikiPath,
   listPublishedRedDeadWikiCollections,
   listPublishedRedDeadWikiPages
 } from "@/lib/red-dead";
@@ -27,16 +25,16 @@ export async function GET() {
     ]);
 
     const pages: SitemapUrlSetEntry[] = [
-      { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
+      ...(landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/games"), changefreq: "weekly" as const, priority: "0.8" }] : []),
       ...gameLandingSitemapEntries(landing),
       ...wikiPages.map((page) => ({
-        loc: withSiteUrl(buildRedDeadWikiPath(page.slug)),
+        loc: withSiteUrl(page.canonical_path),
         changefreq: "weekly" as const,
         priority: "0.9" as const,
         lastmod: rowLastmod(page)
       })),
       ...collections.map((page) => ({
-        loc: withSiteUrl(buildRedDeadCollectionPath(page.wiki_slug, page.collection_slug)),
+        loc: withSiteUrl(page.canonical_path),
         changefreq: "weekly" as const,
         priority: "0.9" as const,
         lastmod: rowLastmod(page)

@@ -9,6 +9,7 @@ import { isNavLinkActive, siteNavGroupsForPath } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteMoreDrawerProps = {
+  linkPaths?: Record<string, string>;
   id: string;
   open: boolean;
   onClose: () => void;
@@ -41,10 +42,10 @@ export function trapTabKey(event: KeyboardEvent, container: HTMLElement | null) 
  * Right-side drawer with every section link, feedback and the theme switch. It renders in the
  * server HTML (hidden until opened) so crawlers see every section link on every page.
  */
-export function SiteMoreDrawer({ id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
+export function SiteMoreDrawer({ linkPaths = {}, id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const groups = siteNavGroupsForPath(pathname);
+  const groups = siteNavGroupsForPath(pathname, linkPaths);
 
   useEffect(() => {
     if (!open) return;

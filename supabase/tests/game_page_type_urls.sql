@@ -14,6 +14,13 @@ select pg_temp.url_assert(public.expected_game_page_path('10000000-0000-0000-000
 select pg_temp.url_assert(public.expected_game_page_path('10000000-0000-0000-0000-000000000001','catalog','url-fixture-items')='/catalog/url-fixture-items','no double prefix');
 select pg_temp.url_assert((public.move_game_namespace_to_page_type_urls('url-fixture')->>'pages_moved')::int=0,'idempotent');
 select pg_temp.url_assert((select description_md like '%](/url-fixture/wiki/items)%' from public.game_wiki_pages where namespace='url-fixture'),'route move leaves content untouched');
+do $$ begin
+ begin perform public.rewrite_moved_game_links('url-fixture'); raise exception 'expected transaction guard';
+ exception when others then if sqlerrm not like 'Link rewrite must run after%' then raise; end if; end;
+end $$;
+-- The harness runs one rollback transaction. Simulate the next committed release
+-- only after proving the transaction guard above.
+select set_config('bloxodes.namespaces_moved_in_transaction','',true);
 select public.rewrite_moved_game_links('url-fixture');
 select pg_temp.url_assert((select description_md like '%](/wiki/url-fixture/items)%' from public.game_wiki_pages where namespace='url-fixture'),'markdown rewritten');
 insert into public.game_tool_pages(namespace,game_id,slug) values('url-fixture','10000000-0000-0000-0000-000000000001','calculator');
@@ -51,14 +58,6 @@ insert into public.game_tool_pages(namespace,game_id,slug) values('new-fixture',
 select pg_temp.url_assert((select canonical_path='/tools/new-fixture-calculator' from public.game_tool_pages where namespace='new-fixture'),'publisher new namespace');
 
 do $$ declare ns text; begin
- foreach ns in array array['gta','red-dead','minecraft'] loop
-  begin
-   perform public.move_game_namespace_to_page_type_urls(ns);
-   raise exception 'expected renderer refusal';
-  exception when others then
-   if sqlerrm not like 'Namespace % cannot move until its GTA/Red Dead/Minecraft renderer follow-up PR' then raise; end if;
-  end;
- end loop;
  begin
   perform public.move_game_namespace_to_page_type_urls('unmoved-fixture');
   raise exception 'expected root wiki prerequisite';
@@ -183,7 +182,7 @@ insert into public.game_wiki_pages(namespace,game_id,slug) values
  ('minecraft','70000000-0000-0000-0000-000000000002','minecraft-java'),
  ('minecraft','70000000-0000-0000-0000-000000000003','minecraft-bedrock'),
  ('minecraft','70000000-0000-0000-0000-000000000004','minecraft');
-select pg_temp.url_assert(public.expected_game_page_path(gid,'wiki',slug)=base and public.expected_game_page_path(gid,'collection','items')=base||'/items','Minecraft '||slug)
+select pg_temp.url_assert(public.expected_game_page_path(gid,'wiki',slug)=base and public.expected_game_page_path(gid,'collection','items')=case when slug='minecraft' then '/minecraft/wiki/items' else base||'/items' end,'Minecraft '||slug)
 from (values
  ('70000000-0000-0000-0000-000000000002'::uuid,'minecraft-java','/minecraft/java/wiki'),
  ('70000000-0000-0000-0000-000000000003'::uuid,'minecraft-bedrock','/minecraft/bedrock/wiki'),
@@ -191,7 +190,7 @@ from (values
 ) editions(gid,slug,base);
 do $$ begin
  begin perform public.move_game_namespace_to_page_type_urls('minecraft'); raise exception 'expected Minecraft refusal';
- exception when others then if sqlerrm not like 'Namespace minecraft cannot move until%' then raise; end if; end;
+ exception when others then if sqlerrm not like 'Namespace needs a root wiki before moving:%' then raise; end if; end;
  perform pg_temp.url_assert(not exists(select 1 from public.games where namespace='minecraft' and url_style<>'namespace'),'Minecraft stays namespace');
 end $$;
 
@@ -234,6 +233,7 @@ do $$ declare typ text; t text; col record; begin
 end $$;
 update public.game_wiki_pages set sources_json='[{"title":"Original source","url":"https://bloxodes.com/rewrite-fixture/wiki/items"}]' where namespace='rewrite-fixture';
 select public.move_game_namespace_to_page_type_urls('rewrite-fixture');
+select set_config('bloxodes.namespaces_moved_in_transaction','',true);
 create temp table rewrite_result as select public.rewrite_moved_game_links('rewrite-fixture') result;
 select pg_temp.url_assert((select resolved_target=case when path='/rewrite-fixture/codes' then '/codes/rewrite-fixture' else '/wiki/rewrite-fixture' end from public.resolve_site_route(path)),'move alias '||path)
 from (values ('/rewrite-fixture'),('/rewrite-fixture/wiki'),('/rewrite-fixture/codes'),('/rewrite-fixture/tools'),('/rewrite-fixture/maps'),('/rewrite-fixture/quizzes'),('/rewrite-fixture/checklists'),('/rewrite-fixture/catalog')) aliases(path);
