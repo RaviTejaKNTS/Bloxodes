@@ -74,18 +74,21 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   // Round 2: every page of resolved redirects plus the blockers. One spare
   // page absorbs rows added since the count; the next refresh settles the rest.
   const pageCount = Math.ceil(counted.count / PAGE_SIZE) + 1;
-  const reads = Array.from({ length: pageCount }, (_, index) =>
+  type Read = { data: unknown; error: unknown };
+  // Query builders are cast once here: their generic types are too deep to mix in one array.
+  const loose = (read: unknown) => Promise.resolve(read as PromiseLike<Read>).then(({ data, error }): Read => ({ data, error }));
+  const pageReads = Array.from({ length: pageCount }, (_, index) => loose(
     client.from('site_route_redirects').select(REDIRECT_COLUMNS).order('path')
-      .range(index * PAGE_SIZE, (index + 1) * PAGE_SIZE - 1).abortSignal(signal));
-  if (blockerFilter) {
-    reads.push(client.from('site_routes').select('path,status,match_type').in('status', ['live', 'gone']).eq('match_type', 'exact')
-      .or(blockerFilter).order('path').range(0, PAGE_SIZE - 1).abortSignal(signal));
-  }
-  const results = await Promise.all(reads);
+      .range(index * PAGE_SIZE, (index + 1) * PAGE_SIZE - 1).abortSignal(signal)));
+  const blockerRead = blockerFilter
+    ? loose(client.from('site_routes').select('path,status,match_type').in('status', ['live', 'gone']).eq('match_type', 'exact')
+      .or(blockerFilter).order('path').range(0, PAGE_SIZE - 1).abortSignal(signal))
+    : Promise.resolve<Read>({ data: [], error: null });
+  const results = await Promise.all([...pageReads, blockerRead]);
   const rows = new Map<string, RedirectRoute>();
   for (const { data, error } of results) {
-    if (error || !data) throw unavailable();
-    for (const row of data as unknown as RedirectRoute[]) rows.set(row.path, row);
+    if (error || !Array.isArray(data)) throw unavailable();
+    for (const row of data as RedirectRoute[]) rows.set(row.path, row);
   }
   return [...rows.values()];
 }
