@@ -162,7 +162,10 @@ export function cacheTagsForPath(pathname: string) {
   if (["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists", "games"].includes(first) || ["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists"].includes(second)) {
     tags.push(`page:${pathnameOnly.replace(/\/page\/[1-9]\d*$/, "")}`);
   }
-  if (first && ["gta", "red-dead", "minecraft"].includes(first)) tags.push(first);
+  if (first && ["gta", "red-dead", "minecraft"].includes(first)) {
+    tags.push(first);
+    if (!second) tags.push(`page:${pathnameOnly}`);
+  }
 
   if (pathnameOnly === "/") {
     return unique([...tags, "home"]);
@@ -376,7 +379,11 @@ export function cacheTagsForPath(pathname: string) {
     return unique(catalogTags);
   }
 
-  return first && (second === undefined || ["wiki", "tools", "codes", "checklists"].includes(second)) ? unique([...tags, first, "game-wiki-index"]) : [];
+  if (first && (second === undefined || ["wiki", "tools", "codes", "checklists"].includes(second))) {
+    if (!second) tags.push(`page:${pathnameOnly}`);
+    return unique([...tags, first, "game-wiki-index"]);
+  }
+  return [];
 }
 
 export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {

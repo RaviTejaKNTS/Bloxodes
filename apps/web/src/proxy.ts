@@ -9,7 +9,7 @@ import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
-import { googleIndexHeader } from "@/lib/seo/google-index-policy";
+import { googleIndexHeader, isGooglePolicyHtmlPath } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
 
@@ -111,7 +111,6 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   const url = req.nextUrl;
   const hostname = getRequestHostname(req);
   const hostRedirectNeeded = shouldRedirectToCanonicalHost(hostname);
-  const gameIndexPaths = readGameIndexPaths(event ? work => event.waitUntil(work) : undefined);
   const snapshot = await readRedirectSnapshot(event ? work => event.waitUntil(work) : undefined);
   // Only root aliases participate in the old combined host/path correction.
   let registry = (/^\/[^/]+$/.test(url.pathname.replace(/\/+$/, '')) || url.pathname.toLowerCase().startsWith('/catalog/'))
@@ -143,6 +142,11 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   if (registry) {
     return registryRedirectResponse(registry, url, hostname);
   }
+
+  // Cold HTML game pages briefly wait for publication evidence. Redirects never do.
+  const waitForPolicy = isGooglePolicyHtmlPath(url.pathname)
+    && /^\/(?:games|wiki|maps|checklists|quizzes|tools|codes|catalog)\//.test(url.pathname);
+  const gameIndexPaths = await readGameIndexPaths(event ? work => event.waitUntil(work) : undefined, waitForPolicy);
 
   // Pass a header downstream for routes that need request-time consent context.
   const requestHeaders = new Headers(req.headers);

@@ -171,13 +171,13 @@ it('a pending or failed Google policy never delays or discards redirects', async
   vi.useFakeTimers();
   vi.spyOn(console, 'error').mockImplementation(() => {});
   try {
-    expect(policy(p => work.push(p)).size).toBe(0);
+    expect((await policy(p => work.push(p))).size).toBe(0);
     const snapshot = await redirects.read();
     expect(snapshot.exact.size).toBeGreaterThan(0);
     await vi.advanceTimersByTimeAsync(15_000);
     await Promise.all(work);
     expect((await redirects.read()).exact).toBe(snapshot.exact);
-    expect(policy().size).toBe(0);
+    expect((await policy()).size).toBe(0);
   } finally { vi.useRealTimers(); }
 });
 
@@ -187,15 +187,15 @@ it('Google policy retains its own last-good published paths', async () => {
   const load = vi.fn().mockResolvedValue([{ path: '/wiki/peak', status: 'live', match_type: 'exact', indexableGamePath: true }]);
   const policy = createGameIndexPolicyCache(load, () => now);
   const work: Promise<void>[] = [];
-  policy(p => work.push(p));
+  await policy(p => work.push(p));
   await Promise.all(work);
-  expect(policy().has('/wiki/peak')).toBe(true);
+  expect((await policy()).has('/wiki/peak')).toBe(true);
   now = SITE_ROUTE_SNAPSHOT_TTL + 1;
   load.mockRejectedValue(new Error('private detail'));
   const log = vi.spyOn(console, 'error').mockImplementation(() => {});
   try {
-    policy(p => work.push(p));
+    await policy(p => work.push(p));
     await Promise.all(work);
-    expect(policy().has('/wiki/peak')).toBe(true);
+    expect((await policy()).has('/wiki/peak')).toBe(true);
   } finally { log.mockRestore(); }
 });

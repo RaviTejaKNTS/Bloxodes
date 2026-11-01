@@ -15,6 +15,7 @@ export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promi
   let nextRefresh = 0;
   let refreshing: Promise<void> | undefined;
   return {
+    isLoaded: () => loaded,
     async read(background?: (work: Promise<void>) => void) {
       if (!refreshing && now() >= nextRefresh) {
         const controller = new AbortController();
@@ -92,11 +93,21 @@ export const readRedirectSnapshot = cache.read;
 // Never await it on a redirect request, including the first cold request.
 export function createGameIndexPolicyCache(load: (signal: AbortSignal) => Promise<RedirectRoute[]>, now = Date.now) {
   const cache = createRedirectSnapshotCache(load, now, 15_000);
-  let paths: ReadonlySet<string> = new Set();
-  return (background?: (work: Promise<void>) => void): ReadonlySet<string> => {
-    const work = cache.read(background).then(snapshot => { paths = snapshot.indexableGamePaths; });
+  let paths: ReadonlySet<string> | undefined;
+  return async (background?: (work: Promise<void>) => void, waitForInitial = false): Promise<ReadonlySet<string>> => {
+    const work = cache.read(background).then(snapshot => {
+      if (cache.isLoaded()) paths = snapshot.indexableGamePaths;
+    });
     background?.(work);
-    return paths;
+    if (waitForInitial && !paths) {
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      try {
+        await Promise.race([work, new Promise<void>(resolve => { timer = setTimeout(resolve, SITE_ROUTE_INITIAL_TIMEOUT); })]);
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    return paths ?? new Set();
   };
 }
 export async function loadGameIndexPolicyRows(signal: AbortSignal): Promise<RedirectRoute[]> {

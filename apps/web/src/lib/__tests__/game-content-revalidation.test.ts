@@ -1,20 +1,21 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cacheTagsForPath } from "../public-cache-tags";
 
-const state = vi.hoisted(() => ({ pages: 83, queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
+const state = vi.hoisted(() => ({ pages: 83, namespace: "risk-of-rain", queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({ getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: {} }) }) }));
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: state.pages }) }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   const filters: Record<string, unknown> = {};
   state.queries.push({ table, filters });
-  const root = { id: "root", namespace: "risk-of-rain", parent_id: null, url_style: "page_type" };
+  const root = { id: "root", namespace: state.namespace, parent_id: null, url_style: "page_type" };
   const child = { ...root, id: "child", parent_id: "root" };
   const routes = [
     { id: "live", source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/wiki/risk-of-rain-2/items", status: "live" },
     { id: "old", source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/risk-of-rain/wiki/second/items", status: "old" },
     { id: "sibling", source: "game", game_id: "child", page_type: "tool", page_id: "tool", path: "/tools/risk-of-rain-cost", status: "live" },
-    { id: "hub", source: "game", game_id: "root", page_type: "wiki", page_id: "root-wiki", path: "/games/risk-of-rain", status: "live" }
+    { id: "hub", source: "game", game_id: "root", page_type: "wiki", page_id: "root-wiki", path: "/games/risk-of-rain", status: "live" },
+    { id: "namespace-hub", source: "game", game_id: "root", page_type: "hub", page_id: "root", path: `/${state.namespace}`, status: "live" }
   ];
   const all: Record<string, Array<Record<string, unknown>>> = {
     games: [root, child], site_routes: routes,
@@ -33,8 +34,16 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   return query;
 } }) }));
 import { gameContentRevalidationTargets } from "../game-content-revalidation";
-beforeEach(() => { state.queries.length = 0; state.pages = 83; });
+beforeEach(() => { state.queries.length = 0; state.pages = 83; state.namespace = "risk-of-rain"; });
 describe("game_content event contract", () => {
+  it.each(["risk-of-rain", "gta", "red-dead", "minecraft"])("root wiki events purge the %s namespace homepage tag", async namespace => {
+    state.namespace = namespace;
+    const { paths, tags } = await gameContentRevalidationTargets("games/risk-of-rain");
+    expect(paths).toContain(`/${namespace}`);
+    expect(tags).toContain(`page:/${namespace}`);
+    expect(cacheTagsForPath(`/${namespace}`)).toContain(`page:/${namespace}`);
+  });
+
   it.each(["wiki/risk-of-rain-2/items", "risk-of-rain/wiki/second/items"])("purges both collection subtrees and parents for %s", async slug => {
     const { paths, tags, collectionPaths } = await gameContentRevalidationTargets(slug);
     for (const base of ["/wiki/risk-of-rain-2/items", "/risk-of-rain/wiki/second/items"]) {
