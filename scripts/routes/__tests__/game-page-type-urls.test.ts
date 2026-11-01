@@ -36,6 +36,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text);
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
+   ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
    alter table public.games add unique(namespace,slug,kind);
    ${['wiki','code'].map(kind=>`alter table public.game_${kind}_pages add unique(game_id);`).join('\n')}

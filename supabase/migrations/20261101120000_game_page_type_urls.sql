@@ -204,7 +204,7 @@ begin
   select coalesce(jsonb_agg(public.rewrite_game_url_links(v,mapping,collection_paths) order by n),'[]'::jsonb) into result from jsonb_array_elements(value) with ordinality e(v,n);
  when 'string' then
   original:=value#>>'{}'; revised:=original;
-  for pair in select m.key,m.value#>>'{}' target from jsonb_each(mapping) m order by length(m.key) desc,m.key loop
+  for pair in select key,value#>>'{}' target from jsonb_each(mapping) order by length(key) desc,key loop
    revised:=regexp_replace(revised,'(^|[[:space:]"''(<])(https://bloxodes\.com)?'||pair.key||case when collection_paths ? pair.key then '(/page/[1-9][0-9]*)?' else '()' end||'(?=$|[#?[:space:]"'')<>])', E'\\1\\2'||pair.target||E'\\3','g');
   end loop;
   result:=to_jsonb(revised);
