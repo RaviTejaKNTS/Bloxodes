@@ -9,12 +9,16 @@ const PAGE_SIZE = 500;
 export async function movedGameSitemapEntries(): Promise<SitemapUrlSetEntry[]> {
   const entries: SitemapUrlSetEntry[] = [];
   const client = supabaseAdmin();
-  for (let offset = 0; ; offset += PAGE_SIZE) {
-    const { data, error } = await client.from("site_routes").select("path")
+  // Keyset pages on path, so a row changing mid-read can't shift a page boundary.
+  for (let after: string | null = null; ; ) {
+    let query = client.from("site_routes").select("path")
       .eq("status", "old").eq("source", "game").not("page_id", "is", null)
-      .order("path").range(offset, offset + PAGE_SIZE - 1);
+      .order("path").limit(PAGE_SIZE);
+    if (after) query = query.gt("path", after);
+    const { data, error } = await query;
     if (error || !data) throw new Error("Moved game sitemap unavailable");
     entries.push(...data.map(({ path }) => ({ loc: withSiteUrl(path), changefreq: "monthly", priority: "0.1" })));
     if (data.length < PAGE_SIZE) return entries;
+    after = data[data.length - 1].path;
   }
 }

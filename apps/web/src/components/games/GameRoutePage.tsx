@@ -18,6 +18,7 @@ import { GameRelatedLinks } from "@/components/games/GameRelatedLinks";
 import { gameCollectionMetadata, renderSharedGameCollection } from "@/components/games/GameCollectionPage";
 import { GameCodePage } from "@/components/games/GameCodePage";
 import { GameToolPage, gameToolMetadata } from "@/components/games/GameToolPage";
+import { MinecraftNotice } from "@/components/games/specialized/MinecraftNotice";
 import { buildAlternates, SITE_URL } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string; sitePath: string }> };
@@ -92,7 +93,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
   return { openGraph: { title: ctx.codes?.title || ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
-export default async function SharedGamePage({ params }: Props) {
+export default async function SharedGamePage(props: Props) {
+  const page = await renderSharedGamePage(props);
+  const { slug } = await props.params;
+  return slug === "minecraft" ? <>{page}<MinecraftNotice /></> : page;
+}
+async function renderSharedGamePage({ params }: Props) {
   const ctx = await context(params);
   if (ctx.wiki) return renderGameWikiPage({ page: ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
   if (ctx.collection) {
