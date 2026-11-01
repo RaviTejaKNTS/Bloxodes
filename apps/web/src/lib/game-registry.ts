@@ -29,7 +29,7 @@ const readGameCollection = cache(async (namespace: string, value: string, column
 });
 export const getGameCollectionByPath = cache((namespace: string, path: string) => readGameCollection(namespace, path, "canonical_path"));
 export const getGameCollectionById = cache((namespace: string, id: string) => readGameCollection(namespace, id, "id"));
-export type GameToolPage = ToolContent & { game_id: string; id: string; namespace: string; canonical_path: string; tool_key: string; rules_json: Record<string, unknown> };
+export type GameToolPage = ToolContent & { game_id: string; id: string; namespace: string; slug: string; canonical_path: string; tool_key: string; rules_json: Record<string, unknown> };
 const readGameTool = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<GameToolPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
   const { data, error } = await supabaseAdmin().from("game_tool_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
