@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { registryRequestRedirect, resolveSiteRoute } from "@/lib/site-route-resolver";
+import { registryRequestRedirect } from "@/lib/site-route-resolver";
 import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snapshot";
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
-import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
+import { REQUEST_PATHNAME_HEADER, REQUEST_GAME_PATH_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
-import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
 import { googleIndexHeader, isGooglePolicyHtmlPath } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
@@ -133,15 +132,8 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
     return applySecurityHeaders(redirectWithStatus(redirectUrl, hostRedirectNeeded ? 301 : registry!.code), redirectUrl.pathname, hostname);
   }
 
-  const editionPath = minecraftLegacyRedirect(url.pathname, url.search, path => resolveSiteRoute(snapshot, path)?.target ?? path);
-  if (editionPath) {
-    return applySecurityHeaders(redirectWithStatus(new URL(editionPath, url), 308), url.pathname, hostname);
-  }
-
   registry ??= registryRequestRedirect(snapshot, url.pathname, url.search);
-  if (registry) {
-    return registryRedirectResponse(registry, url, hostname);
-  }
+  if (registry) return registryRedirectResponse(registry, url, hostname);
 
   // Cold HTML game pages briefly wait for publication evidence. Redirects never do.
   const waitForPolicy = isGooglePolicyHtmlPath(url.pathname)
@@ -152,6 +144,9 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
+  // Always overwrite the incoming header. Ownership uses the existing published URL list.
+  const menuPath = url.pathname.replace(/\/page\/[1-9]\d*$/, "");
+  requestHeaders.set(REQUEST_GAME_PATH_HEADER, gameIndexPaths.has(menuPath) || /^\/games\/[^/]+$/.test(menuPath) ? menuPath : "");
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
   // An existing all-engine robots header (private routes, indexing disabled) already covers Google.

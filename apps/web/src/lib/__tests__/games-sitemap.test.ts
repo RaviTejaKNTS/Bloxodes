@@ -1,6 +1,7 @@
 import { expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/game-content-index", () => ({ listSharedGameDiscoveryPages: async () => [
+  ...["gta", "red-dead", "minecraft"].map(namespace => ({ namespace, canonical_path: `/wiki/${namespace}`, title: namespace })),
   { namespace: "peak", canonical_path: "/wiki/peak", title: "PEAK" },
   { namespace: "peak", canonical_path: "/maps/peak-map", title: "Map" },
   { namespace: "risk-of-rain", canonical_path: "/games/risk-of-rain", title: "Risk of Rain" },
@@ -22,4 +23,5 @@ it("uses owner namespaces and saved paths, emits each URL once without namespace
   expect(urls).toContain("https://bloxodes.com/wiki/risk-of-rain-2/items");
   expect(urls).not.toContain("https://bloxodes.com/wiki/maps");
   expect(urls).not.toContain("https://bloxodes.com/peak");
+  for (const ns of ["gta", "red-dead", "minecraft"]) expect(urls).toContain(`https://bloxodes.com/wiki/${ns}`);
 });

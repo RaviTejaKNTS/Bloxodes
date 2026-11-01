@@ -9,7 +9,6 @@ const aliases: Record<string, string> = {
 };
 vi.mock("server-only", () => ({}));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
-vi.mock("@/lib/game-link-paths", () => ({ gameLinkPaths: async () => state.moved ? aliases : {} }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: namespace === "gta" && state.moved ? "/games/gta" : `/${namespace}/wiki` }) }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
   const query = { select: () => query, eq: () => query, gt: () => query, not: () => query, order: () => query, limit: async () => ({ data: [], error: null }) };
@@ -23,45 +22,23 @@ vi.mock("@/lib/content-counts", () => ({ getContentCounts: async () => ({ codes:
 vi.mock("@/lib/wiki", () => ({ listPublishedWikiPages: async () => [] }));
 vi.mock("@/lib/puzzles", () => ({ listPublishedPuzzlePages: async () => [] }));
 vi.mock("@/lib/catalog", () => ({ listPublishedTopLevelCatalogPages: async () => [] }));
-vi.mock("@/lib/minecraft", () => ({ getMinecraftWikiPageBySlug: async () => null }));
 vi.mock("@/app/(site)/events/page-data", () => ({ buildEventsCards: async () => ({ cards: [] }) }));
 import { loadHomePageData } from "../home-page-data";
-import { GTA_LINKS, HubsPageSidebar, HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
-
-describe("home and hub rails use saved aliases", () => {
-  it.each([false, true])("keeps curated home and sidebar destinations consistent, moved=%s", async moved => {
-    state.moved = moved;
-    const home = await loadHomePageData();
-    const gta = home.franchises.find(franchise => franchise.name === "Grand Theft Auto")!;
-    expect(gta.href).toBe(moved ? "/games/gta" : "/gta/wiki");
-    expect(gta.links.map(link => link.href)).toEqual(GTA_LINKS.slice(0, 3).map(link => moved ? aliases[link.href] ?? link.href : link.href));
-    const redDead = home.franchises.find(franchise => franchise.name === "Red Dead")!;
-    expect(redDead.href).toBe("/red-dead/wiki");
-    expect(redDead.links.every(link => link.href.startsWith("/red-dead/"))).toBe(true);
-    for (const element of [
-      await HubsPageSidebar({ canonicalPath: "/example", title: "Example", links: GTA_LINKS }),
-      await HubsSidebarLayout({ canonicalPath: "/example", title: "Example", heading: "GTA", links: GTA_LINKS, children: <p>Body</p> }),
-    ]) {
-      const html = renderToStaticMarkup(element);
-      for (const link of GTA_LINKS.slice(0, 6)) {
-        expect(html).toContain(`href="${moved ? aliases[link.href] ?? link.href : link.href}"`);
-        if (moved && aliases[link.href]) expect(html).not.toContain(`href="${link.href}"`);
-      }
-    }
-  });
-});
-
-it("preserves the committed GTA home destinations and full sidebar order before the move", async () => {
-  state.moved = false;
+import { hubsSidebarLinksFor, HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
+import GamesPage from "@/app/(site)/games/page";
+const games = ["arc-raiders", "gta", "red-dead", "minecraft"].map(namespace => ({ namespace, title: namespace, href: `/games/${namespace}`, image: `https://media.bloxodes.com/${namespace}.webp`, pages: [{ kind: "wiki", gameId: "owner", title: `${namespace} wiki`, href: `/wiki/${namespace}-game` }] }));
+vi.mock("@/lib/game-site-data", () => ({ listGameCards: async () => games, listGameMenus: async () => games }));
+it("includes every published root with the same home card and directory contract", async () => {
   const home = await loadHomePageData();
-  const gta = home.franchises.find(franchise => franchise.name === "Grand Theft Auto")!;
-  expect(gta.href).toBe("/gta/wiki");
-  expect(gta.links.map(link => link.href)).toEqual(["/gta/maps", "/gta/maps/gta5", "/gta/checklists"]);
-  const element = await HubsSidebarLayout({ canonicalPath: "/example", title: "Example", heading: "GTA", links: GTA_LINKS, children: <p>Body</p> });
-  const markup = renderToStaticMarkup(element);
-  const links = [...markup.matchAll(/href="(\/gta[^"]*)"/g)].map(match => match[1]);
-  expect(links).toEqual([
-    "/gta/maps", "/gta/maps/gta5", "/gta/checklists", "/gta/checklists/gta-5",
-    "/gta/wiki/gta-5/spaceship-parts", "/gta/wiki/gta-5/vehicles"
-  ]);
+  expect(home.franchises.map(game => game.name)).toEqual(games.map(game => game.title));
+  for (const game of games) {
+    expect(home.franchises.find(card => card.name === game.title)).toMatchObject({ href: game.href, image: game.image, links: [{ href: game.pages[0].href, label: game.pages[0].title }] });
+    const sidebar = await hubsSidebarLinksFor(game.namespace);
+    const markup = renderToStaticMarkup(await HubsSidebarLayout({ canonicalPath: game.href, title: game.title, ...sidebar, children: <p>Body</p> }));
+    expect(markup).toContain(`href="${game.pages[0].href}"`);
+  }
+  const page = await GamesPage();
+  // Inspect the exact cards passed to the server layout without resolving its rail.
+  const markup = renderToStaticMarkup(<>{page.props.children}</>);
+  for (const game of games) expect(markup).toContain(`href="${game.href}"`);
 });

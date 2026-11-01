@@ -2,10 +2,9 @@ import "server-only";
 import { getGameMapBySlug } from "./game-extra-pages";
 
 import { GTA5_MAP_LAYERS, type Gta5MapMarker } from "@/lib/gta-map-types";
-import {
-  getGtaWikiCollectionPageByPath,
-  getPublishedGtaWikiCollectionRuntime
-} from "@/lib/gta";
+import { createGameReader } from "@/lib/shared-game-reader";
+const { getSharedGameWikiCollectionPageByPath: getGtaWikiCollectionPageByPath,
+  getPublishedSharedGameWikiCollectionRuntime: getPublishedGtaWikiCollectionRuntime } = createGameReader("gta");
 
 function firstString(item: Record<string, unknown>, keys: string[]): string {
   for (const key of keys) {

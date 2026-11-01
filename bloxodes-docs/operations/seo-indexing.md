@@ -4,7 +4,7 @@ Last verified: 2026-11-01
 
 ## Sitemaps, feed and search
 
-- Next routes build `/sitemap.xml` and per-family sitemaps from published production data. `/sitemaps/games.xml` covers non-Roblox games.
+- Next routes build `/sitemap.xml` and per-family sitemaps from published production data. `/sitemaps/games.xml` lists every published non-Roblox page at its stored URL, the same way for every game. The old `/sitemaps/gta.xml`, `red-dead.xml` and `minecraft.xml` permanently redirect to it.
 - `/feed.xml` (`apps/web/src/app/feed.xml/route.ts`) lists published articles, codes, checklists, events, puzzles, shared game pages, GTA and Minecraft adapters and the monthly reports that are listed in it by hand.
 - Content events refresh search, sitemaps and the feed. Code or static data changes need a web deploy.
 - Collection pagination pages are `noindex` and stay out of sitemaps.

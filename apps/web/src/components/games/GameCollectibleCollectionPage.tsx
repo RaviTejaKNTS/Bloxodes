@@ -146,7 +146,7 @@ export function renderGameCollectibleCollectionPage({
         afterContent={<>{detailNodes}<CollectionFaq items={faqNodes} /></>}
       />
 
-      {contentHtml?.id ? <CommentsSection entityType={page.namespace === "gta" ? "gta_wiki_collection" : page.namespace === "red-dead" ? "red_dead_wiki_collection" : page.namespace === "minecraft" ? "minecraft_wiki_collection" : "game_collection"} entityId={contentHtml.id} /> : null}
+      {contentHtml?.id ? <CommentsSection entityType={"game_collection"} entityId={contentHtml.id} /> : null}
     </div>
   );
 }

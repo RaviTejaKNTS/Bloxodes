@@ -17,6 +17,7 @@ import type { GameMap } from "@/components/games/GameMap";
 // Keep the page-type routing, specialist renderers and metadata real. Stub IO
 // and interactive boundaries to inspect saved identities and calculator inputs.
 const state = vi.hoisted(() => ({ namespace: "gta", kind: "wiki", moved: false, page: {} as ReturnType<typeof savedPage> }));
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: async () => [] }));
 vi.mock("server-only", () => ({}));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NOT_FOUND"); } }));
@@ -27,7 +28,7 @@ vi.mock("@/lib/tools", () => ({ getToolContentWithDevFallback: async () => null 
 vi.mock("@/lib/db", () => ({ getChecklistPageBySlug: async () => null }));
 vi.mock("@/lib/site-route-page", () => ({ getLiveSiteRoute: async () => ({ source: "game", page_type: state.kind, page_id: "page-id", game_id: "owner" }) }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
-  const query = { select: () => query, eq: () => query, maybeSingle: async () => ({ data: { namespace: state.namespace, url_style: "page_type" }, error: null }) };
+  const query = { select: () => query, eq: () => query, single: async () => ({ data: { canonical_path: `/wiki/${state.page.wiki_slug}` }, error: null }), maybeSingle: async () => ({ data: { namespace: state.namespace, url_style: "page_type" }, error: null }) };
   return query;
 } }) }));
 function root() { return { id: "root", namespace: state.namespace, slug: state.namespace, title: state.namespace, kind: "franchise", parent_id: null, is_published: true, url_style: state.moved ? "page_type" : "namespace", cover_image: "https://media.bloxodes.com/cover.webp", description_md: "Root fallback copy." }; }
@@ -45,18 +46,15 @@ vi.mock("@/lib/game-extra-pages", () => ({
   getGameExtendedPage: async () => null, getGameChecklistByPath: async () => null,
 }));
 function checklist() { return { ...state.page, page: state.page, items: [{ id: "task-id", section_code: "1", title: "Finish the mission", description: null, is_required: true }] }; }
-vi.mock("@/lib/gta-checklists", () => ({ getGtaChecklistPageBySlug: async () => state.kind === "checklist" ? checklist() : null }));
 const item = { item: { name: "Saved item" }, system: { slug: "item-id", name: "Saved item", image: "https://media.bloxodes.com/item.webp" } };
 function runtime() { return { config: { code: "saved-code", gameSlug: state.page.wiki_slug, slug: "items", label: "Items", sortOrder: 0, gameName: "Saved game" }, document: { meta: { schemaVersion: 2, itemFields: ["name"], display: { cardFields: [] } }, items: [item] } }; }
 function reader() { return {
+  getPublishedSharedGameWikiCollectionRuntime: async () => runtime(),
   listPublishedSharedGameWikiPages: async () => [], listPublishedSharedGameWikiCollectionsByWikiSlug: async () => [],
   listPublishedSharedGameWikiCollectionImageUrls: async () => [],
   resolveSharedGameWikiCoverImage: () => "https://media.bloxodes.com/cover.webp", resolveSharedGameWikiThumbnailImage: () => "https://media.bloxodes.com/cover.webp",
 }; }
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: reader }));
-vi.mock("@/lib/gta", () => ({ getGtaWikiPageBySlug: async () => state.page, getGtaWikiCollectionPageByPath: async () => state.page, getPublishedGtaWikiCollectionRuntime: async () => runtime(), listPublishedGtaWikiCollectionsByWikiSlug: async () => [state.page], buildGtaCollectionPath: () => state.page.canonical_path }));
-vi.mock("@/lib/red-dead", () => ({ getRedDeadWikiPageBySlug: async () => state.page, getRedDeadWikiCollectionPageByPath: async () => state.page, getPublishedRedDeadWikiCollectionRuntime: async () => runtime(), listPublishedRedDeadWikiCollectionsByWikiSlug: async () => [state.page], buildRedDeadCollectionPath: () => state.page.canonical_path }));
-vi.mock("@/lib/minecraft", () => ({ getMinecraftWikiPageBySlug: async () => state.page, getMinecraftWikiCollectionPageByPath: async () => state.page, getPublishedMinecraftWikiCollectionRuntime: async () => runtime(), listPublishedMinecraftWikiCollectionsByWikiSlug: async () => [state.page], buildMinecraftCollectionPath: () => state.page.canonical_path, buildMinecraftWikiPath: (slug: string) => `/minecraft/${slug.replace("minecraft-", "")}/wiki`, getMinecraftTool: async () => state.page, listMinecraftTools: async () => [], listPublishedMinecraftCollections: async () => [] }));
 vi.mock("@/lib/page-content", () => ({ renderPageContentNodes: (html: string) => [<p key="copy" dangerouslySetInnerHTML={{ __html: html }} />], buildPageContentHtml: async (page: Record<string, unknown>) => ({ id: page.id, title: page.title, descriptionHtml: [{ key: "description", html: "<p>Saved description.</p>" }], introHtml: "", howHtml: "", faq: [], wikiHtml: "", tipsHtml: "" }) }));
 vi.mock("@/components/game-collections/GameCollectionView", () => ({ GameCollectionView: (props: Parameters<typeof GameCollectionView>[0]) => <section data-code={props.config.slug}>{props.sections.flatMap((section) => section.items.map((item) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
 vi.mock("@/components/games/GameCollectibleChecklist", () => ({ GameCollectibleChecklist: (props: Parameters<typeof GameCollectibleChecklist>[0]) => <section data-code={props.code}>{props.sections.flatMap((section) => section.items.map((item) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
@@ -68,7 +66,7 @@ vi.mock("@/components/ChecklistProgressHeader", () => ({ ChecklistProgressHeader
 vi.mock("@/components/maps/MapViewport", () => ({ MapViewport: ({ children }: { children: ReactNode }) => <div>{children}</div> }));
 vi.mock("@/components/UpdatedTimestamp", () => ({ UpdatedTimestamp: () => null }));
 vi.mock("@/components/SocialShare", () => ({ SocialShare: () => null }));
-vi.mock("@/components/tools/ToolPageLayout", () => ({ ToolPageLayout: ({ children }: { children: ReactNode }) => <>{children}</> }));
+vi.mock("@/components/tools/ToolPageLayout", () => ({ RelatedToolLinks: async () => null, ToolPageLayout: ({ children }: { children: ReactNode }) => <>{children}</> }));
 vi.mock("@/components/games/specialized/minecraft/MinecraftToolClient", () => ({ MinecraftToolClient: (props: Parameters<typeof MinecraftToolClient>[0]) => <div data-calculator={JSON.stringify(props)} /> }));
 vi.mock("@/lib/gta-map", () => ({ getGta5MapMarkers: async () => [{ id: "pin-id", collectionCode: "saved-code" }] }));
 vi.mock("@/components/gta/Gta5InteractiveMap", () => ({ Gta5InteractiveMap: (props: Parameters<typeof Gta5InteractiveMap>[0]) => <div data-engine="gta5" data-pins={JSON.stringify(props.markers)} /> }));
@@ -111,7 +109,7 @@ const fixtures = [
   ["minecraft", "wiki", "minecraft-hub", "/minecraft/wiki", "/games/minecraft", "root"],
   ...["java", "bedrock"].map(edition => ["minecraft", "wiki", `minecraft-${edition}`, `/minecraft/${edition}/wiki`, `/wiki/minecraft-${edition}`, edition]),
   ...["gta", "red-dead"].flatMap(namespace => ["database", "collectible"].map(type => [namespace, "collection", `${namespace}-child`, `/${namespace}/wiki/${namespace}-child/items`, `/wiki/${namespace}-child/items`, type])),
-  ...["java", "bedrock"].map(edition => ["minecraft", "collection", `minecraft-${edition}`, `/minecraft/${edition}/wiki/items`, `/wiki/minecraft-${edition}/items`, "database"]),
+  ...["java", "bedrock"].flatMap(edition => ["database", "collectible"].map(type => ["minecraft", "collection", `minecraft-${edition}`, `/minecraft/${edition}/wiki/items`, `/wiki/minecraft-${edition}/items`, type])),
   ["minecraft", "tool", "xp-calculator", "/minecraft/tools/xp-calculator", "/tools/minecraft-xp-calculator", "tool"],
   ["gta", "checklist", "gta-5", "/gta/checklists/gta-5", "/checklists/gta-5", "checklist"],
   ["gta", "map", "gta5", "/gta/maps/gta5", "/maps/gta5", "gta5"],
@@ -171,21 +169,22 @@ describe("specialized page-type resolver contracts", () => {
     for (const rendered of [after]) {
       expect(rendered).toContain(variant === "gta5" ? "GTA 5 Interactive Map" : "Saved title");
       if (kind === "wiki" || kind === "tool") expect(rendered).toContain("page-id");
-      if (kind === "wiki") expect(rendered).toContain(namespace === "gta" ? "gta_wiki" : namespace === "red-dead" ? "red_dead_wiki" : "minecraft_wiki");
+      if (kind === "wiki") expect(rendered).toContain("game_wiki");
       if (kind === "collection") {
         for (const value of ["Saved item", "item-id", "saved-code", "page-id"]) expect(rendered).toContain(value);
-        expect(rendered).toContain(namespace === "gta" ? "gta_wiki_collection"
-          : namespace === "red-dead" ? "red_dead_wiki_collection" : "minecraft_wiki_collection");
+        expect(rendered).toContain("game_collection");
       }
       if (kind === "checklist") { expect(rendered).toContain("gta:gta-5"); expect(rendered).toContain("task-id"); }
       if (kind === "map") expect(rendered).toContain(variant === "gta-layered" ? "layer-id" : "pin-id");
       if (kind === "tool") {
         const calculator = JSON.parse(load(rendered)("[data-calculator]").attr("data-calculator")!);
         expect(calculator).toEqual({ slug: "xp-calculator", rules: state.page.rules_json });
-        expect(rendered).toContain("minecraft_tool");
+        expect(rendered).toContain("game_tool");
       }
     }
     expect(state.page.id).toBe("page-id");
     expect(state.page.tool_key).toBe(slug);
   });
 });
+
+vi.mock("@/lib/minecraft-tools/page-reader", () => ({ getMinecraftTool: async () => state.page, listMinecraftTools: async () => [] }));

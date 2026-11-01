@@ -1,12 +1,10 @@
 import "server-only";
 import { getGameMapBySlug } from "./game-extra-pages";
 
-import {
-  getGtaWikiCollectionPageByPath,
-  getGtaWikiPageBySlug,
-  getPublishedGtaWikiCollectionRuntime,
-  type GtaWikiCollectionPage
-} from "@/lib/gta";
+import { createGameReader, type SharedGameWikiCollectionPage as GtaWikiCollectionPage } from "@/lib/shared-game-reader";
+const { getSharedGameWikiCollectionPageByPath: getGtaWikiCollectionPageByPath,
+  getSharedGameWikiPageBySlug: getGtaWikiPageBySlug,
+  getPublishedSharedGameWikiCollectionRuntime: getPublishedGtaWikiCollectionRuntime } = createGameReader("gta");
 import type {
   GtaMapDefinition,
   GtaMapFact,

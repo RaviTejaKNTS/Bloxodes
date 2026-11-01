@@ -60,9 +60,16 @@ export async function gameContentRevalidationTargets(slug: string) {
     for (const id of new Set([game.id, root.id])) {
       for (const wiki of await rows("game_wiki_pages", "id,canonical_path", { game_id: id })) pagePaths.add(wiki.canonical_path);
     }
+    // Specialized renderers may consume a sibling title or edition's collection.
+    // Refresh maps and calculators in the owning namespace for every game.
+    for (const [table, index] of [["game_tool_pages", "/tools"], ["game_map_pages", "/maps"]]) {
+      for (const dependent of await rows(table, "id,canonical_path", { namespace: game.namespace })) {
+        pagePaths.add(dependent.canonical_path);
+        indexes.add(index);
+      }
+    }
     const hubs = await rows("site_routes", "path", { source: "game", game_id: root.id, page_type: "hub", status: "live" });
     for (const hub of hubs) pagePaths.add(hub.path);
-    if (["gta", "red-dead", "minecraft"].includes(game.namespace)) indexes.add(`/sitemaps/${game.namespace}.xml`);
   }
   for (const owner of owners) await addOwner(owner);
   for (const path of pagePaths) {

@@ -37,6 +37,8 @@ Redirects are the other in-process cache (`apps/web/src/lib/site-route-snapshot.
 - Once loaded, requests use the copy and a background refresh runs every 5 minutes (15-second limit). A failed refresh keeps the last copy.
 - `/api/revalidate` doesn't clear it. Route changes show up after the next refresh.
 
+Every non-Roblox page change uses the `game_content` event. One resolver works out the affected pages from stored route ownership (the page, its old URLs, its game's hub, collection pagination and the relevant index pages), the same for every game.
+
 ## Runtime variables
 
 - Edge Function: `REVALIDATE_ENDPOINT`, `REVALIDATE_SECRET`, batch and delay controls, service role.

@@ -1,5 +1,4 @@
 import { gameContentRevalidationTargets } from "@/lib/game-content-revalidation";
-import { buildMinecraftWikiPath, minecraftCollectionEventPath } from "@/lib/minecraft-paths";
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
@@ -7,8 +6,6 @@ import { cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type Public
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
-import { getGtaMapRoutesForWikiSlug } from "@/lib/gta-interactive-map-registry";
-import { MINECRAFT_TOOL_SLUGS } from "@/lib/minecraft-tools/manifest";
 
 type SinglePayload = PublicCacheEvent;
 type Payload = SinglePayload | { type: "batch"; events: SinglePayload[] };
@@ -26,17 +23,6 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "puzzle",
   "wiki",
   "wiki_collection",
-  "gta_checklist",
-  "gta_game",
-  "gta_wiki",
-  "gta_wiki_collection",
-  "red_dead_game",
-  "red_dead_wiki",
-  "red_dead_wiki_collection",
-  "minecraft_game",
-  "minecraft_wiki",
-  "minecraft_wiki_collection",
-  "minecraft_tool",
   "game_content",
   "stats"
 ]);
@@ -72,9 +58,6 @@ const PUZZLES_SITEMAP_PATH = "/sitemaps/puzzles.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
-const GTA_SITEMAP_PATH = "/sitemaps/gta.xml";
-const RED_DEAD_SITEMAP_PATH = "/sitemaps/red-dead.xml";
-const MINECRAFT_SITEMAP_PATH = "/sitemaps/minecraft.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
@@ -231,95 +214,6 @@ function revalidateForWiki(slug: string) {
   return applyRevalidation(
     [...paginatedIndexPaths("/wiki"), `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
-  );
-}
-
-function revalidateForGtaGame(slug: string) {
-  return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
-    ["games-index", "gta-home", "gta-games-index", "gta-wiki-index", `gta-game:${slug}`]
-  );
-}
-
-function revalidateForGtaWiki(slug: string) {
-  return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
-    ["games-index", "gta-home", "gta-wiki-index", `gta-wiki:${slug}`]
-  );
-}
-
-function revalidateForGtaWikiCollection(slug: string) {
-  const [wikiSlug, collectionSlug] = slug.split("/");
-  const basePath = wikiSlug && collectionSlug ? `/gta/wiki/${wikiSlug}/${collectionSlug}` : "";
-  return applyRevalidation(
-    [
-      "/gta",
-      "/gta/wiki",
-      "/gta/maps",
-      wikiSlug ? `/gta/wiki/${wikiSlug}` : "",
-      ...(wikiSlug ? getGtaMapRoutesForWikiSlug(wikiSlug) : []),
-      basePath,
-      ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
-      FEED_PATH,
-      SITEMAP_INDEX_PATH,
-      GTA_SITEMAP_PATH
-    ].filter(Boolean) as string[],
-    [
-      "gta-home",
-      "gta-wiki-index",
-      "gta-wiki-collection-index",
-      wikiSlug ? `gta-wiki:${wikiSlug}` : "",
-      wikiSlug && collectionSlug ? `gta-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
-    ]
-  );
-}
-
-function revalidateForRedDeadGame(slug: string) {
-  return applyRevalidation(
-    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
-    ["games-index", "red-dead-home", "red-dead-games-index", "red-dead-wiki-index", `red-dead-game:${slug}`]
-  );
-}
-
-function revalidateForRedDeadWiki(slug: string) {
-  return applyRevalidation(
-    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
-    ["games-index", "red-dead-home", "red-dead-wiki-index", `red-dead-wiki:${slug}`]
-  );
-}
-
-function revalidateForRedDeadWikiCollection(slug: string) {
-  const [wikiSlug, collectionSlug] = slug.split("/");
-  const basePath = wikiSlug && collectionSlug ? `/red-dead/wiki/${wikiSlug}/${collectionSlug}` : "";
-  return applyRevalidation(
-    [
-      "/red-dead",
-      "/red-dead/wiki",
-      wikiSlug ? `/red-dead/wiki/${wikiSlug}` : "",
-      basePath,
-      ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
-      SITEMAP_INDEX_PATH,
-      RED_DEAD_SITEMAP_PATH
-    ].filter(Boolean) as string[],
-    [
-      "red-dead-home",
-      "red-dead-wiki-index",
-      "red-dead-wiki-collection-index",
-      wikiSlug ? `red-dead-wiki:${wikiSlug}` : "",
-      wikiSlug && collectionSlug ? `red-dead-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
-    ]
-  );
-}
-
-function revalidateForMinecraft(type: "minecraft_game" | "minecraft_wiki" | "minecraft_wiki_collection" | "minecraft_tool", slug: string) {
-  const indexes = ["/minecraft", "/minecraft/wiki", "/minecraft/java/wiki", "/minecraft/bedrock/wiki", "/minecraft/tools", "/games", FEED_PATH, SITEMAP_INDEX_PATH, MINECRAFT_SITEMAP_PATH];
-  const detailPath = type === "minecraft_wiki_collection" ? minecraftCollectionEventPath(slug) : type === "minecraft_tool" ? `/minecraft/tools/${slug}` : buildMinecraftWikiPath(slug);
-  const paginatedPaths = type === "minecraft_wiki_collection"
-    ? Array.from({ length: PAGINATED_INDEX_PURGE_LIMIT - 1 }, (_, index) => `${detailPath}/page/${index + 2}`)
-    : [];
-  return applyRevalidation(
-    [...indexes, detailPath, ...paginatedPaths, ...(type === "minecraft_wiki_collection" ? MINECRAFT_TOOL_SLUGS.map((tool) => `/minecraft/tools/${tool}`) : [])].filter(Boolean),
-    cacheTagsForEvent(type, slug)
   );
 }
 
@@ -756,11 +650,6 @@ async function resolveUniverseIdsForEvent(type: SinglePayload["type"], slug: str
       return lookupUniverseIdsBySlug("events_pages", "slug", [slug]);
     case "checklist":
       return lookupUniverseIdsBySlug("checklist_pages", "slug", [slug]);
-    case "minecraft_game":
-    case "minecraft_wiki":
-    case "minecraft_wiki_collection":
-    case "minecraft_tool":
-      return [];
     case "tool":
       return lookupUniverseIdsBySlug("tools", "code", [slug]);
     case "quiz":
@@ -901,16 +790,6 @@ async function collectRevalidationTargets(payload: SinglePayload) {
 
   switch (payload.type) {
     case "game_content": {
-      // Deferred namespaces retain their existing map/calculator dependencies.
-      if (/^(gta|red-dead|minecraft)\//.test(slug)) {
-        if (!/^[a-z0-9-]+\/[a-z0-9/-]+$/.test(slug) || slug.includes("..")) break;
-        const namespace = slug.split("/")[0];
-        // A collection update also changes the copy and previews on its parent wiki.
-        const wikiPrefix = namespace === "gta" ? slug.match(/^gta\/wiki\/[^/]+/)?.[0] : undefined;
-        purgePaths = applyRevalidation([`/${slug}`, ...(wikiPrefix ? [`/${wikiPrefix}`] : []), `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
-        purgeTags = [...purgeTags, namespace];
-        break;
-      }
       const targets = await gameContentRevalidationTargets(slug);
       // A collection can shrink or become hidden. Invalidate its subtree too,
       // including previously cached pages beyond the new runtime's page count.
@@ -920,12 +799,6 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       paginationPrefixes = targets.collectionPaths.map(path => `${path}/page/`);
       break;
     }
-    case "minecraft_game":
-    case "minecraft_wiki":
-    case "minecraft_wiki_collection":
-    case "minecraft_tool":
-      purgePaths = revalidateForMinecraft(payload.type, slug);
-      break;
     case "code":
       purgePaths = revalidateForCode(slug);
       break;
@@ -958,27 +831,6 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "wiki_collection":
       purgePaths = revalidateForWikiCollection(slug);
-      break;
-    case "gta_checklist":
-      purgePaths = applyRevalidation([...paginatedIndexPaths("/gta/checklists"), `/gta/checklists/${slug}`, `/gta/wiki/${slug}`, "/gta", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH], ["gta-checklists-index", "gta-checklists", `gta-checklist:${slug}`]);
-      break;
-    case "gta_game":
-      purgePaths = revalidateForGtaGame(slug);
-      break;
-    case "gta_wiki":
-      purgePaths = revalidateForGtaWiki(slug);
-      break;
-    case "gta_wiki_collection":
-      purgePaths = revalidateForGtaWikiCollection(slug);
-      break;
-    case "red_dead_game":
-      purgePaths = revalidateForRedDeadGame(slug);
-      break;
-    case "red_dead_wiki":
-      purgePaths = revalidateForRedDeadWiki(slug);
-      break;
-    case "red_dead_wiki_collection":
-      purgePaths = revalidateForRedDeadWikiCollection(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);
@@ -1069,7 +921,7 @@ export async function POST(request: Request) {
   impactedWikiSlugs = Array.from(new Set(impactedWikiSlugs));
   impactedListSlugs = Array.from(new Set(impactedListSlugs));
 
-  const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags, ...(parsedEvents.every(event => event.type === "game_content" && !/^(gta|red-dead|minecraft)\//.test(normalizeSlug(event.slug))) ? { paginationPrefixes: [...new Set(paginationPrefixes)] } : {}) });
+  const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags, ...(parsedEvents.every(event => event.type === "game_content") ? { paginationPrefixes: [...new Set(paginationPrefixes)] } : {}) });
   const warmPaths = warmableRevalidationPaths(purgePaths);
   const warmMode = readWarmMode();
   const cloudflareWarm = cloudflare.enabled && cloudflare.ok

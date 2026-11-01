@@ -1,4 +1,5 @@
 "use client";
+import type { GameMenu } from "@/lib/game-site-navigation";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -12,6 +13,8 @@ import { isNavLinkActive, siteNavLinksForPath, type SidebarAccount } from "@/lib
 
 type SiteHeaderProps = {
   account: SidebarAccount;
+  gameMenus?: GameMenu[];
+  gamePaths?: string[];
   linkPaths?: Record<string, string>;
 };
 
@@ -24,9 +27,35 @@ const iconButtonClass =
  * The sticky site header. Section links sit on one line that wraps out of view when the window is
  * too narrow, so every link stays in the server HTML and the More drawer lists them all.
  */
-export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
+export function SiteHeader({ account, linkPaths = {}, gameMenus: initialMenus = [], gamePaths = [] }: SiteHeaderProps) {
   const pathname = usePathname() ?? "/";
-  const links = siteNavLinksForPath(pathname, linkPaths);
+  const initialPath = useRef(pathname);
+  const [resolved, setResolved] = useState({ path: pathname, menus: initialMenus });
+  const menuPath = pathname.replace(/\/page\/[1-9]\d*$/, "");
+  const isGame = gamePaths.includes(menuPath) || /^\/games\/[^/]+$/.test(menuPath);
+  // Never show a previous game's menu while the next request is pending.
+  const gameMenus = resolved.path === pathname ? resolved.menus : [];
+  useEffect(() => {
+    if (pathname === initialPath.current) {
+      initialPath.current = "";
+      return;
+    }
+    if (!isGame) return; // Roblox navigation keeps its existing menu and makes no request.
+    const controller = new AbortController();
+    fetch(`/api/game-menu?path=${encodeURIComponent(menuPath)}`, { signal: controller.signal })
+      .then(response => {
+        if (!response.ok) throw new Error("Game menu unavailable");
+        return response.json();
+      })
+      .then(({ menu }: { menu: GameMenu | null }) => {
+        if (!controller.signal.aborted) setResolved({ path: pathname, menus: menu ? [menu] : [] });
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setResolved({ path: pathname, menus: [] });
+      });
+    return () => controller.abort();
+  }, [pathname, menuPath, isGame]);
+  const links = siteNavLinksForPath(pathname, linkPaths, gameMenus);
   const listRef = useRef<HTMLUListElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -106,14 +135,14 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
           </div>
         </div>
       </header>
-      <SiteMoreDrawer linkPaths={linkPaths}
+      <SiteMoreDrawer gameMenus={gameMenus} linkPaths={linkPaths}
         id={SITE_MORE_DRAWER_ID}
         open={moreOpen}
         onClose={closeMore}
         pathname={pathname}
         returnFocusRef={moreButtonRef}
       />
-      <GlobalSearchOverlay linkPaths={linkPaths} />
+      <GlobalSearchOverlay linkPaths={linkPaths} gameMenus={gameMenus} />
     </>
   );
 }

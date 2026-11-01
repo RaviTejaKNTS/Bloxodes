@@ -19,10 +19,8 @@ const KINDS: Array<[RegExp, RecentPageKind]> = [
   [/^\/catalog\/.+/, "catalog"],
   [/^\/stats\/games\/[^/]+$/, "stats"],
   [/^\/puzzles\/[^/]+$/, "puzzle"],
-  [/^\/gta\/checklists\/[^/]+$/, "checklist"],
-  [/^\/gta\/maps\/.+/, "map"],
-  [/^\/minecraft\/tools\/[^/]+$/, "tool"],
-  [/^\/(wiki|gta|red-dead|minecraft)\/.+/, "wiki"]
+  [/^\/maps\/[^/]+$/, "map"],
+  [/^\/wiki\/.+/, "wiki"]
 ];
 
 export function recentPageKind(pathname: string): RecentPageKind | null {

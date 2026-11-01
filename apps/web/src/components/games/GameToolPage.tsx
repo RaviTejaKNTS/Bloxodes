@@ -15,7 +15,7 @@ export async function GameToolPage({ tool, namespaceTitle, sidebarContent }: { t
   const landing = await getGameLandingForLinks(tool.namespace);
   return <GameToolPageLayout tool={tool} namespaceTitle={namespaceTitle} landingPath={landing.path} sidebarContent={sidebarContent}><ResourceCostTool {...rules} /></GameToolPageLayout>;
 }
-export function GameToolPageLayout({ tool, namespaceTitle, children, sidebarContent = <></>, landingPath = `/${tool.namespace}` }: { tool: ToolPage; namespaceTitle: string; children: ReactNode; sidebarContent?: ReactNode; landingPath?: string }) {
+export function GameToolPageLayout({ tool, namespaceTitle, children, sidebarContent, landingPath = `/${tool.namespace}` }: { tool: ToolPage; namespaceTitle: string; children: ReactNode; sidebarContent?: ReactNode; landingPath?: string }) {
   const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: namespaceTitle, href: landingPath }, { label: "Tools", href: tool.canonical_path.slice(0, tool.canonical_path.lastIndexOf("/")) }, { label: tool.title }], tool.canonical_path);
   return <DedicatedToolPage toolCode={tool.code} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="game_tool" breadcrumbItems={breadcrumbs} sidebarContent={sidebarContent} relatedContent={null}>{children}</DedicatedToolPage>;
 }

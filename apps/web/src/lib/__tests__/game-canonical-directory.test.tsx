@@ -16,7 +16,6 @@ vi.mock("@/lib/game-registry", () => ({
     return state.publishedWiki ? { game_id: namespace, namespace, canonical_path: `/${namespace}/wiki`, is_published: true } : null;
   }
 }));
-vi.mock("@/lib/minecraft", () => ({ getMinecraftWikiPageBySlug: async () => ({ slug: "minecraft-java" }), resolveMinecraftWikiCoverImage: () => "/images/games/minecraft.webp" }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string) => {
   const query = { select: () => query, is: () => query, eq: () => query, not: () => query, limit: () => query, maybeSingle: async () => ({ data: null, error: state.failedRead === table ? { message: "View unavailable" } : null }), order: async () => ({ data: [{ namespace: "future-game", title: "Future Game", cover_image: "/Bloxodes.png" }], error: null }) };
   return query;

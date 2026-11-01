@@ -434,7 +434,7 @@ export function HomeGameShelf({ data, className }: { data: HomePageData; classNa
   );
 }
 
-/** B5: GTA, Red Dead and Minecraft. */
+/** Published game roots, ordered by published page count. */
 export function HomeFranchises({ data, className }: { data: HomePageData; className?: string }) {
   if (!data.franchises.length) return null;
   return (

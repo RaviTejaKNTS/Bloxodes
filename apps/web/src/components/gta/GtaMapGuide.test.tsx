@@ -7,7 +7,6 @@ import { MapViewport } from "@/components/maps/MapViewport";
 vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: async () => [{ slug: "gta5", canonical_path: "/gta/maps/gta5" }, { slug: "gta-san-andreas", canonical_path: "/gta/maps/gta-san-andreas" }] }));
 
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async () => ({ path: "/gta/wiki" }) }));
-vi.mock("@/lib/game-link-paths", () => ({ gameLinkPaths: async () => ({}) }));
 
 describe("GTA map ad layout", () => {
   it("renders one rail beside the map and flat guide copy, with full screen available", async () => {

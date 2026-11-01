@@ -37,3 +37,23 @@ export const getGameChecklistById = cache((namespace: string, id: string) => rea
 
 /** Stable namespace and stored slug, independent of the public URL style. */
 export const getGameMapBySlug = cache((namespace: string, slug: string) => readGameExtendedPage(namespace, slug, "slug", "map"));
+
+export async function listPublishedGameChecklists(namespace: string, page = 1, pageSize = 20) {
+  const sb = supabaseAdmin();
+  const { count, error: countError } = await sb.from("game_checklist_pages_view").select("id", { count: "exact", head: true }).eq("namespace", namespace);
+  if (countError) throw countError;
+  const total = count ?? 0;
+  const offset = (page - 1) * pageSize;
+  if (offset >= total) return { checklists: [], total };
+  const { data, error } = await sb.from("game_checklist_pages_view")
+    .select("*").eq("namespace", namespace).order("published_at", { ascending: false }).order("slug")
+    .range(offset, offset + pageSize - 1);
+  if (error?.code === "PGRST103") return { checklists: [], total: 0 };
+  if (error) throw error;
+  const checklists = await Promise.all((data ?? []).map(async page => {
+    // Artwork can only be resolved when the row includes its owning game.
+    if (!page.game_id) return page;
+    return { ...page, image: (await getGameArtwork(namespace, page.game_id))?.cover_image ?? null };
+  }));
+  return { checklists: checklists, total };
+}

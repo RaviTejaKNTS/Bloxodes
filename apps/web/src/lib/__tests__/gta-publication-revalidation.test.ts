@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cacheTagsForEvent } from "@/lib/public-cache-tags";
+
 
 const mocks = vi.hoisted(() => ({
   path: vi.fn(), tag: vi.fn(),
@@ -10,6 +10,7 @@ vi.mock("next/cache", () => ({ revalidatePath: mocks.path, revalidateTag: mocks.
 vi.mock("@/lib/cloudflare-cache", () => ({ purgeCloudflarePublicCache: mocks.purge, warmCloudflarePaths: vi.fn() }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: vi.fn() }));
 
+vi.mock("@/lib/game-content-revalidation", () => ({gameContentRevalidationTargets: async (slug: string) => ({paths: [`/${slug}`, "/feed.xml", "/sitemaps/games.xml"], tags: ["games-index", `page:/${slug}`], collectionPaths: [`/${slug}`]})}));
 import { POST } from "@/app/api/revalidate/route";
 
 beforeEach(() => {
@@ -25,32 +26,10 @@ async function publish(type: string, slug: string) {
   }));
 }
 
-describe("GTA pre-launch publication revalidation", () => {
-  it("invalidates the GTA VI hub and discovery routes for shared hub publication", async () => {
-    expect((await publish("game_content", "gta/wiki/gta-6")).status).toBe(200);
-    const paths = mocks.path.mock.calls.map(([path]) => path);
-    expect(paths).toEqual(expect.arrayContaining([
-      "/gta/wiki/gta-6", "/gta/wiki", "/gta", "/games", "/feed.xml", "/sitemaps/gta.xml"
-    ]));
-  });
-
-  it.each(["characters", "locations", "editions", "trailers"])("refreshes the parent wiki when the %s collection changes", async (collection) => {
-    expect((await publish("game_content", `gta/wiki/gta-6/${collection}`)).status).toBe(200);
-    const paths = mocks.path.mock.calls.map(([path]) => path);
-    expect(paths).toEqual(expect.arrayContaining([
-      "/gta/wiki/gta-6", `/gta/wiki/gta-6/${collection}`, `/gta/wiki/gta-6/${collection}/page/2`,
-      "/gta/wiki", "/gta", "/feed.xml", "/sitemap.xml", "/sitemaps/gta.xml"
-    ]));
-    expect(mocks.purge).toHaveBeenCalledWith(expect.objectContaining({
-      paths: expect.arrayContaining(["/gta/wiki/gta-6"]), tags: expect.arrayContaining(["gta", "feed"])
-    }));
-  });
-
-  it.each([
-    ["gta_game", "gta-6"], ["gta_wiki", "gta-6"], ["gta_wiki_collection", "gta-6/characters"]
-  ] as const)("keeps %s compatibility events connected to the feed", async (type, slug) => {
-    expect((await publish(type, slug)).status).toBe(200);
-    expect(mocks.path).toHaveBeenCalledWith("/feed.xml");
-    expect(cacheTagsForEvent(type, slug)).toContain("feed");
-  });
+it.each(["gta", "red-dead", "minecraft", "peak"])("routes %s publication through the same owner resolver", async namespace => {
+ const slug = `wiki/${namespace}/items`;
+ expect((await publish("game_content", slug)).status).toBe(200);
+ expect(mocks.path).toHaveBeenCalledWith(`/${slug}`, "layout");
+ expect(mocks.path).toHaveBeenCalledWith("/sitemaps/games.xml");
+ expect(mocks.purge).toHaveBeenCalledWith(expect.objectContaining({paginationPrefixes: [`/${slug}/page/`]}));
 });

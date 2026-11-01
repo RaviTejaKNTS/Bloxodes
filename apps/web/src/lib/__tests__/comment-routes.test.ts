@@ -86,6 +86,7 @@ describe("comment mutation link rejection", () => {
 
 describe("moved game comment ownership", () => {
   it.each([
+    ["game_wiki", "/wiki/gta-5"], ["game_collection", "/wiki/red-dead-redemption-2/horses"], ["game_tool", "/tools/minecraft-xp-calculator"],
     ["game_wiki", "/wiki/peak"], ["game_collection", "/wiki/peak/items"],
     ["game_wiki", "/games/risk-of-rain"], ["game_map", "/maps/peak-map"],
     ["game_tool", "/tools/peak-cost"], ["game_code", "/codes/peak"],
@@ -105,4 +106,21 @@ describe("moved game comment ownership", () => {
     expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({ entity_type: entityType, entity_id: id, page_url: `https://bloxodes.com${path}` }));
     expect(mocks.revalidate).toHaveBeenCalledWith(`comments:${entityType}:${id}`, { expire: 0 });
   });
+});
+
+it.each([
+ ["gta_wiki", "game_wiki"], ["gta_wiki_collection", "game_collection"],
+ ["red_dead_wiki", "game_wiki"], ["red_dead_wiki_collection", "game_collection"],
+ ["minecraft_wiki", "game_wiki"], ["minecraft_wiki_collection", "game_collection"], ["minecraft_tool", "game_tool"]
+])("maps legacy comment type %s to %s before insert", async (entityType, sharedType) => {
+ const query = {
+  select: () => query, eq: () => query,
+  maybeSingle: async () => ({ data: { id, canonical_path: "/wiki/example", author: null }, error: null }),
+  insert: mocks.insert.mockReturnThis()
+ };
+ mocks.admin.mockReturnValue({ from: () => query });
+ const response = await POST(request("POST", {entityType, entityId: id, body: "Thanks", guestName: "Player", guestEmail: "me@example.com"}));
+ expect(response.status).toBe(200);
+ expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({ entity_type: sharedType, entity_id: id }));
+ expect(mocks.revalidate).toHaveBeenCalledWith(`comments:${sharedType}:${id}`, { expire: 0 });
 });

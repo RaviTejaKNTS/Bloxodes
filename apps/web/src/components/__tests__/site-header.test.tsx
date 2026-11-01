@@ -19,7 +19,7 @@ import { signedOutSidebarAccount, siteNavLinks } from "@/lib/site-navigation";
 
 function render() {
   const container = document.createElement("div");
-  container.innerHTML = renderToStaticMarkup(<SiteHeader account={signedOutSidebarAccount} />);
+  container.innerHTML = renderToStaticMarkup(<SiteHeader account={signedOutSidebarAccount} gameMenus={[{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "wiki", gameId: "gta5", title: "GTA 5", href: "/wiki/gta-5" }, { kind: "collection", gameId: "gta5", title: "Vehicles", href: "/wiki/gta-5/vehicles" }] }]} />);
   return container;
 }
 
@@ -56,9 +56,9 @@ describe("site header", () => {
   });
 
   it("shows franchise links in the bar and keeps every site section in the drawer", () => {
-    navigation.pathname = "/gta/wiki/gta-5/vehicles";
+    navigation.pathname = "/wiki/gta-5/vehicles";
     const container = render();
-    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(["/gta", "/gta/wiki", "/gta/maps", "/gta/checklists", "/games"]);
+    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(["/games/gta", "/wiki/gta-5"]);
     const drawer = container.querySelector("#site-more-drawer")!;
     for (const link of siteNavLinks) expect(hrefs(drawer)).toContain(link.href);
     expect(container.querySelector('nav[aria-label="Game wikis"]')).toBeNull();

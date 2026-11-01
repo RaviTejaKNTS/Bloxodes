@@ -1,15 +1,13 @@
-import { getGameLandingForLinks } from "@/lib/game-landing";
-import { supabaseAdmin } from "@/lib/supabase";
+import { listGameCards } from "@/lib/game-site-data";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { safeJsonLd, breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getMinecraftWikiPageBySlug, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
 import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
-const description = "Explore Roblox, Minecraft, Grand Theft Auto, Red Dead and daily puzzles on Bloxodes.";
+const description = "Find game wikis, maps, checklists, tools and daily puzzles.";
 const canonical = `${SITE_URL}/games`;
 
 export const metadata: Metadata = {
@@ -29,41 +27,12 @@ export const metadata: Metadata = {
   }
 };
 
-const platforms = [
-  {
-    href: "/wiki",
-    label: "Roblox",
-    image: "/images/games/roblox.webp"
-  },
-  {
-    href: "/gta",
-    label: "Grand Theft Auto",
-    image: "/images/games/gta.webp"
-  },
-  {
-    href: "/red-dead",
-    label: "Red Dead",
-    image: "/images/games/red-dead.webp"
-  },
-  {
-    href: "/puzzles",
-    label: "Puzzles",
-    image: "/images/games/puzzles.webp"
-  }
-];
-
 export default async function GamesPage() {
-  const minecraft = await getMinecraftWikiPageBySlug("minecraft-java");
-  const publishedPlatforms = minecraft
-    ? [...platforms.slice(0, 1).map(platform => ({ ...platform })), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1).map(platform => ({ ...platform }))]
-    : platforms.map(platform => ({ ...platform }));
-  const { data: extraGames, error } = await supabaseAdmin().from("games").select("namespace,title,cover_image,hero_image").is("parent_id", null).eq("is_published",true).not("namespace","in","(gta,red-dead,minecraft)").order("title");
-  if (error) throw new Error(`Games directory read failed: ${error.message}`);
-  publishedPlatforms.push(...(extraGames ?? []).map(game => ({ href: `/${game.namespace}`, label: game.title, image: game.cover_image || game.hero_image || "/Bloxodes.png" })));
-  const landingPaths = new Map(await Promise.all(publishedPlatforms
-    .filter(platform => !["/wiki", "/puzzles"].includes(platform.href))
-    .map(async platform => [platform.href, (await getGameLandingForLinks(platform.href.slice(1))).path] as const)));
-  for (const platform of publishedPlatforms) platform.href = landingPaths.get(platform.href) ?? platform.href;
+  const publishedPlatforms = [
+    { href: "/wiki", label: "Roblox", image: "/images/games/roblox.webp" },
+    ...(await listGameCards()).map(game => ({ href: game.href, label: game.title, image: game.image })),
+    { href: "/puzzles", label: "Puzzles", image: "/images/games/puzzles.webp" }
+  ];
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [

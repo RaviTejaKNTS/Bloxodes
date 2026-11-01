@@ -1,45 +1,38 @@
 import { beforeEach, expect, it, vi } from "vitest";
-const state = vi.hoisted(() => ({ path: "/gta/maps/gta5" as string | null, moved: false, failMap: false, failRoot: false, other: false }));
+const state = vi.hoisted(() => ({ rows: [] as object[] }));
 vi.mock("server-only", () => ({}));
-vi.mock("@/lib/game-extra-pages", () => ({ getGameMapBySlug: async () => {
-  if (state.failMap) throw new Error("Map unavailable");
-  return state.path ? { canonical_path: state.path } : null;
-} }));
-vi.mock("@/lib/game-registry", () => ({ getGameRoot: async () => {
-  if (state.failRoot) throw new Error("Root unavailable");
-  return { url_style: state.moved ? "page_type" : "namespace" };
-} }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({
-  rpc: async () => ({ data: state.other ? [{ entity_type: "gta_wiki", entity_id: "other", slug: "other", title: "GTA 5 map guide", url: "/gta/wiki/other", search_text: "gta 5 map" }] : [], error: null }),
-  from: () => {
-    const query = { select: () => query, eq: () => query, or: () => query, in: () => query, ilike: () => query, order: () => query, limit: () => query, then: (resolve: (value: unknown) => unknown) => resolve({ data: [], error: null }) };
-    return query;
-  }
+ rpc: async () => ({ data: state.rows, error: null }),
+ from: () => { const q = { select: () => q, eq: () => q, not: () => q, or: () => q, in: () => q, ilike: () => q, order: () => q, limit: () => q, then: (resolve: (value: unknown) => unknown) => resolve({data: [], error: null}) }; return q; }
 }) }));
 import { GET } from "@/app/api/search/all/route";
-it.each(["/gta/maps/gta5", "/maps/gta5", null])("search uses the published map canonical path %s and retains search identity", async path => {
-  state.path = path;
-  state.moved = path !== "/gta/maps/gta5";
-  const response = await GET(new Request("https://bloxodes.com/api/search/all?q=gta+5+map&scope=gta"));
-  expect(response.status).toBe(200);
-  const { items } = await response.json();
-  if (!path) expect(items).toEqual([]);
-  else {
-    expect(items).toHaveLength(1);
-    expect(items[0]).toMatchObject({ id: "gta_wiki-gta5-interactive-map", title: "GTA 5 Interactive Map", url: path, type: "wiki" });
-  }
+beforeEach(() => { state.rows = []; });
+it.each(["gta5", "red-dead-2", "minecraft", "peak"])("returns the indexed %s map with the shared identity", async slug => {
+ state.rows = [{entity_type: "game_map", entity_id: "map-id", slug, title: `${slug} map`, url: `/maps/${slug}`, updated_at: null}];
+ const response = await GET(new Request(`https://bloxodes.com/api/search/all?q=${slug}&scope=maps`));
+ expect((await response.json()).items).toMatchObject([{id: "game_map-map-id", url: `/maps/${slug}`, type: "tool"}]);
+});
+it("has no synthetic static map when no published index row exists", async () => {
+ const response = await GET(new Request("https://bloxodes.com/api/search/all?q=gta+5+map"));
+ expect((await response.json()).items).toEqual([]);
 });
 
-beforeEach(() => { Object.assign(state, { path: "/gta/maps/gta5", moved: false, failMap: false, failRoot: false, other: false }); });
-it.each([false, true])("keeps the committed static GTA5 result while unmoved (identity failure=%s)", async failRoot => {
-  Object.assign(state, { failRoot, failMap: true });
-  const response = await GET(new Request("https://bloxodes.com/api/search/all?q=gta+5+map&scope=gta"));
-  expect(response.status).toBe(200);
-  expect((await response.json()).items).toMatchObject([{ id: "gta_wiki-gta5-interactive-map", url: "/gta/maps/gta5" }]);
+it.each([
+ ["gta_game", "wiki"], ["gta_wiki", "wiki"], ["gta_wiki_collection", "wiki"], ["gta_checklist", "checklist"],
+ ["red_dead_game", "wiki"], ["red_dead_wiki", "wiki"], ["red_dead_wiki_collection", "wiki"],
+ ["minecraft_game", "wiki"], ["minecraft_wiki", "wiki"], ["minecraft_wiki_collection", "wiki"], ["minecraft_tool", "tool"]
+])("reads legacy %s rows during rollout", async (entity_type, type) => {
+ state.rows = [{ entity_type, entity_id: "old-id", title: "Legacy page", url: "/wiki/legacy-page", updated_at: null }];
+ for (const scope of ["games", "global"]) {
+  const response = await GET(new Request(`https://bloxodes.com/api/search/all?q=legacy&scope=${scope}`));
+  expect((await response.json()).items).toMatchObject([{ type, url: "/wiki/legacy-page" }]);
+ }
 });
-it("retains other search results if the moved map lookup fails", async () => {
-  Object.assign(state, { moved: true, failMap: true, other: true });
-  const response = await GET(new Request("https://bloxodes.com/api/search/all?q=gta+5+map&scope=gta"));
-  expect(response.status).toBe(200);
-  expect((await response.json()).items).toMatchObject([{ id: "gta_wiki-other", url: "/gta/wiki/other" }]);
+it.each(["story", "mode", "grand", "theft", "auto", "gta"])("preserves Roblox ranking for %s", async word => {
+ state.rows = [
+  { entity_type: "wiki", entity_id: "loose", title: "Unrelated newer match", url: "/wiki/newer", updated_at: "2026-10-20" },
+  { entity_type: "wiki", entity_id: "match", title: "Beta Alpha", url: "/wiki/older", updated_at: "2026-10-01" }
+ ];
+ const response = await GET(new Request(`https://bloxodes.com/api/search/all?q=${word}+alpha+beta&scope=wiki`));
+ expect((await response.json()).items.map((item: { id: string }) => item.id)).toEqual(["wiki-match", "wiki-loose"]);
 });

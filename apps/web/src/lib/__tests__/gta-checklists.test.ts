@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { cacheTagsForEvent, cacheTagsForPath } from "@/lib/public-cache-tags";
+import { cacheTagsForPath } from "@/lib/public-cache-tags";
 import { resolveSearchScope, siteNavLinksForPath } from "@/lib/site-navigation";
 import { getChecklistStorageKey, readLocalChecklistProgress, writeLocalChecklistProgress, loadAccountChecklistProgress, saveAccountChecklistProgress } from "@/lib/checklist-progress-client";
 
@@ -45,13 +45,8 @@ describe("GTA checklist contracts", () => {
     expect(await saveAccountChecklistProgress("gta:gta-5", ["leaf"])).toBe(true);
   });
   it("has discoverable navigation and matching publish/purge tags", () => {
-    expect(siteNavLinksForPath("/gta/checklists/gta-5").some(x => x.href === "/gta/checklists")).toBe(true);
-    expect(resolveSearchScope("/gta/checklists/gta-5").scope).toBe("gta-checklists");
-    const eventTags = cacheTagsForEvent("gta_checklist", "gta-5");
-    for (const path of ["/gta/checklists", "/gta/checklists/page/2", "/gta/checklists/gta-5", "/gta/wiki/gta-5", "/sitemaps/gta.xml", "/feed.xml"]) {
-      expect(cacheTagsForPath(path).some(tag => eventTags.includes(tag))).toBe(true);
-    }
-    expect(eventTags).not.toContain("checklists");
+    expect(siteNavLinksForPath("/checklists/gta-5", {}, [{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "checklist", gameId: "gta5", title: "Checklist", href: "/checklists/gta-5" }] }]).some(x => x.href === "/checklists/gta-5")).toBe(true);
+
   });
   it("ships every completion task at the renderer's leaf depth with stable keys", () => {
     const sql = readFileSync(new URL("../../../../../supabase/migrations/20260920000026_seed_gta_5_checklist.sql", import.meta.url), "utf8");

@@ -1,4 +1,4 @@
-import { ToolPageLayout } from "./ToolPageLayout";
+import { ToolPageLayout, RelatedToolLinks } from "./ToolPageLayout";
 import type { Metadata } from "next";
 import type { ComponentProps, ReactNode } from "react";
 
@@ -134,7 +134,7 @@ export async function DedicatedToolPage({
   };
 
   return (
-    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`} sidebarContent={sidebarContent}>
+    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`} sidebarContent={sidebarContent ?? await RelatedToolLinks({ canonicalPath: canonicalPath ?? `/tools/${toolCode}`, toolCode })}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"

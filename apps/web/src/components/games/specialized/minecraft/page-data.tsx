@@ -1,8 +1,10 @@
+import { createGameReader } from "@/lib/shared-game-reader";
+const { listPublishedSharedGameWikiCollections: listPublishedMinecraftCollections } = createGameReader("minecraft");
 import Link from "next/link";
 import { cache } from "react";
 import { ContentCard } from "@/components/ContentCard";
 import { ToolCard } from "@/components/ToolCard";
-import { buildMinecraftCollectionPath, getMinecraftTool, listMinecraftTools, listPublishedMinecraftCollections, type MinecraftToolPage } from "@/lib/minecraft";
+import { getMinecraftTool, listMinecraftTools, type MinecraftToolPage } from "@/lib/minecraft-tools/page-reader";
 import { isMinecraftToolSlug, MINECRAFT_TOOL_COLLECTIONS } from "@/lib/minecraft-tools/manifest";
 import type { ToolRules } from "@/lib/minecraft-tools/types";
 

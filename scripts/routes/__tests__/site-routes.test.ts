@@ -4,7 +4,6 @@ import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { buildRedirectSnapshot, resolveSiteRoute, type RedirectRoute } from "../../../apps/web/src/lib/site-route-resolver";
-import { minecraftLegacyRedirect } from "../../../apps/web/src/lib/minecraft-paths";
 
 // Executes the actual migration and row triggers in GitHub's disposable Postgres.
 // Never connects to managed development or production. No local execution.
@@ -137,11 +136,3 @@ test("site route backfill, selective update locks, hub restoration, ownership an
   }
 });
 
-// The registry resolves paths only. Phase 3 must run this request handler first.
-test("Minecraft edition query redirects remain authoritative before the registry", () => {
-  assert.equal(minecraftLegacyRedirect("/minecraft/wiki", "?edition=bedrock&ref=guide"), "/minecraft/bedrock/wiki?ref=guide");
-  assert.equal(minecraftLegacyRedirect("/minecraft/wiki/achievements", "?edition=java"), "/minecraft/java/wiki/achievements");
-  assert.equal(minecraftLegacyRedirect("/minecraft/java/wiki/mobs", "?edition=bedrock&ref=guide"), "/minecraft/java/wiki/mobs?ref=guide");
-  assert.equal(minecraftLegacyRedirect("/minecraft/tools/test", "?edition=java"), "/minecraft/tools/test");
-  assert.equal(minecraftLegacyRedirect("/minecraft/wiki", ""), null);
-});

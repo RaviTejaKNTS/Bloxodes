@@ -54,6 +54,36 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${["map","quiz","catalog"].map(kind=>`create trigger prepare_game_extended_page before insert or update on public.game_${kind}_pages for each row execute function public.prepare_game_extended_page();`).join("\n")}
    ${readFileSync(new URL("../../../supabase/tests/game_page_type_urls.sql",import.meta.url),"utf8")}
    ${readFileSync(new URL("../../../supabase/tests/specialized_franchise_page_type_urls.sql",import.meta.url),"utf8")}
+   -- Minimal plumbing schema, using the same disposable GitHub database.
+   ${['wiki','collection','tool','code','map','quiz','catalog'].map(kind=>`alter table public.game_${kind}_pages add column meta_description text;`).join('\n')}
+   alter table public.game_checklist_pages add column seo_description text;
+   alter table public.game_collection_pages add column published_dataset_id uuid;
+   create table public.comments(id uuid primary key default gen_random_uuid(),entity_type text,entity_id uuid,parent_id uuid,body_md text,status text,
+    constraint comments_entity_type_check check(entity_type in ('wiki','game_wiki','gta_wiki','game_collection','minecraft_tool','game_tool')));
+   insert into public.comments(entity_type,entity_id,body_md,status) values('gta_wiki',gen_random_uuid(),'Keep this body','approved');
+   create temporary table comment_before as select * from public.comments;
+   create table public.search_index(id uuid primary key default gen_random_uuid(),entity_type text,entity_id text,slug text,title text,subtitle text,url text,updated_at timestamptz,is_published boolean,search_text text,unique(entity_type,entity_id));
+   insert into public.search_index(entity_type,entity_id,slug,title,url,is_published)
+   select kind,'legacy-'||kind,'legacy','Legacy fixture','/wiki/legacy',true
+   from unnest(array['gta_game','gta_wiki','gta_wiki_collection','gta_checklist','red_dead_game','red_dead_wiki','red_dead_wiki_collection','minecraft_game','minecraft_wiki','minecraft_wiki_collection','minecraft_tool']) kind;
+   insert into public.search_index(entity_type,entity_id,slug,title,url,is_published)
+   values('wiki','roblox-fixture','the-forge','The Forge','/wiki/the-forge',true);
+   create temporary table search_before as select * from public.search_index;
+   create table public.revalidation_events(entity_type text);
+   ${migration("20261102210000_unify_game_discovery_and_comments.sql")}
+   select pg_temp.url_assert(not exists((select * from search_before except select * from public.search_index) union all (select * from public.search_index except select * from search_before)),'cutover leaves all search rows unchanged');
+   select pg_temp.url_assert((select count(*)=1 from public.comments c join comment_before b using(id) where c.entity_type='game_wiki' and (c.entity_id,c.parent_id,c.body_md,c.status) is not distinct from (b.entity_id,b.parent_id,b.body_md,b.status)),'comment identity and content preserved');
+   ${["wiki","collection","tool","code","map","quiz","catalog","checklist"].map(kind=>`update public.game_${kind}_pages set title=coalesce(title,slug,code,'Fixture');`).join("\n")}
+   set local bloxodes.plumbing_phase='legacy';
+   ${readFileSync(new URL("../../../supabase/tests/unified_game_plumbing.sql",import.meta.url),"utf8").replace(/^--[^\n]*\n/,'').replace(/^begin;\s*/i,'').replace(/rollback;\s*$/i,'')}
+   -- Mirror tmp/streamline-later/20261102220000_reindex_shared_game_search.sql;
+   -- CI must not depend on an ignored tmp file. Test both upsert and retired-key deletion.
+   select public.refresh_game_content_index(null);
+   delete from public.search_index where entity_type in
+    ('gta_game','gta_wiki','gta_wiki_collection','gta_checklist','red_dead_game','red_dead_wiki','red_dead_wiki_collection','minecraft_game','minecraft_wiki','minecraft_wiki_collection','minecraft_tool');
+   set local bloxodes.plumbing_phase='reindexed';
+   ${readFileSync(new URL("../../../supabase/tests/unified_game_plumbing.sql",import.meta.url),"utf8").replace(/^--[^\n]*\n/,'').replace(/^begin;\s*/i,'').replace(/rollback;\s*$/i,'')}
+   select pg_temp.url_assert(not exists(select * from search_before where entity_type='wiki' except select * from public.search_index),'deferred rebuild preserves Roblox rows');
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });

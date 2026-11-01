@@ -1,4 +1,5 @@
 "use client";
+import type { GameMenu } from "@/lib/game-site-navigation";
 
 import { useEffect, useRef, type RefObject } from "react";
 import Link from "next/link";
@@ -9,6 +10,7 @@ import { isNavLinkActive, siteNavGroupsForPath } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteMoreDrawerProps = {
+  gameMenus?: GameMenu[];
   linkPaths?: Record<string, string>;
   id: string;
   open: boolean;
@@ -42,10 +44,10 @@ export function trapTabKey(event: KeyboardEvent, container: HTMLElement | null) 
  * Right-side drawer with every section link, feedback and the theme switch. It renders in the
  * server HTML (hidden until opened) so crawlers see every section link on every page.
  */
-export function SiteMoreDrawer({ linkPaths = {}, id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
+export function SiteMoreDrawer({ gameMenus = [], linkPaths = {}, id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const groups = siteNavGroupsForPath(pathname, linkPaths);
+  const groups = siteNavGroupsForPath(pathname, linkPaths, gameMenus);
 
   useEffect(() => {
     if (!open) return;

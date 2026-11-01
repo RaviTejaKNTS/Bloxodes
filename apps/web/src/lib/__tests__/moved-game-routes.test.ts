@@ -3,7 +3,6 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import captured from "./fixtures/moved-game-routes.json";
 import { buildRedirectSnapshot, registryRequestRedirect, type RedirectRoute } from "../site-route-resolver";
-import { minecraftLegacyRedirect } from "../minecraft-paths";
 
 // Managed-development route capture after #171. Owner IDs are placeholders.
 const rows: RedirectRoute[] = captured.map(([path, target, page_type]) => ({ path, resolved_target: target, page_type, page_id: `owner:${target}`, status: "old", match_type: "exact", tail_mode: "append", match_self: true, target_url: null, redirect_code: 301, origin: "namespace-move" }));
@@ -25,9 +24,8 @@ describe("retired game URL families", () => {
     const sql = readFileSync(new URL("../../../../../supabase/migrations/20261102200000_finish_moved_game_url_cleanup.sql", import.meta.url), "utf8");
     expect(sql).toContain("values('/gta/checklists/page','old','prefix',destination,'drop',301");
   });
-  it("preserves edition query links in one hop and leaves static map assets alone", () => {
-    const resolvePath = (path: string) => registryRequestRedirect(snapshot, path, "")?.target ?? path;
-    expect(minecraftLegacyRedirect("/minecraft/wiki/blocks", "edition=bedrock", resolvePath)).toBe("/wiki/minecraft-bedrock/blocks");
+  it("uses stored default owners in one hop and leaves static map assets alone", () => {
+    expect(registryRequestRedirect(snapshot, "/minecraft/wiki/blocks", "")?.target).toBe("/wiki/minecraft-java/blocks");
     expect(registryRequestRedirect(snapshot, "/gta/maps/gta5/roadmap/0/0,1,1.jpg", "")).toBeNull();
   });
   it("contains no imports of deleted route folders", () => {

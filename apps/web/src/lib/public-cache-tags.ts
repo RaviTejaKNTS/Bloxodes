@@ -1,4 +1,3 @@
-import { getGtaInteractiveMapDefinition } from "@/lib/gta-interactive-map-registry";
 
 export const CACHE_TAG_HEADER = "Cache-Tag";
 
@@ -15,17 +14,6 @@ export type PublicCacheEventType =
   | "puzzle"
   | "wiki"
   | "wiki_collection"
-  | "gta_checklist"
-  | "gta_game"
-  | "gta_wiki"
-  | "gta_wiki_collection"
-  | "red_dead_game"
-  | "red_dead_wiki"
-  | "red_dead_wiki_collection"
-  | "minecraft_game"
-  | "minecraft_wiki"
-  | "minecraft_wiki_collection"
-  | "minecraft_tool"
   | "game_content"
   | "stats";
 
@@ -162,10 +150,6 @@ export function cacheTagsForPath(pathname: string) {
   if (["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists", "games"].includes(first) || ["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists"].includes(second)) {
     tags.push(`page:${pathnameOnly.replace(/\/page\/[1-9]\d*$/, "")}`);
   }
-  if (first && ["gta", "red-dead", "minecraft"].includes(first)) {
-    tags.push(first);
-    if (!second) tags.push(`page:${pathnameOnly}`);
-  }
 
   if (pathnameOnly === "/") {
     return unique([...tags, "home"]);
@@ -173,81 +157,6 @@ export function cacheTagsForPath(pathname: string) {
 
   if (first === "games") {
     return unique([...tags, second ? slugTag("game-hub", second) : "games-index"]);
-  }
-
-  if (first === "gta") {
-    if (second === "checklists") return unique([...tags, "gta-checklists", "gta-checklists-index", third && third !== "page" ? slugTag("gta-checklist", third) : ""]);
-    if (second === "maps") {
-      if (!third) return unique([...tags, "gta-home", "gta-wiki-index"]);
-      if (third === "gta5") return unique([...tags, "gta-home", "gta-wiki:gta-5", "gta-wiki-collection-index"]);
-      const map = getGtaInteractiveMapDefinition(third);
-      if (!map) return unique([...tags, "gta-home", "gta-wiki-index"]);
-      const wikiSlugs = new Set([
-        map.wikiSlug,
-        ...map.layers.flatMap((layer) => layer.collection ? [layer.collection.wikiSlug] : []),
-        ...map.guideOnly.map((guide) => guide.wikiSlug)
-      ]);
-      const collectionTags = [
-        ...map.layers.flatMap((layer) => layer.collection ? [slugTag("gta-wiki-collection", layer.collection.wikiSlug + "/" + layer.collection.collectionSlug)] : []),
-        ...map.guideOnly.map((guide) => slugTag("gta-wiki-collection", guide.wikiSlug + "/" + guide.collectionSlug))
-      ];
-      return unique([
-        ...tags,
-        "gta-home",
-        "gta-wiki-index",
-        "gta-wiki-collection-index",
-        ...Array.from(wikiSlugs, (slug) => slugTag("gta-wiki", slug)),
-        ...collectionTags
-      ]);
-    }
-    if (!second) return unique([...tags, "gta-home"]);
-    if (second === "wiki") {
-      if (!third || third === "page") return unique([...tags, "gta-wiki-index"]);
-      if (fourth && fourth !== "page") {
-        return unique([
-          ...tags,
-          "gta-wiki-collection-index",
-          slugTag("gta-wiki", third),
-          slugTag("gta-wiki-collection", `${third}/${fourth}`)
-        ]);
-      }
-      return unique([...tags, "gta-wiki", slugTag("gta-wiki", third)]);
-    }
-    return unique(tags);
-  }
-
-  if (first === "minecraft") {
-    if (!second) return unique([...tags, "minecraft-home"]);
-    if ((second === "java" || second === "bedrock") && third === "wiki") {
-      const wiki = `minecraft-${second}`;
-      const collection = fourth;
-      return unique([...tags, "minecraft-wiki-index", slugTag("minecraft-wiki", wiki), "minecraft-wiki-collection-index", collection ? slugTag("minecraft-wiki-collection", `${wiki}/${collection}`) : "", collection ? slugTag("minecraft-wiki-collection", `${wiki}-${collection}`) : ""]);
-    }
-    if (second === "wiki") {
-      if (!third) return unique([...tags, "minecraft-wiki-index"]);
-      return unique([...tags, "minecraft-wiki-collection-index", slugTag("minecraft-wiki-collection", third)]);
-    }
-    if (second === "tools") {
-      return unique([...tags, "minecraft-tools", "minecraft-tools-index", third ? slugTag("minecraft-tool", third) : ""]);
-    }
-    return unique(tags);
-  }
-
-  if (first === "red-dead") {
-    if (!second) return unique([...tags, "red-dead-home"]);
-    if (second === "wiki") {
-      if (!third || third === "page") return unique([...tags, "red-dead-wiki-index"]);
-      if (fourth && fourth !== "page") {
-        return unique([
-          ...tags,
-          "red-dead-wiki-collection-index",
-          slugTag("red-dead-wiki", third),
-          slugTag("red-dead-wiki-collection", `${third}/${fourth}`)
-        ]);
-      }
-      return unique([...tags, "red-dead-wiki", slugTag("red-dead-wiki", third)]);
-    }
-    return unique(tags);
   }
 
   if (pathnameOnly === "/feed.xml") {
@@ -316,6 +225,10 @@ export function cacheTagsForPath(pathname: string) {
   if (first === "puzzles") {
     if (!second || second === "page") return unique([...tags, "puzzles-index"]);
     return unique([...tags, "puzzles", slugTag("puzzle", second)]);
+  }
+
+  if (first === "maps") {
+    return unique([...tags, second ? "maps" : "maps-index"]);
   }
 
   if (first === "tools") {
@@ -454,74 +367,6 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "home",
         "sitemap",
         "sitemap:stats"
-      ]);
-    case "gta_checklist":
-      return unique([...base, slugTag("gta-checklist", normalized), "gta-checklists", "gta-checklists-index", "gta-home", slugTag("gta-wiki", normalized), "feed", "sitemap", "sitemap:gta"]);
-    case "gta_game":
-      return unique([...base, slugTag("gta-game", normalized), "gta-home", "gta-wiki-index", "games-index", "feed", "sitemap", "sitemap:gta"]);
-    case "gta_wiki":
-      return unique([...base, slugTag("gta-wiki", normalized), "gta-home", "gta-wiki-index", "feed", "sitemap", "sitemap:gta"]);
-    case "gta_wiki_collection": {
-      const [wikiSlug, collectionSlug] = normalized.split("/");
-      return unique([
-        ...base,
-        wikiSlug ? slugTag("gta-wiki", wikiSlug) : "",
-        wikiSlug && collectionSlug ? slugTag("gta-wiki-collection", `${wikiSlug}/${collectionSlug}`) : "",
-        "gta-home",
-        "gta-wiki-index",
-        "gta-wiki-collection-index",
-        "feed",
-        "sitemap",
-        "sitemap:gta"
-      ]);
-    }
-    case "red_dead_game":
-      return unique([
-        ...base,
-        slugTag("red-dead-game", normalized),
-        "red-dead-home",
-        "red-dead-wiki-index",
-        "games-index",
-        "sitemap",
-        "sitemap:red-dead"
-      ]);
-    case "red_dead_wiki":
-      return unique([
-        ...base,
-        slugTag("red-dead-wiki", normalized),
-        "red-dead-home",
-        "red-dead-wiki-index",
-        "sitemap",
-        "sitemap:red-dead"
-      ]);
-    case "red_dead_wiki_collection": {
-      const [wikiSlug, collectionSlug] = normalized.split("/");
-      return unique([
-        ...base,
-        wikiSlug ? slugTag("red-dead-wiki", wikiSlug) : "",
-        wikiSlug && collectionSlug ? slugTag("red-dead-wiki-collection", `${wikiSlug}/${collectionSlug}`) : "",
-        "red-dead-home",
-        "red-dead-wiki-index",
-        "red-dead-wiki-collection-index",
-        "sitemap",
-        "sitemap:red-dead"
-      ]);
-    }
-    case "minecraft_game":
-      return unique([...base, "minecraft-games-index", slugTag("minecraft-game", normalized), "minecraft-home", slugTag("minecraft-wiki", normalized), "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
-    case "minecraft_wiki":
-      return unique([...base, slugTag("minecraft-wiki", normalized), "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
-    case "minecraft_wiki_collection":
-      return unique([
-        ...base,
-        slugTag("minecraft-wiki-collection", normalized),
-        "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index",
-        "minecraft-tools", "minecraft-tools-index", "feed", "sitemap", "sitemap:minecraft"
-      ]);
-    case "minecraft_tool":
-      return unique([
-        ...base, slugTag("minecraft-tool", normalized),
-        "minecraft-home", "minecraft-tools", "minecraft-tools-index", "feed", "sitemap", "sitemap:minecraft"
       ]);
     case "wiki_collection": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
