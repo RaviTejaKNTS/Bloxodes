@@ -17,16 +17,10 @@ it("has no synthetic static map when no published index row exists", async () =>
  expect((await response.json()).items).toEqual([]);
 });
 
-it.each([
- ["gta_game", "wiki"], ["gta_wiki", "wiki"], ["gta_wiki_collection", "wiki"], ["gta_checklist", "checklist"],
- ["red_dead_game", "wiki"], ["red_dead_wiki", "wiki"], ["red_dead_wiki_collection", "wiki"],
- ["minecraft_game", "wiki"], ["minecraft_wiki", "wiki"], ["minecraft_wiki_collection", "wiki"], ["minecraft_tool", "tool"]
-])("reads legacy %s rows during rollout", async (entity_type, type) => {
- state.rows = [{ entity_type, entity_id: "old-id", title: "Legacy page", url: "/wiki/legacy-page", updated_at: null }];
- for (const scope of ["games", "global"]) {
-  const response = await GET(new Request(`https://bloxodes.com/api/search/all?q=legacy&scope=${scope}`));
-  expect((await response.json()).items).toMatchObject([{ type, url: "/wiki/legacy-page" }]);
- }
+it("keeps retired per-franchise rows out of the games scope", async () => {
+ state.rows = [{ entity_type: "gta_wiki", entity_id: "old-id", title: "Legacy page", url: "/wiki/legacy-page", updated_at: null }];
+ const response = await GET(new Request("https://bloxodes.com/api/search/all?q=legacy&scope=games"));
+ expect((await response.json()).items).toEqual([]);
 });
 it.each(["story", "mode", "grand", "theft", "auto", "gta"])("preserves Roblox ranking for %s", async word => {
  state.rows = [
