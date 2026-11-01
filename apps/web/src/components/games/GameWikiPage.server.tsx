@@ -10,6 +10,21 @@ export async function renderGameWikiPage(props: Omit<GameWikiPageProps, "directo
   const { page, namespace } = props;
   const landing = await getGameLandingForLinks(namespace);
   const gameId = page.game_kind === "franchise" ? undefined : page.game_id;
+  let extraLinks = props.extraLinks ?? [];
+  if (namespace === "gta" && page.game_kind !== "franchise" && props.extraLinks === undefined) {
+    const { getGtaChecklistPageBySlug } = await import("@/lib/gta-checklists");
+    const { getGtaMapRouteForWikiSlug } = await import("@/lib/gta-interactive-map-registry");
+    const { listGameMapPages } = await import("@/lib/game-extra-pages");
+    const moved = page.canonical_path.startsWith("/wiki/");
+    const [checklist, maps] = await Promise.all([getGtaChecklistPageBySlug(page.slug), moved ? listGameMapPages("gta") : []]);
+    const legacyMap = getGtaMapRouteForWikiSlug(page.slug);
+    const map = maps.find(map => map.slug === legacyMap?.split("/").pop());
+    const mapPath = moved ? map?.canonical_path : legacyMap;
+    extraLinks = [
+      ...(mapPath ? [{ href: mapPath, title: "Explore the interactive map" }] : []),
+      ...(checklist ? [{ href: moved ? checklist.page.canonical_path : `/gta/checklists/${page.slug}`, title: `Track your 100% completion with the ${page.game_title} checklist` }] : [])
+    ];
+  }
   const reader = createGameReader(namespace);
   const directoryPages = page.game_kind === "franchise"
     ? (await reader.listPublishedSharedGameWikiPages())
@@ -20,6 +35,7 @@ export async function renderGameWikiPage(props: Omit<GameWikiPageProps, "directo
       : [];
   return renderWiki({
     ...props,
+    extraLinks,
     landingPath: landing.path,
     directoryPages,
     sidebarContent: <GameRelatedLinks namespace={namespace} gameId={gameId} canonicalPath={page.canonical_path} />

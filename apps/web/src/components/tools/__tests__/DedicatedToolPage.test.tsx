@@ -52,7 +52,7 @@ describe("shared dedicated tool contract", () => {
 
  });
  it("gives shared-game calculators the same sidebar and content contract", async () => {
-  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
+  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", slug: "resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
   const page = GameToolPageLayout({ tool: sharedTool, namespaceTitle: "Example Game", children: <div>Resource calculator</div> });
   const html = renderToStaticMarkup(await DedicatedToolPage(page.props));
   expect(readTool).not.toHaveBeenCalled();
@@ -64,7 +64,7 @@ describe("shared dedicated tool contract", () => {
  });
 
  it("renders shared-game navigation supplied by its server route", async () => {
-  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
+  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", slug: "resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
   const page = GameToolPageLayout({ tool: sharedTool, namespaceTitle: "Example Game", sidebarContent: <a href="/example-game/wiki/owner">Owner wiki</a>, children: <div>Resource calculator</div> });
   const html = renderToStaticMarkup(await DedicatedToolPage(page.props));
   expect(html).toContain('href="/example-game/wiki/owner"');

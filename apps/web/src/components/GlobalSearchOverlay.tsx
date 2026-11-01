@@ -26,7 +26,7 @@ function isOpenShortcut(event: KeyboardEvent) {
  * Centered search popup. Opens from any `[data-search-trigger]` element, the
  * `bloxodes:open-search` window event, or Cmd/Ctrl+K. Search is scoped to the current section.
  */
-export function GlobalSearchOverlay() {
+export function GlobalSearchOverlay({ linkPaths = {} }: { linkPaths?: Record<string, string> }) {
   const pathname = usePathname() ?? "/";
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -126,7 +126,7 @@ export function GlobalSearchOverlay() {
         aria-label="Search"
         className="w-full max-w-xl overflow-hidden rounded-xl border border-border/70 bg-background shadow-2xl"
       >
-        <UnifiedSearch pageScope={resolveSearchScope(pathname)} autoFocus onNavigate={closeOverlay} onClose={closeOverlay} />
+        <UnifiedSearch pageScope={resolveSearchScope(pathname, linkPaths)} autoFocus onNavigate={closeOverlay} onClose={closeOverlay} />
       </div>
     </div>,
     document.body

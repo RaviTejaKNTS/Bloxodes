@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { registryRequestRedirect } from "@/lib/site-route-resolver";
+import { registryRequestRedirect, resolveSiteRoute } from "@/lib/site-route-resolver";
 import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snapshot";
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
@@ -133,7 +133,7 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
     return applySecurityHeaders(redirectWithStatus(redirectUrl, hostRedirectNeeded ? 301 : registry!.code), redirectUrl.pathname, hostname);
   }
 
-  const editionPath = minecraftLegacyRedirect(url.pathname, url.search);
+  const editionPath = minecraftLegacyRedirect(url.pathname, url.search, path => resolveSiteRoute(snapshot, path)?.target ?? path);
   if (editionPath) {
     return applySecurityHeaders(redirectWithStatus(new URL(editionPath, url), 308), url.pathname, hostname);
   }

@@ -2,12 +2,18 @@ import { describe, expect, it, vi } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { load } from "cheerio";
 import { GtaMapGuide } from "./GtaMapGuide";
+import { HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
 import { MapViewport } from "@/components/maps/MapViewport";
-vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: async () => [{ slug: "gta5" }, { slug: "gta-san-andreas" }] }));
+vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: async () => [{ slug: "gta5", canonical_path: "/gta/maps/gta5" }, { slug: "gta-san-andreas", canonical_path: "/gta/maps/gta-san-andreas" }] }));
+
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async () => ({ path: "/gta/wiki" }) }));
+vi.mock("@/lib/game-link-paths", () => ({ gameLinkPaths: async () => ({}) }));
 
 describe("GTA map ad layout", () => {
   it("renders one rail beside the map and flat guide copy, with full screen available", async () => {
-    const $ = load(renderToStaticMarkup(await GtaMapGuide({ canonicalPath: "/gta/maps/gta5", title: "GTA 5 map", heading: "About this map", map: <MapViewport><div data-map-engine /></MapViewport>, children: <><p>First paragraph.</p><p>Second paragraph.</p><h3>Collection guides</h3><ul><li>Parts</li></ul></> })));
+    const guide = await GtaMapGuide({ canonicalPath: "/gta/maps/gta5", title: "GTA 5 map", heading: "About this map", map: <MapViewport><div data-map-engine /></MapViewport>, children: <><p>First paragraph.</p><p>Second paragraph.</p><h3>Collection guides</h3><ul><li>Parts</li></ul></> });
+    const sidebar = guide.props.children;
+    const $ = load(renderToStaticMarkup(await HubsSidebarLayout(sidebar.props)));
     expect($("#article-body")).toHaveLength(1);
     expect($(".content-sidebar-grid > aside#sidebar.space-y-4")).toHaveLength(1);
     expect($("#article-body > p")).toHaveLength(2);

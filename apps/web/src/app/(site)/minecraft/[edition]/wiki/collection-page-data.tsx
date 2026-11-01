@@ -59,7 +59,7 @@ export async function generateMinecraftCollectionMetadata({
   currentPage: number;
 }): Promise<Metadata> {
   const page = await getMinecraftWikiCollectionPageByPath(normalize(slug), normalize(collection));
-  const basePath = buildMinecraftCollectionPath(slug, collection);
+  const basePath = page?.canonical_path ?? buildMinecraftCollectionPath(slug, collection);
   const canonicalPath = currentPage === 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   if (!page) {
@@ -110,7 +110,7 @@ export async function renderMinecraftCollectionPageRoute({
   const collectionOptions = collections.map((entry) => ({
     value: entry.code,
     label: entry.display_name,
-    href: buildMinecraftCollectionPath(entry.wiki_slug, entry.collection_slug),
+    href: entry.canonical_path,
     pageType: entry.page_type
   }));
   const databaseContentHtml = contentHtml ? { ...contentHtml, id: null } : null;
@@ -121,8 +121,9 @@ export async function renderMinecraftCollectionPageRoute({
     currentPage,
     prepared: context.prepared,
     routeBase: buildMinecraftWikiPath(slug),
-    collectionBasePath: buildMinecraftCollectionPath(slug, collection),
-    wikiHomePath: buildMinecraftWikiPath(slug),
+    collectionBasePath: context.page.canonical_path,
+    wikiHomePath: context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/")),
+    wikiIndexPath: context.page.canonical_path.startsWith("/wiki/") ? "/games/minecraft" : buildMinecraftWikiPath(slug),
     wikiLabel: `${context.page.game_title} Wiki`,
     collectionOptions,
     showMoreCollections: false,
@@ -131,12 +132,12 @@ export async function renderMinecraftCollectionPageRoute({
   });
   return (
     <GameCollectionSidebarLayout
-      canonicalPath={buildMinecraftCollectionPath(slug, collection)}
+      canonicalPath={context.page.canonical_path}
       title={context.page.title}
       code={context.page.code}
       gameName={context.page.game_short_title || context.page.game_title}
-      wikiPath={buildMinecraftWikiPath(slug)}
-      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildMinecraftCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+      wikiPath={context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/"))}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: entry.canonical_path, description: entry.meta_description }))}
     >
       {renderedCollection}
       <RelatedMinecraftTools collection={collection} />

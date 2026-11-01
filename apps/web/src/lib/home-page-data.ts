@@ -1,3 +1,4 @@
+import { gameLinkPaths } from "@/lib/game-link-paths";
 import "server-only";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { formatDistanceToNowStrict } from "date-fns";
@@ -228,6 +229,8 @@ async function latestActiveCodes(page: CodePageWithCounts, limit: number) {
 }
 
 export async function loadHomePageData() {
+  const linkPaths = await gameLinkPaths();
+  const toLink = (link: { href: string; title: string }): HomeLink => ({ href: linkPaths[link.href] ?? link.href, label: link.title });
   const [statsHome, recentCodePages, wikiPages, eventsPayload, quizzes, tools, counts, articles, checklists, puzzles, catalogPages, minecraft, gtaLanding, redDeadLanding, minecraftLanding] =
     await Promise.all([
       load("stats home", () => getStatsHome()),
@@ -556,10 +559,6 @@ export async function loadHomePageData() {
     puzzles: homePuzzles,
     directory
   };
-}
-
-function toLink(link: { href: string; title: string }): HomeLink {
-  return { href: link.href, label: link.title };
 }
 
 export type HomePageData = Awaited<ReturnType<typeof loadHomePageData>>;

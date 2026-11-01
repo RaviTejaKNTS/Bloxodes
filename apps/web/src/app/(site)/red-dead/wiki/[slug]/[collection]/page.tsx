@@ -65,7 +65,7 @@ export async function generateRedDeadCollectionMetadata({
   currentPage: number;
 }): Promise<Metadata> {
   const page = await getRedDeadWikiCollectionPageByPath(normalize(slug), normalize(collection));
-  const basePath = buildRedDeadCollectionPath(slug, collection);
+  const basePath = page?.canonical_path ?? buildRedDeadCollectionPath(slug, collection);
   const canonicalPath = currentPage === 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL}${canonicalPath}`;
   if (!page) {
@@ -119,17 +119,17 @@ export async function renderRedDeadCollectionPageRoute({
   const collectionOptions = collections.map((entry) => ({
     value: entry.code,
     label: entry.display_name,
-    href: buildRedDeadCollectionPath(entry.wiki_slug, entry.collection_slug),
+    href: entry.canonical_path,
     pageType: entry.page_type
   }));
   const layout = (children: ReactNode) => (
     <GameCollectionSidebarLayout
-      canonicalPath={buildRedDeadCollectionPath(context.page.wiki_slug, context.page.collection_slug)}
+      canonicalPath={context.page.canonical_path}
       title={context.page.title}
       code={context.page.code}
       gameName={context.page.game_short_title || context.config.gameName}
-      wikiPath={`/red-dead/wiki/${context.page.wiki_slug}`}
-      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildRedDeadCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+      wikiPath={context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/"))}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: entry.canonical_path, description: entry.meta_description }))}
     >
       {children}
     </GameCollectionSidebarLayout>
@@ -156,6 +156,9 @@ export async function renderRedDeadCollectionPageRoute({
     currentPage,
     prepared: context.prepared,
     routeBase: "/red-dead/wiki",
+    collectionBasePath: context.page.canonical_path,
+    wikiHomePath: context.page.canonical_path.slice(0, context.page.canonical_path.lastIndexOf("/")),
+    wikiIndexPath: context.page.canonical_path.startsWith("/wiki/") ? "/games/red-dead" : "/red-dead/wiki",
     wikiLabel: "Red Dead Wiki",
     collectionOptions,
     showMoreCollections: false,

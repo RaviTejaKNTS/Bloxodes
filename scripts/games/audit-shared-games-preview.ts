@@ -30,7 +30,7 @@ async function main() {
    assert.equal(canonical,`https://bloxodes.com${route}`,`Canonical ${route}`);
    for(const script of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)) JSON.parse(script[1]);
    for(const link of html.matchAll(/href="([^"?#]*\/page\/[1-9]\d*)"/g)) {
-    const path=link[1];if(!path.startsWith("/")||!path.startsWith(`/${route.split("/")[1]}/`) || !path.includes("/wiki/")) continue;
+    const path=link[1];if (!path.startsWith(`${route.replace(/\/page\/[1-9]\d*$/, "")}/page/`)) continue;
     if(!paths.has(path)){paths.add(path);queue.push(path);}
    }
    results.push({path:route,status:response.status,canonical:canonical!,bytes:Buffer.byteLength(html)});

@@ -145,14 +145,14 @@ async function main() {
   const gameId = await saveGame(game);
   const wikiId = await saveWiki(gameId, wiki);
   const readback = await gameDatabase(supabaseAdmin(), "gta").from("wiki_pages_view")
-    .select("id, slug, title, game_id, game_title, is_published")
+    .select("id, slug, title, game_id, game_title, is_published, canonical_path")
     .eq("id", wikiId)
     .single();
   if (readback.error) throw readback.error;
   if (!readback.data.is_published || readback.data.game_id !== gameId || readback.data.title !== wiki.title) {
     throw new Error(`Managed-development readback failed for ${options.game}.`);
   }
-  const url = `${options.baseUrl}/gta/wiki/${options.game}`;
+  const url = `${options.baseUrl}${readback.data.canonical_path}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || !html.includes(wiki.title)) {

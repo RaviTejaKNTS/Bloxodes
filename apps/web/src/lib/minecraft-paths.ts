@@ -19,8 +19,18 @@ export function minecraftCollectionEventPath(code: string): string {
 }
 
 /** Migrate old links once. Cookies never decide a public content URL. */
-export function minecraftLegacyRedirect(pathname: string, query: string): string | null {
+export function minecraftLegacyRedirect(
+  pathname: string,
+  query: string,
+  resolvePath: (path: string) => string = path => path
+): string | null {
   const params = new URLSearchParams(query);
+  const direct = resolvePath(pathname);
+  if (/^\/minecraft\/wiki(?:\/|$)/.test(pathname) && direct !== pathname && /^(\/wiki\/|\/games\/)/.test(direct)
+    && (!params.has("edition") || pathname === "/minecraft/wiki/legacy-minecraft")) {
+    params.delete("edition");
+    return `${direct}${params.size ? `?${params}` : ""}`;
+  }
   const explicit = parseMinecraftEdition(params.get("edition"));
   let target = pathname;
   const legacy = /^\/minecraft\/wiki(?:\/(.*))?$/.exec(pathname);
@@ -32,6 +42,11 @@ export function minecraftLegacyRedirect(pathname: string, query: string): string
   } else if (!/^\/minecraft\/(?:(?:java|bedrock)\/wiki|tools)(?:\/|$)/.test(pathname) || !params.has("edition")) {
     return null;
   }
+  // Resolve the edition/tool destination against the same redirect snapshot as
+  // the request. Before a move it stays namespace-style; afterwards an old row
+  // points straight at its live owner. Edition-less legacy links never hop via
+  // an edition URL that has itself moved.
+  target = resolvePath(target);
   params.delete("edition");
   return `${target}${params.size ? `?${params}` : ""}`;
 }

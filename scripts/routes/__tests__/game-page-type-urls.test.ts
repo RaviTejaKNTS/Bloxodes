@@ -34,10 +34,13 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    create table public.games(id uuid primary key default gen_random_uuid(),namespace text,slug text,kind text default 'game',parent_id uuid,is_published boolean default true,description_md text);
    ${tables.map(table=>`create table public.${table}(id uuid primary key default gen_random_uuid(),namespace text,slug text,code text,wiki_slug text,collection_slug text,canonical_path text,game_id uuid references public.games(id),wiki_page_id uuid,old_slugs text[] default '{}',is_published boolean default true,is_public boolean default true,published_at timestamptz,updated_at timestamptz,title text,intro_md text,tips_md text,description_md text,how_it_works_md text,wiki_md text,body_md text,content_md text,redeem_md text,rewards_md text,troubleshoot_md text,find_codes_md text,game_description_md text,event_details_md text,event_summary_md text,how_to_play_md text,interlinking_ai_copy_md text,faq_json jsonb,description_json jsonb,controls_json jsonb,quiz_data jsonb,map_data jsonb,catalog_data jsonb,sources_json jsonb default '[]');`).join("\n")}
    create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text);
+   ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
-   ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
+   ${migration("20261102130000_specialized_franchise_page_type_urls.sql")}
+   ${migration("20261102140000_move_switch_root_style_first.sql")}
+   ${migration("20261102150000_prepare_game_content_check_after_inherit.sql")}
    alter table public.games add unique(namespace,slug,kind);
    ${['wiki','code'].map(kind=>`alter table public.game_${kind}_pages add unique(game_id);`).join('\n')}
    ${['tool','map','quiz','catalog','checklist'].map(kind=>`alter table public.game_${kind}_pages add unique(namespace,slug);`).join('\n')}
@@ -46,6 +49,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${["wiki","collection","code","tool","checklist"].map(kind=>`create trigger prepare_game_content before insert or update on public.game_${kind}_pages for each row execute function public.prepare_game_content();`).join("\n")}
    ${["map","quiz","catalog"].map(kind=>`create trigger prepare_game_extended_page before insert or update on public.game_${kind}_pages for each row execute function public.prepare_game_extended_page();`).join("\n")}
    ${readFileSync(new URL("../../../supabase/tests/game_page_type_urls.sql",import.meta.url),"utf8")}
+   ${readFileSync(new URL("../../../supabase/tests/specialized_franchise_page_type_urls.sql",import.meta.url),"utf8")}
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });

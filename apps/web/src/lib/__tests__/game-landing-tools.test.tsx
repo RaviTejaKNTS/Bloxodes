@@ -39,6 +39,7 @@ const tool: ToolPage = {
   namespace: "minecraft",
   game_id: "minecraft",
   code: "resource-cost",
+  slug: "resource-cost",
   title: "Resource cost",
   seo_title: "Resource cost",
   meta_description: "Calculate resource costs.",

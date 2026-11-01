@@ -157,7 +157,12 @@ async function planManifest(manifestPath: string): Promise<Plan> {
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
   const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
   if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
-  if (manifest.route && manifest.route !== `/gta/wiki/${gameSlug}/${collectionSlug}`) throw new Error(`${manifestPath} route does not match its slugs.`);
+  const sb = gameDatabase(supabaseAdmin(), "gta");
+  const gameIdentity = await sb.from("games").select("id").eq("namespace", "gta").eq("slug", gameSlug).single();
+  if (gameIdentity.error) throw gameIdentity.error;
+  const expected = await supabaseAdmin().rpc("expected_game_page_path", { p_game_id: gameIdentity.data.id, p_type: "collection", p_slug: collectionSlug });
+  if (expected.error) throw expected.error;
+  if (manifest.route && manifest.route !== expected.data) throw new Error(`${manifestPath} route does not match its stored owner.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");
   const finalPath = manifest.finalJson ? resolveInside(root, manifest.finalJson, "finalJson") : path.join(root, "final.json");

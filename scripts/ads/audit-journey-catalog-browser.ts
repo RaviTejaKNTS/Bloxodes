@@ -1,3 +1,4 @@
+import { specialistMapAndToolPaths } from "../shared/specialist-public-paths";
 import { chromium, type BrowserContext, type Page } from "playwright";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:3000";
@@ -214,7 +215,7 @@ async function discoverPageTwoRoute(page: Page, baseUrl: string, route: string):
 }
 
 async function discoverNestedRoutes(page: Page, baseUrl: string): Promise<string[]> {
-  const routes = new Set<string>(ROUTES);
+  const routes = new Set<string>([...ROUTES, ...await specialistMapAndToolPaths(baseUrl)]);
   for (const root of DISCOVERY_ROOTS) {
     await page.goto(new URL(root.route.replace(/^\//, ""), baseUrl).href);
     await page.waitForSelector("#article-body");
@@ -333,7 +334,7 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 
     const content = selectors[0];
     const widgets = document.querySelectorAll<HTMLElement>(".ads-tools-widget");
-    if (widgets.length || /^\/(?:tools|gta\/maps|minecraft\/tools)(?:\/|$)/.test(window.location.pathname)) {
+    if (widgets.length || /^\/(?:tools|maps|gta\/maps|minecraft\/tools)(?:\/|$)/.test(window.location.pathname)) {
       const rails = document.querySelectorAll<HTMLElement>("aside.space-y-4");
       if (rails.length !== 1 || !rails[0].matches("aside#sidebar") || document.querySelectorAll("aside#sidebar").length !== 1 || !rails[0].parentElement?.classList.contains("content-sidebar-grid") || content.contains(rails[0])) {
         throw new Error("map/tool sidebar must be one direct grid child outside the article body");

@@ -936,6 +936,7 @@ export function renderGameCollectionPage({
   collectionBasePath,
   navigationQuery,
   wikiHomePath,
+  wikiIndexPath,
   wikiLabel = "Wiki",
   collectionOptions,
   commentsEntityType = "wiki_collection",
@@ -952,6 +953,8 @@ export function renderGameCollectionPage({
   collectionBasePath?: string;
   navigationQuery?: string;
   wikiHomePath?: string;
+  /** Public wiki directory; routeBase still controls existing presentation defaults. */
+  wikiIndexPath?: string;
   wikiLabel?: string;
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
   commentsEntityType?: "wiki_collection" | "gta_wiki_collection" | "red_dead_wiki_collection" | "minecraft_wiki_collection" | "game_collection";
@@ -979,6 +982,7 @@ export function renderGameCollectionPage({
   const metadataImage = normalizedRouteBase === "/wiki" ? null : normalizeText(items.find(item => normalizeText(item.image))?.image);
   const useStream = streamOption ?? normalizedRouteBase === "/wiki";
   const basePath = collectionBasePath ?? `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
+  const directoryPath = wikiIndexPath ?? normalizedRouteBase;
   const gameWikiPath = wikiHomePath ?? `${normalizedRouteBase}/${config.gameSlug}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
@@ -1044,8 +1048,8 @@ export function renderGameCollectionPage({
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: wikiLabel, href: normalizedRouteBase },
-    ...(gameWikiPath === normalizedRouteBase ? [] : [{ label: config.gameName, href: gameWikiPath }]),
+    { label: wikiLabel, href: directoryPath },
+    ...(gameWikiPath === directoryPath ? [] : [{ label: config.gameName, href: gameWikiPath }]),
     {
       label: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`,
       href: null
@@ -1064,8 +1068,8 @@ export function renderGameCollectionPage({
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: wikiLabel, url: `${SITE_URL.replace(/\/$/, "")}${normalizedRouteBase}` },
-      ...(gameWikiPath === normalizedRouteBase ? [] : [{ name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}${gameWikiPath}` }]),
+      { name: wikiLabel, url: `${SITE_URL.replace(/\/$/, "")}${directoryPath}` },
+      ...(gameWikiPath === directoryPath ? [] : [{ name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}${gameWikiPath}` }]),
       { name: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`, url: canonicalUrl }
     ])
   );

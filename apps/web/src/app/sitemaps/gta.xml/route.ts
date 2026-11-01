@@ -3,8 +3,6 @@ import { listPublishedGtaChecklists } from "@/lib/gta-checklists";
 import { listGameMapPages } from "@/lib/game-extra-pages";
 import { NextResponse } from "next/server";
 import {
-  buildGtaCollectionPath,
-  buildGtaWikiPath,
   listPublishedGtaWikiCollections,
   listPublishedGtaWikiPages
 } from "@/lib/gta";
@@ -26,20 +24,20 @@ export async function GET() {
     const mapRoutes = maps.map(page => ({ loc: withSiteUrl(page.canonical_path),
       changefreq: "monthly" as const, priority: "0.9", lastmod: toIsoDate(page.updated_at) }));
     const pages: SitemapUrlSetEntry[] = [
-      { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
+      ...(landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/games"), changefreq: "weekly" as const, priority: "0.8" }] : []),
       ...gameLandingSitemapEntries(landing),
-      ...(mapRoutes.length ? [{ loc: withSiteUrl("/gta/maps"), changefreq: "monthly" as const, priority: "0.8" }] : []),
+      ...(mapRoutes.length && landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/gta/maps"), changefreq: "monthly" as const, priority: "0.8" }] : []),
       ...mapRoutes,
-      ...(checklistData.total ? [{ loc: withSiteUrl("/gta/checklists"), changefreq: "weekly" as const, priority: "0.9" }] : []),
-      ...checklistData.checklists.map(page => ({ loc: withSiteUrl(`/gta/checklists/${page.slug}`), changefreq: "weekly" as const, priority: "0.9", lastmod: toIsoDate(page.content_updated_at ?? page.updated_at) })),
+      ...(checklistData.total && landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/gta/checklists"), changefreq: "weekly" as const, priority: "0.9" }] : []),
+      ...checklistData.checklists.map(page => ({ loc: withSiteUrl(page.canonical_path), changefreq: "weekly" as const, priority: "0.9", lastmod: toIsoDate(page.content_updated_at ?? page.updated_at) })),
       ...wikiPages.map((page) => ({
-        loc: withSiteUrl(buildGtaWikiPath(page.slug)),
+        loc: withSiteUrl(page.canonical_path),
         changefreq: "weekly" as const,
         priority: "0.9",
         lastmod: toIsoDate(page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at)
       })),
       ...collections.map((page) => ({
-        loc: withSiteUrl(buildGtaCollectionPath(page.wiki_slug, page.collection_slug)),
+        loc: withSiteUrl(page.canonical_path),
         changefreq: "weekly" as const,
         priority: "0.9",
         lastmod: toIsoDate(page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at)

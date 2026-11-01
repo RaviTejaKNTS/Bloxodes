@@ -1,3 +1,5 @@
+import { specializedCollectionRoute, specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
+import { GTA_CHECKLISTS } from "@/lib/engagement/config";
 import { getLiveSiteRoute } from "@/lib/site-route-page";
 import { getGameExtendedPage, getGameChecklistByPath, getGameExtendedPageById, getGameChecklistById } from "@/lib/game-extra-pages";
 import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
@@ -65,14 +67,33 @@ async function context(params: Props["params"]) {
   const rootWiki = segments.length ? null : await getGameWikiByPath(slug, `/${slug}/wiki`);
   return { root, rootWiki, path, basePath, segments, currentPage, wiki, collection, codes, tool, map, quiz, catalog, checklist };
 }
-function checklistConfig(namespace: string, canonicalPath: string, moved: boolean) { return { basePath:moved ? canonicalPath.slice(0, canonicalPath.lastIndexOf("/")) : `/${namespace}/checklists`,title:"Checklists",heading:"Checklists",intro:"",description:"Game completion checklists.",progressNamespace:namespace }; }
+function checklistConfig(namespace: string, canonicalPath: string, moved: boolean) {
+  const presentation = namespace === "gta" ? GTA_CHECKLISTS : {
+    title: "Checklists", heading: "Checklists", intro: "", description: "Game completion checklists."
+  };
+  return {
+    ...presentation,
+    basePath: moved ? canonicalPath.slice(0, canonicalPath.lastIndexOf("/")) : `/${namespace}/checklists`,
+    progressNamespace: namespace
+  };
+}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ctx = await context(params);
-  if (ctx.wiki) return gameWikiMetadata(ctx.wiki);
-  if (ctx.collection) return gameCollectionMetadata(ctx.collection, ctx.currentPage);
-  if (ctx.tool) return gameToolMetadata(ctx.tool);
+  if (ctx.wiki) return gameWikiMetadata(ctx.root.url_style === "page_type" && ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki);
+  if (ctx.collection) {
+    const specialized = await specializedCollectionRoute(ctx.collection, ctx.currentPage);
+    return specialized ? specialized.metadata() : gameCollectionMetadata(ctx.collection, ctx.currentPage);
+  }
+  if (ctx.tool) {
+    const specialized = await specializedMinecraftToolRoute(ctx.root.namespace, ctx.tool.slug);
+    return specialized ? specialized.metadata() : gameToolMetadata(ctx.tool);
+  }
   if (ctx.quiz) return gameQuizMetadata(ctx.quiz);
-  if (ctx.map || ctx.catalog) return gameContentMetadata((ctx.map || ctx.catalog)!);
+  if (ctx.map) {
+    const specialized = await specializedGtaMapRoute(ctx.root.namespace, ctx.map.slug);
+    return specialized ? specialized.metadata() : gameContentMetadata(ctx.map);
+  }
+  if (ctx.catalog) return gameContentMetadata(ctx.catalog);
   if (ctx.checklist) return checklistMetadata(ctx.checklist,checklistConfig(ctx.root.namespace, ctx.checklist.canonical_path, ctx.root.url_style === "page_type"));
   if (!ctx.segments.length && !ctx.codes) return gameWikiMetadata(gameRootWikiPage(ctx.root, ctx.rootWiki));
   const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
@@ -80,10 +101,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);
-  if (ctx.wiki) return renderGameWikiPage({ page: ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
-  if (ctx.collection) return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
+  if (ctx.wiki) return renderGameWikiPage({ page: ctx.root.url_style === "page_type" && ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
+  if (ctx.collection) {
+    const specialized = await specializedCollectionRoute(ctx.collection, ctx.currentPage);
+    return specialized ? specialized.render() : renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
+  }
   if (ctx.codes) return <GameCodePage page={ctx.codes} namespaceTitle={ctx.root.title} />;
+  if (ctx.tool) {
+    const specialized = await specializedMinecraftToolRoute(ctx.root.namespace, ctx.tool.slug);
+    if (specialized) return specialized.render();
+  }
   if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} sidebarContent={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.tool.game_id} canonicalPath={ctx.tool.canonical_path} />} />;
+  if (ctx.map) {
+    const specialized = await specializedGtaMapRoute(ctx.root.namespace, ctx.map.slug);
+    if (specialized) return specialized.render();
+  }
   if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameContentPage page={ctx.map}><GameMap data={parseGameMapData(ctx.map.map_data)} /></GameContentPage>; }
   if (ctx.catalog) return <GameContentPage page={ctx.catalog}><GameCatalog data={parseGameCatalogData(ctx.catalog.catalog_data)} /></GameContentPage>;
   if (ctx.quiz) return <GameQuizPage page={ctx.quiz} />;

@@ -66,7 +66,7 @@ function PointDetails({ marker, checked, toggle, clear, share, copyStatus }: {
   </>;
 }
 
-export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
+export function Gta5InteractiveMap({ markers, wikiPath = "/gta/wiki/gta-5" }: { markers: Gta5MapMarker[]; wikiPath?: string }) {
   const parts = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-spaceship-parts" });
   const letters = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-letter-scraps" });
   const jumps = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-stunt-jumps" });
@@ -266,7 +266,7 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
     <div ref={mapElement} className="gta-map-canvas" role="application" aria-label="Zoomable GTA 5 map with selectable location pins" />
     <MapGestureHint hint={gestureHint} />
     <header className="gta-map-topbar">
-      <Link href="/gta/wiki/gta-5" className="gta-map-back" aria-label="Back to GTA 5 wiki"><ArrowLeft size={17} /></Link>
+      <Link href={wikiPath} className="gta-map-back" aria-label="Back to GTA 5 wiki"><ArrowLeft size={17} /></Link>
       <div className="gta-map-title"><SiteLogo className="h-6" /><span className="gta-map-title__separator" aria-hidden="true">.</span><h1>GTA 5 Story Mode interactive map</h1></div>
       <div className="gta-map-topbar__actions">
         <button type="button" onClick={() => setListOpen(!listOpen)} aria-label="Toggle map layers and locations" aria-expanded={listOpen}><Layers3 size={17} /><span>Layers</span></button>

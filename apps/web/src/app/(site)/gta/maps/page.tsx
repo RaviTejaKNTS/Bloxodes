@@ -53,13 +53,13 @@ export default async function GtaMapsIndexPage() {
   const publishedMaps = await listGameMapPages("gta");
   const publishedSlugs = new Set(publishedMaps.map(page => page.slug));
   const cards: GtaMapCard[] = [
-    ...(publishedSlugs.has("gta5") ? [GTA5_CARD] : []),
+    ...(publishedSlugs.has("gta5") ? [{ ...GTA5_CARD, route: publishedMaps.find(page => page.slug === "gta5")!.canonical_path }] : []),
     ...listGtaInteractiveMapDefinitions()
       .filter((map) => publishedSlugs.has(map.slug))
       .map((map) => ({
         slug: map.slug,
         title: map.title,
-        route: map.route,
+        route: publishedMaps.find(page => page.slug === map.slug)!.canonical_path,
         preview: { type: "image" as const, src: map.views[0].image, width: map.views[0].width, height: map.views[0].height },
         summary: map.summary,
         count: map.mappedPointCount.toLocaleString() + " map points",

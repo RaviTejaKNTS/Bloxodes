@@ -1,3 +1,4 @@
+import { gameLinkPaths } from "@/lib/game-link-paths";
 import type { ReactNode } from "react";
 import { PageSidebar } from "@/components/PageSidebar";
 import { RailLinkList, type RailLink } from "@/components/RailLinkList";
@@ -55,13 +56,15 @@ export function hubsSidebarLinksFor(namespace: string) {
 }
 
 /** Rail for pages that already own their `content-sidebar-grid` (static and policy pages). */
-export function HubsPageSidebar({ canonicalPath, title, shareHeading = "Share with your friends", heading = "Popular pages", links = POPULAR_LINKS }: {
+export async function HubsPageSidebar({ canonicalPath, title, shareHeading = "Share with your friends", heading = "Popular pages", links = POPULAR_LINKS }: {
   canonicalPath: string;
   title: string;
   shareHeading?: string;
   heading?: string;
   links?: HubsSidebarLink[];
 }) {
+  const paths = await gameLinkPaths();
+  links = links.map(link => ({ ...link, href: paths[link.href] ?? link.href }));
   return (
     <PageSidebar className="hidden lg:block">
       <SocialShare url={`${SITE_URL.replace(/\/$/, "")}${canonicalPath}`} title={title} heading={shareHeading} />
@@ -74,7 +77,7 @@ export function HubsPageSidebar({ canonicalPath, title, shareHeading = "Share wi
  * Hub, landing, author and static pages: main column plus the right rail. Mediavine adds sticky
  * sidebar ads after the rail's short content (share box plus one six-link list).
  */
-export function HubsSidebarLayout({
+export async function HubsSidebarLayout({
   children,
   canonicalPath,
   title,
@@ -95,6 +98,8 @@ export function HubsSidebarLayout({
   footer?: { href: string; label: string };
   className?: string;
 }) {
+  const paths = await gameLinkPaths();
+  links = links.map(link => ({ ...link, href: paths[link.href] ?? link.href }));
   const visible = links.filter(link => link.href !== canonicalPath).slice(0, 6);
   return (
     <div className={className ? `grid gap-8 content-sidebar-grid ${className}` : "grid gap-8 content-sidebar-grid"}>

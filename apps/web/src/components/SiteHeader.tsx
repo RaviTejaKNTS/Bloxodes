@@ -12,6 +12,7 @@ import { isNavLinkActive, siteNavLinksForPath, type SidebarAccount } from "@/lib
 
 type SiteHeaderProps = {
   account: SidebarAccount;
+  linkPaths?: Record<string, string>;
 };
 
 export const SITE_MORE_DRAWER_ID = "site-more-drawer";
@@ -23,9 +24,9 @@ const iconButtonClass =
  * The sticky site header. Section links sit on one line that wraps out of view when the window is
  * too narrow, so every link stays in the server HTML and the More drawer lists them all.
  */
-export function SiteHeader({ account }: SiteHeaderProps) {
+export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
   const pathname = usePathname() ?? "/";
-  const links = siteNavLinksForPath(pathname);
+  const links = siteNavLinksForPath(pathname, linkPaths);
   const listRef = useRef<HTMLUListElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -105,14 +106,14 @@ export function SiteHeader({ account }: SiteHeaderProps) {
           </div>
         </div>
       </header>
-      <SiteMoreDrawer
+      <SiteMoreDrawer linkPaths={linkPaths}
         id={SITE_MORE_DRAWER_ID}
         open={moreOpen}
         onClose={closeMore}
         pathname={pathname}
         returnFocusRef={moreButtonRef}
       />
-      <GlobalSearchOverlay />
+      <GlobalSearchOverlay linkPaths={linkPaths} />
     </>
   );
 }

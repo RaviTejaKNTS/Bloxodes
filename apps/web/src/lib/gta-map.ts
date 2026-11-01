@@ -1,9 +1,8 @@
 import "server-only";
-import { getGameExtendedPage } from "./game-extra-pages";
+import { getGameMapBySlug } from "./game-extra-pages";
 
 import { GTA5_MAP_LAYERS, type Gta5MapMarker } from "@/lib/gta-map-types";
 import {
-  buildGtaCollectionPath,
   getGtaWikiCollectionPageByPath,
   getPublishedGtaWikiCollectionRuntime
 } from "@/lib/gta";
@@ -98,7 +97,7 @@ async function getLiveGta5MapMarkers(snapshot: MapSnapshot): Promise<Gta5MapMark
         image: entry.system.image ?? null,
         x: point.x,
         y: point.y,
-        guideUrl: `${buildGtaCollectionPath("gta-5", layer.slug)}#item-${entry.system.slug}`,
+        guideUrl: `${page.canonical_path}#item-${entry.system.slug}`,
         collectionCode: page.code,
         walkthroughUrl: layer.slug === "hidden-packages" && typeof item.walkthroughUrl === "string"
           && /^https:\/\/(www\.)?youtube\.com\//.test(item.walkthroughUrl)
@@ -110,7 +109,7 @@ async function getLiveGta5MapMarkers(snapshot: MapSnapshot): Promise<Gta5MapMark
 }
 
 export async function getGta5MapMarkers(): Promise<Gta5MapMarker[]> {
-  const page = await getGameExtendedPage("gta","/gta/maps/gta5","map");
+  const page = await getGameMapBySlug("gta", "gta5");
   if(!page || page.renderer_key !== "gta5") throw new Error("GTA V map needs its published shared snapshot.");
   const snapshot = page.map_data as MapSnapshot;
   let timeout: ReturnType<typeof setTimeout> | undefined;
@@ -125,7 +124,12 @@ export async function getGta5MapMarkers(): Promise<Gta5MapMarker[]> {
     // Keep the map usable during a transient collection database outage. This
     // snapshot is generated from the same published collection revision.
     console.warn("Serving the GTA V map marker snapshot:", error);
-    return [...snapshot.markerSnapshot, ...getPlaceMarkers(snapshot.places)];
+    return [...snapshot.markerSnapshot.map(marker => ({
+      ...marker,
+      guideUrl: page.canonical_path.startsWith("/maps/")
+        ? marker.guideUrl?.replace(/^\/gta\/wiki\//, "/wiki/") ?? null
+        : marker.guideUrl
+    })), ...getPlaceMarkers(snapshot.places)];
   } finally {
     if (timeout) clearTimeout(timeout);
   }
