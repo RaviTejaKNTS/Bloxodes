@@ -108,7 +108,10 @@ async function resolveTree(node: ReactNode): Promise<ReactNode> {
   // Awaiting the full ReactNode union is too deep for TypeScript; server components resolve to plain nodes.
   const resolved = (await (node as unknown)) as ReactNode;
   if (resolved == null || typeof resolved !== "object") return resolved;
-  if (Array.isArray(resolved)) return Promise.all(resolved.map(resolveTree));
+  if (Array.isArray(resolved)) {
+    const children = resolved as unknown as ReactNode[];
+    return Promise.all(children.map(child => resolveTree(child)));
+  }
   if (!React.isValidElement<{ children?: ReactNode }>(resolved)) return resolved;
   if (typeof resolved.type === "function") {
     const render = resolved.type as FunctionComponent<{ children?: ReactNode }>;
