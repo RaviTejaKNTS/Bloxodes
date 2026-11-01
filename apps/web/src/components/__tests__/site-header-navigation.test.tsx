@@ -3,15 +3,18 @@ import { act, type ComponentProps } from "react";
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameMenu } from "@/lib/game-site-navigation";
-const state = vi.hoisted(() => ({ path: "/wiki/the-forge", searchMenus: [] as GameMenu[], drawerMenus: [] as GameMenu[] }));
+const state = vi.hoisted(() => ({ path: "/wiki/the-forge", searchMenus: [] as GameMenu[] }));
 vi.mock("next/navigation", () => ({ usePathname: () => state.path }));
 vi.mock("next/link", () => ({ default: ({ children, ...props }: ComponentProps<"a">) => <a {...props}>{children}</a> }));
 vi.mock("@/components/SiteLogo", () => ({ SiteLogo: () => null }));
 vi.mock("@/components/AccountSheetButton", () => ({ AccountSheetButton: () => null }));
-vi.mock("@/components/SiteMoreDrawer", () => ({ SiteMoreDrawer: ({ gameMenus }: { gameMenus: GameMenu[] }) => { state.drawerMenus = gameMenus; return null; } }));
+vi.mock("@/components/SiteFeedbackButton", () => ({ SiteFeedbackButton: () => null }));
+vi.mock("@/components/ThemeToggle", () => ({ ThemeToggle: () => null }));
 vi.mock("@/components/GlobalSearchOverlay", () => ({ GlobalSearchOverlay: ({ gameMenus }: { gameMenus: GameMenu[] }) => { state.searchMenus = gameMenus; return null; } }));
 import { SiteHeader } from "../SiteHeader";
-import { resolveSearchScope, signedOutSidebarAccount, siteNavLinks } from "@/lib/site-navigation";
+import { GameMenuBridge } from "../games/GameMenuBridge";
+import { publishGameMenu } from "@/lib/game-menu-store";
+import { signedOutSidebarAccount, siteNavLinks } from "@/lib/site-navigation";
 const gta: GameMenu = { namespace: "gta", title: "GTA 5", href: "/wiki/gta-5", image: "", pages: [] };
 const terraria: GameMenu = { namespace: "terraria", title: "Terraria", href: "/wiki/terraria", image: "", pages: [] };
 let container: HTMLDivElement;
@@ -25,35 +28,50 @@ beforeEach(() => {
  container = document.createElement("div"); document.body.append(container); root = createRoot(container);
 });
 afterEach(async () => { await act(async () => root.unmount()); container.remove(); vi.unstubAllGlobals(); });
-async function navigate(path: string, initial: GameMenu[] = []) {
+async function navigate(path: string, menu?: GameMenu | null) {
  state.path = path;
- await act(async () => { root.render(<SiteHeader account={signedOutSidebarAccount} gameMenus={initial} gamePaths={[gta.href, terraria.href]} />); });
+ await act(async () => { root.render(<><SiteHeader account={signedOutSidebarAccount} />{menu !== undefined && <GameMenuBridge key={path} path={path} menu={menu} />}</>); });
 }
 const primary = () => [...container.querySelectorAll('nav[aria-label="Primary"] a')].map(a => a.getAttribute("href"));
-it("follows Roblox → GTA → Terraria → Roblox without fetching on Roblox", async () => {
- fetchMenu.mockImplementation(async (url: string) => ({ ok: true, json: async () => ({ menu: url.includes("gta-5") ? gta : terraria }) }));
+const drawer = () => container.querySelector("#site-more-drawer")!;
+it("follows Roblox → GTA → Terraria → Roblox using page menus without requests", async () => {
  await navigate("/wiki/the-forge");
- expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(fetchMenu).not.toHaveBeenCalled();
- await navigate(gta.href);
- expect(primary()).toEqual([gta.href]); expect(state.drawerMenus).toEqual([gta]);
- expect(resolveSearchScope(state.path, {}, state.searchMenus).scope).toBe("games");
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href));
+ await navigate(gta.href, gta);
+ expect(primary()).toEqual([gta.href]); expect(drawer().textContent).toContain(gta.title);
+ expect(state.searchMenus).toEqual([gta]);
+ await navigate(terraria.href, terraria);
+ expect(primary()).toEqual([terraria.href]); expect(drawer().textContent).toContain(terraria.title);
+ expect(drawer().textContent).not.toContain(gta.title);
+ expect(state.searchMenus).toEqual([terraria]);
+ await navigate("/wiki/the-forge");
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
+ expect(drawer().textContent).not.toContain(terraria.title);
+ expect(fetchMenu).not.toHaveBeenCalled();
+});
+it("uses the bridge on a direct game visit and falls back when the next menu is unavailable", async () => {
+ await navigate(gta.href, gta); expect(primary()).toEqual([gta.href]);
+ await navigate(terraria.href, null);
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
+ expect(fetchMenu).not.toHaveBeenCalled();
+});
+it("hides an outgoing menu even while its bridge is still mounted", async () => {
+ await navigate(gta.href, gta);
+ state.path = "/wiki/the-forge";
+ await act(async () => { root.render(<><SiteHeader account={signedOutSidebarAccount} /><GameMenuBridge key={gta.href} path={gta.href} menu={gta} /></>); });
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href));
+ expect(state.searchMenus).toEqual([]);
+});
+it("does not let late outgoing cleanup clear the next game's menu", async () => {
  await navigate(terraria.href);
- expect(primary()).toEqual([terraria.href]); expect(state.searchMenus).toEqual([terraria]);
- await navigate("/wiki/the-forge");
- expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
- expect(resolveSearchScope(state.path, {}, state.searchMenus).scope).toBe("wiki");
- expect(fetchMenu).toHaveBeenCalledTimes(2);
-});
-it("uses the server menu initially and falls back when the next game request fails", async () => {
- await navigate(gta.href, [gta]); expect(primary()).toEqual([gta.href]); expect(fetchMenu).not.toHaveBeenCalled();
- fetchMenu.mockRejectedValue(new Error("offline"));
- await navigate(terraria.href, [gta]);
- expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
-});
-it("ignores an old request that finishes after navigation to Roblox", async () => {
- let finish!: (value: unknown) => void;
- fetchMenu.mockReturnValue(new Promise(resolve => { finish = resolve; }));
- await navigate("/wiki/the-forge"); await navigate(gta.href); await navigate("/wiki/the-forge");
- await act(async () => { finish({ ok: true, json: async () => ({ menu: gta }) }); });
- expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
+ let clearOld!: () => void;
+ let clearNew!: () => void;
+ await act(async () => {
+  clearOld = publishGameMenu(gta.href, gta);
+  clearNew = publishGameMenu(terraria.href, terraria);
+  clearOld();
+ });
+ expect(primary()).toEqual([terraria.href]);
+ await act(async () => clearNew());
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href));
 });

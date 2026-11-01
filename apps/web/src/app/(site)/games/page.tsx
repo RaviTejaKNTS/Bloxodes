@@ -7,6 +7,8 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { safeJsonLd, breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
+export const revalidate = 3600;
+
 const description = "Find game wikis, maps, checklists, tools and daily puzzles.";
 const canonical = `${SITE_URL}/games`;
 

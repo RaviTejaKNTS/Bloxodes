@@ -19,7 +19,7 @@ import { signedOutSidebarAccount, siteNavLinks } from "@/lib/site-navigation";
 
 function render() {
   const container = document.createElement("div");
-  container.innerHTML = renderToStaticMarkup(<SiteHeader account={signedOutSidebarAccount} gameMenus={[{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "wiki", gameId: "gta5", title: "GTA 5", href: "/wiki/gta-5" }, { kind: "collection", gameId: "gta5", title: "Vehicles", href: "/wiki/gta-5/vehicles" }] }]} />);
+  container.innerHTML = renderToStaticMarkup(<SiteHeader account={signedOutSidebarAccount} />);
   return container;
 }
 
@@ -55,13 +55,10 @@ describe("site header", () => {
     expect(drawer.textContent).toContain("Theme");
   });
 
-  it("shows franchise links in the bar and keeps every site section in the drawer", () => {
+  it("uses the Roblox fallback in server HTML on game URLs before a bridge publishes", () => {
     navigation.pathname = "/wiki/gta-5/vehicles";
     const container = render();
-    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(["/games/gta", "/wiki/gta-5"]);
-    const drawer = container.querySelector("#site-more-drawer")!;
-    for (const link of siteNavLinks) expect(hrefs(drawer)).toContain(link.href);
-    expect(container.querySelector('nav[aria-label="Game wikis"]')).toBeNull();
-    expect(hrefs(container)).not.toContain("/gta/wiki/gta-6");
+    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(siteNavLinks.map(link => link.href));
+    for (const link of siteNavLinks) expect(hrefs(container.querySelector("#site-more-drawer"))).toContain(link.href);
   });
 });

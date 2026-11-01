@@ -17,7 +17,8 @@ import type { GameMap } from "@/components/games/GameMap";
 // Keep the page-type routing, specialist renderers and metadata real. Stub IO
 // and interactive boundaries to inspect saved identities and calculator inputs.
 const state = vi.hoisted(() => ({ namespace: "gta", kind: "wiki", moved: false, page: {} as ReturnType<typeof savedPage> }));
-vi.mock("@/lib/game-site-data", () => ({ listGameMenus: async () => [] }));
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: async () => [], getGameMenuForPath: async () => null }));
+vi.mock("@/components/games/GameMenuBridge", () => ({ GameMenuBridge: () => null }));
 vi.mock("server-only", () => ({}));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NOT_FOUND"); } }));

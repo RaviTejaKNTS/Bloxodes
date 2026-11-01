@@ -5,7 +5,7 @@ import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snaps
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
-import { REQUEST_PATHNAME_HEADER, REQUEST_GAME_PATH_HEADER } from "@/lib/request-headers";
+import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 import { googleIndexHeader, isGooglePolicyHtmlPath } from "@/lib/seo/google-index-policy";
@@ -144,9 +144,6 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
-  // Always overwrite the incoming header. Ownership uses the existing published URL list.
-  const menuPath = url.pathname.replace(/\/page\/[1-9]\d*$/, "");
-  requestHeaders.set(REQUEST_GAME_PATH_HEADER, gameIndexPaths.has(menuPath) || /^\/games\/[^/]+$/.test(menuPath) ? menuPath : "");
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
   // An existing all-engine robots header (private routes, indexing disabled) already covers Google.

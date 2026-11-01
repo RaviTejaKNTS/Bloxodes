@@ -1,6 +1,4 @@
-import { getGameMenuForPath } from "@/lib/game-site-data";
-import { headers } from "next/headers";
-import { REQUEST_GAME_PATH_HEADER } from "@/lib/request-headers";
+import { GameRelatedToolLinks } from "./GameRelatedToolLinks";
 import type { ReactNode } from "react";
 import { PageSidebar } from "@/components/PageSidebar";
 import { RailLinkList } from "@/components/RailLinkList";
@@ -17,14 +15,9 @@ const robloxTools = [
   { code: "wizard-alchemy-potion-planner", title: "Wizard Alchemy potion planner", description: "Plan potion Magic totals and material shortfalls." },
   { code: "wizard-alchemy-race-reroll-calculator", title: "Wizard Alchemy race reroll calculator", description: "Compare race odds and plan your reroll budget." }
 ];
-export async function RelatedToolLinks({ canonicalPath, toolCode }: { canonicalPath: string; toolCode?: string }) {
-  const gamePath = (await headers()).get(REQUEST_GAME_PATH_HEADER);
-  const menu = gamePath === canonicalPath ? await getGameMenuForPath(canonicalPath) : null;
-  const owner = menu?.pages.find(page => page.href === canonicalPath);
-  const links = menu
-    ? menu.pages.filter(page => page.kind === "tool" && page.gameId === owner?.gameId && page.href !== canonicalPath).map(page => ({ href: page.href, title: page.title }))
-    : robloxTools.filter(tool => tool.code !== toolCode).map(tool => ({ href: `/tools/${tool.code}`, title: tool.title, description: tool.description }));
-  return <RailLinkList heading="More tools" links={links.slice(0, 6)} />;
+export function RelatedToolLinks({ canonicalPath, toolCode }: { canonicalPath: string; toolCode?: string }) {
+  const fallbackLinks = robloxTools.filter(tool => tool.code !== toolCode).map(tool => ({ href: `/tools/${tool.code}`, title: tool.title, description: tool.description }));
+  return <GameRelatedToolLinks canonicalPath={canonicalPath} fallbackLinks={fallbackLinks} />;
 }
 
 export function ToolPageLayout({ children, title, canonicalPath, toolCode, sidebarContent }: {

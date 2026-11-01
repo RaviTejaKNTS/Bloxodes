@@ -1,3 +1,5 @@
+import { GameMenuBridge } from "@/components/games/GameMenuBridge";
+import { getGameMenuForPath } from "@/lib/game-site-data";
 import { specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
 import { gameChecklistConfig } from "@/lib/engagement/config";
 import { getLiveSiteRoute } from "@/lib/site-route-page";
@@ -83,6 +85,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);
+  // Menu failure must never prevent the page itself from rendering.
+  const [menu, page] = await Promise.all([
+    getGameMenuForPath(ctx.basePath).catch(() => null),
+    renderPage(ctx),
+  ]);
+  return <><GameMenuBridge path={ctx.path} menu={menu} />{page}</>;
+}
+
+async function renderPage(ctx: Awaited<ReturnType<typeof context>>) {
   if (ctx.wiki) return renderGameWikiPage({ page: ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
   if (ctx.collection) {
     return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });

@@ -134,7 +134,7 @@ export async function DedicatedToolPage({
   };
 
   return (
-    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`} sidebarContent={sidebarContent ?? await RelatedToolLinks({ canonicalPath: canonicalPath ?? `/tools/${toolCode}`, toolCode })}>
+    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`} sidebarContent={sidebarContent ?? <RelatedToolLinks canonicalPath={canonicalPath ?? `/tools/${toolCode}`} toolCode={toolCode} />}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
