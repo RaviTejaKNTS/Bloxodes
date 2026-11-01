@@ -12,18 +12,11 @@ export async function GET() {
   const landings = new Map(await Promise.all(namespaces.map(async namespace => [namespace, await getGameLandingForLinks(namespace)] as const)));
   for (const page of pages) {
    paths.set(page.canonical_path, toIsoDate(page.updated_at ?? page.published_at ?? page.created_at));
-   // Namespace directories are served only by the old renderer. Moved pages
-   // belong to the global indexes, which already have their own sitemap entries.
-   if (landings.get(page.namespace)?.root?.url_style !== "page_type") {
-    for (const section of ["codes", "tools", "maps", "quizzes", "checklists", "catalog"]) {
-     const directory = `/${page.namespace}/${section}`;
-     if (page.canonical_path.startsWith(`${directory}/`)) paths.set(directory, undefined);
-    }
-   }
+
   }
   for (const [namespace, landing] of landings) {
    // After a move, specialist sitemaps own their landing. Preserve the old entries until then.
-   if (["gta", "red-dead", "minecraft"].includes(namespace) && landing.root?.url_style === "page_type") continue;
+   if (["gta", "red-dead", "minecraft"].includes(namespace)) continue;
    if (landing.isAlias && landing.root) paths.delete(`/${landing.root.namespace}`);
    for (const entry of gameLandingSitemapEntries(landing)) paths.set(new URL(entry.loc).pathname, entry.lastmod);
   }

@@ -3,6 +3,10 @@ import { expect, test } from "@playwright/test";
 // The PR workflow runs this after the specialized namespace moves are applied
 // in managed development; missing fixtures must fail this suite.
 const cases = [
+  { old: "/gta/checklists/page/2", path: "/games/gta" },
+  { old: "/gta/maps", path: "/games/gta" },
+  { old: "/minecraft/tools", path: "/games/minecraft" },
+  { old: "/minecraft/wiki/legacy-minecraft", path: "/games/minecraft" },
   { old: "/gta/maps/gta5", path: "/maps/gta5", engine: ".leaflet-container" },
   { old: "/gta/wiki/gta-5/spaceship-parts", path: "/wiki/gta-5/spaceship-parts" },
   { old: "/gta/checklists/gta-5", path: "/checklists/gta-5" },

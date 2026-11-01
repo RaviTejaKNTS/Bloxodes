@@ -25,7 +25,6 @@ export async function GET() {
     ]);
 
     const pages: SitemapUrlSetEntry[] = [
-      ...(landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/games"), changefreq: "weekly" as const, priority: "0.8" }] : []),
       ...gameLandingSitemapEntries(landing),
       ...wikiPages.map((page) => ({
         loc: withSiteUrl(page.canonical_path),

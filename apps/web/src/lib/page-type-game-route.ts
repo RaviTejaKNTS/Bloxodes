@@ -27,7 +27,7 @@ export const resolvePageTypeGameRoute = cache(async (path: string) => {
       namespace = data?.namespace;
     }
     if (!namespace) return null;
-    const props = { params: Promise.resolve({ slug: namespace, segments: ["page-type"], sitePath: path }) };
+    const props = { params: Promise.resolve({ slug: namespace, sitePath: path }) };
     return { render: () => GameRoutePage(props), metadata: () => generateMetadata(props) };
   } catch {
     console.error("[game-routes] Game route lookup failed.");

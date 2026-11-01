@@ -19,7 +19,6 @@ export async function GET() {
     const pages: SitemapUrlSetEntry[] = [];
     pages.push(...gameLandingSitemapEntries(landing));
     for (const wiki of wikis.filter(page => page.slug !== "minecraft")) pages.push({ loc: withSiteUrl(wiki.canonical_path), changefreq: "weekly", priority: "0.9", lastmod: rowLastmod(wiki) });
-    if (tools.length && landing.root?.url_style !== "page_type") pages.push({ loc: withSiteUrl("/minecraft/tools"), changefreq: "weekly", priority: "0.8" });
     for (const page of collections) pages.push({ loc: withSiteUrl(page.canonical_path), changefreq: "weekly", priority: "0.8", lastmod: rowLastmod(page) });
     for (const page of tools) pages.push({ loc: withSiteUrl(page.canonical_path), changefreq: "weekly", priority: "0.8", lastmod: rowLastmod(page) });
     return new NextResponse(buildSitemapUrlSetXml([...new Map(pages.map(page => [page.loc, page])).values()]), { headers: { "content-type": "application/xml" } });

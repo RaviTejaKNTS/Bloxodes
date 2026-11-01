@@ -25,9 +25,7 @@ Lists that paginate use `<url>/page/<n>`. Pagination pages are `noindex`.
 
 ## Other games
 
-Each namespace has a URL style in `games.url_style`. New games use `page_type`; games published before the switch keep `namespace` until a reviewed migration moves them. A child game always has its root's style.
-
-**Page-type style** (the Roblox pattern):
+Every non-Roblox game uses page-type URLs, the Roblox pattern:
 
 | Page | URL |
 | --- | --- |
@@ -39,29 +37,15 @@ Each namespace has a URL style in `games.url_style`. New games use `page_type`; 
 | Codes | `/codes/<game-slug>` |
 | Tool, catalog | `/tools/<namespace>-<slug>`, `/catalog/<namespace>-<slug>` (no prefix added when the slug already starts with the namespace; the stored slug doesn't change) |
 
-Franchise roots can't own collections. The page-type routes look up `site_routes` and render the game page only when no Roblox page owns the URL; Roblox pages render exactly as before. Index pages (`/wiki`, `/codes`, `/quizzes`, `/checklists`, `/tools`, `/catalog`, `/maps`) list published page-type game pages in an "Other games" section.
+Franchise roots can't own collections. Minecraft's editions are the games `minecraft-java` and `minecraft-bedrock`.
 
-**Namespace style** (games not moved yet). Three route systems serve them:
+Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(game_id, page_type, slug)` computes it and database guards refuse any other path. Namespace, game and slug ownership never change.
 
-| Games | Route code | URLs |
-| --- | --- | --- |
-| GTA, Red Dead | Hand-written folders `(site)/gta`, `(site)/red-dead` | `/gta/wiki/<game>/<collection>`, `/gta/maps/<slug>`, `/gta/checklists/<slug>` |
-| Minecraft | Hand-written folder `(site)/minecraft` | `/minecraft/<java|bedrock>/wiki/<collection>`, `/minecraft/tools/<tool>` |
-| Every other game | Registry route `(site)/[slug]/[[...segments]]` | `/<namespace>/wiki`, `/<namespace>/wiki/<game>/<collection>`, `/<namespace>/<maps|quizzes|catalog|checklists|tools>/<slug>` |
+The page-type routes run the Roblox reader first; only when no Roblox page owns the URL do they look up `site_routes` and render the game page (`lib/page-type-game-route.ts`, `components/games/GameRoutePage.tsx`). GTA map engines, GTA and Red Dead collections, GTA checklists (progress keys `gta:<slug>`), Minecraft edition collections and Minecraft calculators keep their own renderers in `components/games/specialized/`. Index pages (`/wiki`, `/codes`, `/quizzes`, `/checklists`, `/tools`, `/catalog`, `/maps`) list published game pages in an "Other games" section.
 
-Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(game_id, page_type, slug)` computes the right path for the game's style, and database guards refuse any other path. Namespace, game and slug ownership never change.
+`games.url_style` records each namespace's style. New games get `page_type`; a child takes its root's style. Every namespace is `page_type`. `move_game_namespace_to_page_type_urls` and `rewrite_moved_game_links` exist for any root that isn't; a move must ship after the web code that serves its URLs is live, and the link rewrite in a later schema release (the runner applies a release's migrations in one transaction).
 
-### Moving a namespace
-
-Only a reviewed migration moves a namespace, by calling `move_game_namespace_to_page_type_urls(namespace)`. It switches every game in the namespace to `page_type` and rewrites each page's `canonical_path`; the `site_routes` triggers turn every old URL into a redirect to the new one. It also adds redirects for the namespace root, `/<namespace>/wiki` and the old directory listings, and old collection `/page/<n>` URLs keep their page number. It refuses unknown namespaces and namespaces without a root wiki.
-
-GTA, Red Dead and Minecraft keep their specialized pages after a move: the page-type routes hand each page to the same renderer the old route uses (GTA map engines and collectible collections, GTA checklists with their `gta:<slug>` progress keys, Red Dead collections, Minecraft edition pages and calculators). Curated nav, home links, search, sitemaps and the feed follow `url_style`, so nothing changes until a namespace moves.
-
-Minecraft's legacy child game (`minecraft`, wiki `/minecraft/wiki/legacy-minecraft`, 25 collections at `/minecraft/wiki/<slug>`) duplicates the Java and Bedrock editions. Moving Minecraft archives it: the game is unpublished, its rows, datasets and progress stay, and its old URLs redirect to the edition page (achievements to Bedrock, the rest to Java, or Bedrock when only Bedrock has it). The move refuses to run if Minecraft's data doesn't have exactly that shape. `minecraftLegacyRedirect` resolves `?edition=` links through the route table, so they take one hop after the move.
-
-`rewrite_moved_game_links(namespace)` then rewrites internal links to the old URLs in stored page text. It takes only row locks, so it runs in a later schema release than the move: the schema runner applies all pending migrations in one transaction.
-
-A move must ship after the web code that serves the new URLs is live, never in the same release.
+Minecraft's legacy child game (`minecraft`, wiki `/minecraft/wiki/legacy-minecraft`, 25 collections) is archived: unpublished, with its rows, datasets and progress kept. Its old URLs redirect to the edition pages (achievements to Bedrock, the rest to Java, or Bedrock when only Bedrock has it).
 
 ## Slug rules
 
@@ -82,6 +66,7 @@ All redirects come from the [route table](#route-table). `apps/web/src/proxy.ts`
 - Paths are split into segments before decoding, so an encoded `/` never creates a new segment.
 - `minecraftLegacyRedirect` (`apps/web/src/lib/minecraft-paths.ts`) still runs ahead of the table. It handles `?edition=` links and the Minecraft conflicts below.
 - A codes page rename redirects its old `/codes/<slug>` once each server refreshes its copy (up to 5 minutes).
+- Old namespace URLs of every non-Roblox game (`/gta/...`, `/<namespace>/wiki/...`) are page-linked `old` rows. An old collection URL also matches `/page/<n>` and keeps the number. `/gta/checklists/page/<n>` drops its tail and goes to `/games/gta`. GTA map tiles and artwork keep their `/gta/maps/...` asset URLs.
 - `scripts/routes/fixtures/` holds a baseline of 1,138 responses captured from production before the switch. PR checks replay it against the new middleware, including the first request to a fresh server.
 
 Some pages also redirect inside their own route, for example `/page/1` to the list's first page. Those stay with the page.
@@ -103,5 +88,5 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 
 ## Known issues
 
-- `minecraftLegacyRedirect` still runs ahead of the route table for `?edition=` links. Since Minecraft moved, it resolves its edition target through the table, so legacy links take one hop. It goes away with the old Minecraft routes.
-- Every game with a root wiki is on page-type URLs, including GTA, Red Dead and Minecraft. A namespace without a root wiki can't move and stays namespace-style. The old namespace route folders (`(site)/gta`, `red-dead`, `minecraft`, `[slug]/[[...segments]]`) now only redirect and are due for removal.
+- `minecraftLegacyRedirect` still runs ahead of the route table for old `?edition=` links. It resolves the edition target through the table, so they take one hop.
+- `apps/web/src/lib/game-route-names.ts` (the old reserved-namespace list) is still read by `scripts/games/publish-game-pages.ts` and `scripts/shared/game-wiki-bundle.ts`, though namespaces no longer become root URLs.

@@ -24,11 +24,8 @@ export async function GET() {
     const mapRoutes = maps.map(page => ({ loc: withSiteUrl(page.canonical_path),
       changefreq: "monthly" as const, priority: "0.9", lastmod: toIsoDate(page.updated_at) }));
     const pages: SitemapUrlSetEntry[] = [
-      ...(landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/games"), changefreq: "weekly" as const, priority: "0.8" }] : []),
       ...gameLandingSitemapEntries(landing),
-      ...(mapRoutes.length && landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/gta/maps"), changefreq: "monthly" as const, priority: "0.8" }] : []),
       ...mapRoutes,
-      ...(checklistData.total && landing.root?.url_style !== "page_type" ? [{ loc: withSiteUrl("/gta/checklists"), changefreq: "weekly" as const, priority: "0.9" }] : []),
       ...checklistData.checklists.map(page => ({ loc: withSiteUrl(page.canonical_path), changefreq: "weekly" as const, priority: "0.9", lastmod: toIsoDate(page.content_updated_at ?? page.updated_at) })),
       ...wikiPages.map((page) => ({
         loc: withSiteUrl(page.canonical_path),

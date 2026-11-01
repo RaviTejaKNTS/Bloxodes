@@ -2,21 +2,17 @@ import type { SharedGameGame, SharedGameWikiPage } from "./shared-game-reader";
 
 export type GameWikiPresentationPage = SharedGameWikiPage & { seo_canonical_path?: string };
 
-/** Only a published wiki owned by this published namespace root can replace its canonical. */
-export function gameLandingPath(game: SharedGameGame, wiki?: SharedGameWikiPage | null, hasIndependentRoot = false): string {
-  if (game.url_style === "page_type") return game.kind === "franchise" ? `/games/${game.namespace}` : `/wiki/${game.slug}`;
-  const rootPath = `/${game.namespace}`;
-  return !hasIndependentRoot && game.is_published && game.parent_id === null
-    && wiki?.is_published && wiki.game_id === game.id && wiki.namespace === game.namespace
-    && wiki.canonical_path === `${rootPath}/wiki` ? wiki.canonical_path : rootPath;
+/** All game roots use page-type URLs. */
+export function gameLandingPath(game: SharedGameGame): string {
+  return game.kind === "franchise" ? `/games/${game.namespace}` : `/wiki/${game.slug}`;
 }
 
 export function gameWikiCanonicalPath(page: GameWikiPresentationPage): string {
   return page.seo_canonical_path ?? page.canonical_path;
 }
 
-/** Namespace landing pages use the same wiki presentation, with their own identity and art. */
-export function gameRootWikiPage(game: SharedGameGame, wiki?: SharedGameWikiPage | null, hasIndependentRoot = false): GameWikiPresentationPage {
+/** Root pages use the same wiki presentation, with their own identity and art. */
+export function gameRootWikiPage(game: SharedGameGame, wiki?: SharedGameWikiPage | null): GameWikiPresentationPage {
   return {
     ...game, game_id: game.id,
     seo_title: null, meta_description: null, controls_json: [], tips_md: null, content_updated_at: game.updated_at,
@@ -26,9 +22,9 @@ export function gameRootWikiPage(game: SharedGameGame, wiki?: SharedGameWikiPage
     game_cover_image: game.cover_image, game_hero_image: game.hero_image, game_official_url: game.official_url,
     game_release_dates_json: game.release_dates_json, game_platforms_json: game.platforms_json, game_status: game.status,
     ...(wiki?.game_id === game.id ? wiki : {}),
-    canonical_path: game.url_style === "page_type" ? gameLandingPath(game, wiki) : `/${game.namespace}`,
-    // Keep the route identity for directory cards and comments. Only SEO identity changes.
-    seo_canonical_path: gameLandingPath(game, wiki, hasIndependentRoot)
+    canonical_path: gameLandingPath(game),
+    // Cards, comments and SEO retain the same saved page identity.
+    seo_canonical_path: gameLandingPath(game)
   };
 }
 
