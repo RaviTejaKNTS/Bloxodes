@@ -5687,7 +5687,7 @@
     {
       "url": "/minecraft/wiki/mobs?x=one&y=middle&x=two&y=&x=three",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs?x=one&y=middle&x=two&y=&x=three"
+      "location": "/wiki/minecraft-java/mobs?x=one&x=two&x=three&y=middle&y="
     },
     {
       "url": "/lists/top-trending-roblox-action-games%2Fextra",
