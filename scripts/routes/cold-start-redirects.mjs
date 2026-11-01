@@ -27,9 +27,16 @@ for (const [path, status, target] of [
     });
     clearTimeout(timer);
     const response = await fetch(base + path, {redirect:'manual', signal:AbortSignal.timeout(10_000)});
-    assert.equal(response.status, status, `First request ${path}`);
-    const location = new URL(response.headers.get('location'), base);
-    assert.equal(location.pathname + location.search, target, `First request ${path}`);
+    try {
+      assert.equal(response.status, status, `First request ${path}`);
+      const location = new URL(response.headers.get('location'), base);
+      assert.equal(location.pathname + location.search, target, `First request ${path}`);
+    } catch (error) {
+      // Server output says why the first redirect snapshot load failed.
+      await new Promise(resolve => setTimeout(resolve, 1_000));
+      console.error(output);
+      throw error;
+    }
     await response.body?.cancel();
     console.log(`Fresh server first request: ${path} -> ${status} ${target}`);
   } finally {
