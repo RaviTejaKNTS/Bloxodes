@@ -102,6 +102,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   const gameInput = gameSchema.parse(gameFile);
   if (gameInput.slug !== bundle.game.slug || gameInput.title !== bundle.game.name || gameInput.namespace != null && gameInput.namespace !== bundle.namespace || gameInput.kind != null && gameInput.kind !== bundle.game.kind || gameInput.parent_slug != null && gameInput.parent_slug !== bundle.game.parent) throw new Error("game.json identity must match bundle.namespace and bundle.game.");
   checkCopy({ ...gameInput, description_json: { title: gameInput.title, short_title: gameInput.short_title } }, "game.json");
+  assertPageTypeLinks(gameInput, "game.json");
   const [games, hubs] = await Promise.all([rows(db, "games", bundle.namespace), rows(db, "game_wiki_pages", bundle.namespace)]);
   const identity = resolveGameWikiIdentity(games, hubs, bundle.namespace, bundle.game);
   const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent, bundle.game.kind);
@@ -153,6 +154,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     const manifestPath = await bundlePath(root, entry.manifest);
     const folder = path.dirname(manifestPath);
     const document = await json(await bundlePath(folder, manifest.dataset));
+    assertPageTypeLinks(document, `${slug}/dataset.json`);
     assertNoRobloxIdentifiers(document, `${slug}/dataset.json`);
     checkCopy({ description_json: document.meta?.display }, `${slug}/dataset.json metadata`);
     const issues: Issue[] = [];

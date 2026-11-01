@@ -74,6 +74,8 @@ test("public copy rejects retired links in markdown, HTML and nested JSON string
   for (const link of ["/minecraft/java/wiki/mobs", "/minecraft/bedrock/wiki/achievements", "https://www.bloxodes.com/gta/wiki/gta-5", "http://bloxodes.com/valheim/wiki/bosses"]) {
     assert.throws(() => assertPageTypeLinks({ description_md: `[More](${link})` }, "final.json"), /retired namespace link/);
   }
+  assert.doesNotThrow(() => assertPageTypeLinks({ canonical_path: "/gta/wiki/items", description_md: "[More](/wiki/gta-5)" }, "final.json"));
+  assert.throws(() => assertPageTypeLinks({ items: [{ system: { notes: "[Boss](/valheim/wiki/bosses)" } }] }, "items/dataset.json"), /items\/dataset.json.items\[0\].system.notes/);
   for (const asset of ["/images/tools/minecraft/xp-calculator.webp", "/gta/maps/gta-vice-city/map.webp", "https://bloxodes.com/gta/maps/gta-vice-city/map.webp"]) {
     assert.doesNotThrow(() => assertPageTypeLinks({ description_md: `![Map](${asset})` }, "final.json"));
   }

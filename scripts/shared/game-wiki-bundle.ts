@@ -35,7 +35,8 @@ export function assertPageTypeLinks(value: unknown, field: string) {
   } else if (Array.isArray(value)) {
     value.forEach((entry, index) => assertPageTypeLinks(entry, `${field}[${index}]`));
   } else if (value && typeof value === "object") {
-    for (const [key, entry] of Object.entries(value)) assertPageTypeLinks(entry, `${field}.${key}`);
+    // canonical_path is a stored route checked against the target separately, not copy.
+    for (const [key, entry] of Object.entries(value)) if (key !== "canonical_path") assertPageTypeLinks(entry, `${field}.${key}`);
   }
 }
 
