@@ -14,7 +14,7 @@ export async function listSharedGameDiscoveryPages(): Promise<GameContentIndexEn
    if (!checklist) query = query.eq("is_published",true);
    const {data,error} = await query.range(offset,offset+999);
    if(error) throw new Error(`Game discovery read failed: ${error.message}`);
-   rows.push(...data as GameContentIndexEntry[]);
+   rows.push(...(data as unknown as GameContentIndexEntry[]));
    if(data.length<1000) return rows;
   }
  }));
