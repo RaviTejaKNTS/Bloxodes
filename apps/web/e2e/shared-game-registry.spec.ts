@@ -108,8 +108,9 @@ for (const coverageCase of cases) {
         // Early notFound uses layout metadata. Compare its OG URL/title with
         // another early 404 instead of demanding successful-page metadata.
         const og = async () => ({
-          url: await page.locator('meta[property="og:url"]').getAttribute("content"),
-          title: await page.locator('meta[property="og:title"]').getAttribute("content"),
+          // Layout-level 404 metadata can repeat these tags; compare the first.
+          url: await page.locator('meta[property="og:url"]').first().getAttribute("content"),
+          title: await page.locator('meta[property="og:title"]').first().getAttribute("content"),
         });
         const actual = await og();
         const fallback = await page.goto(`${entry.canonical_path}/__registry_missing_page__/page/2`, { waitUntil: "domcontentloaded" });
