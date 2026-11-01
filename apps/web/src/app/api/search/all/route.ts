@@ -177,7 +177,7 @@ function rankSearchRow(row: SearchRow, query: string): number {
   // "Vehicles in Grand Theft Auto Online"). Rank all meaningful query words
   // ahead of loose RPC matches even when the word order differs.
   // Preserve the original ranking words for every Roblox entity.
-  const isGame = row.entity_type.startsWith("game_") || Object.hasOwn(LEGACY_GAME_SEARCH_TYPES, row.entity_type);
+  const isGame = row.entity_type.startsWith("game_") || Object.prototype.hasOwnProperty.call(LEGACY_GAME_SEARCH_TYPES, row.entity_type);
   const filler = new Set(isGame ? ["all", "in", "of", "the"] : ["all", "gta", "grand", "theft", "auto", "in", "of", "the", "story", "mode"]);
   const terms = (value: string) => value.split(/[^a-z0-9]+/).filter((word) => word && !filler.has(word));
   const queryTerms = terms(normalizedQuery);
