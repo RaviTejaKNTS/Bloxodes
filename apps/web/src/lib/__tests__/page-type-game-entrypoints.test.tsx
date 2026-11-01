@@ -38,9 +38,9 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
   const filters: Record<string, unknown> = {};
   state.queries.push({ table, filters });
   const roots = [
-    { id: "root-id", namespace: "peak", title: "Example", is_published: state.root, parent_id: null, slug: "peak", url_style: "page_type" },
-    { id: "child-id", namespace: "peak", title: "Child", is_published: true, parent_id: "root-id", slug: "peak-child", url_style: "page_type" },
-    { id: "other-root-id", namespace: "other", title: "Other", is_published: true, parent_id: null, slug: "peak", url_style: "page_type" },
+    { id: "root-id", namespace: "peak", title: "Example", kind: "franchise", is_published: state.root, parent_id: null, slug: "peak", url_style: "page_type" },
+    { id: "child-id", namespace: "peak", title: "Child", kind: "game", is_published: true, parent_id: "root-id", slug: "peak-child", url_style: "page_type" },
+    { id: "other-root-id", namespace: "other", title: "Other", kind: "franchise", is_published: true, parent_id: null, slug: "peak", url_style: "page_type" },
   ].map(row => ({ ...row, cover_image: `https://media.bloxodes.com/${row.id}.webp` }));
   const row = { id: "page-id", namespace: "peak", game_id: state.franchise ? "root-id" : "child-id", game_kind: state.franchise ? "franchise" : "game", title: "Saved title", seo_title: "SEO title", meta_description: "Saved description", map_data: { image: "https://media.bloxodes.com/map.webp", width: 100, height: 100, attribution: "Example", markers: [{ id: "pin", title: "Pin", x: 10, y: 20 }] },
     catalog_data: { columns: [{ key: "name", label: "Name" }], items: [{ id: "item", name: "Item" }] },
@@ -140,6 +140,12 @@ describe("page-type entry points with pilot-style fixtures", () => {
     expect(await invoke(entry.default, params)).toBeTruthy();
     expect(state.queries.some(q => q.table === `game_${kind}_pages_view` && q.filters.id === "page-id")).toBe(true);
     const movedMetadata = await invoke(entry.generateMetadata, params);
+    if (name === "games") {
+      expect(movedMetadata).toMatchObject({
+        alternates: { canonical: "https://bloxodes.com/games/peak" },
+        openGraph: { url: "https://bloxodes.com/games/peak" },
+      });
+    }
     expect(normalizeUrls(movedMetadata, path)).toEqual(normalizeUrls(oldMetadata, legacyPath));
   });
   it.each(entries)("$name rejects hidden pages in rendering and metadata", async ({ kind, path, entry, params }) => {

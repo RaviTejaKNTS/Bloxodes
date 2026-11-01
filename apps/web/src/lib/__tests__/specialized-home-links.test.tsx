@@ -8,6 +8,7 @@ const aliases: Record<string, string> = {
   "/gta/maps/gta5": "/maps/gta5", "/gta/checklists/gta-5": "/checklists/gta-5",
 };
 vi.mock("server-only", () => ({}));
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("@/lib/game-link-paths", () => ({ gameLinkPaths: async () => state.moved ? aliases : {} }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: namespace === "gta" && state.moved ? "/games/gta" : `/${namespace}/wiki` }) }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
