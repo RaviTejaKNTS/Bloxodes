@@ -27,9 +27,9 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
   sql(url,`create database ${db};`);
   sql(target.toString(),`begin;
    do $$ begin
-    if not exists(select from pg_roles where rolname='anon') then create role anon; end if;
-    if not exists(select from pg_roles where rolname='authenticated') then create role authenticated; end if;
-    if not exists(select from pg_roles where rolname='service_role') then create role service_role; end if;
+    begin create role anon; exception when duplicate_object or unique_violation then null; end;
+    begin create role authenticated; exception when duplicate_object or unique_violation then null; end;
+    begin create role service_role; exception when duplicate_object or unique_violation then null; end;
    end $$;
    create table public.games(id uuid primary key default gen_random_uuid(),namespace text,slug text,kind text default 'game',parent_id uuid,is_published boolean default true,description_md text);
    ${tables.map(table=>`create table public.${table}(id uuid primary key default gen_random_uuid(),namespace text,slug text,code text,wiki_slug text,collection_slug text,canonical_path text,game_id uuid references public.games(id),wiki_page_id uuid,old_slugs text[] default '{}',is_published boolean default true,is_public boolean default true,published_at timestamptz,updated_at timestamptz,title text,intro_md text,tips_md text,description_md text,how_it_works_md text,wiki_md text,body_md text,content_md text,redeem_md text,rewards_md text,troubleshoot_md text,find_codes_md text,game_description_md text,event_details_md text,event_summary_md text,how_to_play_md text,interlinking_ai_copy_md text,faq_json jsonb,description_json jsonb,controls_json jsonb,quiz_data jsonb,map_data jsonb,catalog_data jsonb,sources_json jsonb default '[]');`).join("\n")}
