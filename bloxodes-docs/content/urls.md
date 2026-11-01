@@ -104,4 +104,4 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 ## Known issues
 
 - The Minecraft root wiki and its `achievements` collection still store the legacy paths `/minecraft/wiki` and `/minecraft/wiki/achievements` in `canonical_path`. So `site_routes` lists them as live, and the two Minecraft redirect rows lose to them (logged in `site_route_conflicts`). `minecraftLegacyRedirect` still serves those redirects, so it must keep running ahead of any route table lookup until Minecraft moves.
-- `peak` and `risk-of-rain` are on page-type URLs. Every other game published before 2026-11-02 is still on namespace-style URLs; they move namespace by namespace, and GTA, Red Dead and Minecraft move last, with their renderers. Don't add route code for a single namespace.
+- Every shared game with a root wiki is on page-type URLs (on 2026-11-02 that was all of them). A namespace without a root wiki can't move and stays namespace-style. GTA, Red Dead and Minecraft are still namespace-style until their move. Don't add route code for a single namespace.

@@ -30,12 +30,26 @@ for (const coverageCase of cases) {
       test.skip(true, "No eligible namespace roots");
       return;
     }
-    const root = roots[0];
     let selected: Entry | undefined;
     let kind: typeof kinds[number] = "wiki";
     if (coverageCase === "hub" || coverageCase === "unknown-path") {
-      kind = "hub";
-      selected = { ...root, game_id: root.id, canonical_path: `/${root.namespace}` };
+      // Moved roots use their wiki route; only unmoved roots have a live hub.
+      const { data: routes, error } = await sb.from("site_routes")
+        .select("path,page_type,game_id").eq("source", "game").eq("status", "live")
+        .in("page_type", ["hub", "wiki"]).in("game_id", roots.map(root => root.id)).order("path");
+      expect(error).toBeNull();
+      const route = routes?.[0];
+      const root = roots.find(root => root.id === route?.game_id);
+      if (root && route) {
+        kind = route.page_type as "hub" | "wiki";
+        if (kind === "hub") selected = { ...root, game_id: root.id, canonical_path: route.path };
+        else {
+          const { data: wiki, error: wikiError } = await sb.from("game_wiki_pages_view")
+            .select("id,game_id,namespace,canonical_path,title").eq("game_id", root.id).single();
+          expect(wikiError).toBeNull();
+          selected = wiki ?? undefined;
+        }
+      }
     } else {
       kind = coverageCase === "collection-page-2" ? "collection" : coverageCase.endsWith("wiki") || coverageCase === "non-collection-page-2" ? "wiki" : coverageCase as typeof kinds[number];
       let query = sb.from(`game_${kind}_pages_view`).select("id,game_id,namespace,canonical_path,title")
@@ -46,7 +60,7 @@ for (const coverageCase of cases) {
       const { data, error } = await query.order("id");
       expect(error).toBeNull();
       const candidates = (data ?? []) as Entry[];
-      if (coverageCase === "root-wiki") selected = candidates.find(row => row.canonical_path === `/${row.namespace}/wiki` && roots.some(root => root.id === row.game_id));
+      if (coverageCase === "root-wiki") selected = candidates.find(row => roots.some(root => root.id === row.game_id));
       else if (coverageCase === "child-wiki") selected = candidates.find(row => roots.some(root => root.namespace === row.namespace && root.id !== row.game_id));
       else if (coverageCase === "collection-page-2") {
         // Use the canonical collection's own pagination: item counts alone do not
@@ -77,6 +91,8 @@ for (const coverageCase of cases) {
     const errors: string[] = [];
     page.on("pageerror", error => errors.push(error.message));
     const response = await page.goto(path, { waitUntil: "domcontentloaded" });
+    expect(new URL(page.url()).pathname).toBe(path);
+    expect(response?.request().redirectedFrom()).toBeNull();
     const missing = coverageCase === "non-collection-page-2" || coverageCase === "unknown-path";
     expect(response?.status()).toBe(missing ? 404 : 200);
     if (missing) {
@@ -92,11 +108,12 @@ for (const coverageCase of cases) {
         // Early notFound uses layout metadata. Compare its OG URL/title with
         // another early 404 instead of demanding successful-page metadata.
         const og = async () => ({
-          url: await page.locator('meta[property="og:url"]').getAttribute("content"),
-          title: await page.locator('meta[property="og:title"]').getAttribute("content"),
+          // Layout-level 404 metadata can repeat these tags; compare the first.
+          url: await page.locator('meta[property="og:url"]').first().getAttribute("content"),
+          title: await page.locator('meta[property="og:title"]').first().getAttribute("content"),
         });
         const actual = await og();
-        const fallback = await page.goto(`/${entry.namespace}/wiki/__registry_missing_page__/page/2`, { waitUntil: "domcontentloaded" });
+        const fallback = await page.goto(`${entry.canonical_path}/__registry_missing_page__/page/2`, { waitUntil: "domcontentloaded" });
         expect(fallback?.status()).toBe(404);
         expect(actual).toEqual(await og());
       }

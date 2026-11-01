@@ -181,20 +181,69 @@ for (const namespace of pilots) {
   });
 }
 
-test("unmoved shared namespace, Minecraft and Roblox retain their URLs", async ({ page }, info) => {
+test("batch namespaces use page-type URLs and one-hop aliases", async ({ page, request }, info) => {
+  test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
+  test.setTimeout(240_000);
+  const coverage: Coverage = [];
+  try {
+    const db = database();
+    const { data: roots, error } = await db.from("games").select("id,namespace,url_style")
+      .is("parent_id", null).eq("is_published", true)
+      .not("namespace", "in", "(gta,red-dead,minecraft,peak,risk-of-rain)").order("namespace");
+    expect(error).toBeNull();
+    const { data: wikis, error: wikiError } = await db.from("game_wiki_pages_view")
+      .select("id,game_id,namespace,canonical_path").in("game_id", (roots ?? []).map(root => root.id));
+    expect(wikiError).toBeNull();
+    const { data: oldRoots, error: aliasError } = await db.from("site_routes").select("path")
+      .eq("source", "game").eq("status", "old").eq("match_type", "exact")
+      .in("path", (roots ?? []).map(root => `/${root.namespace}`));
+    expect(aliasError).toBeNull();
+    const eligible = (roots ?? []).filter(root => oldRoots?.some(alias => alias.path === `/${root.namespace}`)
+      && wikis?.some(wiki => wiki.game_id === root.id));
+    expect(eligible.length, "at least two batch namespaces need published root wikis").toBeGreaterThanOrEqual(2);
+    // Choose from the current inventory, rather than pinning games that may be
+    // absent in another database. Root aliases distinguish moved namespaces from
+    // games created on page-type URLs. A pending batch fails the count above.
+    for (const root of eligible.slice(0, 3)) {
+      expect(root.url_style, `${root.namespace} batch cutover must be applied`).toBe("page_type");
+      const wiki = wikis!.find(wiki => wiki.game_id === root.id)!;
+      await renders(page, wiki.canonical_path, coverage);
+      for (const oldPath of [`/${root.namespace}`, `/${root.namespace}/wiki`]) {
+        await redirects(request, oldPath, wiki.canonical_path, coverage);
+      }
+
+      // Include a collection when available, without requiring every namespace
+      // to publish one. Its old page URL must also resolve directly to the new URL.
+      const { data: collections, error: collectionError } = await db.from("game_collection_pages_view")
+        .select("id,canonical_path").eq("namespace", root.namespace)
+        .not("published_dataset_id", "is", null).order("canonical_path").limit(1);
+      expect(collectionError).toBeNull();
+      for (const collection of collections ?? []) {
+        const { data: aliases, error: aliasError } = await db.from("site_routes").select("path")
+          .eq("source", "game").eq("page_type", "collection").eq("page_id", collection.id)
+          .eq("status", "old").eq("match_type", "exact").like("path", `/${root.namespace}/%`);
+        expect(aliasError).toBeNull();
+        expect(aliases?.length, `${collection.canonical_path} needs an old namespace URL`).toBeGreaterThan(0);
+        await renders(page, collection.canonical_path, coverage);
+        for (const alias of aliases!) await redirects(request, alias.path, collection.canonical_path, coverage);
+      }
+    }
+  } finally {
+    await report(info, coverage);
+  }
+});
+
+test("GTA, Red Dead, Minecraft and Roblox retain their URLs", async ({ page }, info) => {
   test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
   const coverage: Coverage = [];
   try {
     const db = database();
-    const { data: root, error } = await db.from("games").select("id,url_style")
-      .eq("namespace", "wardogs").is("parent_id", null).single();
+    const { data: roots, error } = await db.from("games").select("namespace,url_style")
+      .in("namespace", ["gta", "red-dead", "minecraft"]).is("parent_id", null).order("namespace");
     expect(error).toBeNull();
-    expect(root?.url_style).toBe("namespace");
-    const { data: wiki, error: wikiError } = await db.from("game_wiki_pages_view")
-      .select("canonical_path").eq("game_id", root!.id).single();
-    expect(wikiError).toBeNull();
-    expect(wiki?.canonical_path).toBe("/wardogs/wiki");
-    for (const path of [wiki!.canonical_path, "/minecraft/java/wiki", "/wiki/blox-fruits"]) {
+    expect(roots?.map(root => root.namespace)).toEqual(["gta", "minecraft", "red-dead"]);
+    expect(roots!.every(root => root.url_style === "namespace")).toBe(true);
+    for (const path of ["/gta/wiki", "/red-dead/wiki", "/minecraft/java/wiki", "/wiki/blox-fruits"]) {
       await renders(page, path, coverage);
     }
   } finally {
