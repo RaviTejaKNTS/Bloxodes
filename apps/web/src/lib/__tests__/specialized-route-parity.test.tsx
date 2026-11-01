@@ -104,22 +104,19 @@ type RouteAdapter<Params> = [
 
 // Resolve server components without an RSC server; client boundaries above are
 // inert probes of the exact props handed to the interactive component.
-async function resolveTree(node: ReactNode): Promise<ReactNode> {
-  // Awaiting the full ReactNode union is too deep for TypeScript; server components resolve to plain nodes.
-  const resolved = (await (node as unknown)) as ReactNode;
+// Typed as unknown: walking the full ReactNode union is too deep for TypeScript.
+async function resolveTree(node: unknown): Promise<unknown> {
+  const resolved: unknown = await node;
   if (resolved == null || typeof resolved !== "object") return resolved;
-  if (Array.isArray(resolved)) {
-    const children = resolved as unknown as ReactNode[];
-    return Promise.all(children.map(child => resolveTree(child)));
-  }
+  if (Array.isArray(resolved)) return Promise.all(resolved.map((child: unknown) => resolveTree(child)));
   if (!React.isValidElement<{ children?: ReactNode }>(resolved)) return resolved;
   if (typeof resolved.type === "function") {
     const render = resolved.type as FunctionComponent<{ children?: ReactNode }>;
     return resolveTree(await render(resolved.props));
   }
-  return React.cloneElement(resolved, {}, await resolveTree(resolved.props.children));
+  return React.cloneElement(resolved, {}, (await resolveTree(resolved.props.children)) as ReactNode);
 }
-async function html(node: ReactNode) { return renderToStaticMarkup(<>{await resolveTree(node)}</>); }
+async function html(node: ReactNode) { return renderToStaticMarkup(<>{(await resolveTree(node)) as ReactNode}</>); }
 function withoutUrls(value: unknown): unknown {
   return JSON.parse(JSON.stringify(value), (key, val) => key === "url" || key === "canonical" || key === "languages" ? undefined : val);
 }
