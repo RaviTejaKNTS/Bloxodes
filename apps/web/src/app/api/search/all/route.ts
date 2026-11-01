@@ -1,4 +1,4 @@
-import { LEGACY_GAME_SEARCH_TYPES, SCOPE_ENTITY_TYPES } from "@/lib/search-scopes";
+import { SCOPE_ENTITY_TYPES } from "@/lib/search-scopes";
 import { isRetiredMusicGameCatalogUrl } from "@/lib/game-specific-id-pages";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { NextResponse } from "next/server";
@@ -177,7 +177,7 @@ function rankSearchRow(row: SearchRow, query: string): number {
   // "Vehicles in Grand Theft Auto Online"). Rank all meaningful query words
   // ahead of loose RPC matches even when the word order differs.
   // Preserve the original ranking words for every Roblox entity.
-  const isGame = row.entity_type.startsWith("game_") || Object.prototype.hasOwnProperty.call(LEGACY_GAME_SEARCH_TYPES, row.entity_type);
+  const isGame = row.entity_type.startsWith("game_");
   const filler = new Set(isGame ? ["all", "in", "of", "the"] : ["all", "gta", "grand", "theft", "auto", "in", "of", "the", "story", "mode"]);
   const terms = (value: string) => value.split(/[^a-z0-9]+/).filter((word) => word && !filler.has(word));
   const queryTerms = terms(normalizedQuery);
@@ -254,7 +254,7 @@ export async function GET(request: Request) {
     const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
-      const type = TYPE_MAP[LEGACY_GAME_SEARCH_TYPES[row.entity_type] ?? row.entity_type] ?? "article";
+      const type = TYPE_MAP[row.entity_type] ?? "article";
       const badge = row.entity_type === "code" && row.active_code_count != null ? `${row.active_code_count} active` : null;
       return {
         id: `${row.entity_type}-${row.entity_id}`,

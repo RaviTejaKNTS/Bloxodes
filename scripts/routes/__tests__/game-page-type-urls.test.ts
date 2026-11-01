@@ -115,11 +115,8 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    insert into public.search_index(entity_type,entity_id,slug,title,url,is_published)
    select kind,id::text,'stale','Stale fixture','/stale-path',true
    from plumbing_expected_search where kind in ('game_wiki','game_collection');
-   -- Mirror tmp/streamline-later/20261102220000_reindex_shared_game_search.sql;
-   -- CI must not depend on an ignored tmp file. Test both upsert and retired-key deletion.
-   select public.refresh_game_content_index(null);
-   delete from public.search_index where entity_type in
-    ('gta_game','gta_wiki','gta_wiki_collection','gta_checklist','red_dead_game','red_dead_wiki','red_dead_wiki_collection','minecraft_game','minecraft_wiki','minecraft_wiki_collection','minecraft_tool');
+   -- The reindex release: test both upsert and retired-key deletion.
+   ${migration("20261102220000_reindex_shared_game_search.sql")}
    set local bloxodes.plumbing_phase='reindexed';
    ${readFileSync(new URL("../../../supabase/tests/unified_game_plumbing.sql",import.meta.url),"utf8").replace(/^--[^\n]*\n/,'').replace(/^begin;\s*/i,'').replace(/rollback;\s*$/i,'')}
    -- Literal state expectations, independent of the SQL assertion's joins.
