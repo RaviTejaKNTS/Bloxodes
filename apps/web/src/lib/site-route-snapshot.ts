@@ -46,48 +46,48 @@ export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promi
     }
   };
 }
+const REDIRECT_COLUMNS = 'path,status,match_type,tail_mode,match_self,page_id,page_type,target_url,resolved_target,redirect_code,origin';
+// Two parallel rounds, so a cold load stays well inside the initial deadline
+// however many redirects exist: resolved_target is computed per row, which
+// makes each page slow, and reading pages one after another timed out.
 async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   const client = supabaseAdmin();
-  const rows: RedirectRoute[] = [];
-  async function read(table: string, blockers?: string) {
-    let after: string | undefined;
-    for (;;) {
-      const columns = blockers ? 'path,status,match_type' : 'path,status,match_type,tail_mode,match_self,page_id,page_type,target_url,resolved_target,redirect_code,origin';
-      let query = client.from(table).select(columns).order('path').limit(PAGE_SIZE).abortSignal(signal);
-      if (blockers) query = query.in('status', ['live', 'gone']).eq('match_type', 'exact').or(blockers);
-      if (after) query = query.gt('path', after);
-      const { data, error } = await query;
-      if (error || !data) throw new Error('Redirect snapshot unavailable');
-      if (data.length === 0) break;
-      const page = data as unknown as RedirectRoute[];
-      rows.push(...page);
-      // A short page is the last one; skip the extra empty round trip. PAGE_SIZE
-      // stays below the PostgREST row cap (1000) so a capped page never looks short.
-      if (page.length < PAGE_SIZE) break;
-      after = page[page.length - 1].path;
-    }
-  }
-  await read('site_route_redirects');
+  const unavailable = () => new Error('Redirect snapshot unavailable');
+  // Round 1: the redirect count (cheap, base table) and the few prefix rules.
+  const [counted, prefixRows] = await Promise.all([
+    client.from('site_routes').select('path', { count: 'exact', head: true }).eq('status', 'old').abortSignal(signal),
+    client.from('site_routes').select('path').eq('status', 'old').eq('match_type', 'prefix').abortSignal(signal)
+  ]);
+  if (counted.error || counted.count == null || prefixRows.error || !prefixRows.data) throw unavailable();
   // Exact live/gone paths can only block redirects at/below a prefix. Use
   // lexicographic subtree bounds, avoiding LIKE wildcards in stored paths.
-  // Nested prefixes (every /lists/<slug> under /lists) add nothing to the
-  // subtree filter; dropping them keeps the request URL short.
-  // Only prefix rules can be blocked. Old collection rows redirect only their
-  // exact path and /page/<n>, where no live page exists; adding every moved
-  // collection here made the filter too long once whole namespaces moved.
-  const prefixPaths = rows.filter(row => row.match_type === 'prefix').map(row => row.path);
-  const prefixes = prefixPaths
-    .filter(path => !prefixPaths.some(other => other !== path && (other === '/' || path.startsWith(other + '/'))))
-    .map(path => ({ path }));
-  if (prefixes.length) {
-    const quote = (value: string) => JSON.stringify(value);
-    const filters = prefixes.flatMap(({path}) => path === '/' ? ['path.gte."/"'] : [
-      `path.eq.${quote(path)}`,
-      `and(path.gte.${quote(path + '/')},path.lt.${quote(path + '0')})`
-    ]).join(',');
-    await read('site_routes', filters);
+  // Nested prefixes (every /lists/<slug> under /lists) add nothing, and old
+  // collection rows redirect only their exact path and /page/<n>, where no
+  // live page exists, so neither belongs in this filter.
+  const prefixPaths = prefixRows.data.map(row => row.path as string);
+  const prefixes = prefixPaths.filter(path => !prefixPaths.some(other => other !== path && (other === '/' || path.startsWith(other + '/'))));
+  const quote = (value: string) => JSON.stringify(value);
+  const blockerFilter = prefixes.flatMap(path => path === '/' ? ['path.gte."/"'] : [
+    `path.eq.${quote(path)}`,
+    `and(path.gte.${quote(path + '/')},path.lt.${quote(path + '0')})`
+  ]).join(',');
+  // Round 2: every page of resolved redirects plus the blockers. One spare
+  // page absorbs rows added since the count; the next refresh settles the rest.
+  const pageCount = Math.ceil(counted.count / PAGE_SIZE) + 1;
+  const reads = Array.from({ length: pageCount }, (_, index) =>
+    client.from('site_route_redirects').select(REDIRECT_COLUMNS).order('path')
+      .range(index * PAGE_SIZE, (index + 1) * PAGE_SIZE - 1).abortSignal(signal));
+  if (blockerFilter) {
+    reads.push(client.from('site_routes').select('path,status,match_type').in('status', ['live', 'gone']).eq('match_type', 'exact')
+      .or(blockerFilter).order('path').range(0, PAGE_SIZE - 1).abortSignal(signal));
   }
-  return rows;
+  const results = await Promise.all(reads);
+  const rows = new Map<string, RedirectRoute>();
+  for (const { data, error } of results) {
+    if (error || !data) throw unavailable();
+    for (const row of data as unknown as RedirectRoute[]) rows.set(row.path, row);
+  }
+  return [...rows.values()];
 }
 const cache = createRedirectSnapshotCache(loadRedirectRows);
 export const readRedirectSnapshot = cache.read;
