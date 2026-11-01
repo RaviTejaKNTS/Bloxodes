@@ -1,5 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { load } from "cheerio";
+import { beforeEach, expect, it, vi } from "vitest";
 
 const state = vi.hoisted(() => ({ wikiPublished: true, wrongOwner: false, independent: false, failedRead: "", moved: "" }));
 function stored(path: string) {
