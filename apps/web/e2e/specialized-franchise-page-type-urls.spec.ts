@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-// Intentionally not added to a workflow. Run only after all three namespaces
-// have moved in managed development; missing fixtures must fail this suite.
+// The PR workflow runs this after the specialized namespace moves are applied
+// in managed development; missing fixtures must fail this suite.
 const cases = [
   { old: "/gta/maps/gta5", path: "/maps/gta5", engine: ".leaflet-container" },
   { old: "/gta/wiki/gta-5/spaceship-parts", path: "/wiki/gta-5/spaceship-parts" },

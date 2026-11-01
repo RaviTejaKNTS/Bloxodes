@@ -5412,52 +5412,52 @@
     {
       "url": "/minecraft/wiki?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki?ref=a+b"
+      "location": "/wiki/minecraft-bedrock?ref=a+b"
     },
     {
       "url": "/minecraft/wiki?edition=java",
       "status": 308,
-      "location": "/minecraft/java/wiki"
+      "location": "/wiki/minecraft-java"
     },
     {
       "url": "/minecraft/wiki?edition=invalid",
       "status": 308,
-      "location": "/minecraft/java/wiki"
+      "location": "/wiki/minecraft-java"
     },
     {
       "url": "/minecraft/wiki/mobs",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs"
+      "location": "/wiki/minecraft-java/mobs"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/mobs?ref=a+b"
+      "location": "/wiki/minecraft-bedrock/mobs?ref=a+b"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=java",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs"
+      "location": "/wiki/minecraft-java/mobs"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=invalid",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs"
+      "location": "/wiki/minecraft-java/mobs"
     },
     {
       "url": "/minecraft/wiki/mobs?ref=old",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?ref=old"
+      "location": "/wiki/minecraft-java/mobs?ref=old"
     },
     {
       "url": "/minecraft/wiki/achievements",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements"
+      "location": "/wiki/minecraft-bedrock/achievements"
     },
     {
       "url": "/minecraft/wiki/achievements?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements?ref=a+b"
+      "location": "/wiki/minecraft-bedrock/achievements?ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements?edition=java",
@@ -5467,22 +5467,22 @@
     {
       "url": "/minecraft/wiki/achievements?edition=invalid",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements"
+      "location": "/wiki/minecraft-bedrock/achievements"
     },
     {
       "url": "/minecraft/wiki/achievements?ref=old",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements?ref=old"
+      "location": "/wiki/minecraft-bedrock/achievements?ref=old"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements/page/2"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements/page/2?ref=a+b"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=java",
@@ -5492,27 +5492,27 @@
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=invalid",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements/page/2"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?ref=old",
       "status": 308,
-      "location": "/minecraft/bedrock/wiki/achievements/page/2?ref=old"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?ref=old"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?ref=a+b"
+      "location": "/wiki/minecraft-java/mobs?ref=a+b"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=java",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs"
+      "location": "/wiki/minecraft-java/mobs"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=invalid",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs"
+      "location": "/wiki/minecraft-java/mobs"
     },
     {
       "url": "/minecraft/tools/test?edition=bedrock&ref=a%20b",
@@ -5672,22 +5672,22 @@
     {
       "url": "/minecraft/wiki/mobs?x=a+b",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?x=a+b"
+      "location": "/wiki/minecraft-java/mobs?x=a+b"
     },
     {
       "url": "/minecraft/wiki/mobs?x=%2B%26%3D%2F%25&escaped=%E2%9C%93",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
+      "location": "/wiki/minecraft-java/mobs?x=%2B%26%3D%2F%25&escaped=%E2%9C%93"
     },
     {
       "url": "/minecraft/wiki/mobs?empty=&bare&x=",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?empty=&bare=&x="
+      "location": "/wiki/minecraft-java/mobs?empty=&bare=&x="
     },
     {
       "url": "/minecraft/wiki/mobs?x=one&y=middle&x=two&y=&x=three",
       "status": 308,
-      "location": "/minecraft/java/wiki/mobs?x=one&x=two&x=three&y=middle&y="
+      "location": "/wiki/minecraft-java/mobs?x=one&x=two&x=three&y=middle&y="
     },
     {
       "url": "/lists/top-trending-roblox-action-games%2Fextra",

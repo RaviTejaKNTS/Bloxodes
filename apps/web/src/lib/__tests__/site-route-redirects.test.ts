@@ -22,7 +22,10 @@ describe('frozen Phase 2 behavior against migration seed', () => {
     expect(fixture.counts).toEqual({articles:12,legacyCodeSlugs:360,retiredLists:61});
     expect(rows.filter(r=>r.origin==='slug_oldslugs')).toHaveLength(360);
   });
-  for (const entry of fixture.cases) it(entry.url, async () => {
+  // The seed is the pre-move registry. Minecraft's baseline now expects its
+  // post-move targets, which the managed-development parity spec and
+  // minecraft-moved-redirects.test.ts cover against moved data.
+  for (const entry of fixture.cases.filter(entry => !entry.url.startsWith('/minecraft'))) it(entry.url, async () => {
     // Next's configured redirect stage handles trailing slashes before middleware.
     if (entry.url.split('?')[0].endsWith('/')) {
       expect(entry.status).toBe(308);

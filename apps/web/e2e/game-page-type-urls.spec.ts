@@ -233,7 +233,7 @@ test("batch namespaces use page-type URLs and one-hop aliases", async ({ page, r
   }
 });
 
-test("GTA, Red Dead, Minecraft and Roblox retain their URLs", async ({ page }, info) => {
+test("GTA, Red Dead and Minecraft move while Roblox retains its URL", async ({ page, request }, info) => {
   test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
   const coverage: Coverage = [];
   try {
@@ -242,10 +242,17 @@ test("GTA, Red Dead, Minecraft and Roblox retain their URLs", async ({ page }, i
       .in("namespace", ["gta", "red-dead", "minecraft"]).is("parent_id", null).order("namespace");
     expect(error).toBeNull();
     expect(roots?.map(root => root.namespace)).toEqual(["gta", "minecraft", "red-dead"]);
-    expect(roots!.every(root => root.url_style === "namespace")).toBe(true);
-    for (const path of ["/gta/wiki", "/red-dead/wiki", "/minecraft/java/wiki", "/wiki/blox-fruits"]) {
+    expect(roots!.every(root => root.url_style === "page_type")).toBe(true);
+    for (const namespace of ["gta", "red-dead", "minecraft"]) {
+      const path = `/games/${namespace}`;
       await renders(page, path, coverage);
+      for (const oldPath of [`/${namespace}`, `/${namespace}/wiki`]) {
+        await redirects(request, oldPath, path, coverage);
+      }
     }
+    await renders(page, "/wiki/minecraft-java", coverage);
+    await redirects(request, "/minecraft/java/wiki", "/wiki/minecraft-java", coverage);
+    await renders(page, "/wiki/blox-fruits", coverage);
   } finally {
     await report(info, coverage);
   }

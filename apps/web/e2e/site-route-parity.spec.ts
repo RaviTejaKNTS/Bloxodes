@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import fixture from '../../../scripts/routes/fixtures/phase-2-redirects.json';
 
 // Real production build, real middleware, managed-development route rows.
+// The frozen baseline includes reviewed final Minecraft move destinations.
 // No injected snapshot, catalog fetch fixture, content write, or production access.
 test('all frozen redirects preserve status and Location against managed development', async ({request, baseURL}) => {
   test.setTimeout(240_000);
@@ -34,8 +35,6 @@ test('live pages never redirect, across every registered page type', async ({req
     expect(error,`${source}/${type}`).toBeNull();
     let sampled=0;
     for(const route of routes??[]) {
-      // Known Minecraft live/redirect conflicts stay with minecraftLegacyRedirect.
-      if(route.path==='/minecraft/wiki'||route.path.startsWith('/minecraft/wiki/')) continue;
       const response=await request.get(route.path,{maxRedirects:0});
       expect([200,404],`${source}/${type} ${route.path}`).toContain(response.status());
       if(++sampled===3) break;
