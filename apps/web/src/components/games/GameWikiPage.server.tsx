@@ -22,7 +22,7 @@ export async function renderGameWikiPage(props: Omit<GameWikiPageProps, "directo
     const mapPath = moved ? map?.canonical_path : legacyMap;
     extraLinks = [
       ...(mapPath ? [{ href: mapPath, title: "Explore the interactive map" }] : []),
-      ...(checklist ? [{ href: moved ? checklist.canonical_path : `/gta/checklists/${page.slug}`, title: `Track your 100% completion with the ${page.game_title} checklist` }] : [])
+      ...(checklist ? [{ href: moved ? checklist.page.canonical_path : `/gta/checklists/${page.slug}`, title: `Track your 100% completion with the ${page.game_title} checklist` }] : [])
     ];
   }
   const reader = createGameReader(namespace);
