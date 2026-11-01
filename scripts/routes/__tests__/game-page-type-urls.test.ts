@@ -36,8 +36,8 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text);
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
    -- Search and revalidation side effects are out of scope for these route tests.
-   create function public.refresh_game_content_index(text) returns void language sql as $$ select $$;
-   create function public.enqueue_revalidation(text,text,text) returns void language sql as $$ select $$;
+   create function public.refresh_game_content_index(text) returns void language plpgsql as $$ begin end $$;
+   create function public.enqueue_revalidation(text,text,text) returns void language plpgsql as $$ begin end $$;
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
