@@ -1,5 +1,3 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 import { reservedGameNamespaces } from "../../apps/web/src/lib/game-route-names";
 import { runtimeManifestSchema, type GameWikiBundle } from "../../contracts/game-wiki/v1/schema";
 
@@ -9,13 +7,37 @@ export function assertGameWikiIdentity(bundle: Pick<GameWikiBundle, "namespace" 
   if (game.parent) {
     if (game.parent !== namespace || game.kind !== "game") throw new Error("A child game must have kind game and parent equal to the namespace root.");
   } else if (game.slug !== namespace) throw new Error("A root game's slug must equal its namespace.");
-  if (namespace === "minecraft" && !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(game.slug)) throw new Error("Minecraft requires an approved edition identity; new editions need route code.");
 }
 
-export function gameWikiPath(namespace: string, slug: string, parent?: string, style: "namespace" | "page_type" = "namespace", kind: string = "game") {
-  if (style === "page_type") return !parent && kind === "franchise" ? `/games/${namespace}` : `/wiki/${slug}`;
-  if (namespace === "minecraft" && ["minecraft-java", "minecraft-bedrock"].includes(slug)) return `/minecraft/${slug.slice(10)}/wiki`;
-  return `/${namespace}/wiki${parent ? `/${slug}` : ""}`;
+export function gameWikiPath(namespace: string, slug: string, parent?: string, kind: string = "game") {
+  return !parent && kind === "franchise" ? `/games/${namespace}` : `/wiki/${slug}`;
+}
+
+// Inspect every string, including nested FAQ, controls and structured-data copy.
+// Match whole absolute URLs first so an external URL's path is never treated as
+// an internal relative link. Maps is a real site section absent from the
+// namespace reservation list. Files (a last segment with an extension) are
+// static assets, never retired pages. A retired page may have one segment
+// between the namespace and its section (old edition paths like /<ns>/java/wiki).
+export function assertPageTypeLinks(value: unknown, field: string) {
+  if (typeof value === "string") {
+    const links = value.matchAll(/https?:\/\/[^\s<>"'`\[\]()]+|(?<![\w/.:])\/[^\s<>"'`\[\]()]+/gi);
+    for (const [link] of links) {
+      let url: URL;
+      try { url = new URL(link, "https://bloxodes.com"); } catch { continue; }
+      if (url.protocol !== "https:" && url.protocol !== "http:" || !["bloxodes.com", "www.bloxodes.com"].includes(url.hostname)) continue;
+      if (/\.[a-z0-9]{2,5}$/i.test(url.pathname)) continue;
+      const retired = /^\/([^/]+)\/(?:[^/]+\/)?(wiki|tools|maps|checklists|quizzes|codes|catalog)(?:\/|$)/.exec(url.pathname);
+      if (retired && !reservedGameNamespaces.has(retired[1]) && retired[1] !== "maps") {
+        throw new Error(`${field}: retired namespace link "${link}". Use the page-type URL instead.`);
+      }
+    }
+  } else if (Array.isArray(value)) {
+    value.forEach((entry, index) => assertPageTypeLinks(entry, `${field}[${index}]`));
+  } else if (value && typeof value === "object") {
+    // canonical_path is a stored route checked against the target separately, not copy.
+    for (const [key, entry] of Object.entries(value)) if (key !== "canonical_path") assertPageTypeLinks(entry, `${field}.${key}`);
+  }
 }
 
 export function assertNoRobloxIdentifiers(value: unknown, label: string) {
@@ -26,14 +48,9 @@ export function assertNoRobloxIdentifiers(value: unknown, label: string) {
   }
 }
 
-export async function assertGameWikiRoutes(bundle: GameWikiBundle, siteRoot: string) {
+export function assertGameWikiRoutes(bundle: GameWikiBundle) {
   assertGameWikiIdentity(bundle);
-  // Static top-level routes take precedence over the shared registry route.
-  const entries = await fs.readdir(siteRoot, { withFileTypes: true });
-  if (entries.some(entry => entry.isDirectory() && entry.name === bundle.namespace) && !["gta", "red-dead", "minecraft"].includes(bundle.namespace)) {
-    throw new Error(`Namespace ${bundle.namespace} has a dedicated route. It needs reviewed route code before game-wiki publication.`);
-  }
-  if (!bundle.game.parent && ["gta", "red-dead", "minecraft"].includes(bundle.namespace) && bundle.collections?.length) throw new Error(`${bundle.namespace} root collections need route code; publish collections on a child game.`);
+  if (bundle.game.kind === "franchise" && bundle.collections?.length) throw new Error("Franchise roots cannot own collections; publish collections on a child game.");
 }
 
 export async function selectGameWikiPages(bundle: GameWikiBundle, only: string[] | undefined, readManifest: (file: string) => Promise<unknown>) {

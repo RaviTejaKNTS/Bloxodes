@@ -11,7 +11,7 @@ import { useCollectionChecklistProgress } from "@/lib/collection-checklist-progr
 import { GTA5_MAP_LAYERS, type Gta5MapLayerSlug, type Gta5MapMarker } from "@/lib/gta-map-types";
 
 const PROGRESS_BASE = {
-  endpoint: "/api/gta/collections/progress",
+  endpoint: "/api/games/gta/collections/progress",
   requestKey: "code",
   storageKeyPrefix: "gta-collection:",
   eventName: "gta-collection-progress",

@@ -7,7 +7,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { wikiMediaPublicBaseUrl } from "@/lib/wiki-media";
 import { bundleSchema, gameSchema, hubFinalSchema, collectionFinalSchema } from "../../contracts/game-wiki/v1/schema";
-import { assertGameWikiRoutes, assertNoRobloxIdentifiers, gameWikiPath, selectGameWikiPages, resolveGameWikiIdentity } from "../shared/game-wiki-bundle";
+import { assertGameWikiRoutes, assertPageTypeLinks, assertNoRobloxIdentifiers, gameWikiPath, selectGameWikiPages, resolveGameWikiIdentity } from "../shared/game-wiki-bundle";
 import { bundlePath, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
@@ -94,7 +94,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   const bundle = bundleSchema.parse(raw);
   if (!bundle.hub && !bundle.collections?.length) throw new Error("Supply a hub and/or collections in bundle.json.");
   const selected = await selectGameWikiPages(bundle, options.only, async file => json(await bundlePath(root, file)));
-  await assertGameWikiRoutes({ ...bundle, collections: selected.collections.map(row => row.entry) }, path.join(repoRoot, "apps/web/src/app/(site)"));
+  assertGameWikiRoutes({ ...bundle, collections: selected.collections.map(row => row.entry) });
   console.log(`${options.apply ? "Apply preflight" : "Dry run"}: game-wiki@1, ${bundle.namespace}/${bundle.game.slug}, target=${options.target}`);
   if (options.target === "production") await assertLocalContentPublication();
   const gameFile = await json(await bundlePath(root, "game.json"));
@@ -102,9 +102,10 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   const gameInput = gameSchema.parse(gameFile);
   if (gameInput.slug !== bundle.game.slug || gameInput.title !== bundle.game.name || gameInput.namespace != null && gameInput.namespace !== bundle.namespace || gameInput.kind != null && gameInput.kind !== bundle.game.kind || gameInput.parent_slug != null && gameInput.parent_slug !== bundle.game.parent) throw new Error("game.json identity must match bundle.namespace and bundle.game.");
   checkCopy({ ...gameInput, description_json: { title: gameInput.title, short_title: gameInput.short_title } }, "game.json");
+  assertPageTypeLinks(gameInput, "game.json");
   const [games, hubs] = await Promise.all([rows(db, "games", bundle.namespace), rows(db, "game_wiki_pages", bundle.namespace)]);
   const identity = resolveGameWikiIdentity(games, hubs, bundle.namespace, bundle.game);
-  const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent, identity.game?.url_style ?? identity.root?.url_style ?? "page_type", bundle.game.kind);
+  const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent, bundle.game.kind);
   if (/[?#]/.test(wikiPath)) throw new Error("Stored wiki route must be a canonical path.");
   const failures: string[] = [];
   async function check<T>(label: string, work: () => Promise<T>): Promise<T | undefined> {
@@ -118,6 +119,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
       const file = await json(await bundlePath(root, selected.hub!.finalJson));
       assertNoRobloxIdentifiers(file, "wiki/final.json");
       const final = hubFinalSchema.parse(file);
+      assertPageTypeLinks(final, "wiki/final.json");
       if (final.slug !== identity.hubSlug || final.game_slug !== bundle.game.slug || final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== wikiPath) throw new Error("Hub identity/route must match the target game's permanent hub slug and route.");
       if (bundle.game.kind === "game" && gameInput.status === "released" && !final.tips_md.trim()) throw new Error("Released games require gameplay tips.");
       validateWikiControlsJson(final.controls_json, "wiki/final.json controls_json");
@@ -148,10 +150,11 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     const slug = manifest.collection.slug;
     assertNoRobloxIdentifiers(manifest, entry.manifest);
     if (manifest.namespace != null && manifest.namespace !== bundle.namespace || manifest.game.slug !== bundle.game.slug || manifest.game.name !== bundle.game.name) throw new Error("Manifest identity must match the bundle.");
-    if (manifest.route != null && manifest.route !== `${wikiPath}/${slug}`) throw new Error("Manifest route must match the target wiki route.");
+    if (manifest.route != null && manifest.route !== `${wikiPath}/${slug}`) throw new Error(`Manifest route must match the target wiki route: expected ${wikiPath}/${slug}, got ${manifest.route}.`);
     const manifestPath = await bundlePath(root, entry.manifest);
     const folder = path.dirname(manifestPath);
     const document = await json(await bundlePath(folder, manifest.dataset));
+    assertPageTypeLinks(document, `${slug}/dataset.json`);
     assertNoRobloxIdentifiers(document, `${slug}/dataset.json`);
     checkCopy({ description_json: document.meta?.display }, `${slug}/dataset.json metadata`);
     const issues: Issue[] = [];
@@ -160,6 +163,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     const file = await json(await bundlePath(folder, manifest.finalJson));
     assertNoRobloxIdentifiers(file, `${slug}/final.json`);
     const final = collectionFinalSchema.parse(file);
+    assertPageTypeLinks(final, `${slug}/final.json`);
     if (final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== `${wikiPath}/${slug}`) throw new Error("Collection target namespace/route mismatch.");
     checkCopy(final, `${slug}/final.json`);
     const sections = new Set(document.items?.map((row: { system?: { section?: string } }) => row.system?.section));
@@ -253,7 +257,7 @@ export async function gameContentStatus(options: ContentOptions, db: SupabaseCli
   const hubs = await rows(db, "game_wiki_pages", namespace);
   const hub = game ? hubs.find(page => page.game_id === game.id) : undefined;
   const pages = (await rows(db, "game_collection_pages", namespace)).filter(page => game && page.game_id === game.id);
-  const wikiPath = hub?.canonical_path ?? gameWikiPath(namespace, options.game!, game?.parent_id || options.game !== namespace ? namespace : undefined, game?.url_style ?? games.find(row => row.parent_id == null)?.url_style ?? "page_type", game?.kind ?? "game");
+  const wikiPath = hub?.canonical_path ?? gameWikiPath(namespace, options.game!, game?.parent_id || options.game !== namespace ? namespace : undefined, game?.kind ?? "game");
   const parentPublished = !game?.parent_id || Boolean(games.find(parent => parent.id === game.parent_id)?.is_published);
   const visible = Boolean(game?.is_published && parentPublished && hub?.is_published);
   console.log(`Target: ${options.target}. URLs are production canonical URLs; development status describes staged rows.`);
