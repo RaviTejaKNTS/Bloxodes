@@ -72,7 +72,10 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   // lexicographic subtree bounds, avoiding LIKE wildcards in stored paths.
   // Nested prefixes (every /lists/<slug> under /lists) add nothing to the
   // subtree filter; dropping them keeps the request URL short.
-  const prefixPaths = rows.filter(row => row.match_type === 'prefix' || (row.page_type === 'collection' && row.page_id !== null)).map(row => row.path);
+  // Only prefix rules can be blocked. Old collection rows redirect only their
+  // exact path and /page/<n>, where no live page exists; adding every moved
+  // collection here made the filter too long once whole namespaces moved.
+  const prefixPaths = rows.filter(row => row.match_type === 'prefix').map(row => row.path);
   const prefixes = prefixPaths
     .filter(path => !prefixPaths.some(other => other !== path && (other === '/' || path.startsWith(other + '/'))))
     .map(path => ({ path }));
