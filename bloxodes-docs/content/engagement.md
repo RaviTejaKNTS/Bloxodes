@@ -1,6 +1,6 @@
 # Quizzes, checklists, tools and events data
 
-Last verified: 2026-10-30
+Last verified: 2026-11-01
 
 Roblox engagement pages. Quizzes, checklists and tools are made by hand when the owner asks; none have a schedule. Events are collected data only. The non-Roblox versions are in [franchise games](franchise.md).
 
@@ -12,7 +12,7 @@ Every page type follows the same path: runner skill → research → research re
 - **Data:** `quiz_pages.quiz_data` (JSONB) plus page copy. Account history in `user_quiz_progress`.
 - **Runtime:** database only. Each attempt draws five easy, five medium and five hard questions (`apps/web/src/lib/quizzes.ts`).
 - **Publish:** `import:content-final` (`scripts/content/import-content-final.ts`), the `content-final` publisher.
-- **Live:** 44 published quizzes, last changed 2026-10-30.
+- **Live:** 53 published quizzes, last changed 2026-11-01.
 
 ## Standalone checklists
 

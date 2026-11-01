@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 83858907,
+    "code": "speed-run-4",
+    "title": "Speed Run 4 Roblox Quiz: 15 Questions on Courses and Shortcuts",
+    "description_md": "Know the main course? Try questions about stage hazards, unusual platforms and shortcut inputs. Each attempt draws 15 questions, with five from each difficulty.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Speed Run 4 knowledge with 15 questions from easy, medium and hard pools on the main course, stage hazards and tricky shortcut inputs.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "What movement does Speed Run 4's standard Main World course mainly test?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Steering cars around corners."
+          },
+          {
+            "id": "b",
+            "text": "Running and jumping between platforms."
+          },
+          {
+            "id": "c",
+            "text": "Swimming between islands."
+          },
+          {
+            "id": "d",
+            "text": "Flying planes through rings."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "What happens when you cross the yellow line at the start of a level?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your character slows down."
+          },
+          {
+            "id": "b",
+            "text": "Your character keeps the same speed."
+          },
+          {
+            "id": "c",
+            "text": "Your character's movement reverses."
+          },
+          {
+            "id": "d",
+            "text": "Your character runs faster."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "How many stages are in the Main World course in the Default dimension?",
+        "options": [
+          {
+            "id": "a",
+            "text": "45."
+          },
+          {
+            "id": "b",
+            "text": "15."
+          },
+          {
+            "id": "c",
+            "text": "7."
+          },
+          {
+            "id": "d",
+            "text": "30."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "Where do you arrive after beating Main World Level 45: Rainbow Run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 1."
+          },
+          {
+            "id": "b",
+            "text": "Level 44."
+          },
+          {
+            "id": "c",
+            "text": "Winners."
+          },
+          {
+            "id": "d",
+            "text": "The lobby's start point."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "Where do you activate optional modes such as Zombie Mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "At each level's finish."
+          },
+          {
+            "id": "b",
+            "text": "In the lobby."
+          },
+          {
+            "id": "c",
+            "text": "In the pet inventory."
+          },
+          {
+            "id": "d",
+            "text": "In Winners."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "How does the wind in Level 2: Western Desert affect your movement?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It has no gameplay effect."
+          },
+          {
+            "id": "b",
+            "text": "It pushes you toward platform edges."
+          },
+          {
+            "id": "c",
+            "text": "It lowers your running speed."
+          },
+          {
+            "id": "d",
+            "text": "It changes your jump arc."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "What happens if you touch the poison at the bottom of Level 8: Poison Factory?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You get a jump boost and survive."
+          },
+          {
+            "id": "b",
+            "text": "You slow down but survive."
+          },
+          {
+            "id": "c",
+            "text": "You pass through unharmed."
+          },
+          {
+            "id": "d",
+            "text": "Your character dies."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "What liquid covers the deadly floor in Level 27: Ice Cream Land?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toxic waste."
+          },
+          {
+            "id": "b",
+            "text": "Lava."
+          },
+          {
+            "id": "c",
+            "text": "Sugary water."
+          },
+          {
+            "id": "d",
+            "text": "Plain water."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "What is the deadly liquid spilling from the buckets in Level 37: Waffle Industries?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Syrup."
+          },
+          {
+            "id": "b",
+            "text": "Plain water."
+          },
+          {
+            "id": "c",
+            "text": "Lava."
+          },
+          {
+            "id": "d",
+            "text": "Frosting."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "Which part of the upside-down trees forms the main jumping platforms in Level 40?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The roots."
+          },
+          {
+            "id": "b",
+            "text": "The leaves."
+          },
+          {
+            "id": "c",
+            "text": "The trunks."
+          },
+          {
+            "id": "d",
+            "text": "The branches."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "What happens if you touch the candles on Level 41: Birthday Cake's platforms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You slow down but survive."
+          },
+          {
+            "id": "b",
+            "text": "You get a jump boost and survive."
+          },
+          {
+            "id": "c",
+            "text": "Your character dies."
+          },
+          {
+            "id": "d",
+            "text": "You pass through unharmed."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "What makes landings tight in Level 44: Sanctuary of Stories?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Broad bridges with no gaps between platforms."
+          },
+          {
+            "id": "b",
+            "text": "Wide platforms connected by a continuous floor."
+          },
+          {
+            "id": "c",
+            "text": "Large platforms with only short gaps between them."
+          },
+          {
+            "id": "d",
+            "text": "Very small, narrow platforms with long jumps between them."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "Which resource do you collect to unlock Forbidden World levels?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stars."
+          },
+          {
+            "id": "b",
+            "text": "Cash."
+          },
+          {
+            "id": "c",
+            "text": "Energy."
+          },
+          {
+            "id": "d",
+            "text": "Gems."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "Which parts of Level 4's bright blue crystals are solid enough to stand on?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only the sides."
+          },
+          {
+            "id": "b",
+            "text": "Every face."
+          },
+          {
+            "id": "c",
+            "text": "Only the top."
+          },
+          {
+            "id": "d",
+            "text": "Only the bottom."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "How does lava contact differ between the bottom of Level 9 and the tops of its volcanoes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bottom lava kills; volcano-top lava does not."
+          },
+          {
+            "id": "b",
+            "text": "Bottom lava does not kill; volcano-top lava does."
+          },
+          {
+            "id": "c",
+            "text": "Both bottom lava and volcano-top lava kill."
+          },
+          {
+            "id": "d",
+            "text": "Neither bottom lava nor volcano-top lava kills."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "Which contact rule applies to the land and trees at the bottom of Level 10: Urban City?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both the bottom land and its trees are deadly."
+          },
+          {
+            "id": "b",
+            "text": "Neither the bottom land nor its trees is deadly."
+          },
+          {
+            "id": "c",
+            "text": "The bottom trees are deadly; the land is not."
+          },
+          {
+            "id": "d",
+            "text": "The bottom land is deadly; its trees are not."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "In Level 16: Microchip Overdrive, which section can let you recover after falling through a gap in the platforms?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first section only."
+          },
+          {
+            "id": "b",
+            "text": "The second section only."
+          },
+          {
+            "id": "c",
+            "text": "Both sections."
+          },
+          {
+            "id": "d",
+            "text": "Neither section."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "In Cybernaut, how does Level 3's wall-glide return compare with jumping straight from the extra platform to the tilted platform?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The wall glide is safer but slightly slower."
+          },
+          {
+            "id": "b",
+            "text": "The wall glide is safer and slightly faster."
+          },
+          {
+            "id": "c",
+            "text": "The wall glide is harder but slightly slower."
+          },
+          {
+            "id": "d",
+            "text": "The wall glide is harder and slightly faster."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "In Chromium, how do you start Level 6's straight-line shortcut across the deathplane?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Go left from the start and hold Space."
+          },
+          {
+            "id": "b",
+            "text": "Go right from the start and hold W."
+          },
+          {
+            "id": "c",
+            "text": "Go right from the start and hold Space."
+          },
+          {
+            "id": "d",
+            "text": "Go left from the start and hold W."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "In Chromium's Level 6 straight-line shortcut, when do you gain speed if you jump toward the finish without touching the starting speed pad?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Before leaving the starting platform."
+          },
+          {
+            "id": "b",
+            "text": "In the middle of the level."
+          },
+          {
+            "id": "c",
+            "text": "Only after entering the next level."
+          },
+          {
+            "id": "d",
+            "text": "You never gain speed on that shortcut."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "In Level 22's shortcut from the first right slope, which platforms are the first landing target?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Middle platforms without collision."
+          },
+          {
+            "id": "b",
+            "text": "Outer platforms without collision."
+          },
+          {
+            "id": "c",
+            "text": "Outer platforms with collision."
+          },
+          {
+            "id": "d",
+            "text": "Middle platforms with collision."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "In Level 29: Golden Clock, how do the full yellow-orange gears and the lower golden cogs differ?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both sets form the main path."
+          },
+          {
+            "id": "b",
+            "text": "Lower cogs form the main path; full gears are decoration."
+          },
+          {
+            "id": "c",
+            "text": "Full gears form the main path; lower cogs are decoration."
+          },
+          {
+            "id": "d",
+            "text": "Both sets are decoration outside the main path."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "In Level 37's shortcut, where is the first opening in the invisible wall that lets you wrap around and continue on the beam?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Around the vertical beam after the bucket jump."
+          },
+          {
+            "id": "b",
+            "text": "At the lighter waffle platform before the ramp."
+          },
+          {
+            "id": "c",
+            "text": "At the right ramp before jumping onto the bucket."
+          },
+          {
+            "id": "d",
+            "text": "Before passing behind the spinning gear."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "What makes the overhead-beam shortcut possible in Level 12's Cosmic dimension?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A solid roof blocks the beams, so you stay beneath them."
+          },
+          {
+            "id": "b",
+            "text": "The roof is not solid, so you can reach the beams above."
+          },
+          {
+            "id": "c",
+            "text": "The roof is not solid, so the overhead beams cannot be reached."
+          },
+          {
+            "id": "d",
+            "text": "A solid roof removes the need to reach the overhead beams."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "In the Default dimension, what input sequence controls the steep-slope return after Level 4's decorative-platform skip?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Touch the slope and hold W while the falling animation continues."
+          },
+          {
+            "id": "b",
+            "text": "Touch the slope and hold Space while the falling animation continues."
+          },
+          {
+            "id": "c",
+            "text": "Touch the slope, press nothing until the falling animation starts, then hold W."
+          },
+          {
+            "id": "d",
+            "text": "Touch the slope, press nothing until the falling animation stops, then hold W."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "For Level 9's first-volcano shortcut in the Default dimension, how do you get over the steep slope onto the volcano top?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop at the edge and make an ordinary jump without carrying the slope's momentum."
+          },
+          {
+            "id": "b",
+            "text": "Move off the slope's edge and let its momentum carry you over the top."
+          },
+          {
+            "id": "c",
+            "text": "Keep climbing directly up the center instead of moving off an edge."
+          },
+          {
+            "id": "d",
+            "text": "Stop on the center of the slope and climb straight up without moving sideways."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "In Level 10's Default-dimension tree shortcut, how does launching from the last tree's curvature help you cross the deathplane?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It raises the jump and builds enough velocity for the deathplane crossing."
+          },
+          {
+            "id": "b",
+            "text": "It lowers the jump and builds enough velocity for the deathplane crossing."
+          },
+          {
+            "id": "c",
+            "text": "It raises the jump and reduces velocity for the deathplane crossing."
+          },
+          {
+            "id": "d",
+            "text": "It lowers the jump and reduces velocity for the deathplane crossing."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "In Peach Desert's Level 23 red-tree shortcut at 60 FPS, what do you do on the tree to keep its momentum while flicking right toward the tall platform?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tap Space once, then flick right."
+          },
+          {
+            "id": "b",
+            "text": "Hold Space down, and flick right."
+          },
+          {
+            "id": "c",
+            "text": "Tap Space repeatedly, and flick right."
+          },
+          {
+            "id": "d",
+            "text": "Avoid pressing Space, and flick right."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "In Main World Level 41's large shortcut, when do you make the jump press for the first boost from the protruding gum pillar?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Once you have settled and waited on that gum pillar."
+          },
+          {
+            "id": "b",
+            "text": "Once well before touching that pillar, releasing before contact."
+          },
+          {
+            "id": "c",
+            "text": "Right as you first land on that gum pillar."
+          },
+          {
+            "id": "d",
+            "text": "After running off that gum pillar and losing contact."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}
