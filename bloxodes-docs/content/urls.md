@@ -25,7 +25,23 @@ Lists that paginate use `<url>/page/<n>`. Pagination pages are `noindex`.
 
 ## Other games
 
-Other games put the namespace first today. Three route systems serve them:
+Each namespace has a URL style in `games.url_style`. New games use `page_type`; games published before the switch keep `namespace` until a reviewed migration moves them. A child game always has its root's style.
+
+**Page-type style** (the Roblox pattern):
+
+| Page | URL |
+| --- | --- |
+| Franchise hub (root, `kind=franchise`) | `/games/<namespace>` |
+| Game wiki (single game or franchise child) | `/wiki/<game-slug>` |
+| Collection | `/wiki/<game-slug>/<collection-slug>` |
+| Map | `/maps/<slug>` |
+| Checklist, quiz | `/checklists/<slug>`, `/quizzes/<slug>` |
+| Codes | `/codes/<game-slug>` |
+| Tool, catalog | `/tools/<namespace>-<slug>`, `/catalog/<namespace>-<slug>` (no prefix added when the slug already starts with the namespace; the stored slug doesn't change) |
+
+Franchise roots can't own collections. The page-type routes look up `site_routes` and render the game page only when no Roblox page owns the URL; Roblox pages render exactly as before. Index pages (`/wiki`, `/codes`, `/quizzes`, `/checklists`, `/tools`, `/catalog`, `/maps`) list published page-type game pages in an "Other games" section.
+
+**Namespace style** (games not moved yet). Three route systems serve them:
 
 | Games | Route code | URLs |
 | --- | --- | --- |
@@ -33,7 +49,15 @@ Other games put the namespace first today. Three route systems serve them:
 | Minecraft | Hand-written folder `(site)/minecraft` | `/minecraft/<java|bedrock>/wiki/<collection>`, `/minecraft/tools/<tool>` |
 | Every other game | Registry route `(site)/[slug]/[[...segments]]` | `/<namespace>/wiki`, `/<namespace>/wiki/<game>/<collection>`, `/<namespace>/<maps|quizzes|catalog|checklists|tools>/<slug>` |
 
-Each `game_*` row stores its URL in `canonical_path`. Database triggers set it and refuse changes. Full route rules are in [franchise](franchise.md#routes).
+Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(game_id, page_type, slug)` computes the right path for the game's style, and database guards refuse any other path. Namespace, game and slug ownership never change.
+
+### Moving a namespace
+
+Only a reviewed migration moves a namespace, by calling `move_game_namespace_to_page_type_urls(namespace)`. It switches every game in the namespace to `page_type` and rewrites each page's `canonical_path`; the `site_routes` triggers turn every old URL into a redirect to the new one. It also adds redirects for the namespace root, `/<namespace>/wiki` and the old directory listings, and old collection `/page/<n>` URLs keep their page number. It refuses unknown namespaces, namespaces without a root wiki, and `gta`, `red-dead` and `minecraft` (their renderers move with them).
+
+`rewrite_moved_game_links(namespace)` then rewrites internal links to the old URLs in stored page text. It takes only row locks, so it runs in a later schema release than the move: the schema runner applies all pending migrations in one transaction.
+
+A move must ship after the web code that serves the new URLs is live, never in the same release.
 
 ## Slug rules
 
@@ -76,4 +100,4 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 ## Known issues
 
 - The Minecraft root wiki and its `achievements` collection still store the legacy paths `/minecraft/wiki` and `/minecraft/wiki/achievements` in `canonical_path`. So `site_routes` lists them as live, and the two Minecraft redirect rows lose to them (logged in `site_route_conflicts`). `minecraftLegacyRedirect` still serves those redirects, so it must keep running ahead of any route table lookup until Minecraft moves.
-- Other games use three route systems for the same page types, and their URLs put the namespace first, unlike Roblox. The owner has approved a move to page-type URLs (`/wiki/<game>`, `/maps/<slug>`, `/games/<franchise>` for franchise hubs) backed by one route table that also holds every redirect. Until a game moves, publish it under its current routes and don't add route code for a single namespace.
+- Every game published before 2026-11-02 is still on namespace-style URLs. They move namespace by namespace; GTA, Red Dead and Minecraft move last, with their renderers. Don't add route code for a single namespace.

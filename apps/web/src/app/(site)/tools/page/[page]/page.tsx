@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { loadToolsPageData, renderToolsPage } from "../../page-data";
@@ -40,12 +41,12 @@ export default async function ToolsPaginatedPage({ params }: PageProps) {
     notFound();
   }
 
-  return renderToolsPage({
+  return <>{await renderToolsPage({
     tools,
     total,
     totalPages,
     currentPage: pageNumber,
     showHero: pageNumber === 1,
     latestUpdatedAt
-  });
+  })}<OtherGamesSection kind="tool" /></>;
 }

@@ -30,9 +30,9 @@ test("site route backfill, selective update locks, hub restoration, ownership an
   });
   const sql = `begin;
     do $$ begin
-      if not exists(select from pg_roles where rolname='anon') then create role anon; end if;
-      if not exists(select from pg_roles where rolname='authenticated') then create role authenticated; end if;
-      if not exists(select from pg_roles where rolname='service_role') then create role service_role; end if;
+      begin create role anon; exception when duplicate_object or unique_violation then null; end;
+      begin create role authenticated; exception when duplicate_object or unique_violation then null; end;
+      begin create role service_role; exception when duplicate_object or unique_violation then null; end;
     end $$;
     create table public.games(id uuid primary key default gen_random_uuid(), namespace text, parent_id uuid, is_published boolean default false);
     ${tables.map(table => `create table public.${table}(id uuid primary key default gen_random_uuid(), slug text, code text, wiki_slug text, collection_slug text, canonical_path text, game_id uuid references public.games(id), old_slugs text[] not null default '{}', is_published boolean default false, dataset_revision_id uuid);`).join("\n")}

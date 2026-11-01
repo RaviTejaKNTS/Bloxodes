@@ -88,7 +88,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
   const breadcrumbs = gameBreadcrumbs([
     { label: "Home", href: "/" },
     { label: namespaceTitle, href: landingPath },
-    ...([`/${namespace}`, `/${namespace}/wiki`].includes(page.canonical_path) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]),
+    ...(page.canonical_path.startsWith("/wiki/") || page.canonical_path.startsWith("/games/") ? (landingPath.startsWith("/games/") ? [] : [{ label: "Wiki", href: "/wiki" }]) : ([`/${namespace}`, `/${namespace}/wiki`].includes(page.canonical_path) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }])),
     { label: page.game_short_title || page.game_title, href: null }
   ], canonicalPath);
   const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);

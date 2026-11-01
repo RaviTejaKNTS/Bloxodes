@@ -61,7 +61,11 @@ export async function stageChecklist(operation: any, file: string): Promise<stri
       const copied=items.map((item:any)=>({...item,id:randomUUID(),page_id:id,namespace}));
       output.checklists.push(page); output.checklistItems.push(...copied);
       const expected={id,namespace,game_id:page.game_id,slug,title:page.title,seo_title:page.seo_title??null,seo_description:page.seo_description??null,description_md:page.description_md??null,is_public:true};
-      entries.push({kind:'shared',source:file,sourceHash:fingerprint(bytes),id,namespace,slug,expected,items:copied,path:`/${namespace}/checklists/${slug}`,originalPath:`/${namespace}/checklists/${original.slug}`,title:page.title});
+      const db=database();
+      const route=await db.rpc('expected_game_page_path',{p_game_id:page.game_id,p_type:'checklist',p_slug:slug});
+      const originalRoute=await db.rpc('expected_game_page_path',{p_game_id:page.game_id,p_type:'checklist',p_slug:original.slug});
+      if(route.error || originalRoute.error) throw route.error ?? originalRoute.error;
+      entries.push({kind:'shared',source:file,sourceHash:fingerprint(bytes),id,namespace,slug,expected,items:copied,path:route.data,originalPath:originalRoute.data,title:page.title});
     }
   }
   // Record cleanup ownership before any publisher can write a QA row.

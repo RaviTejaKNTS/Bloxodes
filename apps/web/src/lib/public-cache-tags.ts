@@ -159,14 +159,20 @@ export function cacheTagsForPath(pathname: string) {
   const segments = pathnameOnly.split("/").filter(Boolean);
   const [first, second, third, fourth] = segments;
   const tags = ["site"];
-  if (first && ["gta", "red-dead", "minecraft"].includes(first)) tags.push(first);
+  if (["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists", "games"].includes(first) || ["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists"].includes(second)) {
+    tags.push(`page:${pathnameOnly.replace(/\/page\/[1-9]\d*$/, "")}`);
+  }
+  if (first && ["gta", "red-dead", "minecraft"].includes(first)) {
+    tags.push(first);
+    if (!second) tags.push(`page:${pathnameOnly}`);
+  }
 
   if (pathnameOnly === "/") {
     return unique([...tags, "home"]);
   }
 
   if (first === "games") {
-    return unique([...tags, "games-index"]);
+    return unique([...tags, second ? slugTag("game-hub", second) : "games-index"]);
   }
 
   if (first === "gta") {
@@ -373,7 +379,11 @@ export function cacheTagsForPath(pathname: string) {
     return unique(catalogTags);
   }
 
-  return first && (second === undefined || ["wiki", "tools", "codes", "checklists"].includes(second)) ? unique([...tags, first, "game-wiki-index"]) : [];
+  if (first && (second === undefined || ["wiki", "tools", "codes", "checklists"].includes(second))) {
+    if (!second) tags.push(`page:${pathnameOnly}`);
+    return unique([...tags, first, "game-wiki-index"]);
+  }
+  return [];
 }
 
 export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
@@ -382,7 +392,7 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
 
   switch (type) {
     case "game_content":
-      return unique([normalized.split("/")[0], "games-index", "game-wiki-index", "feed", "sitemap", "sitemap:games"]);
+      return unique(["games-index", "feed", "sitemap:games"]);
     case "code":
       return unique([...base, slugTag("code", normalized), "codes", "codes-index", "home", "feed", "sitemap", "sitemap:codes"]);
     case "article":

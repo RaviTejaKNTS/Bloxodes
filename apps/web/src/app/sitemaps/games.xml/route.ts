@@ -8,14 +8,20 @@ export async function GET() {
  try {
   const pages = await listSharedGameDiscoveryPages();
   const paths = new Map<string, string | undefined>();
-  for(const page of pages) {
+  const namespaces = [...new Set(pages.map(page => page.namespace))];
+  const landings = new Map(await Promise.all(namespaces.map(async namespace => [namespace, await getGameLandingForLinks(namespace)] as const)));
+  for (const page of pages) {
    paths.set(page.canonical_path, toIsoDate(page.updated_at ?? page.published_at ?? page.created_at));
-   const namespace = page.canonical_path.split("/")[1];
-   const section = page.canonical_path.split("/")[2];
-   if (["codes","tools","maps","quizzes","checklists","catalog"].includes(section)) paths.set(`/${namespace}/${section}`, undefined);
+   // Namespace directories are served only by the old renderer. Moved pages
+   // belong to the global indexes, which already have their own sitemap entries.
+   if (landings.get(page.namespace)?.root?.url_style !== "page_type") {
+    for (const section of ["codes", "tools", "maps", "quizzes", "checklists", "catalog"]) {
+     const directory = `/${page.namespace}/${section}`;
+     if (page.canonical_path.startsWith(`${directory}/`)) paths.set(directory, undefined);
+    }
+   }
   }
-  const namespaces = [...new Set(pages.map(page => page.canonical_path.split("/")[1]))];
-  for (const landing of await Promise.all(namespaces.map(getGameLandingForLinks))) {
+  for (const landing of landings.values()) {
    if (landing.isAlias && landing.root) paths.delete(`/${landing.root.namespace}`);
    for (const entry of gameLandingSitemapEntries(landing)) paths.set(new URL(entry.loc).pathname, entry.lastmod);
   }

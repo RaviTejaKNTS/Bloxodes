@@ -95,3 +95,11 @@ describe("shared game cache invalidation", () => {
   expect(cacheTagsForPath("/games")).toContain("games-index");
  });
 });
+
+
+it("shared game events avoid broad Roblox family tags and pagination shares its page dependency", () => {
+  const tags = cacheTagsForEvent("game_content", "wiki/peak/items");
+  for (const broad of ["game-content", "wiki", "codes", "tools", "site"]) expect(tags).not.toContain(broad);
+  expect(cacheTagsForPath("/wiki/peak/items/page/99")).toContain("page:/wiki/peak/items");
+  expect(cacheTagsForPath("/wiki/blox-fruits")).not.toContain("game-content");
+});

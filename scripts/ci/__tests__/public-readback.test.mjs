@@ -43,3 +43,12 @@ test("sitemap checks cover legacy, franchise and shared game routes", () => {
   assert.equal(publicationSitemap("/minecraft/quizzes/blocks"), "/sitemaps/games.xml");
   assert.equal(publicationSitemap("/games"), "/sitemaps/main.xml");
 });
+
+
+test("moved and new shared pages use the shared sitemap while Roblox and unmoved entries stay unchanged", () => {
+  for (const path of ["/wiki/peak", "/games/risk-of-rain", "/wiki/brand-new/items", "/tools/brand-new-calculator"]) {
+    assert.equal(publicationSitemap(path, "game"), "/sitemaps/games.xml");
+  }
+  assert.equal(publicationSitemap("/wiki/blox-fruits", "roblox"), "/sitemaps/wiki.xml");
+  assert.equal(publicationSitemap("/minecraft/tools/crafting", "game"), "/sitemaps/minecraft.xml");
+});

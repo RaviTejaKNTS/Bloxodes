@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -78,6 +79,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const catalog = await getCatalogPageContentByCodes([code]);
   if (!catalog) {
+    const gameRoute = await resolvePageTypeGameRoute(`/catalog/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.metadata();
+
     return {
       alternates: buildAlternates(canonical)
     };
@@ -117,6 +121,9 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
 
   const { contentHtml } = await buildCatalogContent(code);
   if (!contentHtml) {
+    const gameRoute = await resolvePageTypeGameRoute(`/catalog/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

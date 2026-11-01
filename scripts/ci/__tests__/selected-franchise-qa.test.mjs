@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {assertSelectedQaEnvironment, assertLiveSourceEquivalent, cleanupOwnedAccounts, collectionVisibleFacts, MANAGED_TARGET, bundleInput, imagePolicy, selectedFranchisePlan, selectedReviewImages} from '../selected-franchise-qa-contract.mjs';
+import {assertSelectedQaEnvironment, assertLiveSourceEquivalent, cleanupOwnedAccounts, collectionVisibleFacts, MANAGED_TARGET, bundleInput, imagePolicy, resolveSelectedFranchisePaths, selectedFranchisePlan, selectedReviewImages} from '../selected-franchise-qa-contract.mjs';
 
 const env = () => ({GITHUB_ACTIONS: 'true', GITHUB_EVENT_NAME: 'workflow_dispatch', BLOXODES_MANAGED_QA: 'true', BLOXODES_SELECTED_FRANCHISE_QA: 'true', BLOXODES_ENV_PROFILE: 'process-only', SUPABASE_URL: MANAGED_TARGET, NEXT_PUBLIC_SUPABASE_URL: MANAGED_TARGET, ARTICLE_DEV_SUPABASE_URL: MANAGED_TARGET, SUPABASE_MEDIA_PUBLIC_URL: MANAGED_TARGET, BUNDLE_HASH: 'a'.repeat(64), BLOXODES_VERIFIED_BUNDLE: 'a'.repeat(64), TEST_BASE_URL: 'http://bloxodes.test:3000'});
 test('development dispatch rejects production, source, receipt and preview substitution', () => {
@@ -30,7 +30,7 @@ test('bundle inputs reject traversal and symlinks including nonexistent children
 });
 test('selection binds publisher, namespace, payload groups and exact public paths', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-plan-'));
-  const payload = {wiki: [{namespace: 'example', slug: 'example', title: 'Example', game_id: 'c0e2c719-0933-4f08-bb8e-738fe4c144b6', is_published: true}]};
+  const payload = {wiki: [{namespace: 'example', slug: 'example', canonical_path: '/example/wiki', title: 'Example', game_id: 'c0e2c719-0933-4f08-bb8e-738fe4c144b6', is_published: true}]};
   const batch = {version: 1, operations: [{publisher: 'game-pages', namespace: 'example', file: 'pages.json'}], urls: [{path: '/example/wiki', contains: 'Example'}], events: [{type: 'game_content', slug: 'example'}]};
   try {
     fs.writeFileSync(path.join(root, 'pages.json'), JSON.stringify(payload));
@@ -52,7 +52,7 @@ test('two selected pages require exactly one URL for each path, in either order'
   const batch = {version: 1, operations: [{publisher: 'game-pages', namespace: 'example', file: 'pages.json'}], urls, events: [{type: 'game_content', slug: 'example'}]};
   try {
     fs.writeFileSync(path.join(root, 'pages.json'), JSON.stringify({wiki: [
-      {slug: 'example', title: 'Example', is_published: true}, {slug: 'world', title: 'World', is_published: true}
+      {slug: 'example', canonical_path: '/example/wiki', title: 'Example', is_published: true}, {slug: 'world', canonical_path: '/example/wiki/world', title: 'World', is_published: true}
     ]}));
     assert.deepEqual(selectedFranchisePlan(root, {...batch, urls: [...urls].reverse()}).urls, [...urls].reverse());
     for (const replacement of [[urls[0], urls[0]], [urls[1], urls[1]], [urls[0]], [...urls, urls[0]], [urls[0], {path: '/example/wiki/extra', contains: 'Extra'}]]) {
@@ -174,4 +174,78 @@ test('cleanup records a remaining owned account and still completes other absenc
   assert.equal(result.attempts.length, 8);
   assert.equal(result.failures.length, 1);
   assert.match(result.failures[0], /absence:app_users/);
+});
+
+
+test('selection accepts reviewed paths for unmoved, moved and brand-new namespaces', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-styles-'));
+  try {
+    for (const [namespace, canonical_path] of [['unmoved', '/unmoved/wiki'], ['moved', '/wiki/moved'], ['brand-new', '/games/brand-new']]) {
+      fs.writeFileSync(path.join(root, 'pages.json'), JSON.stringify({wiki: [{slug: namespace, canonical_path, is_published: true}]}));
+      const batch = {version: 1, operations: [{publisher: 'game-pages', namespace, file: 'pages.json'}], urls: [{path: canonical_path, contains: namespace}], events: [{type: 'game_content', slug: namespace}]};
+      assert.equal(selectedFranchisePlan(root, batch).pages[0].path, canonical_path);
+    }
+  } finally { fs.rmSync(root, {recursive: true, force: true}); }
+});
+
+// Identity and path responses deliberately differ from row.slug and legacy URLs.
+function pathDatabase(namespace, expected, wikiSlug = 'permanent-wiki') {
+  const calls = [];
+  return {calls, from(table) {
+    const filters = {};
+    const query = {select() {return query;}, eq(key, value) {filters[key] = value; return query;}, async single() {
+      calls.push({table, filters});
+      assert.equal(filters.namespace, namespace);
+      return {data: table === 'games' ? {id: 'game-id'} : {game_id: 'game-id', slug: wikiSlug}, error: null};
+    }};
+    return query;
+  }, async rpc(name, args) {
+    calls.push({name, args});
+    assert.equal(name, 'expected_game_page_path');
+    assert.equal(args.p_game_id, 'game-id');
+    return {data: expected[args.p_type], error: null};
+  }};
+}
+test('omitted canonical paths use target RPC for moved, unmoved and new namespaces', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-rpc-'));
+  try {
+    for (const [namespace, expectedPath] of [['unmoved', '/unmoved/wiki/permanent-wiki'], ['moved', '/wiki/game-identity'], ['brand-new', '/wiki/new-game']]) {
+      fs.writeFileSync(path.join(root, 'pages.json'), JSON.stringify({wiki: [{slug: 'permanent-wiki', is_published: true}]}));
+      const batch = {version: 1, operations: [{publisher: 'game-pages', namespace, file: 'pages.json'}], urls: [{path: expectedPath, contains: namespace}], events: [{type: 'game_content', slug: namespace}]};
+      const plan = selectedFranchisePlan(root, batch);
+      assert.equal(plan.pages[0].path, null);
+      const db = pathDatabase(namespace, {wiki: expectedPath});
+      await resolveSelectedFranchisePaths(plan, db);
+      assert.equal(plan.pages[0].path, expectedPath);
+      assert.equal(db.calls[1].args.p_slug, 'permanent-wiki');
+      await assert.rejects(resolveSelectedFranchisePaths({...plan, pages: [{...plan.pages[0], path: '/wrong'}]}, db), /target URL style/);
+      await assert.rejects(resolveSelectedFranchisePaths({...plan, urls: [{path: '/wrong'}]}, db), /exactly match/);
+      await assert.rejects(resolveSelectedFranchisePaths(selectedFranchisePlan(root, batch), {from: db.from, rpc: async () => ({error: new Error('RPC failed')})}), /RPC failed/);
+    }
+  } finally {fs.rmSync(root, {recursive: true, force: true});}
+});
+test('collection manifests support permanent wiki identities and Minecraft editions', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-collection-paths-'));
+  try {
+    for (const [namespace, gameSlug, wikiSlug, route] of [
+      ['unmoved', 'child-game', 'permanent-wiki', '/unmoved/wiki/permanent-wiki/items'],
+      ['moved', 'child-game', 'permanent-wiki', '/wiki/child-game/items'],
+      ['brand-new', 'new-game', 'permanent-wiki', '/wiki/new-game/items'],
+      ['minecraft', 'minecraft-java', 'minecraft-java', '/minecraft/java/wiki/items'],
+      ['minecraft', 'minecraft-bedrock', 'minecraft-bedrock', '/minecraft/bedrock/wiki/items']
+    ]) {
+      const manifest = {schemaVersion: 1, namespace, game: {slug: gameSlug}, collection: {slug: 'items', pageType: 'database'}, dataset: 'dataset.json', finalJson: 'final.json', mediaRoot: 'media', route};
+      fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify(manifest));
+      fs.writeFileSync(path.join(root, 'dataset.json'), JSON.stringify({meta: {schemaVersion: 2, gameSlug, collection: 'items'}, items: [{system: {slug: 'one'}, item: {name: 'One'}}]}));
+      fs.writeFileSync(path.join(root, 'final.json'), JSON.stringify({wiki_slug: wikiSlug, collection_slug: 'items', code: `${wikiSlug}-items`}));
+      fs.writeFileSync(path.join(root, 'images.json'), JSON.stringify({acceptedGapCount: 1, acceptedGaps: [{systemSlug: 'one', status: 'text-only/accepted missing', decisionReason: 'Approved'}]}));
+      const batch = {version: 1, operations: [{publisher: 'franchise-collection', namespace, file: 'manifest.json'}], urls: [{path: route, contains: 'Items'}], events: [{type: 'game_content', slug: namespace}]};
+      const db = pathDatabase(namespace, {collection: route}, wikiSlug);
+      assert.equal((await resolveSelectedFranchisePaths(selectedFranchisePlan(root, batch), db)).collections[0].path, route);
+      const omitted = {...manifest}; delete omitted.route;
+      fs.writeFileSync(path.join(root, 'manifest.json'), JSON.stringify(omitted));
+      assert.equal((await resolveSelectedFranchisePaths(selectedFranchisePlan(root, batch), db)).collections[0].path, route);
+      await assert.rejects(resolveSelectedFranchisePaths(selectedFranchisePlan(root, batch), pathDatabase(namespace, {collection: route}, 'wrong-owner')), /wiki owner/);
+    }
+  } finally {fs.rmSync(root, {recursive: true, force: true});}
 });

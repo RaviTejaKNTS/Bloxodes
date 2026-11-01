@@ -447,12 +447,27 @@ export async function purgeCloudflareEverything(): Promise<CloudflarePurgeResult
 
 export async function purgeCloudflarePublicCache({
   paths,
-  tags
+  tags,
+  paginationPrefixes
 }: {
   paths: string[];
   tags: string[];
+  paginationPrefixes?: string[];
 }): Promise<CloudflarePurgeResult> {
   const strategy = readEnv("CLOUDFLARE_PURGE_STRATEGY") ?? "tags";
+
+  // Game events include exact index/parent URLs. Treating /wiki or /tools
+  // as a prefix would evict every unrelated page in that family.
+  if (paginationPrefixes !== undefined) {
+    if (strategy === "tags" || !["everything", "files", "prefixes", "tags-and-prefixes"].includes(strategy)) {
+      const result = await purgeCloudflareTags(tags);
+      if (result.ok || readEnv("CLOUDFLARE_TAG_PURGE_FALLBACK") === "false") return result;
+    }
+    return mergePurgeResults("scoped-files-and-pagination", [
+      await purgeCloudflarePaths(paths),
+      ...(paginationPrefixes.length ? [await purgeCloudflarePrefixes(paginationPrefixes)] : [])
+    ]);
+  }
 
   if (strategy === "everything") {
     return purgeCloudflareEverything();

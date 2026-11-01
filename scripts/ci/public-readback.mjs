@@ -2,7 +2,8 @@ import { load } from "cheerio";
 
 const legacyFamilies = new Set(["articles", "authors", "catalog", "checklists", "codes", "events", "puzzles", "quizzes", "stats", "tools", "wiki"]);
 
-export function publicationSitemap(pathname) {
+export function publicationSitemap(pathname, source) {
+  if (source === "game" && /^\/(games|wiki|maps|codes|tools|quizzes|checklists|catalog)\//.test(pathname)) return "/sitemaps/games.xml";
   const [, family, section, subsection] = pathname.split("/");
   if (!family || family === "games") return "/sitemaps/main.xml";
   if (legacyFamilies.has(family)) return `/sitemaps/${section ? family : "main"}.xml`;

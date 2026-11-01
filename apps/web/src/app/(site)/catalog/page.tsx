@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
@@ -308,6 +309,8 @@ export default async function CatalogIndexPage() {
           ))}
         </section>
       ) : null}
+
+      <OtherGamesSection kind="catalog" />
 
       <script
         type="application/ld+json"

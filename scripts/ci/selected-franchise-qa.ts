@@ -4,7 +4,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash, createHmac, randomUUID} from 'node:crypto';
 import {createClient} from '@supabase/supabase-js';
 import sharp from 'sharp';
-import {assertSelectedQaEnvironment, assertLiveSourceEquivalent, bundleInput, cleanupOwnedAccounts, collectionVisibleFacts, selectedFranchisePlan, selectedReviewImages, stable} from './selected-franchise-qa-contract.mjs';
+import {assertSelectedQaEnvironment, assertLiveSourceEquivalent, bundleInput, cleanupOwnedAccounts, collectionVisibleFacts, selectedFranchisePlan, resolveSelectedFranchisePaths, selectedReviewImages, stable} from './selected-franchise-qa-contract.mjs';
 import {contentDigest} from './managed-content-receipt.mjs';
 import {collectionImageKey} from '../shared/franchise-collection-media';
 import {parseGameQuizData} from '../../apps/web/src/lib/game-page-data';
@@ -56,6 +56,7 @@ async function preparedImage(file: string) {
 }
 async function verify() {
   const {base, plan} = selection(), db = database();
+  await resolveSelectedFranchisePaths(plan, db);
   const prior = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
   same(prior.digest, contentDigest(base), 'Selected bundle digest');
   const readback: any[] = [], browser: any = {namespace: plan.namespace, urls: plan.urls, collections: [], pages: plan.pages};
@@ -71,6 +72,9 @@ async function verify() {
     const result = await db.from(table).select('*').eq('namespace', plan.namespace).eq('slug', entry.row.slug).single();
     if (result.error) throw result.error;
     for (const [key, value] of Object.entries(entry.row)) same(key === 'quiz_data' ? parseGameQuizData(value) : value, result.data[key], `${table}.${entry.row.slug}.${key}`);
+    const expectedPath = await db.rpc('expected_game_page_path', {p_game_id: result.data.game_id, p_type: entry.kind === 'hub' ? 'wiki' : 'quiz', p_slug: entry.row.slug});
+    if (expectedPath.error) throw expectedPath.error;
+    same(entry.path, expectedPath.data, 'Expected game path');
     const view = await db.from(`${table}_view`).select('canonical_path').eq('namespace', plan.namespace).eq('id', result.data.id).single();
     if (view.error) throw view.error;
     same(entry.path, view.data.canonical_path, 'Page canonical path');
@@ -81,6 +85,9 @@ async function verify() {
     const result = await db.from('game_collection_pages_view').select('*').eq('namespace', plan.namespace).eq('code', final.code).single();
     if (result.error) throw result.error;
     const page = result.data;
+    const expectedPath = await db.rpc('expected_game_page_path', {p_game_id: page.game_id, p_type: 'collection', p_slug: manifest.collection.slug});
+    if (expectedPath.error) throw expectedPath.error;
+    same(entry.path, expectedPath.data, 'Expected collection path');
     if (!page.is_published || page.page_type !== manifest.collection.pageType || page.item_count !== dataset.items.length || page.canonical_path !== entry.path || !page.published_dataset_id) throw new Error(`Invalid published pointer/count/type: ${final.code}`);
     const replaceCount = (value: unknown): any => typeof value === 'string' ? value.replaceAll('{count}', dataset.items.length.toLocaleString('en-US')) : Array.isArray(value) ? value.map(replaceCount) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, child]) => [key, replaceCount(child)])) : value;
     const copyKeys = ['title', 'display_name', 'seo_title', 'meta_description', 'intro_md', 'how_it_works_md', 'description_md', 'description_json', 'faq_json', 'schema_ld_json', 'thumb_url', 'wiki_md', 'wiki_sort_order'];

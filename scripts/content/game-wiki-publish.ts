@@ -104,8 +104,8 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   checkCopy({ ...gameInput, description_json: { title: gameInput.title, short_title: gameInput.short_title } }, "game.json");
   const [games, hubs] = await Promise.all([rows(db, "games", bundle.namespace), rows(db, "game_wiki_pages", bundle.namespace)]);
   const identity = resolveGameWikiIdentity(games, hubs, bundle.namespace, bundle.game);
-  const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent);
-  if (!wikiPath.startsWith(`/${bundle.namespace}/`) || /[?#]/.test(wikiPath)) throw new Error("Stored wiki route is outside its namespace.");
+  const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent, identity.game?.url_style ?? identity.root?.url_style ?? "page_type", bundle.game.kind);
+  if (/[?#]/.test(wikiPath)) throw new Error("Stored wiki route must be a canonical path.");
   const failures: string[] = [];
   async function check<T>(label: string, work: () => Promise<T>): Promise<T | undefined> {
     try { const result = await work(); console.log(`PASS ${label}`); return result; }
@@ -253,7 +253,7 @@ export async function gameContentStatus(options: ContentOptions, db: SupabaseCli
   const hubs = await rows(db, "game_wiki_pages", namespace);
   const hub = game ? hubs.find(page => page.game_id === game.id) : undefined;
   const pages = (await rows(db, "game_collection_pages", namespace)).filter(page => game && page.game_id === game.id);
-  const wikiPath = hub?.canonical_path ?? gameWikiPath(namespace, options.game!, game?.parent_id || options.game !== namespace ? namespace : undefined);
+  const wikiPath = hub?.canonical_path ?? gameWikiPath(namespace, options.game!, game?.parent_id || options.game !== namespace ? namespace : undefined, game?.url_style ?? games.find(row => row.parent_id == null)?.url_style ?? "page_type", game?.kind ?? "game");
   const parentPublished = !game?.parent_id || Boolean(games.find(parent => parent.id === game.parent_id)?.is_published);
   const visible = Boolean(game?.is_published && parentPublished && hub?.is_published);
   console.log(`Target: ${options.target}. URLs are production canonical URLs; development status describes staged rows.`);

@@ -4,6 +4,7 @@ export type GameWikiPresentationPage = SharedGameWikiPage & { seo_canonical_path
 
 /** Only a published wiki owned by this published namespace root can replace its canonical. */
 export function gameLandingPath(game: SharedGameGame, wiki?: SharedGameWikiPage | null, hasIndependentRoot = false): string {
+  if (game.url_style === "page_type") return game.kind === "franchise" ? `/games/${game.namespace}` : `/wiki/${game.slug}`;
   const rootPath = `/${game.namespace}`;
   return !hasIndependentRoot && game.is_published && game.parent_id === null
     && wiki?.is_published && wiki.game_id === game.id && wiki.namespace === game.namespace
@@ -25,7 +26,7 @@ export function gameRootWikiPage(game: SharedGameGame, wiki?: SharedGameWikiPage
     game_cover_image: game.cover_image, game_hero_image: game.hero_image, game_official_url: game.official_url,
     game_release_dates_json: game.release_dates_json, game_platforms_json: game.platforms_json, game_status: game.status,
     ...(wiki?.game_id === game.id ? wiki : {}),
-    canonical_path: `/${game.namespace}`,
+    canonical_path: game.url_style === "page_type" ? gameLandingPath(game, wiki) : `/${game.namespace}`,
     // Keep the route identity for directory cards and comments. Only SEO identity changes.
     seo_canonical_path: gameLandingPath(game, wiki, hasIndependentRoot)
   };

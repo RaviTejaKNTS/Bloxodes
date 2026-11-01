@@ -19,12 +19,12 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
   return query;
 } }) }));
 vi.mock("@/lib/game-content-index", () => ({ listSharedGameDiscoveryPages: async () => [
-  { canonical_path: "/future-game/wiki", updated_at: "2026-03-01" },
-  { canonical_path: "/future-game/wiki/child" },
-  { canonical_path: "/future-game/wiki/child/items" },
-  { canonical_path: "/future-game/catalog/items" },
+  { namespace: "future-game", canonical_path: "/future-game/wiki", updated_at: "2026-03-01" },
+  { namespace: "future-game", canonical_path: "/future-game/wiki/child" },
+  { namespace: "future-game", canonical_path: "/future-game/wiki/child/items" },
+  { namespace: "future-game", canonical_path: "/future-game/catalog/items" },
   // The index can contain explicit namespaces for reference types too.
-  { canonical_path: "/gta/catalog/items" }
+  { namespace: "gta", canonical_path: "/gta/catalog/items" }
 ].filter(page => state.wikiPublished || page.canonical_path !== "/future-game/wiki") }));
 vi.mock("@/lib/gta", () => ({
   listPublishedGtaWikiPages: async () => [{ slug: "gta" }],

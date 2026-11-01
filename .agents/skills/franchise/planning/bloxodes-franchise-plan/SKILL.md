@@ -23,8 +23,8 @@ Decide this first. It sets the registry identity, the URLs and which pages each 
 
 | Shape | When | Registry | Pages |
 | --- | --- | --- | --- |
-| Single game | One title, with no other entries players treat as part of the same series | `kind=game`, no parent | One wiki at `/<namespace>/wiki`. Collections, codes, tools and reference pages hang off that game. |
-| Multi-game franchise | Several titles players search separately, like GTA 5 and GTA Online, or Red Dead Redemption 1 and 2 | `kind=franchise` root, each title `kind=game` with `parent_id` | A franchise wiki that links its title wikis, then each title gets its own wiki, collections and pages. Plan only the titles with enough verified material now. |
+| Single game | One title, with no other entries players treat as part of the same series | `kind=game`, no parent | One wiki at `/wiki/<game-slug>`. Collections, codes, tools and reference pages hang off that game. |
+| Multi-game franchise | Several titles players search separately, like GTA 5 and GTA Online, or Red Dead Redemption 1 and 2 | `kind=franchise` root, each title `kind=game` with `parent_id` | A franchise hub at `/games/<namespace>` that links its title wikis, then each title gets its own wiki at `/wiki/<game-slug>`, collections and pages. Plan only the titles with enough verified material now. |
 
 - Expansions, editions, modes and remasters stay inside their title unless players search them as a separate game. Keep their scope explicit in each page.
 - If the title is already registered as a single game and a new entry makes it a franchise, flag that in the plan for the user. Don't restructure it yourself, because it changes live URLs.
@@ -75,9 +75,9 @@ Proposed titles become real page titles, so write them in the words a player wou
 
 URL rules for new content:
 
-- Wiki and codes use the standalone or child route rules from the wiki docs.
-- Named tools, maps, checklists, quizzes and catalogs use `/<namespace>/<type>/<page-slug>`. Their section URL is a directory.
-- Collections append their slug to the owning wiki.
+- New games use page-type URLs ([URLs](../../../../../bloxodes-docs/content/urls.md#other-games)): `/wiki/<game-slug>`, `/codes/<game-slug>`, `/maps|checklists|quizzes/<page-slug>`, and `/tools|catalog/<namespace>-<page-slug>`.
+- Collections append their slug to the owning game's wiki. A franchise hub can't own collections.
+- A new title in a namespace that hasn't moved yet keeps that namespace's existing URL style. Read the root's `games.url_style` and use `expected_game_page_path` for exact URLs.
 
 If the request is only to plan, return the plan. If it also authorizes creation, carry on with the matching skills within that scope. Don't ask again for work the user already authorized.
 

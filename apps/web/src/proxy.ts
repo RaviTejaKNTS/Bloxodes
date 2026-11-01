@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { registryRequestRedirect } from "@/lib/site-route-resolver";
-import { readRedirectSnapshot } from "@/lib/site-route-snapshot";
+import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snapshot";
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
@@ -9,7 +9,7 @@ import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
-import { googleIndexHeader } from "@/lib/seo/google-index-policy";
+import { googleIndexHeader, isGooglePolicyHtmlPath } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
 
@@ -143,6 +143,11 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
     return registryRedirectResponse(registry, url, hostname);
   }
 
+  // Cold HTML game pages briefly wait for publication evidence. Redirects never do.
+  const waitForPolicy = isGooglePolicyHtmlPath(url.pathname)
+    && /^\/(?:games|wiki|maps|checklists|quizzes|tools|codes|catalog)\//.test(url.pathname);
+  const gameIndexPaths = await readGameIndexPaths(event ? work => event.waitUntil(work) : undefined, waitForPolicy);
+
   // Pass a header downstream for routes that need request-time consent context.
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
@@ -150,7 +155,7 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
   // An existing all-engine robots header (private routes, indexing disabled) already covers Google.
-  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`, gameIndexPaths);
   if (googleRobots && !response.headers.has("X-Robots-Tag")) {
     response.headers.set("X-Robots-Tag", googleRobots);
   }

@@ -11,10 +11,12 @@ export type RedirectRoute = {
   tail_mode: 'append' | 'drop' | 'free-items';
   match_self: boolean;
   page_id: string | null;
+  page_type?: string | null;
   target_url: string | null;
   resolved_target: string | null;
   redirect_code: 301 | 302 | 307 | 308;
   origin: string;
+  indexableGamePath?: boolean;
 };
 export function siteRouteTarget(row: RedirectRoute, path: string): string | null {
   if (row.status !== 'old') return null;
@@ -39,6 +41,7 @@ export function siteRouteTarget(row: RedirectRoute, path: string): string | null
 export function buildRedirectSnapshot(rows: RedirectRoute[]) {
   const redirects = rows;
   return {
+    indexableGamePaths: new Set(rows.filter(row => row.indexableGamePath).map(row => row.path)),
     exact: new Map(redirects.filter(row => row.match_type === 'exact').map(row => [row.path, row])),
     prefixes: redirects.filter(row => row.match_type === 'prefix' && row.status === 'old').sort((a, b) => b.path.length - a.path.length)
   };
@@ -47,6 +50,15 @@ export type RedirectSnapshot = ReturnType<typeof buildRedirectSnapshot>;
 export function resolveSiteRoute(snapshot: RedirectSnapshot, path: string) {
   const exact = snapshot.exact.get(path);
   if (exact) return { row: exact, target: siteRouteTarget(exact, path) };
+  // Collection pagination is a virtual route. An exact live/gone row above
+  // still wins; only a page-linked old collection may carry its numeric tail.
+  const pagination = /^(.*)(\/page\/[1-9]\d*)$/.exec(path);
+  if (pagination) {
+    const row = snapshot.exact.get(pagination[1]);
+    if (row?.status === 'old' && row.page_type === 'collection' && row.page_id !== null && row.resolved_target) {
+      return { row, target: row.resolved_target + pagination[2] };
+    }
+  }
   for (const row of snapshot.prefixes) {
     if (!(path === row.path ? row.match_self : row.path === '/' ? path.startsWith('/') : path.startsWith(row.path + '/'))) continue;
     const target = siteRouteTarget(row, path);
