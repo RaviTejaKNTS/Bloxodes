@@ -1,0 +1,907 @@
+{
+  "page": {
+    "universe_id": 2668101271,
+    "code": "fling-things-and-people",
+    "title": "Fling Things and People Roblox Quiz: 15 Questions on Grabbing",
+    "description_md": "Think you know Fling Things and People? Each attempt draws 15 random questions: five Easy, five Medium and five Hard, covering the Grab Line, map landmarks, Building Plot roles and Toy interactions.",
+    "seo_title": null,
+    "seo_description": "Test what you know about Roblox Fling Things and People, from Grab Line controls to map landmarks, Building Plot roles and Toys. Can you handle all three tiers?",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "On PC, what does right-click do while you hold a target with the Grab Line?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Throw the target."
+          },
+          {
+            "id": "b",
+            "text": "Rotate the target."
+          },
+          {
+            "id": "c",
+            "text": "Change its distance."
+          },
+          {
+            "id": "d",
+            "text": "Release it without throwing."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "Which targets can you drag with the Grab Line in ordinary play outside Building Plots?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fixed walls and floors."
+          },
+          {
+            "id": "b",
+            "text": "Loose objects and players."
+          },
+          {
+            "id": "c",
+            "text": "Shop buttons and item icons."
+          },
+          {
+            "id": "d",
+            "text": "Anchored ground and cliffs."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "Where can you spend Coins?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your Toys."
+          },
+          {
+            "id": "b",
+            "text": "Put Toys Away."
+          },
+          {
+            "id": "c",
+            "text": "Toy Shop."
+          },
+          {
+            "id": "d",
+            "text": "Settings."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "After pausing at a stop, how does the Train continue?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toward the rider's mouse pointer."
+          },
+          {
+            "id": "b",
+            "text": "Along the rider's walking direction."
+          },
+          {
+            "id": "c",
+            "text": "Toward the nearest grabbed prop."
+          },
+          {
+            "id": "d",
+            "text": "Along its set path to the next point."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "Where is the main player spawn?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Plains."
+          },
+          {
+            "id": "b",
+            "text": "The Poison Factory."
+          },
+          {
+            "id": "c",
+            "text": "The Crystal Caves."
+          },
+          {
+            "id": "d",
+            "text": "The Secret Area."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "Where can players build together inside sandbox-style houses?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Poison Pit."
+          },
+          {
+            "id": "b",
+            "text": "Building Plots."
+          },
+          {
+            "id": "c",
+            "text": "The Crystal Caves."
+          },
+          {
+            "id": "d",
+            "text": "The Barn's silo."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "Which menu lets you spawn a Toy Shop item you have already bought?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Settings."
+          },
+          {
+            "id": "b",
+            "text": "Put Toys Away."
+          },
+          {
+            "id": "c",
+            "text": "Your Toys."
+          },
+          {
+            "id": "d",
+            "text": "Store."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "Besides finding one in the Glass Boxes area, how can you normally get a Glass Box?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Collect one as the Slot Machine's item reward."
+          },
+          {
+            "id": "b",
+            "text": "Buy one in the Toy Shop using Robux."
+          },
+          {
+            "id": "c",
+            "text": "Spawn one from Your Toys before buying it."
+          },
+          {
+            "id": "d",
+            "text": "Buy one in the Toy Shop with Coins."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "What color does Hot Sauce turn a player's character when poured on them?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red."
+          },
+          {
+            "id": "b",
+            "text": "Blue."
+          },
+          {
+            "id": "c",
+            "text": "Green."
+          },
+          {
+            "id": "d",
+            "text": "Purple."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What can Blobman's rider grab and throw with its arms while staying aboard?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Anchored house walls."
+          },
+          {
+            "id": "b",
+            "text": "Other players."
+          },
+          {
+            "id": "c",
+            "text": "Shop menu buttons."
+          },
+          {
+            "id": "d",
+            "text": "Fixed Train tracks."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "On PC, which input rotates an object held by the Grab Line?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Mouse Wheel."
+          },
+          {
+            "id": "b",
+            "text": "Right-click."
+          },
+          {
+            "id": "c",
+            "text": "R."
+          },
+          {
+            "id": "d",
+            "text": "Left-click again."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "On PC, which input moves a grabbed object closer or farther away?",
+        "options": [
+          {
+            "id": "a",
+            "text": "R."
+          },
+          {
+            "id": "b",
+            "text": "Left-click again."
+          },
+          {
+            "id": "c",
+            "text": "Right-click."
+          },
+          {
+            "id": "d",
+            "text": "Mouse Wheel."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "On PC, what does a second left-click do after the Grab Line grabs an object?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Release the object."
+          },
+          {
+            "id": "b",
+            "text": "Rotate the object."
+          },
+          {
+            "id": "c",
+            "text": "Throw the object."
+          },
+          {
+            "id": "d",
+            "text": "Change its distance."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-14",
+        "question": "Which menu lets you remove a Toy you have already spawned?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your Toys."
+          },
+          {
+            "id": "b",
+            "text": "Put Toys Away."
+          },
+          {
+            "id": "c",
+            "text": "Store."
+          },
+          {
+            "id": "d",
+            "text": "Toy Shop."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "Which Train stop is above the Poison Pit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Factory."
+          },
+          {
+            "id": "b",
+            "text": "The Barn."
+          },
+          {
+            "id": "c",
+            "text": "The Mountain."
+          },
+          {
+            "id": "d",
+            "text": "The Beach."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "Where does Factory poison apply its visual filter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "To the map's ground textures."
+          },
+          {
+            "id": "b",
+            "text": "To the player's camera view."
+          },
+          {
+            "id": "c",
+            "text": "To the plot's border color."
+          },
+          {
+            "id": "d",
+            "text": "To every Toy's shop portrait."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "How is the Plot Barrier meant to handle props at a plot's edge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Let props cross both ways."
+          },
+          {
+            "id": "b",
+            "text": "Let props enter but stop them leaving."
+          },
+          {
+            "id": "c",
+            "text": "Stop props entering or leaving."
+          },
+          {
+            "id": "d",
+            "text": "Let props leave but stop them entering."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "What plot-item permission does a Requester have before acceptance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move existing plot objects."
+          },
+          {
+            "id": "b",
+            "text": "Spawn from the Item Builder."
+          },
+          {
+            "id": "c",
+            "text": "Move and spawn plot objects."
+          },
+          {
+            "id": "d",
+            "text": "No plot-item permission."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "Which Building Plot role can use the Save/Load menu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Owner."
+          },
+          {
+            "id": "b",
+            "text": "Co-Owner."
+          },
+          {
+            "id": "c",
+            "text": "Member."
+          },
+          {
+            "id": "d",
+            "text": "Requester."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "Where does an Item Builder item emerge after you select its button?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Beside the map's main spawn."
+          },
+          {
+            "id": "b",
+            "text": "Up through the plot's trapdoor."
+          },
+          {
+            "id": "c",
+            "text": "Above the plot's roof."
+          },
+          {
+            "id": "d",
+            "text": "Beside the nearest Train stop."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "When touching a Slot Machine handle gives a reward, what does its indicator look like?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Dark blue and unlit."
+          },
+          {
+            "id": "b",
+            "text": "Pale green and flashing."
+          },
+          {
+            "id": "c",
+            "text": "Bright red and glowing."
+          },
+          {
+            "id": "d",
+            "text": "Solid yellow and unlit."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "What can repeated use of the same Slot Machine do to that machine's availability?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave it permanently out of order."
+          },
+          {
+            "id": "b",
+            "text": "Keep it available with no interruption."
+          },
+          {
+            "id": "c",
+            "text": "Remove it from the map permanently."
+          },
+          {
+            "id": "d",
+            "text": "Put it temporarily out of order."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "Which landmark should you look beside to find the Secret Area entrance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The UFOs."
+          },
+          {
+            "id": "b",
+            "text": "The Factory's poison tanks."
+          },
+          {
+            "id": "c",
+            "text": "The Mountain Train stop."
+          },
+          {
+            "id": "d",
+            "text": "The Beach's houses."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "In the common Glass Box and Pallet travel trick, how do players move around the map?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They swim below the island."
+          },
+          {
+            "id": "b",
+            "text": "They fly between locations."
+          },
+          {
+            "id": "c",
+            "text": "They teleport between Train stops."
+          },
+          {
+            "id": "d",
+            "text": "They walk through the plot barrier."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Where is the wooden entrance to the Crystal Caves?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside the Poison Factory."
+          },
+          {
+            "id": "b",
+            "text": "On top of the Barn's silo."
+          },
+          {
+            "id": "c",
+            "text": "Below the Mountain."
+          },
+          {
+            "id": "d",
+            "text": "At the Plains spawn decal."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "When Unstable Substance hits a solid surface with enough force, which way does it fling nearby objects and players?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Straight upward."
+          },
+          {
+            "id": "b",
+            "text": "Straight downward."
+          },
+          {
+            "id": "c",
+            "text": "Away from the impact point."
+          },
+          {
+            "id": "d",
+            "text": "Toward the impact point."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "During the Mysterious Mushroom's spiral-vision effect, how does movement change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Walking directions reverse."
+          },
+          {
+            "id": "b",
+            "text": "Walking becomes faster."
+          },
+          {
+            "id": "c",
+            "text": "Jumping becomes higher."
+          },
+          {
+            "id": "d",
+            "text": "Movement stops completely."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "What defensive use can a Pallet have against Missiles and Unstable Substances?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pulling all nearby objects inward."
+          },
+          {
+            "id": "b",
+            "text": "Deflecting the incoming Toy."
+          },
+          {
+            "id": "c",
+            "text": "Reversing the attacker's walking controls."
+          },
+          {
+            "id": "d",
+            "text": "Setting the attacker's avatar on fire."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-15",
+        "question": "If a thrown Balloon explodes, what can happen to the player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Their controls reverse."
+          },
+          {
+            "id": "b",
+            "text": "Their vision blacks out."
+          },
+          {
+            "id": "c",
+            "text": "They ragdoll."
+          },
+          {
+            "id": "d",
+            "text": "Their character turns red."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-16",
+        "question": "During the Mysterious Mushroom's fainting effect, what happens to the player's vision?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It stays clear throughout."
+          },
+          {
+            "id": "b",
+            "text": "It gets brighter throughout."
+          },
+          {
+            "id": "c",
+            "text": "It zooms in and stays clear."
+          },
+          {
+            "id": "d",
+            "text": "It briefly goes completely black."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "What is the Grab Line's adjustable range without and with Farther Reach?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2–20 studs normally; 2–30 with Farther Reach."
+          },
+          {
+            "id": "b",
+            "text": "2–30 studs normally; 2–40 with Farther Reach."
+          },
+          {
+            "id": "c",
+            "text": "5–20 studs normally; 5–30 with Farther Reach."
+          },
+          {
+            "id": "d",
+            "text": "2–15 studs normally; 2–25 with Farther Reach."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "Which houses sit above the cave that the Train passes through?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Green House and Pink House."
+          },
+          {
+            "id": "b",
+            "text": "The Blue House and Chinese House."
+          },
+          {
+            "id": "c",
+            "text": "The Blue House and Mountain House."
+          },
+          {
+            "id": "d",
+            "text": "The Pink House and Poison Factory."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "If you activate the Missile's button and it hits nothing, about how long does it propel itself before exploding?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 3 seconds."
+          },
+          {
+            "id": "b",
+            "text": "About 12 seconds."
+          },
+          {
+            "id": "c",
+            "text": "About 8 seconds."
+          },
+          {
+            "id": "d",
+            "text": "About 20 seconds."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "You have already had a Mysterious Mushroom side effect in this life. What happens if you eat another before dying?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It always repeats the first effect."
+          },
+          {
+            "id": "b",
+            "text": "It adds a second side effect."
+          },
+          {
+            "id": "c",
+            "text": "It restarts the first effect for the rest of the server."
+          },
+          {
+            "id": "d",
+            "text": "It gives no further side effect in that life."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "While Blobman is holding your avatar, what must happen before that capture stops blocking you from grabbing its rider?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You escape or get thrown."
+          },
+          {
+            "id": "b",
+            "text": "The rider changes walking direction."
+          },
+          {
+            "id": "c",
+            "text": "The rider changes the Grab Line color."
+          },
+          {
+            "id": "d",
+            "text": "The rider pauses without releasing you."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-06",
+        "question": "Which action can a Building Plot Co-Owner perform that a Member cannot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move objects in the plot."
+          },
+          {
+            "id": "b",
+            "text": "Accept Requesters."
+          },
+          {
+            "id": "c",
+            "text": "Spawn from the Item Builder."
+          },
+          {
+            "id": "d",
+            "text": "Demote the Owner."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-07",
+        "question": "If a Building Plot Owner without Infinite House Time leaves the server and other plot members remain, who receives the Owner title?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The remaining player with the lowest role."
+          },
+          {
+            "id": "b",
+            "text": "The player nearest the trapdoor."
+          },
+          {
+            "id": "c",
+            "text": "Nobody; the departing Owner keeps the title."
+          },
+          {
+            "id": "d",
+            "text": "The remaining player with the highest role."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

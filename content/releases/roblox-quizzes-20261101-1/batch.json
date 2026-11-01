@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "content-final",
+      "file": "quizzes/apeirophobia.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/break-in-2-story.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/break-in-story.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/fling-things-and-people.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/isle.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/pressure.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/rainbow-friends.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/residence-massacre.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/speed-run-4.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/quizzes/apeirophobia",
+      "contains": "Apeirophobia Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/break-in-2-story",
+      "contains": "Break In 2 (Story) Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/break-in-story",
+      "contains": "Break In (Story) Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/fling-things-and-people",
+      "contains": "Fling Things and People Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/isle",
+      "contains": "Isle Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/pressure",
+      "contains": "Pressure Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/rainbow-friends",
+      "contains": "Rainbow Friends Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/residence-massacre",
+      "contains": "Residence Massacre Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/speed-run-4",
+      "contains": "Speed Run 4 Roblox Quiz"
+    }
+  ],
+  "events": [
+    {
+      "type": "quiz",
+      "slug": "apeirophobia"
+    },
+    {
+      "type": "quiz",
+      "slug": "break-in-2-story"
+    },
+    {
+      "type": "quiz",
+      "slug": "break-in-story"
+    },
+    {
+      "type": "quiz",
+      "slug": "fling-things-and-people"
+    },
+    {
+      "type": "quiz",
+      "slug": "isle"
+    },
+    {
+      "type": "quiz",
+      "slug": "pressure"
+    },
+    {
+      "type": "quiz",
+      "slug": "rainbow-friends"
+    },
+    {
+      "type": "quiz",
+      "slug": "residence-massacre"
+    },
+    {
+      "type": "quiz",
+      "slug": "speed-run-4"
+    }
+  ]
+}
