@@ -39,6 +39,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
    ${migration("20261102130000_specialized_franchise_page_type_urls.sql")}
+   ${migration("20261102140000_move_switch_root_style_first.sql")}
    alter table public.games add unique(namespace,slug,kind);
    ${['wiki','code'].map(kind=>`alter table public.game_${kind}_pages add unique(game_id);`).join('\n')}
    ${['tool','map','quiz','catalog','checklist'].map(kind=>`alter table public.game_${kind}_pages add unique(namespace,slug);`).join('\n')}
