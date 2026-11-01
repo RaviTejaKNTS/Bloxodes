@@ -9,7 +9,7 @@ vi.mock("react", async importOriginal => ({ ...await importOriginal<typeof impor
 vi.mock("@/lib/game-registry", () => ({
   getGameRoot: async (namespace: string) => {
     if (state.failedRead === "root") throw new Error("Root unavailable");
-    return { id: namespace, namespace, parent_id: null, is_published: true };
+    return { id: namespace, namespace, slug: namespace, kind: namespace === "future-game" ? "game" : "franchise", url_style: "page_type", parent_id: null, is_published: true };
   },
   getGameWikiByPath: async (namespace: string) => {
     if (state.failedRead === "wiki") throw new Error("Wiki unavailable");
@@ -35,7 +35,8 @@ describe("games directory canonical links", () => {
       const graph = JSON.parse($("script[type='application/ld+json']").text())["@graph"];
       const schemaUrls = graph[1].mainEntity.itemListElement.map((entry: { url: string }) => entry.url);
       for (const namespace of ["gta", "red-dead", "minecraft", "future-game"]) {
-        const path = `/${namespace}${published ? "/wiki" : ""}`;
+        // Page-type landing: franchise hub or single-game wiki, published wiki or not.
+        const path = namespace === "future-game" ? "/wiki/future-game" : `/games/${namespace}`;
         expect($(`#article-body a[href='${path}']`)).toHaveLength(1);
         expect(schemaUrls).toContain(`https://bloxodes.com${path}`);
       }
@@ -51,8 +52,10 @@ describe("games directory canonical links", () => {
     const graph = JSON.parse($("script[type='application/ld+json']").text())["@graph"];
     const schemaUrls = graph[1].mainEntity.itemListElement.map((entry: { url: string }) => entry.url);
     for (const namespace of ["gta", "red-dead", "minecraft", "future-game"]) {
-      expect($(`#article-body a[href='/${namespace}']`)).toHaveLength(1);
-      expect(schemaUrls).toContain(`https://bloxodes.com/${namespace}`);
+      // An unreadable root falls back to its old namespace URL, which redirects.
+      const path = failedRead === "root" ? `/${namespace}` : namespace === "future-game" ? "/wiki/future-game" : `/games/${namespace}`;
+      expect($(`#article-body a[href='${path}']`)).toHaveLength(1);
+      expect(schemaUrls).toContain(`https://bloxodes.com${path}`);
     }
   });
 });

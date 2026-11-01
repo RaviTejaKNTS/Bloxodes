@@ -26,11 +26,11 @@ describe("franchise social image adapters", () => {
   it("uses the root's artwork and identity for a namespace landing page", () => {
     const game = { id: "root", namespace: "example", slug: "example", title: "Example", kind: "franchise", parent_id: null, is_published: true, cover_image: "https://media.bloxodes.com/root-cover.webp", hero_image: "https://media.bloxodes.com/root-square.webp", description_md: "Example games.", updated_at: "2026-01-01" } as SharedGameGame;
     const page = gameRootWikiPage(game);
-    expect(page).toMatchObject({ game_id: "root", canonical_path: "/example", game_kind: "franchise", game_hero_image: game.hero_image });
-    expect(gameWikiMetadata(page).openGraph).toMatchObject({ images: [game.cover_image], url: "https://bloxodes.com/example" });
+    expect(page).toMatchObject({ game_id: "root", canonical_path: "/games/example", game_kind: "franchise", game_hero_image: game.hero_image });
+    expect(gameWikiMetadata(page).openGraph).toMatchObject({ images: [game.cover_image], url: "https://bloxodes.com/games/example" });
     const wiki = { ...page, id: "wiki", canonical_path: "/example/wiki", description_md: "Full wiki copy.", tips_md: "Gameplay tips." };
-    expect(gameWikiMetadata(gameRootWikiPage(game, wiki)).alternates?.canonical).toBe("https://bloxodes.com/example/wiki");
-    expect(gameRootWikiPage(game, wiki)).toMatchObject({ id: "wiki", canonical_path: "/example", description_md: wiki.description_md, tips_md: wiki.tips_md });
+    expect(gameWikiMetadata(gameRootWikiPage(game, wiki)).alternates?.canonical).toBe("https://bloxodes.com/games/example");
+    expect(gameRootWikiPage(game, wiki)).toMatchObject({ id: "wiki", canonical_path: "/games/example", description_md: wiki.description_md, tips_md: wiki.tips_md });
     expect(gameRootWikiPage(game, { ...wiki, game_id: "sibling" } as SharedGameWikiPage).description_md).toBe(game.description_md);
   });
   it("adds franchise checklist social artwork while preserving the Roblox metadata contract", () => {

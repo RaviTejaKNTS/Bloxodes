@@ -1,6 +1,6 @@
 # SEO, indexing and analytics
 
-Last verified: 2026-10-19
+Last verified: 2026-11-01
 
 ## Sitemaps, feed and search
 
@@ -8,6 +8,7 @@ Last verified: 2026-10-19
 - `/feed.xml` (`apps/web/src/app/feed.xml/route.ts`) lists published articles, codes, checklists, events, puzzles, shared game pages, GTA and Minecraft adapters and the monthly reports that are listed in it by hand.
 - Content events refresh search, sitemaps and the feed. Code or static data changes need a web deploy.
 - Collection pagination pages are `noindex` and stay out of sitemaps.
+- `/sitemaps/moved.xml` is a temporary recrawl sitemap, linked from `/sitemap.xml`. It lists every old page-linked game URL (`site_routes` rows with `status = 'old'`, `source = 'game'`, a `page_id`), which all redirect, so search engines revisit them and pick up the new URLs. It returns 503 rather than a partial list. Remove the route, `lib/moved-game-sitemap.ts` and the index entry on 2027-01-02 (`MOVED_GAME_SITEMAP_REMOVE_ON`); the redirect rows stay.
 
 ## Google index policy
 

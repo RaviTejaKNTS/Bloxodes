@@ -40,33 +40,18 @@ describe("franchise wiki image schema", () => {
   });
 });
 
-describe("bare root canonical alias", () => {
-  it.each(["game", "franchise"] as const)("keeps %s root comments and canonical identity with its scoped cards", async kind => {
+describe("page-type root canonical", () => {
+  it.each(["game", "franchise"] as const)("keeps %s root comments and canonical identity", async kind => {
     const root = { id: "root-game", namespace: "example", title: "Example", slug: "root", kind, is_published: true, parent_id: null } as SharedGameGame;
-    const wiki = { ...gameRootWikiPage(root), id: "root-wiki", canonical_path: "/example/wiki", is_published: true };
+    const wiki = { ...gameRootWikiPage(root), id: "root-wiki", is_published: true };
     const page = gameRootWikiPage(root, wiki);
-    const directoryPages = [
-      { href: "/example/wiki", title: "Wiki", kind: "game_wiki_pages_view", image: null },
-      { href: "/example/wiki/child", title: "Child Wiki", kind: "game_wiki_pages_view", image: null },
-      { href: "/example/wiki/items", title: "Items", kind: "game_collection_pages_view", image: null },
-      ...["tools", "catalog", "quizzes"].map(section => ({ href: `/example/${section}/reference`, title: section, kind: "reference", image: null }))
-    ];
-    const $ = load(renderToStaticMarkup(await renderGameWikiPage({ page, namespace: "example", namespaceTitle: "Example", landingPath: "/example/wiki", directoryPages })));
+    const canonical = kind === "game" ? "/wiki/root" : "/games/example";
+    const $ = load(renderToStaticMarkup(await renderGameWikiPage({ page, namespace: "example", namespaceTitle: "Example", landingPath: canonical })));
     const graph = JSON.parse($("script[type='application/ld+json']").text())["@graph"];
-    expect(graph[0].url).toBe("https://bloxodes.com/example/wiki");
-    expect(graph[1].itemListElement.map((entry: { item: string }) => entry.item)).toEqual(["https://bloxodes.com", "https://bloxodes.com/example/wiki"]);
-    for (const section of ["tools", "catalog", "quizzes"]) expect($(`a[href='/example/${section}/reference']`)).toHaveLength(kind === "game" ? 1 : 0);
-    expect($("a[href='/example/wiki/items']")).toHaveLength(kind === "game" ? 1 : 0);
-    expect($("a[href='/example/wiki/child']")).toHaveLength(1);
-    const visiblePaths = $("#article-body [data-card-type='wiki'] a, #article-body .ads-content-game-collection a").map((_, link) => $(link).attr("href")).get();
-    expect(graph[0].mainEntity.numberOfItems).toBe(visiblePaths.length);
-    expect(graph[0].mainEntity.itemListElement.map((entry: { url: string }) => entry.url)).toEqual(visiblePaths.map(path => `https://bloxodes.com${path}`));
+    expect(graph[0].url).toBe(`https://bloxodes.com${canonical}`);
     expect($("[data-comments-id='root-wiki']")).toHaveLength(1);
-    expect($("nav[aria-label='Breadcrumb'] a[href='/example/wiki']")).toHaveLength(0);
-    expect($("a[href='/example/wiki']")).toHaveLength(0);
-    // SocialShare puts the canonical URL into each provider's encoded share URL.
-    expect($.html()).toContain(encodeURIComponent("https://bloxodes.com/example/wiki"));
-    expect(page.canonical_path).toBe("/example");
+    expect(page.canonical_path).toBe(canonical);
+    expect($.html()).toContain(encodeURIComponent(`https://bloxodes.com${canonical}`));
   });
 });
 

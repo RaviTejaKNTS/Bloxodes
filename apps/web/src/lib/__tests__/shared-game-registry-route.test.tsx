@@ -72,12 +72,12 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
 } }) }));
 
 import { generateMetadata as previousMetadata } from "./fixtures/shared-game-route-before";
-import SharedGamePage, { generateMetadata } from "@/app/(site)/[slug]/[[...segments]]/page";
+import SharedGamePage, { generateMetadata } from "@/components/games/GameRoutePage";
 import { getGameWikiByPath, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath } from "@/lib/game-registry";
 import { getGameExtendedPage, getGameChecklistByPath } from "@/lib/game-extra-pages";
 import { getLiveSiteRoute } from "@/lib/site-route-page";
 
-const props = (segments = ["detail"]) => ({ params: Promise.resolve({ slug: "example", segments }) });
+const props = (segments = ["detail"]) => ({ params: Promise.resolve({ slug: "example", segments, sitePath: `/example/${segments.join("/")}` }) });
 const readers = {
   wiki: () => getGameWikiByPath("example", "/example/detail"),
   collection: () => getGameCollectionByPath("example", "/example/detail"),
@@ -109,7 +109,8 @@ describe("shared registry route", () => {
     if (kind === "wiki" || kind === "collection") expect(state.render.mock.calls[0][0].page).toEqual(oldPage);
     else expect((result as { props: Record<string, unknown> }).props[kind === "tool" ? "tool" : kind === "checklist" ? "data" : "page"]).toEqual(oldPage);
     const metadata = await generateMetadata(props());
-    expect(metadata).toEqual(await previousMetadata(props()));
+    if (kind === "checklist") expect(metadata.alternates?.canonical).toBe("https://bloxodes.com/example/detail");
+    else expect(metadata).toEqual(await previousMetadata(props()));
   });
   it.each(["gone", "old"])("%s rows cannot render even when a page still exists", async status => {
     state.status = status;
@@ -119,11 +120,11 @@ describe("shared registry route", () => {
   it.each(Object.keys(readers))("unpublished %s stays a 404", async kind => {
     state.kind = kind; state.published = false;
     await expect(SharedGamePage(props())).rejects.toThrow("NEXT_NOT_FOUND");
-    expect(await generateMetadata(props())).toEqual(await previousMetadata(props()));
+    await expect(generateMetadata(props())).rejects.toThrow("NEXT_NOT_FOUND");
   });
   it.each(Object.keys(readers))("hidden-game %s keeps fallback metadata and the final 404", async kind => {
     state.kind = kind; state.hiddenGame = true;
-    expect(await generateMetadata(props())).toEqual(await previousMetadata(props()));
+    await expect(generateMetadata(props())).rejects.toThrow("NEXT_NOT_FOUND");
     await expect(SharedGamePage(props())).rejects.toThrow("NEXT_NOT_FOUND");
   });
   it("looks up the base collection path for pagination", async () => {
@@ -147,24 +148,6 @@ describe("shared registry route", () => {
     state.kind = "map"; state.renderer = "gta5";
     await expect(SharedGamePage(props())).rejects.toThrow("NEXT_NOT_FOUND");
   });
-  it.each([true, false])("renders the namespace root with a synthetic hub row present=%s", async route => {
-    state.kind = "hub"; state.route = route;
-    await SharedGamePage(props([]));
-    expect(state.render.mock.calls[0][0].page.canonical_path).toBe("/example");
-    expect(await generateMetadata(props([]))).toEqual(await previousMetadata(props([])));
-  });
-  it.each(["codes", "tools", "maps", "quizzes", "checklists", "catalog"])("renders populated %s directories without a route row and rejects empty ones", async segment => {
-    state.directorySegment = segment;
-    state.route = false;
-    expect(await SharedGamePage(props([segment]))).toBeTruthy();
-    state.directory = false;
-    await expect(SharedGamePage(props([segment]))).rejects.toThrow("NEXT_NOT_FOUND");
-  });
-  it("renders the root even without a published wiki", async () => {
-    state.kind = "hub"; state.published = false;
-    await SharedGamePage(props([]));
-    expect(state.render.mock.calls[0][0].page).toMatchObject({ game_id: "root-id", canonical_path: "/example", title: "Example" });
-  });
   it("rejects a foreign source and unsupported page type", async () => {
     state.source = "roblox";
     await expect(SharedGamePage(props())).rejects.toThrow("NEXT_NOT_FOUND");
@@ -174,7 +157,7 @@ describe("shared registry route", () => {
   it.each(["missing-page", "foreign-page"])("does not load a wrong or foreign ID: %s", async id => {
     state.selectedId = id;
     await expect(SharedGamePage(props())).rejects.toThrow("NEXT_NOT_FOUND");
-    expect(await generateMetadata(props())).toMatchObject({ title: "Example" });
+    await expect(generateMetadata(props())).rejects.toThrow("NEXT_NOT_FOUND");
   });
   it("uses the selected sibling ID instead of the first row", async () => {
     state.selectedId = "sibling-page";
@@ -197,7 +180,8 @@ describe("shared registry route", () => {
   it.each(Object.keys(readers) as Array<keyof typeof readers>)("registry errors fall back to the old %s output", async kind => {
     state.kind = kind; state.error = "site_routes";
     const log = vi.spyOn(console, "warn").mockImplementation(() => {});
-    expect(await generateMetadata(props())).toEqual(await previousMetadata(props()));
+    if (kind === "checklist") expect((await generateMetadata(props())).alternates?.canonical).toBe("https://bloxodes.com/example/detail");
+    else expect(await generateMetadata(props())).toEqual(await previousMetadata(props()));
     expect(await SharedGamePage(props())).toBeTruthy();
     expect(state.queries.filter(q => q.table.endsWith("_pages_view")).some(q => q.filters.canonical_path === "/example/detail")).toBe(true);
     expect(log).toHaveBeenCalledWith("Site route lookup unavailable; using by-path page readers.");

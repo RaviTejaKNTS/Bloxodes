@@ -33,22 +33,9 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 
 ## Routes
 
-URLs depend on the namespace's `games.url_style`; see [URLs](urls.md#other-games). New games use page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections under their game's wiki, and `/maps|checklists|quizzes|codes/<slug>`. Games published before the switch keep their namespace-style URLs until they're moved.
+Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections `/wiki/<game-slug>/<collection-slug>`, and `/maps|checklists|quizzes/<slug>`, `/codes/<game-slug>`, `/tools|catalog/<namespace>-<slug>`. Full rules and how the routes find a page are in [URLs](urls.md#other-games).
 
 Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `expected_game_page_path` gives the right URL; `content:publish` and `publish:game-pages` use it.
-
-Slug rules are in [URLs](urls.md).
-
-Namespace-style games outside GTA, Red Dead and Minecraft use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
-
-How the shared route picks a page (`apps/web/src/lib/site-route-page.ts`):
-
-1. Check the namespace root is published (`getGameRoot`).
-2. Read the one `live` row for the path (collections look up the URL without `/page/<n>`; other types 404 on `/page/<n>`).
-3. Load only that page by ID through its usual published view, so drafts and hidden games stay hidden. A row whose page isn't visible gets the namespace's fallback metadata and a 404.
-4. No row: the namespace root falls back to its built-in hub, the `/<namespace>/codes|tools|maps|quizzes|checklists|catalog` listings render from their lists, and anything else 404s.
-
-The route table read has a 2-second limit. If it fails or times out, that request falls back to the eight by-path readers.
 
 ## Data
 
