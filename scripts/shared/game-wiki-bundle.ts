@@ -16,15 +16,18 @@ export function gameWikiPath(namespace: string, slug: string, parent?: string, k
 // Inspect every string, including nested FAQ, controls and structured-data copy.
 // Match whole absolute URLs first so an external URL's path is never treated as
 // an internal relative link. Maps is a real site section absent from the
-// namespace reservation list.
+// namespace reservation list. Files (a last segment with an extension) are
+// static assets, never retired pages. A retired page may have one segment
+// between the namespace and its section (old edition paths like /<ns>/java/wiki).
 export function assertPageTypeLinks(value: unknown, field: string) {
   if (typeof value === "string") {
     const links = value.matchAll(/https?:\/\/[^\s<>"'`\[\]()]+|(?<![\w/.:])\/[^\s<>"'`\[\]()]+/gi);
     for (const [link] of links) {
       let url: URL;
       try { url = new URL(link, "https://bloxodes.com"); } catch { continue; }
-      if (url.origin !== "https://bloxodes.com") continue;
-      const retired = /^\/([^/]+)\/(wiki|tools|maps|checklists|quizzes|codes|catalog)(?:\/|$)/.exec(url.pathname);
+      if (url.protocol !== "https:" && url.protocol !== "http:" || !["bloxodes.com", "www.bloxodes.com"].includes(url.hostname)) continue;
+      if (/\.[a-z0-9]{2,5}$/i.test(url.pathname)) continue;
+      const retired = /^\/([^/]+)\/(?:[^/]+\/)?(wiki|tools|maps|checklists|quizzes|codes|catalog)(?:\/|$)/.exec(url.pathname);
       if (retired && !reservedGameNamespaces.has(retired[1]) && retired[1] !== "maps") {
         throw new Error(`${field}: retired namespace link "${link}". Use the page-type URL instead.`);
       }

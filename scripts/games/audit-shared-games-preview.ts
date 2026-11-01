@@ -40,7 +40,7 @@ async function main() {
  await Promise.all([worker(),worker(),worker()]);
  for(const route of ["/gta/wiki/not-a-real-game","/minecraft/not-an-edition/wiki","/shared-verification/wiki/not-a-real-collection","/shared-verification/wiki/machines/page/999999"]) assert.equal((await fetch(`${base}${route}`,{signal:AbortSignal.timeout(60000)})).status,404,`Invalid route ${route}`);
  for(const ns of ["gta","red-dead","shared-verification"]) {
-  const endpoint=ns==="shared-verification"?`/api/games/${ns}/collections/progress`:`/api/${ns}/collections/progress`;
+  const endpoint=`/api/games/${ns}/collections/progress`;
   assert.equal((await fetch(`${base}${endpoint}`)).status,401,`Anonymous progress ${ns}`);
   assert.equal((await fetch(`${base}${endpoint}`,{method:"PUT",headers:{Origin:"https://untrusted.example","Content-Type":"application/json"},body:'{}'})).status,403,`Origin guard ${ns}`);
  }

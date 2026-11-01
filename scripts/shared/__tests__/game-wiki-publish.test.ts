@@ -71,6 +71,12 @@ test("public copy rejects retired links in markdown, HTML and nested JSON string
   for (const link of ["/wiki/game/items", "/games/gta", "/tools/minecraft-calculator", "/maps/gta", "/wiki/tools", "/maps/wiki", "/catalog/tools", "/api/games/gta/collections/progress", "https://bloxodes.com/wiki/game", "https://example.com/gta/wiki/items", "https://bloxodes.com.example.org/gta/wiki", "/gta/wikipedia", "#wiki"]) {
     assert.doesNotThrow(() => assertPageTypeLinks({ description_md: `[More](${link})` }, "final.json"));
   }
+  for (const link of ["/minecraft/java/wiki/mobs", "/minecraft/bedrock/wiki/achievements", "https://www.bloxodes.com/gta/wiki/gta-5", "http://bloxodes.com/valheim/wiki/bosses"]) {
+    assert.throws(() => assertPageTypeLinks({ description_md: `[More](${link})` }, "final.json"), /retired namespace link/);
+  }
+  for (const asset of ["/images/tools/minecraft/xp-calculator.webp", "/gta/maps/gta-vice-city/map.webp", "https://bloxodes.com/gta/maps/gta-vice-city/map.webp"]) {
+    assert.doesNotThrow(() => assertPageTypeLinks({ description_md: `![Map](${asset})` }, "final.json"));
+  }
   assert.throws(() => assertPageTypeLinks({ schema_ld_json: { itemListElement: [{ url: "https://bloxodes.com/example/wiki/items" }] } }, "final.json"), /schema_ld_json.itemListElement\[0\].url/);
 });
 
