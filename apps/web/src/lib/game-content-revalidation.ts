@@ -15,7 +15,8 @@ export async function gameContentRevalidationTargets(slug: string) {
     for (let offset = 0;; offset += 500) {
       let query = db.from(table).select(columns);
       for (const [key, value] of Object.entries(filters)) query = query.eq(key, value);
-      const { data, error } = await query.order("id").range(offset, offset + 499);
+      // site_routes is keyed by path and has no id column.
+      const { data, error } = await query.order(table === "site_routes" ? "path" : "id").range(offset, offset + 499);
       if (error) throw new Error(`Game revalidation lookup failed: ${table}`);
       result.push(...(data ?? []) as unknown as Array<Record<string, string>>);
       if (!data || data.length < 500) return result;
@@ -24,7 +25,7 @@ export async function gameContentRevalidationTargets(slug: string) {
   const namespaceEvent = !slug.includes("/");
   const owners = namespaceEvent
     ? []
-    : await rows("site_routes", "id,page_id,page_type,game_id,path", { source: "game", path: `/${slug}` });
+    : await rows("site_routes", "page_id,page_type,game_id,path", { source: "game", path: `/${slug}` });
   // A namespace event expands every owner; a page event never expands siblings.
   const namespace = namespaceEvent ? slug : null;
   const games = namespace
@@ -36,7 +37,7 @@ export async function gameContentRevalidationTargets(slug: string) {
   const pagePaths = new Set<string>();
   const collectionPaths = new Set<string>();
   const addOwner = async (owner: Record<string, string>) => {
-    const routes = await rows("site_routes", "id,path", { source: "game", page_type: owner.page_type, page_id: owner.page_id });
+    const routes = await rows("site_routes", "path", { source: "game", page_type: owner.page_type, page_id: owner.page_id });
     for (const route of routes) {
       pagePaths.add(route.path);
       if (owner.page_type === "collection") {
@@ -53,13 +54,13 @@ export async function gameContentRevalidationTargets(slug: string) {
     const root = (await rows("games", "id,namespace,parent_id,url_style", { namespace: game.namespace })).find(row => !row.parent_id);
     if (!root) throw new Error("Game revalidation root is missing");
     if (namespaceEvent) {
-      for (const route of await rows("site_routes", "id,page_id,page_type,game_id,path", { source: "game", game_id: game.id, status: "live" })) await addOwner(route);
+      for (const route of await rows("site_routes", "page_id,page_type,game_id,path", { source: "game", game_id: game.id, status: "live" })) await addOwner(route);
     }
     // Wiki slugs are permanent editorial IDs and need not equal the root slug.
     for (const id of new Set([game.id, root.id])) {
       for (const wiki of await rows("game_wiki_pages", "id,canonical_path", { game_id: id })) pagePaths.add(wiki.canonical_path);
     }
-    const hubs = await rows("site_routes", "id,path", { source: "game", game_id: root.id, page_type: "hub", status: "live" });
+    const hubs = await rows("site_routes", "path", { source: "game", game_id: root.id, page_type: "hub", status: "live" });
     for (const hub of hubs) pagePaths.add(hub.path);
     if (["gta", "red-dead", "minecraft"].includes(game.namespace)) indexes.add(`/sitemaps/${game.namespace}.xml`);
   }
