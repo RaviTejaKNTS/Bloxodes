@@ -25,6 +25,7 @@ function humanizeSlug(value: string): string {
 }
 
 export type SharedGameGame = {
+  url_style?: "namespace" | "page_type";
   id: string;
   namespace: string;
   kind: "game" | "franchise";
@@ -164,6 +165,8 @@ async function withCache<T>(key: string[], tags: string[], loader: () => Promise
   return publicContentCache(loader, key, { revalidate: REVALIDATE_SECONDS, tags })();
 }
 
+// Legacy synchronous builders are exported only by gta.ts and red-dead.ts.
+// Shared namespaces use stored canonical_path through game-registry readers.
 function buildSharedGameWikiPath(slug: string): string {
   return `/${namespace}/wiki/${normalizeSlug(slug)}`;
 }

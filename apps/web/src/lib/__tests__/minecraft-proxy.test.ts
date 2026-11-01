@@ -1,4 +1,4 @@
-vi.mock('@/lib/site-route-snapshot', () => ({readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
+vi.mock('@/lib/site-route-snapshot', () => ({readGameIndexPaths: () => new Set<string>(), readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
 import { NextRequest } from "next/server";
 import { describe, expect, it, vi } from "vitest";
 import { proxy } from "@/proxy";

@@ -105,8 +105,8 @@ describe("published landing reader and sitemap entries", () => {
     db[reader].mockRejectedValue(new Error("Required content unavailable"));
     await expect(getGameLanding(root.namespace)).rejects.toThrow("Required content unavailable");
     const landing = await getGameLandingForLinks(root.namespace);
-    expect(landing).toMatchObject({ path: "/future-game", isAlias: false, lookupFailed: true });
-    expect(gameLandingSitemapEntries(landing).map(entry => entry.loc)).toEqual(["https://bloxodes.com/future-game"]);
+    expect(landing).toMatchObject({ path: "/games", isAlias: false, lookupFailed: true });
+    expect(gameLandingSitemapEntries(landing)).toEqual([]);
   });
 
   it("retains a published fallback root without inventing a wiki URL", async () => {
@@ -134,4 +134,11 @@ describe("canonical breadcrumbs", () => {
     ]);
     expect(gameBreadcrumbs([{ label: "Home", href: "/" }, { label: "Game", href: "/future-game/wiki" }, { label: "Game" }], "/future-game/wiki")).toHaveLength(2);
   });
+});
+
+it("uses page-type landing paths while preserving franchise and same-slug child identity", () => {
+  const moved = { ...root, url_style: "page_type" as const };
+  expect(gameLandingPath(moved)).toBe("/wiki/future-game");
+  expect(gameLandingPath({ ...moved, kind: "franchise" })).toBe("/games/future-game");
+  expect(gameRootWikiPage(moved).canonical_path).toBe("/wiki/future-game");
 });

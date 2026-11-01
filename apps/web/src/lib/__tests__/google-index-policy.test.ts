@@ -1,4 +1,4 @@
-vi.mock('@/lib/site-route-snapshot', () => ({readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
+vi.mock('@/lib/site-route-snapshot', () => ({readGameIndexPaths: () => new Set<string>(), readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
 import { readFileSync } from "node:fs";
 import { NextRequest } from "next/server";
 import { describe, expect, it, vi } from "vitest";
@@ -169,4 +169,18 @@ describe("Google index policy", () => {
       expect(source).toMatch(/googleBot:\s*\{\s*index: false,/);
     }
   });
+});
+
+
+it("extends coverage from moved live game identities without changing static coverage", () => {
+  const moved = new Set(["/wiki/future-game", "/wiki/future-game/items", "/games/future-franchise"]);
+  for (const path of moved) {
+    expect(isGoogleIndexable(path, moved)).toBe(true);
+    expect(googleIndexHeader(path, moved)).toBeNull();
+    expect(isGoogleIndexable(path + "?sort=name", moved)).toBe(false);
+  }
+  expect(isGoogleIndexable("/wiki/future-game/items/page/2", moved)).toBe(true);
+  expect(isGoogleIndexable("/wiki/future-game/missing", moved)).toBe(false);
+  expect(isGoogleIndexable("/unmoved-game/wiki", moved)).toBe(false);
+  expect(isGoogleIndexable("/wiki/future-game")).toBe(false);
 });

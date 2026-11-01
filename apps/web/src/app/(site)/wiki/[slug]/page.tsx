@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -42,6 +43,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = await getWikiPageBySlug(slug);
 
   if (!page) {
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${(await params).slug}`);
+    if (gameRoute) return gameRoute.metadata();
+
     return {
       alternates: buildAlternates(canonical)
     };
@@ -85,6 +89,9 @@ export default async function WikiDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const data = await loadWikiDetailPageData(slug);
   if (!data) {
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${(await params).slug}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

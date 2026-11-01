@@ -19,7 +19,7 @@ import { CopyGameCode } from "./CopyGameCode";
 
 export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; namespaceTitle: string }) {
   const landing = await getGameLandingForLinks(page.namespace);
-  const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: namespaceTitle, href: landing.path }, { label: "Codes", href: `/${page.namespace}/codes` }, { label: page.title }], page.canonical_path);
+  const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: namespaceTitle, href: landing.path }, { label: "Codes", href: page.canonical_path.slice(0, page.canonical_path.lastIndexOf("/")) }, { label: page.title }], page.canonical_path);
   const { data: codes, error } = await supabaseAdmin().from("game_codes").select("code,rewards_text,status").eq("code_page_id", page.id).order("verified_at", { ascending: false, nullsFirst: false });
   if (error) throw new Error(`Game codes read failed: ${error.message}`);
   const sections = [["", page.intro_md], ["How to redeem", page.redeem_md], ["Rewards", page.rewards_md], ["Troubleshooting", page.troubleshoot_md], ["Where to find codes", page.find_codes_md]] as const;

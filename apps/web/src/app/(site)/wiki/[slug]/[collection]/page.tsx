@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -175,6 +176,9 @@ export async function generateWikiCollectionMetadata({
     : null;
 
   if (!page) {
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${slug}/${collection}${currentPage > 1 ? `/page/${currentPage}` : ""}`);
+    if (gameRoute) return gameRoute.metadata();
+
     return {
       title: `Roblox Wiki | ${SITE_NAME}`,
       description: WIKI_DESCRIPTION,
@@ -240,6 +244,9 @@ export async function renderWikiCollectionPage({
 }) {
   const context = await resolveContext(slug, collection);
   if (!context) {
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${slug}/${collection}${currentPage > 1 ? `/page/${currentPage}` : ""}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

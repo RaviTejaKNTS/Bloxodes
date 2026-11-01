@@ -1,3 +1,4 @@
+import { gameContentRevalidationTargets } from "@/lib/game-content-revalidation";
 import { buildMinecraftWikiPath, minecraftCollectionEventPath } from "@/lib/minecraft-paths";
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -102,10 +103,10 @@ function normalizeSlug(value: string): string {
     .replace(/^\/+|\/+$/g, "");
 }
 
-function applyRevalidation(paths: string[], tags: string[] = []) {
+function applyRevalidation(paths: string[], tags: string[] = [], inferNamespaces = true) {
   const uniquePaths = Array.from(new Set(paths));
   const namespaces = uniquePaths.map(path => path.split("/")[1]).filter(Boolean);
-  const uniqueTags = Array.from(new Set([...tags, ...namespaces].filter(Boolean)));
+  const uniqueTags = Array.from(new Set([...tags, ...(inferNamespaces ? namespaces : [])].filter(Boolean)));
 
   for (const path of uniquePaths) {
     if (/\[[^/\]]+\]/.test(path)) {
@@ -896,15 +897,27 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   let purgePaths: string[] = [];
   let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
   let impactedWikiSlugs: string[] = [];
+  let paginationPrefixes: string[] = [];
 
   switch (payload.type) {
     case "game_content": {
-      if (!/^[a-z0-9-]+\/[a-z0-9/-]+$/.test(slug) || slug.includes("..")) break;
-      const namespace = slug.split("/")[0];
-      // A collection update also changes the copy and previews on its parent wiki.
-      const wikiPrefix = namespace === "gta" ? slug.match(/^gta\/wiki\/[^/]+/)?.[0] : undefined;
-      purgePaths = applyRevalidation([`/${slug}`, ...(wikiPrefix ? [`/${wikiPrefix}`] : []), `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
-      purgeTags = [...purgeTags, namespace];
+      // Deferred namespaces retain their existing map/calculator dependencies.
+      if (/^(gta|red-dead|minecraft)\//.test(slug)) {
+        if (!/^[a-z0-9-]+\/[a-z0-9/-]+$/.test(slug) || slug.includes("..")) break;
+        const namespace = slug.split("/")[0];
+        // A collection update also changes the copy and previews on its parent wiki.
+        const wikiPrefix = namespace === "gta" ? slug.match(/^gta\/wiki\/[^/]+/)?.[0] : undefined;
+        purgePaths = applyRevalidation([`/${slug}`, ...(wikiPrefix ? [`/${wikiPrefix}`] : []), `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
+        purgeTags = [...purgeTags, namespace];
+        break;
+      }
+      const targets = await gameContentRevalidationTargets(slug);
+      // A collection can shrink or become hidden. Invalidate its subtree too,
+      // including previously cached pages beyond the new runtime's page count.
+      for (const path of targets.collectionPaths) revalidatePath(path, "layout");
+      purgePaths = applyRevalidation(targets.paths, targets.tags, false);
+      purgeTags = targets.tags;
+      paginationPrefixes = targets.collectionPaths.map(path => `${path}/page/`);
       break;
     }
     case "minecraft_game":
@@ -1013,7 +1026,8 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     paths: purgePaths,
     tags: purgeTags,
     impactedWikiSlugs,
-    impactedListSlugs: []
+    impactedListSlugs: [],
+    paginationPrefixes
   };
 }
 
@@ -1039,6 +1053,7 @@ export async function POST(request: Request) {
   let purgeTags: string[] = [];
   let impactedWikiSlugs: string[] = [];
   let impactedListSlugs: string[] = [];
+  let paginationPrefixes: string[] = [];
 
   for (const event of parsedEvents) {
     const targets = await collectRevalidationTargets(event);
@@ -1046,6 +1061,7 @@ export async function POST(request: Request) {
     purgeTags = [...purgeTags, ...targets.tags];
     impactedWikiSlugs = [...impactedWikiSlugs, ...targets.impactedWikiSlugs];
     impactedListSlugs = [...impactedListSlugs, ...targets.impactedListSlugs];
+    paginationPrefixes.push(...targets.paginationPrefixes);
   }
 
   purgePaths = Array.from(new Set(purgePaths));
@@ -1053,7 +1069,7 @@ export async function POST(request: Request) {
   impactedWikiSlugs = Array.from(new Set(impactedWikiSlugs));
   impactedListSlugs = Array.from(new Set(impactedListSlugs));
 
-  const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags });
+  const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags, ...(parsedEvents.every(event => event.type === "game_content" && !/^(gta|red-dead|minecraft)\//.test(normalizeSlug(event.slug))) ? { paginationPrefixes: [...new Set(paginationPrefixes)] } : {}) });
   const warmPaths = warmableRevalidationPaths(purgePaths);
   const warmMode = readWarmMode();
   const cloudflareWarm = cloudflare.enabled && cloudflare.ok

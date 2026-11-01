@@ -33,16 +33,13 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 
 ## Routes
 
-| Page | URL |
-| --- | --- |
-| Franchise or game root wiki | `/<namespace>/wiki` |
-| Child game wiki (franchise) | `/<namespace>/wiki/<game-slug>` |
-| Collection | the owning wiki URL plus `/<collection-slug>` |
-| Maps, quizzes, catalogs, checklists | `/<namespace>/maps|quizzes|catalog|checklists/<slug>` |
+URLs depend on the namespace's `games.url_style`; see [URLs](urls.md#other-games). New games use page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections under their game's wiki, and `/maps|checklists|quizzes|codes/<slug>`. Games published before the switch keep their namespace-style URLs until they're moved.
 
-Slug rules and the planned move to page-type URLs are in [URLs](urls.md).
+Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `expected_game_page_path` gives the right URL; `content:publish` and `publish:game-pages` use it.
 
-New namespaces use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
+Slug rules are in [URLs](urls.md).
+
+Namespace-style games outside GTA, Red Dead and Minecraft use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
 
 How the shared route picks a page (`apps/web/src/lib/site-route-page.ts`):
 

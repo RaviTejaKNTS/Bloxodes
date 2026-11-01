@@ -104,7 +104,7 @@ export function renderGameCollectibleCollectionPage({
   const breadcrumbs = gameBreadcrumbs([
     { label: "Home", href: "/" },
     { label: namespaceTitle, href: landingPath },
-    { label: "Wiki", href: `/${page.namespace}/wiki` },
+    ...(page.canonical_path.startsWith("/wiki/") ? (landingPath?.startsWith("/games/") ? [] : [{ label: "Wiki", href: "/wiki" }]) : [{ label: "Wiki", href: `/${page.namespace}/wiki` }]),
     { label: config.gameName, href: wikiPath },
     { label: config.label, href: null }
   ], canonicalPath);

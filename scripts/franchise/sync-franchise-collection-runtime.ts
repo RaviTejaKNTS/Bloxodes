@@ -305,7 +305,7 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
     namespace: namespaceValue,
     manifest,
     manifestPath,
-    code: `${gameSlug}-${collectionSlug}`,
+    code: `${finalJson?.wiki_slug ?? gameSlug}-${collectionSlug}`,
     pageType,
     datasetPath,
     contentHash: sha256(JSON.stringify(stableValue(hashDocument))),
@@ -327,9 +327,8 @@ function resolveCountTokens<T>(valueToResolve: T, count: number): T {
 export function pageCopy(plan: Plan): Record<string, unknown> | null {
   if (!plan.finalJson) return null;
   const final = resolveCountTokens(plan.finalJson, plan.items.length);
-  const gameSlug = plan.manifest.game.slug;
   const collectionSlug = plan.manifest.collection.slug;
-  if (final.wiki_slug !== gameSlug || final.collection_slug !== collectionSlug || final.code !== plan.code) {
+  if (typeof final.wiki_slug !== "string" || !SAFE_SLUG.test(final.wiki_slug) || final.collection_slug !== collectionSlug || final.code !== `${final.wiki_slug}-${collectionSlug}` || final.code !== plan.code) {
     throw new Error(`${plan.code} final.json identity does not match its manifest.`);
   }
   for (const key of ["title", "display_name", "seo_title", "meta_description"] as const) {
@@ -375,6 +374,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   const wiki = await readPublishQuery(() => sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("game_id", game.data!.id).maybeSingle());
   if (wiki.error) throw wiki.error;
   if (!wiki.data || !stageRevision && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
+  if (plan.finalJson && plan.finalJson.wiki_slug !== wiki.data.slug) throw new Error(`${plan.code} final.json wiki owner does not match the published wiki.`);
   const copy = pageCopy(plan);
   let pageQuery = await readPublishQuery(() => sb
     .from(pagesTable)

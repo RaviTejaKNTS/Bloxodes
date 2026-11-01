@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { loadCodesPageData, renderCodesPage, codesMetadata } from "../../page-data";
@@ -45,11 +46,11 @@ export default async function CodesPaginatedPage({ params }: PageProps) {
     notFound();
   }
 
-  return renderCodesPage({
+  return <>{await renderCodesPage({
     games,
     totalGames: total,
     totalPages,
     currentPage: pageNumber,
     showHero: pageNumber === 1
-  });
+  })}<OtherGamesSection kind="code" /></>;
 }

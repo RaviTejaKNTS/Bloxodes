@@ -12,7 +12,7 @@ function quizPresentation(page: GameExtendedPage) {
       page: { ...page, code: page.slug, gameName: page.game_title, image: resolveGameCoverImage(page), seo_description: page.meta_description, description_md: [page.intro_md, page.description_md].filter(Boolean).join("\n\n") },
       questions: parseGameQuizData(page.quiz_data)
     },
-    config: { basePath: `/${page.namespace}/quizzes`, homePath: "/", title: "Quizzes", heading: "Quizzes", intro: "", description: page.meta_description || page.title, progressNamespace: page.namespace, progress: { sessionEndpoint: "/api/quizzes/session", progressEndpoint: `/api/games/${page.namespace}/quizzes/progress` } }
+    config: { basePath: page.canonical_path.slice(0, page.canonical_path.lastIndexOf("/")), homePath: "/", title: "Quizzes", heading: "Quizzes", intro: "", description: page.meta_description || page.title, progressNamespace: page.namespace, progress: { sessionEndpoint: "/api/quizzes/session", progressEndpoint: `/api/games/${page.namespace}/quizzes/progress` } }
   };
 }
 export function gameQuizMetadata(page: GameExtendedPage) {

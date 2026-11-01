@@ -1,5 +1,6 @@
 import 'server-only';
 import { supabaseAdmin } from './supabase-admin';
+import { loadPublishedMovedGamePages, MOVED_PAGE_KINDS } from "./published-moved-game-pages";
 import { buildRedirectSnapshot, type RedirectRoute, type RedirectSnapshot } from './site-route-resolver';
 
 export const SITE_ROUTE_SNAPSHOT_TTL = 5 * 60_000;
@@ -7,7 +8,7 @@ export const SITE_ROUTE_INITIAL_TIMEOUT = 2_000;
 export const SITE_ROUTE_INITIAL_RETRY = 2_000;
 const PAGE_SIZE = 500;
 /** Cold readers share a bounded initial load; warm readers use stale-while-revalidate. */
-export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promise<RedirectRoute[]>, now = Date.now) {
+export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promise<RedirectRoute[]>, now = Date.now, initialTimeout = SITE_ROUTE_INITIAL_TIMEOUT) {
   let snapshot: RedirectSnapshot = buildRedirectSnapshot([]);
   let loaded = false;
   let failures = 0;
@@ -17,7 +18,7 @@ export function createRedirectSnapshotCache(load: (signal: AbortSignal) => Promi
     async read(background?: (work: Promise<void>) => void) {
       if (!refreshing && now() >= nextRefresh) {
         const controller = new AbortController();
-        const timeout = loaded ? 15_000 : SITE_ROUTE_INITIAL_TIMEOUT;
+        const timeout = loaded ? 15_000 : initialTimeout;
         let timer: ReturnType<typeof setTimeout>;
         const deadline = new Promise<never>((_, reject) => {
           timer = setTimeout(() => { controller.abort(); reject(new Error('Redirect snapshot timed out')); }, timeout);
@@ -50,7 +51,7 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   async function read(table: string, blockers?: string) {
     let after: string | undefined;
     for (;;) {
-      const columns = blockers ? 'path,status,match_type' : 'path,status,match_type,tail_mode,match_self,page_id,target_url,resolved_target,redirect_code,origin';
+      const columns = blockers ? 'path,status,match_type' : 'path,status,match_type,tail_mode,match_self,page_id,page_type,target_url,resolved_target,redirect_code,origin';
       let query = client.from(table).select(columns).order('path').limit(PAGE_SIZE).abortSignal(signal);
       if (blockers) query = query.in('status', ['live', 'gone']).eq('match_type', 'exact').or(blockers);
       if (after) query = query.gt('path', after);
@@ -70,7 +71,7 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   // lexicographic subtree bounds, avoiding LIKE wildcards in stored paths.
   // Nested prefixes (every /lists/<slug> under /lists) add nothing to the
   // subtree filter; dropping them keeps the request URL short.
-  const prefixPaths = rows.filter(row => row.match_type === 'prefix').map(row => row.path);
+  const prefixPaths = rows.filter(row => row.match_type === 'prefix' || (row.page_type === 'collection' && row.page_id !== null)).map(row => row.path);
   const prefixes = prefixPaths
     .filter(path => !prefixPaths.some(other => other !== path && (other === '/' || path.startsWith(other + '/'))))
     .map(path => ({ path }));
@@ -86,3 +87,36 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
 }
 const cache = createRedirectSnapshotCache(loadRedirectRows);
 export const readRedirectSnapshot = cache.read;
+
+// Policy refresh has its own timeout, last-good state and failure handling.
+// Never await it on a redirect request, including the first cold request.
+export function createGameIndexPolicyCache(load: (signal: AbortSignal) => Promise<RedirectRoute[]>, now = Date.now) {
+  const cache = createRedirectSnapshotCache(load, now, 15_000);
+  let paths: ReadonlySet<string> = new Set();
+  return (background?: (work: Promise<void>) => void): ReadonlySet<string> => {
+    const work = cache.read(background).then(snapshot => { paths = snapshot.indexableGamePaths; });
+    background?.(work);
+    return paths;
+  };
+}
+export async function loadGameIndexPolicyRows(signal: AbortSignal): Promise<RedirectRoute[]> {
+  const client = supabaseAdmin();
+  const rows: RedirectRoute[] = [];
+  for (const kind of MOVED_PAGE_KINDS) {
+    const pages = await loadPublishedMovedGamePages(client, kind, signal);
+    if (signal.aborted) throw new Error("Game policy timed out");
+    for (let start = 0; start < pages.length; start += 200) {
+      const batch = pages.slice(start, start + 200);
+      const { data, error } = await client.from("site_routes")
+        .select("path,page_id").eq("source", "game").eq("status", "live").eq("page_type", kind)
+        .in("path", batch.map(page => page.canonical_path)).abortSignal(signal);
+      if (error) throw new Error("Published game policy routes unavailable");
+      const published = new Map(batch.map(page => [page.canonical_path, page.id]));
+      for (const route of data ?? []) {
+        if (published.get(route.path) === route.page_id) rows.push({ path: route.path, status: "live", match_type: "exact", indexableGamePath: true } as RedirectRoute);
+      }
+    }
+  }
+  return rows;
+}
+export const readGameIndexPaths = createGameIndexPolicyCache(loadGameIndexPolicyRows);

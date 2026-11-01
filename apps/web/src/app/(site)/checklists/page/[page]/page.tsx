@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { loadChecklistsPageData, renderChecklistsPage } from "../../page-data";
@@ -40,11 +41,11 @@ export default async function ChecklistsPaginatedPage({ params }: PageProps) {
     notFound();
   }
 
-  return renderChecklistsPage({
+  return <>{await renderChecklistsPage({
     cards,
     total,
     totalPages,
     currentPage: pageNumber,
     showHero: pageNumber === 1
-  });
+  })}<OtherGamesSection kind="checklist" /></>;
 }

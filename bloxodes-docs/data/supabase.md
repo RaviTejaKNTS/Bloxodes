@@ -34,7 +34,7 @@ Two Supabase databases: production (self-hosted on the VPS) and managed developm
 | Codes | `code_pages`, `codes` |
 | Articles | `articles`, authors, `article_source_images` |
 | Roblox wiki | `roblox_wiki_registry`, `wiki_pages`, `wiki_collection_pages`, `wiki_collection_datasets`, `wiki_collection_items` |
-| Non-Roblox games | `games` and `game_*` (see [franchise](../content/franchise.md#data)) |
+| Non-Roblox games | `games` and `game_*` (see [franchise](../content/franchise.md#data)); `games.url_style` picks each namespace's URL style (see [URLs](../content/urls.md#other-games)) |
 | Engagement | `quiz_pages`, `checklist_pages`, `checklist_items`, `events_pages`, `tools` |
 | Catalog | `catalog_pages` and the `roblox_*` ID and item tables |
 | Stats | `roblox_universes`, `roblox_universe_stats_*`, rank snapshots, current indexes, `stats_job_runs` |

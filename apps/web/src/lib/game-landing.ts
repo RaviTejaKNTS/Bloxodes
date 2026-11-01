@@ -26,8 +26,8 @@ const hasIndependentRootPage = cache(async (namespace: string): Promise<boolean>
 export const getGameLanding = cache(async (namespace: string) => {
   const root = await getGameRoot(namespace);
   if (!root) return { root: null, wiki: null, path: `/${namespace}`, isAlias: false, hasIndependentRoot: false };
-  const wiki = await getGameWikiByPath(namespace, `/${namespace}/wiki`);
-  const hasIndependentRoot = gameLandingPath(root, wiki) !== `/${namespace}` ? await hasIndependentRootPage(namespace) : false;
+  const wiki = await getGameWikiByPath(namespace, root.url_style === "page_type" ? gameLandingPath(root) : `/${namespace}/wiki`);
+  const hasIndependentRoot = root.url_style !== "page_type" && gameLandingPath(root, wiki) !== `/${namespace}` ? await hasIndependentRootPage(namespace) : false;
   const path = gameLandingPath(root, wiki, hasIndependentRoot);
   return { root, wiki, path, isAlias: path !== `/${namespace}`, hasIndependentRoot };
 });
@@ -39,13 +39,15 @@ export const getGameLandingForLinks = cache(async (namespace: string): Promise<G
   try {
     return await getGameLanding(namespace);
   } catch {
-    return { root: null, wiki: null, path: `/${namespace}`, isAlias: false, hasIndependentRoot: true, lookupFailed: true };
+    // With identity unavailable, use the stable directory rather than guessing
+    // an old namespace URL that may already redirect.
+    return { root: null, wiki: null, path: "/games", isAlias: false, hasIndependentRoot: false, lookupFailed: true };
   }
 });
 
 export function gameLandingSitemapEntries(landing: GameLandingForLinks): SitemapUrlSetEntry[] {
   const { root, wiki, path } = landing;
-  if (!root) return landing.lookupFailed ? [{ loc: withSiteUrl(path), changefreq: "weekly", priority: "0.9" }] : [];
+  if (!root) return [];
   const lastmod = landing.isAlias
     ? wiki?.content_updated_at ?? wiki?.updated_at ?? wiki?.published_at
     : root.updated_at ?? root.published_at;

@@ -99,11 +99,14 @@ export async function saveFranchiseWikiPage(client: SupabaseClient, namespaceVal
   const payload = { ...pick(wiki, wikiFields), is_published: !stagePage, game_id: gameId };
   const page = await readPublishQuery(() => sb.from("wiki_pages").select("id").eq("game_id", gameId).maybeSingle());
   if (page.error) throw page.error;
+  const expected = await client.rpc("expected_game_page_path", { p_game_id: gameId, p_type: "wiki", p_slug: wiki.slug });
+  if (expected.error || typeof expected.data !== "string") throw expected.error ?? new Error("Wiki canonical path unavailable");
+  if (wiki.canonical_path != null && wiki.canonical_path !== expected.data) throw new Error(`Wiki canonical path must be ${expected.data}`);
   // Inserts need the validated route, including Minecraft edition paths.
   // Updates leave the target's permanent canonical path unchanged.
   const result = page.data
     ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("*").single()
-    : await sb.from("wiki_pages").insert({ ...payload, ...pick(wiki, ["canonical_path"]) }).select("*").single();
+    : await sb.from("wiki_pages").insert({ ...payload, canonical_path: expected.data }).select("*").single();
   if (result.error || result.data?.slug !== wiki.slug || result.data.is_published !== !stagePage) throw result.error ?? new Error(`Hub readback failed for ${wiki.slug}`);
   return result.data;
 }

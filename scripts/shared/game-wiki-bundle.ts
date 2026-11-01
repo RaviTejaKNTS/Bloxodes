@@ -12,7 +12,8 @@ export function assertGameWikiIdentity(bundle: Pick<GameWikiBundle, "namespace" 
   if (namespace === "minecraft" && !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(game.slug)) throw new Error("Minecraft requires an approved edition identity; new editions need route code.");
 }
 
-export function gameWikiPath(namespace: string, slug: string, parent?: string) {
+export function gameWikiPath(namespace: string, slug: string, parent?: string, style: "namespace" | "page_type" = "namespace", kind: string = "game") {
+  if (style === "page_type") return !parent && kind === "franchise" ? `/games/${namespace}` : `/wiki/${slug}`;
   if (namespace === "minecraft" && ["minecraft-java", "minecraft-bedrock"].includes(slug)) return `/minecraft/${slug.slice(10)}/wiki`;
   return `/${namespace}/wiki${parent ? `/${slug}` : ""}`;
 }

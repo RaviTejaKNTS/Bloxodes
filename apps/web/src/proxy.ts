@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { registryRequestRedirect } from "@/lib/site-route-resolver";
-import { readRedirectSnapshot } from "@/lib/site-route-snapshot";
+import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snapshot";
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
@@ -111,6 +111,7 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
   const url = req.nextUrl;
   const hostname = getRequestHostname(req);
   const hostRedirectNeeded = shouldRedirectToCanonicalHost(hostname);
+  const gameIndexPaths = readGameIndexPaths(event ? work => event.waitUntil(work) : undefined);
   const snapshot = await readRedirectSnapshot(event ? work => event.waitUntil(work) : undefined);
   // Only root aliases participate in the old combined host/path correction.
   let registry = (/^\/[^/]+$/.test(url.pathname.replace(/\/+$/, '')) || url.pathname.toLowerCase().startsWith('/catalog/'))
@@ -150,7 +151,7 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
   // An existing all-engine robots header (private routes, indexing disabled) already covers Google.
-  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`, gameIndexPaths);
   if (googleRobots && !response.headers.has("X-Robots-Tag")) {
     response.headers.set("X-Robots-Tag", googleRobots);
   }

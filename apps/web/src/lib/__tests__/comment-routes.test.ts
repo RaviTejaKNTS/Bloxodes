@@ -83,3 +83,26 @@ describe("comment mutation link rejection", () => {
     expect(mocks.revalidate).toHaveBeenCalledWith(`comments:code:${id}`, { expire: 0 });
   });
 });
+
+describe("moved game comment ownership", () => {
+  it.each([
+    ["game_wiki", "/wiki/peak"], ["game_collection", "/wiki/peak/items"],
+    ["game_wiki", "/games/risk-of-rain"], ["game_map", "/maps/peak-map"],
+    ["game_tool", "/tools/peak-cost"], ["game_code", "/codes/peak"],
+    ["game_quiz", "/quizzes/peak"], ["game_catalog", "/catalog/peak-items"]
+  ])("%s discovers %s from its unchanged page ID", async (entityType, path) => {
+    const filters: Record<string, unknown> = {};
+    const query = {
+      select: () => query,
+      eq: (key: string, value: unknown) => { filters[key] = value; return query; },
+      maybeSingle: async () => ({ data: { id, canonical_path: path, author: null }, error: null }),
+      insert: mocks.insert.mockReturnThis()
+    };
+    mocks.admin.mockReturnValue({ from: () => query });
+    const response = await POST(request("POST", { entityType, entityId: id, body: "Thanks!", guestName: "Player", guestEmail: "me@example.com" }));
+    expect(response.status).toBe(200);
+    expect(filters).toMatchObject({ id, is_published: true });
+    expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({ entity_type: entityType, entity_id: id, page_url: `https://bloxodes.com${path}` }));
+    expect(mocks.revalidate).toHaveBeenCalledWith(`comments:${entityType}:${id}`, { expire: 0 });
+  });
+});

@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 import "../shared/load-env";
 import fs from "node:fs";
 import path from "node:path";
@@ -157,10 +158,13 @@ async function main() {
     for (const operation of batch.operations) await run(operation, true);
     await revalidatePublishedContent(process.env, batch.events);
   }
+  const routeDb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {auth: {persistSession: false}});
   for (const url of batch.urls) {
+    const owner = await routeDb.from("site_routes").select("source").eq("path", url.path).eq("status", "live").maybeSingle();
+    if (owner.error) throw owner.error;
     await verifyPublicText(url.path, url.contains);
     console.log(`Verified https://bloxodes.com${url.path}`);
-    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", publicationSitemap(url.path), "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
+    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", publicationSitemap(url.path, owner.data?.source), "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
   }
   // Queue acknowledgement follows the selected desktop/mobile browser checks.
   execFileSync("npx", ["playwright", "test", "apps/web/e2e/release-smoke.spec.ts"], {

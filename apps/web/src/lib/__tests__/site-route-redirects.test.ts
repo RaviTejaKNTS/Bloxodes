@@ -9,7 +9,7 @@ vi.mock('../supabase-admin', () => ({supabaseAdmin: vi.fn()}));
 const state = vi.hoisted(() => ({snapshot: undefined as ReturnType<typeof buildRedirectSnapshot> | undefined}));
 vi.mock('../site-route-snapshot', async importOriginal => {
   const actual = await importOriginal<typeof import('../site-route-snapshot')>();
-  return {...actual, readRedirectSnapshot: () => state.snapshot};
+  return {...actual, readGameIndexPaths: () => new Set<string>(), readRedirectSnapshot: () => state.snapshot};
 });
 import { proxy } from '../../proxy';
 import { createRedirectSnapshotCache, SITE_ROUTE_SNAPSHOT_TTL } from '../site-route-snapshot';
@@ -152,4 +152,50 @@ it('failed cold load retries after 2 seconds, without rejecting requests', async
   load.mockResolvedValue(rows);
   expect((await cache.read()).exact.size).toBeGreaterThan(0);
   expect(load).toHaveBeenCalledTimes(2);
+});
+
+it('redirects only numeric pagination on page-linked old collection rows', () => {
+  const old: RedirectRoute = { path: '/peak/wiki/items', source: 'game', page_type: 'collection', page_id: 'items', status: 'old', match_type: 'exact', tail_mode: 'append', match_self: true, target_url: null, resolved_target: '/wiki/peak/items', redirect_code: 301, origin: 'trigger' } as RedirectRoute;
+  const snapshot = buildRedirectSnapshot([old]);
+  expect(resolveSiteRoute(snapshot, '/peak/wiki/items/page/2')?.target).toBe('/wiki/peak/items/page/2');
+  expect(resolveSiteRoute(snapshot, '/peak/wiki/items/page/2junk')).toBeNull();
+  expect(resolveSiteRoute(snapshot, '/peak/wiki/items-other/page/2')).toBeNull();
+});
+
+it('a pending or failed Google policy never delays or discards redirects', async () => {
+  const { createGameIndexPolicyCache } = await import('../site-route-snapshot');
+  const policyLoad = vi.fn(() => new Promise<RedirectRoute[]>(() => {}));
+  const policy = createGameIndexPolicyCache(policyLoad);
+  const redirects = createRedirectSnapshotCache(async () => rows);
+  const work: Promise<void>[] = [];
+  vi.useFakeTimers();
+  vi.spyOn(console, 'error').mockImplementation(() => {});
+  try {
+    expect(policy(p => work.push(p)).size).toBe(0);
+    const snapshot = await redirects.read();
+    expect(snapshot.exact.size).toBeGreaterThan(0);
+    await vi.advanceTimersByTimeAsync(15_000);
+    await Promise.all(work);
+    expect((await redirects.read()).exact).toBe(snapshot.exact);
+    expect(policy().size).toBe(0);
+  } finally { vi.useRealTimers(); }
+});
+
+it('Google policy retains its own last-good published paths', async () => {
+  const { createGameIndexPolicyCache } = await import('../site-route-snapshot');
+  let now = 0;
+  const load = vi.fn().mockResolvedValue([{ path: '/wiki/peak', status: 'live', match_type: 'exact', indexableGamePath: true }]);
+  const policy = createGameIndexPolicyCache(load, () => now);
+  const work: Promise<void>[] = [];
+  policy(p => work.push(p));
+  await Promise.all(work);
+  expect(policy().has('/wiki/peak')).toBe(true);
+  now = SITE_ROUTE_SNAPSHOT_TTL + 1;
+  load.mockRejectedValue(new Error('private detail'));
+  const log = vi.spyOn(console, 'error').mockImplementation(() => {});
+  try {
+    policy(p => work.push(p));
+    await Promise.all(work);
+    expect(policy().has('/wiki/peak')).toBe(true);
+  } finally { log.mockRestore(); }
 });
