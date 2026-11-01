@@ -198,7 +198,7 @@ async function gta5MapSearchRow(query: string, entityTypes: string[] | null): Pr
   if (!terms.length || !terms.every((term) => searchText.includes(term))) return [];
   let url = "/gta/maps/gta5";
   try {
-    const root = await getGameRoot("gta").catch(() => null);
+    const root = await getGameRoot("gta");
     if (root?.url_style === "page_type") {
       const page = await getGameMapBySlug("gta", "gta5");
       if (!page) return [];
