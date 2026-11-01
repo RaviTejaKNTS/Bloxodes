@@ -51,6 +51,7 @@ const item = { item: { name: "Saved item" }, system: { slug: "item-id", name: "S
 function runtime() { return { config: { code: "saved-code", gameSlug: state.page.wiki_slug, slug: "items", label: "Items", sortOrder: 0, gameName: "Saved game" }, document: { meta: { schemaVersion: 2, itemFields: ["name"], display: { cardFields: [] } }, items: [item] } }; }
 function reader() { return {
   getPublishedSharedGameWikiCollectionRuntime: async () => runtime(),
+  listPublishedSharedGameWikiCollections: async () => [],
   listPublishedSharedGameWikiPages: async () => [], listPublishedSharedGameWikiCollectionsByWikiSlug: async () => [],
   listPublishedSharedGameWikiCollectionImageUrls: async () => [],
   resolveSharedGameWikiCoverImage: () => "https://media.bloxodes.com/cover.webp", resolveSharedGameWikiThumbnailImage: () => "https://media.bloxodes.com/cover.webp",

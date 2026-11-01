@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 const state = vi.hoisted(() => ({ total: 1, range: vi.fn(), eq: vi.fn(), rows: [{ slug: "gta-5" }] }));
 vi.mock("server-only", () => ({}));
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
  const chain = { select: () => chain, eq: (key: string,value: string) => { state.eq(key,value); return chain; }, order: () => chain,
    range: (start: number, end: number) => { state.range(start, end); return chain; },

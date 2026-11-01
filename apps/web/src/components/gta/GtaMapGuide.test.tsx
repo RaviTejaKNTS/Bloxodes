@@ -4,6 +4,7 @@ import { load } from "cheerio";
 import { GtaMapGuide } from "./GtaMapGuide";
 import { HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
 import { MapViewport } from "@/components/maps/MapViewport";
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: async () => [] }));
 vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: async () => [{ slug: "gta5", canonical_path: "/gta/maps/gta5" }, { slug: "gta-san-andreas", canonical_path: "/gta/maps/gta-san-andreas" }] }));
 
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async () => ({ path: "/gta/wiki" }) }));

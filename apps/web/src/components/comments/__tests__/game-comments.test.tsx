@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import { createRoot } from "react-dom/client";
 import { readFileSync } from "node:fs";
 import { expect, it, vi } from "vitest";

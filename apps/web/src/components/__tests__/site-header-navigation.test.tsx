@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
-import { act, type ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import { act } from "react-dom/test-utils";
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameMenu } from "@/lib/game-site-navigation";
