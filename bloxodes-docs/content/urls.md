@@ -89,4 +89,5 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 ## Known issues
 
 - `minecraftLegacyRedirect` still runs ahead of the route table for old `?edition=` links. It resolves the edition target through the table, so they take one hop.
+- Stored page text still links to old GTA, Red Dead and Minecraft URLs. `rewrite_moved_game_links` is too slow for those namespaces (about 325 GTA mappings) to fit a schema release; the links redirect in one hop.
 - `apps/web/src/lib/game-route-names.ts` (the old reserved-namespace list) is still read by `scripts/games/publish-game-pages.ts` and `scripts/shared/game-wiki-bundle.ts`, though namespaces no longer become root URLs.

@@ -1,11 +1,9 @@
 begin;
 set local lock_timeout = '3s';
 
--- #171 must already be committed. These rewrites take row locks only; do not
--- combine them with the table-locking namespace moves in a schema release.
-select public.rewrite_moved_game_links('gta');
-select public.rewrite_moved_game_links('red-dead');
-select public.rewrite_moved_game_links('minecraft');
+-- No stored-link rewrite for gta, red-dead or minecraft: with ~325 GTA
+-- mappings it ran past the schema runners' request limits, and every old
+-- link already redirects to its page in one hop.
 
 -- The deleted GTA directory handler also served /page/<n>. The bare directory
 -- already redirects to the franchise hub. Drop its pagination tail in one hop.
