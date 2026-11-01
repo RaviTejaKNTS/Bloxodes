@@ -16,6 +16,8 @@ for (const {path: pathname, contains} of selected.slice(0, 20)) {
     page.on("pageerror", error => errors.push(error.message));
     const response = await page.goto(pathname, { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBe(200);
+    expect(response?.request().redirectedFrom(), pathname).toBeNull();
+    expect(new URL(page.url()).pathname).toBe(pathname);
     await expect(page.locator("main")).toBeVisible();
     if (contains) await expect(page.locator("main")).toContainText(contains, { ignoreCase: true });
     await expect(page.locator("h1")).toHaveCount(1);
