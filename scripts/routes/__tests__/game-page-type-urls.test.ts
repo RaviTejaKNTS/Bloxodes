@@ -35,12 +35,16 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ${tables.map(table=>`create table public.${table}(id uuid primary key default gen_random_uuid(),namespace text,slug text,code text,wiki_slug text,collection_slug text,canonical_path text,game_id uuid references public.games(id),wiki_page_id uuid,old_slugs text[] default '{}',is_published boolean default true,is_public boolean default true,published_at timestamptz,updated_at timestamptz,title text,intro_md text,tips_md text,description_md text,how_it_works_md text,wiki_md text,body_md text,content_md text,redeem_md text,rewards_md text,troubleshoot_md text,find_codes_md text,game_description_md text,event_details_md text,event_summary_md text,how_to_play_md text,interlinking_ai_copy_md text,faq_json jsonb,description_json jsonb,controls_json jsonb,quiz_data jsonb,map_data jsonb,catalog_data jsonb,sources_json jsonb default '[]');`).join("\n")}
    create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text);
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
+   -- Search and revalidation side effects are out of scope for these route tests.
+   create function public.refresh_game_content_index(text) returns void language plpgsql as $$ begin end $$;
+   create function public.enqueue_revalidation(text,text,text) returns void language plpgsql as $$ begin end $$;
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
    ${migration("20261102130000_specialized_franchise_page_type_urls.sql")}
    ${migration("20261102140000_move_switch_root_style_first.sql")}
    ${migration("20261102150000_prepare_game_content_check_after_inherit.sql")}
+   ${migration("20261102175000_defer_search_refresh_during_moves.sql")}
    alter table public.games add unique(namespace,slug,kind);
    ${['wiki','code'].map(kind=>`alter table public.game_${kind}_pages add unique(game_id);`).join('\n')}
    ${['tool','map','quiz','catalog','checklist'].map(kind=>`alter table public.game_${kind}_pages add unique(namespace,slug);`).join('\n')}

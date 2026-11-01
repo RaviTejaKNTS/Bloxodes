@@ -92,7 +92,10 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   }
   return [...rows.values()];
 }
-const cache = createRedirectSnapshotCache(loadRedirectRows);
+// The first request in a fresh process waits for redirects. ~1,600 rows take
+// two parallel rounds; 2 seconds left no margin for database latency.
+export const REDIRECT_INITIAL_TIMEOUT = 5_000;
+const cache = createRedirectSnapshotCache(loadRedirectRows, Date.now, REDIRECT_INITIAL_TIMEOUT);
 export const readRedirectSnapshot = cache.read;
 
 // Policy refresh has its own timeout, last-good state and failure handling.
