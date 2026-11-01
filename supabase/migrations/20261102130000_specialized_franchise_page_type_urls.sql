@@ -218,7 +218,10 @@ begin
  if legacy.id is not null then
   update public.games set is_published=false where id=legacy.id and is_published;
  end if;
- update public.games set url_style='page_type' where namespace=p_namespace;
+ -- Root first: a child's path rules (including the Minecraft archive check)
+ -- read the root's style, so children must switch after it.
+ update public.games set url_style='page_type' where namespace=p_namespace and parent_id is null;
+ update public.games set url_style='page_type' where namespace=p_namespace and parent_id is not null;
  main_path:=public.expected_game_page_path(root.id,'wiki');
  if legacy.id is not null then
   delete from public.site_routes where source='game' and game_id=legacy.id and status='live' and page_type in ('wiki','collection');
