@@ -5432,7 +5432,7 @@
     {
       "url": "/minecraft/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a%20b"
+      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=java",
@@ -5457,7 +5457,7 @@
     {
       "url": "/minecraft/wiki/achievements?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements?edition=bedrock&ref=a%20b"
+      "location": "/wiki/minecraft-bedrock/achievements?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements?edition=java",
@@ -5482,7 +5482,7 @@
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements/page/2?edition=bedrock&ref=a%20b"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=java",
@@ -5502,7 +5502,7 @@
     {
       "url": "/minecraft/java/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a%20b"
+      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=java",
@@ -5682,7 +5682,7 @@
     {
       "url": "/minecraft/wiki/mobs?empty=&bare&x=",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs?empty=&bare&x="
+      "location": "/wiki/minecraft-java/mobs?empty=&bare=&x="
     },
     {
       "url": "/minecraft/wiki/mobs?x=one&y=middle&x=two&y=&x=three",
