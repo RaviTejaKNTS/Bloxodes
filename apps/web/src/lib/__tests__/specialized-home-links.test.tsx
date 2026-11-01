@@ -1,12 +1,6 @@
-import { describe, expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 const state = vi.hoisted(() => ({ moved: false }));
-const aliases: Record<string, string> = {
-  "/gta/maps": "/games/gta", "/gta/checklists": "/games/gta",
-  "/gta/wiki/gta-5/spaceship-parts": "/wiki/gta-5/spaceship-parts", "/gta/wiki/gta-5/vehicles": "/wiki/gta-5/vehicles",
-  "/gta/wiki/gta-5": "/wiki/gta-5", "/gta/wiki/gta-6": "/wiki/gta-6",
-  "/gta/maps/gta5": "/maps/gta5", "/gta/checklists/gta-5": "/checklists/gta-5",
-};
 vi.mock("server-only", () => ({}));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: namespace === "gta" && state.moved ? "/games/gta" : `/${namespace}/wiki` }) }));

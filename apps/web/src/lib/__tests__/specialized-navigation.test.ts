@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { resolveSearchScope, siteNavGroupsForPath, siteNavLinksForPath } from "../site-navigation";
 
 const paths = {

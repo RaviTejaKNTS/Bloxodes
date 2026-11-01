@@ -1,7 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { cacheTagsForPath } from "@/lib/public-cache-tags";
-import { resolveSearchScope, siteNavLinksForPath } from "@/lib/site-navigation";
+import { siteNavLinksForPath } from "@/lib/site-navigation";
 import { getChecklistStorageKey, readLocalChecklistProgress, writeLocalChecklistProgress, loadAccountChecklistProgress, saveAccountChecklistProgress } from "@/lib/checklist-progress-client";
 
 const db = vi.hoisted(() => ({ page: { id: "gta-page" } as { id: string } | null, items: [{ id: "leaf", section_code: "1.0.1" }, { id: "heading", section_code: "1" }] }));
