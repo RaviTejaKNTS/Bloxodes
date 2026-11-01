@@ -1,11 +1,22 @@
 import { load } from "cheerio";
-import React, { type ReactNode, type ReactElement } from "react";
+import React, { type ReactNode, type FunctionComponent } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
+import type { Metadata } from "next";
+import type { GameCollectionView } from "@/components/game-collections/GameCollectionView";
+import type { GameCollectibleChecklist } from "@/components/games/GameCollectibleChecklist";
+import type { CommentsSection } from "@/components/comments/CommentsSection";
+import type { ChecklistBoard } from "@/components/ChecklistBoard";
+import type { MinecraftToolClient } from "@/app/(site)/minecraft/tools/MinecraftToolClient";
+import type { Gta5InteractiveMap } from "@/components/gta/Gta5InteractiveMap";
+import type { GtaInteractiveMap } from "@/components/gta/GtaInteractiveMap";
+import type { GtaMapGuide } from "@/components/gta/GtaMapGuide";
+import type { GameMap } from "@/components/games/GameMap";
+
 // Keep routing, namespace adapters and metadata real. Stub IO and interactive
 // boundaries so the same saved identity can be rendered before and after a move.
-const state = vi.hoisted(() => ({ namespace: "gta", kind: "wiki", moved: false, page: {} as Record<string, any> }));
+const state = vi.hoisted(() => ({ namespace: "gta", kind: "wiki", moved: false, page: {} as ReturnType<typeof savedPage> }));
 vi.mock("server-only", () => ({}));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NOT_FOUND"); } }));
@@ -47,23 +58,23 @@ vi.mock("@/lib/gta", () => ({ getGtaWikiPageBySlug: async () => state.page, getG
 vi.mock("@/lib/red-dead", () => ({ getRedDeadWikiPageBySlug: async () => state.page, getRedDeadWikiCollectionPageByPath: async () => state.page, getPublishedRedDeadWikiCollectionRuntime: async () => runtime(), listPublishedRedDeadWikiCollectionsByWikiSlug: async () => [state.page], buildRedDeadCollectionPath: () => state.page.canonical_path }));
 vi.mock("@/lib/minecraft", () => ({ getMinecraftWikiPageBySlug: async () => state.page, getMinecraftWikiCollectionPageByPath: async () => state.page, getPublishedMinecraftWikiCollectionRuntime: async () => runtime(), listPublishedMinecraftWikiCollectionsByWikiSlug: async () => [state.page], buildMinecraftCollectionPath: () => state.page.canonical_path, buildMinecraftWikiPath: (slug: string) => `/minecraft/${slug.replace("minecraft-", "")}/wiki`, getMinecraftTool: async () => state.page, listMinecraftTools: async () => [], listPublishedMinecraftCollections: async () => [] }));
 vi.mock("@/lib/page-content", () => ({ renderPageContentNodes: (html: string) => [<p key="copy" dangerouslySetInnerHTML={{ __html: html }} />], buildPageContentHtml: async (page: Record<string, unknown>) => ({ id: page.id, title: page.title, descriptionHtml: [{ key: "description", html: "<p>Saved description.</p>" }], introHtml: "", howHtml: "", faq: [], wikiHtml: "", tipsHtml: "" }) }));
-vi.mock("@/components/game-collections/GameCollectionView", () => ({ GameCollectionView: (props: any) => <section data-code={props.config.slug}>{props.sections.flatMap((section: any) => section.items.map((item: any) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
-vi.mock("@/components/games/GameCollectibleChecklist", () => ({ GameCollectibleChecklist: (props: any) => <section data-code={props.code}>{props.sections.flatMap((section: any) => section.items.map((item: any) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
+vi.mock("@/components/game-collections/GameCollectionView", () => ({ GameCollectionView: (props: Parameters<typeof GameCollectionView>[0]) => <section data-code={props.config.slug}>{props.sections.flatMap((section) => section.items.map((item) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
+vi.mock("@/components/games/GameCollectibleChecklist", () => ({ GameCollectibleChecklist: (props: Parameters<typeof GameCollectibleChecklist>[0]) => <section data-code={props.code}>{props.sections.flatMap((section) => section.items.map((item) => <div key={item.id} data-item-id={item.id}>{item.name}</div>))}</section> }));
 vi.mock("@/components/games/GameCollectionSidebarLayout", () => ({ GameCollectionSidebarLayout: ({ children }: { children: ReactNode }) => <>{children}</> }));
 vi.mock("@/components/games/GameRelatedLinks", () => ({ GameRelatedLinks: () => null }));
-vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: ({ entityId, entityType }: any) => <span data-comments-id={entityId} data-entity={entityType} /> }));
-vi.mock("@/components/ChecklistBoard", () => ({ ChecklistBoard: (props: any) => <div data-board={JSON.stringify(props)} /> }));
+vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: ({ entityId, entityType }: Parameters<typeof CommentsSection>[0]) => <span data-comments-id={entityId} data-entity={entityType} /> }));
+vi.mock("@/components/ChecklistBoard", () => ({ ChecklistBoard: (props: Parameters<typeof ChecklistBoard>[0]) => <div data-board={JSON.stringify(props)} /> }));
 vi.mock("@/components/ChecklistProgressHeader", () => ({ ChecklistProgressHeader: () => null }));
 vi.mock("@/components/maps/MapViewport", () => ({ MapViewport: ({ children }: { children: ReactNode }) => <div>{children}</div> }));
 vi.mock("@/components/UpdatedTimestamp", () => ({ UpdatedTimestamp: () => null }));
 vi.mock("@/components/SocialShare", () => ({ SocialShare: () => null }));
 vi.mock("@/components/tools/ToolPageLayout", () => ({ ToolPageLayout: ({ children }: { children: ReactNode }) => <>{children}</> }));
-vi.mock("@/app/(site)/minecraft/tools/MinecraftToolClient", () => ({ MinecraftToolClient: (props: any) => <div data-calculator={JSON.stringify(props)} /> }));
+vi.mock("@/app/(site)/minecraft/tools/MinecraftToolClient", () => ({ MinecraftToolClient: (props: Parameters<typeof MinecraftToolClient>[0]) => <div data-calculator={JSON.stringify(props)} /> }));
 vi.mock("@/lib/gta-map", () => ({ getGta5MapMarkers: async () => [{ id: "pin-id", collectionCode: "saved-code" }] }));
-vi.mock("@/components/gta/Gta5InteractiveMap", () => ({ Gta5InteractiveMap: (props: any) => <div data-engine="gta5" data-pins={JSON.stringify(props.markers)} /> }));
-vi.mock("@/components/gta/GtaInteractiveMap", () => ({ GtaInteractiveMap: (props: any) => <div data-engine="layered" data-layer={props.map.layers[0].slug} /> }));
-vi.mock("@/components/gta/GtaMapGuide", () => ({ GtaMapGuide: ({ map, children, title }: any) => <><h1>{title}</h1>{map}<article>{children}</article></> }));
-vi.mock("@/components/games/GameMap", () => ({ GameMap: ({ data }: any) => <div data-engine="image-pins" data-pin={data.markers[0].id} /> }));
+vi.mock("@/components/gta/Gta5InteractiveMap", () => ({ Gta5InteractiveMap: (props: Parameters<typeof Gta5InteractiveMap>[0]) => <div data-engine="gta5" data-pins={JSON.stringify(props.markers)} /> }));
+vi.mock("@/components/gta/GtaInteractiveMap", () => ({ GtaInteractiveMap: (props: Parameters<typeof GtaInteractiveMap>[0]) => <div data-engine="layered" data-layer={props.map.layers[0].slug} /> }));
+vi.mock("@/components/gta/GtaMapGuide", () => ({ GtaMapGuide: ({ map, children, title }: Parameters<typeof GtaMapGuide>[0]) => <><h1>{title}</h1>{map}<article>{children}</article></> }));
+vi.mock("@/components/games/GameMap", () => ({ GameMap: ({ data }: Parameters<typeof GameMap>[0]) => <div data-engine="image-pins" data-pin={data.markers[0].id} /> }));
 vi.mock("@/lib/gta-interactive-maps", () => ({ getGtaInteractiveMapPageData: async () => state.page.renderer_key !== "gta-layered" ? null : ({ config: { route: state.page.canonical_path, title: "Saved map", mapTitle: state.page.title, description: "Saved description.", mappedPointCount: 1, about: [], views: [] }, layers: [{ slug: "layer-id", label: "Saved layer", sourceUrl: "https://example.com/map", sourceTitle: "Map", pointCount: 1 }], guides: [], hubTitle: "Saved wiki", hubPath: "/wiki/gta-3" }) }));
 
 import GameEntry, { generateMetadata as gameEntryMetadata } from "@/app/(site)/games/[slug]/page";
@@ -86,18 +97,25 @@ import Checklist, { generateMetadata as checklistMetadata } from "@/app/(site)/g
 import Gta5, { generateMetadata as gta5Metadata } from "@/app/(site)/gta/maps/gta5/page";
 import MapPage, { generateMetadata as mapMetadata } from "@/app/(site)/gta/maps/[slug]/page";
 
+type RouteAdapter<Params> = [
+  (props: { params: Params }) => Promise<ReactNode>,
+  (props: { params: Params }) => Promise<Metadata>
+];
+
 // Resolve server components without an RSC server; client boundaries above are
 // inert probes of the exact props handed to the interactive component.
-async function resolveTree(node: any): Promise<any> {
-  if (node == null || typeof node !== "object") return node;
-  if (Array.isArray(node)) return Promise.all(node.map(resolveTree));
-  if (typeof node.then === "function") return resolveTree(await node);
-  if (!React.isValidElement(node)) return node;
-  const el = node as ReactElement<any>;
-  if (typeof el.type === "function") return resolveTree(await (el.type as any)(el.props));
-  return React.cloneElement(el, {}, await resolveTree(el.props.children));
+async function resolveTree(node: ReactNode): Promise<ReactNode> {
+  const resolved = await node;
+  if (resolved == null || typeof resolved !== "object") return resolved;
+  if (Array.isArray(resolved)) return Promise.all(resolved.map(resolveTree));
+  if (!React.isValidElement<{ children?: ReactNode }>(resolved)) return resolved;
+  if (typeof resolved.type === "function") {
+    const render = resolved.type as FunctionComponent<{ children?: ReactNode }>;
+    return resolveTree(await render(resolved.props));
+  }
+  return React.cloneElement(resolved, {}, await resolveTree(resolved.props.children));
 }
-async function html(node: any) { return renderToStaticMarkup(await resolveTree(node)); }
+async function html(node: ReactNode) { return renderToStaticMarkup(await resolveTree(node)); }
 function withoutUrls(value: unknown): unknown {
   return JSON.parse(JSON.stringify(value), (key, val) => key === "url" || key === "canonical" || key === "languages" ? undefined : val);
 }
@@ -117,60 +135,64 @@ const fixtures = [
   ["gta", "map", "image-map", "/gta/maps/image-map", "/maps/image-map", "image-pins"],
 ];
 
+function savedPage(namespace: string, slug: string, oldPath: string, variant: string) {
+  return {
+    id: "page-id",
+    namespace,
+    game_id: variant === "root" ? "root" : "owner",
+    slug,
+    wiki_slug: slug,
+    collection_slug: "items",
+    canonical_path: oldPath,
+    title: "Saved title",
+    seo_title: "Saved title",
+    meta_description: "Saved description.",
+    description_md: "Saved description.",
+    game_title: "Saved game",
+    game_kind: variant === "root" ? "franchise" : "game",
+    is_published: true,
+    code: "saved-code",
+    display_name: "Items",
+    page_type: variant,
+    renderer_key: variant,
+    image: "https://media.bloxodes.com/cover.webp",
+    cover_image: "https://media.bloxodes.com/cover.webp" as string | null,
+    tool_key: slug,
+    rules_json: { revision: "saved-revision", editions: ["java", "bedrock"] },
+    map_data: {
+      image: "https://media.bloxodes.com/map.webp", width: 100, height: 100,
+      attribution: "Map", markers: [{ id: "pin-id", title: "Saved pin", x: 20, y: 30 }]
+    },
+    created_at: "2026-01-01",
+    updated_at: "2026-01-01",
+    controls_json: []
+  };
+}
+
 describe("specialized namespace → real page-type resolver parity", () => {
   it.each(fixtures)("%s %s %s (%s → %s, %s)", async (namespace, kind, slug, oldPath, newPath, variant) => {
     Object.assign(state, { namespace, kind, moved: false });
-    state.page = {
-      id: "page-id",
-      namespace,
-      game_id: variant === "root" ? "root" : "owner",
-      slug,
-      wiki_slug: slug,
-      collection_slug: "items",
-      canonical_path: oldPath,
-      title: "Saved title",
-      seo_title: "Saved title",
-      meta_description: "Saved description.",
-      description_md: "Saved description.",
-      game_title: "Saved game",
-      game_kind: variant === "root" ? "franchise" : "game",
-      is_published: true,
-      code: "saved-code",
-      display_name: "Items",
-      page_type: variant,
-      renderer_key: variant,
-      image: "https://media.bloxodes.com/cover.webp",
-      cover_image: "https://media.bloxodes.com/cover.webp",
-      tool_key: slug,
-      rules_json: { revision: "saved-revision", editions: ["java", "bedrock"] },
-      map_data: {
-        image: "https://media.bloxodes.com/map.webp", width: 100, height: 100,
-        attribution: "Map", markers: [{ id: "pin-id", title: "Saved pin", x: 20, y: 30 }]
-      },
-      created_at: "2026-01-01",
-      updated_at: "2026-01-01",
-      controls_json: []
-    };
+    state.page = savedPage(namespace, slug, oldPath, variant);
     if (variant === "root") state.page.cover_image = null; // artwork falls back to the root game
     const params = Promise.resolve({ slug, tool: slug, edition: variant });
     const collectionProps = { slug, collection: "items", currentPage: 1 };
     async function old() {
       if (kind === "wiki") {
         if (variant === "root") {
-          const [render, metadata] = namespace === "gta" ? [GtaRoot, gtaRootMetadata]
+          const [render, metadata]: [() => Promise<ReactNode>, () => Promise<Metadata>] = namespace === "gta" ? [GtaRoot, gtaRootMetadata]
             : namespace === "red-dead" ? [RedDeadRoot, redDeadRootMetadata] : [MinecraftRoot, minecraftRootMetadata];
-          return { metadata: await (metadata as () => Promise<any>)(), body: await (render as () => Promise<any>)() };
+          return { metadata: await metadata(), body: await render() };
         }
-        const adapter: [any, any] = namespace === "gta" ? [GtaWiki, gtaWikiMetadata] : namespace === "red-dead" ? [RedDeadWiki, redDeadWikiMetadata] : [MinecraftWiki, minecraftWikiMetadata];
-        return { metadata: await adapter[1]({ params } as any), body: await adapter[0]({ params } as any) };
+        const adapter: RouteAdapter<typeof params> = namespace === "gta" ? [GtaWiki, gtaWikiMetadata] : namespace === "red-dead" ? [RedDeadWiki, redDeadWikiMetadata] : [MinecraftWiki, minecraftWikiMetadata];
+        return { metadata: await adapter[1]({ params }), body: await adapter[0]({ params }) };
       }
       if (kind === "collection") {
         const render = namespace === "gta" ? renderGtaCollectionPage : namespace === "red-dead" ? renderRedDeadCollectionPageRoute : renderMinecraftCollectionPageRoute;
         const metadata = namespace === "gta" ? generateGtaCollectionMetadata : namespace === "red-dead" ? generateRedDeadCollectionMetadata : generateMinecraftCollectionMetadata;
         return { metadata: await metadata(collectionProps), body: await render(collectionProps) };
       }
-      const adapter: [any, any] = kind === "tool" ? [Tool, toolMetadata] : kind === "checklist" ? [Checklist, checklistMetadata] : slug === "gta5" ? [Gta5, gta5Metadata] : [MapPage, mapMetadata];
-      return { metadata: await adapter[1]({ params } as any), body: await adapter[0]({ params } as any) };
+      const adapter: RouteAdapter<typeof params> = kind === "tool" ? [Tool, toolMetadata] : kind === "checklist" ? [Checklist, checklistMetadata] : slug === "gta5" ? [Gta5, gta5Metadata] : [MapPage, mapMetadata];
+      return { metadata: await adapter[1]({ params }), body: await adapter[0]({ params }) };
     }
     const previous = await old();
     const before = await html(previous.body);
@@ -207,10 +229,11 @@ describe("specialized namespace → real page-type resolver parity", () => {
     state.moved = true;
     state.page = { ...state.page, canonical_path: newPath };
     const parts = newPath.split("/").slice(1);
-    const entry: [any, any] = parts[0] === "games" ? [GameEntry, gameEntryMetadata] : kind === "wiki" ? [WikiEntry, wikiEntryMetadata] : kind === "collection" ? [CollectionEntry, collectionEntryMetadata] : kind === "map" ? [MapEntry, mapEntryMetadata] : kind === "tool" ? [ToolEntry, toolEntryMetadata] : [ChecklistEntry, checklistEntryMetadata];
-    const entryProps = { params: Promise.resolve({ slug: kind === "tool" ? [parts[1]] : parts[1], collection: parts[2] }) };
-    const metadata = await entry[1](entryProps as any);
-    const after = await html(await entry[0](entryProps as any));
+    const entryProps = { params: Promise.resolve({ slug: parts[1], collection: parts[2] }) };
+    const entry: RouteAdapter<typeof entryProps.params> = parts[0] === "games" ? [GameEntry, gameEntryMetadata] : kind === "wiki" ? [WikiEntry, wikiEntryMetadata] : kind === "collection" ? [CollectionEntry, collectionEntryMetadata] : kind === "map" ? [MapEntry, mapEntryMetadata] : [ChecklistEntry, checklistEntryMetadata];
+    const toolEntryProps = { params: Promise.resolve({ slug: [parts[1]], collection: parts[2] }) };
+    const metadata = kind === "tool" ? await toolEntryMetadata(toolEntryProps) : await entry[1](entryProps);
+    const after = await html(kind === "tool" ? await ToolEntry(toolEntryProps) : await entry[0](entryProps));
     const content = (markup: string) => {
       const $ = load(markup);
       return {
