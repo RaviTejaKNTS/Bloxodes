@@ -14,7 +14,7 @@ const cases = [
   { old: "/minecraft/java/wiki/enchantments", path: "/wiki/minecraft-java/enchantments" },
   { old: "/minecraft/tools/nether-coordinate-converter", path: "/tools/minecraft-nether-coordinate-converter" },
   { old: "/minecraft/wiki/achievements", path: "/wiki/minecraft-bedrock/achievements" },
-  { old: "/minecraft/wiki/enchantments?edition=java&ref=guide", path: "/wiki/minecraft-java/enchantments?ref=guide" }
+  { old: "/minecraft/wiki/enchantments?edition=java&ref=guide", path: "/wiki/minecraft-java/enchantments?edition=java&ref=guide" }
 ];
 
 for (const fixture of cases) {

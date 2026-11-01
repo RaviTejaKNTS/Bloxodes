@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { registryRequestRedirect, resolveSiteRoute } from "@/lib/site-route-resolver";
+import { registryRequestRedirect } from "@/lib/site-route-resolver";
 import { readRedirectSnapshot, readGameIndexPaths } from "@/lib/site-route-snapshot";
 import type { NextFetchEvent } from "next/server";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
@@ -8,7 +8,6 @@ import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } f
 import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
-import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
 import { googleIndexHeader, isGooglePolicyHtmlPath } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
@@ -133,15 +132,8 @@ export async function proxy(req: NextRequest, event?: NextFetchEvent) {
     return applySecurityHeaders(redirectWithStatus(redirectUrl, hostRedirectNeeded ? 301 : registry!.code), redirectUrl.pathname, hostname);
   }
 
-  const editionPath = minecraftLegacyRedirect(url.pathname, url.search, path => resolveSiteRoute(snapshot, path)?.target ?? path);
-  if (editionPath) {
-    return applySecurityHeaders(redirectWithStatus(new URL(editionPath, url), 308), url.pathname, hostname);
-  }
-
   registry ??= registryRequestRedirect(snapshot, url.pathname, url.search);
-  if (registry) {
-    return registryRedirectResponse(registry, url, hostname);
-  }
+  if (registry) return registryRedirectResponse(registry, url, hostname);
 
   // Cold HTML game pages briefly wait for publication evidence. Redirects never do.
   const waitForPolicy = isGooglePolicyHtmlPath(url.pathname)

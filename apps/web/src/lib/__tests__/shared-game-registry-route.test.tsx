@@ -7,6 +7,8 @@ const state = vi.hoisted(() => ({
   render: vi.fn(),
 }));
 vi.mock("server-only", () => ({}));
+// Menu loading is covered separately; keep registry lookup counts scoped to page data.
+vi.mock("@/lib/game-site-data", () => ({ getGameMenuForPath: async () => null }));
 vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NEXT_NOT_FOUND"); } }));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({
@@ -98,7 +100,7 @@ describe("shared registry route", () => {
     state.kind = kind;
     const oldPage = await readers[kind]();
     state.queries = [];
-    const result = await SharedGamePage(props());
+    const result = (await SharedGamePage(props())).props.children[1];
     const pageQueries = state.queries.filter(q => q.table.endsWith("_pages_view"));
     expect(pageQueries).toHaveLength(1);
     expect(pageQueries[0].filters).toMatchObject({ namespace: "example", id: "page-id" });
@@ -194,7 +196,7 @@ describe("shared registry route", () => {
     await vi.advanceTimersByTimeAsync(1999);
     expect(state.queries.some(q => q.table.endsWith("_pages_view"))).toBe(false);
     await vi.advanceTimersByTimeAsync(1);
-    expect(await result).toBe("rendered");
+    expect((await result).props.children[1]).toBe("rendered");
     expect(state.queries.filter(q => q.table.endsWith("_pages_view"))).toHaveLength(8);
   });
   it("keeps a genuine missing live row distinct from a read failure", async () => {

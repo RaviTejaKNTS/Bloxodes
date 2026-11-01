@@ -1,31 +1,26 @@
-vi.mock('@/lib/site-route-snapshot', () => ({readGameIndexPaths: () => new Set<string>(), readRedirectSnapshot: async () => ({exact: new Map(), prefixes: []})}));
 import { NextRequest } from "next/server";
-import { describe, expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
+import { buildRedirectSnapshot, type RedirectRoute } from "../site-route-resolver";
+vi.mock("@/lib/site-route-snapshot", () => ({ readGameIndexPaths: () => new Set(), readRedirectSnapshot: async () => buildRedirectSnapshot([
+  ["/minecraft/wiki", "/games/minecraft", "wiki"],
+  ["/minecraft/wiki/recipes", "/wiki/minecraft-java/recipes", "collection"],
+  ["/minecraft/wiki/achievements", "/wiki/minecraft-bedrock/achievements", "collection"],
+  ["/minecraft/bedrock/wiki/fuels", "/wiki/minecraft-bedrock/fuels", "collection"]
+].map(([path, target, page_type]) => ({ path, page_type, page_id: path, resolved_target: target, target_url: null, status: "old", match_type: "exact", tail_mode: "append", match_self: true, redirect_code: 308, origin: "fixture" } as RedirectRoute))) }));
 import { proxy } from "@/proxy";
-import { buildMinecraftCollectionPath, minecraftLegacyRedirect } from "@/lib/minecraft-paths";
+it.each([
+ ["/minecraft/wiki?edition=bedrock&ref=guide", "/games/minecraft?edition=bedrock&ref=guide"],
+ ["/minecraft/wiki/recipes/page/2?edition=bedrock&view=list", "/wiki/minecraft-java/recipes/page/2?edition=bedrock&view=list"],
+ ["/minecraft/wiki/achievements?edition=java", "/wiki/minecraft-bedrock/achievements?edition=java"],
+ ["/minecraft/bedrock/wiki/fuels?edition=java", "/wiki/minecraft-bedrock/fuels?edition=java"]
+])("uses the stored default owner for %s", async (path, target) => {
+ const response = await proxy(new NextRequest(`https://bloxodes.com${path}`));
+ expect(response.status).toBe(308);
+ expect(response.headers.get("location")).toBe(`https://bloxodes.com${target}`);
+ expect(response.headers.get("set-cookie")).toBeNull();
+});
 
-describe("permanent Minecraft edition routes", () => {
-  it("migrates explicit legacy links and preserves pagination and useful queries", async () => {
-    const response = (await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/recipes/page/2?edition=bedrock&view=list")));
-    expect(response.status).toBe(308);
-    expect(response.headers.get("location")).toBe("https://bloxodes.com/minecraft/bedrock/wiki/recipes/page/2?view=list");
-    expect(response.headers.get("set-cookie")).toBeNull();
-  });
-  it("ignores remembered editions for the directory and fixed legacy migration", async () => {
-    for (const cookie of ["", "minecraft-edition=java", "minecraft-edition=bedrock"]) {
-      const headers = { cookie };
-      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki", { headers }))).headers.get("location")).toBeNull();
-      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/wiki/fuels", { headers }))).headers.get("location")).toBe("https://bloxodes.com/minecraft/java/wiki/fuels");
-      expect((await proxy(new NextRequest("https://bloxodes.com/minecraft/bedrock/wiki/fuels", { headers }))).headers.get("location")).toBeNull();
-    }
-  });
-  it("routes exclusive objectives to their fixed edition and strips obsolete queries", () => {
-    expect(minecraftLegacyRedirect("/minecraft/wiki/achievements", "")).toBe("/minecraft/bedrock/wiki/achievements");
-    expect(minecraftLegacyRedirect("/minecraft/wiki/advancements", "")).toBe("/minecraft/java/wiki/advancements");
-    expect(minecraftLegacyRedirect("/minecraft/bedrock/wiki/fuels", "?edition=java&view=list")).toBe("/minecraft/bedrock/wiki/fuels?view=list");
-    expect(minecraftLegacyRedirect("/minecraft/wiki", "?edition=java")).toBe("/minecraft/java/wiki");
-    expect(minecraftLegacyRedirect("/wiki", "?edition=java")).toBeNull();
-    expect(buildMinecraftCollectionPath("minecraft-java", "fuels")).toBe("/minecraft/java/wiki/fuels");
-    expect(buildMinecraftCollectionPath("minecraft-bedrock", "fuels")).toBe("/minecraft/bedrock/wiki/fuels");
-  });
+it.each(["/wiki/blox-fruits?edition=bedrock", "/wiki/minecraft-java?edition=bedrock", "/minecraft/tools/test?edition=bedrock"])("leaves unmatched queries alone: %s", async path => {
+ const response = await proxy(new NextRequest(`https://bloxodes.com${path}`));
+ expect(response.headers.get("location")).toBeNull();
 });

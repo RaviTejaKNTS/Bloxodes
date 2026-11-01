@@ -11,15 +11,13 @@ export const ROBLOX_CHECKLISTS: ChecklistConfig = {
   intro: "Actionable runbooks for your favorite experiences so you can mark off tasks, rewards, and codes as you play.",
   description: CHECKLISTS_DESCRIPTION, progressNamespace: ""
 };
-const gtaDescription = "Track your progress toward 100% completion in GTA games. Check off missions, activities and collectibles, and save your checklist as you play.";
-export const GTA_CHECKLISTS: ChecklistConfig = {
-  basePath: "/gta/checklists", title: "GTA Checklists",
-  heading: "Guided GTA checklists to track your progress",
-  intro: gtaDescription, description: gtaDescription, progressNamespace: "gta"
-};
 export const ROBLOX_QUIZZES: QuizConfig = {
   basePath: "/quizzes", title: "Roblox Quizzes", homePath: "/",
   heading: "Roblox quizzes to test in-game knowledge",
   intro: "Quick, replayable quizzes built from in-game mechanics, NPCs, and regions. Pick a game and take a 15-question run.",
   description: QUIZZES_DESCRIPTION, progressNamespace: "", progress: DEFAULT_QUIZ_PROGRESS
 };
+
+export function gameChecklistConfig(namespace: string, canonicalPath: string): ChecklistConfig {
+  return { title: "Checklists", heading: "Checklists", intro: "", description: "Game completion checklists.", basePath: canonicalPath.slice(0, canonicalPath.lastIndexOf("/")), progressNamespace: namespace };
+}

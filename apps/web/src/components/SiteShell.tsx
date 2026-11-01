@@ -1,4 +1,3 @@
-import { gameLinkPaths } from "@/lib/game-link-paths";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -16,11 +15,10 @@ const inter = Inter({
   fallback: ["Arial", "Helvetica", "system-ui", "sans-serif"]
 });
 
-export async function SiteShell({ children }: SiteShellProps) {
-  const linkPaths = await gameLinkPaths();
+export function SiteShell({ children }: SiteShellProps) {
   return (
     <div className={`${inter.className} min-h-screen`}>
-      <SiteHeader account={signedOutSidebarAccount} linkPaths={linkPaths} />
+      <SiteHeader account={signedOutSidebarAccount} />
       <div className="flex min-h-[calc(100vh-3.5rem)] flex-col">
         <main className="flex-1">{children}</main>
         <SiteFooter />

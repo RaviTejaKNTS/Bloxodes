@@ -3,7 +3,8 @@ import { checklistMetadata } from "@/components/ChecklistPageTemplate";
 import { gameCollectionMetadata } from "@/components/games/GameCollectionPage";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { gameRootWikiPage } from "../game-root-page";
-import { ROBLOX_CHECKLISTS, GTA_CHECKLISTS } from "../engagement/config";
+import { ROBLOX_CHECKLISTS, gameChecklistConfig } from "../engagement/config";
+const GTA_CHECKLISTS = gameChecklistConfig("gta", "/checklists/gta-5");
 import type { SharedGameGame, SharedGameWikiPage, SharedGameWikiCollectionPage } from "../shared-game-reader";
 
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));

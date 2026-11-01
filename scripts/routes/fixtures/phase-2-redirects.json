@@ -5412,17 +5412,17 @@
     {
       "url": "/minecraft/wiki?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock?ref=a+b"
+      "location": "/games/minecraft?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki?edition=java",
       "status": 308,
-      "location": "/wiki/minecraft-java"
+      "location": "/games/minecraft?edition=java"
     },
     {
       "url": "/minecraft/wiki?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-java"
+      "location": "/games/minecraft?edition=invalid"
     },
     {
       "url": "/minecraft/wiki/mobs",
@@ -5432,17 +5432,17 @@
     {
       "url": "/minecraft/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/mobs?ref=a+b"
+      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=java",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs"
+      "location": "/wiki/minecraft-java/mobs?edition=java"
     },
     {
       "url": "/minecraft/wiki/mobs?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs"
+      "location": "/wiki/minecraft-java/mobs?edition=invalid"
     },
     {
       "url": "/minecraft/wiki/mobs?ref=old",
@@ -5457,17 +5457,17 @@
     {
       "url": "/minecraft/wiki/achievements?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements?ref=a+b"
+      "location": "/wiki/minecraft-bedrock/achievements?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements?edition=java",
       "status": 308,
-      "location": "/minecraft/java/wiki/achievements"
+      "location": "/wiki/minecraft-bedrock/achievements?edition=java"
     },
     {
       "url": "/minecraft/wiki/achievements?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements"
+      "location": "/wiki/minecraft-bedrock/achievements?edition=invalid"
     },
     {
       "url": "/minecraft/wiki/achievements?ref=old",
@@ -5482,17 +5482,17 @@
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements/page/2?ref=a+b"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=java",
       "status": 308,
-      "location": "/minecraft/java/wiki/achievements/page/2"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?edition=java"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-bedrock/achievements/page/2"
+      "location": "/wiki/minecraft-bedrock/achievements/page/2?edition=invalid"
     },
     {
       "url": "/minecraft/wiki/achievements/page/2?ref=old",
@@ -5502,32 +5502,32 @@
     {
       "url": "/minecraft/java/wiki/mobs?edition=bedrock&ref=a%20b",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs?ref=a+b"
+      "location": "/wiki/minecraft-java/mobs?edition=bedrock&ref=a+b"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=java",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs"
+      "location": "/wiki/minecraft-java/mobs?edition=java"
     },
     {
       "url": "/minecraft/java/wiki/mobs?edition=invalid",
       "status": 308,
-      "location": "/wiki/minecraft-java/mobs"
+      "location": "/wiki/minecraft-java/mobs?edition=invalid"
     },
     {
       "url": "/minecraft/tools/test?edition=bedrock&ref=a%20b",
-      "status": 308,
-      "location": "/minecraft/tools/test?ref=a+b"
+      "status": 404,
+      "location": null
     },
     {
       "url": "/minecraft/tools/test?edition=java",
-      "status": 308,
-      "location": "/minecraft/tools/test"
+      "status": 404,
+      "location": null
     },
     {
       "url": "/minecraft/tools/test?edition=invalid",
-      "status": 308,
-      "location": "/minecraft/tools/test"
+      "status": 404,
+      "location": null
     },
     {
       "url": "/lists/",

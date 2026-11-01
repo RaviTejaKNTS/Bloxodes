@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { SharedGameWikiPage } from "@/lib/shared-game-reader";
 import type { GameWikiPresentationPage } from "@/lib/game-root-page";
 
-const mocks = vi.hoisted(() => ({ directory: vi.fn(), wikis: vi.fn(), render: vi.fn(), reader: vi.fn(), maps: vi.fn(), checklist: vi.fn() }));
+const mocks = vi.hoisted(() => ({ menus: vi.fn(), directory: vi.fn(), wikis: vi.fn(), render: vi.fn(), reader: vi.fn(), maps: vi.fn(), checklist: vi.fn() }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
-vi.mock("@/lib/gta-checklists", () => ({ getGtaChecklistPageBySlug: mocks.checklist }));
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: mocks.menus }));
 vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: mocks.maps }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/game-registry", () => ({ getGameDirectoryPages: mocks.directory }));
@@ -22,6 +22,7 @@ import { renderGameWikiPage } from "./GameWikiPage.server";
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.menus.mockResolvedValue([]);
   mocks.maps.mockResolvedValue([]);
   mocks.checklist.mockResolvedValue(null);
   mocks.directory.mockResolvedValue([{ href: "/example/wiki/child", title: "Child", kind: "game_wiki_pages_view", image: null }]);
@@ -87,13 +88,9 @@ describe("wiki route navigation adapter", () => {
   });
 });
 
-it("preserves the committed GTA wiki map and checklist links without a map read before the move", async () => {
-  mocks.maps.mockRejectedValue(new Error("Map unavailable"));
-  mocks.checklist.mockResolvedValue({ canonical_path: "/gta/checklists/gta-5" });
-  await renderGameWikiPage({ page: { slug: "gta-5", game_kind: "game", game_title: "GTA V", canonical_path: "/gta/wiki/gta-5", game_id: "owner" } as SharedGameWikiPage, namespace: "gta", namespaceTitle: "GTA" });
-  expect(mocks.maps).not.toHaveBeenCalled();
-  expect(mocks.render.mock.calls[0][0].extraLinks).toEqual([
-    { href: "/gta/maps/gta5", title: "Explore the interactive map" },
-    { href: "/gta/checklists/gta-5", title: "Track your 100% completion with the GTA V checklist" }
-  ]);
+it.each(["gta", "red-dead", "minecraft", "arc-raiders"])("gives %s wikis the same owned reference links", async namespace => {
+  const pages = ["map", "checklist", "quiz", "tool", "code", "catalog"].map(kind => ({ kind, gameId: "owner", title: kind, href: `/${kind}s/${namespace}-game` }));
+  mocks.menus.mockResolvedValue([{ namespace, pages: [...pages, { kind: "tool", gameId: "other", title: "Other", href: "/tools/other" }] }]);
+  await renderGameWikiPage({ page: { game_kind: "game", canonical_path: `/wiki/${namespace}-game`, game_id: "owner" } as SharedGameWikiPage, namespace, namespaceTitle: namespace });
+  expect(mocks.render.mock.calls[0][0].extraLinks).toEqual(pages.map(({ href, title }) => ({ href, title })));
 });

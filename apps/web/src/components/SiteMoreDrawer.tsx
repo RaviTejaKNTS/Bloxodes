@@ -1,4 +1,5 @@
 "use client";
+import { useGameMenus } from "@/lib/game-menu-store";
 
 import { useEffect, useRef, type RefObject } from "react";
 import Link from "next/link";
@@ -45,7 +46,8 @@ export function trapTabKey(event: KeyboardEvent, container: HTMLElement | null) 
 export function SiteMoreDrawer({ linkPaths = {}, id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const groups = siteNavGroupsForPath(pathname, linkPaths);
+  const gameMenus = useGameMenus(pathname);
+  const groups = siteNavGroupsForPath(gameMenus[0]?.href ?? pathname, linkPaths, gameMenus);
 
   useEffect(() => {
     if (!open) return;

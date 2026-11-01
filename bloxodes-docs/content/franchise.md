@@ -35,6 +35,8 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 
 Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections `/wiki/<game-slug>/<collection-slug>`, and `/maps|checklists|quizzes/<slug>`, `/codes/<game-slug>`, `/tools|catalog/<namespace>-<slug>`. Full rules and how the routes find a page are in [URLs](urls.md#other-games).
 
+Every game is handled the same way from its data: menus, sidebar links, `/games` cards, the home page games section, collection pages, progress, checklists, related links, search, comments, the feed, sitemaps and cache refresh. Only tools, calculators and interactive maps have their own engines. Don't add code for a single game.
+
 Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `expected_game_page_path` gives the right URL; `content:publish` and `publish:game-pages` use it.
 
 ## Data

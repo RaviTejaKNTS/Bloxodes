@@ -3,17 +3,16 @@ import markerSnapshot from "@/data/gta5-map-marker-snapshot.json";
 import points from "@/data/gta5-map-points.json";
 import places from "@/data/gta5-map-places.json";
 import { getGameMapBySlug } from "@/lib/game-extra-pages";
-import { getGtaWikiCollectionPageByPath } from "@/lib/gta";
+const { getGtaWikiCollectionPageByPath } = vi.hoisted(() => ({ getGtaWikiCollectionPageByPath: vi.fn(async () => null) }));
 
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/game-extra-pages", () => ({
   getGameMapBySlug: vi.fn(async () => ({canonical_path:"/gta/maps/gta5",renderer_key:"gta5",map_data:{points,places,markerSnapshot}}))
 }));
-vi.mock("@/lib/gta", () => ({
-  buildGtaCollectionPath: (game: string, collection: string) => `/gta/wiki/${game}/${collection}`,
-  getGtaWikiCollectionPageByPath: vi.fn(async () => null),
-  getPublishedGtaWikiCollectionRuntime: vi.fn(async () => null)
-}));
+vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({
+  getSharedGameWikiCollectionPageByPath: getGtaWikiCollectionPageByPath,
+  getPublishedSharedGameWikiCollectionRuntime: vi.fn(async () => null)
+}) }));
 
 import { getGta5MapMarkers } from "@/lib/gta-map";
 

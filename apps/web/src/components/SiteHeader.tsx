@@ -1,4 +1,5 @@
 "use client";
+import { useGameMenus } from "@/lib/game-menu-store";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -26,7 +27,8 @@ const iconButtonClass =
  */
 export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
   const pathname = usePathname() ?? "/";
-  const links = siteNavLinksForPath(pathname, linkPaths);
+  const gameMenus = useGameMenus(pathname);
+  const links = siteNavLinksForPath(gameMenus[0]?.href ?? pathname, linkPaths, gameMenus);
   const listRef = useRef<HTMLUListElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -113,7 +115,7 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
         pathname={pathname}
         returnFocusRef={moreButtonRef}
       />
-      <GlobalSearchOverlay linkPaths={linkPaths} />
+      <GlobalSearchOverlay linkPaths={linkPaths} gameMenus={gameMenus} />
     </>
   );
 }

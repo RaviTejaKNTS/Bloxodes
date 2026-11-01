@@ -64,7 +64,7 @@ All redirects come from the [route table](#route-table). `apps/web/src/proxy.ts`
 - Only `old` rows redirect. Each uses its row's status code (301 or 308) and an absolute `Location`; Next.js 16.2 throws on a relative one from middleware.
 - Root article and codes aliases decode, trim and lowercase the slug and keep the incoming query. The former `next.config.js` rules (pizza-place and `/ads.txt`) keep the incoming query in Next's serialization and run before the canonical-host redirect. Retired lists and free-items categories drop the incoming query and use their own.
 - Paths are split into segments before decoding, so an encoded `/` never creates a new segment.
-- `minecraftLegacyRedirect` (`apps/web/src/lib/minecraft-paths.ts`) still runs ahead of the table. It handles `?edition=` links and the Minecraft conflicts below.
+- Old Minecraft URLs, including old `?edition=` links, redirect through their rows like every other old URL; the query string is kept and the row decides the destination (Java by default, Bedrock for achievements).
 - A codes page rename redirects its old `/codes/<slug>` once each server refreshes its copy (up to 5 minutes).
 - Old namespace URLs of every non-Roblox game (`/gta/...`, `/<namespace>/wiki/...`) are page-linked `old` rows. An old collection URL also matches `/page/<n>` and keeps the number. `/gta/checklists/page/<n>` drops its tail and goes to `/games/gta`. GTA map tiles and artwork keep their `/gta/maps/...` asset URLs.
 - `scripts/routes/fixtures/` holds a baseline of 1,138 responses captured from production before the switch. PR checks replay it against the new middleware, including the first request to a fresh server.
@@ -88,6 +88,5 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 
 ## Known issues
 
-- `minecraftLegacyRedirect` still runs ahead of the route table for old `?edition=` links. It resolves the edition target through the table, so they take one hop.
 - Stored page text still links to old GTA, Red Dead and Minecraft URLs. `rewrite_moved_game_links` is too slow for those namespaces (about 325 GTA mappings) to fit a schema release; the links redirect in one hop.
 - `apps/web/src/lib/game-route-names.ts` (the old reserved-namespace list) is still read by `scripts/games/publish-game-pages.ts` and `scripts/shared/game-wiki-bundle.ts`, though namespaces no longer become root URLs.

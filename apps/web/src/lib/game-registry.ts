@@ -30,7 +30,7 @@ const readGameCollection = cache(async (namespace: string, value: string, column
 export const getGameCollectionByPath = cache((namespace: string, path: string) => readGameCollection(namespace, path, "canonical_path"));
 export const getGameCollectionById = cache((namespace: string, id: string) => readGameCollection(namespace, id, "id"));
 export type GameToolPage = ToolContent & { game_id: string; id: string; namespace: string; slug: string; canonical_path: string; tool_key: string; rules_json: Record<string, unknown> };
-const readGameTool = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<GameToolPage | null> => {
+const readGameTool = cache(async (namespace: string, value: string, column: "canonical_path" | "id" | "slug"): Promise<GameToolPage | null> => {
   if (!(await getGameRoot(namespace))) return null;
   const { data, error } = await supabaseAdmin().from("game_tool_pages_view").select("*").eq("namespace", namespace).eq(column, value).eq("is_published", true).maybeSingle();
   if (error) throw new Error(`Game tool read failed: ${error.message}`);
@@ -38,6 +38,13 @@ const readGameTool = cache(async (namespace: string, value: string, column: "can
 });
 export const getGameToolByPath = cache((namespace: string, path: string) => readGameTool(namespace, path, "canonical_path"));
 export const getGameToolById = cache((namespace: string, id: string) => readGameTool(namespace, id, "id"));
+export const getGameToolBySlug = cache((namespace: string, slug: string) => readGameTool(namespace, slug, "slug"));
+export async function listPublishedGameTools(namespace: string): Promise<GameToolPage[]> {
+  const { data, error } = await supabaseAdmin().from("game_tool_pages_view").select("*").eq("namespace", namespace).eq("is_published", true).order("title");
+  if (error) throw error;
+  return (data ?? []) as GameToolPage[];
+}
+
 export type GameCodePage = { image?: string | null; id: string; namespace: string; game_id: string; canonical_path: string; title: string; seo_title: string | null; meta_description: string | null; intro_md: string | null; redeem_md: string | null; rewards_md: string | null; troubleshoot_md: string | null; find_codes_md: string | null; faq_json: Array<{q:string;a:string}> | null; updated_at: string | null; published_at: string | null };
 const readGameCode = cache(async (namespace: string, value: string, column: "canonical_path" | "id"): Promise<GameCodePage | null> => {
   if (!(await getGameRoot(namespace))) return null;

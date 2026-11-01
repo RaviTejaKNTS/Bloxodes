@@ -20,7 +20,7 @@ export default async function MinecraftToolPage({ params }: Props) {
   if (!tool || !isMinecraftToolSlug(slug)) notFound();
   const rules = toolRules(tool);
   const landing = await getGameLandingForLinks("minecraft");
-  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="minecraft_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools", href: "/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
+  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="game_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools", href: "/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
     <MinecraftToolClient slug={slug} rules={rules} />
   </DedicatedToolPage>;
 }

@@ -1,5 +1,7 @@
-import { specializedCollectionRoute, specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
-import { GTA_CHECKLISTS } from "@/lib/engagement/config";
+import { GameMenuBridge } from "@/components/games/GameMenuBridge";
+import { getGameMenuForPath } from "@/lib/game-site-data";
+import { specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
+import { gameChecklistConfig } from "@/lib/engagement/config";
 import { getLiveSiteRoute } from "@/lib/site-route-page";
 import { getGameExtendedPage, getGameChecklistByPath, getGameExtendedPageById, getGameChecklistById } from "@/lib/game-extra-pages";
 import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
@@ -61,22 +63,11 @@ async function context(params: Props["params"]) {
   if (!wiki && !collection && !codes && !tool && !map && !quiz && !catalog && !checklist) notFound();
   return { root, path, basePath, currentPage, wiki, collection, codes, tool, map, quiz, catalog, checklist };
 }
-function checklistConfig(namespace: string, canonicalPath: string) {
-  const presentation = namespace === "gta" ? GTA_CHECKLISTS : {
-    title: "Checklists", heading: "Checklists", intro: "", description: "Game completion checklists."
-  };
-  return {
-    ...presentation,
-    basePath: canonicalPath.slice(0, canonicalPath.lastIndexOf("/")),
-    progressNamespace: namespace
-  };
-}
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ctx = await context(params);
   if (ctx.wiki) return gameWikiMetadata(ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki);
   if (ctx.collection) {
-    const specialized = await specializedCollectionRoute(ctx.collection, ctx.currentPage);
-    return specialized ? specialized.metadata() : gameCollectionMetadata(ctx.collection, ctx.currentPage);
+    return gameCollectionMetadata(ctx.collection, ctx.currentPage);
   }
   if (ctx.tool) {
     const specialized = await specializedMinecraftToolRoute(ctx.root.namespace, ctx.tool.slug);
@@ -88,23 +79,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return specialized ? specialized.metadata() : gameContentMetadata(ctx.map);
   }
   if (ctx.catalog) return gameContentMetadata(ctx.catalog);
-  if (ctx.checklist) return checklistMetadata(ctx.checklist,checklistConfig(ctx.root.namespace, ctx.checklist.canonical_path));
+  if (ctx.checklist) return checklistMetadata(ctx.checklist,gameChecklistConfig(ctx.root.namespace, ctx.checklist.canonical_path));
   const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
   return { openGraph: { title: ctx.codes?.title || ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);
+  // Menu failure must never prevent the page itself from rendering.
+  const [menu, page] = await Promise.all([
+    getGameMenuForPath(ctx.basePath).catch(() => null),
+    renderPage(ctx),
+  ]);
+  return <><GameMenuBridge path={ctx.path} menu={menu} />{page}</>;
+}
+
+async function renderPage(ctx: Awaited<ReturnType<typeof context>>) {
   if (ctx.wiki) return renderGameWikiPage({ page: ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
   if (ctx.collection) {
-    const specialized = await specializedCollectionRoute(ctx.collection, ctx.currentPage);
-    return specialized ? specialized.render() : renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
+    return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
   }
   if (ctx.codes) return <GameCodePage page={ctx.codes} namespaceTitle={ctx.root.title} />;
   if (ctx.tool) {
     const specialized = await specializedMinecraftToolRoute(ctx.root.namespace, ctx.tool.slug);
     if (specialized) return specialized.render();
   }
-  if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} sidebarContent={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.tool.game_id} canonicalPath={ctx.tool.canonical_path} />} />;
+  if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} />;
   if (ctx.map) {
     const specialized = await specializedGtaMapRoute(ctx.root.namespace, ctx.map.slug);
     if (specialized) return specialized.render();
@@ -112,6 +111,6 @@ export default async function SharedGamePage({ params }: Props) {
   if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameContentPage page={ctx.map}><GameMap data={parseGameMapData(ctx.map.map_data)} /></GameContentPage>; }
   if (ctx.catalog) return <GameContentPage page={ctx.catalog}><GameCatalog data={parseGameCatalogData(ctx.catalog.catalog_data)} /></GameContentPage>;
   if (ctx.quiz) return <GameQuizPage page={ctx.quiz} />;
-  if (ctx.checklist) return <ChecklistPageTemplate data={ctx.checklist} config={checklistConfig(ctx.root.namespace, ctx.checklist.canonical_path)} sidebar={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.checklist.game_id} canonicalPath={ctx.checklist.canonical_path} />} />;
+  if (ctx.checklist) return <ChecklistPageTemplate data={ctx.checklist} config={gameChecklistConfig(ctx.root.namespace, ctx.checklist.canonical_path)} sidebar={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.checklist.game_id} canonicalPath={ctx.checklist.canonical_path} />} />;
   notFound();
 }

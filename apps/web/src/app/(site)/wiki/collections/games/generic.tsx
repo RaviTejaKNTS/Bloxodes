@@ -957,7 +957,7 @@ export function renderGameCollectionPage({
   wikiIndexPath?: string;
   wikiLabel?: string;
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
-  commentsEntityType?: "wiki_collection" | "gta_wiki_collection" | "red_dead_wiki_collection" | "minecraft_wiki_collection" | "game_collection";
+  commentsEntityType?: "wiki_collection" | "game_collection";
   showMoreCollections?: boolean;
   enableItemFinder?: boolean;
   /** Franchise callers opt into the flat ad stream; Roblox collections always use it. */
@@ -1140,10 +1140,7 @@ export function renderGameCollectionPage({
         ) : null}
           </>) : null}
           sections={groupedSectionsWithNotes}
-          config={{
-            ...preparedCollection.viewConfig,
-            hideMissingImagePlaceholders: normalizedRouteBase === "/gta/wiki"
-          }}
+          config={preparedCollection.viewConfig}
           pagination={pagination.info}
           toolbar={
             <>

@@ -1,3 +1,4 @@
+import { GameRelatedToolLinks } from "./GameRelatedToolLinks";
 import type { ReactNode } from "react";
 import { PageSidebar } from "@/components/PageSidebar";
 import { RailLinkList } from "@/components/RailLinkList";
@@ -14,15 +15,10 @@ const robloxTools = [
   { code: "wizard-alchemy-potion-planner", title: "Wizard Alchemy potion planner", description: "Plan potion Magic totals and material shortfalls." },
   { code: "wizard-alchemy-race-reroll-calculator", title: "Wizard Alchemy race reroll calculator", description: "Compare race odds and plan your reroll budget." }
 ];
-const minecraftTools = [
-  { code: "xp-calculator", title: "Minecraft XP calculator", description: "Work out the experience needed to reach your target level." },
-  { code: "nether-coordinate-converter", title: "Nether coordinate converter", description: "Convert coordinates between the Overworld and Nether." },
-  { code: "stack-and-storage-calculator", title: "Stack and storage calculator", description: "Calculate stacks and containers for your items." },
-  { code: "furnace-fuel-calculator", title: "Furnace fuel calculator", description: "Plan fuel for your next batch of smelting." },
-  { code: "crafting-materials-planner", title: "Crafting materials planner", description: "Work out the materials needed for your crafts." },
-  { code: "beacon-materials-calculator", title: "Beacon materials calculator", description: "Calculate the blocks needed for your beacon pyramid." },
-  { code: "building-materials-estimator", title: "Building materials estimator", description: "Estimate the blocks needed for your next build." }
-];
+export function RelatedToolLinks({ canonicalPath, toolCode }: { canonicalPath: string; toolCode?: string }) {
+  const fallbackLinks = robloxTools.filter(tool => tool.code !== toolCode).map(tool => ({ href: `/tools/${tool.code}`, title: tool.title, description: tool.description }));
+  return <GameRelatedToolLinks canonicalPath={canonicalPath} fallbackLinks={fallbackLinks} />;
+}
 
 export function ToolPageLayout({ children, title, canonicalPath, toolCode, sidebarContent }: {
   children: ReactNode;
@@ -31,16 +27,13 @@ export function ToolPageLayout({ children, title, canonicalPath, toolCode, sideb
   toolCode?: string;
   sidebarContent?: ReactNode;
 }) {
-  const minecraft = canonicalPath.startsWith("/minecraft/");
-  const links = (minecraft ? minecraftTools : robloxTools).filter(tool => tool.code !== toolCode).slice(0, 6);
-  const basePath = minecraft ? "/minecraft/tools" : "/tools";
   return (
     <div className="grid gap-8 content-sidebar-grid ads-tools-layout">
       <div className="min-w-0 ads-tools-main">{children}</div>
       <PageSidebar>
-        <SocialShare url={`${SITE_URL.replace(/\/$/, "")}${canonicalPath}`} title={title} heading="Share this tool" analytics={{ contentType: "tool", itemId: toolCode ?? basePath }} />
+        <SocialShare url={`${SITE_URL.replace(/\/$/, "")}${canonicalPath}`} title={title} heading="Share this tool" analytics={{ contentType: "tool", itemId: toolCode ?? canonicalPath }} />
         {sidebarContent ?? (
-          <RailLinkList heading="More tools" links={links.map(tool => ({ href: `${basePath}/${tool.code}`, title: tool.title, description: tool.description }))} />
+          <RailLinkList heading="More tools" links={robloxTools.filter(tool => tool.code !== toolCode).slice(0, 6).map(tool => ({ href: `/tools/${tool.code}`, title: tool.title, description: tool.description }))} />
         )}
       </PageSidebar>
     </div>

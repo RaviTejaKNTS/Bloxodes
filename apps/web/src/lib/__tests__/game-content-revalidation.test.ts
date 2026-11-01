@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cacheTagsForPath } from "../public-cache-tags";
 
-const state = vi.hoisted(() => ({ pages: 83, namespace: "risk-of-rain", queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
+const state = vi.hoisted(() => ({ dependents: false, pages: 83, namespace: "risk-of-rain", queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({ getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: {} }) }) }));
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: state.pages }) }));
@@ -19,6 +19,8 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   ];
   const all: Record<string, Array<Record<string, unknown>>> = {
     games: [root, child], site_routes: routes,
+    game_map_pages: state.dependents ? [{id: "sibling-map", namespace: state.namespace, game_id: "sibling", canonical_path: "/maps/sibling-map"}] : [],
+    game_tool_pages: state.dependents ? [{id: "root-tool", namespace: state.namespace, game_id: "root", canonical_path: "/tools/root-tool"}] : [],
     game_wiki_pages: [
       { id: "root-wiki", game_id: "root", canonical_path: "/games/risk-of-rain", slug: "permanent-hub-slug" },
       { id: "child-wiki", game_id: "child", canonical_path: "/wiki/risk-of-rain-2" }
@@ -41,7 +43,7 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   return query;
 } }) }));
 import { gameContentRevalidationTargets } from "../game-content-revalidation";
-beforeEach(() => { state.queries.length = 0; state.pages = 83; state.namespace = "risk-of-rain"; });
+beforeEach(() => { state.dependents = false; state.queries.length = 0; state.pages = 83; state.namespace = "risk-of-rain"; });
 describe("game_content event contract", () => {
   it.each(["risk-of-rain", "gta", "red-dead", "minecraft"])("root wiki events purge the %s namespace homepage tag", async namespace => {
     state.namespace = namespace;
@@ -79,4 +81,20 @@ describe("game_content event contract", () => {
   it.each(["../wiki", "peak//wiki", "peak?draft=1"])("rejects invalid event %s", async slug => {
     expect(await gameContentRevalidationTargets(slug)).toEqual({ paths: [], tags: [], collectionPaths: [] });
   });
+});
+
+it.each(["gta", "red-dead", "minecraft", "risk-of-rain"])("%s never targets a retired sitemap", async namespace => {
+ state.namespace = namespace;
+ const { paths } = await gameContentRevalidationTargets(namespace);
+ expect(paths).toContain("/sitemaps/games.xml");
+ for (const retired of ["gta", "red-dead", "minecraft"]) expect(paths).not.toContain(`/sitemaps/${retired}.xml`);
+});
+
+it.each(["gta", "red-dead", "minecraft", "risk-of-rain"])("%s refreshes calculators and sibling maps from stored ownership", async namespace => {
+ state.namespace = namespace;
+ state.dependents = true;
+ const { paths, tags } = await gameContentRevalidationTargets("wiki/risk-of-rain-2/items");
+ expect(paths).toEqual(expect.arrayContaining(["/maps/sibling-map", "/tools/root-tool", "/maps", "/tools"]));
+ expect(tags).toContain("page:/maps/sibling-map");
+ expect(tags).toContain("page:/tools/root-tool");
 });
