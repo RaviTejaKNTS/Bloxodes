@@ -429,7 +429,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
         runtimeManifestSchemaVersion: plan.manifest.schemaVersion,
         namespace: plan.namespace,
         datasetFile: path.basename(plan.datasetPath),
-        mediaPrefix: plan.items.find(item => item.image_key)?.image_key?.replace(/[^/]+$/, "") ?? `${plan.config.mediaPrefix}/${plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
+        mediaPrefix: `${plan.config.mediaPrefix}/${plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
         sourceUrls: plan.manifest.sourceUrls
       }
     }).select("id, item_count").single();
