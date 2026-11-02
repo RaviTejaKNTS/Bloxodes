@@ -16,7 +16,7 @@ const args = process.argv.slice(2);
 const value = (key: string) => args[args.indexOf(key) + 1];
 const apply = args.includes("--apply");
 const namespace = value("--namespace");
-const label = namespace === "minecraft" ? "Minecraft" : namespace === "red-dead" ? "Red Dead" : namespace;
+const label = namespace;
 const allowProd = args.includes("--allow-prod");
 const slugs = args.flatMap((arg, i) => arg === "--game" ? [args[i + 1]] : []);
 export const gameFields = ["slug", "title", "short_title", "installment", "content_kind", "developer", "publisher", "description_md", "cover_image", "hero_image", "official_url", "release_dates_json", "platforms_json", "status", "is_published"];
@@ -25,11 +25,10 @@ export const pick = (row: Record<string, unknown>, fields: string[]) => Object.f
 
 export async function runFranchiseWikiHubsCli() {
   if (args.includes("--help")) {
-    console.log("Usage: npm run publish:franchise-wiki-hubs -- --namespace <red-dead|minecraft> --workspace <root> --game <slug> [--game <slug>] [--apply --allow-prod]");
+    console.log("Usage: npm run publish:franchise-wiki-hubs -- --namespace <game-namespace> --workspace <root> --game <slug> [--game <slug>] [--apply --allow-prod]");
     return;
   }
   if ((!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || namespace === "roblox") || !args.includes("--workspace") || !slugs.length || slugs.some(s => !/^[a-z0-9-]+$/.test(s))) throw new Error("Explicit namespace, workspace and game allowlist required.");
-  if (namespace === "minecraft" && slugs.some(slug => !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(slug))) throw new Error("Minecraft requires an approved edition identity.");
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
   if (production && apply) assertProductionPublication();
   if (!production && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Unrecognized database target.");
@@ -46,7 +45,7 @@ export async function runFranchiseWikiHubsCli() {
     const images = requireFranchiseHubImages(game, slug);
     for (const image of images) {
       const { url } = image;
-      if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/${namespace === "minecraft" ? "minecraft" : slug}/`)) throw new Error(`Unapproved media URL for ${slug}`);
+      if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/`)) throw new Error(`Unapproved media URL for ${slug}`);
     }
     plans.push({ slug, game, wiki });
   }
@@ -61,7 +60,6 @@ export async function runFranchiseWikiHubsCli() {
     if (wiki.cover_image) await verifyFranchisePageImage({ url: wiki.cover_image, role: "cover", label: `${slug} wiki` });
   });
   await validateFranchisePublicationImages(client, namespace, imagePayload);
-  if (args.includes("--stage") && (slugs.some(slug => namespace === "minecraft" && slug === "minecraft"))) throw new Error("Staging requires independent Minecraft edition hubs.");
   // Read all exact target rows before the first mutation.
   const existing = await readPublishQuery(() => sb.from("games").select("id,slug,is_published").in("slug", slugs));
   if (existing.error) throw existing.error;
@@ -102,7 +100,7 @@ export async function saveFranchiseWikiPage(client: SupabaseClient, namespaceVal
   const expected = await client.rpc("expected_game_page_path", { p_game_id: gameId, p_type: "wiki", p_slug: wiki.slug });
   if (expected.error || typeof expected.data !== "string") throw expected.error ?? new Error("Wiki canonical path unavailable");
   if (wiki.canonical_path != null && wiki.canonical_path !== expected.data) throw new Error(`Wiki canonical path must be ${expected.data}`);
-  // Inserts need the validated route, including Minecraft edition paths.
+  // Inserts need the validated permanent route.
   // Updates leave the target's permanent canonical path unchanged.
   const result = page.data
     ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("*").single()

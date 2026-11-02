@@ -27,3 +27,18 @@ test("dataset labels reject wrong shapes, empty values, markup and multiline tex
     assert.ok(labelIssues({ price: value }).length, JSON.stringify(value));
   }
 });
+
+test("dataset quality rules apply to every game: empty declared fields warn, generic copy blocks", () => {
+  const audit = (code: string, cardSummary: string) => {
+    const issues: Issue[] = [];
+    auditDataset(code, "dataset.json", {
+      meta: { schemaVersion: 2, itemFields: ["name", "price", "rarity", "obtainment", "cardSummary", "unused"], columns: ["name", "price", "rarity", "obtainment"], display: { tableFields: ["price", "rarity", "obtainment"], cardFields: ["price", "rarity", "obtainment"], cardDescriptionField: "cardSummary", sectionOrder: ["Items"] } },
+      items: [{ item: { name: "Pet", price: "25 Coins", rarity: "Rare", obtainment: "Hatches from an egg.", cardSummary }, system: { slug: "pet", section: "Items", sortOrder: 10 } }]
+    }, issues);
+    return issues;
+  };
+  for (const code of ["gta-5-vehicles", "example-pets"]) {
+    assert.equal(audit(code, "A companion.").find(issue => /Declared fields are empty/.test(issue.message))?.level, "warning");
+    assert.equal(audit(code, "Mission details and requirements for Pet.").find(issue => /known generic/.test(issue.message))?.level, "error");
+  }
+});

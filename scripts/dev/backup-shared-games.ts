@@ -9,11 +9,9 @@ const url = process.env.SUPABASE_URL;
 assertManagedDevelopmentSupabaseUrl(url, "shared games backup");
 if (new URL(url).hostname !== "bbtcaurrtyoukvjbxbbj.supabase.co") throw new Error("Unexpected development project");
 const sb = createClient(url, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false } });
-const legacyTables = ["gta_games", "red_dead_games", "minecraft_games", ...["gta", "red_dead", "minecraft"].flatMap(prefix => ["wiki_pages", "wiki_collection_pages", "wiki_collection_datasets", "wiki_collection_items"].map(suffix => `${prefix}_${suffix}`)), "gta_checklist_pages", "gta_checklist_items", "minecraft_tools", "minecraft_releases", "user_gta_collection_progress", "user_red_dead_collection_progress", "comments", "user_checklist_progress"];
-const legacy = process.argv.includes("--legacy-before-migration");
-const tables = legacy ? legacyTables : ["games", "game_wiki_pages", "game_collection_pages", "game_collection_datasets", "game_collection_items", "game_checklist_pages", "game_checklist_items", "game_tool_pages", "game_releases", "game_collection_progress", "game_code_pages", "game_codes", "game_map_pages", "game_quiz_pages", "game_catalog_pages", "game_quiz_progress", "comments", "user_checklist_progress"];
+const tables = ["games", "game_wiki_pages", "game_collection_pages", "game_collection_datasets", "game_collection_items", "game_checklist_pages", "game_checklist_items", "game_tool_pages", "game_releases", "game_collection_progress", "game_code_pages", "game_codes", "game_map_pages", "game_quiz_pages", "game_catalog_pages", "game_quiz_progress", "comments", "user_checklist_progress"];
 async function main() {
-const root = path.resolve(legacy ? "tmp/shared-games/before/data" : `tmp/shared-games/backups/${new Date().toISOString().replaceAll(":", "-")}`);
+const root = path.resolve(`tmp/shared-games/backups/${new Date().toISOString().replaceAll(":", "-")}`);
 await fs.mkdir(root, { recursive: true, mode: 0o700 });
 const receipts = [];
 for (const table of tables) {

@@ -12,11 +12,8 @@ type ImageIdentity = {
 
 export function collectionImageKey(image: ImageIdentity): string {
   const prefix = `${image.mediaPrefix}/${image.gameSlug}/${image.collectionSlug}`;
-  if (image.namespace === "minecraft") {
-    if (!/^[a-f0-9]{64}$/.test(image.hash) || !/^(png|jpg|webp|avif|gif)$/.test(image.extension)) {
-      throw new Error("Minecraft media requires an exact SHA-256 and safe image extension.");
-    }
-    return `${prefix}/${image.hash}.${image.extension}`;
+  if (!/^[a-f0-9]{64}$/.test(image.hash) || !/^(png|jpg|webp|avif|gif)$/.test(image.extension)) {
+    throw new Error("Collection media requires an exact SHA-256 and safe image extension.");
   }
   return `${prefix}/${image.itemSlug}-${image.hash.slice(0, 16)}.${image.extension}`;
 }
@@ -46,14 +43,14 @@ type MediaStore = {
 
 async function visitImages(items: MediaItem[], confirmedKeys: Set<string> | undefined, visit: (item: MediaItem) => Promise<void>, concurrency: number, label: string) {
   if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 8) throw new Error("Media concurrency must be an integer from 1 to 8.");
-  // Minecraft keeps its invocation cache. Other namespaces still verify every row.
+  // An optional invocation cache deduplicates immutable object requests.
   const pending = confirmedKeys
     ? [...new Map(items.filter(item => item.image_key && !confirmedKeys.has(item.image_key)).map(item => [item.image_key, item])).values()]
     : items.filter(item => item.image_key);
   await mapPublishConcurrent(pending, visit, { concurrency, label });
 }
 
-// The caller supplies this invocation-scoped cache only for Minecraft.
+// The caller can supply an invocation-scoped cache for any namespace.
 export async function uploadCollectionImages(items: MediaItem[], store: MediaStore, confirmedKeys?: Set<string>, concurrency = 8) {
   await visitImages(items, confirmedKeys, async item => {
     if (!item.image_key || !item.image_mime || !item.image_sha256 || !item.prepared_image) return;

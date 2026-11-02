@@ -11,18 +11,18 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
     then: (resolve: (value: unknown) => unknown) => resolve({ data: table === "game_checklist_items" ? db.items : [], error: null }) };
   return chain;
 } }) }));
-import { validateGtaChecklistProgress } from "@/lib/gta-checklist-progress";
+import { validateGameChecklistProgress } from "@/lib/game-checklist-progress";
 
 beforeEach(() => { vi.unstubAllGlobals(); db.page = { id: "gta-page" }; });
 describe("GTA checklist contracts", () => {
   it("only accepts real leaf IDs belonging to a published GTA checklist", async () => {
-    expect(await validateGtaChecklistProgress("gta:gta-5", ["leaf"])).toBeNull();
-    expect((await validateGtaChecklistProgress("gta:gta-5", ["heading"]))?.status).toBe(400);
-    expect((await validateGtaChecklistProgress("gta:gta-5", ["foreign-leaf"]))?.status).toBe(400);
-    expect((await validateGtaChecklistProgress("gta:../gta-5"))?.status).toBe(400);
+    expect(await validateGameChecklistProgress("gta:gta-5", ["leaf"])).toBeNull();
+    expect((await validateGameChecklistProgress("gta:gta-5", ["heading"]))?.status).toBe(400);
+    expect((await validateGameChecklistProgress("gta:gta-5", ["foreign-leaf"]))?.status).toBe(400);
+    expect((await validateGameChecklistProgress("gta:../gta-5"))?.status).toBe(400);
     db.page = null;
-    expect((await validateGtaChecklistProgress("gta:gta-5"))?.status).toBe(404);
-    expect(await validateGtaChecklistProgress("jailbreak", ["old-id"])).toBeNull();
+    expect((await validateGameChecklistProgress("gta:gta-5"))?.status).toBe(404);
+    expect(await validateGameChecklistProgress("jailbreak", ["old-id"])).toBeNull();
   });
   it("preserves Roblox browser keys and isolates GTA progress across reload reads", () => {
     const values = new Map<string, string>();

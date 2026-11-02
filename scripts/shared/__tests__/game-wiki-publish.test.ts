@@ -119,16 +119,13 @@ test("target UUIDs may differ and existing game/hub ownership stays permanent", 
   assert.throws(() => resolveGameWikiIdentity([], [{ id: "foreign", slug: "new-game", game_id: "other-game" }], "new-game", { slug: "new-game", kind: "game" }), /belongs to a different game/);
 });
 
-test("Minecraft wrappers and direct franchise commands invoke their CLI runners", async () => {
+test("Direct generic franchise commands invoke their CLI runners", async () => {
   const scripts = JSON.parse(await fs.readFile("package.json", "utf8")).scripts;
-  for (const command of ["publish:minecraft-wiki", "sync:minecraft-collection-runtime", "publish:franchise-wiki-hubs", "sync:franchise-collection-runtime", "sync:shared-game-collection-runtime"]) {
+  for (const command of ["publish:franchise-wiki-hubs", "sync:franchise-collection-runtime", "sync:shared-game-collection-runtime"]) {
     assert.ok(scripts[command]);
     const output = execFileSync("npm", ["run", "--silent", command, "--", "--help"], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
     assert.match(output, /Usage: npm run (publish:franchise-wiki-hubs|sync:franchise-collection-runtime)/, command);
   }
-  const run = (command: string, args: string[]) => execFileSync("npm", ["run", "--silent", command, "--", ...args], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
-  assert.throws(() => run("publish:minecraft-wiki", ["--workspace", "tmp", "--game", "unapproved-edition"]), /Minecraft requires an approved edition identity/);
-  assert.throws(() => run("sync:minecraft-collection-runtime", []), /At least one --manifest is required/);
 });
 
 test("Roblox identifiers and stale or conflicting item image exceptions fail", () => {
@@ -332,22 +329,22 @@ test("CLI apply keeps permanent root hub slugs and UUIDs beside same-slug child 
   }
 });
 
-test("CLI apply inserts a missing Minecraft edition hub with its validated route", async () => {
+test("CLI apply inserts a missing previously unlisted Minecraft edition hub with its validated route", async () => {
   const { root } = await fixture();
   try {
-    await retargetFixture(root, "minecraft", "minecraft-java", "game", "minecraft");
+    await retargetFixture(root, "minecraft", "minecraft-console", "game", "minecraft");
     const parentId = randomUUID();
     const result = await applyFixture(root, {
       games: [{ id: parentId, namespace: "minecraft", slug: "minecraft", kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/cover.webp", hero_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/hero.webp" }]
     });
-    const edition = result.tables.games.find(game => game.slug === "minecraft-java")!;
+    const edition = result.tables.games.find(game => game.slug === "minecraft-console")!;
     const hub = result.tables.game_wiki_pages[0];
     assert.equal(edition.parent_id, parentId);
     assert.equal(edition.url_style, "page_type", "New editions inherit their existing root URL style");
     assert.equal(hub.game_id, edition.id);
-    assert.equal(hub.canonical_path, "/wiki/minecraft-java");
-    assert.equal(result.calls.find(call => call.table === "game_wiki_pages" && call.method === "POST")?.payload?.canonical_path, "/wiki/minecraft-java");
-    assert.equal(result.tables.game_collection_pages[0].canonical_path, "/wiki/minecraft-java/items");
+    assert.equal(hub.canonical_path, "/wiki/minecraft-console");
+    assert.equal(result.calls.find(call => call.table === "game_wiki_pages" && call.method === "POST")?.payload?.canonical_path, "/wiki/minecraft-console");
+    assert.equal(result.tables.game_collection_pages[0].canonical_path, "/wiki/minecraft-console/items");
   } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
 
@@ -641,11 +638,34 @@ test("parallel media preparation preserves dataset order and content hash", asyn
     document.items = Array.from({ length: 25 }, (_, index) => ({ item: { ...document.items[0].item, name: `Blade ${index}` }, system: { slug: `blade-${index}`, section: "Blades", image: "sword.webp" } }));
     await write("collections/items/dataset.json", document);
     const { planManifest } = await import("../../franchise/sync-franchise-collection-runtime");
-    const run = () => planManifest("example", path.join(root, "collections/items/runtime-manifest.json"), { wikiCanonicalPath: "/wiki/example", strictPaths: true });
+    const db = createClient("https://target.supabase.co", "test-key", { global: { fetch: async () => new Response("[]", { headers: { "content-type": "application/json" } }) } });
+    const run = () => planManifest("example", path.join(root, "collections/items/runtime-manifest.json"), { wikiCanonicalPath: "/wiki/example", strictPaths: true, db });
     const first = await run();
     const second = await run();
     assert.deepEqual(first.items.map(row => row.item_slug), document.items.map((row: { system: { slug: string } }) => row.system.slug));
     assert.deepEqual(first.items.map(row => row.sort_order), Array.from({ length: 25 }, (_, index) => index + 1));
     assert.equal(first.contentHash, second.contentHash);
   } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+
+test("repeat publication preserves stored media identities without namespace rules", async () => {
+  for (const namespace of ["minecraft", "new-game"]) {
+    const { root, write } = await fixture();
+    try {
+      await retargetFixture(root, namespace, `${namespace}-console`, "game", namespace);
+      const cover = `https://media.bloxodes.com/wiki/${namespace}/${namespace}/cover.webp`;
+      const hero = `https://media.bloxodes.com/wiki/${namespace}/${namespace}/hero.webp`;
+      const gameInput = JSON.parse(await fs.readFile(path.join(root, "game.json"), "utf8"));
+      await write("game.json", { ...gameInput, cover_image: cover, hero_image: hero });
+      const first = await applyFixture(root, { games: [{ id: randomUUID(), namespace, slug: namespace, kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: cover, hero_image: hero }] });
+      const storedItem = first.tables.game_collection_items[0];
+      const oldKey = `${namespace}/${namespace}/items/${storedItem.image_sha256}.webp`;
+      storedItem.image_key = oldKey;
+      const second = await applyFixture(root, first.tables);
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.cover_image, cover);
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.hero_image, hero);
+      assert.ok(second.tables.game_collection_items.every(item => item.image_key === oldKey));
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
 });

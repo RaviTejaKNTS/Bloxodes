@@ -1,14 +1,14 @@
 # Every registered GTA map engine, the map hub, and the shared image-pin template.
-/gta/maps
-/gta/maps/gta5
-/gta/maps/gta-san-andreas
-/gta/maps/gta-vice-city
-/gta/maps/gta-iii
-/gta/maps/gta-4
-/gta/maps/gta-liberty-city-stories
-/gta/maps/gta-vice-city-stories
-/gta/maps/gta-chinatown-wars
-/gta/maps/gta-online
+/maps
+/maps/gta5
+/maps/gta-san-andreas
+/maps/gta-vice-city
+/maps/gta-iii
+/maps/gta-4
+/maps/gta-liberty-city-stories
+/maps/gta-vice-city-stories
+/maps/gta-chinatown-wars
+/maps/gta-online
 # Confirm publication before auditing this shared image-pin example.
 /wiki/sarab/maps
 # Roblox tool indexes and every bespoke/shared-template calculator.
@@ -37,17 +37,17 @@
 /tools/roblox-marketplace-fee-calculator
 /tools/roblox-server-memory-capacity-planner
 # Minecraft uses DedicatedToolPage for every calculator.
-/minecraft/tools
-/minecraft/tools/nether-coordinate-converter
-/minecraft/tools/stack-and-storage-calculator
-/minecraft/tools/furnace-fuel-calculator
-/minecraft/tools/pixel-circle-generator
-/minecraft/tools/anvil-enchantment-planner
-/minecraft/tools/crafting-materials-planner
-/minecraft/tools/brewing-planner
-/minecraft/tools/xp-calculator
-/minecraft/tools/beacon-materials-calculator
-/minecraft/tools/building-materials-estimator
-/minecraft/tools/gear-comparison
-/minecraft/tools/command-generator
-/minecraft/tools/stronghold-triangulation
+/tools
+/tools/minecraft-nether-coordinate-converter
+/tools/minecraft-stack-and-storage-calculator
+/tools/minecraft-furnace-fuel-calculator
+/tools/minecraft-pixel-circle-generator
+/tools/minecraft-anvil-enchantment-planner
+/tools/minecraft-crafting-materials-planner
+/tools/minecraft-brewing-planner
+/tools/minecraft-xp-calculator
+/tools/minecraft-beacon-materials-calculator
+/tools/minecraft-building-materials-estimator
+/tools/minecraft-gear-comparison
+/tools/minecraft-command-generator
+/tools/minecraft-stronghold-triangulation

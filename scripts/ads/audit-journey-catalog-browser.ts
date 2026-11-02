@@ -39,9 +39,8 @@ const ROUTES = [
   "/quizzes",
   "/tools",
   "/tools/roblox-username-generator",
-  "/gta/maps",
-  "/gta/maps/gta5",
-  "/minecraft/tools",
+  "/maps",
+  "/maps/gta5",
   "/events",
   "/authors",
   "/wiki",
@@ -110,8 +109,7 @@ const DISCOVERY_ROOTS = [
     route: "/tools",
     prefixes: ["/tools/"]
   },
-  { route: "/gta/maps", prefixes: ["/gta/maps/"] },
-  { route: "/minecraft/tools", prefixes: ["/minecraft/tools/"] },
+  { route: "/maps", prefixes: ["/maps/"] },
   {
     route: "/authors",
     prefixes: ["/authors/"]
@@ -334,7 +332,7 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 
     const content = selectors[0];
     const widgets = document.querySelectorAll<HTMLElement>(".ads-tools-widget");
-    if (widgets.length || /^\/(?:tools|maps|gta\/maps|minecraft\/tools)(?:\/|$)/.test(window.location.pathname)) {
+    if (widgets.length || /^\/(?:tools|maps)(?:\/|$)/.test(window.location.pathname)) {
       const rails = document.querySelectorAll<HTMLElement>("aside.space-y-4");
       if (rails.length !== 1 || !rails[0].matches("aside#sidebar") || document.querySelectorAll("aside#sidebar").length !== 1 || !rails[0].parentElement?.classList.contains("content-sidebar-grid") || content.contains(rails[0])) {
         throw new Error("map/tool sidebar must be one direct grid child outside the article body");

@@ -165,16 +165,6 @@ async function withCache<T>(key: string[], tags: string[], loader: () => Promise
   return publicContentCache(loader, key, { revalidate: REVALIDATE_SECONDS, tags })();
 }
 
-// Legacy synchronous builders are exported only by gta.ts and red-dead.ts.
-// Shared namespaces use stored canonical_path through game-registry readers.
-function buildSharedGameWikiPath(slug: string): string {
-  return `/${namespace}/wiki/${normalizeSlug(slug)}`;
-}
-
-function buildSharedGameCollectionPath(wikiSlug: string, collectionSlug: string): string {
-  return `${buildSharedGameWikiPath(wikiSlug)}/${normalizeSlug(collectionSlug)}`;
-}
-
 type SharedGameWikiImageFields = {
   cover_image?: string | null;
   game_cover_image?: string | null;
@@ -444,5 +434,5 @@ async function loadPublishedSharedGameWikiCollectionRuntime(
 
 const getPublishedSharedGameWikiCollectionRuntime = cache(loadPublishedSharedGameWikiCollectionRuntime);
 
-return { buildSharedGameWikiPath, buildSharedGameCollectionPath, resolveSharedGameWikiCoverImage, resolveSharedGameWikiThumbnailImage, listPublishedSharedGameGames, getSharedGameGameBySlug, listPublishedSharedGameWikiPages, getSharedGameWikiPageBySlug, getSharedGameWikiCollectionPageByPath, listPublishedSharedGameWikiCollectionsByWikiSlug, listPublishedSharedGameWikiCollections, listPublishedSharedGameWikiCollectionImageUrls, getPublishedSharedGameWikiCollectionRuntime };
+return { resolveSharedGameWikiCoverImage, resolveSharedGameWikiThumbnailImage, listPublishedSharedGameGames, getSharedGameGameBySlug, listPublishedSharedGameWikiPages, getSharedGameWikiPageBySlug, getSharedGameWikiCollectionPageByPath, listPublishedSharedGameWikiCollectionsByWikiSlug, listPublishedSharedGameWikiCollections, listPublishedSharedGameWikiCollectionImageUrls, getPublishedSharedGameWikiCollectionRuntime };
 }

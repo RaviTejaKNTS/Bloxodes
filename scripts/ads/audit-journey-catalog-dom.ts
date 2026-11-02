@@ -161,7 +161,7 @@ function auditPage(snapshot: PageSnapshot) {
   }
 
   const widgets = $(".ads-tools-widget");
-  if (widgets.length || /^\/(?:catalog|tools|maps|gta\/maps|minecraft\/tools)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
+  if (widgets.length || /^\/(?:catalog|tools|maps)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
     const sidebar = $("aside.space-y-4");
     if (sidebar.length !== 1 || !sidebar.is("aside#sidebar") || $("aside#sidebar").length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
       failures.push("sidebar must be one direct grid child outside the article body");
@@ -332,9 +332,8 @@ async function main() {
     "/quizzes",
     "/tools",
     "/tools/roblox-username-generator",
-    "/gta/maps",
-    "/gta/maps/gta5",
-    "/minecraft/tools",
+    "/maps",
+    "/maps/gta5",
     "/events",
     "/authors",
     "/wiki",
@@ -399,8 +398,7 @@ async function main() {
     { root: "/wiki", prefix: "/wiki/" },
     { root: "/puzzles", prefix: "/puzzles/" },
     { root: "/tools", prefix: "/tools/" },
-    { root: "/gta/maps", prefix: "/gta/maps/" },
-    { root: "/minecraft/tools", prefix: "/minecraft/tools/" },
+    { root: "/maps", prefix: "/maps/" },
     { root: "/authors", prefix: "/authors/" },
     { root: "/stats/reports", prefix: "/stats/reports/" },
     { root: "/codes", prefix: "/codes/" },

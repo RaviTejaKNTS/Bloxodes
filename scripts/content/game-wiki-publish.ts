@@ -29,9 +29,10 @@ const digest = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest(
 export async function planGameWikiImage(root: string, value: string, namespace: string, gameSlug: string, role: "cover" | "hero") {
   let bytes: Buffer;
   let metadata: sharp.Metadata;
-  const mediaSlug = namespace === "minecraft" ? "minecraft" : gameSlug;
+  let hostedKey: string | undefined;
   if (/^https?:/.test(value)) {
-    if (!value.startsWith(`https://media.bloxodes.com/wiki/${namespace}/${mediaSlug}/`)) throw new Error(`${role}: use hosted artwork under this game's R2 prefix or a local bundle file.`);
+    if (!new RegExp(`^https://media\\.bloxodes\\.com/wiki/${namespace}/[a-z0-9-]+/[a-zA-Z0-9._/-]+$`).test(value) || value.includes("/../")) throw new Error(`${role}: use hosted artwork under this game's R2 prefix or a local bundle file.`);
+    hostedKey = new URL(value).pathname.slice("/wiki/".length);
     const image = await verifyFranchisePageImage({ url: value, role: role === "hero" ? "thumbnail" : "cover", label: gameSlug });
     bytes = image.bytes;
     metadata = image.metadata;
@@ -49,7 +50,7 @@ export async function planGameWikiImage(root: string, value: string, namespace: 
   if (role === "cover" && Math.abs(width / height - 16 / 9) > 0.01) throw new Error(`${gameSlug}: cover_image must be 16:9 (${width}x${height}).`);
   if (role === "hero" && width !== height) throw new Error(`${gameSlug}: hero_image must be square (${width}x${height}).`);
   const hash = digest(bytes);
-  const key = `${namespace}/${mediaSlug}/hub-${role}-${hash.slice(0, 16)}.${format === "jpeg" ? "jpg" : format}`;
+  const key = hostedKey ?? `${namespace}/${gameSlug}/hub-${role}-${hash.slice(0, 16)}.${format === "jpeg" ? "jpg" : format}`;
   return { bytes, key, url: `https://media.bloxodes.com/wiki/${key}`, mime: mime[format], hash, width, height };
 }
 
@@ -168,7 +169,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     checkCopy(final, `${slug}/final.json`);
     const sections = new Set(document.items?.map((row: { system?: { section?: string } }) => row.system?.section));
     if (Object.keys(final.description_json).some(section => !sections.has(section))) throw new Error("description_json keys must match dataset sections.");
-    const plan = await planManifest(bundle.namespace, manifestPath, { wikiCanonicalPath: wikiPath, strictPaths: true });
+    const plan = await planManifest(bundle.namespace, manifestPath, { wikiCanonicalPath: wikiPath, strictPaths: true, db });
     const current = existingCollections.filter(row => row.code === plan.code || row.wiki_slug === identity.hubSlug && row.collection_slug === slug);
     if (current.length > 1 || current.some(row => row.game_id !== identity.game?.id || row.wiki_page_id !== identity.hub?.id || row.wiki_slug !== identity.hubSlug || row.collection_slug !== slug || row.code !== plan.code || row.page_type !== plan.pageType || row.canonical_path !== `${wikiPath}/${slug}`)) throw new Error("Collection conflicts with a permanent target identity, route or page type.");
     const order = manifest.collection.sortOrder ?? final.wiki_sort_order ?? current[0]?.wiki_sort_order ?? maxCollectionOrder + 10;

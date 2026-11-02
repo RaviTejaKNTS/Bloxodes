@@ -100,7 +100,7 @@ The exported workspace is an authoring snapshot. The collection route keeps rend
 
 ## Verification
 
-Preserve Minecraft edition identities and its `database` page-type restriction. On GitHub, run the narrowest checks that apply, and only for collections that changed:
+Preserve each game's stored identity, canonical path and collection page type. On GitHub, run the narrowest checks that apply, and only for collections that changed:
 
 ```bash
 npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json

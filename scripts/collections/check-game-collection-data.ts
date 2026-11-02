@@ -455,12 +455,11 @@ async function main() {
   if (usefulFieldKeys.length <= 2 && !imageBackedLocationGuide) {
     issues.push({
       level: "error",
-      message: `Collection has only ${usefulFieldKeys.length} useful field(s) beyond name/cardSummary (${usefulFieldKeys.join(", ") || "none"}). Enrich to GTABase parity before publishing.`
+      message: `Collection has only ${usefulFieldKeys.length} useful field(s) beyond name/cardSummary (${usefulFieldKeys.join(", ") || "none"}). Add useful item details before publishing.`
     });
   }
 
   const FILLER_PATTERNS = [
-    /open wheel vehicle in gta online/i,
     /listed online vehicle entry/i,
     /use the image to confirm/i,
     /use the item image and location note/i,

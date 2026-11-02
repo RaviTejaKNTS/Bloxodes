@@ -16,14 +16,14 @@ Scoped route-family guides:
 
 ## Shared game pages
 
-GTA, Red Dead and Minecraft routes in development and production use shared game readers and `components/games` page templates. Existing route files retain their public URL contracts. New namespaces resolve through `[slug]/[[...segments]]/page.tsx`; unknown roots and unpublished pages return 404. `games.kind` and `parent_id` choose a franchise hub or standalone wiki. Minecraft keeps its edition paths and redirects. The October 2026 homepage (`app/(site)/page.tsx`, data in `lib/home-page-data.ts`, blocks in `components/home/`) shows GTA, Red Dead and Minecraft in its "Beyond Roblox" block and directory, using the curated link lists in `components/hubs/HubsSidebar.tsx`.
+Every non-Roblox game uses shared game readers and `components/games` page templates at page-type URLs: `/games/<franchise>` for franchise hubs, then `/wiki`, `/maps`, `/checklists`, `/quizzes`, `/codes`, `/tools` and `/catalog`. Unknown and unpublished pages return 404. `games.kind` and `parent_id` choose a franchise hub or standalone wiki. Old URLs redirect through `site_routes`. The homepage (`app/(site)/page.tsx`, data in `lib/home-page-data.ts`, blocks in `components/home/`) shows franchises in its "Beyond Roblox" block and directory, using the curated link lists in `components/hubs/HubsSidebar.tsx`.
 
-Check metadata, structured data, pagination, shared search, comments, progress, sitemaps, feed and revalidation whenever adding a page type. New non-GTA collection pagination is noindex. The shared changes have not been released to production.
+Check metadata, structured data, pagination, shared search, comments, progress, sitemaps, feed and revalidation whenever adding a page type.
 
 ## Route Families
 
 - Core content: home, codes, articles, stats, checklists, events, quizzes, wiki pages, puzzles, authors.
-- Game-platform entry: `/games`; GTA routes live under `/gta` and `/gta/wiki` with GTA-specific navigation while retaining the shared Bloxodes shell and components. Do not expose a GTA tools route until a real tool is ready to publish.
+- Game-platform entry: `/games`, with franchise hubs at `/games/<franchise>`, all inside the shared Bloxodes shell and components.
 - Catalog: music IDs, free Roblox items, admin commands, color codes, decal IDs, The Forge, and generic catalog fallback routes.
 - Tools: Roblox ID extractor, Robux/USD, DevEx, The Forge calculators, Grow a Garden calculator, and generic tool fallback routes.
 - Static pages: about, contact, policies, disclaimer, editorial, cookie settings.
@@ -54,7 +54,7 @@ Check metadata, structured data, pagination, shared search, comments, progress, 
 - Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `bloxodes-docs/content/catalog.md` and `bloxodes-docs/content/roblox-wiki.md` respectively; a shared card/list renderer does not merge their data ownership.
-- GTA wiki and collection pages reuse the same renderer contract but load shared storage through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
+- Shared wiki and collection pages use `shared-game-reader.ts` and the common game renderers with stored canonical paths. Never attach non-Roblox rows to Roblox universe or wiki tables.
 - Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `collectible` uses the shared collectible renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
 
 ## Public Route Checklists
@@ -75,24 +75,19 @@ Check metadata, structured data, pagination, shared search, comments, progress, 
 5. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.
 6. Follow the scoped workflow in `catalog/AGENTS.md` or `tools/AGENTS.md`.
 
-## Red Dead and collectible rollout (2026-09-07)
+## Collection page types
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. The production model before October 6 used isolated `red_dead_*` tables for Red Dead, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. These migrations preceded the current shared storage.
+Wiki collection page types are `database` and `collectible` for every game. Standalone `/checklists` pages and progress storage keys are separate from them.
 
-Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+## Standalone game checklists
 
-
-## GTA standalone checklist support (2026-09-10)
-
-GTA standalone completion checklists live under `/gta/checklists/<game-slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Keep the UI shared; checklist data belongs to `game_checklist_pages` and `game_checklist_items` linked to `games` with the GTA namespace. Development and production publish GTA V, San Andreas, Vice City, and the dated GTA Online Career Progress snapshot. All checkable tasks require exactly three-part section codes. See `bloxodes-docs/content/franchise.md`.
+Standalone checklists live at `/checklists/<slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Data belongs to `game_checklist_pages` and `game_checklist_items`, linked to `games`. All checkable tasks need exactly three-part section codes. See `bloxodes-docs/content/franchise.md`.
 
 ## Shared engagement presentation (2026-09-10)
 
 Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `bloxodes-docs/content/franchise.md` for ownership and verification.
 
 
-Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `bloxodes-docs/content/roblox-wiki.md`.
-
 ## Shared game reference routes
 
-The generic `/<namespace>` route additionally serves maps, quizzes, catalogs and standalone checklists, with named detail slugs and section directories. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. Existing GTA map routes retain registered engines while their snapshots load from shared storage. The page types use shared storage in managed development and production.
+Page-type routes serve maps, quizzes, catalogs and standalone checklists. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. GTA maps keep their registered engines; their snapshots load from shared storage.

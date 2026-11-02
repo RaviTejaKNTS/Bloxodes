@@ -20,9 +20,9 @@ The shared schema is applied in managed development and production. Roblox keeps
 - `public-content-cache.ts`: compatibility wrapper for former `unstable_cache` call sites. Public Supabase content should render fresh at the VPS and rely on Cloudflare for long-lived edge caching.
 - `public-cache-tags.ts`: Cloudflare `Cache-Tag` mapping for public route families and Supabase revalidation events.
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
-- `gta.ts`: server-only GTA game, wiki, and collection-runtime readers for the `/gta` namespace. Keep this separate from Roblox universe/editorial slug ownership.
+- `shared-game-reader.ts`, `game-registry.ts` and `game-extra-pages.ts` own shared published content reads. Use stored canonical paths. GTA maps and Minecraft calculators keep their own adapters.
 - `wiki-collections.ts`: shared Roblox collection page/list reads, including the explicit `database` or `collectible` page type and compatibility fallbacks for older schemas.
-- `collection-checklist-progress-client.ts` and `wiki-collection-progress.ts`: shared local-first/account-synced checklist progress behavior for Roblox collection pages. The GTA adapter uses the same client renderer with its own endpoint and GTA progress namespace.
+- `collection-checklist-progress-client.ts` and `wiki-collection-progress.ts`: shared local-first/account-synced checklist progress behavior for collection pages. Non-Roblox games use the same client renderer with `/api/games/[namespace]/collections/progress`.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
 - `auth/extension-session.ts`: validated Chromium identity callback handling and short-lived, redirect-bound extension login handoffs.
@@ -72,24 +72,18 @@ The shared schema is applied in managed development and production. Roblox keeps
 2. Keep route files and UI components thin.
 3. If content is publishable, expose tags that `/api/revalidate` can target.
 
-## Red Dead and collectible rollout (2026-09-07)
+## Collection page types
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. The production model before October 6 used isolated `red_dead_*` tables for Red Dead, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. These migrations preceded the current shared storage.
+Wiki collection page types are `database` and `collectible` for every game. Standalone `/checklists` pages and progress storage keys are separate from them.
 
-Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+## Standalone game checklists
 
-
-## GTA standalone checklist support (2026-09-10)
-
-`gta-checklists.ts` owns standalone GTA checklist reads. `gta-checklist-progress.ts` validates namespaced GTA progress for the shared checklist API. Keep existing Roblox progress keys unchanged; GTA standalone keys are `gta:<slug>`, distinct from collectible progress.
-The current managed-development content covers `gta-5`, `gta-san-andreas`, `gta-vice-city`, and `gta-online`. GTA Online is a dated Career Progress snapshot for supported current-generation editions, not a universal game-wide 100% meter.
+`game-checklist-progress.ts` validates published membership and leaf task IDs for every `<namespace>:<slug>` key. Existing Roblox keys and the account/browser protocol stay unchanged. Standalone keys are distinct from collectible progress.
 
 ## Shared engagement presentation (2026-09-10)
 
 Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `bloxodes-docs/content/franchise.md` for ownership and verification.
 
-
-Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `bloxodes-docs/content/roblox-wiki.md`.
 
 ## Shared game reference pages
 
