@@ -40,9 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const code = normalizeToolCode(slug ?? []);
   const canonical = `${SITE_URL.replace(/\/$/, "")}/tools/${code}`;
   if (!code) {
-    return {
-      alternates: buildAlternates(`${SITE_URL.replace(/\/$/, "")}/tools`)
-    };
+    notFound();
   }
 
   const tool = await getToolContentWithDevFallback(code);
@@ -50,9 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const gameRoute = await resolvePageTypeGameRoute(`/tools/${(await params).slug.join("/")}`);
     if (gameRoute) return gameRoute.metadata();
 
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    notFound();
   }
 
   const title = resolveSeoTitle(tool.seo_title) ?? tool.title ?? undefined;

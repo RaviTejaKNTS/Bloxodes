@@ -179,12 +179,7 @@ export async function generateWikiCollectionMetadata({
     const gameRoute = await resolvePageTypeGameRoute(`/wiki/${slug}/${collection}${currentPage > 1 ? `/page/${currentPage}` : ""}`);
     if (gameRoute) return gameRoute.metadata();
 
-    return {
-      title: `Roblox Wiki | ${SITE_NAME}`,
-      description: WIKI_DESCRIPTION,
-      alternates: buildAlternates(canonical),
-      robots: { index: false, follow: false }
-    };
+    notFound();
   }
 
   if (!checklistPage && growGardenConfig) {

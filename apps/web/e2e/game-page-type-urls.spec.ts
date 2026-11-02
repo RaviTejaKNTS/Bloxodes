@@ -32,8 +32,8 @@ async function renders(page: Page, path: string, coverage: Coverage, checkSeo = 
   expect(new URL(page.url()).pathname, path).toBe(path);
   expect(response?.request().redirectedFrom(), path).toBeNull();
   if (checkSeo) {
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `${siteUrl}${path}`);
-    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", `${siteUrl}${path}`);
+    await expect(page.locator('link[rel="canonical"]'), path).toHaveAttribute("href", `${siteUrl}${path}`);
+    await expect(page.locator('meta[property="og:url"]'), path).toHaveAttribute("content", `${siteUrl}${path}`);
   }
   await expect(page).toHaveTitle(/\S/);
   entry.status = "PASSED";
@@ -259,11 +259,10 @@ test("GTA, Red Dead and Minecraft move while Roblox retains its URL", async ({ p
 });
 
 
-test("unknown page-type paths return 404 with unique error metadata", async ({ request, page }) => {
-  test.setTimeout(180_000);
-  for (const path of ["/__url-review-missing", "/games/url-review-missing", "/wiki/url-review-missing", "/wiki/url-review-missing/items",
+for (const path of ["/__url-review-missing", "/games/url-review-missing", "/wiki/url-review-missing", "/wiki/url-review-missing/items",
     "/maps/url-review-missing", "/codes/url-review-missing", "/tools/url-review-missing",
     "/quizzes/url-review-missing", "/checklists/url-review-missing", "/catalog/url-review-missing"]) {
+  test(`404 metadata: ${path}`, async ({ request, page }) => {
     // Check the raw response as well as the hydrated DOM: browser metadata
     // handling can otherwise hide duplicate tags emitted during error recovery.
     const response = await request.get(path, { maxRedirects: 0 });
@@ -275,12 +274,28 @@ test("unknown page-type paths return 404 with unique error metadata", async ({ r
     expect(html.match(/<meta\s+property="og:url"[^>]*>/g) ?? [], path).toHaveLength(0);
     expect(html.match(/<link\s+rel="canonical"[^>]*>/g) ?? [], path).toHaveLength(0);
     await page.goto(path, { waitUntil: "domcontentloaded" });
-    await expect(page).toHaveTitle("404 — Page Not Found | Bloxodes");
-    await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
-    await expect(page.locator('meta[name="twitter:title"]')).toHaveCount(1);
-    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
-    await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
-    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
-  }
+    await expect(page, path).toHaveTitle("404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[property="og:title"]'), path).toHaveCount(1);
+    await expect(page.locator('meta[property="og:title"]'), path).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[name="twitter:title"]'), path).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:title"]'), path).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[property="og:url"]'), path).toHaveCount(0);
+    await expect(page.locator('link[rel="canonical"]'), path).toHaveCount(0);
+  });
+}
+
+// Error recovery must leave the successful root route's own metadata intact.
+test("homepage retains its own metadata after a 404", async ({ page }) => {
+  const title = "Bloxodes | Roblox stats, wikis, codes, events, quizzes & checklists";
+  await page.goto("/wiki/url-review-missing", { waitUntil: "domcontentloaded" });
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+  await page.getByRole("link", { name: "Go home", exact: true }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveTitle(title);
+  await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", title);
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveCount(1);
+  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", title);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /^https:\/\/bloxodes\.com\/?$/);
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", /^https:\/\/bloxodes\.com\/?$/);
 });

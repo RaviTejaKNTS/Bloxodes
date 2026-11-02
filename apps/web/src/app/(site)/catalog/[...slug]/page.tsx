@@ -72,9 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const code = normalizeCatalogCode(slug ?? []);
   const canonical = `${SITE_URL.replace(/\/$/, "")}/catalog/${code}`;
   if (!code) {
-    return {
-      alternates: buildAlternates(`${SITE_URL.replace(/\/$/, "")}/catalog`)
-    };
+    notFound();
   }
 
   const catalog = await getCatalogPageContentByCodes([code]);
@@ -82,9 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const gameRoute = await resolvePageTypeGameRoute(`/catalog/${(await params).slug.join("/")}`);
     if (gameRoute) return gameRoute.metadata();
 
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    notFound();
   }
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Catalogs | ${SITE_NAME}`;

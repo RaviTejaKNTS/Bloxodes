@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!data) {
     const gameRoute = await resolvePageTypeGameRoute(`/checklists/${(await params).slug}`);
     if (gameRoute) return gameRoute.metadata();
+    notFound();
   }
   return checklistMetadata(data, ROBLOX_CHECKLISTS);
 }

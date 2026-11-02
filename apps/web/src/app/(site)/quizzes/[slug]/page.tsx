@@ -11,6 +11,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!data) {
     const gameRoute = await resolvePageTypeGameRoute(`/quizzes/${(await params).slug}`);
     if (gameRoute) return gameRoute.metadata();
+    notFound();
   }
   return quizMetadata(data, ROBLOX_QUIZZES);
 }
