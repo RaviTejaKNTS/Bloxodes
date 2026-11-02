@@ -5,7 +5,7 @@ import {assertEnvironment, robloxMetadata} from '../../../scripts/ci/selected-ro
 type Fact = {key: string; label: string; text: string; description: boolean};
 type Item = {item: {name: string; imageCreditUrl?: unknown}; system: {slug: string; section: string}; image: string | null; facts: Record<'cards' | 'list', Fact[]>};
 type Collection = {path: string; code: string; label: string; pageType: 'database' | 'collectible'; final: {title: string; seo_title: string; meta_description: string; thumb_url?: string}; items: Item[]};
-type Hub = {path: string; icon: string; thumb: string; final: Collection['final']};
+type Hub = {path: string; icon: string; cover: {url: string}; final: Collection['final']};
 // Traces contain cookies and request headers; account tokens must stay private.
 test.use({trace: 'off', video: 'off'});
 const selectedFile = process.env.SELECTED_ROBLOX_BROWSER;
@@ -137,8 +137,8 @@ for (const url of selected.urls) test(`${url.path} selected wiki sitemap and HTM
   expect(sitemap).toContain(`<loc>https://bloxodes.com${url.path}</loc>`);
   expect(sitemap).not.toContain(`<loc>https://bloxodes.com${url.path}/page/`);
 });
-for (const hub of selected.hubs) test(`${hub.path} official artwork, metadata and selected collection CTAs`, async ({page}, info) => {
-  await html(page, info, hub.path); await metadata(page, robloxMetadata(hub.final, hub.path, 'hub'), hub.thumb);
+for (const hub of selected.hubs) test(`${hub.path} published artwork, metadata and selected collection CTAs`, async ({page}, info) => {
+  await html(page, info, hub.path); await metadata(page, robloxMetadata(hub.final, hub.path, 'hub'), hub.cover.url);
   const headerImage = page.locator('main header img').first();
   await loadedImage(headerImage, hub.icon);
   for (const entry of selected.collections.filter(entry => entry.path.startsWith(`${hub.path}/`))) {
@@ -157,6 +157,11 @@ for (const hub of selected.hubs) test(`${hub.path} official artwork, metadata an
     for (const [index, image] of (await cta.locator('img').all()).entries()) await loadedImage(image, expected[index]);
   }
   await capture(page, info, 'hub-artwork');
+  await page.goto(`/wiki?q=${encodeURIComponent(hub.final.title.replace(/\s+wiki$/i, ''))}`, {waitUntil: 'load'});
+  const card = page.locator(`#article-body a[href="${hub.path}"]`).filter({has: page.locator('img')});
+  await expect(card).toHaveCount(1);
+  await loadedImage(card.locator('img'), hub.cover.url);
+  await capture(page, info, 'hub-card');
 });
 for (const entry of selected.collections) {
   test(`${entry.path} complete card/list fields, exact images and pagination`, async ({page}, info) => {

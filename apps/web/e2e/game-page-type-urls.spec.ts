@@ -270,11 +270,16 @@ test("unknown page-type paths return 404 with unique error metadata", async ({ r
     expect(response.status(), path).toBe(404);
     const html = await response.text();
     expect(html.match(/<meta\s+property="og:title"[^>]*>/g) ?? [], path).toHaveLength(1);
+    expect(html.match(/<meta\s+property="og:title"[^>]*>/)?.[0], path)
+      .toContain('content="404 — Page Not Found | Bloxodes"');
     expect(html.match(/<meta\s+property="og:url"[^>]*>/g) ?? [], path).toHaveLength(0);
+    expect(html.match(/<link\s+rel="canonical"[^>]*>/g) ?? [], path).toHaveLength(0);
     await page.goto(path, { waitUntil: "domcontentloaded" });
     await expect(page).toHaveTitle("404 — Page Not Found | Bloxodes");
     await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
     await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   }

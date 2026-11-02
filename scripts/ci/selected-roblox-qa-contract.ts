@@ -13,6 +13,19 @@ export function assertEnvironment(env: Record<string, string | undefined>, downl
   if (!/^[0-9a-f]{64}$/.test(env.BUNDLE_HASH ?? '') || downloaded && (env.BLOXODES_VERIFIED_BUNDLE !== env.BUNDLE_HASH || env.BATCH !== `content/releases/${env.BUNDLE_HASH}/batch.json`)) throw new QaFailure('Select the exact downloaded immutable bundle.');
 }
 
+/** QA-only sidecar, frozen beside <final>.qa-cover.json; never added to authoring finals. */
+export function publishedHubCover(universeId: number, input: unknown) {
+  const evidence = input as {file: string; sha256: string; format: string};
+  if (!Number.isSafeInteger(universeId) || universeId <= 0 || !evidence ||
+      Object.keys(evidence).sort().join(',') !== 'file,format,sha256' ||
+      typeof evidence.file !== 'string' || !/^[a-zA-Z0-9_./-]+$/.test(evidence.file) ||
+      evidence.file.split('/').some(part => !part || part === '.' || part === '..' || part.startsWith('.')) ||
+      typeof evidence.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(evidence.sha256) ||
+      !['png', 'jpeg', 'webp', 'avif'].includes(evidence.format)) throw new QaFailure('Invalid frozen hub cover evidence.');
+  const extension = evidence.format === 'jpeg' ? 'jpg' : evidence.format;
+  return {...evidence, url: `https://media.bloxodes.com/wiki/${universeId}/hubs/cover-${evidence.sha256.slice(0, 16)}.${extension}`};
+}
+
 // Mirror only the pure metadata values from apps/web/src/lib/seo.ts here.
 // Importing that module loads Next's global types into the scripts CI program.
 const QA_WIKI_DESCRIPTION = 'Roblox wiki hubs with live universe stats, codes, tools, catalog links, controls, tips, and gameplay notes.';

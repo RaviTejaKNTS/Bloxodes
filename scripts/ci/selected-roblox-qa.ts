@@ -12,9 +12,10 @@ import {parseBatch, ownedPath} from './content-contract.mjs';
 import {decodeBundle, extractBundle} from './content-bundle.mjs';
 import {contentDigest} from './managed-content-receipt.mjs';
 import {bundleInput, collectionVisibleFacts, stable} from './selected-franchise-qa-contract.mjs';
-import {assertEnvironment, QaFailure} from './selected-roblox-qa-contract';
+import {assertEnvironment, publishedHubCover, QaFailure} from './selected-roblox-qa-contract';
 import {getFieldLabel} from '../../apps/web/src/lib/game-collections';
-import {pickWikiThumbnail} from '../../apps/web/src/lib/wiki-images';
+import {resolveWikiCardImage, resolveWikiMetadataImage} from '../../apps/web/src/lib/wiki-images';
+import {validateRobloxHubCover} from '../shared/roblox-hub-cover';
 
 export {assertEnvironment, robloxMetadata} from './selected-roblox-qa-contract';
 
@@ -69,7 +70,14 @@ export function selectedPlan(base: string, input: unknown) {
     if (operation.publisher === 'roblox-wiki') {
       if (!slug(payload.slug) || !Number.isSafeInteger(payload.universe_id) || payload.universe_id <= 0 || payload.is_published === false || payload.cover_image != null) throw new QaFailure('Invalid selected hub identity or artwork override.');
       for (const key of ['title', 'seo_title', 'meta_description', 'description_md', 'tips_md']) if (typeof payload[key] === 'string') payload[key] = payload[key].trim();
-      hubs.push({path: `/wiki/${payload.slug}`, final: payload});
+      // A deterministic QA-only companion binds generated publisher output without
+      // changing the approved authoring final or the shared content schema.
+      const cover = publishedHubCover(payload.universe_id, json(bundleInput(base, `${operation.file}.qa-cover.json`)));
+      const coverFile = bundleInput(base, cover.file);
+      if (fs.statSync(coverFile).size > 1_000_000) throw new QaFailure('Frozen hub cover exceeds 1 MB.');
+      const bytes = fs.readFileSync(coverFile);
+      same(cover.sha256, hash(bytes), 'Frozen hub cover bytes');
+      hubs.push({path: `/wiki/${payload.slug}`, final: payload, cover});
       continue;
     }
     const manifest = payload, root = path.posix.dirname(operation.file);
@@ -109,6 +117,50 @@ function database(downloaded = true) {
 }
 const result = async (query: PromiseLike<any>) => { const response = await query; if (response.error) throw new QaFailure('Managed QA database operation failed.'); return response.data; };
 const resolveCount = (value: any, count: number): any => typeof value === 'string' ? value.replaceAll('{count}', count.toLocaleString('en-US')) : Array.isArray(value) ? value.map(child => resolveCount(child, count)) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, child]) => [key, resolveCount(child, count)])) : value;
+/** Bound network reads as well as decoding; reject redirects before consuming bytes. */
+async function artworkBytes(url: string, maxBytes: number, fetcher: typeof fetch) {
+  const response = await fetcher(url, {redirect: 'error', signal: AbortSignal.timeout(30_000)});
+  if (!response.ok || response.redirected || !response.body || !response.headers.get('content-type')?.startsWith('image/')) throw new QaFailure('Hub artwork is unavailable or is not an image.');
+  const reader = response.body.getReader(), chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      size += value.length;
+      if (size > maxBytes) throw new QaFailure('Hub artwork exceeds its byte limit.');
+      chunks.push(value);
+    }
+  } finally { await reader.cancel(); }
+  return Buffer.concat(chunks);
+}
+
+export async function verifyPublishedHubArtwork(
+  hub: {final: {universe_id: number}; cover: ReturnType<typeof publishedHubCover>},
+  row: {cover_image: unknown}, universe: {icon_url: unknown; thumbnail_urls?: unknown}, fetcher: typeof fetch = fetch
+) {
+  const cover = publishedHubCover(hub.final.universe_id, {file: hub.cover.file, sha256: hub.cover.sha256, format: hub.cover.format});
+  // Exact equality rejects alternate origins, universes, hashes, extensions,
+  // credentials, ports, query strings, fragments and URL-normalization tricks.
+  same(cover.url, row.cover_image, 'Published hub cover URL');
+  const fields = {...universe, cover_image: cover.url, icon_url: typeof universe.icon_url === 'string' ? universe.icon_url : null};
+  same(cover.url, resolveWikiCardImage(fields), 'Rendered wiki card cover');
+  same(cover.url, resolveWikiMetadataImage(fields), 'Rendered wiki metadata cover');
+  const bytes = await artworkBytes(cover.url, 1_000_000, fetcher);
+  same(cover.sha256, hash(bytes), 'Published hub cover SHA256');
+  const decoded = await validateRobloxHubCover(bytes, bytes, cover.sha256);
+  same(cover.format, decoded.format, 'Published hub cover format');
+  await sharp(bytes, {failOn: 'error', limitInputPixels: 768 * 432}).raw().toBuffer();
+  const icon = universe.icon_url;
+  if (typeof icon !== 'string' || !icon.startsWith('https://') || icon === cover.url) throw new QaFailure('Hub requires a distinct HTTPS icon.');
+  const iconBytes = await artworkBytes(icon, 5_000_000, fetcher);
+  const image = sharp(iconBytes, {failOn: 'error', limitInputPixels: 512 * 512});
+  const metadata = await image.metadata();
+  same(512, metadata.width, 'Hub icon width'); same(512, metadata.height, 'Hub icon height');
+  await image.raw().toBuffer();
+  return {icon, cover: {...cover, bytes: bytes.length, width: 768, height: 432}};
+}
+
 async function verify() {
   const {base, plan} = selection(), db = database(), state = json(privateFile('state'));
   same(state.digest, contentDigest(base), 'Frozen bundle digest');
@@ -117,19 +169,12 @@ async function verify() {
     const row = await result(db.from('wiki_pages').select('*').eq('slug', hub.final.slug).single());
     for (const key of ['slug', 'universe_id', 'title', 'seo_title', 'meta_description', 'description_md', 'tips_md']) same(hub.final[key], row[key], `Hub ${key}`);
     same(hub.final.controls_json ?? [], row.controls_json, 'Hub controls');
-    same(null, row.cover_image, 'Hub cover override'); same(true, row.is_published, 'Hub publication');
+    same(true, row.is_published, 'Hub publication');
     const universe = await result(db.from('roblox_universes').select('icon_url,thumbnail_urls').eq('universe_id', row.universe_id).single());
-    const thumb = pickWikiThumbnail(universe.thumbnail_urls);
-    if (!thumb || !universe.icon_url || thumb === universe.icon_url) throw new QaFailure('Hub requires distinct official icon and thumbnail.');
-    for (const [url, width, height] of [[universe.icon_url, 512, 512], [thumb, 768, 432]] as const) {
-      if (!url.startsWith('https://')) throw new QaFailure('Official artwork must be hosted over HTTPS.');
-      const response = await fetch(url, {redirect: 'error', signal: AbortSignal.timeout(30_000)});
-      if (!response.ok) throw new QaFailure('Official hub artwork is unavailable.');
-      const metadata = await sharp(Buffer.from(await response.arrayBuffer())).metadata();
-      same(width, metadata.width, 'Official artwork width'); same(height, metadata.height, 'Official artwork height');
-    }
-    browser.hubs.push({...hub, icon: universe.icon_url, thumb});
-    readback.push({path: hub.path, fieldsCompared: Object.keys(hub.final), officialArtwork: {icon: universe.icon_url, thumb}});
+    const artwork = await verifyPublishedHubArtwork(hub, row, universe);
+    media.add(artwork.cover.url); media.add(artwork.icon);
+    browser.hubs.push({...hub, ...artwork});
+    readback.push({path: hub.path, fieldsCompared: [...Object.keys(hub.final), 'cover_image'], artwork});
   }
   for (const entry of plan.collections) {
     const {manifest, dataset, final} = entry;

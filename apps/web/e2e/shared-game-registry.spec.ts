@@ -96,27 +96,12 @@ for (const coverageCase of cases) {
     const missing = coverageCase === "non-collection-page-2" || coverageCase === "unknown-path";
     expect(response?.status()).toBe(missing ? 404 : 200);
     if (missing) {
-      // A 404 must never advertise the healthy base page as its canonical URL.
-      const canonicalLink = page.locator('link[rel="canonical"]');
-      const canonical = await canonicalLink.count() ? await canonicalLink.getAttribute("href") : null;
-      if (canonical) {
-        expect(canonical).toBe(`https://bloxodes.com${path}`);
-        const metadata = await seo(page);
-        expect(metadata.ogUrl).toBe(canonical);
-        expect(metadata.title).toContain(metadata.ogTitle);
-      } else {
-        // Early notFound uses layout metadata. Compare its OG URL/title with
-        // another early 404 instead of demanding successful-page metadata.
-        const og = async () => ({
-          // Layout-level 404 metadata can repeat these tags; compare the first.
-          url: await page.locator('meta[property="og:url"]').first().getAttribute("content"),
-          title: await page.locator('meta[property="og:title"]').first().getAttribute("content"),
-        });
-        const actual = await og();
-        const fallback = await page.goto(`${entry.canonical_path}/__registry_missing_page__/page/2`, { waitUntil: "domcontentloaded" });
-        expect(fallback?.status()).toBe(404);
-        expect(actual).toEqual(await og());
-      }
+      // Missing pages have their own error title and no successful-page URL.
+      await expect(page).toHaveTitle("404 — Page Not Found | Bloxodes");
+      await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+      await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+      await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
     } else {
       await expect(page.locator("main")).toBeVisible();
       await expect(page.locator("h1")).toHaveCount(1);
