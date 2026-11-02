@@ -106,10 +106,14 @@ async function verify() {
     for (const [index, authored] of dataset.items.entries()) {
       const {name, ...fields} = authored.item;
       const item: any = {item_slug: authored.system.slug, item_name: name.trim(), section: authored.system.section.trim(), sort_order: Number.isInteger(authored.system.sortOrder) ? authored.system.sortOrder : index + 1, fields_json: fields, image_key: null, image_mime: null, image_width: null, image_height: null, image_bytes: null, image_sha256: null};
+      const saved = rows.find(row => row.item_slug === item.item_slug);
+      if (!saved) throw new Error(`Missing selected item: ${item.item_slug}`);
       if (authored.system.image) {
         const relative = path.relative(base, path.join(entry.mediaRoot, authored.system.image.replace(/^media\//, ''))).split(path.sep).join('/');
         const image = await preparedImage(bundleInput(base, relative));
-        item.image_key = collectionImageKey({namespace: plan.namespace, mediaPrefix: plan.namespace, gameSlug: manifest.game.slug, collectionSlug: manifest.collection.slug, itemSlug: item.item_slug, hash: image.hash, extension: image.mime === 'image/jpeg' ? 'jpg' : image.mime.replace('image/', '')});
+        // Repeat publication keeps the stored key when the item's image is unchanged; its public bytes are still checked below.
+        const storedKey = saved.image_sha256 === image.hash && saved.image_key?.startsWith(`${plan.namespace}/`) ? saved.image_key : null;
+        item.image_key = storedKey ?? collectionImageKey({namespace: plan.namespace, mediaPrefix: plan.namespace, gameSlug: manifest.game.slug, collectionSlug: manifest.collection.slug, itemSlug: item.item_slug, hash: image.hash, extension: image.mime === 'image/jpeg' ? 'jpg' : image.mime.replace('image/', '')});
         Object.assign(item, {image_mime: image.mime, image_width: image.width, image_height: image.height, image_bytes: image.bytes.length, image_sha256: image.hash});
         if (!verifiedMedia.has(item.image_key)) {
           const mediaUrl = `https://media.bloxodes.com/wiki/${item.image_key.split('/').map(encodeURIComponent).join('/')}`;
@@ -119,8 +123,6 @@ async function verify() {
           verifiedMedia.add(item.image_key);
         }
       }
-      const saved = rows.find(row => row.item_slug === item.item_slug);
-      if (!saved) throw new Error(`Missing selected item: ${item.item_slug}`);
       for (const [key, value] of Object.entries(item)) same(value, saved[key], `${final.code}/${item.item_slug}.${key}`);
       expected.push(item);
     }
