@@ -42,7 +42,7 @@ export function storedGameLinkMigrationFixture(repair: string): string {
       before.push(unchanged); after.push(unchanged);
     }
     const prose = "Keep the player's route notes, task order and reward amounts: 42. ";
-    const shape = (parts: string[]) => f.field.endsWith("_json")
+    const shape = (parts: string[]) => /_(json|data)$/.test(f.field)
       ? { nested: [null, 42, false, { text: prose + parts.join("\n"), assets: ["/gta/maps/gta5/tiles/1/2/3.png", "/red-dead/maps/rdr2/icon.webp"] }], empty: {} }
       : prose + parts.join("\n") + "\n/gta/maps/gta5/tiles/1/2/3.png";
     row[f.field] = shape(before);
