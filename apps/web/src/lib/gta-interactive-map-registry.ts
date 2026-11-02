@@ -12,7 +12,7 @@ export function getGtaInteractiveMapDefinition(slug: string): GtaMapDefinition |
 }
 
 export function getGtaMapRouteForWikiSlug(wikiSlug: string): string | null {
-  if (wikiSlug === "gta-5") return "/gta/maps/gta5";
+  if (wikiSlug === "gta-5") return "/maps/gta5";
   const definition = GTA_INTERACTIVE_MAPS.find((map) =>
     map.wikiSlug === wikiSlug
     || map.layers.some((layer) => layer.collection?.wikiSlug === wikiSlug)
