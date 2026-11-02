@@ -66,7 +66,7 @@ function printUsage() {
   npm run export:shared-game-collection-workspace -- --namespace <slug> --game <game-slug> --collection <collection-slug> --output-root <directory> [options]
 
 Options:
-  --namespace <slug>    Read this non-Roblox namespace. Defaults to gta for the legacy GTA alias.
+  --namespace <slug>    Read this non-Roblox namespace. Required.
   --allow-remote-read   Allow an intentional read-only export outside managed development.
   --workspace           Export dataset.json, media/, final.json, and runtime-manifest.json.
   --force               Replace an existing final.json.
@@ -79,7 +79,7 @@ This helper reads one managed-development shared game collection revision and wr
 
 function parseArgs(argv: string[]): CliOptions {
   const options: CliOptions = {
-    namespace: "gta",
+    namespace: "",
     game: null,
     collection: null,
     outputRoot: null,
@@ -127,7 +127,7 @@ function parseArgs(argv: string[]): CliOptions {
         throw new Error(`Unknown option: ${arg}`);
     }
   }
-  if (options.namespace === "minecraft" && !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(options.game)) throw new Error("Minecraft requires an approved edition identity.");
+  if (!options.namespace) throw new Error("--namespace is required");
   if (!options.game) throw new Error("--game is required");
   if (!options.collection) throw new Error("--collection is required");
   if (!options.dryRun && !options.outputRoot) throw new Error("--output-root is required unless --dry-run is used");
@@ -227,8 +227,8 @@ async function main() {
     .select("title")
     .eq("id", row.game_id)
     .maybeSingle();
-  if (gameError) throw new Error(`Failed to read GTA game: ${gameError.message}`);
-  if (!gameData?.title) throw new Error(`Missing GTA game for ${row.code}.`);
+  if (gameError) throw new Error(`Failed to read game: ${gameError.message}`);
+  if (!gameData?.title) throw new Error(`Missing game for ${row.code}.`);
   const finalJson = {
     wiki_slug: row.wiki_slug,
     collection_slug: row.collection_slug,

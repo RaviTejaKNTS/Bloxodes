@@ -18,7 +18,7 @@ function pickRelated(options: CollectionLink[], currentCode: string): Collection
 }
 
 /**
- * Franchise collection pages (GTA, Red Dead, Minecraft and shared games): main column plus the
+ * Shared game collection pages: main column plus the
  * right rail. Mediavine adds sticky sidebar ads after the rail's short content.
  */
 export function GameCollectionSidebarLayout({

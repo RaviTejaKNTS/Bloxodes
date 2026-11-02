@@ -316,12 +316,11 @@ export function auditDataset(code: string, datasetPath: string, document: Datase
       issues,
       code,
       datasetPath,
-      `Dataset has only ${usefulItemFields.length} useful item field(s) beyond name/cardSummary (${usefulItemFields.join(", ") || "none"}). Enrich to GTABase parity before publishing.`
+      `Dataset has only ${usefulItemFields.length} useful item field(s) beyond name/cardSummary (${usefulItemFields.join(", ") || "none"}). Add useful item details before publishing.`
     );
   }
 
   const FILLER_PATTERNS = [
-    /open wheel vehicle in gta online/i,
     /listed online vehicle entry/i,
     /use the image to confirm/i,
     /use the item image and location note/i,
@@ -398,35 +397,30 @@ export function auditDataset(code: string, datasetPath: string, document: Datase
     }
   }
 
-  if (code.startsWith("gta-")) {
-    const itemRows = items.filter((row): row is Record<string, unknown> => isRecord(row) && isRecord(row.item))
-      .map((row) => row.item as Record<string, unknown>);
-    const emptyFields = itemFields.filter((field) => field !== "name" && !itemRows.some((item) => hasContent(item[field])));
-    if (emptyFields.length) {
-      addIssue(issues, code, datasetPath, `Declared fields are empty in every item: ${emptyFields.join(", ")}. Remove unsupported fields or research their values.`);
+  const itemRows = items.filter((row): row is Record<string, unknown> => isRecord(row) && isRecord(row.item))
+    .map((row) => row.item as Record<string, unknown>);
+  const emptyFields = itemFields.filter((field) => field !== "name" && !itemRows.some((item) => hasContent(item[field])));
+  if (emptyFields.length) {
+    addIssue(issues, code, datasetPath, `Declared fields are empty in every item: ${emptyFields.join(", ")}. Remove unsupported fields or research their values.`, "warning");
+  }
+  for (const [field, source] of [["objectives", "cardSummary"], ["mapHint", "location"]] as const) {
+    const comparable = itemRows.filter((item) => hasContent(item[field]) && hasContent(item[source]));
+    const duplicates = comparable.filter((item) => JSON.stringify(item[field]) === JSON.stringify(item[source]));
+    if (comparable.length >= 3 && duplicates.length / comparable.length >= 0.8) {
+      addIssue(issues, code, datasetPath, `${duplicates.length}/${comparable.length} ${field} values duplicate ${source}; add distinct, useful detail or remove the field.`);
     }
-    for (const [field, source] of [["objectives", "cardSummary"], ["mapHint", "location"]] as const) {
-      const comparable = itemRows.filter((item) => hasContent(item[field]) && hasContent(item[source]));
-      const duplicates = comparable.filter((item) => JSON.stringify(item[field]) === JSON.stringify(item[source]));
-      if (comparable.length >= 3 && duplicates.length / comparable.length >= 0.8) {
-        addIssue(issues, code, datasetPath, `${duplicates.length}/${comparable.length} ${field} values duplicate ${source}; add distinct, useful detail or remove the field.`);
-      }
-    }
-    const generic = itemRows.filter((item) => ["cardSummary", "description", "objectives", "mapHint", "modeRules"]
-      .some((field) => typeof item[field] === "string" && /mission details and requirements for|use the (?:item )?image to|search exact (?:perch|location) shown in image|complete the team objective, survive the round and outscore/i.test(item[field] as string)));
-    if (generic.length) {
-      addIssue(issues, code, datasetPath, `${generic.length} item(s) contain known generic or misleading descriptive text.`);
-    }
-    const wrongCrewMax = itemRows.filter((item) => {
-      const range = typeof item.players === "string" ? item.players.match(/^\s*\d+\s*[-–]\s*(\d+)\s*$/) : null;
-      return range && hasContent(item.crewMax) && String(item.crewMax).trim() !== range[1];
-    });
-    if (wrongCrewMax.length) {
-      addIssue(issues, code, datasetPath, `${wrongCrewMax.length} item(s) have crewMax conflicting with the listed player range.`);
-    }
-    if (code === "gta-online-criminal-careers" && itemRows.some((item) => hasContent(item.payout) || hasContent(item.rankUnlock))) {
-      addIssue(issues, code, datasetPath, "Career Builder paths are starting business choices, not ranked jobs with fixed payouts.");
-    }
+  }
+  const generic = itemRows.filter((item) => ["cardSummary", "description", "objectives", "mapHint", "modeRules"]
+    .some((field) => typeof item[field] === "string" && /mission details and requirements for|use the (?:item )?image to|search exact (?:perch|location) shown in image|complete the team objective, survive the round and outscore/i.test(item[field] as string)));
+  if (generic.length) {
+    addIssue(issues, code, datasetPath, `${generic.length} item(s) contain known generic or misleading descriptive text.`);
+  }
+  const wrongCrewMax = itemRows.filter((item) => {
+    const range = typeof item.players === "string" ? item.players.match(/^\s*\d+\s*[-–]\s*(\d+)\s*$/) : null;
+    return range && hasContent(item.crewMax) && String(item.crewMax).trim() !== range[1];
+  });
+  if (wrongCrewMax.length) {
+    addIssue(issues, code, datasetPath, `${wrongCrewMax.length} item(s) have crewMax conflicting with the listed player range.`);
   }
 }
 

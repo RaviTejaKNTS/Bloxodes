@@ -8,7 +8,7 @@ These routes back interactive site features, search, tool data, session/progress
 
 `/api/games/[namespace]/collections/progress` is the one progress endpoint for every non-Roblox game, including GTA map progress. Keep session ownership, trusted-origin checks, rate limits, published collection/item validation and private no-store responses. Roblox progress uses its existing tables and endpoints.
 
-Shared comments resolve their exact published canonical paths. Search accepts generic game content types alongside preserved GTA, Red Dead and Minecraft types. `/api/revalidate` consumes `game_content` with a namespace-owned path and invalidates dependent hubs, maps, tools, sitemaps and feeds. These changes currently target managed development.
+Shared comments resolve their exact published canonical paths. Search returns shared `game_*` types. `/api/revalidate` consumes `game_content` with a namespace-owned path and invalidates dependent hubs, maps, tools, sitemaps and feeds.
 
 ## Endpoint Groups
 
@@ -112,18 +112,13 @@ Shared comments resolve their exact published canonical paths. Search accepts ge
 2. Reuse existing data helpers from `apps/web/src/lib/*` where possible.
 3. Add cache invalidation if the endpoint mutates data consumed by cached pages or loaders.
 
-## Red Dead and collectible rollout (2026-09-07)
+## Collection page types
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Before October 6, Red Dead used isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+Wiki collection page types are `database` and `collectible` for every game. Standalone `/checklists` pages and progress storage keys are separate from them.
 
-Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+## Standalone game checklists
 
-
-## GTA standalone checklist support (2026-09-10)
-
-Minecraft reuses search, comments and revalidation. Search entries and comment ownership resolve to the saved edition’s permanent wiki/collection URL. Wiki/game events carry the editorial edition slug; collection events carry the full collection code. Revalidation covers the edition hub, collection pagination, neutral indexes, Minecraft sitemap and feed. Shared tool events retain tool slugs. No cookie selects public content.
-
-`checklists/progress` also serves GTA standalone checklists using `gta:<game-slug>` keys. Validate GTA published-page membership and real leaf IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/api/games/[namespace]/collections/progress`.
+`checklists/progress` serves standalone checklists for every game through `<namespace>:<slug>` keys. `game-checklist-progress.ts` validates published membership and leaf task IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/api/games/[namespace]/collections/progress`.
 
 ## Shared quiz progress
 

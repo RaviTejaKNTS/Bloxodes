@@ -2,24 +2,16 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { specialistMapAndToolPaths } from "../specialist-public-paths";
 
-for (const moved of [false, true]) {
-  test(`ad audits seed stored specialist URLs, moved=${moved}`, async () => {
-    const map = moved ? "/maps/gta5" : "/gta/maps/gta5";
-    const tool = moved ? "/tools/minecraft-xp-calculator" : "/minecraft/tools/xp-calculator";
-    const requested: string[] = [];
-    const request = (async (url: unknown) => {
-      requested.push(String(url));
-      return new Response(`<urlset>${[
-        String(url).includes("gta.xml") ? map : tool,
-        "/wiki/unrelated", // other sitemap page families do not seed the map/tool audit
-      ].map(path => `<url><loc>https://bloxodes.com${path}</loc></url>`).join("")}</urlset>`);
-    }) as typeof fetch;
-    assert.deepEqual(await specialistMapAndToolPaths("https://preview.example", request), [map, tool]);
-    assert.equal(requested.length, 2);
-  });
-}
+test("ad audits discover all shared canonical maps and tools", async () => {
+  const paths = ["/maps/gta5", "/tools/minecraft-xp-calculator", "/maps/new-game", "/wiki/unrelated"];
+  const request = (async (url: unknown) => {
+    assert.equal(String(url), "https://preview.example/sitemaps/games.xml");
+    return new Response(`<urlset>${paths.map(path => `<url><loc>https://bloxodes.com${path}</loc></url>`).join("")}</urlset>`);
+  }) as typeof fetch;
+  assert.deepEqual(await specialistMapAndToolPaths("https://preview.example", request), paths.slice(0, 3));
+});
 
-test("fails rather than silently dropping specialist coverage on a sitemap outage", async () => {
+test("fails on a sitemap outage", async () => {
   const request = (async () => new Response("Unavailable", { status: 503 })) as typeof fetch;
   await assert.rejects(specialistMapAndToolPaths("https://preview.example", request), /canonical route discovery failed: HTTP 503/);
 });

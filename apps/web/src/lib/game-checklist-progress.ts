@@ -2,9 +2,9 @@ import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 import { supabaseAdmin } from "@/lib/supabase";
 
-// Existing Roblox progress keys stay unchanged. GTA standalone checklists share
-// the same account/browser protocol with a disjoint namespace.
-export async function validateGtaChecklistProgress(key: string, checkedIds?: string[]) {
+// Shared game checklists use namespace:slug keys in the account/browser protocol.
+// Existing Roblox progress keys stay unchanged.
+export async function validateGameChecklistProgress(key: string, checkedIds?: string[]) {
   if (!key.includes(":") || key.startsWith("wiki-collection:")) return null;
   const [namespace, ...parts] = key.split(":");
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || namespace === "roblox" || parts.length !== 1) return {status:400,error:"Invalid game checklist."};

@@ -93,7 +93,7 @@ When `brief.md` comes back, check that:
 - The collection is durable, useful and source-backed.
 - Item fields help players compare items.
 - The section plan is clear and useful for players, and section labels aren't source-table noise.
-- The page type is explicit: finite player-completed goals use `collectible`, reference rosters use `database`. Preserve Minecraft edition identities and its `database` page-type restriction.
+- The page type is explicit: finite player-completed goals use `collectible`, reference rosters use `database`. Preserve each game's stored identity and canonical path.
 
 ## Data checks
 

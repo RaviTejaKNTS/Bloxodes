@@ -68,7 +68,7 @@ Use this after `bloxodes-franchise-wiki-research` and parent approval. Write one
 - `cover_image` **(required)**: a landscape 16:9 image for cards and social previews. Official key art, store art or a real gameplay screenshot. Never pad portrait box art into a wide frame.
 - `hero_image` **(required)**: a separate square-friendly image for the thumbnail beside the title. Never reuse the cover URL.
 
-Both images are served from Bloxodes media (`https://media.bloxodes.com/wiki/...`), never hotlinked. Stage them with `npm run sync:franchise-wiki-media -- --namespace <slug>` (GTA uses `sync:gta-wiki-media`, Minecraft `sync:minecraft-wiki-media`). A hub without both images isn't ready: don't hand it in, send it back to the image stage.
+Both images are served from Bloxodes media (`https://media.bloxodes.com/wiki/...`), never hotlinked. Keep them in the bundle as local files or hosted URLs under `https://media.bloxodes.com/wiki/<namespace>/`; `content:publish` validates and uploads them. A hub without both images isn't ready: don't hand it in, send it back to the image stage.
 
 ## Franchise differences
 

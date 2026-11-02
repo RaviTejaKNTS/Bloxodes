@@ -38,13 +38,13 @@ async function main() {
   }
  }
  await Promise.all([worker(),worker(),worker()]);
- for(const route of ["/gta/wiki/not-a-real-game","/minecraft/not-an-edition/wiki","/shared-verification/wiki/not-a-real-collection","/shared-verification/wiki/machines/page/999999"]) assert.equal((await fetch(`${base}${route}`,{signal:AbortSignal.timeout(60000)})).status,404,`Invalid route ${route}`);
- for(const ns of ["gta","red-dead","shared-verification"]) {
+ for(const route of ["/wiki/not-a-real-game","/wiki/shared-verification/not-a-real-collection","/wiki/shared-verification/machines/page/999999"]) assert.equal((await fetch(`${base}${route}`,{signal:AbortSignal.timeout(60000)})).status,404,`Invalid route ${route}`);
+ for(const ns of [...new Set([...paths].filter(path => path.startsWith("/games/")).map(path => path.split("/")[2])), "shared-verification"]) {
   const endpoint=`/api/games/${ns}/collections/progress`;
   assert.equal((await fetch(`${base}${endpoint}`)).status,401,`Anonymous progress ${ns}`);
   assert.equal((await fetch(`${base}${endpoint}`,{method:"PUT",headers:{Origin:"https://untrusted.example","Content-Type":"application/json"},body:'{}'})).status,403,`Origin guard ${ns}`);
  }
- for(const path of ["/sitemaps/games.xml","/sitemaps/gta.xml","/sitemaps/red-dead.xml","/sitemaps/minecraft.xml","/sitemap.xml","/feed.xml"]) {
+ for(const path of ["/sitemaps/games.xml","/sitemap.xml","/feed.xml"]) {
   const response=await fetch(`${base}${path}`,{signal:AbortSignal.timeout(120000)});assert.equal(response.status,200,`Discovery ${path}`);
   const body=await response.text();assert.match(body,/<\?xml|<urlset|<sitemapindex|<rss/,`XML ${path}`);
  }
