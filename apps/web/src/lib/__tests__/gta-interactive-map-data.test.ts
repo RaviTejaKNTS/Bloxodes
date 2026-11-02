@@ -90,10 +90,10 @@ describe("GTA interactive map data", () => {
 
   it("connects game hubs and episodes to the correct map routes", () => {
     for (const slug of Object.keys(mapFiles)) {
-      expect(getGtaMapRouteForWikiSlug(slug)).toBe("/gta/maps/" + slug);
+      expect(getGtaMapRouteForWikiSlug(slug)).toBe("/maps/" + slug);
     }
-    expect(getGtaMapRouteForWikiSlug("gta-4-tlad")).toBe("/gta/maps/gta-4");
-    expect(getGtaMapRouteForWikiSlug("gta-4-tbogt")).toBe("/gta/maps/gta-4");
-    expect(getGtaMapRouteForWikiSlug("gta-5")).toBe("/gta/maps/gta5");
+    expect(getGtaMapRouteForWikiSlug("gta-4-tlad")).toBe("/maps/gta-4");
+    expect(getGtaMapRouteForWikiSlug("gta-4-tbogt")).toBe("/maps/gta-4");
+    expect(getGtaMapRouteForWikiSlug("gta-5")).toBe("/maps/gta5");
   });
 });

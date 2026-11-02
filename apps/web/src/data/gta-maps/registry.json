@@ -6,7 +6,7 @@
     "mapTitle": "GTA San Andreas interactive map",
     "description": "Explore mapped collectibles, challenges, services, and named locations across the State of San Andreas, Los Santos, and San Fierro. Track supported collections as you play.",
     "summary": "Explore the State of San Andreas, Los Santos, and San Fierro with mapped collectibles, challenges, pickups, and useful places.",
-    "route": "/gta/maps/gta-san-andreas",
+    "route": "/maps/gta-san-andreas",
     "views": [
       {
         "slug": "state",
@@ -264,7 +264,7 @@
         "collectionSlug": "import-export",
         "label": "Import/export vehicle checklist",
         "note": "The guide tracks the required vehicle roster; the plotted points are guide locations.",
-        "href": "/gta/wiki/gta-san-andreas/import-export"
+        "href": "/wiki/gta-san-andreas/import-export"
       }
     ],
     "about": [
@@ -281,7 +281,7 @@
     "mapTitle": "GTA Vice City interactive map",
     "description": "Explore Vice City hidden packages, rampages, stunt jumps, store robberies, weapons, clothing, and other mapped locations. Track supported collection guides from the map.",
     "summary": "Find hidden packages, rampages, stunt jumps, stores, weapons, and clothing across Vice City.",
-    "route": "/gta/maps/gta-vice-city",
+    "route": "/maps/gta-vice-city",
     "views": [
       {
         "slug": "vice-city",
@@ -424,7 +424,7 @@
     "mapTitle": "GTA III interactive map",
     "description": "Explore Liberty City hidden packages, rampages, unique stunt jumps, weapons, and pickups. Switch between original and alternate rampage locations without double-counting progress.",
     "summary": "Track Liberty City packages, rampages, and stunt jumps, with selectable rampage location variants.",
-    "route": "/gta/maps/gta-iii",
+    "route": "/maps/gta-iii",
     "views": [
       {
         "slug": "liberty-city",
@@ -541,7 +541,7 @@
     "mapTitle": "GTA IV and Episodes interactive map",
     "description": "Explore Liberty City for GTA IV, The Lost and Damned, and The Ballad of Gay Tony. Switch game mode to browse pigeons, stunt jumps, episode seagulls, random characters, pickups, and more.",
     "summary": "One Liberty City map for GTA IV, The Lost and Damned, and The Ballad of Gay Tony, with mode-specific layers.",
-    "route": "/gta/maps/gta-4",
+    "route": "/maps/gta-4",
     "views": [
       {
         "slug": "liberty-city",
@@ -800,25 +800,25 @@
         "wikiSlug": "gta-4",
         "collectionSlug": "side-missions-activities",
         "label": "GTA IV side missions and activities",
-        "href": "/gta/wiki/gta-4/side-missions-activities"
+        "href": "/wiki/gta-4/side-missions-activities"
       },
       {
         "wikiSlug": "gta-4-tlad",
         "collectionSlug": "angus-bike-thefts",
         "label": "Angus' bike thefts",
-        "href": "/gta/wiki/gta-4-tlad/angus-bike-thefts"
+        "href": "/wiki/gta-4-tlad/angus-bike-thefts"
       },
       {
         "wikiSlug": "gta-4-tlad",
         "collectionSlug": "bike-races",
         "label": "Bike races",
-        "href": "/gta/wiki/gta-4-tlad/bike-races"
+        "href": "/wiki/gta-4-tlad/bike-races"
       },
       {
         "wikiSlug": "gta-4-tbogt",
         "collectionSlug": "base-jumps",
         "label": "Base jumps",
-        "href": "/gta/wiki/gta-4-tbogt/base-jumps"
+        "href": "/wiki/gta-4-tbogt/base-jumps"
       }
     ],
     "about": [
@@ -835,7 +835,7 @@
     "mapTitle": "GTA Liberty City Stories interactive map",
     "description": "Explore Liberty City Stories hidden packages, rampages, stunt jumps, weapons, and pickups on one zoomable map. Track supported collection progress from each marker.",
     "summary": "Find hidden packages, rampages, stunt jumps, weapons, and pickups around Liberty City.",
-    "route": "/gta/maps/gta-liberty-city-stories",
+    "route": "/maps/gta-liberty-city-stories",
     "views": [
       {
         "slug": "liberty-city",
@@ -943,7 +943,7 @@
     "mapTitle": "GTA Vice City Stories interactive map",
     "description": "Explore Vice City Stories empire sites, red balloons, rampages, stunt jumps, stores, weapons, and vehicles. Switch PSP and PlayStation 2 views to see edition-specific locations.",
     "summary": "Find empire building sites, red balloons, rampages, stunt jumps, stores, pickups, and vehicles around Vice City.",
-    "route": "/gta/maps/gta-vice-city-stories",
+    "route": "/maps/gta-vice-city-stories",
     "views": [
       {
         "slug": "vice-city",
@@ -1112,7 +1112,7 @@
     "mapTitle": "GTA Chinatown Wars interactive map",
     "description": "Explore Liberty City Chinatown Wars collectibles, drug dealers, camera sites, rampages, stunt jumps, street vendors, and pickups. Track mapped collection progress as you go.",
     "summary": "Track drug dealers, security cameras, rampages, stunt jumps, random characters, lions, and pickups across Liberty City.",
-    "route": "/gta/maps/gta-chinatown-wars",
+    "route": "/maps/gta-chinatown-wars",
     "views": [
       {
         "slug": "liberty-city",
@@ -1298,14 +1298,14 @@
         "wikiSlug": "gta-chinatown-wars",
         "collectionSlug": "random-encounters",
         "label": "Random encounters guide",
-        "href": "/gta/wiki/gta-chinatown-wars/random-encounters"
+        "href": "/wiki/gta-chinatown-wars/random-encounters"
       },
       {
         "wikiSlug": "gta-chinatown-wars",
         "collectionSlug": "lions-of-fo",
         "label": "Lion of Fo guide",
         "note": "The statues have randomized identities; the map shows possible statue locations, not a one-pin-per-collection-item checklist.",
-        "href": "/gta/wiki/gta-chinatown-wars/lions-of-fo"
+        "href": "/wiki/gta-chinatown-wars/lions-of-fo"
       }
     ],
     "about": [
@@ -1323,7 +1323,7 @@
     "mapTitle": "GTA Online interactive map",
     "description": "Explore GTA Online mapped stunt jumps, weapon and item pickups, store robberies, LS Tags, daily poster sites, seasonal ghost locations, and Air Freight mission jammers. Collection guides without verified map coordinates remain linked separately.",
     "summary": "Explore mapped GTA Online world locations, including stunt jumps, pickups, shops, seasonal event pins, and Air Freight cargo points.",
-    "route": "/gta/maps/gta-online",
+    "route": "/maps/gta-online",
     "views": [
       {
         "slug": "san-andreas",
@@ -1524,42 +1524,42 @@
         "collectionSlug": "action-figures",
         "label": "Action Figures",
         "note": "No source map page with verified coordinates is available for this collection.",
-        "href": "/gta/wiki/gta-online/action-figures"
+        "href": "/wiki/gta-online/action-figures"
       },
       {
         "wikiSlug": "gta-online",
         "collectionSlug": "playing-cards",
         "label": "Playing Cards",
         "note": "No source map page with verified coordinates is available for this collection.",
-        "href": "/gta/wiki/gta-online/playing-cards"
+        "href": "/wiki/gta-online/playing-cards"
       },
       {
         "wikiSlug": "gta-online",
         "collectionSlug": "signal-jammers",
         "label": "Signal Jammers (50 collectibles)",
         "note": "No source map page with verified coordinates is available for the 50 freemode collectible jammers. The seven Air Freight mission markers are separate.",
-        "href": "/gta/wiki/gta-online/signal-jammers"
+        "href": "/wiki/gta-online/signal-jammers"
       },
       {
         "wikiSlug": "gta-online",
         "collectionSlug": "media-sticks",
         "label": "Media Sticks",
         "note": "No source map page with verified coordinates is available for this collection.",
-        "href": "/gta/wiki/gta-online/media-sticks"
+        "href": "/wiki/gta-online/media-sticks"
       },
       {
         "wikiSlug": "gta-online",
         "collectionSlug": "movie-props",
         "label": "Movie Props",
         "note": "No source map page with verified coordinates is available for this collection.",
-        "href": "/gta/wiki/gta-online/movie-props"
+        "href": "/wiki/gta-online/movie-props"
       },
       {
         "wikiSlug": "gta-online",
         "collectionSlug": "peyote-plants",
         "label": "Peyote Plants",
         "note": "No source map page with verified coordinates is available for this collection.",
-        "href": "/gta/wiki/gta-online/peyote-plants"
+        "href": "/wiki/gta-online/peyote-plants"
       }
     ],
     "about": [

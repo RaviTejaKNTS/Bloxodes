@@ -1,0 +1,3670 @@
+[
+  {
+    "id": "21b041d8-6cdb-4252-828f-0fe29f5332cf",
+    "slug": "gta5",
+    "renderer": "gta5",
+    "before_hash": "5a01530f556e974af20f28e02d9e2620d51af2cd8ccd8298c1e59b78eb5ece1f",
+    "after_hash": "a5ff08cc94a3821809263e8ec7bac0fe04e000fbff814ba4f12dd5303ddce31e",
+    "edits": [
+      {
+        "path": [
+          "markerSnapshot",
+          0,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-1",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          1,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-2",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          2,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-3",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          3,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-4",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          4,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-5",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          5,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-6",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          6,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-7",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          7,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-8",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          8,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-9",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          9,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-10",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          10,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-11",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          11,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-12",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          12,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-13",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          13,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-14",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          14,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-15",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          15,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-16",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          16,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-17",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          17,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-18",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          18,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-19",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          19,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-20",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          20,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-21",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          21,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-22",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          22,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-23",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          23,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-24",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          24,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-25",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          25,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-26",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          26,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-27",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          27,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-28",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          28,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-29",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          29,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-30",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          30,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-31",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-31"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          31,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-32",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-32"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          32,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-33",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-33"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          33,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-34",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-34"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          34,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-35",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-35"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          35,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-36",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-36"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          36,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-37",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-37"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          37,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-38",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-38"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          38,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-39",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-39"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          39,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-40",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-40"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          40,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-41",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-41"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          41,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-42",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-42"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          42,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-43",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-43"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          43,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-44",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-44"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          44,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-45",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-45"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          45,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-46",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-46"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          46,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-47",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-47"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          47,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-48",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-48"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          48,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-49",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-49"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          49,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/spaceship-parts#item-spaceship-parts-50",
+        "after": "/wiki/gta-5/spaceship-parts#item-spaceship-parts-50"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          50,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-01-lsia-terminal-4-station",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-01-lsia-terminal-4-station"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          51,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-02-sightings-bar-restaurant",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-02-sightings-bar-restaurant"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          52,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-03-olifantus",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-03-olifantus"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          53,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-04-buccaneer-way-containers",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-04-buccaneer-way-containers"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          54,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-05-popular-street-tunnel",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-05-popular-street-tunnel"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          55,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-06-car-scrapyard",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-06-car-scrapyard"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          56,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-07-noose-headquarters-island",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-07-noose-headquarters-island"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          57,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-08-grove-street-house",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-08-grove-street-house"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          58,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-09-davis-mega-mall-container",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-09-davis-mega-mall-container"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          59,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-10-mile-high-club-crane",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-10-mile-high-club-crane"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          60,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-11-darnell-bros-bridge",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-11-darnell-bros-bridge"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          61,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-12-storm-drain-canals",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-12-storm-drain-canals"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          62,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-13-vinewood-racetrack-stands",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-13-vinewood-racetrack-stands"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          63,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-14-hawaiian-snow-skate-park",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-14-hawaiian-snow-skate-park"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          64,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-15-std-contractors-site",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-15-std-contractors-site"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          65,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-16-west-vinewood-motel",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-16-west-vinewood-motel"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          66,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-17-palomino-avenue-canal",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-17-palomino-avenue-canal"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          67,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-18-vespucci-beach-bowl",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-18-vespucci-beach-bowl"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          68,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-19-pearls-seafood",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-19-pearls-seafood"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          69,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-20-backlot-city-stage-12",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-20-backlot-city-stage-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          70,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-21-hill-valley-church-pond",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-21-hill-valley-church-pond"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          71,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-22-kortz-center-maze",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-22-kortz-center-maze"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          72,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-23-pacific-bluffs-country-club",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-23-pacific-bluffs-country-club"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          73,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-24-with-a-paddle-fruit-stall",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-24-with-a-paddle-fruit-stall"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          74,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-25-lake-vinewood-estates-games-room",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-25-lake-vinewood-estates-games-room"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          75,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-26-vinewood-sign",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-26-vinewood-sign"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          76,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-27-big-o-fruit-juice",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-27-big-o-fruit-juice"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          77,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-28-abandoned-mine",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-28-abandoned-mine"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          78,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-29-larry-tupper-billboard",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-29-larry-tupper-billboard"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          79,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-30-redwood-lights-track",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-30-redwood-lights-track"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          80,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-31-palmer-taylor-power-station-island",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-31-palmer-taylor-power-station-island"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          81,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-32-coveted-cove",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-32-coveted-cove"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          82,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-33-derelict-motel-pool",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-33-derelict-motel-pool"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          83,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-34-sandy-shores-airfield-rock",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-34-sandy-shores-airfield-rock"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          84,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-35-stoner-cement-works",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-35-stoner-cement-works"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          85,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-36-hill-valley-church-cemetery",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-36-hill-valley-church-cemetery"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          86,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-37-route-68-dry-culvert",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-37-route-68-dry-culvert"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          87,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-38-lago-zancudo-swamp",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-38-lago-zancudo-swamp"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          88,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-39-raton-canyon-cliff",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-39-raton-canyon-cliff"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          89,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-40-northwest-alamo-sea-rowboat",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-40-northwest-alamo-sea-rowboat"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          90,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-41-millars-boat-shop-fishery",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-41-millars-boat-shop-fishery"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          91,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-42-union-grain-farm-crop-tunnel",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-42-union-grain-farm-crop-tunnel"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          92,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-43-el-gordo-lighthouse",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-43-el-gordo-lighthouse"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          93,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-44-procopio-truck-stop-toilet",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-44-procopio-truck-stop-toilet"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          94,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-45-dignity-village-doorway",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-45-dignity-village-doorway"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          95,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-46-beekers-garage-derelict-house",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-46-beekers-garage-derelict-house"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          96,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-47-procopio-drive-house",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-47-procopio-drive-house"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          97,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-48-mount-chiliad-aerial-tramway",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-48-mount-chiliad-aerial-tramway"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          98,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-49-paleto-forest-sawmill",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-49-paleto-forest-sawmill"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          99,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/letter-scraps#item-letter-scrap-50-altruist-camp-radio-antenna",
+        "after": "/wiki/gta-5/letter-scraps#item-letter-scrap-50-altruist-camp-radio-antenna"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          100,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-1",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          101,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-2",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          102,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-3",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          103,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-4",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          104,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-5",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          105,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-6",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          106,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-7",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          107,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-8",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          108,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-9",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          109,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-10",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          110,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-11",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          111,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-12",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          112,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-13",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          113,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-14",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          114,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-15",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          115,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-16",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          116,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-17",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          117,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-18",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          118,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-19",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          119,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-20",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          120,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-21",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          121,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-22",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          122,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-23",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          123,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-24",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          124,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-25",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          125,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-26",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          126,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-27",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          127,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-28",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          128,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-29",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          129,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/nuclear-waste#item-nuclear-waste-30",
+        "after": "/wiki/gta-5/nuclear-waste#item-nuclear-waste-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          130,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-1",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          131,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-2",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          132,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-3",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          133,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-4",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          134,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-5",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          135,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-6",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          136,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-7",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          137,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-8",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          138,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-9",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          139,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-10",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          140,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-11",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          141,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-12",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          142,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-13",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          143,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-14",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          144,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-15",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          145,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-16",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          146,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-17",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          147,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-18",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          148,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-19",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          149,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-20",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          150,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-21",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          151,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-22",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          152,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-23",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          153,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-24",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          154,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-25",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          155,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-26",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          156,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-27",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          157,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-28",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          158,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-29",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          159,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/submarine-pieces#item-submarine-pieces-30",
+        "after": "/wiki/gta-5/submarine-pieces#item-submarine-pieces-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          160,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-1",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          161,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-2",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          162,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-3",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          163,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-4",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          164,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-5",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          165,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-6",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          166,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-7",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          167,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-8",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          168,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-9",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          169,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-10",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          170,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-11",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          171,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-12",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          172,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-13",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          173,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-14",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          174,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-15",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          175,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-16",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          176,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-17",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          177,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-18",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          178,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-19",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          179,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-20",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          180,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-21",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          181,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-22",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          182,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-23",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          183,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-24",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          184,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-25",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          185,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-26",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          186,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-27",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          187,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-28",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          188,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-29",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          189,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-30",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          190,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-31",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-31"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          191,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-32",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-32"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          192,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-33",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-33"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          193,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-34",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-34"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          194,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-35",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-35"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          195,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-36",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-36"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          196,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-37",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-37"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          197,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-38",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-38"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          198,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-39",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-39"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          199,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-40",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-40"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          200,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-41",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-41"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          201,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-42",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-42"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          202,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-43",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-43"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          203,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-44",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-44"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          204,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-45",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-45"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          205,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-46",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-46"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          206,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-47",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-47"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          207,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-48",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-48"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          208,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-49",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-49"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          209,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-50",
+        "after": "/wiki/gta-5/monkey-mosaics#item-monkey-mosaics-50"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          210,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-1",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          211,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-2",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          212,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-3",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          213,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-4",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          214,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-5",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          215,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-6",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          216,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-7",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          217,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-8",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          218,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-9",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          219,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-10",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          220,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-11",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          221,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-12",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          222,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-13",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          223,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-14",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          224,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-15",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          225,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-16",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          226,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-17",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          227,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-18",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          228,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-19",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          229,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-20",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          230,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-21",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          231,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-22",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          232,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-23",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          233,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-24",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          234,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-25",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          235,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-26",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          236,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/peyote-plants#item-peyote-plants-27",
+        "after": "/wiki/gta-5/peyote-plants#item-peyote-plants-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          237,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-1",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          238,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-2",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          239,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-3",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          240,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-4",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          241,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-5",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          242,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-6",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          243,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-7",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          244,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-8",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          245,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-9",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          246,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-10",
+        "after": "/wiki/gta-5/epsilon-tracts#item-epsilon-tracts-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          247,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-1",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          248,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-2",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          249,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-3",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          250,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-4",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          251,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-5",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          252,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-6",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          253,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-7",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          254,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-8",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          255,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-9",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          256,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-10",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          257,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-11",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          258,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-12",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          259,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-13",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          260,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-14",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          261,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/hidden-packages#item-hidden-packages-15",
+        "after": "/wiki/gta-5/hidden-packages#item-hidden-packages-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          262,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-1",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          263,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-2",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          264,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-3",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          265,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-4",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          266,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-5",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          267,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-6",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          268,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-7",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          269,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-8",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          270,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-9",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          271,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-10",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          272,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-11",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          273,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-12",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          274,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-13",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          275,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-14",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          276,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-15",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          277,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-16",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          278,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-17",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          279,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-18",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          280,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-19",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          281,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-20",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          282,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-21",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          283,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-22",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          284,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-23",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          285,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-24",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          286,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-25",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          287,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-26",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          288,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-27",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          289,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-28",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          290,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-29",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          291,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-30",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          292,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-31",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-31"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          293,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-32",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-32"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          294,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-33",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-33"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          295,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-34",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-34"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          296,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-35",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-35"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          297,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-36",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-36"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          298,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-37",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-37"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          299,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-38",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-38"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          300,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-39",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-39"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          301,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-40",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-40"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          302,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-41",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-41"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          303,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-42",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-42"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          304,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-43",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-43"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          305,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-44",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-44"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          306,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-45",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-45"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          307,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-46",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-46"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          308,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-47",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-47"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          309,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-48",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-48"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          310,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-49",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-49"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          311,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/stunt-jumps#item-stunt-jumps-50",
+        "after": "/wiki/gta-5/stunt-jumps#item-stunt-jumps-50"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          312,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-1",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          313,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-2",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          314,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-3",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          315,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-4",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          316,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-5",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          317,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-6",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          318,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-7",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          319,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-8",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          320,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-9",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          321,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-10",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          322,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-11",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          323,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-12",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          324,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-13",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          325,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-14",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          326,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-15",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-15"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          327,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-16",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-16"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          328,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-17",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-17"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          329,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-18",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-18"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          330,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-19",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-19"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          331,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-20",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-20"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          332,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-21",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-21"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          333,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-22",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-22"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          334,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-23",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-23"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          335,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-24",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-24"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          336,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-25",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-25"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          337,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-26",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-26"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          338,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-27",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-27"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          339,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-28",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-28"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          340,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-29",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-29"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          341,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-30",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-30"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          342,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-31",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-31"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          343,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-32",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-32"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          344,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-33",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-33"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          345,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-34",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-34"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          346,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-35",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-35"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          347,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-36",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-36"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          348,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-37",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-37"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          349,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-38",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-38"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          350,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-39",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-39"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          351,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-40",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-40"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          352,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-41",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-41"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          353,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-42",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-42"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          354,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-43",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-43"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          355,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-44",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-44"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          356,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-45",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-45"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          357,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-46",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-46"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          358,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-47",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-47"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          359,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-48",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-48"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          360,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-49",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-49"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          361,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/under-the-bridge#item-under-the-bridge-50",
+        "after": "/wiki/gta-5/under-the-bridge#item-under-the-bridge-50"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          362,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-1",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-1"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          363,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-2",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-2"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          364,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-3",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-3"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          365,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-4",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-4"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          366,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-5",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-5"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          367,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-6",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-6"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          368,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-7",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-7"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          369,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-8",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-8"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          370,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-9",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-9"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          371,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-10",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-10"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          372,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-11",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-11"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          373,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-12",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-12"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          374,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-13",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-13"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          375,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-14",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-14"
+      },
+      {
+        "path": [
+          "markerSnapshot",
+          376,
+          "guideUrl"
+        ],
+        "before": "/gta/wiki/gta-5/knife-flights#item-knife-flights-15",
+        "after": "/wiki/gta-5/knife-flights#item-knife-flights-15"
+      }
+    ]
+  },
+  {
+    "id": "64a15f2e-6188-4f81-8ba2-deb6bd8c7842",
+    "slug": "gta-chinatown-wars",
+    "renderer": "gta-layered",
+    "before_hash": "8fee8a2fbaacdc387c84aabff030cf13c110262caf9d8450781a7b998a137832",
+    "after_hash": "13d726d8ede6010bf897420ef51e6d2b91ae653cd36c23c93af8cc65f5c0c6b0",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-chinatown-wars",
+        "after": "/maps/gta-chinatown-wars"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          0,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-chinatown-wars/random-encounters",
+        "after": "/wiki/gta-chinatown-wars/random-encounters"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          1,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-chinatown-wars/lions-of-fo",
+        "after": "/wiki/gta-chinatown-wars/lions-of-fo"
+      }
+    ]
+  },
+  {
+    "id": "b1bfb684-ab75-406d-a224-841a4a5550b5",
+    "slug": "gta-san-andreas",
+    "renderer": "gta-layered",
+    "before_hash": "0f47f7b10c793147d2cf777c75a65005f51dd773f392bc197a45f05bb57ffb19",
+    "after_hash": "c4837a51bdd738d1df4e0ff33cbd4e43a5c636b0cbdc1b96bb4cfcd4306fd091",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-san-andreas",
+        "after": "/maps/gta-san-andreas"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          0,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-san-andreas/import-export",
+        "after": "/wiki/gta-san-andreas/import-export"
+      }
+    ]
+  },
+  {
+    "id": "db56cb07-3bbe-4108-9c02-0c9443b9e2df",
+    "slug": "gta-liberty-city-stories",
+    "renderer": "gta-layered",
+    "before_hash": "e971f3fb8934fccf58a79a1d562f1b826a7d5d332bcaa2692ca325bd7941b64a",
+    "after_hash": "a952bbe246eaf40e6789d55a64622960351fd1ed62646eef7d0c186b951d8f8c",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-liberty-city-stories",
+        "after": "/maps/gta-liberty-city-stories"
+      }
+    ]
+  },
+  {
+    "id": "e4c8b738-13dd-4cbf-91dd-0c45c69187fb",
+    "slug": "gta-online",
+    "renderer": "gta-layered",
+    "before_hash": "ecafbe58217508c6ad4e1e48157bcf46f1cd48b30dcd6a455fb5f0c59688c335",
+    "after_hash": "9372b2da788ba539444d72df2cbc01193d56c0d0697f0d14202fd143d1fd1eab",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-online",
+        "after": "/maps/gta-online"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          0,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/action-figures",
+        "after": "/wiki/gta-online/action-figures"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          1,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/playing-cards",
+        "after": "/wiki/gta-online/playing-cards"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          2,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/signal-jammers",
+        "after": "/wiki/gta-online/signal-jammers"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          3,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/media-sticks",
+        "after": "/wiki/gta-online/media-sticks"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          4,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/movie-props",
+        "after": "/wiki/gta-online/movie-props"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          5,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-online/peyote-plants",
+        "after": "/wiki/gta-online/peyote-plants"
+      }
+    ]
+  },
+  {
+    "id": "e89f54b6-dda7-4ab7-92b5-8c0b40a8b7cc",
+    "slug": "gta-vice-city",
+    "renderer": "gta-layered",
+    "before_hash": "fd5752da5114de9c2da000e926437651cb283b86ca52096f7e1758b72f9196d4",
+    "after_hash": "2c8f59e33dec523533d973f0adb9a9273108819e6ff0b790b7490ed6012baa6b",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-vice-city",
+        "after": "/maps/gta-vice-city"
+      }
+    ]
+  },
+  {
+    "id": "e9d48637-2106-45fb-a8c9-4cba10797841",
+    "slug": "gta-vice-city-stories",
+    "renderer": "gta-layered",
+    "before_hash": "3506028acc165c5892f23c8a3d6d98abfd989e67bd34452203ec1714b951ca20",
+    "after_hash": "506ef0d9c5062b7f738b48d2ab2f468fa4817092a36da17cd885c9e644e0e6bc",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-vice-city-stories",
+        "after": "/maps/gta-vice-city-stories"
+      }
+    ]
+  },
+  {
+    "id": "eb3b3fca-c4d5-424d-a048-a6da11b2a65d",
+    "slug": "gta-iii",
+    "renderer": "gta-layered",
+    "before_hash": "7243483239cf9ded6f8a4ae5d82d47802380fa27160041db94451894fafc789f",
+    "after_hash": "28b7fa8bd98af52e8ac1c8c17554e43f8f7fa1d6c79aba8d7d3759e687df8994",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-iii",
+        "after": "/maps/gta-iii"
+      }
+    ]
+  },
+  {
+    "id": "f8b1cab6-a7f4-46d4-a620-a66b8270fc3f",
+    "slug": "gta-4",
+    "renderer": "gta-layered",
+    "before_hash": "393f66b8f803a7b34bb6396cfe605fcc7b20d964964e9d70cbd7bf6506085b68",
+    "after_hash": "a0d29c2262a9e61688d26275d727567430ed6491240b4fcab605cf46b71c58fb",
+    "edits": [
+      {
+        "path": [
+          "definition",
+          "route"
+        ],
+        "before": "/gta/maps/gta-4",
+        "after": "/maps/gta-4"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          0,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-4/side-missions-activities",
+        "after": "/wiki/gta-4/side-missions-activities"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          1,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-4-tlad/angus-bike-thefts",
+        "after": "/wiki/gta-4-tlad/angus-bike-thefts"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          2,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-4-tlad/bike-races",
+        "after": "/wiki/gta-4-tlad/bike-races"
+      },
+      {
+        "path": [
+          "definition",
+          "guideOnly",
+          3,
+          "href"
+        ],
+        "before": "/gta/wiki/gta-4-tbogt/base-jumps",
+        "after": "/wiki/gta-4-tbogt/base-jumps"
+      }
+    ]
+  }
+]

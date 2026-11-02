@@ -81,7 +81,7 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Page type rules
 
-- **Maps:** the default map has search, categories, zoom and guide links. The nine GTA maps keep their registered `gta-layered` and `gta5` engines and frozen snapshots. Changing a frozen snapshot needs a reviewed migration. New simple maps use `image-pins`.
+- **Maps:** the default map has search, categories, zoom and guide links. The nine GTA maps keep their registered `gta-layered` and `gta5` engines and frozen snapshots. The snapshot guard accepts each original snapshot and its exact reviewed canonical-link version. Migration `20261102230000` adds those nine hashes before the stored-link repair in `20261103000000`; it also rewrites only exact approved old map data by GTA namespace and map slug, so differing development UUIDs do not skip the repair. Already-canonical snapshots are unchanged. It does not relax the renderer or full-data hash checks. Geometry, assets, prose and other snapshot changes still need a reviewed migration. New simple maps use `image-pins`.
 - **Catalogs:** the default body is a table. An interactive catalog needs code.
 - **Tools:** a new calculator needs a registered `tool_key` and checked client code. `resource-cost` is the one generic calculator. Minecraft calculators keep their own rules and publisher.
 - **Codes:** a code in `check` status stays hidden. Codes are verified from the game's own sources. There's no automatic refresh for non-Roblox codes.
@@ -91,4 +91,4 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 - Managed development has 25 `games` rows whose IDs differ from production (the GTA, Red Dead and Minecraft roots were aligned on 2026-10-19). `publish:game-pages` on the GitHub path needs matching IDs, so the first update to one of those games fails in CI staging until its development ID is aligned. `content:publish` isn't affected.
 - `game_catalog_pages`, `game_code_pages` and `game_codes` have no production rows yet. The tables, skills and publishers exist, but nothing is published.
-- `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`.
+- `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`. Importer navigation and guide links use canonical page-type URLs; static `/gta/maps/` asset paths stay unchanged.
