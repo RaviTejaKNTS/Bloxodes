@@ -1,6 +1,6 @@
 # URLs
 
-Last verified: 2026-11-01
+Last verified: 2026-11-02
 
 How public URLs are built, the slug rules every new page follows, and where redirects live.
 
@@ -39,7 +39,7 @@ Every non-Roblox game uses page-type URLs, the Roblox pattern:
 
 Franchise roots can't own collections. Minecraft's editions are the games `minecraft-java` and `minecraft-bedrock`.
 
-Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(game_id, page_type, slug)` computes it and database guards refuse any other path. Namespace, game and slug ownership never change.
+Each `game_*` row stores its URL in `canonical_path`. `expected_game_page_path(game_id, page_type, slug)` computes it and database guards refuse any other path. New content links to that stored path, never to an old namespace URL. Namespace, game and slug ownership never change.
 
 The page-type routes run the Roblox reader first; only when no Roblox page owns the URL do they look up `site_routes` and render the game page (`lib/page-type-game-route.ts`, `components/games/GameRoutePage.tsx`). GTA map engines, GTA and Red Dead collections, GTA checklists (progress keys `gta:<slug>`), Minecraft edition collections and Minecraft calculators keep their own renderers in `components/games/specialized/`. Index pages (`/wiki`, `/codes`, `/quizzes`, `/checklists`, `/tools`, `/catalog`, `/maps`) list published game pages in an "Other games" section.
 
@@ -69,7 +69,7 @@ All redirects come from the [route table](#route-table). `apps/web/src/proxy.ts`
 - Old namespace URLs of every non-Roblox game (`/gta/...`, `/<namespace>/wiki/...`) are page-linked `old` rows. An old collection URL also matches `/page/<n>` and keeps the number. `/gta/checklists/page/<n>` drops its tail and goes to `/games/gta`. GTA map tiles and artwork keep their `/gta/maps/...` asset URLs.
 - `scripts/routes/fixtures/` holds a baseline of 1,138 responses captured from production before the switch. PR checks replay it against the new middleware, including the first request to a fresh server.
 
-Some pages also redirect inside their own route, for example `/page/1` to the list's first page. Those stay with the page.
+Some pages also redirect inside their own route, for example `/page/1` to the list's first page. Those stay with the page. The retired `/sitemaps/gta.xml`, `red-dead.xml` and `minecraft.xml` routes send a 308 to `/sitemaps/games.xml` on `SITE_URL`, never on the internal request origin.
 
 ## Route table
 
@@ -88,5 +88,5 @@ Some pages also redirect inside their own route, for example `/page/1` to the li
 
 ## Known issues
 
-- Stored page text still links to old GTA, Red Dead and Minecraft URLs. `rewrite_moved_game_links` is too slow for those namespaces (about 325 GTA mappings) to fit a schema release; the links redirect in one hop.
+- `rewrite_moved_game_links` is too slow for a namespace the size of GTA (about 325 mappings) to fit a schema release. For the old links left in stored page text, `supabase/migrations/20261103000000_repair_remaining_stored_game_links.sql` replaces it: 559 links (GTA 447, Red Dead 112) in 108 fields on 88 rows, listed from a production read. The scanned mutable fields hold 0 Minecraft links. It runs only the old paths found in each field against that field's current value and keeps queries, fragments and `/page/<n>` tails. Rows missing from managed development are skipped, and a changed route destination fails the whole migration. Static `/gta/maps/...` assets don't change. The list is fixed, so an old link added after that read isn't repaired, but it still redirects in one hop.
 - `apps/web/src/lib/game-route-names.ts` (the old reserved-namespace list) is still read by `scripts/games/publish-game-pages.ts` and `scripts/shared/game-wiki-bundle.ts`, though namespaces no longer become root URLs.

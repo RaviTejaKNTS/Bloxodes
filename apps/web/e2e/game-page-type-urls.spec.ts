@@ -259,10 +259,23 @@ test("GTA, Red Dead and Minecraft move while Roblox retains its URL", async ({ p
 });
 
 
-test("unknown page-type paths return 404 before and after pilot moves", async ({ request }) => {
-  for (const path of ["/games/url-review-missing", "/wiki/url-review-missing", "/wiki/url-review-missing/items",
+test("unknown page-type paths return 404 with unique error metadata", async ({ request, page }) => {
+  test.setTimeout(180_000);
+  for (const path of ["/__url-review-missing", "/games/url-review-missing", "/wiki/url-review-missing", "/wiki/url-review-missing/items",
     "/maps/url-review-missing", "/codes/url-review-missing", "/tools/url-review-missing",
     "/quizzes/url-review-missing", "/checklists/url-review-missing", "/catalog/url-review-missing"]) {
-    expect((await request.get(path, { maxRedirects: 0 })).status(), path).toBe(404);
+    // Check the raw response as well as the hydrated DOM: browser metadata
+    // handling can otherwise hide duplicate tags emitted during error recovery.
+    const response = await request.get(path, { maxRedirects: 0 });
+    expect(response.status(), path).toBe(404);
+    const html = await response.text();
+    expect(html.match(/<meta\s+property="og:title"[^>]*>/g) ?? [], path).toHaveLength(1);
+    expect(html.match(/<meta\s+property="og:url"[^>]*>/g) ?? [], path).toHaveLength(0);
+    await page.goto(path, { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveTitle("404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "404 — Page Not Found | Bloxodes");
+    await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
   }
 });

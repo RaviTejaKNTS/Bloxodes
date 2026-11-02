@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
+import { withSiteUrl } from "@/lib/sitemap";
 
-export function GET(request: Request) {
-  return NextResponse.redirect(new URL("/sitemaps/games.xml", request.url), 308);
+export function GET(_request: Request) {
+  return NextResponse.redirect(withSiteUrl("/sitemaps/games.xml"), 308);
 }

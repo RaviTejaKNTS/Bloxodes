@@ -1,6 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { PageNotFoundTracker } from "@/components/PageNotFoundTracker";
 import { SITE_NAME } from "@/lib/seo";
+
+// Replace the inherited homepage social metadata on every site 404. A missing
+// page has no canonical or Open Graph URL, including when its parent has one.
+export const metadata: Metadata = {
+  title: `404 — Page Not Found | ${SITE_NAME}`,
+  alternates: { canonical: null },
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: `404 — Page Not Found | ${SITE_NAME}`,
+    type: "website",
+    siteName: SITE_NAME
+  },
+  twitter: { title: `404 — Page Not Found | ${SITE_NAME}`, card: "summary" }
+};
 
 export default function SiteNotFound() {
   return (
