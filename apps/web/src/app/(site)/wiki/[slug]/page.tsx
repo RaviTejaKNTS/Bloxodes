@@ -46,9 +46,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const gameRoute = await resolvePageTypeGameRoute(`/wiki/${(await params).slug}`);
     if (gameRoute) return gameRoute.metadata();
 
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    // Metadata must fail with the page so Next also recovers the hydrated head.
+    notFound();
   }
 
   const title = resolveSeoTitle(page.seo_title) ?? page.title ?? `Roblox Wiki | ${SITE_NAME}`;

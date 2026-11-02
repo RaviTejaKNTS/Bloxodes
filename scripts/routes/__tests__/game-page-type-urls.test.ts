@@ -3,6 +3,7 @@ import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { storedGameLinkMigrationFixture } from "../fixtures/stored-game-link-migration";
 import { buildRedirectSnapshot, resolveSiteRoute, type RedirectRoute } from "../../../apps/web/src/lib/site-route-resolver";
 const migration = (name: string) => readFileSync(new URL(`../../../supabase/migrations/${name}`, import.meta.url), "utf8").replace(/^begin;\s*/i, "").replace(/commit;\s*$/i, "");
 
@@ -19,6 +20,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
  const url = process.env.CI_TRANSACTION_DATABASE_URL;
  assert.ok(url);
  assert.ok(["localhost","127.0.0.1"].includes(new URL(url).hostname));
+ assert.equal(new URL(url).search, "");
  const db = "game_urls_"+randomUUID().replaceAll("-","");
  const target = new URL(url); target.pathname="/"+db;
  const sql = (connection: string, input: string) => execFileSync("psql",[connection,"-X","-v","ON_ERROR_STOP=1","-q"],{input,encoding:"utf8",stdio:["pipe","pipe","pipe"]});
@@ -33,14 +35,16 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    end $$;
    create table public.games(id uuid primary key default gen_random_uuid(),namespace text,slug text,kind text default 'game',parent_id uuid,is_published boolean default true,description_md text);
    ${tables.map(table=>`create table public.${table}(id uuid primary key default gen_random_uuid(),namespace text,slug text,code text,wiki_slug text,collection_slug text,canonical_path text,game_id uuid references public.games(id),wiki_page_id uuid,old_slugs text[] default '{}',is_published boolean default true,is_public boolean default true,published_at timestamptz,updated_at timestamptz,title text,intro_md text,tips_md text,description_md text,how_it_works_md text,wiki_md text,body_md text,content_md text,redeem_md text,rewards_md text,troubleshoot_md text,find_codes_md text,game_description_md text,event_details_md text,event_summary_md text,how_to_play_md text,interlinking_ai_copy_md text,faq_json jsonb,description_json jsonb,controls_json jsonb,quiz_data jsonb,map_data jsonb,catalog_data jsonb,sources_json jsonb default '[]');`).join("\n")}
-   create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text);
+   create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text,description text);
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
-   -- Search and revalidation side effects are out of scope for these route tests.
+   -- Early route cases omit side effects. The repair phase below installs the
+   -- real page/task triggers and records search and revalidation calls.
    create function public.refresh_game_content_index(text) returns void language plpgsql as $$ begin end $$;
    create function public.enqueue_revalidation(text,text,text) returns void language plpgsql as $$ begin end $$;
    ${migration("20261031194915_site_routes_registry.sql")}
    ${migration("20261101120000_game_page_type_urls.sql")}
    ${migration("20261101130000_fix_rewrite_game_url_links.sql")}
+   ${readFileSync(new URL("../../../supabase/tests/stored_game_link_repair.sql",import.meta.url),"utf8")}
    ${migration("20261102130000_specialized_franchise_page_type_urls.sql")}
    ${migration("20261102140000_move_switch_root_style_first.sql")}
    ${migration("20261102150000_prepare_game_content_check_after_inherit.sql")}
@@ -134,6 +138,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
       else true end
    ),'published, hidden, missing-dataset and dated rows have the correct search visibility');
    select pg_temp.url_assert(not exists(select * from search_before where entity_type='wiki' except select * from public.search_index),'deferred rebuild preserves Roblox rows');
+   ${storedGameLinkMigrationFixture(migration("20261103000000_repair_remaining_stored_game_links.sql"))}
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });
