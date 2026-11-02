@@ -36,6 +36,10 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    create table public.games(id uuid primary key default gen_random_uuid(),namespace text,slug text,kind text default 'game',parent_id uuid,is_published boolean default true,description_md text);
    ${tables.map(table=>`create table public.${table}(id uuid primary key default gen_random_uuid(),namespace text,slug text,code text,wiki_slug text,collection_slug text,canonical_path text,game_id uuid references public.games(id),wiki_page_id uuid,old_slugs text[] default '{}',is_published boolean default true,is_public boolean default true,published_at timestamptz,updated_at timestamptz,title text,intro_md text,tips_md text,description_md text,how_it_works_md text,wiki_md text,body_md text,content_md text,redeem_md text,rewards_md text,troubleshoot_md text,find_codes_md text,game_description_md text,event_details_md text,event_summary_md text,how_to_play_md text,interlinking_ai_copy_md text,faq_json jsonb,description_json jsonb,controls_json jsonb,quiz_data jsonb,map_data jsonb,catalog_data jsonb,sources_json jsonb default '[]');`).join("\n")}
    create table public.game_checklist_items(id uuid primary key,page_id uuid,namespace text,item_key text,section_code text,description text);
+   create schema extensions;
+   create extension pgcrypto with schema extensions;
+   alter table public.game_map_pages add column renderer_key text not null default 'image-pins';
+   ${migration("20261006114258_shared_game_map_snapshot_guards.sql")}
    ${migration("20261006114354_shared_game_namespace_publication_safety.sql")}
    -- Early route cases omit side effects. The repair phase below installs the
    -- real page/task triggers and records search and revalidation calls.
@@ -138,7 +142,7 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
       else true end
    ),'published, hidden, missing-dataset and dated rows have the correct search visibility');
    select pg_temp.url_assert(not exists(select * from search_before where entity_type='wiki' except select * from public.search_index),'deferred rebuild preserves Roblox rows');
-   ${storedGameLinkMigrationFixture(migration("20261103000000_repair_remaining_stored_game_links.sql"))}
+   ${storedGameLinkMigrationFixture(migration("20261103000000_repair_remaining_stored_game_links.sql"), migration("20261102230000_allow_canonical_gta_map_snapshots.sql"))}
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });

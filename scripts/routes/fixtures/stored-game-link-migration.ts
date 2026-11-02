@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { gtaMapLinkSnapshots } from "./gta-map-link-snapshots";
 
 const literal = (value: string) => "'" + value.replaceAll("'", "''") + "'";
 const json = (value: unknown) => literal(JSON.stringify(value)) + "::jsonb";
@@ -10,7 +11,10 @@ const missingId = "2f2263d2-e1fa-4030-b14e-eddff7946854";
 // Parse only the reviewed inventory, never regenerate the migration's UPDATEs.
 // Literal before/after URL pairs provide expectations without calling the SQL
 // rewrite helper. Counts fail closed if the inventory/parser changes.
-export function storedGameLinkMigrationFixture(repair: string): string {
+export function storedGameLinkMigrationFixture(repair: string, snapshotPrerequisite: string): string {
+  const maps = gtaMapLinkSnapshots();
+  // One map uses a development UUID absent from the production repair inventory.
+  const storedId = (id: string) => id === maps[0].id ? "b0000000-0000-0000-0000-000000000001" : id;
   const guards = [...repair.matchAll(/r\.path='([^']+)' and r\.status='old' and public\.site_route_target\(r,r\.path\)='([^']+)'/g)]
     .map(([, path, target]) => ({ path, target }));
   assert.equal(guards.length, 111);
@@ -45,9 +49,11 @@ export function storedGameLinkMigrationFixture(repair: string): string {
     const shape = (parts: string[]) => /_(json|data)$/.test(f.field)
       ? { nested: [null, 42, false, { text: prose + parts.join("\n"), assets: ["/gta/maps/gta5/tiles/1/2/3.png", "/red-dead/maps/rdr2/icon.webp"] }], empty: {} }
       : prose + parts.join("\n") + "\n/gta/maps/gta5/tiles/1/2/3.png";
-    row[f.field] = shape(before);
+    const map = maps.find(map => map.id === f.id && f.table === "game_map_pages");
+    if (f.table === "game_map_pages") assert.ok(map, `Missing real map ${f.id}`);
+    row[f.field] = map ? map.before : shape(before);
     rows.set(f.id, row);
-    if (f.id !== missingId) expectedFields.push({ table: f.table, id: f.id, field: f.field, value: shape(after) });
+    if (f.id !== missingId) expectedFields.push({ table: f.table, id: storedId(f.id), field: f.field, value: map ? map.after : shape(after) });
   }
   assert.equal(rows.size, 88);
   assert.ok(rows.has(missingId));
@@ -58,11 +64,15 @@ export function storedGameLinkMigrationFixture(repair: string): string {
   const seed = tables.flatMap(table => {
     const ids = [...new Set(fields.filter(f => f.table === table).map(f => f.id))];
     return ids.filter(id => id !== missingId).map(id => {
-      const row = { ...rows.get(id)! };
+      const row = { ...rows.get(id)!, id: storedId(id) };
       if (table === "game_checklist_items") {
         Object.assign(row, { page_id: checklist, item_key: `task-${id}`, section_code: "story.missions.complete" });
       } else {
         Object.assign(row, { game_id: owner(row.namespace), title: "Repair fixture", slug: `repair-${id}` });
+        if (table === "game_map_pages") {
+          const map = maps.find(map => map.id === id)!;
+          Object.assign(row, { slug: map.slug, renderer_key: map.renderer });
+        }
         if (table === "game_wiki_pages") row.slug = "gta-repair-owner";
         if (table === "game_collection_pages") Object.assign(row, {
           wiki_page_id: wiki(row.namespace), wiki_slug: `${row.namespace}-repair-owner`,
@@ -83,6 +93,10 @@ export function storedGameLinkMigrationFixture(repair: string): string {
   assert.ok(dataTrigger);
   return `
    -- Run after URL moves, prepare triggers and the real search implementation.
+   -- Retire the earlier URL-only GTA5 dummy before inserting its real snapshot.
+   delete from public.game_map_pages m using public.games g
+    where m.game_id=g.id and g.namespace='gta' and g.slug='gta-fixture'
+     and m.slug='gta5' and m.renderer_key='image-pins';
    insert into public.games(id,namespace,slug,url_style) values
     ('${owner("gta")}','gta','gta-repair-owner','page_type'),
     ('${owner("red-dead")}','red-dead','red-dead-repair-owner','page_type');
@@ -136,6 +150,28 @@ export function storedGameLinkMigrationFixture(repair: string): string {
     end loop;
    end $fixture$;
    select pg_temp.url_assert(not exists((select * from repair_before except ${snapshot}) union all (${snapshot} except select * from repair_before)),'guard failures preserve complete stored rows');
+   -- Reproduce deploy 41446295212 with real map rows under the original guard.
+   -- The exception subtransaction must undo ALL earlier page writes/events.
+   do $fixture$ declare rejected boolean:=false; failed_constraint text; begin
+    begin
+     execute ${literal(repair)};
+    exception when check_violation then
+     get stacked diagnostics failed_constraint = constraint_name;
+     if failed_constraint <> 'game_registered_map_snapshot_check' then raise; end if;
+     rejected:=true;
+    end;
+    perform pg_temp.url_assert(rejected,'original map guard did not reproduce production failure');
+   end $fixture$;
+   select pg_temp.url_assert(not exists((select * from repair_before except ${snapshot}) union all (${snapshot} except select * from repair_before)),'snapshot failure preserves every complete row');
+   select pg_temp.url_assert(not exists(select * from repair_updates),'snapshot failure retained updates');
+   select pg_temp.url_assert(not exists(select * from repair_revalidation),'snapshot failure retained events');
+   select pg_temp.url_assert(not exists(select * from repair_search_calls),'snapshot failure retained search writes');
+   create temp table reviewed_maps as select * from jsonb_to_recordset(${json(maps.map(map => ({...map, id: storedId(map.id)})))}) m(id uuid,slug text,renderer text,before_hash text,after_hash text,before jsonb,after jsonb);
+   select pg_temp.url_assert(bool_and(public.valid_gta_map_snapshot(slug,renderer,before) is true
+    and encode(extensions.digest(before::text,'sha256'),'hex')=before_hash
+    and public.valid_gta_map_snapshot(slug,renderer,after) is false),'original guard proves all nine old snapshots and rejects repairs') from reviewed_maps;
+   ${snapshotPrerequisite}
+   ${readFileSync(new URL("../../../supabase/tests/gta_map_link_snapshots.sql", import.meta.url), "utf8")}
    ${repair}
    create temp table repair_after as ${snapshot};
    -- Full row equality catches accidental prose, JSON, asset or identity edits.
@@ -145,7 +181,7 @@ export function storedGameLinkMigrationFixture(repair: string): string {
     where a.value is distinct from b.value||coalesce(f.fields,'{}'::jsonb)
    ),'migration repairs every selected field and preserves all other stored data');
    select pg_temp.url_assert((select count(*)=${expectedFields.length} from repair_updates),'every seeded target field executes an UPDATE');
-   select pg_temp.url_assert((select count(*)=2 and count(*) filter(where namespace='gta' and deferred='')=1 and count(*) filter(where namespace='red-dead' and deferred='')=1 from repair_search_calls),'refresh exactly once per namespace after clearing deferral');
+   select pg_temp.url_assert((select count(*)=3 and count(*) filter(where namespace='gta' and deferred='')=2 and count(*) filter(where namespace='red-dead' and deferred='')=1 from repair_search_calls),'prerequisite and repair defer search until their final namespace refreshes');
    select pg_temp.url_assert(current_setting('bloxodes.url_move_namespace',true)='','deferral cleared');
    create temp table repair_expected_events as ${expectedEvents};
    select pg_temp.url_assert(not exists(
@@ -154,10 +190,11 @@ export function storedGameLinkMigrationFixture(repair: string): string {
    ),'each field update queues exactly its canonical page, including checklist tasks');
    select pg_temp.url_assert(not exists(select 1 from public.game_checklist_items where id='${missingId}'),'missing selected row stays absent');
    truncate repair_updates,repair_search_calls,repair_revalidation;
+   ${snapshotPrerequisite}
    ${repair}
    select pg_temp.url_assert(not exists((select * from repair_after except ${snapshot}) union all (${snapshot} except select * from repair_after)),'migration rerun preserves complete rows');
    select pg_temp.url_assert(not exists(select * from repair_updates),'idempotence: rerun issues no row updates');
    select pg_temp.url_assert(not exists(select * from repair_revalidation),'idempotence: rerun queues no page events');
-   select pg_temp.url_assert((select count(*)=2 from repair_search_calls),'rerun only rebuilds the two namespaces');
+   select pg_temp.url_assert((select count(*)=3 from repair_search_calls),'rerun only rebuilds the declared namespaces');
   `;
 }
