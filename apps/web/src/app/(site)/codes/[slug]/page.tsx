@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -332,6 +333,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const game = await getCodePageBySlug(slug);
 
   if (!game || !game.is_published) {
+    const gameRoute = await resolvePageTypeGameRoute(`/codes/${(await params).slug}`);
+    if (gameRoute) return gameRoute.metadata();
+
     notFound();
   }
 
@@ -412,6 +416,9 @@ export default async function GamePage({ params }: Params) {
   const result = await fetchGameData(slug);
 
   if (result.error === 'NOT_FOUND') {
+    const gameRoute = await resolvePageTypeGameRoute(`/codes/${(await params).slug}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

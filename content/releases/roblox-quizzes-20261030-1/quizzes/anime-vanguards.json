@@ -1,0 +1,811 @@
+{
+  "page": {
+    "universe_id": 5578556129,
+    "code": "anime-vanguards",
+    "title": "Anime Vanguards Roblox Quiz: 15 Questions on Traits and Bosses",
+    "description_md": "Think you know Anime Vanguards? Each attempt draws 15 questions, five per tier, on traits, status effects and Planet Namak bosses.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Anime Vanguards knowledge of trait rerolls, trait stats, status effects and Planet Namak bosses. Easy to hard, 15 questions per attempt.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which game mode does a new player encounter first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Infinite Mode"
+          },
+          {
+            "id": "b",
+            "text": "Story Mode"
+          },
+          {
+            "id": "c",
+            "text": "Legend Stages"
+          },
+          {
+            "id": "d",
+            "text": "Dungeons"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "Who handles trait rerolls in the lobby?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Kiro"
+          },
+          {
+            "id": "b",
+            "text": "Gold Merchant"
+          },
+          {
+            "id": "c",
+            "text": "Takaroda"
+          },
+          {
+            "id": "d",
+            "text": "Mandra"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Where in the lobby do you reroll a unit's trait?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Upgrades area"
+          },
+          {
+            "id": "b",
+            "text": "The Dungeons area"
+          },
+          {
+            "id": "c",
+            "text": "The Trading menu"
+          },
+          {
+            "id": "d",
+            "text": "The Summon area"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "How many Trait Rerolls does one reroll use, no matter the unit's rarity?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two"
+          },
+          {
+            "id": "b",
+            "text": "Four"
+          },
+          {
+            "id": "c",
+            "text": "One"
+          },
+          {
+            "id": "d",
+            "text": "Five"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What does Scholar boost on a unit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50% more experience gained"
+          },
+          {
+            "id": "b",
+            "text": "50% more attack range"
+          },
+          {
+            "id": "c",
+            "text": "50% more damage"
+          },
+          {
+            "id": "d",
+            "text": "50% lower upgrade cost"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What does Fortune add to a Farm unit's income?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10% more cash income"
+          },
+          {
+            "id": "b",
+            "text": "15% more cash income"
+          },
+          {
+            "id": "c",
+            "text": "20% more cash income"
+          },
+          {
+            "id": "d",
+            "text": "30% more cash income"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What do Farm units mainly produce?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Enemy healing"
+          },
+          {
+            "id": "b",
+            "text": "Yen income"
+          },
+          {
+            "id": "c",
+            "text": "Attack-range buffs"
+          },
+          {
+            "id": "d",
+            "text": "Unit experience drops"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "How many placements can a unit with Monarch have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two placements"
+          },
+          {
+            "id": "b",
+            "text": "Four placements"
+          },
+          {
+            "id": "c",
+            "text": "No placement limit"
+          },
+          {
+            "id": "d",
+            "text": "One placement"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "On a non-Farm unit, what does Fortune reduce?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Upgrade costs, by 10%"
+          },
+          {
+            "id": "b",
+            "text": "Placement costs, by 10%"
+          },
+          {
+            "id": "c",
+            "text": "Attack cooldown, by 10%"
+          },
+          {
+            "id": "d",
+            "text": "Range, by 10%"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "How much extra Range does Marksman give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "12% more Range"
+          },
+          {
+            "id": "b",
+            "text": "30% more Range"
+          },
+          {
+            "id": "c",
+            "text": "24% more Range"
+          },
+          {
+            "id": "d",
+            "text": "40% more Range"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What damage boost does Vigor III give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8% more damage"
+          },
+          {
+            "id": "b",
+            "text": "12% more damage"
+          },
+          {
+            "id": "c",
+            "text": "15% more damage"
+          },
+          {
+            "id": "d",
+            "text": "18% more damage"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "How much does Swift III lower SPA (seconds per attack)?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8% lower SPA"
+          },
+          {
+            "id": "b",
+            "text": "10% lower SPA"
+          },
+          {
+            "id": "c",
+            "text": "15% lower SPA"
+          },
+          {
+            "id": "d",
+            "text": "12.5% lower SPA"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How much Range does Range III add?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15% more Range"
+          },
+          {
+            "id": "b",
+            "text": "8% more Range"
+          },
+          {
+            "id": "c",
+            "text": "12% more Range"
+          },
+          {
+            "id": "d",
+            "text": "20% more Range"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What does the Solar trait change for damage, SPA (seconds per attack) and Range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8% more damage, 12% lower SPA and 12% more Range"
+          },
+          {
+            "id": "b",
+            "text": "10% more damage, 5% lower SPA and 25% more Range"
+          },
+          {
+            "id": "c",
+            "text": "15% more damage, 8% lower SPA and 20% more Range"
+          },
+          {
+            "id": "d",
+            "text": "25% more damage, 15% lower SPA and 10% more Range"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "Which damage, SPA (seconds per attack) and Range numbers belong to the Ethereal trait?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10% more damage, 12% lower SPA and 12% more Range"
+          },
+          {
+            "id": "b",
+            "text": "15% more damage, 8% lower SPA and 10% more Range"
+          },
+          {
+            "id": "c",
+            "text": "20% more damage, 20% lower SPA and 5% more Range"
+          },
+          {
+            "id": "d",
+            "text": "25% more damage, 10% lower SPA and 10% more Range"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What critical-hit bonuses does Deadeye give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "25% Critical Chance and 35% Critical Damage"
+          },
+          {
+            "id": "b",
+            "text": "30% Critical Chance and 40% Critical Damage"
+          },
+          {
+            "id": "c",
+            "text": "50% Critical Chance and 25% Critical Damage"
+          },
+          {
+            "id": "d",
+            "text": "45% Critical Chance and 50% Critical Damage"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Status effects generally have cooldowns. When an effect's cooldown is ready, which hits in a multi-hit cycle can apply it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every hit of the cycle"
+          },
+          {
+            "id": "b",
+            "text": "Only the first hit"
+          },
+          {
+            "id": "c",
+            "text": "Only the final hit"
+          },
+          {
+            "id": "d",
+            "text": "Once per wave"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "When a unit applies regular Burn to an enemy that already has Burn, what happens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only one Burn stack can exist"
+          },
+          {
+            "id": "b",
+            "text": "Burn stacks with no limit"
+          },
+          {
+            "id": "c",
+            "text": "Burn caps at three stacks"
+          },
+          {
+            "id": "d",
+            "text": "A new Burn replaces the old one"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which enemy effect gives 30% more Yen when the enemy is killed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Despair"
+          },
+          {
+            "id": "b",
+            "text": "Bubbled"
+          },
+          {
+            "id": "c",
+            "text": "Wanted"
+          },
+          {
+            "id": "d",
+            "text": "Purgatory Flames"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "Which Slow tier cuts an enemy's movement speed by 40%?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tier 0 Slow"
+          },
+          {
+            "id": "b",
+            "text": "Tier 2 Slow"
+          },
+          {
+            "id": "c",
+            "text": "Aura of Corruption slow"
+          },
+          {
+            "id": "d",
+            "text": "Tier 1 Slow"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "Under standard status rules, which effect immobilizes enemies for 3 seconds?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Petrified"
+          },
+          {
+            "id": "b",
+            "text": "Stun"
+          },
+          {
+            "id": "c",
+            "text": "Freeze"
+          },
+          {
+            "id": "d",
+            "text": "Slow"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "Under standard status rules, how long does Stun immobilize an enemy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 second"
+          },
+          {
+            "id": "b",
+            "text": "2 seconds"
+          },
+          {
+            "id": "c",
+            "text": "3 seconds"
+          },
+          {
+            "id": "d",
+            "text": "4 seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "When chasing a Mythic trait, how is pity tracked across your roster?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Each unit has its own pity counter"
+          },
+          {
+            "id": "b",
+            "text": "One counter for every unit"
+          },
+          {
+            "id": "c",
+            "text": "One counter per rarity"
+          },
+          {
+            "id": "d",
+            "text": "One counter per unit name"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "How long is the Hard CC 1 lockout for Time Stop and Confusion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8 seconds"
+          },
+          {
+            "id": "b",
+            "text": "20 seconds"
+          },
+          {
+            "id": "c",
+            "text": "12 seconds"
+          },
+          {
+            "id": "d",
+            "text": "18 seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "How long is the regular Hard CC 2 lockout for Repulse, Stun, Freeze, Frostburn and Petrified?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 seconds"
+          },
+          {
+            "id": "b",
+            "text": "8 seconds"
+          },
+          {
+            "id": "c",
+            "text": "6 seconds"
+          },
+          {
+            "id": "d",
+            "text": "15 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What extra lockout applies to Repulse, separate from the regular Hard CC 2 lockout?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An independent 10-second Repulse lockout"
+          },
+          {
+            "id": "b",
+            "text": "An independent 15-second Repulse lockout"
+          },
+          {
+            "id": "c",
+            "text": "An independent 30-second Repulse lockout"
+          },
+          {
+            "id": "d",
+            "text": "An independent 25-second Repulse lockout"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "What can every damage-over-time effect do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Land a critical hit"
+          },
+          {
+            "id": "b",
+            "text": "Freeze an enemy"
+          },
+          {
+            "id": "c",
+            "text": "Restore the enemy's health"
+          },
+          {
+            "id": "d",
+            "text": "Remove the enemy's trait"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does each Fire unit give other Fire units in range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1% more Range per wave"
+          },
+          {
+            "id": "b",
+            "text": "1% more damage per Fire unit placed"
+          },
+          {
+            "id": "c",
+            "text": "5% more damage for every unit on the team"
+          },
+          {
+            "id": "d",
+            "text": "2% more damage, but only on the placed unit"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Which boss appears in Planet Namak Act 2, Reckless Rage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Vogita"
+          },
+          {
+            "id": "b",
+            "text": "Argon"
+          },
+          {
+            "id": "c",
+            "text": "Doria"
+          },
+          {
+            "id": "d",
+            "text": "Giyu"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "Which boss appears in Planet Namak Act 6, Empowered Emperor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Friezo (Final Form)"
+          },
+          {
+            "id": "b",
+            "text": "Argon"
+          },
+          {
+            "id": "c",
+            "text": "Giyu"
+          },
+          {
+            "id": "d",
+            "text": "Vogita"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "Which effect permanently removes an enemy's own Regen and Revitalize effects?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bleed"
+          },
+          {
+            "id": "b",
+            "text": "Rupture"
+          },
+          {
+            "id": "c",
+            "text": "Cleave"
+          },
+          {
+            "id": "d",
+            "text": "Wounded"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "Which damage-over-time effect cannot stack?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Burn"
+          },
+          {
+            "id": "b",
+            "text": "Bleed"
+          },
+          {
+            "id": "c",
+            "text": "Intense Burn"
+          },
+          {
+            "id": "d",
+            "text": "Black Flame"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-11",
+        "question": "Which enemy effect makes enemies take 50% more damage from damage-over-time effects?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wounded"
+          },
+          {
+            "id": "b",
+            "text": "Purgatory Flames"
+          },
+          {
+            "id": "c",
+            "text": "Cleave"
+          },
+          {
+            "id": "d",
+            "text": "Diseased"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

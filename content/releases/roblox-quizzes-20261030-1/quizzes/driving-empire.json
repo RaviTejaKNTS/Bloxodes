@@ -1,0 +1,667 @@
+{
+  "page": {
+    "universe_id": 1202096104,
+    "code": "driving-empire",
+    "title": "Driving Empire Roblox Quiz: 15 Questions on Cars and Jobs",
+    "description_md": "Think you know Driving Empire's cars? Take 15 questions per run: five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Driving Empire car knowledge across paint, upgrades, speed traps, Miles and delivery jobs. Each run mixes 15 questions from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "E02",
+        "question": "In vehicle customization, what does the Appearance section change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cosmetic looks only"
+          },
+          {
+            "id": "b",
+            "text": "Engine performance"
+          },
+          {
+            "id": "c",
+            "text": "Drivetrain layout"
+          },
+          {
+            "id": "d",
+            "text": "Braking strength"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "E03",
+        "question": "What does the Primary option control in the Appearance menu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The rim set"
+          },
+          {
+            "id": "b",
+            "text": "License plate number"
+          },
+          {
+            "id": "c",
+            "text": "Main paint color"
+          },
+          {
+            "id": "d",
+            "text": "Brake power"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "E04",
+        "question": "A Body Kit changes which part of a car?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The drivetrain"
+          },
+          {
+            "id": "b",
+            "text": "The car's body"
+          },
+          {
+            "id": "c",
+            "text": "Engine aspiration"
+          },
+          {
+            "id": "d",
+            "text": "Boost force"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "E05",
+        "question": "What does a vehicle wrap replace the solid paint with?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A tinted window film"
+          },
+          {
+            "id": "b",
+            "text": "A new interior color"
+          },
+          {
+            "id": "c",
+            "text": "A glossy clear coat"
+          },
+          {
+            "id": "d",
+            "text": "A pattern design"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "E06",
+        "question": "What does upgrading Brakes improve?",
+        "options": [
+          {
+            "id": "a",
+            "text": "How quickly the car can stop"
+          },
+          {
+            "id": "b",
+            "text": "How fast the car tops out"
+          },
+          {
+            "id": "c",
+            "text": "How quickly the engine accelerates"
+          },
+          {
+            "id": "d",
+            "text": "How fast boost refills"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "E07",
+        "question": "What do the Tires options change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Top speed, up or down"
+          },
+          {
+            "id": "b",
+            "text": "Paint reflectance"
+          },
+          {
+            "id": "c",
+            "text": "Tire grip, up or down"
+          },
+          {
+            "id": "d",
+            "text": "Engine power output"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "E08",
+        "question": "What does pressing Boost do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Permanently raises top speed"
+          },
+          {
+            "id": "b",
+            "text": "Temporarily boosts acceleration and speed"
+          },
+          {
+            "id": "c",
+            "text": "Turns on police sirens"
+          },
+          {
+            "id": "d",
+            "text": "Changes the drivetrain layout"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "R05",
+        "question": "What visual and audio cue follows a speed-camera pass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The light stays dark and a camera sound plays"
+          },
+          {
+            "id": "b",
+            "text": "The light flashes without a camera sound"
+          },
+          {
+            "id": "c",
+            "text": "The light stays dark without a camera sound"
+          },
+          {
+            "id": "d",
+            "text": "The light flashes and a camera sound plays"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "M01",
+        "question": "In Drivetrain, which set of drive layouts can you switch between?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Front-wheel, rear-wheel and all-wheel drive"
+          },
+          {
+            "id": "b",
+            "text": "Manual, automatic and paddle-shift gearboxes"
+          },
+          {
+            "id": "c",
+            "text": "Front, rear and all-wheel steering modes"
+          },
+          {
+            "id": "d",
+            "text": "Gasoline, hybrid and electric engines"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "M02",
+        "question": "What do Engine Upgrades improve?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Braking and tire grip"
+          },
+          {
+            "id": "b",
+            "text": "Paint and reflectance"
+          },
+          {
+            "id": "c",
+            "text": "Speed and acceleration"
+          },
+          {
+            "id": "d",
+            "text": "Camera rewards and bounty"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "M03",
+        "question": "For accents such as stripes, which paint option is usually used?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Primary"
+          },
+          {
+            "id": "b",
+            "text": "Secondary"
+          },
+          {
+            "id": "c",
+            "text": "Interior"
+          },
+          {
+            "id": "d",
+            "text": "Rims"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "M04",
+        "question": "To recolor exhausts and some trim pieces, which Appearance option do you use?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Primary"
+          },
+          {
+            "id": "b",
+            "text": "Interior"
+          },
+          {
+            "id": "c",
+            "text": "Rims"
+          },
+          {
+            "id": "d",
+            "text": "Chrome"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "M05",
+        "question": "To recolor the cabin, especially the seats, which option do you use?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Interior"
+          },
+          {
+            "id": "b",
+            "text": "Secondary"
+          },
+          {
+            "id": "c",
+            "text": "Chrome"
+          },
+          {
+            "id": "d",
+            "text": "Tires"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "M06",
+        "question": "Which Appearance option paints the clamp that grips each brake disc?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Spoilers"
+          },
+          {
+            "id": "b",
+            "text": "Body Kits"
+          },
+          {
+            "id": "c",
+            "text": "Calipers"
+          },
+          {
+            "id": "d",
+            "text": "Rims"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "M07",
+        "question": "What two choices appear under Rims?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Spoiler and grille options"
+          },
+          {
+            "id": "b",
+            "text": "Paint Rims and Rim Type"
+          },
+          {
+            "id": "c",
+            "text": "Primary and Secondary paint controls"
+          },
+          {
+            "id": "d",
+            "text": "Brake and tire upgrades"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "M08",
+        "question": "What does Miles measure in Driving Empire?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cash spent at the dealership"
+          },
+          {
+            "id": "b",
+            "text": "Number of race wins earned"
+          },
+          {
+            "id": "c",
+            "text": "Number of packages delivered"
+          },
+          {
+            "id": "d",
+            "text": "Distance driven around the map"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "R01",
+        "question": "What happens to Delivery Driver progress after a successful package drop-off?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Job level and Cash both go up"
+          },
+          {
+            "id": "b",
+            "text": "Only the car's top speed goes up"
+          },
+          {
+            "id": "c",
+            "text": "Only the bounty goes up"
+          },
+          {
+            "id": "d",
+            "text": "Only the job level goes up"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "R04",
+        "question": "With Mobile Customization, what can a driver open from inside their car?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The race leaderboard page"
+          },
+          {
+            "id": "b",
+            "text": "The garage customization menu"
+          },
+          {
+            "id": "c",
+            "text": "The house blueprint shop"
+          },
+          {
+            "id": "d",
+            "text": "The delivery job menu"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "R06",
+        "question": "When a vehicle collides with the solid speed-trap object, what happens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is launched into the air"
+          },
+          {
+            "id": "b",
+            "text": "It bounces backward and keeps rolling"
+          },
+          {
+            "id": "c",
+            "text": "It comes to a complete stop"
+          },
+          {
+            "id": "d",
+            "text": "It passes through the camera"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "H01",
+        "question": "Which settings can Suspension alter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ride height, wheel camber and wheel offset"
+          },
+          {
+            "id": "b",
+            "text": "Aspiration, boost force and boost refill"
+          },
+          {
+            "id": "c",
+            "text": "Brake power, top speed and engine torque"
+          },
+          {
+            "id": "d",
+            "text": "Paint color, plate state and rear spoiler"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "H02",
+        "question": "Which cars can use the Aspiration option?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every vehicle type can use Aspiration"
+          },
+          {
+            "id": "b",
+            "text": "Combustion-engine cars can use Aspiration"
+          },
+          {
+            "id": "c",
+            "text": "Only motorcycles can use Aspiration"
+          },
+          {
+            "id": "d",
+            "text": "Only boats and helicopters can use Aspiration"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "H03",
+        "question": "When a speed trap pays a driver for going fast enough, how is the payout set?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cash and bounty are both fixed amounts"
+          },
+          {
+            "id": "b",
+            "text": "Only bounty scales; cash stays fixed"
+          },
+          {
+            "id": "c",
+            "text": "Both cash and bounty grow with speed"
+          },
+          {
+            "id": "d",
+            "text": "Only cash scales; bounty stays fixed"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "H04",
+        "question": "A player passes a speed camera from the wrong side of the road. What happens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Gain $150 cash and lose 15 bounty"
+          },
+          {
+            "id": "b",
+            "text": "Lose $150 cash and lose 15 bounty"
+          },
+          {
+            "id": "c",
+            "text": "Gain $150 cash and gain 15 bounty"
+          },
+          {
+            "id": "d",
+            "text": "Lose $150 cash and gain 15 bounty"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "H05",
+        "question": "In the Delivery Driver job, how long do you have to collect a package, and how long to deliver it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2 minutes to collect, 40 seconds to deliver"
+          },
+          {
+            "id": "b",
+            "text": "40 seconds to collect, 2 minutes to deliver"
+          },
+          {
+            "id": "c",
+            "text": "1 minute to collect, 1 minute to deliver"
+          },
+          {
+            "id": "d",
+            "text": "3 minutes to collect, 1 minute to deliver"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "H06",
+        "question": "If time runs out during the Delivery Driver job, what happens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Job level kept, same pickup spot"
+          },
+          {
+            "id": "b",
+            "text": "Job level drops to 0, new pickup spot"
+          },
+          {
+            "id": "c",
+            "text": "Job level kept, new pickup spot"
+          },
+          {
+            "id": "d",
+            "text": "Job level drops to 0, same pickup spot"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "H07",
+        "question": "After busting an ATM, how can an Outlaw collect the money?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Finish a race or enter the dealership"
+          },
+          {
+            "id": "b",
+            "text": "Deliver packages or visit the Police Station"
+          },
+          {
+            "id": "c",
+            "text": "Wait out the timer or reach the hideout"
+          },
+          {
+            "id": "d",
+            "text": "Wait for arrest or go to the race queue"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "H08",
+        "question": "What happens when Security is close enough and the red circle under an Outlaw's car fills up?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Goes to the race queue and stays an Outlaw"
+          },
+          {
+            "id": "b",
+            "text": "Keeps the Outlaw role and ATM money"
+          },
+          {
+            "id": "c",
+            "text": "Gets the ATM payout and joins Security"
+          },
+          {
+            "id": "d",
+            "text": "Goes to jail and becomes a Citizen"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

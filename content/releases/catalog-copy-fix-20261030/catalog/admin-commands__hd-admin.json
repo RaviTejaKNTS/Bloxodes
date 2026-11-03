@@ -1,0 +1,40 @@
+{
+  "code": "admin-commands/hd-admin",
+  "title": "150+ Roblox HD Admin Commands List",
+  "seo_title": "150+ Roblox HD Admin Commands List",
+  "meta_description": "Browse 158 HD Admin commands with aliases, arguments, the default ; prefix, Booster syntax, configurable roles, and troubleshooting tips.",
+  "intro_md": "HD Admin is a GUI-based Roblox admin system with a command bar, a configurable rank ladder, and a large command set. It has 158 commands, grouped by category, with aliases, undo aliases, and arguments where available.\n\nCommands use the default prefix `;`, so a typical command looks like `;jump me` or `;kick PlayerName`. Booster commands use `/` instead of `;`.\n\nNot sure the game you are in runs HD Admin? Start at the [Roblox admin commands hub](https://bloxodes.com/catalog/admin-commands) to identify the system first.",
+  "description_md": "## What is HD Admin?\n\nHD Admin is a free Roblox admin system that lets moderators find commands through a GUI while owners configure ranks and command access for their experience.\n\nThe system combines three things:\n\n- A **command bar** where you type commands with the `;` prefix.\n- A **rank system** that decides which commands each player can use.\n- A **menu** showing available commands, ranks, and settings.\n\n## HD Admin ranks\n\nHD Admin ships with a ladder of default ranks, and every command requires a minimum rank:\n\n- **Guest (0):** the starting role.\n- **Booster (1):** access tied to the Booster role.\n- **VIP (2):** the next role above Booster.\n- **Mod (3):** moderation-level access.\n- **Admin (4):** higher administrative access.\n- **Owner (5):** the highest default role.\n\nBooster entries in the command list use inline `/` commands instead of the default `;` prefix.\n\nGame owners can rename ranks, move commands between ranks, and sell their own rank gamepasses, so exact access varies by game.\n\n## How to use HD Admin commands\n\n1. Open the command bar (the rounded bar HD Admin shows on screen) or use chat.\n2. Type the prefix `;` followed by the command and its arguments, for example `;jump me` or `;spin me 10`.\n3. Player arguments accept shortcuts such as `me`, `all`, `others`, or a partial username.\n4. Some effects have an **undo alias**. Check the Undo Aliases field on the command card when one is available.\n\nIf a command does nothing, check your rank in the HD Admin menu first: the command list shows each command's category, and games can restrict categories to higher ranks.\n\n## Using HD Admin in your own game\n\nHD Admin is free on the Roblox Creator Store. Install the model into your place, then use the in-game menu or the configuration module to set the owner, assign ranks, and disable any commands or categories you do not want. Because setup happens through the GUI, it is one of the easiest systems to run without scripting knowledge.\n\nPrefer a lighter or more configurable system? Compare it with [Kohl's Admin](https://bloxodes.com/catalog/admin-commands/kohls-admin), [Basic Admin Essentials](https://bloxodes.com/catalog/admin-commands/basic-admin), and [Adonis](https://bloxodes.com/catalog/admin-commands/adonis-admin) on their own pages.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "The default prefix is ;, so commands look like ;jump me or ;kick PlayerName. Booster commands use / instead. Game owners can change settings, so check the in-game menu if the default syntax does not work.",
+      "q": "What is the HD Admin prefix?"
+    },
+    {
+      "a": "Ranks are controlled by each game. The default roles are Guest, Booster, VIP, Mod, Admin, and Owner, but game owners can configure access for their experience.",
+      "q": "How do I get HD Admin rank in a game?"
+    },
+    {
+      "a": "Booster is role 1 in the default role list. Booster entries in the command list use inline / commands, while most other commands use the default ; prefix.",
+      "q": "What is the HD Admin Booster role?"
+    },
+    {
+      "a": "Check the Undo Aliases field on the command card. Some commands have an undo alias, while others do not.",
+      "q": "How do I undo an HD Admin command?"
+    },
+    {
+      "a": "Check three things: the prefix (default ;), your rank in the HD Admin menu, and whether the game owner disabled that command or category. Commands that target players also only work on players in the same server.",
+      "q": "Why is an HD Admin command not working?"
+    },
+    {
+      "a": "Yes. HD Admin is a free model on the Roblox Creator Store. You install it in your place and configure the owner, ranks, and enabled commands through the in-game menu or the configuration module.",
+      "q": "Is HD Admin free to add to my game?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}

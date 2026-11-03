@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -71,16 +72,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const code = normalizeCatalogCode(slug ?? []);
   const canonical = `${SITE_URL.replace(/\/$/, "")}/catalog/${code}`;
   if (!code) {
-    return {
-      alternates: buildAlternates(`${SITE_URL.replace(/\/$/, "")}/catalog`)
-    };
+    notFound();
   }
 
   const catalog = await getCatalogPageContentByCodes([code]);
   if (!catalog) {
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    const gameRoute = await resolvePageTypeGameRoute(`/catalog/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.metadata();
+
+    notFound();
   }
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Catalogs | ${SITE_NAME}`;
@@ -117,6 +117,9 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
 
   const { contentHtml } = await buildCatalogContent(code);
   if (!contentHtml) {
+    const gameRoute = await resolvePageTypeGameRoute(`/catalog/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

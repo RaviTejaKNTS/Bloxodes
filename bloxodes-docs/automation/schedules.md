@@ -8,16 +8,13 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-All run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro. The article and Roblox wiki runs use Codex `gpt-6.1-sol` high, full access; the other games, daily release and expansion runs use Claude Opus 5.5. They have standing permission to publish (wikis with `content:publish`, articles through the publication drain) and to commit and push the factory repo. None opens code PRs.
+All run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro. The article and Roblox wiki runs use Codex `gpt-6.1-sol` high, full access; the other games run uses Claude Opus 5.5. They have standing permission to publish (wikis with `content:publish`, articles through the publication drain) and to commit and push the factory repo. None opens code PRs.
 
-The two wiki build schedules run in dev-only mode: pages go to managed development and queue rows close as `In dev`. The daily release run then moves `In dev` games to production at the owner's pace, 6 to 8 games a day, Roblox and other games mixed (factory `docs/publishing.md`, "Daily production release").
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes daily other games (Content Factory) | 02:00 IST daily | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and builds its wiki hubs and collections. One game per run. |
-| Bloxodes Roblox wiki every 3 days (Content Factory) | Every 3 days | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds its hub and collections. |
-| Bloxodes daily wiki release (Content Factory) | 10:00 IST daily | Moves the next 7 or so `In dev` games from both queues to production with `content:publish`, oldest first, alternating Roblox and other games. Stops on the first failed apply. Logs each bundle in the factory's `release/ledger.tsv`. |
-| Bloxodes Roblox wiki expansion (temporary, Content Factory) | Every 40 minutes, until its list is empty | `roblox-wiki-main` in dev-only mode: adds collections to the 21 Roblox games that went to managed dev as a hub only, plus Steel Fighters. Each run claims one game from the factory's `tmp/expansion/todo.txt`. Delete this schedule when the list is done. |
+| Bloxodes daily other games (Content Factory) | 02:00 IST daily | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and builds and publishes its wiki hubs and collections. One game per run. |
+| Bloxodes Roblox wiki every 3 days (Content Factory) | Every 3 days | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds and publishes its hub and collections. |
 | Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue` (or finds its own when fewer than 3 are good), has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A T3 schedule copies its model, effort and runtime from the thread that creates it and can't change them later, so create these from a Codex `gpt-6.1-sol`, High, Full access thread. In a sandbox `content:publish` can't reach the database.

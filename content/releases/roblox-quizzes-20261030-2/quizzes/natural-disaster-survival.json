@@ -1,0 +1,763 @@
+{
+  "page": {
+    "universe_id": 65241,
+    "code": "natural-disaster-survival",
+    "title": "Natural Disaster Survival Roblox Quiz: 15 Questions per Attempt",
+    "description_md": "Can you make the right call when the warning hits? Take 15 random questions, with five from each difficulty tier, and see how well you know Natural Disaster Survival.",
+    "seo_title": null,
+    "seo_description": "A warning can change your plan fast in Roblox Natural Disaster Survival. Test what you know about hazards, maps and survival choices in 15 random questions.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "What must you do to earn a survival point from a disaster round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay alive until the disaster round ends."
+          },
+          {
+            "id": "b",
+            "text": "Reach the map before the disaster starts."
+          },
+          {
+            "id": "c",
+            "text": "Stay alive until the disaster warning appears."
+          },
+          {
+            "id": "d",
+            "text": "Return to the lobby before the disaster ends."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What does Acid Rain damage when it strikes the island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Exposed players, while struck structures stay intact."
+          },
+          {
+            "id": "b",
+            "text": "Struck structures, while exposed players stay unharmed."
+          },
+          {
+            "id": "c",
+            "text": "Exposed players and the structures it hits."
+          },
+          {
+            "id": "d",
+            "text": "Neither players nor structures; it changes their appearance."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What rolls down the spawned mountain during an Avalanche?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Large boulders of stone."
+          },
+          {
+            "id": "b",
+            "text": "Large chunks of snow."
+          },
+          {
+            "id": "c",
+            "text": "Large stacks of timber."
+          },
+          {
+            "id": "d",
+            "text": "Large drums of metal."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Which position leaves a player exposed to Blizzard health loss?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside a sheltered corner, surrounded by intact walls."
+          },
+          {
+            "id": "b",
+            "text": "Beneath sheltered stairs, enclosed by large surfaces."
+          },
+          {
+            "id": "c",
+            "text": "On a sheltered lower floor, surrounded by walls."
+          },
+          {
+            "id": "d",
+            "text": "Out in the open, away from surrounding shelter."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How can another player's Deadly Virus droplets infect you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You touch one of the infected droplets."
+          },
+          {
+            "id": "b",
+            "text": "You hear a cough without touching a droplet."
+          },
+          {
+            "id": "c",
+            "text": "You see a droplet without touching one."
+          },
+          {
+            "id": "d",
+            "text": "You enter the same building without touching a droplet."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What can Earthquake shaking do to tall, unstable structures?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Raise the structures smoothly above the shaking ground."
+          },
+          {
+            "id": "b",
+            "text": "Make the structures collapse onto the island."
+          },
+          {
+            "id": "c",
+            "text": "Keep the structures fixed above the shaking ground."
+          },
+          {
+            "id": "d",
+            "text": "Strengthen the structures as the surrounding ground shifts."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "How does a Fire begin spreading through a map?",
+        "options": [
+          {
+            "id": "a",
+            "text": "All blocks ignite together, without flames spreading between parts."
+          },
+          {
+            "id": "b",
+            "text": "A block ignites but the flames stay on that part."
+          },
+          {
+            "id": "c",
+            "text": "A block ignites and the flames spread to other parts."
+          },
+          {
+            "id": "d",
+            "text": "Players ignite first and transfer flames to the map's parts."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "What happens to the water level when a Flash Flood begins?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It gradually rises around the map."
+          },
+          {
+            "id": "b",
+            "text": "It gradually falls away from the map."
+          },
+          {
+            "id": "c",
+            "text": "It stays at its normal level throughout."
+          },
+          {
+            "id": "d",
+            "text": "It drops below the island before flooding starts."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "What is the main moving-object danger during a Sandstorm?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cracks in the ground opening across the map."
+          },
+          {
+            "id": "b",
+            "text": "Explosions of sand erupting across the map."
+          },
+          {
+            "id": "c",
+            "text": "Surges of floodwater sweeping across the map."
+          },
+          {
+            "id": "d",
+            "text": "Fast-moving debris swept across the map."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What can a direct Thunderstorm lightning strike do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hurt a player while leaving every struck part intact."
+          },
+          {
+            "id": "b",
+            "text": "Kill a player and destroy the parts it hits."
+          },
+          {
+            "id": "c",
+            "text": "Stun a player while leaving their health and struck parts unchanged."
+          },
+          {
+            "id": "d",
+            "text": "Destroy struck parts while leaving a directly hit player unharmed."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "What happens to building parts caught by a Tornado?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They vanish intact without leaving any loose debris."
+          },
+          {
+            "id": "b",
+            "text": "They stay attached and become too heavy to move."
+          },
+          {
+            "id": "c",
+            "text": "They can break loose and be flung around."
+          },
+          {
+            "id": "d",
+            "text": "They stay attached while the funnel passes through them."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "What moves across the island during a Tsunami?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A large tidal wave travels across it."
+          },
+          {
+            "id": "b",
+            "text": "A whirlpool circles beneath its center."
+          },
+          {
+            "id": "c",
+            "text": "A water column rises vertically from it."
+          },
+          {
+            "id": "d",
+            "text": "A water level rises evenly around it."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "What does the volcano throw toward the island during Volcanic Eruption?",
+        "options": [
+          {
+            "id": "a",
+            "text": "White and gray steam clouds."
+          },
+          {
+            "id": "b",
+            "text": "Gray and brown stone boulders."
+          },
+          {
+            "id": "c",
+            "text": "Blue and white water columns."
+          },
+          {
+            "id": "d",
+            "text": "Red and yellow lava blocks."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-14",
+        "question": "Why is stepping or jumping onto Earthquake debris dangerous?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The parts slow your movement without causing damage."
+          },
+          {
+            "id": "b",
+            "text": "The parts cushion every landing without causing damage."
+          },
+          {
+            "id": "c",
+            "text": "The parts can injure or fling your character."
+          },
+          {
+            "id": "d",
+            "text": "The parts steady your position without causing damage."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-15",
+        "question": "What route does a Tornado follow around the island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The same fixed circuit on every round."
+          },
+          {
+            "id": "b",
+            "text": "A random path that can change direction."
+          },
+          {
+            "id": "c",
+            "text": "A path that always follows the nearest player."
+          },
+          {
+            "id": "d",
+            "text": "A fixed line from the map's center to its edge."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Which early sound timing can signal Acid Rain after you reach a map?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The wind soundtrack begins only after the round ends."
+          },
+          {
+            "id": "b",
+            "text": "The wind soundtrack begins only after the warning appears."
+          },
+          {
+            "id": "c",
+            "text": "The wind soundtrack begins only after the rain stops."
+          },
+          {
+            "id": "d",
+            "text": "The wind soundtrack begins immediately after you arrive."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "A structure part turns green after Acid Rain hits it. What state is it in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Detached from its structure and harmful to touch."
+          },
+          {
+            "id": "b",
+            "text": "Attached to its structure and harmful only after turning black."
+          },
+          {
+            "id": "c",
+            "text": "Attached to its structure and harmless to touch."
+          },
+          {
+            "id": "d",
+            "text": "Detached from its structure and harmless to touch."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "The Avalanche mountain is already present when you arrive. When do its large snow chunks begin appearing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "After the disaster round has ended."
+          },
+          {
+            "id": "b",
+            "text": "After the disaster warning is given."
+          },
+          {
+            "id": "c",
+            "text": "As soon as the map first loads."
+          },
+          {
+            "id": "d",
+            "text": "Before the mountain appears beside the island."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which Blizzard exposure stage first causes gradual health loss?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stage 1."
+          },
+          {
+            "id": "b",
+            "text": "No exposure stage."
+          },
+          {
+            "id": "c",
+            "text": "Stage 3."
+          },
+          {
+            "id": "d",
+            "text": "Stage 2."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Sandstorm debris is flying from left to right. Where should you move to reduce the flying-object risk?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A roof on the right side, directly in the debris's path."
+          },
+          {
+            "id": "b",
+            "text": "The left side of the map, with room from the edge."
+          },
+          {
+            "id": "c",
+            "text": "The right side of the map, ahead of the debris."
+          },
+          {
+            "id": "d",
+            "text": "The center of the map, directly in the debris's path."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "How can Flash Flood water weaken a building from below?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Submerged supports remain intact while only dry supports detach."
+          },
+          {
+            "id": "b",
+            "text": "Submerged supports become heavier while every joint stays intact."
+          },
+          {
+            "id": "c",
+            "text": "Submerged supports rise together while staying firmly joined."
+          },
+          {
+            "id": "d",
+            "text": "Submerged supports can detach or be destroyed."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "During a Meteor Shower, which situation can kill you even if no meteor touches your character?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You stand on a plate that a meteor strikes."
+          },
+          {
+            "id": "b",
+            "text": "You stand on untouched ground after a meteor disappears over the sea."
+          },
+          {
+            "id": "c",
+            "text": "You stand beneath a meteor's shadow without any impact nearby."
+          },
+          {
+            "id": "d",
+            "text": "You stand beside intact cover while meteors and debris pass clear of your position."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Storm clouds can appear before a Tornado warning. Which other pair shares that early weather?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Thunderstorm and Fire."
+          },
+          {
+            "id": "b",
+            "text": "Earthquake and Fire."
+          },
+          {
+            "id": "c",
+            "text": "Flash Flood and Thunderstorm."
+          },
+          {
+            "id": "d",
+            "text": "Flash Flood and Earthquake."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Which color marks a Fire-burned plate that is safe to touch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Black."
+          },
+          {
+            "id": "b",
+            "text": "Red."
+          },
+          {
+            "id": "c",
+            "text": "Yellow."
+          },
+          {
+            "id": "d",
+            "text": "Orange."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which Launch Land control releases the bridge attached to the rocket?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The red button inside the rocket."
+          },
+          {
+            "id": "b",
+            "text": "The yellow button atop the large tower."
+          },
+          {
+            "id": "c",
+            "text": "The upper button on the second tower."
+          },
+          {
+            "id": "d",
+            "text": "The lower button on the second tower."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "In a Fire plus Flash Flood or Tsunami round, what can active fire do when water reaches it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pause burning until the water moves away again."
+          },
+          {
+            "id": "b",
+            "text": "Go out permanently as soon as water touches it."
+          },
+          {
+            "id": "c",
+            "text": "Keep burning on parts that are underwater."
+          },
+          {
+            "id": "d",
+            "text": "Burn only at the surface, leaving submerged parts unlit."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "In a Tornado plus Volcanic Eruption round, which statement about lava blocks is true?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They become fixed in place once the Tornado reaches them."
+          },
+          {
+            "id": "b",
+            "text": "They are too heavy for the Tornado to lift from the ground."
+          },
+          {
+            "id": "c",
+            "text": "They can only slide along the ground when the Tornado moves them."
+          },
+          {
+            "id": "d",
+            "text": "The Tornado can pick up and carry them."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "During a standalone Earthquake on Modest Headquarters, how does the huge green grass patch behave?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It remains anchored and does not move with the shaking parts."
+          },
+          {
+            "id": "b",
+            "text": "It sinks below the island when the nearby buildings shake."
+          },
+          {
+            "id": "c",
+            "text": "It comes loose and is thrown around with the shaking parts."
+          },
+          {
+            "id": "d",
+            "text": "It breaks apart when the nearby buildings begin to shake."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Which water-tower route fits a Tsunami crossing Trailer Park?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Use the first ladder in the wave's path if available, climb just above the wave, then jump as its front reaches the ladder."
+          },
+          {
+            "id": "b",
+            "text": "Use the first ladder in the wave's path if available, climb far above the wave, then jump off before it arrives."
+          },
+          {
+            "id": "c",
+            "text": "Use the first ladder in the wave's path if available, climb just above the wave, then jump off immediately after it passes."
+          },
+          {
+            "id": "d",
+            "text": "Use a ladder away from the wave's path, stay below its height, then jump off just after it passes."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "During Fire on Raving Raceway, which choice accounts for its grassy terrain?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Choose the highest grass; all lower grassy terrain can burn."
+          },
+          {
+            "id": "b",
+            "text": "Choose the lowest grass; higher grassy terrain can burn."
+          },
+          {
+            "id": "c",
+            "text": "Choose any grass; every grassy level is fireproof."
+          },
+          {
+            "id": "d",
+            "text": "Avoid all grass; every grassy level burns equally."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Apart from fixed map exceptions, how do anchored and unanchored parts differ during an Earthquake?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Anchored parts remain fixed; unanchored parts only shake with the island."
+          },
+          {
+            "id": "b",
+            "text": "Anchored and unanchored parts shake equally; neither kind can be flung from the island."
+          },
+          {
+            "id": "c",
+            "text": "Anchored parts can be flung violently; unanchored parts remain fixed on the island."
+          },
+          {
+            "id": "d",
+            "text": "Anchored parts shake with the island; unanchored parts can be flung more violently."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

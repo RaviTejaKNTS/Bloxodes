@@ -1,3 +1,4 @@
+import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -70,7 +71,7 @@ function normalizeCatalogCodes(codes: string[]): string[] {
     new Set(
       codes
         .map((code) => code.trim())
-        .filter(Boolean)
+        .filter((code) => Boolean(code) && !isRetiredMusicGameCatalogCode(code))
     )
   );
 }
@@ -192,7 +193,7 @@ export async function listPublishedCatalogCodes(): Promise<string[]> {
       if (error) throw error;
       return (data ?? [])
         .map((row) => (row as { code: string | null }).code)
-        .filter((code): code is string => typeof code === "string" && code.length > 0);
+        .filter((code): code is string => typeof code === "string" && code.length > 0 && !isRetiredMusicGameCatalogCode(code));
     },
     ["listPublishedCatalogCodes"],
     {
@@ -317,7 +318,7 @@ export async function listPublishedCatalogPagesByUniverseId(
   const { data, error } = await viewQuery;
 
   if (!error && data) {
-    return (data ?? []) as CatalogListEntry[];
+    return (data ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
   }
 
   let fallbackQuery = supabase
@@ -339,7 +340,7 @@ export async function listPublishedCatalogPagesByUniverseId(
     return [];
   }
 
-  return (fallback ?? []) as CatalogListEntry[];
+  return (fallback ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
 }
 
 export async function listPublishedCatalogPagesByCodePrefix(
@@ -368,7 +369,7 @@ export async function listPublishedCatalogPagesByCodePrefix(
   const { data, error } = await viewQuery;
 
   if (!error && data) {
-    return (data ?? []) as CatalogListEntry[];
+    return (data ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
   }
 
   let fallbackQuery = supabase
@@ -390,5 +391,5 @@ export async function listPublishedCatalogPagesByCodePrefix(
     return [];
   }
 
-  return (fallback ?? []) as CatalogListEntry[];
+  return (fallback ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
 }

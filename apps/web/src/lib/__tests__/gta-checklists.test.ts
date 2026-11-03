@@ -1,7 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { cacheTagsForEvent, cacheTagsForPath } from "@/lib/public-cache-tags";
-import { resolveSearchScope, siteNavLinksForPath } from "@/lib/site-navigation";
+import { siteNavLinksForPath } from "@/lib/site-navigation";
 import { getChecklistStorageKey, readLocalChecklistProgress, writeLocalChecklistProgress, loadAccountChecklistProgress, saveAccountChecklistProgress } from "@/lib/checklist-progress-client";
 
 const db = vi.hoisted(() => ({ page: { id: "gta-page" } as { id: string } | null, items: [{ id: "leaf", section_code: "1.0.1" }, { id: "heading", section_code: "1" }] }));
@@ -12,18 +11,18 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
     then: (resolve: (value: unknown) => unknown) => resolve({ data: table === "game_checklist_items" ? db.items : [], error: null }) };
   return chain;
 } }) }));
-import { validateGtaChecklistProgress } from "@/lib/gta-checklist-progress";
+import { validateGameChecklistProgress } from "@/lib/game-checklist-progress";
 
 beforeEach(() => { vi.unstubAllGlobals(); db.page = { id: "gta-page" }; });
 describe("GTA checklist contracts", () => {
   it("only accepts real leaf IDs belonging to a published GTA checklist", async () => {
-    expect(await validateGtaChecklistProgress("gta:gta-5", ["leaf"])).toBeNull();
-    expect((await validateGtaChecklistProgress("gta:gta-5", ["heading"]))?.status).toBe(400);
-    expect((await validateGtaChecklistProgress("gta:gta-5", ["foreign-leaf"]))?.status).toBe(400);
-    expect((await validateGtaChecklistProgress("gta:../gta-5"))?.status).toBe(400);
+    expect(await validateGameChecklistProgress("gta:gta-5", ["leaf"])).toBeNull();
+    expect((await validateGameChecklistProgress("gta:gta-5", ["heading"]))?.status).toBe(400);
+    expect((await validateGameChecklistProgress("gta:gta-5", ["foreign-leaf"]))?.status).toBe(400);
+    expect((await validateGameChecklistProgress("gta:../gta-5"))?.status).toBe(400);
     db.page = null;
-    expect((await validateGtaChecklistProgress("gta:gta-5"))?.status).toBe(404);
-    expect(await validateGtaChecklistProgress("jailbreak", ["old-id"])).toBeNull();
+    expect((await validateGameChecklistProgress("gta:gta-5"))?.status).toBe(404);
+    expect(await validateGameChecklistProgress("jailbreak", ["old-id"])).toBeNull();
   });
   it("preserves Roblox browser keys and isolates GTA progress across reload reads", () => {
     const values = new Map<string, string>();
@@ -45,13 +44,8 @@ describe("GTA checklist contracts", () => {
     expect(await saveAccountChecklistProgress("gta:gta-5", ["leaf"])).toBe(true);
   });
   it("has discoverable navigation and matching publish/purge tags", () => {
-    expect(siteNavLinksForPath("/gta/checklists/gta-5").some(x => x.href === "/gta/checklists")).toBe(true);
-    expect(resolveSearchScope("/gta/checklists/gta-5").scope).toBe("gta-checklists");
-    const eventTags = cacheTagsForEvent("gta_checklist", "gta-5");
-    for (const path of ["/gta/checklists", "/gta/checklists/page/2", "/gta/checklists/gta-5", "/gta/wiki/gta-5", "/sitemaps/gta.xml", "/feed.xml"]) {
-      expect(cacheTagsForPath(path).some(tag => eventTags.includes(tag))).toBe(true);
-    }
-    expect(eventTags).not.toContain("checklists");
+    expect(siteNavLinksForPath("/checklists/gta-5", {}, [{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "checklist", gameId: "gta5", title: "Checklist", href: "/checklists/gta-5" }] }]).some(x => x.href === "/checklists/gta-5")).toBe(true);
+
   });
   it("ships every completion task at the renderer's leaf depth with stable keys", () => {
     const sql = readFileSync(new URL("../../../../../supabase/migrations/20260920000026_seed_gta_5_checklist.sql", import.meta.url), "utf8");

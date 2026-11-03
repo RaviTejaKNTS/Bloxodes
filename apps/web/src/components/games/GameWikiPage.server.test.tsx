@@ -2,8 +2,10 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { SharedGameWikiPage } from "@/lib/shared-game-reader";
 import type { GameWikiPresentationPage } from "@/lib/game-root-page";
 
-const mocks = vi.hoisted(() => ({ directory: vi.fn(), wikis: vi.fn(), render: vi.fn(), reader: vi.fn() }));
+const mocks = vi.hoisted(() => ({ menus: vi.fn(), directory: vi.fn(), wikis: vi.fn(), render: vi.fn(), reader: vi.fn(), maps: vi.fn(), checklist: vi.fn() }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: mocks.menus }));
+vi.mock("@/lib/game-extra-pages", () => ({ listGameMapPages: mocks.maps }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/game-registry", () => ({ getGameDirectoryPages: mocks.directory }));
 vi.mock("@/lib/shared-game-reader", async () => {
@@ -20,6 +22,9 @@ import { renderGameWikiPage } from "./GameWikiPage.server";
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.menus.mockResolvedValue([]);
+  mocks.maps.mockResolvedValue([]);
+  mocks.checklist.mockResolvedValue(null);
   mocks.directory.mockResolvedValue([{ href: "/example/wiki/child", title: "Child", kind: "game_wiki_pages_view", image: null }]);
   mocks.wikis.mockResolvedValue([]);
 });
@@ -81,4 +86,11 @@ describe("wiki route navigation adapter", () => {
     expect(props.extraLinks).toBe(extraLinks);
     expect(props.sidebarContent.props).toEqual({ namespace: "example", gameId: "child", canonicalPath: page.canonical_path });
   });
+});
+
+it.each(["gta", "red-dead", "minecraft", "arc-raiders"])("gives %s wikis the same owned reference links", async namespace => {
+  const pages = ["map", "checklist", "quiz", "tool", "code", "catalog"].map(kind => ({ kind, gameId: "owner", title: kind, href: `/${kind}s/${namespace}-game` }));
+  mocks.menus.mockResolvedValue([{ namespace, pages: [...pages, { kind: "tool", gameId: "other", title: "Other", href: "/tools/other" }] }]);
+  await renderGameWikiPage({ page: { game_kind: "game", canonical_path: `/wiki/${namespace}-game`, game_id: "owner" } as SharedGameWikiPage, namespace, namespaceTitle: namespace });
+  expect(mocks.render.mock.calls[0][0].extraLinks).toEqual(pages.map(({ href, title }) => ({ href, title })));
 });

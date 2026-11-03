@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { buildAlternates, SITE_URL } from "@/lib/seo";
@@ -37,5 +38,5 @@ export default async function WikiPaginatedPage({ params, searchParams }: PagePr
   if (page === 1) permanentRedirect(query ? `/wiki?${query}#game-wikis` : "/wiki");
   const data = await loadWikiIndexPageData(page, filters);
   if (page > data.totalPages) notFound();
-  return renderWikiIndexPage(data);
+  return <>{await renderWikiIndexPage(data)}<OtherGamesSection kind="wiki" /></>;
 }

@@ -1,0 +1,140 @@
+import { MapViewport } from "@/components/maps/MapViewport";
+import { getGameLandingForLinks } from "@/lib/game-landing";
+import { gameBreadcrumbs } from "@/lib/game-root-page";
+import { getGameMapBySlug } from "@/lib/game-extra-pages";
+import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
+import { GameMap } from "@/components/games/GameMap";
+import { parseGameMapData } from "@/lib/game-page-data";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import "leaflet/dist/leaflet.css";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "@/styles/gta5-map.css";
+import "@/styles/gta-interactive-map.css";
+import { GtaInteractiveMap } from "@/components/gta/GtaInteractiveMap";
+import { GtaMapGuide } from "@/components/gta/GtaMapGuide";
+import { getGtaInteractiveMapDefinition } from "@/lib/gta-interactive-map-registry";
+import { getGtaInteractiveMapPageData } from "@/lib/gta-interactive-maps";
+import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
+
+
+type PageProps = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const shared = await getGameMapBySlug("gta", slug);
+  if(shared) return gameContentMetadata(shared);
+  const config = getGtaInteractiveMapDefinition(slug);
+  if (!config) return { title: "GTA Interactive Map", alternates: buildAlternates(SITE_URL + "/gta/maps/" + slug) };
+  const canonical = SITE_URL + config.route;
+  const image = SITE_URL + (config.views[0]?.image ?? "/Bloxodes.png");
+  return {
+    title: config.mapTitle + " | " + SITE_NAME,
+    description: config.description,
+    alternates: buildAlternates(canonical),
+    openGraph: { type: "website", url: canonical, title: config.mapTitle, description: config.description, siteName: SITE_NAME, images: [image] },
+    twitter: { card: "summary_large_image", title: config.mapTitle, description: config.description, images: [image] }
+  };
+}
+
+function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaInteractiveMapPageData>>>, image: string | null | undefined, landingPath: string) {
+  const { config, layers, guides, hubTitle } = data;
+  const canonical = SITE_URL + config.route;
+  const listItems = [
+    ...layers.filter((layer) => layer.collectionCode && layer.guideUrl).map((layer) => ({
+      name: layer.label,
+      url: SITE_URL + layer.guideUrl,
+      count: layer.collectionCount ?? layer.pointCount
+    })),
+    ...guides.map((guide) => ({ name: guide.label, url: SITE_URL + guide.href, count: guide.count }))
+  ];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      webPageJsonLd({
+        siteUrl: SITE_URL,
+        slug: config.route.slice(1),
+        title: config.mapTitle,
+        description: config.description,
+        image,
+        author: null
+      }),
+      breadcrumbJsonLd(gameBreadcrumbs([
+        { label: "Home", href: "/" },
+        { label: "GTA", href: landingPath },
+        { label: hubTitle, href: data.hubPath },
+        { label: "Interactive map" }
+      ], config.route).map(item => ({ name: item.label, url: item.href === "/" ? SITE_URL : SITE_URL + (item.href || config.route) }))),
+      {
+        "@type": "ItemList",
+        name: config.title + " map guides",
+        numberOfItems: listItems.length,
+        itemListElement: listItems.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.name,
+          url: item.url
+        }))
+      }
+    ]
+  };
+}
+
+export default async function GtaInteractiveMapPage({ params }: PageProps) {
+  const { slug } = await params;
+  const data = await getGtaInteractiveMapPageData(slug);
+  if (!data) {
+    const page = await getGameMapBySlug("gta", slug);
+    if(!page || page.renderer_key !== "image-pins") notFound();
+    return <GameContentPage page={page}><GameMap data={parseGameMapData(page.map_data)} /></GameContentPage>;
+  }
+  const shared = await getGameMapBySlug("gta", slug);
+  if (!shared) notFound();
+  const landing = await getGameLandingForLinks("gta");
+  const jsonLd = structuredData(data, shared.image, landing.path);
+  const collectionLayers = data.layers.filter((layer) => layer.collectionCode && layer.guideUrl);
+  const sourcePages = Array.from(new Map(
+    data.layers.map((layer) => [layer.sourceUrl, { title: layer.sourceTitle, url: layer.sourceUrl }])
+  ).values());
+
+  return (
+    <div className="gta-map-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <GtaMapGuide map={<MapViewport><GtaInteractiveMap map={data} /></MapViewport>} canonicalPath={data.config.route} title={data.config.mapTitle} heading={"About " + data.config.title}>
+        <p>{data.config.description}</p>
+        <p>{data.config.mappedPointCount.toLocaleString()} locations span {data.layers.length} map layers.</p>
+
+        <h3>Collection guides</h3>
+        {collectionLayers.length ? (
+          <ul>
+            {collectionLayers.map((layer) => (
+              <li key={layer.slug}><Link href={layer.guideUrl!}>{layer.label} ({layer.collectionCount}) ↗</Link></li>
+            ))}
+          </ul>
+        ) : <p>There are no directly tracked collection layers for this map.</p>}
+
+        {data.guides.length ? (
+          <>
+            <h3>Related guides without plotted collection pins</h3>
+            <ul>{data.guides.map((guide) => <li key={guide.code}><Link href={guide.href}>{guide.label} ({guide.count}) ↗</Link>{guide.note ? `: ${guide.note}` : ""}</li>)}</ul>
+          </>
+        ) : null}
+
+        <h3>Map notes</h3>
+        {data.config.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <p>Jump and flight pins mark the source map's recorded location or approach area. Follow the linked guide and use the in-game completion prompt where the activity requires a successful landing or timed objective.</p>
+
+        <h3>Sources and map artwork</h3>
+        <p>Pin names, placement, and map artwork are credited to the linked GTA Wiki community map records. Community text and coordinate annotations are adapted under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>; the game map artwork is separate material © Rockstar Games.</p>
+        <ul>{sourcePages.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul>
+        {data.config.views.length > 1 ? (
+          <>
+            <h3>Map areas</h3>
+            <ul>{data.config.views.map((view) => <li key={view.slug}>{view.label}: <a href={view.sourceUrl} target="_blank" rel="noreferrer">map source</a></li>)}</ul>
+          </>
+        ) : null}
+      </GtaMapGuide>
+    </div>
+  );
+}

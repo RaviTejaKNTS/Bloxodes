@@ -1,0 +1,1099 @@
+{
+  "page": {
+    "universe_id": 4807308814,
+    "code": "break-in-2-story",
+    "title": "Break In 2 (Story) Roblox Quiz: 15 Questions on Base and Bosses",
+    "description_md": "Think you know Break In 2? Take on 15 random questions about training, supplies and boss attacks, with five from each difficulty.",
+    "seo_title": null,
+    "seo_description": "Try this Roblox Break In 2 (Story) quiz with 15 random questions, five per difficulty, on training, supplies, boss attacks and the ending puzzles.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "break-in-2-story-easy-e01",
+        "question": "How many attack waves do villains send against the Secret Evil Villain Base?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three"
+          },
+          {
+            "id": "b",
+            "text": "Two"
+          },
+          {
+            "id": "c",
+            "text": "Four"
+          },
+          {
+            "id": "d",
+            "text": "Five"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e02",
+        "question": "Where do the villain attack waves take place?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Gym"
+          },
+          {
+            "id": "b",
+            "text": "The Middle Room"
+          },
+          {
+            "id": "c",
+            "text": "The Fight Arena"
+          },
+          {
+            "id": "d",
+            "text": "The Vault"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e03",
+        "question": "Which Gym exercise raises Strength?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Running on a treadmill"
+          },
+          {
+            "id": "b",
+            "text": "Cycling at the generator"
+          },
+          {
+            "id": "c",
+            "text": "Bench-pressing barbells"
+          },
+          {
+            "id": "d",
+            "text": "Fighting in the arena"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e04",
+        "question": "Which Gym machine raises Speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A barbell bench"
+          },
+          {
+            "id": "b",
+            "text": "The weapons vending machine"
+          },
+          {
+            "id": "c",
+            "text": "The outside generator cycles"
+          },
+          {
+            "id": "d",
+            "text": "A treadmill"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e05",
+        "question": "Which role starts with a Sports Drink?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Sporty"
+          },
+          {
+            "id": "b",
+            "text": "The Protector"
+          },
+          {
+            "id": "c",
+            "text": "The Medic"
+          },
+          {
+            "id": "d",
+            "text": "The Guest"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e06",
+        "question": "Which role starts with a Baseball Bat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Sporty"
+          },
+          {
+            "id": "b",
+            "text": "The Protector"
+          },
+          {
+            "id": "c",
+            "text": "The Guest"
+          },
+          {
+            "id": "d",
+            "text": "The Nerd"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e07",
+        "question": "Where is Uncle Pete's cage at the start of Break In 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "In the Kitchen"
+          },
+          {
+            "id": "b",
+            "text": "In the Maintenance Room"
+          },
+          {
+            "id": "c",
+            "text": "By the Fight Arena"
+          },
+          {
+            "id": "d",
+            "text": "In the Cafeteria"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e08",
+        "question": "Where can players find the key that frees Uncle Pete?",
+        "options": [
+          {
+            "id": "a",
+            "text": "In the Shop vending machine"
+          },
+          {
+            "id": "b",
+            "text": "On the Gym bulletin board"
+          },
+          {
+            "id": "c",
+            "text": "In the Vault"
+          },
+          {
+            "id": "d",
+            "text": "In a Kitchen drawer"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e09",
+        "question": "Where does the Normal Ending boss fight happen?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Lava Cave"
+          },
+          {
+            "id": "b",
+            "text": "The Security Room"
+          },
+          {
+            "id": "c",
+            "text": "The Middle Room"
+          },
+          {
+            "id": "d",
+            "text": "The Maintenance Room"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e11",
+        "question": "Which item can be found outside the base in packs of six?",
+        "options": [
+          {
+            "id": "a",
+            "text": "High Sugar Bloxy Cola"
+          },
+          {
+            "id": "b",
+            "text": "Bloxy Cola"
+          },
+          {
+            "id": "c",
+            "text": "Sports Drink"
+          },
+          {
+            "id": "d",
+            "text": "Lollipop"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-easy-e12",
+        "question": "What weapon is automatically given to a player who still has none when Wave 1 arrives?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Golden Crowbar"
+          },
+          {
+            "id": "b",
+            "text": "A Diamond Crowbar"
+          },
+          {
+            "id": "c",
+            "text": "A Silver Crowbar"
+          },
+          {
+            "id": "d",
+            "text": "A Classic Sword"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "break-in-2-story-medium-e10",
+        "question": "How many Batteries are available from the Laboratory trash cans?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two"
+          },
+          {
+            "id": "b",
+            "text": "One"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m01",
+        "question": "How many villains spawn at the entrance in Wave 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Six"
+          },
+          {
+            "id": "b",
+            "text": "Eight"
+          },
+          {
+            "id": "c",
+            "text": "Ten"
+          },
+          {
+            "id": "d",
+            "text": "Twelve"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m02",
+        "question": "Without a Pay Rise bonus, how much Money does each Wave 1 villain drop?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5 Money"
+          },
+          {
+            "id": "b",
+            "text": "15 Money"
+          },
+          {
+            "id": "c",
+            "text": "10 Money"
+          },
+          {
+            "id": "d",
+            "text": "20 Money"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m03",
+        "question": "What enemy lineup spawns in Wave 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Eight Minions and four Villains"
+          },
+          {
+            "id": "b",
+            "text": "Four Minions and eight Villains"
+          },
+          {
+            "id": "c",
+            "text": "Two Minions and ten Villains"
+          },
+          {
+            "id": "d",
+            "text": "Six Minions and six Villains"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m04",
+        "question": "What must happen before players can damage the Wave 3 Brute?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The other villains must be defeated"
+          },
+          {
+            "id": "b",
+            "text": "The first van must leave"
+          },
+          {
+            "id": "c",
+            "text": "The Brute must target a player twice"
+          },
+          {
+            "id": "d",
+            "text": "The NPC Team must be rescued"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m05",
+        "question": "How much energy does a player lose for missing the wave assembly deadline?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15 energy"
+          },
+          {
+            "id": "b",
+            "text": "60 energy"
+          },
+          {
+            "id": "c",
+            "text": "30 energy"
+          },
+          {
+            "id": "d",
+            "text": "100 energy"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m06",
+        "question": "If players have not opened the Kitchen earlier, when does its entrance door open automatically?",
+        "options": [
+          {
+            "id": "a",
+            "text": "After Wave 2"
+          },
+          {
+            "id": "b",
+            "text": "After Wave 3"
+          },
+          {
+            "id": "c",
+            "text": "After Wave 1"
+          },
+          {
+            "id": "d",
+            "text": "Only after a Kid presses the button"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m07",
+        "question": "After which wave does the base lose power?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wave 1"
+          },
+          {
+            "id": "b",
+            "text": "Wave 3"
+          },
+          {
+            "id": "c",
+            "text": "Before the first wave"
+          },
+          {
+            "id": "d",
+            "text": "Wave 2"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m08",
+        "question": "What do players do at the outside generator to restore the base's power?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cycle until the reboot finishes"
+          },
+          {
+            "id": "b",
+            "text": "Press the Security Room computer"
+          },
+          {
+            "id": "c",
+            "text": "Lift the Kitchen door"
+          },
+          {
+            "id": "d",
+            "text": "Clear the Fight Arena"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m09",
+        "question": "What is the minimum Strength level needed to break open the Pizza Boss door with a weapon?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 2"
+          },
+          {
+            "id": "b",
+            "text": "Level 4"
+          },
+          {
+            "id": "c",
+            "text": "Level 3"
+          },
+          {
+            "id": "d",
+            "text": "Level 5"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m10",
+        "question": "If you slip on ice while leading Twado back to the base, what makes him follow you again?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pet him once"
+          },
+          {
+            "id": "b",
+            "text": "Wait for the next wave"
+          },
+          {
+            "id": "c",
+            "text": "Feed him his favorite food again"
+          },
+          {
+            "id": "d",
+            "text": "Use the generator"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m11",
+        "question": "Who can regain energy by petting Twado after he is rescued?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The player carrying a Medkit"
+          },
+          {
+            "id": "b",
+            "text": "The player with the most energy"
+          },
+          {
+            "id": "c",
+            "text": "The player who freed Uncle Pete"
+          },
+          {
+            "id": "d",
+            "text": "The player who tamed him"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m12",
+        "question": "How much energy does an Apple restore in Break In 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15 energy"
+          },
+          {
+            "id": "b",
+            "text": "5 energy"
+          },
+          {
+            "id": "c",
+            "text": "10 energy"
+          },
+          {
+            "id": "d",
+            "text": "25 energy"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m13",
+        "question": "How much energy does Golden Pizza restore?",
+        "options": [
+          {
+            "id": "a",
+            "text": "25 energy"
+          },
+          {
+            "id": "b",
+            "text": "75 energy"
+          },
+          {
+            "id": "c",
+            "text": "50 energy"
+          },
+          {
+            "id": "d",
+            "text": "100 energy"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m14",
+        "question": "How many vans approach the base in Wave 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Two"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m15",
+        "question": "For about how long does a Sports Drink double training speed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "About 10 to 15 seconds"
+          },
+          {
+            "id": "b",
+            "text": "About 45 to 60 seconds"
+          },
+          {
+            "id": "c",
+            "text": "About 90 seconds"
+          },
+          {
+            "id": "d",
+            "text": "About 25 to 30 seconds"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-m16",
+        "question": "How many charges does a Sports Drink supplied by a starting role have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Five"
+          },
+          {
+            "id": "b",
+            "text": "One"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Ten"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-h08",
+        "question": "Once four of the five Security Room monitor pairs are correct, what color highlights a correct pair?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Green"
+          },
+          {
+            "id": "c",
+            "text": "Yellow"
+          },
+          {
+            "id": "d",
+            "text": "Blue"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-h11",
+        "question": "Which Shop display identifies the strongest Legendary weapon for that run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Weapons Vending Machine"
+          },
+          {
+            "id": "b",
+            "text": "The donation stand"
+          },
+          {
+            "id": "c",
+            "text": "The bulletin board"
+          },
+          {
+            "id": "d",
+            "text": "The Cafeteria menu"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-h16",
+        "question": "Which two Security Room colors make orange?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Blue and white"
+          },
+          {
+            "id": "b",
+            "text": "Red and blue"
+          },
+          {
+            "id": "c",
+            "text": "Yellow and blue"
+          },
+          {
+            "id": "d",
+            "text": "Red and yellow"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-h17",
+        "question": "What color results from mixing white and black in the Security Room puzzle?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Grey"
+          },
+          {
+            "id": "b",
+            "text": "Pink"
+          },
+          {
+            "id": "c",
+            "text": "Orange"
+          },
+          {
+            "id": "d",
+            "text": "Navy blue"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-medium-h18",
+        "question": "What does completing the Security Room color puzzle unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Volcano Door"
+          },
+          {
+            "id": "b",
+            "text": "The Red Cabinet"
+          },
+          {
+            "id": "c",
+            "text": "The Maintenance Room ladder"
+          },
+          {
+            "id": "d",
+            "text": "The Shop weapons machine"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "break-in-2-story-hard-h01",
+        "question": "How many lava flows does Scary Mary summon during the lava attack in her third round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Five"
+          },
+          {
+            "id": "b",
+            "text": "One"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h02",
+        "question": "At what remaining health does Mary reveal robotic Scary Larry in the Normal Ending fight?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One full heart"
+          },
+          {
+            "id": "b",
+            "text": "Half a heart"
+          },
+          {
+            "id": "c",
+            "text": "Two hearts"
+          },
+          {
+            "id": "d",
+            "text": "No hearts"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h03",
+        "question": "Counting the extra groups, how many roses does Mary summon during the charge attack in her third round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three"
+          },
+          {
+            "id": "b",
+            "text": "Six"
+          },
+          {
+            "id": "c",
+            "text": "Nine"
+          },
+          {
+            "id": "d",
+            "text": "Eight"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h04",
+        "question": "How does Mary signal which pipe will send the next lava flow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The floor turns blue"
+          },
+          {
+            "id": "b",
+            "text": "Her violin stops"
+          },
+          {
+            "id": "c",
+            "text": "The ceiling lights flash"
+          },
+          {
+            "id": "d",
+            "text": "That pipe starts fuming"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h05",
+        "question": "During robotic Scary Larry's phase, what removes one of Mary's hearts?",
+        "options": [
+          {
+            "id": "a",
+            "text": "His final hand swipe slams into her pillar"
+          },
+          {
+            "id": "b",
+            "text": "His spikes reach the edge of the arena"
+          },
+          {
+            "id": "c",
+            "text": "Players attack her key"
+          },
+          {
+            "id": "d",
+            "text": "The Brute hits her platform"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h06",
+        "question": "What message appears when robotic Scary Larry starts resisting during the Normal Ending fight?",
+        "options": [
+          {
+            "id": "a",
+            "text": "RUN AWAY"
+          },
+          {
+            "id": "b",
+            "text": "HELP ME"
+          },
+          {
+            "id": "c",
+            "text": "STAY BACK"
+          },
+          {
+            "id": "d",
+            "text": "TURN KEY"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h07",
+        "question": "If a player dies during the robotic Scary Larry phase of Normal Ending, what happens to the option to buy a respawn?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its price doubles"
+          },
+          {
+            "id": "b",
+            "text": "Only the player with the most health can use it"
+          },
+          {
+            "id": "c",
+            "text": "It becomes unavailable"
+          },
+          {
+            "id": "d",
+            "text": "It remains available at the same price"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h10",
+        "question": "What move ends a level-5 Strength attack combo?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An overhead slam"
+          },
+          {
+            "id": "b",
+            "text": "A flying kick"
+          },
+          {
+            "id": "c",
+            "text": "A shield bash"
+          },
+          {
+            "id": "d",
+            "text": "A roundhouse spin"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h12",
+        "question": "How many shield icons appear above the Brute before NPCs attack him in Wave 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three"
+          },
+          {
+            "id": "b",
+            "text": "One"
+          },
+          {
+            "id": "c",
+            "text": "Two"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h13",
+        "question": "With Speed at level 3 or higher, what does faster generator cycling cost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5 energy every second"
+          },
+          {
+            "id": "b",
+            "text": "5 energy every 4 seconds"
+          },
+          {
+            "id": "c",
+            "text": "15 energy every 4 seconds"
+          },
+          {
+            "id": "d",
+            "text": "15 energy every second"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h14",
+        "question": "Which Maintenance Room wire puzzle unlocks the Origin Ending route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first"
+          },
+          {
+            "id": "b",
+            "text": "The third"
+          },
+          {
+            "id": "c",
+            "text": "The second"
+          },
+          {
+            "id": "d",
+            "text": "The fourth"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "break-in-2-story-hard-h15",
+        "question": "Which three of Scary Larry's items are needed to unlock the Secret Ending route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "His Golden Crowbar, hat and violin"
+          },
+          {
+            "id": "b",
+            "text": "His Golden Crowbar, mask and umbrella"
+          },
+          {
+            "id": "c",
+            "text": "His hat, mask and Baseball Bat"
+          },
+          {
+            "id": "d",
+            "text": "His Golden Crowbar, hat and mask"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

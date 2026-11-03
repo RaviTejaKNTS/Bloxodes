@@ -40,7 +40,10 @@ async function main() {
     }
     if (!data.description_json || typeof data.description_json !== "object" || Array.isArray(data.description_json) || !Array.isArray(data.faq_json)) throw new Error(`${file} needs description_json and faq_json.`);
     const plan = Object.fromEntries(fields.filter(key => data[key] !== undefined).map(key => [key, data[key]]));
-    plans.push({ ...plan, game_id: owner.data.id, slug, tool_key: data.tool_key ?? slug, is_published: data.is_published === true });
+    const expected = await sb.rpc("expected_game_page_path", { p_game_id: owner.data.id, p_type: "tool", p_slug: slug });
+    if (expected.error) throw expected.error;
+    if (data.canonical_path != null && data.canonical_path !== expected.data) throw new Error(`${file} canonical_path must be ${expected.data}.`);
+    plans.push({ ...plan, canonical_path: expected.data, game_id: owner.data.id, slug, tool_key: data.tool_key ?? slug, is_published: data.is_published === true });
   }
   if (new Set(plans.map(row => row.slug)).size !== plans.length) throw new Error("Duplicate tool slugs in the exact publication batch.");
   await validateFranchisePublicationImages(sb, "minecraft", { tools: plans });

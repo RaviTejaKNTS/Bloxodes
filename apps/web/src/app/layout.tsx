@@ -29,9 +29,10 @@ export const metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Active & Working Codes`,
+    // Next derives social titles from the resolved document title. Keeping a
+    // homepage title here can survive not-found metadata recovery in Next 16.
     description: SITE_DESCRIPTION,
-    url: SITE_URL,
+    // URLs belong to successful pages, never to the shared error fallback.
     locale: "en_US",
     images: [
       {
@@ -44,7 +45,6 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Active & Working Codes`,
     description: SITE_DESCRIPTION,
     creator: "@bloxodes",
     site: "@bloxodes",

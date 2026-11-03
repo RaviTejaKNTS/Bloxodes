@@ -1,0 +1,619 @@
+{
+  "page": {
+    "universe_id": 6739698191,
+    "code": "violence-district",
+    "title": "Violence District Roblox Quiz: 15 Questions on Killers and Items",
+    "description_md": "Think you know how a Violence District round plays out? Easy questions cover the roles, the team's goal and the basic tools. Hard ones get into specific Killer abilities and how they change a chase.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Violence District knowledge with 15 questions on roles, pallets, Survivor items and Killer abilities, from easy basics to hard chase details.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "How many Killers and Survivors are in a standard round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One Killer against five Survivors"
+          },
+          {
+            "id": "b",
+            "text": "One Killer against four Survivors"
+          },
+          {
+            "id": "c",
+            "text": "Two Killers against five Survivors"
+          },
+          {
+            "id": "d",
+            "text": "Two Killers against four Survivors"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What is the Killer's main job in a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Repair generators before the Survivors finish them."
+          },
+          {
+            "id": "b",
+            "text": "Hunt Survivors down and stop them from escaping."
+          },
+          {
+            "id": "c",
+            "text": "Escort Survivors safely to the exit gates."
+          },
+          {
+            "id": "d",
+            "text": "Guard the pallets so Survivors can't use them."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What do pallets let Survivors do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Heal teammates and restore their items."
+          },
+          {
+            "id": "b",
+            "text": "Reveal the Killer and power the exit gates."
+          },
+          {
+            "id": "c",
+            "text": "Stun the Killer and help break a chase."
+          },
+          {
+            "id": "d",
+            "text": "Hide Survivors and repair generators faster."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "How can a Survivor get out of a round alive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only after every Survivor escapes at once."
+          },
+          {
+            "id": "b",
+            "text": "Only together with at least one teammate."
+          },
+          {
+            "id": "c",
+            "text": "Only after the Killer leaves through the exit."
+          },
+          {
+            "id": "d",
+            "text": "Either together with teammates or alone."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How many generators must the Survivor team repair to finish its objective?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four generators, shared by the whole team."
+          },
+          {
+            "id": "b",
+            "text": "Five generators, shared by the whole team."
+          },
+          {
+            "id": "c",
+            "text": "Five generators, and each Survivor repairs all five."
+          },
+          {
+            "id": "d",
+            "text": "Six generators, shared by the whole team."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "How do Survivors win a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They finish the objectives, then reach an exit."
+          },
+          {
+            "id": "b",
+            "text": "After all Survivors fall, the Killer reaches an exit."
+          },
+          {
+            "id": "c",
+            "text": "Before the objectives, they find the Killer."
+          },
+          {
+            "id": "d",
+            "text": "Before the objectives, they repair the exit."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Where do Survivor items come from?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They are map drops that the Killer can also pick up."
+          },
+          {
+            "id": "b",
+            "text": "They only come from badges earned after a round."
+          },
+          {
+            "id": "c",
+            "text": "Every role gets them free at the start of a round."
+          },
+          {
+            "id": "d",
+            "text": "They're bought in the shop and equipped in the loadout."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What does a Flashlight do to the Killer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It knocks the Killer back and breaks a nearby pallet."
+          },
+          {
+            "id": "b",
+            "text": "It blinds the Killer and makes them drop a carried Survivor."
+          },
+          {
+            "id": "c",
+            "text": "It heals its user and hides them during a chase."
+          },
+          {
+            "id": "d",
+            "text": "It marks a nearby generator for every Survivor."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "When you use a Bandage, how many health states do you recover?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One health state"
+          },
+          {
+            "id": "b",
+            "text": "Four health states"
+          },
+          {
+            "id": "c",
+            "text": "Three health states"
+          },
+          {
+            "id": "d",
+            "text": "Two health states"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What happens when the Parrying Dagger parries the Killer's attack?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It stuns the Killer for a few seconds."
+          },
+          {
+            "id": "b",
+            "text": "It breaks the nearest pallet for the Survivor."
+          },
+          {
+            "id": "c",
+            "text": "It applies Anti-Heal to the Killer."
+          },
+          {
+            "id": "d",
+            "text": "It reveals every exit gate to the team."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What does Adrenaline Shot do when you use it in the dying state?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It fully heals you and clears the dying state."
+          },
+          {
+            "id": "b",
+            "text": "It keeps you standing for the rest of the round."
+          },
+          {
+            "id": "c",
+            "text": "It briefly picks you back up, then you fall again."
+          },
+          {
+            "id": "d",
+            "text": "It leaves you downed for the rest of the round."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How does the Motion Tracker's sound change as the Killer gets closer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It beeps faster and at a higher pitch."
+          },
+          {
+            "id": "b",
+            "text": "It beeps slower and at a lower pitch."
+          },
+          {
+            "id": "c",
+            "text": "It stays silent until the Killer starts a chase."
+          },
+          {
+            "id": "d",
+            "text": "It beeps only when a generator finishes."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What does the WaxBound Candle do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It reveals every pallet and window in range."
+          },
+          {
+            "id": "b",
+            "text": "It hides a Survivor's aura while they are spiked."
+          },
+          {
+            "id": "c",
+            "text": "It reveals the Killer's aura for a short time."
+          },
+          {
+            "id": "d",
+            "text": "It lights an exit gate for every Survivor."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What happens to The Hidden when he stays still?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He hides his aura after hitting a generator."
+          },
+          {
+            "id": "b",
+            "text": "He becomes invincible while sprinting."
+          },
+          {
+            "id": "c",
+            "text": "He reveals Survivors when he crouches."
+          },
+          {
+            "id": "d",
+            "text": "He becomes completely invisible."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What triggers Great Collapse's speed boost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Vaulting a window at full speed."
+          },
+          {
+            "id": "b",
+            "text": "Stunning the Killer with a pallet."
+          },
+          {
+            "id": "c",
+            "text": "Healing a downed teammate nearby."
+          },
+          {
+            "id": "d",
+            "text": "Repairing a generator to completion."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Which actions does The Slasher's Lake of Mist disable while active?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Moving, vaulting and destroying objects."
+          },
+          {
+            "id": "b",
+            "text": "Moving, vaulting and attacking."
+          },
+          {
+            "id": "c",
+            "text": "Attacking, vaulting and destroying objects."
+          },
+          {
+            "id": "d",
+            "text": "Moving, attacking and destroying objects."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-2",
+        "question": "What makes The Stalker's Evil's Grasp gauge fill faster?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Standing still after a Survivor is downed."
+          },
+          {
+            "id": "b",
+            "text": "Landing basic hits from long range."
+          },
+          {
+            "id": "c",
+            "text": "Repairing generators near the exit gate."
+          },
+          {
+            "id": "d",
+            "text": "Stalking a visible Survivor from closer range."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What does a successful Evil's Grasp hit apply to the Survivor it catches?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Anti-Heal on the Survivor"
+          },
+          {
+            "id": "b",
+            "text": "A speed boost on the Survivor"
+          },
+          {
+            "id": "c",
+            "text": "Full healing for the Survivor"
+          },
+          {
+            "id": "d",
+            "text": "A reveal of every exit gate"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What does the Through the Veil ability let The Veil's spears do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop at the first wall they hit."
+          },
+          {
+            "id": "b",
+            "text": "Heal The Veil after each throw."
+          },
+          {
+            "id": "c",
+            "text": "Pass through walls without colliding."
+          },
+          {
+            "id": "d",
+            "text": "Reveal the Survivor they hit to the team."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "While holding her spears, what must The Veil do before carrying a Survivor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Throw both of her spears first."
+          },
+          {
+            "id": "b",
+            "text": "Switch back to her dagger."
+          },
+          {
+            "id": "c",
+            "text": "Land a Through the Veil throw first."
+          },
+          {
+            "id": "d",
+            "text": "Wait for the spear charge to refill."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What does The Cure's Elucidation apply to Survivors it hits?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Full healing"
+          },
+          {
+            "id": "b",
+            "text": "A speed boost"
+          },
+          {
+            "id": "c",
+            "text": "Anti-Heal"
+          },
+          {
+            "id": "d",
+            "text": "Pestilence"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What can The Cure do with a charge earned by spiking Survivors?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn a generator into a Pestilence cloud."
+          },
+          {
+            "id": "b",
+            "text": "Turn a corpse into an SCP-049-2."
+          },
+          {
+            "id": "c",
+            "text": "Revive the nearest Survivor at an exit."
+          },
+          {
+            "id": "d",
+            "text": "Turn a pallet into a healing item."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "What does Mask Up do for The Masked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It switches to a randomly chosen mask."
+          },
+          {
+            "id": "b",
+            "text": "It copies a Survivor's loadout for the round."
+          },
+          {
+            "id": "c",
+            "text": "It locks one mask in for the whole round."
+          },
+          {
+            "id": "d",
+            "text": "It swaps masks only once the exit gates power."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "During The Slasher's Pursuit, what happens to a dropped pallet he touches?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It powers up an exit gate for the Survivors."
+          },
+          {
+            "id": "b",
+            "text": "It is repaired and stood back up for everyone."
+          },
+          {
+            "id": "c",
+            "text": "It is destroyed instantly and can't be used again."
+          },
+          {
+            "id": "d",
+            "text": "It restores health to the Survivors nearby."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "What happens on the fourth chained hit of The Killer's Frenzy?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The target is downed, even if healthy."
+          },
+          {
+            "id": "b",
+            "text": "The target is injured but stays standing."
+          },
+          {
+            "id": "c",
+            "text": "Only an already-injured target is downed."
+          },
+          {
+            "id": "d",
+            "text": "The target is eliminated from the match."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

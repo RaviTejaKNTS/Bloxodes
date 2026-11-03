@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { defaultDecalQuerySeeds } from "../shared/decal-discovery";
 
 import {
   TOOLBOX_SEARCH_API,
@@ -66,7 +67,7 @@ const DEFAULT_QUERY_SEEDS = [
   "green"
 ];
 
-const DEFAULT_SORT_CATEGORIES = ["Top", "Trending", "Ratings", "UpdatedTime", "CreateTime"];
+const DEFAULT_SORT_CATEGORIES = ["CreateTime", "Top", "Trending", "Ratings", "UpdatedTime"];
 const DEFAULT_SORT_DIRECTIONS = ["Descending"];
 
 type ToolboxResponse = {
@@ -82,7 +83,13 @@ type CollectConfig = {
 };
 
 function parseSeeds() {
-  return parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS);
+  return defaultDecalQuerySeeds(parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS));
+}
+
+class ToolboxSearchError extends Error {
+  constructor(readonly status: number, message: string) {
+    super(message);
+  }
 }
 
 async function fetchToolboxDecalPage(pageToken: string | null, config: CollectConfig): Promise<ToolboxResponse> {
@@ -105,7 +112,7 @@ async function fetchToolboxDecalPage(pageToken: string | null, config: CollectCo
 
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new Error(`Toolbox decal search failed (${res.status}): ${body.slice(0, 300)}`);
+    throw new ToolboxSearchError(res.status, `Toolbox decal search failed (${res.status}): ${body.slice(0, 300)}`);
   }
 
   return (await res.json()) as ToolboxResponse;
@@ -126,17 +133,22 @@ async function collect() {
   let totalInserted = 0;
   let totalAlreadyKnown = 0;
   let totalConfigs = 0;
+  let stoppedEarly: string | null = null;
+  let requestCount = 0;
+  // Roblox ignores the requested sort, so a later sort of the same query often returns the same first page.
+  const firstPageSignatures = new Map<string, Set<string>>();
 
   console.log(
     `Roblox decal discovery starting (${queries.length} queries, ${sortCategories.length} sort categories, max ${
       Number.isFinite(maxAssets) ? maxAssets : "unlimited"
-    } assets)...`
+    } new assets)...`
   );
 
-  for (const sortDirection of sortDirections) {
+  discovery: for (const sortDirection of sortDirections) {
     for (const sortCategory of sortCategories) {
       for (const rawQuery of queries) {
-        if (totalDiscovered >= maxAssets) break;
+        // Known candidates must not prevent later queries from finding new assets.
+        if (totalInserted >= maxAssets) break discovery;
         const query = rawQuery.trim();
         totalConfigs += 1;
         const label = query || "(empty)";
@@ -145,28 +157,56 @@ async function collect() {
         let pageToken: string | null = null;
         let pageNumber = 0;
         const seenTokens = new Set<string>();
+        const configAssetIds = new Set<number>();
 
-        while (pageNumber < MAX_PAGES_PER_QUERY && totalDiscovered < maxAssets) {
+        while (pageNumber < MAX_PAGES_PER_QUERY && totalInserted < maxAssets) {
           if (pageToken && seenTokens.has(pageToken)) break;
           if (pageToken) seenTokens.add(pageToken);
 
-          const payload = await fetchToolboxDecalPage(pageToken, {
-            query: query || null,
-            sortCategory,
-            sortDirection
-          });
+          if (requestCount > 0) await sleep(DELAY_MS);
+          requestCount += 1;
+          let payload: ToolboxResponse;
+          try {
+            payload = await fetchToolboxDecalPage(pageToken, {
+              query: query || null,
+              sortCategory,
+              sortDirection
+            });
+          } catch (error) {
+            // Keep what was inserted and let verify and rerank run; the next day continues discovery.
+            if (error instanceof ToolboxSearchError && error.status === 429) {
+              stoppedEarly = "Roblox rate limited Toolbox search (429)";
+              console.warn(`  ${stoppedEarly}; stopping discovery early.`);
+              break discovery;
+            }
+            throw error;
+          }
           const assets = Array.isArray(payload.creatorStoreAssets) ? payload.creatorStoreAssets : [];
           if (!assets.length) break;
 
-          const rows = assets
+          const pageRows = assets
             .map((entry) => buildDecalRowFromToolbox(entry, fetchedAt, "roblox_toolbox_decal_search"))
-            .filter((row): row is NonNullable<typeof row> => Boolean(row))
+            .filter((row): row is NonNullable<typeof row> => Boolean(row));
+          if (pageNumber === 0) {
+            const signature = pageRows.map((row) => row.asset_id).join(",");
+            const signatures = firstPageSignatures.get(query) ?? new Set<string>();
+            if (signatures.has(signature)) {
+              console.log("  same first page as an earlier sort; skipping this sort.");
+              break;
+            }
+            signatures.add(signature);
+            firstPageSignatures.set(query, signatures);
+          }
+          // A page with nothing new for this query means the pagination is repeating itself.
+          const repeatedPage = pageRows.every((row) => configAssetIds.has(row.asset_id));
+          for (const row of pageRows) configAssetIds.add(row.asset_id);
+
+          const rows = pageRows
             .filter((row) => {
               if (seenAssetIds.has(row.asset_id)) return false;
               seenAssetIds.add(row.asset_id);
               return true;
-            })
-            .slice(0, Math.max(0, maxAssets - totalDiscovered));
+            });
 
           const sources: DecalSourceRow[] = rows.map((row, index) => ({
             asset_id: row.asset_id,
@@ -182,8 +222,9 @@ async function collect() {
             last_seen_at: fetchedAt
           }));
 
-          const insertResult = await insertMissingDecalRows(rows, { dryRun: DRY_RUN });
-          await upsertSourceRows(sources, { dryRun: DRY_RUN });
+          const insertResult = await insertMissingDecalRows(rows, { dryRun: DRY_RUN, maxInserts: maxAssets - totalInserted });
+          const skippedIds = new Set(insertResult.skippedAssetIds);
+          await upsertSourceRows(sources.filter((source) => !skippedIds.has(source.asset_id)), { dryRun: DRY_RUN });
           totalDiscovered += rows.length;
           totalInserted += insertResult.inserted;
           totalAlreadyKnown += insertResult.existing;
@@ -195,15 +236,16 @@ async function collect() {
           );
 
           pageToken = payload.nextPageToken ?? null;
-          if (!pageToken) break;
-          await sleep(DELAY_MS);
+          if (!pageToken || repeatedPage) break;
         }
       }
     }
   }
 
   console.log(
-    `Done. Configs: ${totalConfigs}. Unique candidates this run: ${totalDiscovered}. Inserted: ${totalInserted}. Already known: ${totalAlreadyKnown}.`
+    `Done. Configs: ${totalConfigs}. Unique candidates this run: ${totalDiscovered}. Inserted: ${totalInserted}. Already known: ${totalAlreadyKnown}.${
+      stoppedEarly ? ` Stopped early: ${stoppedEarly}.` : ""
+    }`
   );
 }
 

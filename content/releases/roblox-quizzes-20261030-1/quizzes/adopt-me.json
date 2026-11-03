@@ -1,0 +1,571 @@
+{
+  "page": {
+    "universe_id": 383310974,
+    "code": "adopt-me",
+    "title": "Adopt Me Roblox Quiz: 15 Random Questions on Pets and Lures",
+    "description_md": "Know your Neons from your Lures? Easy starts with pet progression and home Lures; Hard gets into Friendship carryover and bait mishaps. Each attempt draws 15 random questions, five Easy, five Medium and five Hard, with no timer.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Adopt Me knowledge with 15 random questions on pets and Lures: five Easy, five Medium and five Hard. There's no timer, so take your time.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Where do you combine pets to make a Neon?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Neon Cave"
+          },
+          {
+            "id": "b",
+            "text": "Nursery"
+          },
+          {
+            "id": "c",
+            "text": "Pet Pen"
+          },
+          {
+            "id": "d",
+            "text": "Safety Hub"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "How many fully aged regular copies of the same pet are needed to make one Neon?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two"
+          },
+          {
+            "id": "b",
+            "text": "Four"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Five"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What colors make up a Mega Neon's glow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only black and white"
+          },
+          {
+            "id": "b",
+            "text": "The full rainbow"
+          },
+          {
+            "id": "c",
+            "text": "Only shades of blue"
+          },
+          {
+            "id": "d",
+            "text": "Only shades of red"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What is a Lure used for in an Adopt Me home?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hatching your pet eggs with bait"
+          },
+          {
+            "id": "b",
+            "text": "Changing your pet's color with bait"
+          },
+          {
+            "id": "c",
+            "text": "Attracting pets or items with bait"
+          },
+          {
+            "id": "d",
+            "text": "Combining your pets into Neons with bait"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What do four fully aged Neon pets of the same kind combine into?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A regular pet of that kind"
+          },
+          {
+            "id": "b",
+            "text": "A Neon of the next rarity"
+          },
+          {
+            "id": "c",
+            "text": "A regular pet of the next rarity"
+          },
+          {
+            "id": "d",
+            "text": "A Mega Neon of that kind"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What bait supply comes with a Lure when you start using it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bait that never runs out"
+          },
+          {
+            "id": "b",
+            "text": "Bait for one use only"
+          },
+          {
+            "id": "c",
+            "text": "Bait for two uses only"
+          },
+          {
+            "id": "d",
+            "text": "Bait for three uses only"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How many Needs complete one Friendship level, regardless of pet rarity?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30 Needs"
+          },
+          {
+            "id": "b",
+            "text": "10 Needs"
+          },
+          {
+            "id": "c",
+            "text": "50 Needs"
+          },
+          {
+            "id": "d",
+            "text": "100 Needs"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Which item do you receive when your pet completes a Friendship level?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Ride Potion"
+          },
+          {
+            "id": "b",
+            "text": "An Age-Up Potion"
+          },
+          {
+            "id": "c",
+            "text": "A Fly Potion"
+          },
+          {
+            "id": "d",
+            "text": "Lure bait"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Which markers identify Neon and Mega Neon pets in the trading grid?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Purple N for Neon; green M for Mega Neon"
+          },
+          {
+            "id": "b",
+            "text": "Blue N for Neon; red M for Mega Neon"
+          },
+          {
+            "id": "c",
+            "text": "Green N for Neon; purple M for Mega Neon"
+          },
+          {
+            "id": "d",
+            "text": "Green N for Neon; red M for Mega Neon"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What must you do to let a Pet Pen pet keep growing after it completes an age level?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Restart the game"
+          },
+          {
+            "id": "b",
+            "text": "Trade the pet"
+          },
+          {
+            "id": "c",
+            "text": "Replace the Pen"
+          },
+          {
+            "id": "d",
+            "text": "Visit the pet"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How do you get the Box Lure and Cozy Home Lure?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Box: free; Cozy Home: Robux"
+          },
+          {
+            "id": "b",
+            "text": "Box: Robux; Cozy Home: free"
+          },
+          {
+            "id": "c",
+            "text": "Box: free; Cozy Home: free"
+          },
+          {
+            "id": "d",
+            "text": "Box: Robux; Cozy Home: Robux"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "Using the same bait, how do the Box Lure and Cozy Home Lure compare for odds and rewards?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Same odds, different items"
+          },
+          {
+            "id": "b",
+            "text": "Same odds and same items"
+          },
+          {
+            "id": "c",
+            "text": "Different odds, same items"
+          },
+          {
+            "id": "d",
+            "text": "Different odds and different items"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "How many copies of each Lure type that is available for sale can you have in one home?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two of each type"
+          },
+          {
+            "id": "b",
+            "text": "Three of each type"
+          },
+          {
+            "id": "c",
+            "text": "One of each type"
+          },
+          {
+            "id": "d",
+            "text": "Four of each type"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Can pets earn Friendship levels inside a Pet Pen?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Yes, while you are online"
+          },
+          {
+            "id": "b",
+            "text": "Yes, if they are Neon pets"
+          },
+          {
+            "id": "c",
+            "text": "Yes, after finishing an age level"
+          },
+          {
+            "id": "d",
+            "text": "No, they cannot earn them there"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "What limits a pet's Friendship level?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Friendship levels have no cap"
+          },
+          {
+            "id": "b",
+            "text": "Friendship levels stop at 10"
+          },
+          {
+            "id": "c",
+            "text": "Friendship levels stop at 100"
+          },
+          {
+            "id": "d",
+            "text": "Friendship levels stop at 1,000"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "You put unlimited bait in a Lure, then leave immediately. How much waiting remains when you return 3 hours and 30 minutes later?",
+        "options": [
+          {
+            "id": "a",
+            "text": "90 minutes"
+          },
+          {
+            "id": "b",
+            "text": "30 minutes"
+          },
+          {
+            "id": "c",
+            "text": "210 minutes"
+          },
+          {
+            "id": "d",
+            "text": "240 minutes"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which pair cannot receive an Age-Up Potion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Newborn and Junior pets"
+          },
+          {
+            "id": "b",
+            "text": "Pre-Teen and Teen pets"
+          },
+          {
+            "id": "c",
+            "text": "Eggs and fully aged pets"
+          },
+          {
+            "id": "d",
+            "text": "Teen and Post-Teen pets"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "One pet used to make a Neon can Fly, and a different ingredient pet can Ride. Which abilities does the new Neon inherit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fly and Ride"
+          },
+          {
+            "id": "b",
+            "text": "Fly only"
+          },
+          {
+            "id": "c",
+            "text": "Ride only"
+          },
+          {
+            "id": "d",
+            "text": "Neither Fly nor Ride"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "With Friendship Bar visibility enabled, when can a newly made Neon display inherited Friendship levels?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Immediately after the new Neon is created"
+          },
+          {
+            "id": "b",
+            "text": "After the new Neon is fully aged"
+          },
+          {
+            "id": "c",
+            "text": "While the new Neon is still growing"
+          },
+          {
+            "id": "d",
+            "text": "Only after the Neon becomes Mega Neon"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "When pets are combined into a Neon or Mega Neon, what Friendship progress carries over?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only partial bars carry over"
+          },
+          {
+            "id": "b",
+            "text": "Both completed levels and partial bars carry over"
+          },
+          {
+            "id": "c",
+            "text": "Only completed levels carry over"
+          },
+          {
+            "id": "d",
+            "text": "Neither completed levels nor partial bars carry over"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "A pet has Friendship level 12. You trade it away and later get it back. What Friendship level does it return with?",
+        "options": [
+          {
+            "id": "a",
+            "text": "6"
+          },
+          {
+            "id": "b",
+            "text": "11"
+          },
+          {
+            "id": "c",
+            "text": "12"
+          },
+          {
+            "id": "d",
+            "text": "0"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "A pet is aging in a Pet Pen. What are its hourly Need rates while you are online and offline?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2 online and 8 offline"
+          },
+          {
+            "id": "b",
+            "text": "8 online and 0 offline"
+          },
+          {
+            "id": "c",
+            "text": "8 online and 2 offline"
+          },
+          {
+            "id": "d",
+            "text": "4 online and 2 offline"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "You sell a Lure containing bait, then repurchase the same type of Lure. What happens to that bait?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It returns to your Backpack"
+          },
+          {
+            "id": "b",
+            "text": "It is removed from the Lure"
+          },
+          {
+            "id": "c",
+            "text": "It is swapped for another bait"
+          },
+          {
+            "id": "d",
+            "text": "It remains inside the repurchased Lure"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

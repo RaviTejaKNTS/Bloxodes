@@ -17,18 +17,9 @@ describe("public cache tags", () => {
     );
   });
 
-  it("tags interactive GTA maps with their hub and linked collection revisions", () => {
-    expect(cacheTagsForPath("/gta/maps")).toEqual(expect.arrayContaining(["site", "gta-home", "gta-wiki-index"]));
-    expect(cacheTagsForPath("/gta/maps/gta5")).toEqual(expect.arrayContaining(["gta-wiki:gta-5", "gta-wiki-collection-index"]));
-    expect(cacheTagsForPath("/gta/maps/gta-4")).toEqual(expect.arrayContaining([
-      "gta-wiki:gta-4",
-      "gta-wiki:gta-4-tlad",
-      "gta-wiki:gta-4-tbogt",
-      "gta-wiki-collection:gta-4/flying-rats",
-      "gta-wiki-collection:gta-4-tlad/seagulls",
-      "gta-wiki-collection:gta-4-tbogt/seagulls"
-    ]));
-    expect(cacheTagsForPath("/gta/maps/gta-online")).toContain("gta-wiki-collection:gta-online/signal-jammers");
+  it.each(["gta5", "red-dead-2", "minecraft-java", "peak"])("tags %s pages by their stored public path", slug => {
+    expect(cacheTagsForPath(`/maps/${slug}`)).toContain(`page:/maps/${slug}`);
+    expect(cacheTagsForPath(`/wiki/${slug}/items/page/99`)).toContain(`page:/wiki/${slug}/items`);
   });
 
   it("purges code detail, indexes, home, feed, and sitemap tags for code events", () => {
@@ -94,4 +85,12 @@ describe("shared game cache invalidation", () => {
   expect(cacheTagsForEvent("game_content", "sandustry/wiki")).toContain("games-index");
   expect(cacheTagsForPath("/games")).toContain("games-index");
  });
+});
+
+
+it("shared game events avoid broad Roblox family tags and pagination shares its page dependency", () => {
+  const tags = cacheTagsForEvent("game_content", "wiki/peak/items");
+  for (const broad of ["game-content", "wiki", "codes", "tools", "site"]) expect(tags).not.toContain(broad);
+  expect(cacheTagsForPath("/wiki/peak/items/page/99")).toContain("page:/wiki/peak/items");
+  expect(cacheTagsForPath("/wiki/blox-fruits")).not.toContain("game-content");
 });

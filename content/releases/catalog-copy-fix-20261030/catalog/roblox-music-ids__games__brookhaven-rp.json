@@ -1,0 +1,52 @@
+{
+  "code": "roblox-music-ids/games/brookhaven-rp",
+  "title": "Brookhaven RP Music IDs",
+  "seo_title": "Brookhaven RP Music IDs [Speaker Songs]",
+  "meta_description": "Find Brookhaven RP music IDs for speaker songs. Learn where to play music, when you can paste a number and why a song may stay silent in the game.",
+  "intro_md": "Brookhaven RP music IDs point to Roblox audio tracks listed for the experience. Use one only when your current music control accepts it.\n\nBrookhaven's current music system uses an in-game speaker list with search. Not every number can be pasted into every server, so start with that menu. It usually has fewer surprises than an old code list.",
+  "description_md": "## What is a Brookhaven RP music ID?\n\nA Brookhaven RP music ID is the numeric asset ID for a Roblox audio upload. Players also call these numbers Brookhaven music codes or song IDs. The number identifies the audio, but it does not unlock Music Unlocked, grant Brookhaven cash or give you a roleplay item.\n\nEach song can show its title, artist, album, duration and cover art when those details exist.\n\n## How to play a song in Brookhaven RP\n\n1. Join [Brookhaven RP on Roblox](https://www.roblox.com/games/4924922222/Brookhaven-RP).\n2. Open a speaker, jukebox or other music control in a house, vehicle, boat or prop when one is available.\n3. If the control shows a song list or search box, look for the track there first.\n4. If your control accepts a Roblox audio ID, check the title and artist, then copy the digits and enter the number.\n5. Select the song and test it with your Roblox volume turned up.\n\nA missing ID field is a feature difference, not a sign you typed the number wrong. Follow the buttons you see in your own server.",
+  "how_it_works_md": "## What stops a Brookhaven song from playing\n\nA number can look right and still stay silent. These are the usual causes:\n\n- **The current control doesn't take typed IDs.** Use its built-in song list or search instead.\n- **The audio is private, moderated or no longer shared.** Roblox can change an audio file after it's published.\n- **Brookhaven changed its music permissions.** A song linked to Brookhaven doesn't guarantee it plays in the current version.\n- **The ID was copied incorrectly.** Paste only the digits when a field is there.\n- **Your access is limited.** A game requirement, such as Music Unlocked, may control which speaker features you see.\n- **Volume is muted.** Check your Roblox volume, device output and the speaker's own controls.\n\nTry the same track through the built-in search, then test a second ID. If the built-in list plays but a number you type doesn't, the speaker probably uses its own song library, not general Roblox audio.\n\nThese numbers point to Roblox audio files, not a way around Roblox's copyright or safety rules. Use audio you have permission to play, and remember that a song you select in a shared roleplay space can be heard by other players.\n\n## How the Brookhaven music feature changed\n\nBrookhaven's music feature has had more than one version. Older versions focused on sharing song IDs. The newer system uses a built-in list, search and Music Unlocked access. That change is why old lists can be popular and still give the wrong instructions.\n\nThe safest routine is simple: open the speaker menu, search for the song by name, and type a number only when the visible control supports it. Roblox audio rules, moderation, creator permissions and Brookhaven's own settings can all change the result.\n\nThe [Brookhaven RP official site](https://www.brookhavenrp.com/) currently points players toward its jukebox-style music experience.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. Brookhaven may limit you to its built-in speaker list, and Roblox audio permissions can change.",
+      "q": "Are these guaranteed working Brookhaven music codes?"
+    },
+    {
+      "a": "Open a speaker or music control in your current Brookhaven server. If it shows an ID field, paste the plain digits. If it only shows a built-in song list or search, use that control instead.",
+      "q": "Where do I enter a Brookhaven music ID?"
+    },
+    {
+      "a": "Music Unlocked can control which speaker features you see. Access, price and controls can change, so check the requirement in the current in-game menu.",
+      "q": "Do I need Music Unlocked to play music in Brookhaven RP?"
+    },
+    {
+      "a": "Not necessarily. Being tied to Brookhaven doesn't identify every artist as a Brookhaven composer, and it doesn't prove every track is on the official soundtrack. A listed song may also be missing from your speaker's menu.",
+      "q": "Are these official Brookhaven soundtrack songs?"
+    },
+    {
+      "a": "The music feature has changed over time. Older versions focused on sharing song IDs. The newer one uses a built-in playlist-style system with search, so the controls visible in your current server are the best guide.",
+      "q": "Why do old Brookhaven music-code lists give different instructions?"
+    },
+    {
+      "a": "No. The speaker may only offer its own song list. Roblox permissions, moderation and game settings can also block an audio file that is otherwise valid. Type a number only when the visible control accepts typed IDs.",
+      "q": "Can I use any Roblox audio ID in Brookhaven?"
+    },
+    {
+      "a": "The audio may be unavailable, the current speaker may not accept typed IDs, Music Unlocked access may be missing, or your Roblox or device volume may be muted. Try the built-in search and a second song to narrow down the cause.",
+      "q": "Why does a Brookhaven song stay silent?"
+    },
+    {
+      "a": "No. A song number doesn't unlock Music Unlocked, give cash or give you a roleplay item.",
+      "q": "Does a song number unlock anything in Brookhaven?"
+    },
+    {
+      "a": "Yes, if you're in a shared roleplay space. A song you select there can be heard by other players.",
+      "q": "Can other players hear the song I pick?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Brookhaven RP's music feature covers speakers, Music Unlocked access, and a searchable in-game song list. For the wider roleplay systems, vehicles, houses, jobs, and locations, see the [Brookhaven RP experience](https://www.roblox.com/games/4924922222/Brookhaven-RP).",
+  "wiki_sort_order": null
+}

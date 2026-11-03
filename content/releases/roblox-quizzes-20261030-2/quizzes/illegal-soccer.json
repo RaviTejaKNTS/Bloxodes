@@ -1,0 +1,619 @@
+{
+  "page": {
+    "universe_id": 10155360168,
+    "code": "illegal-soccer",
+    "title": "Illegal Soccer Roblox Quiz: 15 Questions on Ball Control and Gear",
+    "description_md": "Think you know Illegal Soccer? Test your ball control and match gear knowledge. Each attempt draws 15 random questions, five from each difficulty, with no timer.",
+    "seo_title": null,
+    "seo_description": "Answer 15 questions on the Roblox game Illegal Soccer, five at each difficulty, on ball control, gear and match rules. There's no timer, so take your time.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "How do you pick up the loose ball in the tutorial's first task?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stand beside it without making contact."
+          },
+          {
+            "id": "b",
+            "text": "Walk into it to make contact."
+          },
+          {
+            "id": "c",
+            "text": "Call for it from your teammate."
+          },
+          {
+            "id": "d",
+            "text": "Hit the opponent standing next to it."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "In the tutorial's teamwork task, what does Pass do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep the ball attached to you."
+          },
+          {
+            "id": "b",
+            "text": "Call for the ball from its carrier."
+          },
+          {
+            "id": "c",
+            "text": "Send the ball to your teammate."
+          },
+          {
+            "id": "d",
+            "text": "Move you sideways with the ball."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What does Lob do in the tutorial's teamwork task?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Send the ball high over a defender."
+          },
+          {
+            "id": "b",
+            "text": "Roll the ball low between a defender's feet."
+          },
+          {
+            "id": "c",
+            "text": "Keep the ball at your feet while shifting sideways."
+          },
+          {
+            "id": "d",
+            "text": "Pull a loose ball backward away from a defender."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What does Request Ball ask the player with possession to do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold the ball until you reach them."
+          },
+          {
+            "id": "b",
+            "text": "Send the ball to the opposing keeper."
+          },
+          {
+            "id": "c",
+            "text": "Keep the ball and start a shot."
+          },
+          {
+            "id": "d",
+            "text": "Send the ball back to you."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "After you pick up the ball, what does the tutorial's first task ask you to do next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry it back to its starting spot."
+          },
+          {
+            "id": "b",
+            "text": "Kick it forward across the pitch."
+          },
+          {
+            "id": "c",
+            "text": "Keep holding it beside the teammate."
+          },
+          {
+            "id": "d",
+            "text": "Leave it untouched for the next player."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "In the tutorial's attack task, you have landed the held Kick on the opponent. Which action completes the sequence?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hit them with another held Kick."
+          },
+          {
+            "id": "b",
+            "text": "Use an equipped item against them."
+          },
+          {
+            "id": "c",
+            "text": "Dribble past them with the ball."
+          },
+          {
+            "id": "d",
+            "text": "Slide into them to trip them."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What does Automatic Item Use change about activating an item?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Items need another manual use input."
+          },
+          {
+            "id": "b",
+            "text": "Items wait until the next box pickup."
+          },
+          {
+            "id": "c",
+            "text": "Items activate without a separate use input."
+          },
+          {
+            "id": "d",
+            "text": "Items wait until the next goal is scored."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "While defending as goalkeeper, what does Dive help you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Move across the goalmouth faster and reach high shots."
+          },
+          {
+            "id": "b",
+            "text": "Release a caught ball toward an open teammate."
+          },
+          {
+            "id": "c",
+            "text": "Send a lofted clearance out across the pitch."
+          },
+          {
+            "id": "d",
+            "text": "Strike a nearby attacker with a melee hit."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "After taking the tutorial's question-mark box, what must you do with the item it gives you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Equip it, then use it as prompted."
+          },
+          {
+            "id": "b",
+            "text": "Equip it, then keep it unused until scoring."
+          },
+          {
+            "id": "c",
+            "text": "Leave it unequipped until the tutorial ends."
+          },
+          {
+            "id": "d",
+            "text": "Leave it unequipped and collect another box."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "How do you take the goalkeeper role when it is available?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stand beside a question-mark box on the pitch."
+          },
+          {
+            "id": "b",
+            "text": "Stand in the center circle before a kickoff."
+          },
+          {
+            "id": "c",
+            "text": "Step into the rectangle in front of the net."
+          },
+          {
+            "id": "d",
+            "text": "Step onto a team pad back in the lobby."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "With Assisted Passes enabled, where does a pass track instead of drifting into empty space?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toward the nearest opposing player."
+          },
+          {
+            "id": "b",
+            "text": "Toward a nearby teammate."
+          },
+          {
+            "id": "c",
+            "text": "Toward the center of your own goal."
+          },
+          {
+            "id": "d",
+            "text": "Toward the next question-mark box."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "How many question-mark boxes are on the pitch at one time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two, with a separate box for each team."
+          },
+          {
+            "id": "b",
+            "text": "One for every player currently on the pitch."
+          },
+          {
+            "id": "c",
+            "text": "None, because boxes appear only in the lobby."
+          },
+          {
+            "id": "d",
+            "text": "One, shared between both teams contesting it."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What is the trade-off of a fully charged Kick?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Less distance, but easier placement."
+          },
+          {
+            "id": "b",
+            "text": "More distance, with easier placement."
+          },
+          {
+            "id": "c",
+            "text": "Less distance, with harder placement."
+          },
+          {
+            "id": "d",
+            "text": "More distance, but harder placement."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "In a live match, what does touching a question-mark box give you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One usable item from your equipped loadout."
+          },
+          {
+            "id": "b",
+            "text": "One permanent unlock from the entire shop pool."
+          },
+          {
+            "id": "c",
+            "text": "A complete set of every item in your loadout."
+          },
+          {
+            "id": "d",
+            "text": "A permanent copy of the opponent's equipped item."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "After the earlier tutorial tasks, which three goals finish its final task?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three you score, excluding teammate goals and own goals."
+          },
+          {
+            "id": "b",
+            "text": "Three your team scores, including your teammates' goals."
+          },
+          {
+            "id": "c",
+            "text": "Three you score, including goals into your own net."
+          },
+          {
+            "id": "d",
+            "text": "Three either team scores, regardless of who scores them."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Before an opponent's shot arrives, what does its blue aim line and target dot show the keeper?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Where to stand to begin protection from attacks."
+          },
+          {
+            "id": "b",
+            "text": "Which teammate is available as a passing target."
+          },
+          {
+            "id": "c",
+            "text": "Where the shot is headed on the goal line."
+          },
+          {
+            "id": "d",
+            "text": "Which loose ball to collect beside the goal."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "With Grenade equipped, what does its dotted arc indicate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Where an opponent's next shot will reach the goal."
+          },
+          {
+            "id": "b",
+            "text": "The Grenade's projected landing spot on the pitch."
+          },
+          {
+            "id": "c",
+            "text": "Where the next question-mark box will appear."
+          },
+          {
+            "id": "d",
+            "text": "The position a nearby teammate will run toward."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "For six seconds after a goalkeeper catches the ball, what protection applies?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Their next shot cannot be intercepted."
+          },
+          {
+            "id": "b",
+            "text": "Their teammates cannot lose possession."
+          },
+          {
+            "id": "c",
+            "text": "Opponents cannot enter the goal area."
+          },
+          {
+            "id": "d",
+            "text": "The goalkeeper cannot be attacked."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "When you time Dribble against an opponent's incoming tackle while carrying the ball, what do you gain besides keeping possession?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A refill of the equipped item slots."
+          },
+          {
+            "id": "b",
+            "text": "A speed boost after the contact."
+          },
+          {
+            "id": "c",
+            "text": "Protection from every later tackle."
+          },
+          {
+            "id": "d",
+            "text": "A stronger charge on your next shot."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Who can slip on the Oil Spill you place?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You and opponents, while your teammates are protected."
+          },
+          {
+            "id": "b",
+            "text": "Your opponents, while your own side is protected."
+          },
+          {
+            "id": "c",
+            "text": "You and your teammates, as well as opponents."
+          },
+          {
+            "id": "d",
+            "text": "Your teammates and opponents, while you are protected."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "What happens to Flick while a tackle animation is still playing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is blocked only for the first part of the animation."
+          },
+          {
+            "id": "b",
+            "text": "It is blocked only for the last part of the animation."
+          },
+          {
+            "id": "c",
+            "text": "It is blocked until you press Flick again mid-animation."
+          },
+          {
+            "id": "d",
+            "text": "It is blocked throughout the whole tackle animation."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What sequence happens when you use Sledgehammer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You stay grounded, swing sideways, and launch the ball toward goal."
+          },
+          {
+            "id": "b",
+            "text": "You launch upward, slam the turf, and ragdoll nearby foes."
+          },
+          {
+            "id": "c",
+            "text": "You launch upward, swing in midair, and knock one foe downward."
+          },
+          {
+            "id": "d",
+            "text": "You stay grounded, slam the turf, and pull nearby foes inward."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "You leap and time a Pass volley as the airborne ball arrives. What is this volley suited for?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A power finish built for the longest range."
+          },
+          {
+            "id": "b",
+            "text": "A lofted chip over a keeper off the line."
+          },
+          {
+            "id": "c",
+            "text": "An accurate redirect built for close range."
+          },
+          {
+            "id": "d",
+            "text": "A low reset that pins the ball at your feet."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "After a sprinting forward flick and an immediate jump, when do you start the slide to add distance and hide the kick animation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "While descending from the jump toward the pitch."
+          },
+          {
+            "id": "b",
+            "text": "While first rising away from the pitch."
+          },
+          {
+            "id": "c",
+            "text": "Before your feet leave the pitch for the jump."
+          },
+          {
+            "id": "d",
+            "text": "After your feet have landed back on the pitch."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "For the wall-volley technique, what movement and rebound timing do you use before the shot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop, volley into the sidewall, and take the rebound before it lands."
+          },
+          {
+            "id": "b",
+            "text": "Keep moving, volley into the sidewall, and let the rebound land."
+          },
+          {
+            "id": "c",
+            "text": "Stop, volley into the sidewall, and take the rebound after it lands."
+          },
+          {
+            "id": "d",
+            "text": "Keep moving, volley into the sidewall, and take the rebound before it lands."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

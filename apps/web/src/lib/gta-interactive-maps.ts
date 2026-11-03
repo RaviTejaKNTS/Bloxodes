@@ -1,13 +1,10 @@
 import "server-only";
-import { getGameExtendedPage } from "./game-extra-pages";
+import { getGameMapBySlug } from "./game-extra-pages";
 
-import {
-  buildGtaCollectionPath,
-  getGtaWikiCollectionPageByPath,
-  getGtaWikiPageBySlug,
-  getPublishedGtaWikiCollectionRuntime,
-  type GtaWikiCollectionPage
-} from "@/lib/gta";
+import { createGameReader, type SharedGameWikiCollectionPage as GtaWikiCollectionPage } from "@/lib/shared-game-reader";
+const { getSharedGameWikiCollectionPageByPath: getGtaWikiCollectionPageByPath,
+  getSharedGameWikiPageBySlug: getGtaWikiPageBySlug,
+  getPublishedSharedGameWikiCollectionRuntime: getPublishedGtaWikiCollectionRuntime } = createGameReader("gta");
 import type {
   GtaMapDefinition,
   GtaMapFact,
@@ -116,7 +113,7 @@ function findCollectionItem(point: GtaMapPointRecord, collection: Awaited<Return
 }
 
 function collectionUrl(page: GtaWikiCollectionPage, itemSlug?: string): string {
-  const base = buildGtaCollectionPath(page.wiki_slug, page.collection_slug);
+  const base = page.canonical_path;
   return itemSlug ? base + "#item-" + itemSlug : base;
 }
 
@@ -165,10 +162,10 @@ function buildMarker(point: GtaMapPointRecord, layer: GtaMapLayer, collection: A
 export async function getGtaInteractiveMapPageData(slug: string): Promise<GtaMapPageData | null> {
   const registered = getGtaInteractiveMapDefinition(slug);
   if (!registered) return null;
-  const stored = await getGameExtendedPage("gta",registered.route,"map");
+  const stored = await getGameMapBySlug("gta", slug);
   if (!stored || stored.renderer_key !== "gta-layered") return null;
   const mapData = stored.map_data as {definition:GtaMapDefinition;points:GtaMapPointRecord[]};
-  const config = mapData.definition;
+  const config = { ...mapData.definition, route: stored.canonical_path };
   const pointFile: PointFile = {points:mapData.points};
   const hub = await getGtaWikiPageBySlug(config.wikiSlug);
 
@@ -225,7 +222,7 @@ export async function getGtaInteractiveMapPageData(slug: string): Promise<GtaMap
       title: page.title || guide.label,
       count: page.item_count,
       code: page.code,
-      href: buildGtaCollectionPath(page.wiki_slug, page.collection_slug)
+      href: page.canonical_path
     } satisfies GtaMapGuide : null;
   }));
 
@@ -235,6 +232,6 @@ export async function getGtaInteractiveMapPageData(slug: string): Promise<GtaMap
     markers,
     guides: guidePages.filter((guide): guide is GtaMapGuide => Boolean(guide)),
     hubTitle: hub?.title ?? stored.game_title,
-    hubPath: hub ? "/gta/wiki/" + config.wikiSlug : "/gta"
+    hubPath: hub?.canonical_path ?? "/gta"
   };
 }

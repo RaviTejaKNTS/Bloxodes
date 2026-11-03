@@ -6,6 +6,8 @@ export const revalidate = 0;
 export const fetchCache = "force-no-store";
 
 const SITEMAP_PATHS = [
+  // Temporary moved-URL recrawl sitemap; remove on 2027-01-02.
+  "/sitemaps/moved.xml",
   "/sitemaps/main.xml",
   "/sitemaps/codes.xml",
   "/sitemaps/articles.xml",
@@ -14,9 +16,6 @@ const SITEMAP_PATHS = [
   "/sitemaps/quizzes.xml",
   "/sitemaps/puzzles.xml",
   "/sitemaps/wiki.xml",
-  "/sitemaps/gta.xml",
-  "/sitemaps/red-dead.xml",
-  "/sitemaps/minecraft.xml",
   "/sitemaps/games.xml",
   "/sitemaps/events.xml",
   "/sitemaps/authors.xml",

@@ -1,0 +1,787 @@
+{
+  "page": {
+    "universe_id": 994732206,
+    "code": "blox-fruits",
+    "title": "Blox Fruits Roblox Quiz: 15 Questions on Combat and Progression",
+    "description_md": "Think you know Blox Fruits? You could face questions on Aura, raids and race progression. Each attempt draws 15 random questions: five Easy, five Medium and five Hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Blox Fruits knowledge across combat, raids and race progression, with 15 questions from basic abilities to specialist V4 mechanics.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-2",
+        "question": "Which ability must you have active for ordinary sword hits to bypass another player's Elemental Reflex?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Instinct"
+          },
+          {
+            "id": "b",
+            "text": "Shark race ability"
+          },
+          {
+            "id": "c",
+            "text": "Buddha transformation"
+          },
+          {
+            "id": "d",
+            "text": "Aura"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Which ability lets you dodge certain attacks and see entities through solid surfaces?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Race Awakening"
+          },
+          {
+            "id": "b",
+            "text": "Elemental Reflex"
+          },
+          {
+            "id": "c",
+            "text": "Instinct"
+          },
+          {
+            "id": "d",
+            "text": "Aura"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "While Buddha is transformed, which pair of tap attacks gains extended reach?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fruit and sword taps"
+          },
+          {
+            "id": "b",
+            "text": "Melee and sword taps"
+          },
+          {
+            "id": "c",
+            "text": "Fruit and gun taps"
+          },
+          {
+            "id": "d",
+            "text": "Melee and gun taps"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Which Aura stage gives full-body coverage?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stage 4"
+          },
+          {
+            "id": "b",
+            "text": "Stage 2"
+          },
+          {
+            "id": "c",
+            "text": "Stage 5"
+          },
+          {
+            "id": "d",
+            "text": "Stage 3"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "With Aura active, which of your landed attack types gives no Aura EXP?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sword attacks"
+          },
+          {
+            "id": "b",
+            "text": "Blox Fruit attacks"
+          },
+          {
+            "id": "c",
+            "text": "Gun attacks"
+          },
+          {
+            "id": "d",
+            "text": "Fighting-style attacks"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which NPC sells Aura?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ability Teacher"
+          },
+          {
+            "id": "b",
+            "text": "Instinct Teacher"
+          },
+          {
+            "id": "c",
+            "text": "Alchemist"
+          },
+          {
+            "id": "d",
+            "text": "Martial Arts Master"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which action earns Instinct EXP while Instinct is active?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Landing a sword hit"
+          },
+          {
+            "id": "b",
+            "text": "Landing a fruit hit"
+          },
+          {
+            "id": "c",
+            "text": "Opening a chest"
+          },
+          {
+            "id": "d",
+            "text": "Dodging an attack"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "You outlevel a boss while using an Elemental fruit. What does Elemental Reflex do against its attacks?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Boss attacks bypass Elemental Reflex"
+          },
+          {
+            "id": "b",
+            "text": "It blocks boss attacks with Aura active"
+          },
+          {
+            "id": "c",
+            "text": "It blocks boss attacks with Instinct active"
+          },
+          {
+            "id": "d",
+            "text": "It blocks boss attacks automatically"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "On which island does the Raid Boss appear in a standard fruit Raid?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The fourth island"
+          },
+          {
+            "id": "b",
+            "text": "The fifth island"
+          },
+          {
+            "id": "c",
+            "text": "The third island"
+          },
+          {
+            "id": "d",
+            "text": "The sixth island"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "For a race other than Draco, which NPC starts the V2 Flower Quest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Alchemist"
+          },
+          {
+            "id": "b",
+            "text": "Arowe"
+          },
+          {
+            "id": "c",
+            "text": "Citizen"
+          },
+          {
+            "id": "d",
+            "text": "Dragon Wizard"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "For the non-Draco V2 Flower Quest, what is the minimum player level, and which quest must already be complete?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 700 and the Citizen's quest"
+          },
+          {
+            "id": "b",
+            "text": "Level 850 and the Colosseum Quest"
+          },
+          {
+            "id": "c",
+            "text": "Level 700 and the Colosseum Quest"
+          },
+          {
+            "id": "d",
+            "text": "Level 850 and the Citizen's quest"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "At level 700 or higher, which boss must you defeat behind the Frozen Village door opened with the Military Detective's key?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Vice Admiral"
+          },
+          {
+            "id": "b",
+            "text": "Magma Admiral"
+          },
+          {
+            "id": "c",
+            "text": "Ice Admiral"
+          },
+          {
+            "id": "d",
+            "text": "Awakened Ice Admiral"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Before the final island of a standard fruit Raid, what makes the next island appear?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wait for the island timer to expire"
+          },
+          {
+            "id": "b",
+            "text": "Defeat only the strongest enemy on the island"
+          },
+          {
+            "id": "c",
+            "text": "Defeat a Raid Boss on every island"
+          },
+          {
+            "id": "d",
+            "text": "Defeat every enemy on the current island"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "You finish a matching Raid with a fruit equipped that still has a move to awaken. What does the Mysterious Entity charge to awaken that move?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Beli"
+          },
+          {
+            "id": "b",
+            "text": "Fragments"
+          },
+          {
+            "id": "c",
+            "text": "Ectoplasm"
+          },
+          {
+            "id": "d",
+            "text": "Bones"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What minimum amount of normal Instinct EXP is required as the training prerequisite for Instinct V2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2,500 EXP"
+          },
+          {
+            "id": "b",
+            "text": "10,000 EXP"
+          },
+          {
+            "id": "c",
+            "text": "5,000 EXP"
+          },
+          {
+            "id": "d",
+            "text": "7,500 EXP"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "After unlocking a higher Aura stage, what happens to its buffs if you choose a lower visual stage in Aura Editor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They drop to the selected stage"
+          },
+          {
+            "id": "b",
+            "text": "They last until you change seas"
+          },
+          {
+            "id": "c",
+            "text": "They last until you rejoin"
+          },
+          {
+            "id": "d",
+            "text": "They stay at the unlocked stage"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Which group of races can an ordinary race reroll choose from?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Human, Rabbit, Shark and Angel"
+          },
+          {
+            "id": "b",
+            "text": "Human, Rabbit, Shark and Ghoul"
+          },
+          {
+            "id": "c",
+            "text": "Human, Rabbit, Cyborg and Angel"
+          },
+          {
+            "id": "d",
+            "text": "Human, Draco, Shark and Angel"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "You reached Angel V3, then switched to Human. Which Angel version remains unlocked when you switch back?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Angel V1"
+          },
+          {
+            "id": "b",
+            "text": "Angel V2"
+          },
+          {
+            "id": "c",
+            "text": "Angel V3"
+          },
+          {
+            "id": "d",
+            "text": "Angel V4"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which NPC sells the Microchip used to start a Basic Raid?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Mysterious Entity"
+          },
+          {
+            "id": "b",
+            "text": "Mysterious Scientist"
+          },
+          {
+            "id": "c",
+            "text": "Military Detective"
+          },
+          {
+            "id": "d",
+            "text": "Martial Arts Master"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "How many Fragments do you receive if you die during a fruit Raid?",
+        "options": [
+          {
+            "id": "a",
+            "text": "90"
+          },
+          {
+            "id": "b",
+            "text": "300"
+          },
+          {
+            "id": "c",
+            "text": "1,000"
+          },
+          {
+            "id": "d",
+            "text": "0"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "What minimum level and milestones are required for Third Sea access before Mr. Captain can send you there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 1,000, Colosseum Quest, Don Swan, and King Red Head's Second Sea rip_indra quest"
+          },
+          {
+            "id": "b",
+            "text": "Level 1,500, Colosseum Quest, Tide Keeper, and King Red Head's Second Sea rip_indra quest"
+          },
+          {
+            "id": "c",
+            "text": "Level 1,500, Colosseum Quest, Don Swan, and King Red Head's Second Sea rip_indra quest"
+          },
+          {
+            "id": "d",
+            "text": "Level 1,000, Colosseum Quest, Tide Keeper, and King Red Head's Second Sea rip_indra quest"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "Alongside its 3,000,000 Money price, which four styles each require at least 300 mastery to learn Superhuman in the Second or Third Sea?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Dark Step, Electric, Water Kung Fu and Death Step"
+          },
+          {
+            "id": "b",
+            "text": "Dark Step, Electric, Water Kung Fu and Dragon Breath"
+          },
+          {
+            "id": "c",
+            "text": "Dark Step, Electric, Sharkman Karate and Dragon Breath"
+          },
+          {
+            "id": "d",
+            "text": "Dark Step, Death Step, Water Kung Fu and Dragon Breath"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "After giving Uzoth Fire Essence in the Third Sea, what minimum Dragon Breath mastery and Money and Fragment prices does Dragon Talon require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "400 mastery, 3,000,000 Money and 5,000 Fragments"
+          },
+          {
+            "id": "b",
+            "text": "400 mastery, 3,000,000 Money and 2,500 Fragments"
+          },
+          {
+            "id": "c",
+            "text": "300 mastery, 3,000,000 Money and 5,000 Fragments"
+          },
+          {
+            "id": "d",
+            "text": "400 mastery, 3,000,000 Money and 1,000 Fragments"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "After Arowe assigns your Shark V3 quest, which target must you defeat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Sea Beast you summoned"
+          },
+          {
+            "id": "b",
+            "text": "Tide Keeper's summoned Sea Beast"
+          },
+          {
+            "id": "c",
+            "text": "A naturally spawned Terrorshark"
+          },
+          {
+            "id": "d",
+            "text": "A naturally spawned Sea Beast"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "For the non-Draco Race V4 route, which boss drops the Mirror Fractal used to obtain Blue Gear on Mirage Island?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Dough King"
+          },
+          {
+            "id": "b",
+            "text": "Cake Prince"
+          },
+          {
+            "id": "c",
+            "text": "rip_indra Raid Boss"
+          },
+          {
+            "id": "d",
+            "text": "Don Swan"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "Which statement is true when charging Race V4's gauge with damage you deal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Damage dealt to NPCs gives more charge than damage to players or bosses"
+          },
+          {
+            "id": "b",
+            "text": "Damage dealt to players, NPCs and bosses contributes equally"
+          },
+          {
+            "id": "c",
+            "text": "Damage dealt to bosses gives more charge than damage to players or NPCs"
+          },
+          {
+            "id": "d",
+            "text": "Damage dealt to players gives more charge than damage to NPCs or bosses"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "For dodgeable hits while Instinct is active, how much charge does a normal enemy hit consume compared with a boss or player hit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Twice as much"
+          },
+          {
+            "id": "b",
+            "text": "The same amount"
+          },
+          {
+            "id": "c",
+            "text": "Half as much"
+          },
+          {
+            "id": "d",
+            "text": "Three times as much"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "During Arowe's Ghoul V3 quest, which rule applies to the five player kills in one Second Sea server?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The same player can count five times, but Bounty or Honor must be gained"
+          },
+          {
+            "id": "b",
+            "text": "The same player can count five times, and Bounty or Honor is not required"
+          },
+          {
+            "id": "c",
+            "text": "Five different players are required, and Bounty or Honor must be gained"
+          },
+          {
+            "id": "d",
+            "text": "Five different players are required, but Bounty or Honor is not required"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "For Arowe's assigned Cyborg V3 task, what must you do with a physical fruit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Eat it in front of Arowe"
+          },
+          {
+            "id": "b",
+            "text": "Show it to Arowe and keep it"
+          },
+          {
+            "id": "c",
+            "text": "Give it to Arowe to consume"
+          },
+          {
+            "id": "d",
+            "text": "Trade it to another player near Arowe"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "What minimum Dragon Talon mastery and Dojo Belt are required to access its move upgrades with Uzoth?",
+        "options": [
+          {
+            "id": "a",
+            "text": "500 mastery and the Blue Belt"
+          },
+          {
+            "id": "b",
+            "text": "400 mastery and the Blue Belt"
+          },
+          {
+            "id": "c",
+            "text": "500 mastery and the Black Belt"
+          },
+          {
+            "id": "d",
+            "text": "400 mastery and the Black Belt"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-11",
+        "question": "With Human V4's Psycho at tier 1, how many charges does Flash Step have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two"
+          },
+          {
+            "id": "b",
+            "text": "Five"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-12",
+        "question": "How does Cyborg V4's Energy Control change the Instinct requirement for Super Jump and Super Dash between tiers 1 and 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both tiers require Instinct"
+          },
+          {
+            "id": "b",
+            "text": "Neither tier requires Instinct"
+          },
+          {
+            "id": "c",
+            "text": "Tier 2 requires Instinct; tier 1 does not"
+          },
+          {
+            "id": "d",
+            "text": "Tier 1 requires Instinct; tier 2 does not"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,619 @@
+{
+  "page": {
+    "universe_id": 10771421858,
+    "code": "dont-splash",
+    "title": "DONT SPLASH Roblox Quiz: 15 Questions on Poolrooms and Tools",
+    "description_md": "Think you know DONT SPLASH? Each attempt draws 15 random questions: five Easy, five Medium, and five Hard. The topics include Poolrooms routes, controls, valves, and tool effects.",
+    "seo_title": null,
+    "seo_description": "Try 15 questions on the Roblox game DONT SPLASH: Poolrooms, controls, valves and tool upgrades. Each attempt has five Easy, five Medium and five Hard questions.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "On PC, which key makes your character jump?",
+        "options": [
+          {
+            "id": "a",
+            "text": "W"
+          },
+          {
+            "id": "b",
+            "text": "Spacebar"
+          },
+          {
+            "id": "c",
+            "text": "Shift"
+          },
+          {
+            "id": "d",
+            "text": "E"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "Once a pebble is selected on touch controls, what do you tap to throw it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Tap the THROW button."
+          },
+          {
+            "id": "b",
+            "text": "Tap the selected hotbar icon again."
+          },
+          {
+            "id": "c",
+            "text": "Tap the upward-arrow button."
+          },
+          {
+            "id": "d",
+            "text": "Tap its quantity number."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "Collecting one gray stone cluster adds how many pebbles?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two pebbles"
+          },
+          {
+            "id": "b",
+            "text": "Three pebbles"
+          },
+          {
+            "id": "c",
+            "text": "Five pebbles"
+          },
+          {
+            "id": "d",
+            "text": "One pebble"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "The Poolrooms wall warning says the monster hears what?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Footsteps"
+          },
+          {
+            "id": "b",
+            "text": "Voices"
+          },
+          {
+            "id": "c",
+            "text": "Water"
+          },
+          {
+            "id": "d",
+            "text": "Heartbeats"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "On a hotbar item, what does the number at the upper left identify?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Its remaining quantity"
+          },
+          {
+            "id": "b",
+            "text": "Its slot"
+          },
+          {
+            "id": "c",
+            "text": "Its upgrade level"
+          },
+          {
+            "id": "d",
+            "text": "Its Coin price"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "On PC, how do you put away a hotbar item selected with a number key?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Press that number key again."
+          },
+          {
+            "id": "b",
+            "text": "Press the next number key."
+          },
+          {
+            "id": "c",
+            "text": "Press E once."
+          },
+          {
+            "id": "d",
+            "text": "Press F once."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "At Equipment, which button adds an unlocked tool to YOUR LOADOUT?",
+        "options": [
+          {
+            "id": "a",
+            "text": "REMOVE"
+          },
+          {
+            "id": "b",
+            "text": "UPGRADE"
+          },
+          {
+            "id": "c",
+            "text": "EQUIP"
+          },
+          {
+            "id": "d",
+            "text": "CREATE"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "What fraction of Normal's Coin rewards does Easy pay?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One quarter"
+          },
+          {
+            "id": "b",
+            "text": "Three quarters"
+          },
+          {
+            "id": "c",
+            "text": "The full amount"
+          },
+          {
+            "id": "d",
+            "text": "One half"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "What does the lobby's 3RD PERSON switch area change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your camera view"
+          },
+          {
+            "id": "b",
+            "text": "Your selected map"
+          },
+          {
+            "id": "c",
+            "text": "Your party size"
+          },
+          {
+            "id": "d",
+            "text": "Your difficulty"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "In an existing party, which panel button starts the run without waiting for its countdown?",
+        "options": [
+          {
+            "id": "a",
+            "text": "LEAVE"
+          },
+          {
+            "id": "b",
+            "text": "START NOW"
+          },
+          {
+            "id": "c",
+            "text": "CREATE"
+          },
+          {
+            "id": "d",
+            "text": "REMOVE"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "On Broken Walkway, which pairing matches the two route choices?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Narrow footholds with longer gaps; wide platforms with shorter gaps."
+          },
+          {
+            "id": "b",
+            "text": "Narrow footholds with shorter gaps; wide platforms with shorter gaps."
+          },
+          {
+            "id": "c",
+            "text": "Narrow footholds with shorter gaps; wide platforms with longer gaps."
+          },
+          {
+            "id": "d",
+            "text": "Narrow footholds with longer gaps; wide platforms with longer gaps."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "In Sinking Platforms, how do dark-bordered tiles differ from ordinary tiles?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Dark-bordered tiles sink; ordinary tiles stay static."
+          },
+          {
+            "id": "b",
+            "text": "Dark-bordered tiles stay static; ordinary tiles stay static."
+          },
+          {
+            "id": "c",
+            "text": "Dark-bordered tiles sink; ordinary tiles sink."
+          },
+          {
+            "id": "d",
+            "text": "Dark-bordered tiles stay static; ordinary tiles sink."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "While you wait on the fixed platform before Rotating Bridge, what does the long strip do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stops until you step onto it."
+          },
+          {
+            "id": "b",
+            "text": "Keeps turning around its base."
+          },
+          {
+            "id": "c",
+            "text": "Slides toward the waiting player."
+          },
+          {
+            "id": "d",
+            "text": "Drops straight down into the water."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "At an unopened Maintenance valve on PC, which input completes the interaction while you stay in range?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold E until the ring fills."
+          },
+          {
+            "id": "b",
+            "text": "Hold F until the ring fills."
+          },
+          {
+            "id": "c",
+            "text": "Hold Q until the ring fills."
+          },
+          {
+            "id": "d",
+            "text": "Tap E before the ring fills."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "In Poolrooms Easy or Normal, which full rule opens the Maintenance door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both valve interactions must happen at the same time."
+          },
+          {
+            "id": "b",
+            "text": "Open the left valve and leave the right one closed."
+          },
+          {
+            "id": "c",
+            "text": "Open both valves; separate activations work."
+          },
+          {
+            "id": "d",
+            "text": "Open the right valve and leave the left one closed."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "To unlock the difficulty slot beside Normal, what is the minimum completion requirement?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two Easy completions"
+          },
+          {
+            "id": "b",
+            "text": "Two Normal completions"
+          },
+          {
+            "id": "c",
+            "text": "One Normal completion"
+          },
+          {
+            "id": "d",
+            "text": "One Easy completion"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "When a Bottle is thrown into water, what splash pattern does it make?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Several small splashes along a skipping path."
+          },
+          {
+            "id": "b",
+            "text": "One loud splash back at the thrower's platform."
+          },
+          {
+            "id": "c",
+            "text": "Several small splashes back at the thrower's platform."
+          },
+          {
+            "id": "d",
+            "text": "One loud splash at its landing point."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "On PC, how do hotbar PUSH and SUPER PUSH differ for the target?",
+        "options": [
+          {
+            "id": "a",
+            "text": "PUSH briefly knocks them down; SUPER PUSH leaves them standing."
+          },
+          {
+            "id": "b",
+            "text": "Both actions leave them standing."
+          },
+          {
+            "id": "c",
+            "text": "PUSH leaves them standing; SUPER PUSH briefly knocks them down."
+          },
+          {
+            "id": "d",
+            "text": "Both actions briefly knock them down."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "If Flare is still locked, what does the 8x Flares supply pack do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Unlocks Flare and adds eight uses."
+          },
+          {
+            "id": "b",
+            "text": "Leaves Flare locked and adds eight uses."
+          },
+          {
+            "id": "c",
+            "text": "Unlocks Flare and adds no uses."
+          },
+          {
+            "id": "d",
+            "text": "Leaves Flare locked and adds no uses."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which pair of tools receives Throwing Range's distance increase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pebbles and Flare"
+          },
+          {
+            "id": "b",
+            "text": "Pebbles and Bottles"
+          },
+          {
+            "id": "c",
+            "text": "Bottles and Rescue Rope"
+          },
+          {
+            "id": "d",
+            "text": "Flare and Wind-up Toy"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "On Pebble Skipping's 0-to-1 upgrade preview, how many splashes does each pebble make?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two splashes"
+          },
+          {
+            "id": "b",
+            "text": "Five splashes"
+          },
+          {
+            "id": "c",
+            "text": "Six splashes"
+          },
+          {
+            "id": "d",
+            "text": "Four splashes"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "What running time does Wind-up Toy show in the Toy Battery 0-to-1 upgrade preview?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Five seconds"
+          },
+          {
+            "id": "b",
+            "text": "Seven seconds"
+          },
+          {
+            "id": "c",
+            "text": "Nine seconds"
+          },
+          {
+            "id": "d",
+            "text": "Twelve seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "What changes in the Flare Radius 0-to-1 upgrade preview?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Radius rises from 10 to 11 studs; stun stays at 5 seconds."
+          },
+          {
+            "id": "b",
+            "text": "Radius rises from 10 to 11 studs; stun rises to 6 seconds."
+          },
+          {
+            "id": "c",
+            "text": "Radius stays at 10 studs; stun rises to 6 seconds."
+          },
+          {
+            "id": "d",
+            "text": "Radius rises from 10 to 12 studs; stun stays at 5 seconds."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "With Wind-up Toy still locked, what does the Max Toy Battery pass grant?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Battery level 3/3, and Wind-up Toy unlocks too."
+          },
+          {
+            "id": "b",
+            "text": "Battery level 0/3, and Wind-up Toy unlocks instead."
+          },
+          {
+            "id": "c",
+            "text": "Battery level 0/3, and Wind-up Toy stays locked."
+          },
+          {
+            "id": "d",
+            "text": "Battery level 3/3, and Wind-up Toy stays locked."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "In Normal, your teammate opens the final valve while you're on earlier platforms. When does the rising-water phase start for you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only when you reach the valve area."
+          },
+          {
+            "id": "b",
+            "text": "Only when everyone reaches the stairs."
+          },
+          {
+            "id": "c",
+            "text": "When that final valve is opened."
+          },
+          {
+            "id": "d",
+            "text": "Only when you enter the glowing doorway."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}

@@ -54,8 +54,10 @@ export function selectedFranchisePlan(base, input) {
         for (const row of rows) {
           if (!slug(row.slug) || row.namespace !== undefined && row.namespace !== namespace || row.is_published !== true) throw new Error('Selected rows must be published, owned identities.');
           if (group === 'games') { games.push(row); continue; }
-          const route = group === 'wiki' ? `/${namespace}/wiki${row.slug === namespace ? '' : `/${row.slug}`}` : `/${namespace}/quizzes/${row.slug}`;
-          if (row.canonical_path !== undefined && row.canonical_path !== route) throw new Error('Unexpected selected canonical path.');
+          // Omitted paths are resolved against the staged target, never guessed
+          // from a permanent wiki slug or from the namespace's old URL shape.
+          const route = row.canonical_path ?? null;
+          if (route !== null && (typeof route !== 'string' || !/^\/(?:[a-z0-9-]+\/)*[a-z0-9-]+$/.test(route))) throw new Error('Unexpected selected canonical path.');
           pages.push({kind: group === 'wiki' ? 'hub' : 'quiz', path: route, row});
         }
       }
@@ -71,8 +73,9 @@ export function selectedFranchisePlan(base, input) {
     const datasetFile = resolve(manifest.dataset), finalFile = resolve(manifest.finalJson ?? 'final.json');
     const mediaRoot = resolve(manifest.mediaRoot, {directory: true, optional: true});
     const dataset = json(datasetFile), final = json(finalFile);
-    const route = `/${namespace}/wiki/${manifest.game.slug}/${manifest.collection.slug}`;
-    if (manifest.route !== route || dataset.meta?.schemaVersion !== 2 || dataset.meta.gameSlug !== manifest.game.slug || dataset.meta.collection !== manifest.collection.slug || !Array.isArray(dataset.items) || !dataset.items.length || dataset.items.length > 10000 || final.code !== `${manifest.game.slug}-${manifest.collection.slug}` || final.wiki_slug !== manifest.game.slug || final.collection_slug !== manifest.collection.slug) throw new Error('Selected dataset, final and route must match the manifest.');
+    const route = manifest.route;
+    if (route != null && (typeof route !== 'string' || !/^\/(?:[a-z0-9-]+\/)*[a-z0-9-]+$/.test(route))) throw new Error('Unexpected selected collection path.');
+    if (dataset.meta?.schemaVersion !== 2 || dataset.meta.gameSlug !== manifest.game.slug || dataset.meta.collection !== manifest.collection.slug || !Array.isArray(dataset.items) || !dataset.items.length || dataset.items.length > 10000 || !slug(final.wiki_slug) || final.code !== `${final.wiki_slug}-${manifest.collection.slug}` || final.collection_slug !== manifest.collection.slug) throw new Error('Selected dataset, final and route must match the manifest.');
     for (const row of dataset.items) if (row.system?.image) {
       const image = row.system.image.replace(/^media\//, '');
       bundleInput(base, `${path.relative(base, mediaRoot).split(path.sep).join('/')}/${image}`);
@@ -80,13 +83,48 @@ export function selectedFranchisePlan(base, input) {
     const evidenceFile = resolve('images.json', {optional: true});
     const imageEvidence = fs.existsSync(evidenceFile) ? json(evidenceFile) : null;
     const policy = imagePolicy(dataset, imageEvidence);
-    collections.push({path: route, manifestFile: file, datasetFile, finalFile, mediaRoot, manifest, dataset, final, policy, imageEvidence});
+    collections.push({path: route ?? null, manifestFile: file, datasetFile, finalFile, mediaRoot, manifest, dataset, final, policy, imageEvidence});
   }
-  const paths = [...collections.map(collection => collection.path), ...pages.map(page => page.path)];
-  const urlPaths = new Set(batch.urls.map(url => url.path));
-  if (!paths.length || paths.length > 20 || new Set(paths).size !== paths.length || urlPaths.size !== batch.urls.length || urlPaths.size !== paths.length || paths.some(route => !urlPaths.has(route))) throw new Error('Batch URLs must exactly match the selected page inventory.');
+  assertSelectedPaths({collections, pages, urls: batch.urls}, false);
   if (batch.events.some(event => event.type !== 'game_content' || event.slug !== namespace)) throw new Error('Selected QA requires namespace-scoped game_content events.');
   return {namespace, collections, pages, games, urls: batch.urls};
+}
+
+function assertSelectedPaths(plan, resolved = true) {
+  const paths = [...plan.collections, ...plan.pages].map(entry => entry.path);
+  const known = paths.filter(route => route != null);
+  const urls = new Set(plan.urls.map(url => url.path));
+  if (!paths.length || paths.length > 20 || resolved && known.length !== paths.length || new Set(known).size !== known.length || urls.size !== plan.urls.length || urls.size !== paths.length || known.some(route => !urls.has(route))) throw new Error('Batch URLs must exactly match the selected page inventory.');
+}
+
+// Run after staging: brand-new games now exist, so the target RPC is authoritative
+// for both new namespaces and existing namespaces which have already moved.
+export async function resolveSelectedFranchisePaths(plan, db) {
+  for (const entry of [...plan.pages, ...plan.collections]) {
+    const collection = Boolean(entry.manifest);
+    let query = db.from(collection ? 'games' : entry.kind === 'hub' ? 'game_wiki_pages' : 'game_quiz_pages')
+      .select(collection ? 'id' : 'game_id').eq('namespace', plan.namespace);
+    query = query.eq('slug', collection ? entry.manifest.game.slug : entry.row.slug);
+    if (collection) query = query.eq('kind', 'game');
+    const identity = await query.single();
+    if (identity.error) throw identity.error;
+    const gameId = collection ? identity.data.id : identity.data.game_id;
+    if (!collection && entry.row.game_id && entry.row.game_id !== gameId) throw new Error('Selected page owner differs from frozen input.');
+    if (collection) {
+      const wiki = await db.from('game_wiki_pages').select('slug').eq('namespace', plan.namespace).eq('game_id', gameId).single();
+      if (wiki.error) throw wiki.error;
+      if (wiki.data.slug !== entry.final.wiki_slug) throw new Error('Selected collection wiki owner differs from frozen input.');
+    }
+    const expected = await db.rpc('expected_game_page_path', {
+      p_game_id: gameId, p_type: collection ? 'collection' : entry.kind === 'hub' ? 'wiki' : 'quiz',
+      p_slug: collection ? entry.manifest.collection.slug : entry.row.slug
+    });
+    if (expected.error) throw expected.error;
+    if (typeof expected.data !== 'string' || entry.path != null && entry.path !== expected.data) throw new Error('Selected canonical path differs from target URL style.');
+    entry.path = expected.data;
+  }
+  assertSelectedPaths(plan);
+  return plan;
 }
 
 export function stable(value) {

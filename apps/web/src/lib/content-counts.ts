@@ -1,4 +1,5 @@
 import "server-only";
+import { RETIRED_MUSIC_GAME_CATALOG_CODES } from "@/lib/game-specific-id-pages";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type ContentCounts = {
@@ -19,9 +20,11 @@ export type ContentCounts = {
  */
 export async function getContentCounts(): Promise<ContentCounts> {
   const sb = supabaseAdmin();
-  const countOf = async (table: string, publishColumn = "is_published"): Promise<number> => {
+  const countOf = async (table: string, publishColumn = "is_published", excludeCodes: readonly string[] = []): Promise<number> => {
     try {
-      const { count, error } = await sb.from(table).select("id", { count: "exact", head: true }).eq(publishColumn, true);
+      let query = sb.from(table).select("id", { count: "exact", head: true }).eq(publishColumn, true);
+      if (excludeCodes.length) query = query.not("code", "in", `(${excludeCodes.map((code) => `"${code}"`).join(",")})`);
+      const { count, error } = await query;
       if (error) throw error;
       return count ?? 0;
     } catch (error) {
@@ -34,7 +37,7 @@ export async function getContentCounts(): Promise<ContentCounts> {
     countOf("code_pages"),
     countOf("wiki_pages"),
     countOf("tools"),
-    countOf("catalog_pages"),
+    countOf("catalog_pages", "is_published", RETIRED_MUSIC_GAME_CATALOG_CODES),
     countOf("checklist_pages_view", "is_public"),
     countOf("quiz_pages"),
     countOf("articles"),

@@ -1,0 +1,40 @@
+{
+  "code": "roblox-items-and-bundles",
+  "title": "Roblox Items and Bundles",
+  "seo_title": "Roblox Items and Bundles",
+  "meta_description": "Browse Roblox avatar items and bundles, including accessories, clothing, body parts, animations, emotes, and makeup, with Robux prices, free items and limiteds.",
+  "intro_md": "Roblox items and bundles span the avatar Marketplace: accessories, clothing, body parts, animations, emotes, and makeup.\n\nRegular items have one Robux price set by the creator. Limiteds are different: they come in fixed quantities, and once they sell out, their price follows the resale market.\n\nOnly interested in what costs nothing? The [free Roblox items catalog](https://bloxodes.com/catalog/free-roblox-items) lists only the genuinely free items.",
+  "description_md": "## What is the Roblox Marketplace?\n\nThe Marketplace (long known as the catalog or Avatar Shop) is where all avatar items live: things your character wears, carries, or uses to move and emote. Items are published either by Roblox itself or by community creators, and you buy them with Robux, or claim them free when the price is zero.\n\n## The item families, at a glance\n\n- **[Accessories](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-accessories):** 3D items that attach to a slot, covering hats and hair, glasses, necklaces, wings, and holdable gear.\n- **[Clothing](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-clothing):** layered 3D garments that fit any body, plus classic 2D shirts, t-shirts, and pants.\n- **[Body parts](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-body-parts):** full avatar bundles, heads (including dynamic heads with expressions), and classic faces.\n- **[Animations](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-animations):** packs that change how your avatar walks, runs, jumps, and idles.\n- **[Emotes](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-emotes):** dances and gestures you trigger from the emote wheel.\n- **[Makeup](https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-makeup):** the newest category, covering eyes, lips, face makeup, and full face paint.\n\nEach family breaks down into subcategories, all the way down to specific slots like hair or classic shirts.\n\n## How buying works\n\n- **Regular items** have a Robux price set by the creator. Press Buy on the item's Roblox page and it is yours permanently.\n- **Free items** cost 0 Robux, and the Get button claims them.\n- **Limiteds** exist in fixed quantities. Once sold out, they can only be bought from resellers at market prices, which is why some items show a resale price rather than an original one.\n- **Classic clothing** has platform minimum prices, which keeps 2D shirts and pants from ever being free through the normal flow.\n\nEverything you buy stays in your inventory permanently and is equipped through the Avatar Editor.\n\n## A note on prices and availability\n\nCreators change prices, items go off sale, and limiteds sell out. The Marketplace moves constantly. The item's official Roblox page is always the final word on what you'll pay.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "They are the same thing. Roblox has used both names for the place where avatar items are sold.",
+      "q": "What is the difference between the Marketplace and the Avatar Shop?"
+    },
+    {
+      "a": "Go to the item's official Roblox page, then press Buy (or Get for free items) while logged in. Purchases are permanent and equip from the Avatar Editor.",
+      "q": "How do I buy an item from the Marketplace?"
+    },
+    {
+      "a": "Limiteds are items released in fixed quantities. After they sell out, they can only be bought from resellers, so the price you see is the current lowest resale price instead of an original price.",
+      "q": "What are limiteds and why do some items show a resale price?"
+    },
+    {
+      "a": "Yes. Items at 0 Robux appear alongside paid ones, and the free Roblox items catalog lists only the genuinely free ones.",
+      "q": "Are there free Roblox items?"
+    },
+    {
+      "a": "Roblox grants verified badges to notable creators and brands whose identity it has confirmed.",
+      "q": "What does the verified badge on a creator mean?"
+    },
+    {
+      "a": "Creators can change prices at any time, and limiteds move with the resale market. The item's Roblox page always shows the final price.",
+      "q": "Why does an item's price differ from what Roblox shows?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}

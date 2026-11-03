@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import { ROBLOX_CHECKLISTS } from "@/lib/engagement/config";
 import { notFound } from "next/navigation";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
@@ -17,11 +18,11 @@ export default async function ChecklistsPage() {
     notFound();
   }
 
-  return renderChecklistsPage({
+  return <>{await renderChecklistsPage({
     cards,
     total,
     totalPages,
     currentPage: 1,
     showHero: true
-  });
+  })}<OtherGamesSection kind="checklist" /></>;
 }

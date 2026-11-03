@@ -1,4 +1,4 @@
-import { validateGtaChecklistProgress } from "@/lib/gta-checklist-progress";
+import { validateGameChecklistProgress } from "@/lib/game-checklist-progress";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth/session-user";
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
     const slug = normalizeSlug(url.searchParams.get("slug"));
 
     if (slug) {
-      const invalid = await validateGtaChecklistProgress(slug);
+      const invalid = await validateGameChecklistProgress(slug);
       if (invalid) return privateJson({ error: invalid.error }, { status: invalid.status });
       const { data, error } = await admin
         .from("user_checklist_progress")
@@ -116,7 +116,7 @@ export async function PUT(request: Request) {
 
     const rate = checkRateLimit({ key: `checklist-progress:${user.id}`, limit: 180, windowMs: 60000 });
     if (!rate.allowed) return privateJson({ error: "Please try again shortly." }, { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } });
-    const invalid = await validateGtaChecklistProgress(slug, checkedIds);
+    const invalid = await validateGameChecklistProgress(slug, checkedIds);
     if (invalid) return privateJson({ error: invalid.error }, { status: invalid.status });
 
     if (checkedIds.length === 0) {

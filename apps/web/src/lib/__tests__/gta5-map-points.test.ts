@@ -58,7 +58,7 @@ describe("GTA V Story Mode map annotations", () => {
       expect(marker.x).toBe(point.x);
       expect(marker.y).toBe(point.y);
       expect(marker.name).toBeTruthy();
-      expect(marker.guideUrl).toContain(`/gta/wiki/gta-5/${marker.layer}#item-${marker.id}`);
+      expect(marker.guideUrl).toBe(`/wiki/gta-5/${marker.layer}#item-${marker.id}`);
     }
   });
 });

@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "content-final",
+      "file": "quizzes/99-nights-in-the-forest.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/adopt-me.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/anime-adventures.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/anime-dice.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/anime-vanguards.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/bee-simulator.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/blade-ball.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/blox-fruits.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/break-and-steal-an-egg.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/brookhaven-rp.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/dandys-world.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/dead-rails.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/dont-splash.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/doors.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/dress-to-impress.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/driving-empire.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/evade.json"
+    },
+    {
+      "publisher": "content-final",
+      "file": "quizzes/fisch.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/quizzes/99-nights-in-the-forest",
+      "contains": "99 Nights in the Forest Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/adopt-me",
+      "contains": "Adopt Me Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/anime-adventures",
+      "contains": "Anime Adventures Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/anime-dice",
+      "contains": "Anime Dice Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/anime-vanguards",
+      "contains": "Anime Vanguards Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/bee-simulator",
+      "contains": "Bee Swarm Simulator Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/blade-ball",
+      "contains": "Blade Ball Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/blox-fruits",
+      "contains": "Blox Fruits Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/break-and-steal-an-egg",
+      "contains": "Break and Steal an Egg Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/brookhaven-rp",
+      "contains": "Brookhaven RP Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/dandys-world",
+      "contains": "World Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/dead-rails",
+      "contains": "Dead Rails Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/dont-splash",
+      "contains": "DONT SPLASH Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/doors",
+      "contains": "DOORS Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/dress-to-impress",
+      "contains": "Dress To Impress Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/driving-empire",
+      "contains": "Driving Empire Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/evade",
+      "contains": "Evade Roblox Quiz"
+    },
+    {
+      "path": "/quizzes/fisch",
+      "contains": "Fisch Roblox Quiz"
+    }
+  ],
+  "events": [
+    {
+      "type": "quiz",
+      "slug": "99-nights-in-the-forest"
+    },
+    {
+      "type": "quiz",
+      "slug": "adopt-me"
+    },
+    {
+      "type": "quiz",
+      "slug": "anime-adventures"
+    },
+    {
+      "type": "quiz",
+      "slug": "anime-dice"
+    },
+    {
+      "type": "quiz",
+      "slug": "anime-vanguards"
+    },
+    {
+      "type": "quiz",
+      "slug": "bee-simulator"
+    },
+    {
+      "type": "quiz",
+      "slug": "blade-ball"
+    },
+    {
+      "type": "quiz",
+      "slug": "blox-fruits"
+    },
+    {
+      "type": "quiz",
+      "slug": "break-and-steal-an-egg"
+    },
+    {
+      "type": "quiz",
+      "slug": "brookhaven-rp"
+    },
+    {
+      "type": "quiz",
+      "slug": "dandys-world"
+    },
+    {
+      "type": "quiz",
+      "slug": "dead-rails"
+    },
+    {
+      "type": "quiz",
+      "slug": "dont-splash"
+    },
+    {
+      "type": "quiz",
+      "slug": "doors"
+    },
+    {
+      "type": "quiz",
+      "slug": "dress-to-impress"
+    },
+    {
+      "type": "quiz",
+      "slug": "driving-empire"
+    },
+    {
+      "type": "quiz",
+      "slug": "evade"
+    },
+    {
+      "type": "quiz",
+      "slug": "fisch"
+    }
+  ]
+}

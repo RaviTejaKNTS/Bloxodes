@@ -5,7 +5,7 @@ import { getSessionUser } from "./auth/session-user";
 import { supabaseAdmin } from "./supabase";
 import { isTrustedMutationOrigin } from "./security/request";
 import { checkRateLimit } from "./security/rate-limit";
-import { normalizeGtaCollectionCode as normalizeCode, normalizeGtaCollectionItemSlugs as normalizeSlugs } from "./gta-collection-progress";
+import { normalizeGameCollectionCode as normalizeCode, normalizeGameCollectionItemSlugs as normalizeSlugs } from "./game-collection-progress";
 
 function response(payload: unknown, status = 200) { return NextResponse.json(payload, { status, headers: { "Cache-Control": "private, no-store, max-age=0" } }); }
 async function collection(namespace: string, code: string) {

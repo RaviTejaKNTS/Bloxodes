@@ -52,13 +52,14 @@ Old `.env` backups on the VPS keep the old keys, which no longer work after this
 | Codes | `code_pages`, `codes` |
 | Articles | `articles`, authors, `article_source_images` |
 | Roblox wiki | `roblox_wiki_registry`, `wiki_pages`, `wiki_collection_pages`, `wiki_collection_datasets`, `wiki_collection_items` |
-| Non-Roblox games | `games` and `game_*` (see [franchise](../content/franchise.md#data)) |
+| Non-Roblox games | `games` and `game_*` (see [franchise](../content/franchise.md#data)); `games.url_style` picks each namespace's URL style (see [URLs](../content/urls.md#other-games)) |
 | Engagement | `quiz_pages`, `checklist_pages`, `checklist_items`, `events_pages`, `tools` |
 | Catalog | `catalog_pages` and the `roblox_*` ID and item tables |
 | Stats | `roblox_universes`, `roblox_universe_stats_*`, rank snapshots, current indexes, `stats_job_runs` |
 | Puzzles | `puzzle_pages`, `puzzle_answers`, `puzzle_sync_runs` |
 | Users | accounts and sessions, `comments`, `user_*_progress`, `game_*_progress` |
 | Cache | `revalidation_events`, `cache_warm_events` and their worker run tables |
+| Routes | `site_routes`, `site_route_conflicts` (see [URLs](../content/urls.md#route-table)) |
 
 Generated types for the shared game tables live in `supabase/types/shared-games.ts`. `supabase/schema.sql` is a dump of the production public schema.
 
@@ -68,6 +69,7 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
 - Collection and quiz data lives only in the database. The repo holds no runtime content JSON.
+- `site_routes` triggers serialize URL changes with one transaction advisory lock. A transaction that writes several page tables must write them in the route migration's lock order: `games`, then `game_*` pages (collections last), then Roblox pages.
 
 ## Known issues
 

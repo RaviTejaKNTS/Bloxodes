@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const state = vi.hoisted(() => ({ user: { id: "user-a" } as { id: string } | null, saved: null as unknown, filters: [] as unknown[], checked: ["leaf"] }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/auth/session-user", () => ({ getSessionUser: async () => state.user }));
-vi.mock("@/lib/gta-checklist-progress", () => ({ validateGtaChecklistProgress: async (_key: string, ids?: string[]) => ids?.includes("foreign") ? { status: 400, error: "Unknown task" } : null }));
+vi.mock("@/lib/game-checklist-progress", () => ({ validateGameChecklistProgress: async (_key: string, ids?: string[]) => ids?.includes("foreign") ? { status: 400, error: "Unknown task" } : null }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
  const chain = { select: () => chain, eq: (key: string, value: unknown) => { state.filters.push([key, value]); return chain; },
  maybeSingle: async () => ({ data: { checked_item_ids: state.checked }, error: null }),

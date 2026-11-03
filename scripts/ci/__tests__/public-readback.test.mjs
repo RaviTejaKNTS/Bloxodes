@@ -30,16 +30,36 @@ test("publication fails after bounded readback attempts", async () => {
 
 test("sitemap checks cover legacy, franchise and shared game routes", () => {
   assert.equal(publicationSitemap("/wiki/example/units"), "/sitemaps/wiki.xml");
-  assert.equal(publicationSitemap("/gta"), "/sitemaps/gta.xml");
-  assert.equal(publicationSitemap("/gta/wiki/gta-5/vehicles"), "/sitemaps/gta.xml");
-  assert.equal(publicationSitemap("/minecraft/tools/crafting"), "/sitemaps/minecraft.xml");
+  assert.equal(publicationSitemap("/gta"), "/sitemaps/games.xml");
+  assert.equal(publicationSitemap("/gta/wiki/gta-5/vehicles"), "/sitemaps/games.xml");
+  assert.equal(publicationSitemap("/minecraft/tools/crafting"), "/sitemaps/games.xml");
   for (const edition of ["java", "bedrock"]) {
-    assert.equal(publicationSitemap(`/minecraft/${edition}/wiki`), "/sitemaps/minecraft.xml");
-    assert.equal(publicationSitemap(`/minecraft/${edition}/wiki/blocks`), "/sitemaps/minecraft.xml");
+    assert.equal(publicationSitemap(`/minecraft/${edition}/wiki`), "/sitemaps/games.xml");
+    assert.equal(publicationSitemap(`/minecraft/${edition}/wiki/blocks`), "/sitemaps/games.xml");
     assert.equal(publicationSitemap(`/minecraft/${edition}/quizzes/blocks`), "/sitemaps/games.xml");
   }
-  assert.equal(publicationSitemap("/red-dead/wiki/red-dead-2/weapons"), "/sitemaps/red-dead.xml");
+  assert.equal(publicationSitemap("/red-dead/wiki/red-dead-2/weapons"), "/sitemaps/games.xml");
   assert.equal(publicationSitemap("/sandustry/wiki"), "/sitemaps/games.xml");
   assert.equal(publicationSitemap("/minecraft/quizzes/blocks"), "/sitemaps/games.xml");
   assert.equal(publicationSitemap("/games"), "/sitemaps/main.xml");
+});
+
+
+test("moved and new shared pages use the shared sitemap while Roblox and unmoved entries stay unchanged", () => {
+  for (const path of ["/wiki/peak", "/games/risk-of-rain", "/wiki/brand-new/items", "/tools/brand-new-calculator"]) {
+    assert.equal(publicationSitemap(path, "game"), "/sitemaps/games.xml");
+  }
+  assert.equal(publicationSitemap("/wiki/blox-fruits", "roblox"), "/sitemaps/wiki.xml");
+  assert.equal(publicationSitemap("/minecraft/tools/crafting", "game"), "/sitemaps/games.xml");
+});
+
+test("shared pages use the common sitemap for every namespace", () => {
+  for (const [namespace, type, path] of [
+    ["gta", "wiki", "/games/gta"], ["gta", "collection", "/wiki/gta-5/items"],
+    ["gta", "map", "/maps/gta5"], ["gta", "checklist", "/checklists/gta-5"],
+    ["red-dead", "wiki", "/wiki/red-dead-redemption-2"], ["red-dead", "collection", "/wiki/red-dead-redemption-2/horses"],
+    ["minecraft", "wiki", "/wiki/minecraft-java"], ["minecraft", "tool", "/tools/minecraft-xp-calculator"],
+  ]) assert.equal(publicationSitemap(path, "game", namespace, type), "/sitemaps/games.xml");
+  assert.equal(publicationSitemap("/catalog/gta-items", "game", "gta", "catalog"), "/sitemaps/games.xml");
+  assert.equal(publicationSitemap("/wiki/unrelated", "game", "unrelated", "wiki"), "/sitemaps/games.xml");
 });

@@ -1,0 +1,883 @@
+{
+  "page": {
+    "universe_id": 3085257211,
+    "code": "rainbow-friends",
+    "title": "Rainbow Friends Roblox Quiz: 15 Questions on Chapters 1 and 2",
+    "description_md": "How well do you know Rainbow Friends? Try 15 random questions about Chapters 1 and 2, with five each from easy, medium, and hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Rainbow Friends knowledge with 15 questions on Chapter 1's nights, Chapter 2's Odd World objectives, enemy behavior and escape choices.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "In Chapter 1, Night 1, which objective ends the night?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Restart the backup generator"
+          },
+          {
+            "id": "b",
+            "text": "Fill the food dispensers"
+          },
+          {
+            "id": "c",
+            "text": "Rebuild the block tower"
+          },
+          {
+            "id": "d",
+            "text": "Repair the theater machine"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "Where must the group deliver the 15 food packs in Chapter 1, Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The theater's block platform"
+          },
+          {
+            "id": "b",
+            "text": "The food dispensers"
+          },
+          {
+            "id": "c",
+            "text": "The SOS Light"
+          },
+          {
+            "id": "d",
+            "text": "The backup generator"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "What must the group put into the theater machine in Chapter 1, Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fourteen blocks"
+          },
+          {
+            "id": "b",
+            "text": "Fourteen batteries"
+          },
+          {
+            "id": "c",
+            "text": "Fourteen food packs"
+          },
+          {
+            "id": "d",
+            "text": "Fourteen fuses"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "Which machine takes the nine batteries in Chapter 1, Night 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The backup generator"
+          },
+          {
+            "id": "b",
+            "text": "The SOS Light"
+          },
+          {
+            "id": "c",
+            "text": "The Battering Ram"
+          },
+          {
+            "id": "d",
+            "text": "The food dispensers"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "Which light can you pick up during Chapter 1, Night 4's blackout?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A lantern"
+          },
+          {
+            "id": "b",
+            "text": "A glow stick"
+          },
+          {
+            "id": "c",
+            "text": "A flashlight"
+          },
+          {
+            "id": "d",
+            "text": "A flare"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "What must the group collect during Chapter 2, Hour 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Twenty-five food packs"
+          },
+          {
+            "id": "b",
+            "text": "Twenty-five lightbulbs"
+          },
+          {
+            "id": "c",
+            "text": "Twenty-five batteries"
+          },
+          {
+            "id": "d",
+            "text": "Twenty-five fuses"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "What fuels the Battering Ram in Chapter 2, Hour 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fifteen lightbulbs"
+          },
+          {
+            "id": "b",
+            "text": "Fifteen batteries"
+          },
+          {
+            "id": "c",
+            "text": "Fifteen fuses"
+          },
+          {
+            "id": "d",
+            "text": "Fifteen gas canisters"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "Which item fills the cooking station's bowl during Chapter 2, Hour 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sugar packs"
+          },
+          {
+            "id": "b",
+            "text": "Food packs"
+          },
+          {
+            "id": "c",
+            "text": "Lightbulbs"
+          },
+          {
+            "id": "d",
+            "text": "Batteries"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "What does the SOS Light project after Chapter 2, Hour 1's objective is complete?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A plain circle of white light"
+          },
+          {
+            "id": "b",
+            "text": "An arrow pointing toward the exit"
+          },
+          {
+            "id": "c",
+            "text": "A signal shaped like Blue"
+          },
+          {
+            "id": "d",
+            "text": "A map of the park"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What happens when the ram opens the garage at the end of Chapter 2, Hour 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lookies rush out and knock the group out"
+          },
+          {
+            "id": "b",
+            "text": "Cyan rushes out and starts the foot chase"
+          },
+          {
+            "id": "c",
+            "text": "The group walks straight out of the park"
+          },
+          {
+            "id": "d",
+            "text": "The group boards the coaster inside the garage"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "How do uncollected Lookies move around the map during Chapter 2, Hour 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They hop between platforms"
+          },
+          {
+            "id": "b",
+            "text": "They fly above the paths"
+          },
+          {
+            "id": "c",
+            "text": "They stay at fixed spawn points"
+          },
+          {
+            "id": "d",
+            "text": "They roll along the ground"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "In Chapter 1, Nights 2–4, what happens if Green's searching hand reaches you inside your Box?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He waits until you uncover"
+          },
+          {
+            "id": "b",
+            "text": "He catches you through it"
+          },
+          {
+            "id": "c",
+            "text": "He walks past without reacting"
+          },
+          {
+            "id": "d",
+            "text": "He knocks it aside and leaves"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "What visible marker shows Orange's rampage route in Chapter 1, Nights 3–4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A glowing jagged line"
+          },
+          {
+            "id": "b",
+            "text": "A row of floating arrows"
+          },
+          {
+            "id": "c",
+            "text": "A chain of pulsing circles"
+          },
+          {
+            "id": "d",
+            "text": "A trail of flashing tiles"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-14",
+        "question": "What should you do to get past the wooden planks in Chapter 1, Night 5's vent chase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay upright"
+          },
+          {
+            "id": "b",
+            "text": "Crouch low"
+          },
+          {
+            "id": "c",
+            "text": "Jump forward"
+          },
+          {
+            "id": "d",
+            "text": "Wait in place"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-15",
+        "question": "When does the Box control stop working during Chapter 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "At the start of Night 2"
+          },
+          {
+            "id": "b",
+            "text": "At the start of Night 3"
+          },
+          {
+            "id": "c",
+            "text": "At the start of Night 4"
+          },
+          {
+            "id": "d",
+            "text": "At the start of Night 5"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "What changes when Chapter 1 moves from Night 2 to Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Blue starts hunting only inside the facility's vents"
+          },
+          {
+            "id": "b",
+            "text": "Purple begins hunting players inside the party room"
+          },
+          {
+            "id": "c",
+            "text": "Orange becomes an active threat around the facility"
+          },
+          {
+            "id": "d",
+            "text": "Green stops searching for players around the facility"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "Blue has spotted you in Chapter 1, Nights 1–4. Which Box sequence can hide you from him?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave his view, then equip the Box"
+          },
+          {
+            "id": "b",
+            "text": "Equip the Box in his view, then stop"
+          },
+          {
+            "id": "c",
+            "text": "Crouch in his view, then equip the Box"
+          },
+          {
+            "id": "d",
+            "text": "Run toward him, then equip the Box"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "How does Green choose where to search in Chapter 1, Nights 2–4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He heads toward the loudest nearby player"
+          },
+          {
+            "id": "b",
+            "text": "He tracks the last player he saw"
+          },
+          {
+            "id": "c",
+            "text": "He follows food packs dropped by players"
+          },
+          {
+            "id": "d",
+            "text": "He follows a fixed route with search stops"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "During Orange's marked rampage in Chapter 1, Nights 3–4, what makes him leave his route to chase you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You refill his bowl in the hideout"
+          },
+          {
+            "id": "b",
+            "text": "You enter his view without a Box"
+          },
+          {
+            "id": "c",
+            "text": "You equip your Box out of sight"
+          },
+          {
+            "id": "d",
+            "text": "You wait behind a wall off his route"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "In Chapter 1, Nights 3–4, Purple's hands are reaching out of a leaking vent. How can you pass safely?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cross the puddle inside your Box"
+          },
+          {
+            "id": "b",
+            "text": "Step through the puddle beside the grille"
+          },
+          {
+            "id": "c",
+            "text": "Stay on the narrow footprint-marked path"
+          },
+          {
+            "id": "d",
+            "text": "Sprint through the puddle without stopping"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "In Chapter 2, Hours 1–4, what makes a hidden Purple emerge and pursue you in the lair?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stepping into the maze's fog"
+          },
+          {
+            "id": "b",
+            "text": "Waiting on the entrance staircase"
+          },
+          {
+            "id": "c",
+            "text": "Standing on a rock above the fog"
+          },
+          {
+            "id": "d",
+            "text": "Walking outside the lair in Rainbow Racers"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "On flat ground inside Purple's fog in Chapter 2, Hours 1–4, which action stops Purple from grabbing you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stop while standing upright"
+          },
+          {
+            "id": "b",
+            "text": "Walk while standing upright"
+          },
+          {
+            "id": "c",
+            "text": "Stand inside your Box"
+          },
+          {
+            "id": "d",
+            "text": "Crouch in the fog"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "In Chapter 2, Hour 4, Cyan is inspecting your moving Box. What should you do before she exposes you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep walking inside the Box"
+          },
+          {
+            "id": "b",
+            "text": "Stop moving inside the Box"
+          },
+          {
+            "id": "c",
+            "text": "Take off the Box in her view"
+          },
+          {
+            "id": "d",
+            "text": "Jump toward her from the Box"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "While Yellow carries you through the air in Chapter 2, Hours 2–4, where can you jump down safely?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Green's Drop Tower"
+          },
+          {
+            "id": "b",
+            "text": "Yellow's nest"
+          },
+          {
+            "id": "c",
+            "text": "The Bouncy Castle"
+          },
+          {
+            "id": "d",
+            "text": "The Rainbow Racers stairs"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "In Chapter 2, Hours 1–4, how does a chasing Blue's speed compare with a running player's?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The same speed"
+          },
+          {
+            "id": "b",
+            "text": "Slower than a walking player"
+          },
+          {
+            "id": "c",
+            "text": "Between walking and running speed"
+          },
+          {
+            "id": "d",
+            "text": "Faster than a running player"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which pair of actions makes you drop a carried Looky before delivery in Chapter 2, Hour 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Walking forward or backward"
+          },
+          {
+            "id": "b",
+            "text": "Looking left or right"
+          },
+          {
+            "id": "c",
+            "text": "Standing still or turning in place"
+          },
+          {
+            "id": "d",
+            "text": "Jumping or using your Box"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "How do you lower the path to the vent during Chapter 1, Night 5's chase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Pull the wooden planks off the vent"
+          },
+          {
+            "id": "b",
+            "text": "Push the supporting blocks aside"
+          },
+          {
+            "id": "c",
+            "text": "Break the metal door open"
+          },
+          {
+            "id": "d",
+            "text": "Stack the blocks beneath the ledge"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "What stops Blue at the backyard vent exit in Chapter 1, Night 5's ending?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The wooden vent planks"
+          },
+          {
+            "id": "b",
+            "text": "The locked party-room doors"
+          },
+          {
+            "id": "c",
+            "text": "The closing metal door"
+          },
+          {
+            "id": "d",
+            "text": "The ramp's supporting blocks"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "How does the Technician clear the Giant Looky from the coaster entrance in Chapter 2, Hour 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He lures it away with the baked cake"
+          },
+          {
+            "id": "b",
+            "text": "He pushes it away with the Battering Ram"
+          },
+          {
+            "id": "c",
+            "text": "He draws it away with the SOS Light"
+          },
+          {
+            "id": "d",
+            "text": "He rolls it back into the garage"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-15",
+        "question": "At the end of Chapter 2, Hour 5, what lets you get away from Cyan during the foot chase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Jump over the low metal bars"
+          },
+          {
+            "id": "b",
+            "text": "Crawl under the low metal bars"
+          },
+          {
+            "id": "c",
+            "text": "Push the low metal bars aside"
+          },
+          {
+            "id": "d",
+            "text": "Run back down the corridor"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "After everyone reaches the far ramp in Chapter 1, Night 5's party room, what starts Blue's scripted group chase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A stray balloon pops on a fork"
+          },
+          {
+            "id": "b",
+            "text": "The exit door slams behind the group"
+          },
+          {
+            "id": "c",
+            "text": "A vent plank breaks ahead of the group"
+          },
+          {
+            "id": "d",
+            "text": "The party cake falls from its platform"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "What happens if the group runs out of time to collect the Lookies in Chapter 2, Hour 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The search restarts from the beginning"
+          },
+          {
+            "id": "b",
+            "text": "Fireworks go off and the story continues"
+          },
+          {
+            "id": "c",
+            "text": "The group skips straight to the coaster finale"
+          },
+          {
+            "id": "d",
+            "text": "The Technician dies and the chapter ends"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "Which response avoids Blue's attack on your minecart in Chapter 2, Hour 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lean left before reaching him"
+          },
+          {
+            "id": "b",
+            "text": "Stay centered while passing him"
+          },
+          {
+            "id": "c",
+            "text": "Lean right before reaching him"
+          },
+          {
+            "id": "d",
+            "text": "Use your Box instead of leaning"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "Which response avoids Yellow's attack on your minecart in Chapter 2, Hour 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lean right before reaching him"
+          },
+          {
+            "id": "b",
+            "text": "Stay centered while passing him"
+          },
+          {
+            "id": "c",
+            "text": "Use your Box instead of leaning"
+          },
+          {
+            "id": "d",
+            "text": "Lean left before reaching him"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "Cyan blocks the normal coaster exit at the end of Chapter 2, Hour 5. Which route do the players take instead?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The SOS Light platform"
+          },
+          {
+            "id": "b",
+            "text": "The garbage shaft"
+          },
+          {
+            "id": "c",
+            "text": "The Battering Ram's garage entrance"
+          },
+          {
+            "id": "d",
+            "text": "Purple's Lair"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-06",
+        "question": "What gives the players a brief head start before Cyan's final on-foot chase in Chapter 2, Hour 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "She lands on her back and struggles to rise"
+          },
+          {
+            "id": "b",
+            "text": "She stops to inspect a Looky on the floor"
+          },
+          {
+            "id": "c",
+            "text": "She waits for the players to shut a door"
+          },
+          {
+            "id": "d",
+            "text": "She loses interest and walks back toward the park"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

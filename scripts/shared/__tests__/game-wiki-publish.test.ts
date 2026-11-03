@@ -8,7 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
 import { bundleSchema, gameSchema, runtimeManifestSchema, bundleJsonSchema } from "../../../contracts/game-wiki/v1/schema";
 import { parseContentOptions } from "../../content/roblox-wiki-cli";
-import { assertGameWikiIdentity, assertGameWikiRoutes, assertNoRobloxIdentifiers, gameWikiPath, resolveGameWikiIdentity, selectGameWikiPages } from "../game-wiki-bundle";
+import { assertGameWikiIdentity, assertGameWikiRoutes, assertPageTypeLinks, assertNoRobloxIdentifiers, gameWikiPath, resolveGameWikiIdentity, selectGameWikiPages } from "../game-wiki-bundle";
 import { readWikiContract } from "../wiki-publish-contract";
 import { assertCollectionMissingImages } from "../roblox-wiki-bundle";
 
@@ -34,24 +34,52 @@ test("status accepts a namespace without changing Roblox defaults or production 
   for (const args of [["publish", "/bundle", "--namespace", "example"], ["status", "--game", "example", "--namespace", "../escape"], ["status", "--game", "example", "--namespace", "roblox"], ["publish", "/bundle", "--target", "production", "--apply"], ["publish", "/bundle", "--allow-prod"]]) assert.throws(() => parseContentOptions(args));
 });
 
-test("root, child, reserved namespace and Minecraft routes use registry identities", async () => {
+test("all namespaces use page-type routes and franchise collections fail preflight", () => {
   assert.doesNotThrow(() => assertGameWikiIdentity(bundle()));
   const child = { namespace: "series", game: { slug: "sequel", name: "Sequel", kind: "game" as const, parent: "series" } };
   assert.doesNotThrow(() => assertGameWikiIdentity(child));
   for (const invalid of [{ ...child, namespace: "codes" }, { ...child, game: { ...child.game, kind: "franchise" as const } }, { ...child, game: { ...child.game, parent: "other" } }, { ...child, game: { ...child.game, parent: undefined } }]) assert.throws(() => assertGameWikiIdentity(invalid));
-  assert.equal(gameWikiPath("example", "example"), "/example/wiki");
-  assert.equal(gameWikiPath("series", "sequel", "series"), "/series/wiki/sequel");
-  assert.equal(gameWikiPath("minecraft", "minecraft-java", "minecraft"), "/minecraft/java/wiki");
-  assert.throws(() => assertGameWikiIdentity({ namespace: "minecraft", game: { ...child.game, slug: "minecraft-console", parent: "minecraft" } }), /route code/);
-  const root = path.resolve("tmp", `game-wiki-routes-${randomUUID()}`);
-  await fs.mkdir(path.join(root, "dedicated"), { recursive: true });
-  try {
-    await assertGameWikiRoutes(bundle(), root);
-    await assert.rejects(assertGameWikiRoutes({ ...bundle(), namespace: "dedicated", game: { ...game, slug: "dedicated" } }, root), /route code/);
-    for (const namespace of ["gta", "red-dead", "minecraft"]) {
-      await assert.rejects(assertGameWikiRoutes({ ...bundle(), namespace, game: { ...game, slug: namespace, kind: "franchise" } }, root), /root collections need route code/);
+  assert.equal(gameWikiPath("example", "example"), "/wiki/example");
+  assert.equal(gameWikiPath("series", "series", undefined, "franchise"), "/games/series");
+  assert.equal(gameWikiPath("series", "sequel", "series"), "/wiki/sequel");
+  assert.equal(gameWikiPath("gta", "gta", "gta"), "/wiki/gta");
+  assert.equal(gameWikiPath("minecraft", "minecraft-console", "minecraft"), "/wiki/minecraft-console");
+  assert.doesNotThrow(() => assertGameWikiIdentity({ namespace: "minecraft", game: { ...child.game, slug: "minecraft-console", parent: "minecraft" } }));
+  for (const namespace of ["example", "gta", "red-dead", "minecraft"]) {
+    const root = { ...bundle(), namespace, game: { ...game, slug: namespace, kind: "franchise" as const } };
+    assert.throws(() => assertGameWikiRoutes(root), /Franchise roots cannot own collections/);
+    assert.doesNotThrow(() => assertGameWikiRoutes({ ...root, collections: [] }));
+    assert.doesNotThrow(() => assertGameWikiRoutes({ ...root, game: { ...root.game, kind: "game" } }));
+    assert.doesNotThrow(() => assertGameWikiRoutes({ ...root, game: { ...root.game, slug: "child", parent: namespace, kind: "game" } }));
+  }
+});
+
+test("public copy rejects retired links in markdown, HTML and nested JSON strings", () => {
+  for (const section of ["wiki", "tools", "maps", "checklists", "quizzes", "codes", "catalog"]) {
+    for (const link of [`/new-game/${section}`, `/gta/${section}/items?view=all#top`, `https://bloxodes.com/red-dead/${section}/items`]) {
+      for (const copy of [`[Read more](${link})`, `<a href="${link}">Read more</a>`, link]) {
+        assert.throws(() => assertPageTypeLinks({ faq_json: [{ a: copy }] }, "items/final.json"), error => {
+          assert.ok(error instanceof Error);
+          assert.ok(error.message.includes("items/final.json.faq_json[0].a"));
+          assert.ok(error.message.includes(link));
+          assert.match(error.message, /Use the page-type URL/);
+          return true;
+        });
+      }
     }
-  } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
+  for (const link of ["/wiki/game/items", "/games/gta", "/tools/minecraft-calculator", "/maps/gta", "/wiki/tools", "/maps/wiki", "/catalog/tools", "/api/games/gta/collections/progress", "https://bloxodes.com/wiki/game", "https://example.com/gta/wiki/items", "https://bloxodes.com.example.org/gta/wiki", "/gta/wikipedia", "#wiki"]) {
+    assert.doesNotThrow(() => assertPageTypeLinks({ description_md: `[More](${link})` }, "final.json"));
+  }
+  for (const link of ["/minecraft/java/wiki/mobs", "/minecraft/bedrock/wiki/achievements", "https://www.bloxodes.com/gta/wiki/gta-5", "http://bloxodes.com/valheim/wiki/bosses"]) {
+    assert.throws(() => assertPageTypeLinks({ description_md: `[More](${link})` }, "final.json"), /retired namespace link/);
+  }
+  assert.doesNotThrow(() => assertPageTypeLinks({ canonical_path: "/gta/wiki/items", description_md: "[More](/wiki/gta-5)" }, "final.json"));
+  assert.throws(() => assertPageTypeLinks({ items: [{ system: { notes: "[Boss](/valheim/wiki/bosses)" } }] }, "items/dataset.json"), /items\/dataset.json.items\[0\].system.notes/);
+  for (const asset of ["/images/tools/minecraft/xp-calculator.webp", "/gta/maps/gta-vice-city/map.webp", "https://bloxodes.com/gta/maps/gta-vice-city/map.webp"]) {
+    assert.doesNotThrow(() => assertPageTypeLinks({ description_md: `![Map](${asset})` }, "final.json"));
+  }
+  assert.throws(() => assertPageTypeLinks({ schema_ld_json: { itemListElement: [{ url: "https://bloxodes.com/example/wiki/items" }] } }, "final.json"), /schema_ld_json.itemListElement\[0\].url/);
 });
 
 test("selection leaves unfinished unselected pages alone and rejects duplicates", async () => {
@@ -91,16 +119,13 @@ test("target UUIDs may differ and existing game/hub ownership stays permanent", 
   assert.throws(() => resolveGameWikiIdentity([], [{ id: "foreign", slug: "new-game", game_id: "other-game" }], "new-game", { slug: "new-game", kind: "game" }), /belongs to a different game/);
 });
 
-test("Minecraft wrappers and direct franchise commands invoke their CLI runners", async () => {
+test("Direct generic franchise commands invoke their CLI runners", async () => {
   const scripts = JSON.parse(await fs.readFile("package.json", "utf8")).scripts;
-  for (const command of ["publish:minecraft-wiki", "sync:minecraft-collection-runtime", "publish:franchise-wiki-hubs", "sync:franchise-collection-runtime", "sync:shared-game-collection-runtime"]) {
+  for (const command of ["publish:franchise-wiki-hubs", "sync:franchise-collection-runtime", "sync:shared-game-collection-runtime"]) {
     assert.ok(scripts[command]);
     const output = execFileSync("npm", ["run", "--silent", command, "--", "--help"], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
     assert.match(output, /Usage: npm run (publish:franchise-wiki-hubs|sync:franchise-collection-runtime)/, command);
   }
-  const run = (command: string, args: string[]) => execFileSync("npm", ["run", "--silent", command, "--", ...args], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
-  assert.throws(() => run("publish:minecraft-wiki", ["--workspace", "tmp", "--game", "unapproved-edition"]), /Minecraft requires an approved edition identity/);
-  assert.throws(() => run("sync:minecraft-collection-runtime", []), /At least one --manifest is required/);
 });
 
 test("Roblox identifiers and stale or conflicting item image exceptions fail", () => {
@@ -153,14 +178,35 @@ function testEnvironment() {
   return { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" };
 }
 
+// Mirror expected_game_page_path in 20261101120000_game_page_type_urls.sql.
+// Keep this self-contained: the CLI fakes inject its JS body into a child process.
+function expectedGamePagePath(tables: Record<string, Array<Record<string, any>>>, gameId: string, type: string, slug: string | null = null): string | null {
+  const game = tables.games.find(row => row.id === gameId);
+  if (!game) throw new Error(`Unknown game: ${gameId}`);
+  if (!["hub", "wiki", "collection", "code", "tool", "checklist", "map", "quiz", "catalog"].includes(type)) throw new Error(`Unknown game page type: ${type}`);
+  const section = ({ tool: "tools", quiz: "quizzes", checklist: "checklists", map: "maps" } as Record<string, string>)[type] ?? "catalog";
+  const franchiseRoot = game.kind === "franchise" && game.parent_id == null;
+  const base = franchiseRoot ? `/games/${game.namespace}` : `/wiki/${game.slug}`;
+  if (type === "wiki" || type === "hub") return base;
+  if (type === "collection") {
+    if (franchiseRoot) throw new Error("Franchise roots cannot own collections");
+    return slug == null ? null : `${base}/${slug}`;
+  }
+  if (type === "code") return `/codes/${game.slug}`;
+  if (slug == null) return null;
+  const prefix = ["tool", "catalog"].includes(type) && slug !== game.namespace && !slug.startsWith(`${game.namespace}-`) ? `${game.namespace}-` : "";
+  return `/${section}/${prefix}${slug}`;
+}
+
 // Run the actual CLI against an isolated HTTP fake. Simulate the ownership and
-// edition-route constraints that previously failed only after writes began.
+// page-type route constraints that previously failed only after writes began.
 async function applyFixture(root: string, tables: Record<string, Array<Record<string, any>>>) {
   const report = path.join(root, "apply-report.json");
   const preload = `
     import fs from 'node:fs';
     import { randomUUID } from 'node:crypto';
     const tables = ${JSON.stringify(tables)};
+    const expectedGamePagePath = ${expectedGamePagePath.toString()};
     const calls = [];
     const media = new Set();
     process.on('exit', () => fs.writeFileSync(${JSON.stringify(report)}, JSON.stringify({tables,calls})));
@@ -177,6 +223,12 @@ async function applyFixture(root: string, tables: Record<string, Array<Record<st
         return new Response(null, {status: method === 'HEAD' && !media.has(url.pathname) ? 404 : 200});
       }
       if (!url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected external request');
+      if (url.pathname.startsWith('/rest/v1/rpc/')) {
+        if (url.pathname !== '/rest/v1/rpc/expected_game_page_path' || method !== 'POST') throw new Error('Unexpected RPC '+method+' '+url.pathname);
+        const payload = JSON.parse(init.body);
+        calls.push({table:'rpc/expected_game_page_path',method,payload,query:Object.fromEntries(url.searchParams)});
+        return new Response(JSON.stringify(expectedGamePagePath(tables,payload.p_game_id,payload.p_type,payload.p_slug)),{headers:{'content-type':'application/json'}});
+      }
       const table = url.pathname.split('/').pop();
       const source = tables[table] ??= [];
       const matching = source.filter(row => [...url.searchParams].every(([key,value]) => {
@@ -189,19 +241,36 @@ async function applyFixture(root: string, tables: Record<string, Array<Record<st
       let result = matching;
       if (method === 'PATCH') {
         if (table === 'game_wiki_pages' && payload.canonical_path !== undefined) throw new Error('Existing hub paths must remain untouched');
-        for (const row of matching) Object.assign(row,payload);
+        for (const row of matching) {
+          Object.assign(row,payload);
+          if (['game_wiki_pages','game_collection_pages'].includes(table)) {
+            const expected = expectedGamePagePath(tables,row.game_id,table === 'game_wiki_pages' ? 'wiki' : 'collection',row.collection_slug ?? row.slug);
+            if (row.canonical_path !== expected) throw new Error('Updated page route rejected: expected '+expected);
+          }
+        }
       } else if (method === 'POST') {
         result = (Array.isArray(payload) ? payload : [payload]).map(row=>({id:randomUUID(),...row}));
         for (const row of result) {
+          if (table === 'games') {
+            row.url_style ??= 'page_type';
+            if (row.kind === 'game' && row.parent_id == null) row.parent_id = tables.games.find(game=>game.namespace === row.namespace && game.kind === 'franchise')?.id ?? null;
+            if (row.parent_id != null) {
+              const parent = tables.games.find(game=>game.id === row.parent_id && game.kind === 'franchise' && game.namespace === row.namespace);
+              if (!parent) throw new Error('Game parent must be its franchise');
+              row.url_style = parent.url_style;
+            }
+          }
           if (table === 'game_wiki_pages') {
-            const game = tables.games.find(game=>game.id === row.game_id);
-            row.canonical_path ??= '/'+row.namespace+'/wiki'+(game.parent_id ? '/'+game.slug : '');
-            if (row.namespace === 'minecraft' && game.slug === 'minecraft-java' && row.canonical_path !== '/minecraft/java/wiki') throw new Error('Minecraft edition route rejected');
+            const expected = expectedGamePagePath(tables,row.game_id,'wiki',row.slug);
+            row.canonical_path ??= expected;
+            if (row.canonical_path !== expected) throw new Error('Wiki route rejected: expected '+expected);
           }
           if (table === 'game_collection_pages') {
             const hub = tables.game_wiki_pages.find(hub=>hub.id === row.wiki_page_id);
             if (row.wiki_slug !== hub.slug || row.game_id !== hub.game_id) throw new Error('Collection wiki ownership mismatch');
-            row.canonical_path ??= hub.canonical_path+'/'+row.collection_slug;
+            const expected = expectedGamePagePath(tables,row.game_id,'collection',row.collection_slug);
+            row.canonical_path ??= expected;
+            if (row.canonical_path !== expected) throw new Error('Collection route rejected: expected '+expected);
           }
         }
         source.push(...result);
@@ -247,35 +316,62 @@ test("CLI apply keeps permanent root hub slugs and UUIDs beside same-slug child 
       await write("wiki/final.json", { ...hubFinal, slug: `${namespace}-hub` });
       const gameId = randomUUID(), hubId = randomUUID(), childId = randomUUID(), childHubId = randomUUID();
       const result = await applyFixture(root, {
-        games: [{ id: gameId, namespace, slug: namespace, kind: "franchise", parent_id: null, is_published: true }, { id: childId, namespace, slug: namespace, kind: "game", parent_id: gameId, is_published: true }],
-        game_wiki_pages: [{ id: hubId, namespace, game_id: gameId, slug: `${namespace}-hub`, canonical_path: `/${namespace}/wiki`, is_published: true }, { id: childHubId, namespace, game_id: childId, slug: namespace, canonical_path: `/${namespace}/wiki/legacy`, is_published: true }]
+        games: [{ id: gameId, namespace, slug: namespace, kind: "franchise", parent_id: null, url_style: "page_type", is_published: true }, { id: childId, namespace, slug: namespace, kind: "game", parent_id: gameId, url_style: "page_type", is_published: true }],
+        game_wiki_pages: [{ id: hubId, namespace, game_id: gameId, slug: `${namespace}-hub`, canonical_path: `/games/${namespace}`, is_published: true }, { id: childHubId, namespace, game_id: childId, slug: namespace, canonical_path: `/wiki/${namespace}`, is_published: true }]
       });
       assert.equal(result.tables.games[0].id, gameId);
       assert.equal(result.tables.game_wiki_pages[0].id, hubId);
       assert.equal(result.tables.game_wiki_pages[0].slug, `${namespace}-hub`);
-      assert.equal(result.tables.game_wiki_pages[0].canonical_path, `/${namespace}/wiki`);
+      assert.equal(result.tables.game_wiki_pages[0].canonical_path, `/games/${namespace}`);
       assert.equal(result.tables.game_wiki_pages[1].id, childHubId);
       assert.equal(result.calls.filter(call => call.method === "PATCH" && call.table === "game_wiki_pages").length, 1);
     } finally { await fs.rm(root, { recursive: true, force: true }); }
   }
 });
 
-test("CLI apply inserts a missing Minecraft edition hub with its validated route", async () => {
+test("CLI apply inserts a missing previously unlisted Minecraft edition hub with its validated route", async () => {
   const { root } = await fixture();
   try {
-    await retargetFixture(root, "minecraft", "minecraft-java", "game", "minecraft");
+    await retargetFixture(root, "minecraft", "minecraft-console", "game", "minecraft");
     const parentId = randomUUID();
     const result = await applyFixture(root, {
-      games: [{ id: parentId, namespace: "minecraft", slug: "minecraft", kind: "franchise", parent_id: null, is_published: true, cover_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/cover.webp", hero_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/hero.webp" }]
+      games: [{ id: parentId, namespace: "minecraft", slug: "minecraft", kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/cover.webp", hero_image: "https://media.bloxodes.com/wiki/minecraft/minecraft/hero.webp" }]
     });
-    const edition = result.tables.games.find(game => game.slug === "minecraft-java")!;
+    const edition = result.tables.games.find(game => game.slug === "minecraft-console")!;
     const hub = result.tables.game_wiki_pages[0];
     assert.equal(edition.parent_id, parentId);
+    assert.equal(edition.url_style, "page_type", "New editions inherit their existing root URL style");
     assert.equal(hub.game_id, edition.id);
-    assert.equal(hub.canonical_path, "/minecraft/java/wiki");
-    assert.equal(result.calls.find(call => call.table === "game_wiki_pages" && call.method === "POST")?.payload?.canonical_path, "/minecraft/java/wiki");
-    assert.equal(result.tables.game_collection_pages[0].canonical_path, "/minecraft/java/wiki/items");
+    assert.equal(hub.canonical_path, "/wiki/minecraft-console");
+    assert.equal(result.calls.find(call => call.table === "game_wiki_pages" && call.method === "POST")?.payload?.canonical_path, "/wiki/minecraft-console");
+    assert.equal(result.tables.game_collection_pages[0].canonical_path, "/wiki/minecraft-console/items");
   } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+test("CLI apply gives new roots page-type URLs and children inherit that style", async () => {
+  for (const scenario of ["game-root", "franchise-root", "child"] as const) {
+    const { root, write } = await fixture();
+    try {
+      const parentId = randomUUID();
+      const child = scenario === "child";
+      const franchise = scenario === "franchise-root";
+      const slug = child ? "sequel" : "example";
+      await retargetFixture(root, "example", slug, franchise ? "franchise" : "game", child ? "example" : undefined);
+      if (franchise) await write("bundle.json", { ...bundle(), game: { ...game, kind: "franchise" }, collections: [] });
+      const result = await applyFixture(root, {
+        games: child ? [{ id: parentId, namespace: "example", slug: "example", kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: "https://media.bloxodes.com/wiki/example/example/cover.webp", hero_image: "https://media.bloxodes.com/wiki/example/example/hero.webp" }] : []
+      });
+      const savedGame = result.tables.games.find(row => row.slug === slug)!;
+      const hub = result.tables.game_wiki_pages[0];
+      const route = franchise ? "/games/example" : `/wiki/${slug}`;
+      assert.equal(savedGame.url_style, "page_type", scenario);
+      assert.equal(savedGame.parent_id, child ? parentId : null, scenario);
+      assert.equal(hub.game_id, savedGame.id, scenario);
+      assert.equal(hub.canonical_path, route, scenario);
+      assert.equal(result.calls.find(call => call.table === "game_wiki_pages" && call.method === "POST")?.payload?.canonical_path, route, scenario);
+      if (!franchise) assert.equal(result.tables.game_collection_pages[0].canonical_path, `${route}/items`, scenario);
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
 });
 
 test("new collection orders append above all stored and planned explicit orders", async () => {
@@ -299,16 +395,19 @@ test("new collection orders append above all stored and planned explicit orders"
     }
     await write("bundle.json", { ...bundle(), collections: ["items", ...extra.map(row => row.slug)].map(slug => ({ manifest: `collections/${slug}/runtime-manifest.json` })) });
     const gameId = randomUUID(), hubId = randomUUID(), pageId = randomUUID();
-    const storedPage = { id: pageId, namespace: "example", game_id: gameId, wiki_page_id: hubId, wiki_slug: "example", collection_slug: "items", code: "example-items", canonical_path: "/example/wiki/items", page_type: "database", wiki_sort_order: 10, is_published: true, published_dataset_id: null };
+    const storedPage = { id: pageId, namespace: "example", game_id: gameId, wiki_page_id: hubId, wiki_slug: "example", collection_slug: "items", code: "example-items", canonical_path: "/wiki/example/items", page_type: "database", wiki_sort_order: 10, is_published: true, published_dataset_id: null };
     const result = await applyFixture(root, {
-      games: [{ id: gameId, namespace: "example", slug: "example", kind: "game", parent_id: null, is_published: true }],
-      game_wiki_pages: [{ id: hubId, namespace: "example", game_id: gameId, slug: "example", canonical_path: "/example/wiki", is_published: true }],
-      game_collection_pages: [storedPage, { ...storedPage, id: randomUUID(), collection_slug: "unselected", code: "example-unselected", canonical_path: "/example/wiki/unselected", wiki_sort_order: 100 }, { ...storedPage, id: randomUUID(), game_id: "other-game", wiki_slug: "other-game", collection_slug: "other", code: "other-game-other", canonical_path: "/example/wiki/other/other", wiki_sort_order: 1000 }]
+      games: [{ id: gameId, namespace: "example", slug: "example", kind: "game", parent_id: null, url_style: "page_type", is_published: true }],
+      game_wiki_pages: [{ id: hubId, namespace: "example", game_id: gameId, slug: "example", canonical_path: "/wiki/example", is_published: true }],
+      game_collection_pages: [storedPage, { ...storedPage, id: randomUUID(), collection_slug: "unselected", code: "example-unselected", canonical_path: "/wiki/example/unselected", wiki_sort_order: 100 }, { ...storedPage, id: randomUUID(), game_id: "other-game", wiki_slug: "other-game", collection_slug: "other", code: "other-game-other", canonical_path: "/wiki/example/other/other", wiki_sort_order: 1000 }]
     });
     const orders = Object.fromEntries(result.tables.game_collection_pages.map(row => [row.collection_slug, row.wiki_sort_order]));
     assert.deepEqual(orders, { items: 10, unselected: 100, other: 1000, "new-first": 110, "explicit-final": 250, "after-final": 260, "explicit-manifest": 500, "after-manifest": 510 });
     assert.equal(result.tables.game_collection_pages[0].id, pageId);
-    const mutations = result.calls.filter(call => ["POST", "PATCH", "DELETE"].includes(call.method));
+    const routeReads = result.calls.filter(call => call.table === "rpc/expected_game_page_path");
+    assert.equal(routeReads.length, 1);
+    assert.deepEqual(routeReads[0].payload, { p_game_id: gameId, p_type: "wiki", p_slug: "example" });
+    const mutations = result.calls.filter(call => !call.table.startsWith("rpc/") && ["POST", "PATCH", "DELETE"].includes(call.method));
     assert.deepEqual(mutations.slice(0, 2).map(call => call.table), ["games", "game_wiki_pages"]);
     const publishedPages = mutations.filter(call => call.table === "game_collection_pages" && call.method === "PATCH" && call.payload?.is_published);
     const pageSlugs = new Map(result.tables.game_collection_pages.map(row => [row.id, row.collection_slug]));
@@ -326,14 +425,25 @@ test("CLI dry run validates a new root and its collection without any HTTP mutat
     if (method !== 'GET' || !url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected network write or media request: '+method+' '+url.pathname);
     return new Response('[]', {headers:{'content-type':'application/json'}});
   };`;
-  const run = () => execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
+  const run = (apply = false) => execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : [])], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
   try {
     assert.match(run(), /PASS all checks\. Dry run complete; no database or media writes/);
     await write("collections/items/final.json", { ...final, universe_id: 1 });
     assert.throws(run, /preflight check\(s\) failed/);
     await write("collections/items/final.json", { ...final, intro_md: "This page shows all items." });
     assert.throws(run, /self-referential page/);
+    await write("collections/items/final.json", { ...final, faq_json: [{ q: "Where are items?", a: "[Items](/example/wiki/items)" }] });
+    assert.throws(run, /items\/final.json.faq_json\[0\].a: retired namespace link "\/example\/wiki\/items".*page-type URL/);
+    assert.throws(() => run(true), /items\/final.json.faq_json\[0\].a: retired namespace link/);
+    const hub = JSON.parse(await fs.readFile(path.join(root, "wiki/final.json"), "utf8"));
     await write("collections/items/final.json", final);
+    await write("wiki/final.json", { ...hub, controls_json: [{ action: "[Items](https://bloxodes.com/example/wiki/items)" }] });
+    assert.throws(run, /wiki\/final.json.controls_json\[0\].action: retired namespace link/);
+    assert.throws(() => run(true), /wiki\/final.json.controls_json\[0\].action: retired namespace link/);
+    await write("wiki/final.json", hub);
+    await write("collections/items/runtime-manifest.json", { ...manifest(), route: "/wrong/wiki/items" });
+    assert.throws(run, /expected \/wiki\/example\/items, got \/wrong\/wiki\/items/);
+    await write("collections/items/runtime-manifest.json", manifest());
     await sharp({ create: { width: 120, height: 63, channels: 3, background: "red" } }).webp().toFile(path.join(root, "wiki/cover.webp"));
     assert.throws(run, /cover_image must be 16:9/);
     await sharp({ create: { width: 160, height: 90, channels: 3, background: "red" } }).webp().toFile(path.join(root, "wiki/cover.webp"));
@@ -355,6 +465,13 @@ test("shared hub writer updates the existing target page UUID", async () => {
   const db = createClient("https://target.supabase.co", "test-key", { global: { fetch: async (input, init) => {
     const url = new URL(String(input));
     calls.push(init?.method ?? "GET");
+    if (url.pathname === "/rest/v1/rpc/expected_game_page_path") {
+      assert.equal(init?.method, "POST");
+      const payload = JSON.parse(String(init.body));
+      assert.deepEqual(payload, { p_game_id: gameId, p_type: "wiki", p_slug: "example" });
+      const route = expectedGamePagePath({ games: [{ id: gameId, namespace: "example", slug: "example", kind: "game", parent_id: null, url_style: "page_type" }] }, payload.p_game_id, payload.p_type, payload.p_slug);
+      return new Response(JSON.stringify(route), { headers: { "content-type": "application/json" } });
+    }
     if (init?.method === "PATCH") {
       assert.equal(url.searchParams.get("id"), `eq.${pageId}`);
       assert.equal(url.searchParams.get("namespace"), "eq.example");
@@ -362,14 +479,17 @@ test("shared hub writer updates the existing target page UUID", async () => {
       assert.equal(payload.game_id, gameId);
       assert.equal(payload.id, undefined);
       assert.equal(payload.canonical_path, undefined, "Updates must preserve the target's canonical path");
-      return new Response(JSON.stringify({ ...payload, id: pageId, canonical_path: "/example/wiki" }), { headers: { "content-type": "application/json" } });
+      return new Response(JSON.stringify({ ...payload, id: pageId, canonical_path: "/wiki/example" }), { headers: { "content-type": "application/json" } });
     }
     return new Response(JSON.stringify({ id: pageId }), { headers: { "content-type": "application/json" } });
   } }, auth: { persistSession: false } });
-  const saved = await saveFranchiseWikiPage(db, "example", gameId, { id: randomUUID(), slug: "example", title: "Example Wiki", canonical_path: "/example/wiki/changed", is_published: true });
+  await assert.rejects(saveFranchiseWikiPage(db, "example", gameId, { slug: "example", canonical_path: "/wiki/example/changed" }), /Wiki canonical path must be \/wiki\/example/);
+  assert.deepEqual(calls, ["GET", "POST"], "A rejected route must not update the hub");
+  calls.length = 0;
+  const saved = await saveFranchiseWikiPage(db, "example", gameId, { id: randomUUID(), slug: "example", title: "Example Wiki", canonical_path: "/wiki/example", is_published: true });
   assert.equal(saved.id, pageId);
-  assert.equal(saved.canonical_path, "/example/wiki");
-  assert.deepEqual(calls, ["GET", "PATCH"]);
+  assert.equal(saved.canonical_path, "/wiki/example");
+  assert.deepEqual(calls, ["GET", "POST", "PATCH"]);
 });
 
 test("CLI apply preserves each target's game, hub and collection UUIDs", async () => {
@@ -384,15 +504,16 @@ test("CLI apply preserves each target's game, hub and collection UUIDs", async (
       const hubId = randomUUID();
       const pageId = randomUUID();
       const stored = {
-        games: [{ id: gameId, namespace: "example", slug: "example", kind: "game", parent_id: null, is_published: true }],
-        game_wiki_pages: [{ id: hubId, namespace: "example", game_id: gameId, slug: "example", canonical_path: "/example/wiki", is_published: true }],
-        game_collection_pages: [{ id: pageId, namespace: "example", game_id: gameId, wiki_page_id: hubId, wiki_slug: "example", collection_slug: "items", code: "example-items", canonical_path: "/example/wiki/items", page_type: "database", wiki_sort_order: 10, item_count: 1, is_published: true, published_dataset_id: null }],
+        games: [{ id: gameId, namespace: "example", slug: "example", kind: "game", parent_id: null, url_style: "page_type", is_published: true }],
+        game_wiki_pages: [{ id: hubId, namespace: "example", game_id: gameId, slug: "example", canonical_path: "/wiki/example", is_published: true }],
+        game_collection_pages: [{ id: pageId, namespace: "example", game_id: gameId, wiki_page_id: hubId, wiki_slug: "example", collection_slug: "items", code: "example-items", canonical_path: "/wiki/example/items", page_type: "database", wiki_sort_order: 10, item_count: 1, is_published: true, published_dataset_id: null }],
         game_collection_datasets: [], game_collection_items: []
       };
       const preload = `
         import fs from 'node:fs';
         import { randomUUID } from 'node:crypto';
         const tables = ${JSON.stringify(stored)};
+        const expectedGamePagePath = ${expectedGamePagePath.toString()};
         const calls = [];
         process.on('exit', () => fs.writeFileSync(${JSON.stringify(report)}, JSON.stringify({tables,calls})));
         globalThis.fetch = async (input, init) => {
@@ -403,6 +524,12 @@ test("CLI apply preserves each target's game, hub and collection UUIDs", async (
             return new Response(null, {status: method === 'HEAD' ? 404 : 200});
           }
           if (!url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected external request');
+          if (url.pathname.startsWith('/rest/v1/rpc/')) {
+            if (url.pathname !== '/rest/v1/rpc/expected_game_page_path' || method !== 'POST') throw new Error('Unexpected RPC '+method+' '+url.pathname);
+            const payload = JSON.parse(init.body);
+            calls.push({table:'rpc/expected_game_page_path',method,payload,query:Object.fromEntries(url.searchParams)});
+            return new Response(JSON.stringify(expectedGamePagePath(tables,payload.p_game_id,payload.p_type,payload.p_slug)),{headers:{'content-type':'application/json'}});
+          }
           const table = url.pathname.split('/').pop();
           const source = tables[table] ?? [];
           calls.push({table,method,query:Object.fromEntries(url.searchParams)});
@@ -414,7 +541,13 @@ test("CLI apply preserves each target's game, hub and collection UUIDs", async (
           let result = matching;
           if (method === 'PATCH') {
             const payload = JSON.parse(init.body);
-            for (const row of matching) Object.assign(row,payload);
+            for (const row of matching) {
+              Object.assign(row,payload);
+              if (['game_wiki_pages','game_collection_pages'].includes(table)) {
+                const expected = expectedGamePagePath(tables,row.game_id,table === 'game_wiki_pages' ? 'wiki' : 'collection',row.collection_slug ?? row.slug);
+                if (row.canonical_path !== expected) throw new Error('Updated page route rejected: expected '+expected);
+              }
+            }
           } else if (method === 'POST') {
             if (['games','game_wiki_pages','game_collection_pages'].includes(table)) throw new Error('Existing target pages must update their UUIDs');
             const payload = JSON.parse(init.body);
@@ -449,8 +582,8 @@ test("franchise status reports stored counts, target URLs and hidden parent visi
     console.table = rows => console.log(JSON.stringify(rows));
     const tables = {
       games: [{id:'root',slug:'series',kind:'franchise',parent_id:null,is_published:false},{id:'child',slug:'sequel',kind:'game',parent_id:'root',is_published:true}],
-      game_wiki_pages: [{id:'hub',game_id:'child',slug:'sequel',canonical_path:'/series/wiki/sequel',is_published:true}],
-      game_collection_pages: [{id:'collection',game_id:'child',wiki_slug:'sequel',collection_slug:'items',canonical_path:'/series/wiki/sequel/items',is_published:true,item_count:7,published_dataset_id:'dataset'}]
+      game_wiki_pages: [{id:'hub',game_id:'child',slug:'sequel',canonical_path:'/wiki/sequel',is_published:true}],
+      game_collection_pages: [{id:'collection',game_id:'child',wiki_slug:'sequel',collection_slug:'items',canonical_path:'/wiki/sequel/items',is_published:true,item_count:7,published_dataset_id:'dataset'}]
     };
     globalThis.fetch = async (input, init) => {
       if ((init?.method ?? 'GET') !== 'GET') throw new Error('Status must be read-only');
@@ -464,7 +597,7 @@ test("franchise status reports stored counts, target URLs and hidden parent visi
   assert.equal(result[0].published, true);
   assert.equal(result[0].visible, false);
   assert.equal(result[1].items, 7);
-  assert.equal(result[1].url, "https://bloxodes.com/series/wiki/sequel/items");
+  assert.equal(result[1].url, "https://bloxodes.com/wiki/sequel/items");
 });
 
 test("status resolves root and original-game hubs by game ID and respects a missing kind", () => {
@@ -472,8 +605,8 @@ test("status resolves root and original-game hubs by game ID and respects a miss
     console.table = rows => console.log(JSON.stringify(rows));
     const tables = {
       games: [{id:'root',slug:'gta',kind:'franchise',parent_id:null,is_published:true},{id:'original',slug:'gta',kind:'game',parent_id:'root',is_published:true},{id:'solo',slug:'solo',kind:'franchise',parent_id:null,is_published:true}],
-      game_wiki_pages: [{id:'original-hub',game_id:'original',slug:'gta',canonical_path:'/gta/wiki/gta',is_published:true},{id:'root-hub',game_id:'root',slug:'gta-hub',canonical_path:'/gta/wiki',is_published:true},{id:'solo-hub',game_id:'solo',slug:'solo',canonical_path:'/solo/wiki',is_published:true}],
-      game_collection_pages: [{id:'root-items',game_id:'root',wiki_slug:'gta-hub',collection_slug:'root-items',canonical_path:'/gta/wiki/root-items',is_published:true,item_count:2,published_dataset_id:'root-dataset'},{id:'original-items',game_id:'original',wiki_slug:'gta',collection_slug:'original-items',canonical_path:'/gta/wiki/gta/original-items',is_published:true,item_count:3,published_dataset_id:'original-dataset'}]
+      game_wiki_pages: [{id:'original-hub',game_id:'original',slug:'gta',canonical_path:'/wiki/gta',is_published:true},{id:'root-hub',game_id:'root',slug:'gta-hub',canonical_path:'/games/gta',is_published:true},{id:'solo-hub',game_id:'solo',slug:'solo',canonical_path:'/games/solo',is_published:true}],
+      game_collection_pages: [{id:'root-items',game_id:'root',wiki_slug:'gta-hub',collection_slug:'root-items',canonical_path:'/games/gta/root-items',is_published:true,item_count:2,published_dataset_id:'root-dataset'},{id:'original-items',game_id:'original',wiki_slug:'gta',collection_slug:'original-items',canonical_path:'/wiki/gta/original-items',is_published:true,item_count:3,published_dataset_id:'original-dataset'}]
     };
     globalThis.fetch = async (input, init) => {
       if ((init?.method ?? 'GET') !== 'GET') throw new Error('Status must be read-only');
@@ -485,10 +618,10 @@ test("status resolves root and original-game hubs by game ID and respects a miss
     return JSON.parse(output.trim().split("\n").at(-1)!);
   };
   const root = run("gta");
-  assert.equal(root[0].url, "https://bloxodes.com/gta/wiki");
+  assert.equal(root[0].url, "https://bloxodes.com/games/gta");
   assert.equal(root[1].items, 2);
   const original = run("gta", "game");
-  assert.equal(original[0].url, "https://bloxodes.com/gta/wiki/gta");
+  assert.equal(original[0].url, "https://bloxodes.com/wiki/gta");
   assert.equal(original[1].items, 3);
   const missing = run("solo", "game");
   assert.equal(missing[0].exists, false);
@@ -505,11 +638,34 @@ test("parallel media preparation preserves dataset order and content hash", asyn
     document.items = Array.from({ length: 25 }, (_, index) => ({ item: { ...document.items[0].item, name: `Blade ${index}` }, system: { slug: `blade-${index}`, section: "Blades", image: "sword.webp" } }));
     await write("collections/items/dataset.json", document);
     const { planManifest } = await import("../../franchise/sync-franchise-collection-runtime");
-    const run = () => planManifest("example", path.join(root, "collections/items/runtime-manifest.json"), { wikiCanonicalPath: "/example/wiki", strictPaths: true });
+    const db = createClient("https://target.supabase.co", "test-key", { global: { fetch: async () => new Response("[]", { headers: { "content-type": "application/json" } }) } });
+    const run = () => planManifest("example", path.join(root, "collections/items/runtime-manifest.json"), { wikiCanonicalPath: "/wiki/example", strictPaths: true, db });
     const first = await run();
     const second = await run();
     assert.deepEqual(first.items.map(row => row.item_slug), document.items.map((row: { system: { slug: string } }) => row.system.slug));
     assert.deepEqual(first.items.map(row => row.sort_order), Array.from({ length: 25 }, (_, index) => index + 1));
     assert.equal(first.contentHash, second.contentHash);
   } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+
+test("repeat publication preserves stored media identities without namespace rules", async () => {
+  for (const namespace of ["minecraft", "new-game"]) {
+    const { root, write } = await fixture();
+    try {
+      await retargetFixture(root, namespace, `${namespace}-console`, "game", namespace);
+      const cover = `https://media.bloxodes.com/wiki/${namespace}/${namespace}/cover.webp`;
+      const hero = `https://media.bloxodes.com/wiki/${namespace}/${namespace}/hero.webp`;
+      const gameInput = JSON.parse(await fs.readFile(path.join(root, "game.json"), "utf8"));
+      await write("game.json", { ...gameInput, cover_image: cover, hero_image: hero });
+      const first = await applyFixture(root, { games: [{ id: randomUUID(), namespace, slug: namespace, kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: cover, hero_image: hero }] });
+      const storedItem = first.tables.game_collection_items[0];
+      const oldKey = `${namespace}/${namespace}/items/${storedItem.image_sha256}.webp`;
+      storedItem.image_key = oldKey;
+      const second = await applyFixture(root, first.tables);
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.cover_image, cover);
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.hero_image, hero);
+      assert.ok(second.tables.game_collection_items.every(item => item.image_key === oldKey));
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
 });

@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import { ROBLOX_QUIZZES } from "@/lib/engagement/config";
 import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
@@ -25,5 +26,5 @@ export const metadata: Metadata = {
 
 export default async function QuizzesPage() {
   const { cards, total } = await loadQuizzesPageData();
-  return renderQuizzesPage({ cards, total });
+  return <>{await renderQuizzesPage({ cards, total })}<OtherGamesSection kind="quiz" /></>;
 }

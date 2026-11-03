@@ -13,8 +13,8 @@ function item(slug: string, text: string, namespace = "minecraft") {
   };
 }
 
-test("Minecraft rows with identical bytes share one immutable key, PUT and HEAD", async () => {
-  const rows = [item("first-recipe", "same icon"), item("second-recipe", "same icon")];
+test("Rows with the same key share one PUT and HEAD when a cache is supplied", async () => {
+  const rows = [item("recipe", "same icon"), item("recipe", "same icon")];
   assert.equal(rows[0].image_key, rows[1].image_key);
   let heads = 0, puts = 0;
   const store = { hasObject: async () => { heads++; return false; }, putObject: async () => { puts++; } };
@@ -25,7 +25,7 @@ test("Minecraft rows with identical bytes share one immutable key, PUT and HEAD"
   assert.equal(puts, 1);
 });
 
-test("Different Minecraft bytes keep distinct keys and objects", async () => {
+test("Different image bytes keep distinct keys and objects", async () => {
   const rows = [item("same-row", "first icon"), item("same-row", "second icon")];
   assert.notEqual(rows[0].image_key, rows[1].image_key);
   const puts: string[] = [];
@@ -33,23 +33,20 @@ test("Different Minecraft bytes keep distinct keys and objects", async () => {
   assert.equal(new Set(puts).size, 2);
 });
 
-test("Existing namespaces keep their row-based key and uncached verification behavior", async () => {
-  const rows = [item("first-recipe", "same icon", "gta"), item("second-recipe", "same icon", "gta")];
-  assert.notEqual(rows[0].image_key, rows[1].image_key);
-  assert.match(rows[0].image_key, /^gta\/minecraft\/recipes\/first-recipe-[a-f0-9]{16}\.webp$/);
-  const redDead = item("first-recipe", "same icon", "red-dead");
-  assert.match(redDead.image_key, /^red-dead\/minecraft\/recipes\/first-recipe-[a-f0-9]{16}\.webp$/);
-  let heads = 0;
-  await verifyCollectionImages(rows, { hasObject: async () => { heads++; return true; }, putObject: async () => {} }, "gta-recipes");
-  assert.equal(heads, 2);
+test("Every namespace uses the same row-based key", () => {
+  for (const namespace of ["gta", "red-dead", "minecraft", "new-game"]) {
+    const first = item("first", "same bytes", namespace);
+    assert.notEqual(first.image_key, item("second", "same bytes", namespace).image_key);
+    assert.match(first.image_key, new RegExp(`^${namespace}/minecraft/recipes/first-[a-f0-9]{16}\\.webp$`));
+  }
 });
 
-test("Missing objects and unsafe Minecraft image identities fail before publication", async () => {
+test("Missing objects and unsafe image identities fail before publication", async () => {
   await assert.rejects(verifyCollectionImages([item("recipe", "icon")], { hasObject: async () => false, putObject: async () => {} }, "minecraft-recipes", new Set()), /Missing R2 image/);
   assert.throws(() => collectionImageKey({ namespace: "minecraft", mediaPrefix: "minecraft", gameSlug: "minecraft", collectionSlug: "recipes", itemSlug: "recipe", hash: "bad", extension: "webp" }), /exact SHA-256/);
 });
 
-test("Minecraft uploads are bounded, deduplicate before requests, and propagate failures", async () => {
+test("Collection media uploads are bounded, deduplicate before requests, and propagate failures", async () => {
   const rows = Array.from({ length: 19 }, (_, index) => item(`row-${index}`, `icon-${index}`));
   rows.push(...rows);
   let active = 0, maximum = 0, heads = 0, puts = 0;
@@ -65,7 +62,7 @@ test("Minecraft uploads are bounded, deduplicate before requests, and propagate 
   assert.equal(confirmed.size, 0);
 });
 
-test("A scoped Minecraft retry can lower its request limit without changing the default", async () => {
+test("A scoped media retry can lower its request limit without changing the default", async () => {
   const rows = Array.from({ length: 5 }, (_, index) => item(`row-${index}`, `icon-${index}`));
   let active = 0, maximum = 0;
   await uploadCollectionImages(rows, {
@@ -76,7 +73,7 @@ test("A scoped Minecraft retry can lower its request limit without changing the 
   await assert.rejects(uploadCollectionImages(rows, { hasObject: async () => true, putObject: async () => {} }, new Set(), 9), /integer from 1 to 8/);
 });
 
-test("Minecraft retries a known transport closure and rechecks a possibly completed immutable PUT", async () => {
+test("Collection media retries a known transport closure and rechecks a possibly completed immutable PUT", async () => {
   const row = item("recipe", "exact immutable bytes");
   let heads = 0, puts = 0, stored = false;
   const confirmed = new Set<string>();
@@ -109,7 +106,7 @@ test("Real R2 uploads recover a stored PUT after its response fails in every nam
       storedHeaders.set("content-length", String(row.prepared_image.byteLength));
       throw new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } });
     }, () => new Date(), async delay => { delays.push(delay); });
-    const confirmed = namespace === "minecraft" ? new Set<string>() : undefined;
+    const confirmed = new Set<string>();
     await uploadCollectionImages([row], client, confirmed, 1);
     assert.deepEqual(methods, ["HEAD", "PUT", "HEAD"], namespace);
     assert.deepEqual(delays, [250]);
@@ -167,7 +164,7 @@ test("An explicit client HTTP status prevents retries even with a nested transpo
 });
 
 
-test("Non-Minecraft media uses eight workers and verifies every row", async () => {
+test("Uncached media uses eight workers and verifies every row", async () => {
   const rows = Array.from({ length: 25 }, (_, index) => item(`row-${index}`, `icon-${index}`, "aion-2"));
   let active = 0, maximum = 0;
   const seen = new Set<string>();

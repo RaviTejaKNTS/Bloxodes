@@ -19,11 +19,11 @@ async function main() {
   for(const definition of registry) {
     const game=games.find(game=>game.slug===definition.wikiSlug);
     if(!game)throw new Error(`Missing GTA identity ${definition.wikiSlug}`);
-    rows.push({namespace:"gta",game_id:game.id,slug:definition.slug,title:definition.mapTitle,meta_description:definition.description,canonical_path:definition.route,renderer_key:"gta-layered",map_data:{definition,points:(await read(`gta-maps/${definition.slug}.json`)).points},is_published:true});
+    rows.push({namespace:"gta",game_id:game.id,slug:definition.slug,title:definition.mapTitle,meta_description:definition.description,renderer_key:"gta-layered",map_data:{definition,points:(await read(`gta-maps/${definition.slug}.json`)).points},is_published:true});
   }
   const gta5=games.find(game=>game.slug==="gta-5");
   if(!gta5)throw new Error("Missing GTA V identity");
-  rows.push({namespace:"gta",game_id:gta5.id,slug:"gta5",title:"GTA 5 Interactive Map: Story Mode Collectibles & Challenges",meta_description:"Explore 377 GTA 5 Story Mode collectible and challenge locations on a full-screen Los Santos map. Search 11 collections, browse 92 named places, and track your progress.",canonical_path:"/gta/maps/gta5",renderer_key:"gta5",map_data:{points:await read("gta5-map-points.json"),places:await read("gta5-map-places.json"),markerSnapshot:await read("gta5-map-marker-snapshot.json")},is_published:true});
+  rows.push({namespace:"gta",game_id:gta5.id,slug:"gta5",title:"GTA 5 Interactive Map: Story Mode Collectibles & Challenges",meta_description:"Explore 377 GTA 5 Story Mode collectible and challenge locations on a full-screen Los Santos map. Search 11 collections, browse 92 named places, and track your progress.",renderer_key:"gta5",map_data:{points:await read("gta5-map-points.json"),places:await read("gta5-map-places.json"),markerSnapshot:await read("gta5-map-marker-snapshot.json")},is_published:true});
   // Existing maps must match their reviewed snapshots before an ordinary repeat.
   const {data:existing,error:existingError}=await sb.from("game_map_pages").select("id,slug,game_id,map_data").eq("namespace","gta");
   if(existingError)throw existingError;

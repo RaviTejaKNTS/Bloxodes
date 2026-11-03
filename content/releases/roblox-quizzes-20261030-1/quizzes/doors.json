@@ -1,0 +1,667 @@
+{
+  "page": {
+    "universe_id": 2440500124,
+    "code": "doors",
+    "title": "DOORS Roblox Quiz: 15 Questions on the Hotel and Its Entities",
+    "description_md": "Think you can get through The Hotel without a scare? Easy questions cover the entities that find you early and the rooms on the way to Door 100. Medium ones test codes, puzzles and timers. Hard questions go into The Archives, the Stairwell and the Outdoors maze. Every question assumes standard play with Modifiers off.",
+    "seo_title": null,
+    "seo_description": "Think you know Roblox DOORS? Test Hotel entities, the Door 51 lock, the Door 100 breaker, Archives puzzles and Stairwell terminals, from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Before which entity do the lights flicker in The Hotel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Eyes"
+          },
+          {
+            "id": "b",
+            "text": "Figure"
+          },
+          {
+            "id": "c",
+            "text": "Rush"
+          },
+          {
+            "id": "d",
+            "text": "Dupe"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What makes Eyes start damaging you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Looking at Eyes"
+          },
+          {
+            "id": "b",
+            "text": "Being in the same room as it"
+          },
+          {
+            "id": "c",
+            "text": "Hearing it from another room"
+          },
+          {
+            "id": "d",
+            "text": "Making noise near it"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What sound is Screech's warning in a dark Hotel room?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A metal clank"
+          },
+          {
+            "id": "b",
+            "text": "A 'Psst!'"
+          },
+          {
+            "id": "c",
+            "text": "A ringing bell"
+          },
+          {
+            "id": "d",
+            "text": "A low growl"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Figure is blind. How does it find you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By smell, from across the room"
+          },
+          {
+            "id": "b",
+            "text": "By the light from your flashlight"
+          },
+          {
+            "id": "c",
+            "text": "By body heat, through the walls"
+          },
+          {
+            "id": "d",
+            "text": "By sound, such as footsteps"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Hide finds you in a Hotel closet. What does the screen do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It tints the screen blue and goes quiet"
+          },
+          {
+            "id": "b",
+            "text": "It goes fully black for a moment"
+          },
+          {
+            "id": "c",
+            "text": "It pulses red and flashes 'Get Out'"
+          },
+          {
+            "id": "d",
+            "text": "It fades to white and shows the Lobby map"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Where is a locked Hotel room's Key usually found?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hanging on a wall hook"
+          },
+          {
+            "id": "b",
+            "text": "On furniture or in a Container"
+          },
+          {
+            "id": "c",
+            "text": "Under a loose floor tile"
+          },
+          {
+            "id": "d",
+            "text": "Inside a light fixture"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which room is Door 50 in The Hotel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Library"
+          },
+          {
+            "id": "b",
+            "text": "The Infirmary"
+          },
+          {
+            "id": "c",
+            "text": "Reception"
+          },
+          {
+            "id": "d",
+            "text": "Jeff Shop"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "The Hotel's Door 100 opens into which room?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Greenhouse"
+          },
+          {
+            "id": "b",
+            "text": "The Courtyard"
+          },
+          {
+            "id": "c",
+            "text": "The Infirmary"
+          },
+          {
+            "id": "d",
+            "text": "The Electrical Room"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "What is Hotel+ in DOORS?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An extra floor you reach after The Mines"
+          },
+          {
+            "id": "b",
+            "text": "A major Hotel update, not its own floor"
+          },
+          {
+            "id": "c",
+            "text": "A Hotel mode that replaces the elevators"
+          },
+          {
+            "id": "d",
+            "text": "A sound pack for the Lobby elevators"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How many digits are in the code for Door 51's lock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three"
+          },
+          {
+            "id": "b",
+            "text": "Four"
+          },
+          {
+            "id": "c",
+            "text": "Five"
+          },
+          {
+            "id": "d",
+            "text": "Seven"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "What do you do once the fire cutscene ends at Door 100?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Solve the breaker puzzle, then run to the elevator"
+          },
+          {
+            "id": "b",
+            "text": "Solve the breaker puzzle, then wait for the timer"
+          },
+          {
+            "id": "c",
+            "text": "Collect more switches from the pipes and shelves"
+          },
+          {
+            "id": "d",
+            "text": "Run straight to the elevator without solving anything"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Which Seek chase in The Hotel is guaranteed to happen?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first chase"
+          },
+          {
+            "id": "b",
+            "text": "Both chases, in every run"
+          },
+          {
+            "id": "c",
+            "text": "Neither chase is guaranteed"
+          },
+          {
+            "id": "d",
+            "text": "The second chase"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which items unlock the A-000 door in The Archives, and in what order?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Skeleton Key, then two Lockpicks"
+          },
+          {
+            "id": "b",
+            "text": "Two Lockpicks, then a Skeleton Key"
+          },
+          {
+            "id": "c",
+            "text": "Three Lockpicks, then a Skeleton Key"
+          },
+          {
+            "id": "d",
+            "text": "A Skeleton Key alone"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "The Backdoor timer starts when you open the door to room -50. How long does it give you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One minute"
+          },
+          {
+            "id": "b",
+            "text": "Three minutes"
+          },
+          {
+            "id": "c",
+            "text": "Ten minutes"
+          },
+          {
+            "id": "d",
+            "text": "Four minutes"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "With three or more living players, how many Anchors does Grumble's Nest need?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four"
+          },
+          {
+            "id": "b",
+            "text": "Seven"
+          },
+          {
+            "id": "c",
+            "text": "Nine"
+          },
+          {
+            "id": "d",
+            "text": "Six"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "How many valves are in the Dam fight at Door 200?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nine"
+          },
+          {
+            "id": "b",
+            "text": "Eleven"
+          },
+          {
+            "id": "c",
+            "text": "Ten"
+          },
+          {
+            "id": "d",
+            "text": "Twelve"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "The Adit at Door 100.5 has a Generator. How many Fuses does it need?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four"
+          },
+          {
+            "id": "b",
+            "text": "Seven"
+          },
+          {
+            "id": "c",
+            "text": "Two"
+          },
+          {
+            "id": "d",
+            "text": "Ten"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "In The Mines, which door holds the guaranteed entrance to The Stairwell?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Door 152"
+          },
+          {
+            "id": "b",
+            "text": "Door 150"
+          },
+          {
+            "id": "c",
+            "text": "Door 200"
+          },
+          {
+            "id": "d",
+            "text": "Door 100.5"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Inside a Dupe room with an odd number of doors, how do you find the real door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It has the highest number"
+          },
+          {
+            "id": "b",
+            "text": "It has no number on it"
+          },
+          {
+            "id": "c",
+            "text": "It has the middle number"
+          },
+          {
+            "id": "d",
+            "text": "It has the lowest number"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What does the first terminal pass in The Archives cost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50 Gold"
+          },
+          {
+            "id": "b",
+            "text": "150 Gold"
+          },
+          {
+            "id": "c",
+            "text": "250 Gold"
+          },
+          {
+            "id": "d",
+            "text": "100 Gold"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "In The Archives Forget-Me-Nots puzzle, what do you do when the room has changed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Go forward, because something has changed"
+          },
+          {
+            "id": "b",
+            "text": "Stand still and wait for the room to reset"
+          },
+          {
+            "id": "c",
+            "text": "Go back, because something has changed"
+          },
+          {
+            "id": "d",
+            "text": "Stop and count to ten before moving"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "When an Archives Drone swarm comes for you, which path does it take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A random path through the room"
+          },
+          {
+            "id": "b",
+            "text": "The shortest path to the next room"
+          },
+          {
+            "id": "c",
+            "text": "The longest path along the walls"
+          },
+          {
+            "id": "d",
+            "text": "The path you took through the room"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What happens to Portrait once it has made two copies?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It keeps copying you forever"
+          },
+          {
+            "id": "b",
+            "text": "It drops your items on the floor"
+          },
+          {
+            "id": "c",
+            "text": "It goes quiet and waits for you"
+          },
+          {
+            "id": "d",
+            "text": "It breaks and stops copying"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "A hand appears on the left side of your screen in the Stairwell. What does it mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A hidden attack is coming, so turn toward it"
+          },
+          {
+            "id": "b",
+            "text": "Something is blocking the stairs, so jump"
+          },
+          {
+            "id": "c",
+            "text": "The door is about to lock, so run forward"
+          },
+          {
+            "id": "d",
+            "text": "A guide is nearby, so follow it"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "On most Stairwell maze landings, what has to happen before the terminal opens the door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wait for the landing to clear"
+          },
+          {
+            "id": "b",
+            "text": "Find the matching door number"
+          },
+          {
+            "id": "c",
+            "text": "Trigger the fire alarm"
+          },
+          {
+            "id": "d",
+            "text": "Open the hatch above the landing"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "What fills the last 250 meters of The Outdoors?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A cliff with a rope bridge"
+          },
+          {
+            "id": "b",
+            "text": "A hedge maze with one guillotine"
+          },
+          {
+            "id": "c",
+            "text": "A flooded tunnel with a locked gate"
+          },
+          {
+            "id": "d",
+            "text": "A hedge maze with three guillotines"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "Which signs in The Archives mean Scribbles is close by?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A ringing phone and a dimmed light in the hall"
+          },
+          {
+            "id": "b",
+            "text": "Paper sheets in the next room and a shaking screen"
+          },
+          {
+            "id": "c",
+            "text": "A locked gate and a low humming sound nearby"
+          },
+          {
+            "id": "d",
+            "text": "Wet footprints leading away from the room"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

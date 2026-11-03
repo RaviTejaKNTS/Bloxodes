@@ -1,0 +1,56 @@
+{
+  "code": "roblox-decal-ids/games/berry-avenue",
+  "title": "Berry Avenue Picture Codes",
+  "seo_title": "Berry Avenue Picture Codes [Wall Art & Rug IDs]",
+  "meta_description": "Find Berry Avenue picture codes for frames, wall art, and rugs. Preview each design, search by name, and copy the Decal ID the game expects.",
+  "intro_md": "Berry Avenue picture codes are numeric Roblox **Decal asset IDs** that change the design on supported frames, wall art, and rugs in your house or apartment. Check the preview, copy the number, and paste it into the decor item's **Enter Decal ID** field.\n\nThese codes only change a picture or pattern. They do not give you furniture, a house, avatar items, or rewards, and Roblox can remove an image after it has been shared.",
+  "description_md": "## How to use picture codes in Berry Avenue\n\nPicture codes work through customizable decor inside a house or apartment. The exact button can differ by object, but the number goes into the same Decal ID field.\n\n1. Join [Berry Avenue RP on Roblox](https://www.roblox.com/games/8481844229/Berry-Avenue-RP).\n2. Claim a house or apartment and go inside.\n3. Click or tap a supported empty frame, wall picture, canvas, or rug.\n4. Open the picture or pattern option and find **Enter Decal ID**.\n5. Copy a picture code and paste only the digits into that field.\n6. Press **Done** and wait for the design to load.\n\nUse a code on the type of decor it was picked for. A wide rug pattern may look rather squashed in a tall picture frame, even when Roblox loads it without complaint.\n\n## Does Berry Avenue use a Decal ID or Image ID?\n\nBerry Avenue's decor field expects the public **Decal asset ID**. That is the number shown as the Picture ID on each card and the number you should copy.\n\nRoblox can create two linked numbers for one upload:\n\n- The **Decal ID** identifies the public Decal asset.\n- The **image ID**, sometimes called the texture ID, identifies the image linked behind that Decal.\n\nThe numbers are related, but they are not the same. Berry Avenue labels its field **Enter Decal ID**, and every code below is a public Decal ID. Do not replace that number with the linked texture ID by default. One digit can be enough to send the game looking for a completely different asset.\n\nYou can learn more about both number types in the main [Roblox Decal IDs](https://bloxodes.com/catalog/roblox-decal-ids) guide.\n\n## Berry Avenue picture codes for frames and wall art\n\nPicture and wall-art codes cover designs for empty frames, canvases, posters, and other supported image decor. The available styles include simple aesthetic art, baby-room pictures, blue designs, holiday images, and pink wall art.\n\nThe preview matters more than the uploader's title. Some Roblox Decals have short or vague names, so check the image before copying the code. These are public Roblox uploads used for decoration, not an official Berry Avenue art pack.\n\nFor avatar clothing, hair, faces, and accessories, use the separate [Berry Avenue RP Item IDs](https://bloxodes.com/codes/berry-avenue-rp) page. Those numbers go through the avatar Import ID menu and do a different job.\n\n## Berry Avenue rug and carpet codes\n\nRug codes apply a custom image pattern to supported floor rugs. The choices include geometric designs, tartan, floral patterns, Kidcore styles, soft textures, and simple color combinations.\n\nClick the rug inside your house, open its custom design option, paste the public Decal ID, and press **Done**. A rug code changes the visible pattern only. It does not place a new rug or unlock furniture.\n\nUse the preview to judge the shape before applying it. Square patterns usually fit more neatly, while artwork with text or a clear top edge can rotate or crop awkwardly on floor decor. The rug is innocent. The aspect ratio did it.\n\n## Why a Berry Avenue picture code may not work\n\nA code can stop loading even when the digits once worked. Check these common causes:\n\n- **The Decal was removed or moderated.** Roblox can replace an unavailable image with a blank or gray placeholder.\n- **The creator changed its availability.** A public asset can later become private or disappear.\n- **The wrong number type was copied.** Berry Avenue expects the public Decal asset ID, not the linked texture ID.\n- **The number includes extra text or spaces.** Paste only the digits from the Picture ID.\n- **The object does not support a custom image.** Not every wall, floor, or furniture item has a Decal ID option.\n- **The image is still loading.** A slow connection or busy server can delay the preview.\n- **Berry Avenue or Roblox blocks the asset.** A public Decal is not a permanent promise that every experience will display it.\n\nPaste the code again, confirm the object shows **Enter Decal ID**, and test a second picture. If several codes fail at once, rejoin the game and try later. If only one fails, that asset may no longer be available.\n\nRoblox moderates user-uploaded images, and creators are responsible for having the right to share their artwork. Picture codes should be treated as changeable public assets, not files that will stay online forever.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "It is the numeric asset ID of a public Roblox Decal. Berry Avenue can use that number to replace the image or pattern on a supported frame, wall picture, canvas, or rug.",
+      "q": "What is a Berry Avenue picture code?"
+    },
+    {
+      "a": "Claim a house or apartment, click a supported frame, picture, canvas, or rug, and find the Enter Decal ID field. Paste only the digits and press Done.",
+      "q": "Where do I enter a picture code in Berry Avenue?"
+    },
+    {
+      "a": "Copy the public Decal asset ID shown as the Picture ID. Berry Avenue's decor field says Enter Decal ID. The linked image or texture ID is a different Roblox number and should not be the default value you paste.",
+      "q": "Should I copy the Decal ID or the image ID?"
+    },
+    {
+      "a": "Yes, when the rug has a custom Decal ID option. Use a rug or carpet design from the list, paste its public Decal ID, and press Done to change the visible pattern.",
+      "q": "Can I use Berry Avenue picture codes on rugs?"
+    },
+    {
+      "a": "No. They only change the image or pattern on decor you can already customize. They do not grant a rug, frame, furniture item, house, currency, or other reward.",
+      "q": "Do Berry Avenue picture codes give free furniture or houses?"
+    },
+    {
+      "a": "No. Picture codes are Roblox Decal IDs used on house decor. Avatar Item IDs are imported through the character menu for clothing, hair, faces, and accessories.",
+      "q": "Are picture codes the same as Berry Avenue avatar Item IDs?"
+    },
+    {
+      "a": "The Decal may have been moderated, deleted, or made private. You may also have copied the wrong ID type or used an object that does not support custom images. Try another listed Picture ID to narrow down the cause.",
+      "q": "Why is my Berry Avenue picture blank or gray?"
+    },
+    {
+      "a": "You need access to a house or apartment with customizable decor. Picture codes are entered through frames, wall art, rugs, and similar objects inside the property.",
+      "q": "Do I need a house to use Berry Avenue picture codes?"
+    },
+    {
+      "a": "Yes. Roblox or the uploader can remove, moderate, or restrict a Decal after it has been shared. A preview that loads lowers the chance of a dead code, but it cannot guarantee permanent display in Berry Avenue.",
+      "q": "Can a working Berry Avenue picture code stop working later?"
+    },
+    {
+      "a": "Berry Avenue accepts a Decal ID on supported decor, so an approved public Roblox Decal may work after it passes moderation. The game can still block the asset, and you should only upload images you have the right to share.",
+      "q": "Can I use my own picture in Berry Avenue?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Berry Avenue's house customization supports public Roblox Decal asset IDs for picture frames, wall art, and rug patterns inside a house or apartment. These house-decor codes are separate from the avatar Item IDs used in the character menu.",
+  "wiki_sort_order": null
+}

@@ -11,6 +11,18 @@ vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: () =>
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => ({ select: () => ({ eq: () => ({ order: async () => ({ data: [{ code: "ACTIVE", status: "active", rewards_text: "A reward" }, { code: "EXPIRED", status: "expired", rewards_text: null }], error: null }) }) }) }) }) }));
 
 describe("franchise codes layout", () => {
+  it.each([
+    ["/example/codes", null],
+    ["/example/codes/child", "/example/codes"],
+    ["/codes/child", "/codes"]
+  ])("keeps the correct Codes breadcrumb for %s", async (canonical_path, codesIndex) => {
+    const page = { id: "codes", namespace: "example", game_id: "child", canonical_path, title: "Child Codes", faq_json: [] } as unknown as CodePage;
+    const $ = load(renderToStaticMarkup(await GameCodePage({ page, namespaceTitle: "Example" })));
+    const codesCrumb = $("nav[aria-label='Breadcrumb'] a").filter((_, link) => $(link).text() === "Codes");
+    if (codesIndex) expect(codesCrumb.attr("href")).toBe(codesIndex);
+    else expect(codesCrumb).toHaveLength(0);
+  });
+
   it("omits schema images when the owning game has no artwork", async () => {
     const page = { id: "codes", namespace: "example", game_id: "child", canonical_path: "/example/codes/child", title: "Child Codes", image: null, faq_json: [] } as unknown as CodePage;
     const $ = load(renderToStaticMarkup(await GameCodePage({ page, namespaceTitle: "Example" })));

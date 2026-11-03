@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 7326934954,
+    "code": "99-nights-in-the-forest",
+    "title": "99 Nights in the Forest Roblox Quiz: 15 Survival Questions",
+    "description_md": "Think you know 99 Nights in the Forest? Test your knowledge of campfire safety, rescues, the Map and Compass, taming, crafting, and late-game gear. Each attempt draws 15 random questions, five per tier, with no timer.",
+    "seo_title": null,
+    "seo_description": "Try a 15-question Roblox 99 Nights in the Forest quiz on campfire safety, rescues, maps, taming, crafting and specialist gear, from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "NNF-E1",
+        "question": "What is the missing-child rescue objective in a normal run?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Find children and carry them back to camp."
+          },
+          {
+            "id": "B",
+            "text": "Find children and leave them beside their caves."
+          },
+          {
+            "id": "C",
+            "text": "Find children and take them to the Pelt Trader."
+          },
+          {
+            "id": "D",
+            "text": "Find children and take them to the Tool Workshop."
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-E2",
+        "question": "How does a lit Campfire's safe zone protect you from The Deer?",
+        "options": [
+          {
+            "id": "A",
+            "text": "It repels The Deer only at the highest fire level."
+          },
+          {
+            "id": "B",
+            "text": "It repels The Deer while the fire stays lit."
+          },
+          {
+            "id": "C",
+            "text": "It repels The Deer only while you shine a flashlight."
+          },
+          {
+            "id": "D",
+            "text": "It repels The Deer for one visit per night."
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-E3",
+        "question": "After crafting the Map on PC, which key opens it?",
+        "options": [
+          {
+            "id": "A",
+            "text": "R"
+          },
+          {
+            "id": "B",
+            "text": "Q"
+          },
+          {
+            "id": "C",
+            "text": "M"
+          },
+          {
+            "id": "D",
+            "text": "Tab"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-E5",
+        "question": "Which pair describes a Log's normal uses?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Fuel a Campfire or grind into 5 Wood."
+          },
+          {
+            "id": "B",
+            "text": "Fuel a Flamethrower or grind into 1 Wood."
+          },
+          {
+            "id": "C",
+            "text": "Fuel a Flamethrower or grind into 5 Wood."
+          },
+          {
+            "id": "D",
+            "text": "Fuel a Campfire or grind into 1 Wood."
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-E6",
+        "question": "On PC, which key is used for interact or pick-up prompts?",
+        "options": [
+          {
+            "id": "A",
+            "text": "E"
+          },
+          {
+            "id": "B",
+            "text": "P"
+          },
+          {
+            "id": "C",
+            "text": "C"
+          },
+          {
+            "id": "D",
+            "text": "G"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-E7",
+        "question": "Without talents, which class starts with an Old Flashlight and has reduced hunger drain at Level 1?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Medic"
+          },
+          {
+            "id": "B",
+            "text": "Camper"
+          },
+          {
+            "id": "C",
+            "text": "Hunter"
+          },
+          {
+            "id": "D",
+            "text": "Zookeeper"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-E8",
+        "question": "Without class taming bonuses, what is the minimum flute and full food requirement for a Bunny's one-stage tame?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Good Taming Flute and 1 Berry"
+          },
+          {
+            "id": "B",
+            "text": "Good Taming Flute and 1 Carrot"
+          },
+          {
+            "id": "C",
+            "text": "Old Taming Flute and 1 Carrot"
+          },
+          {
+            "id": "D",
+            "text": "Old Taming Flute and 1 Berry"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-E9",
+        "question": "How many slots does the Old Sack have before any class bonus?",
+        "options": [
+          {
+            "id": "A",
+            "text": "20"
+          },
+          {
+            "id": "B",
+            "text": "15"
+          },
+          {
+            "id": "C",
+            "text": "25"
+          },
+          {
+            "id": "D",
+            "text": "5"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-E11",
+        "question": "What happens to The Deer's flashlight stun after repeated stuns?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Each stun gets shorter."
+          },
+          {
+            "id": "B",
+            "text": "Each stun gets longer."
+          },
+          {
+            "id": "C",
+            "text": "Each stun lasts the same amount of time."
+          },
+          {
+            "id": "D",
+            "text": "Each stun lasts until sunrise."
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-M1",
+        "question": "How is the map layout chosen when you start another run?",
+        "options": [
+          {
+            "id": "A",
+            "text": "It is copied exactly from your previous run."
+          },
+          {
+            "id": "B",
+            "text": "It is generated again for that run."
+          },
+          {
+            "id": "C",
+            "text": "It uses the same fixed layout on every server."
+          },
+          {
+            "id": "D",
+            "text": "It always mirrors your previous run."
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-M5",
+        "question": "On which day does the Pelt Trader first visit camp?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Day 1"
+          },
+          {
+            "id": "B",
+            "text": "Day 3"
+          },
+          {
+            "id": "C",
+            "text": "Day 2"
+          },
+          {
+            "id": "D",
+            "text": "Day 4"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-E12",
+        "question": "How many missing children are there on the main rescue route?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5"
+          },
+          {
+            "id": "B",
+            "text": "2"
+          },
+          {
+            "id": "C",
+            "text": "3"
+          },
+          {
+            "id": "D",
+            "text": "4"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-E13",
+        "question": "What does the Map cost at Crafting Bench Tier 1?",
+        "options": [
+          {
+            "id": "A",
+            "text": "3 Wood"
+          },
+          {
+            "id": "B",
+            "text": "3 Scrap"
+          },
+          {
+            "id": "C",
+            "text": "5 Wood"
+          },
+          {
+            "id": "D",
+            "text": "5 Scrap"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-E14",
+        "question": "How much of the map does fully upgrading the Campfire reveal?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only the area nearest camp"
+          },
+          {
+            "id": "B",
+            "text": "The entire map"
+          },
+          {
+            "id": "C",
+            "text": "Only caves of rescued children"
+          },
+          {
+            "id": "D",
+            "text": "Only structures you have visited"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "NNF-M2",
+        "question": "What does each rescued child add to the day counter after a completed night?",
+        "options": [
+          {
+            "id": "A",
+            "text": "One extra day after every night."
+          },
+          {
+            "id": "B",
+            "text": "One extra day only on the rescue night."
+          },
+          {
+            "id": "C",
+            "text": "Two extra days after every night."
+          },
+          {
+            "id": "D",
+            "text": "Two extra days only on the rescue night."
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-M3",
+        "question": "After you select a child on the missing-children board, where does a crafted Compass point?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Toward the nearest unopened chest."
+          },
+          {
+            "id": "B",
+            "text": "Toward the selected child."
+          },
+          {
+            "id": "C",
+            "text": "Toward the nearest Cultist Gem."
+          },
+          {
+            "id": "D",
+            "text": "Toward the nearest animal burrow."
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-M4",
+        "question": "What is the Good Sack's capacity before and after the Scavenger or Explorer sack bonus?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5 slots, then 7"
+          },
+          {
+            "id": "B",
+            "text": "20 slots, then 22"
+          },
+          {
+            "id": "C",
+            "text": "15 slots, then 17"
+          },
+          {
+            "id": "D",
+            "text": "25 slots, then 27"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-M6",
+        "question": "Without a Blacksmith perk, what upgrades the Crafting Bench from Tier 3 to Tier 4?",
+        "options": [
+          {
+            "id": "A",
+            "text": "20 Wood, 30 Scrap, and 2 Cultist Gems"
+          },
+          {
+            "id": "B",
+            "text": "30 Wood, 20 Scrap, and 1 Cultist Gem"
+          },
+          {
+            "id": "C",
+            "text": "20 Wood, 30 Scrap, and 1 Cultist Gem"
+          },
+          {
+            "id": "D",
+            "text": "30 Wood, 20 Scrap, and 2 Cultist Gems"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-M7",
+        "question": "How many Gem of the Forest Fragments combine into one Gem of the Forest?",
+        "options": [
+          {
+            "id": "A",
+            "text": "2"
+          },
+          {
+            "id": "B",
+            "text": "1"
+          },
+          {
+            "id": "C",
+            "text": "4"
+          },
+          {
+            "id": "D",
+            "text": "3"
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-M10",
+        "question": "What is the minimum number of placed Teleporters needed for a working connection?",
+        "options": [
+          {
+            "id": "A",
+            "text": "1"
+          },
+          {
+            "id": "B",
+            "text": "3"
+          },
+          {
+            "id": "C",
+            "text": "4"
+          },
+          {
+            "id": "D",
+            "text": "2"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "NNF-H3",
+        "question": "Without class food discounts, which trio needs 10 Pumpkins and 5 Cakes apiece for a full tame?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Mammoth, Hellephant, and Mossy Mammoth"
+          },
+          {
+            "id": "B",
+            "text": "Bunny, Wolf, and Alpha Wolf"
+          },
+          {
+            "id": "C",
+            "text": "Bear, Polar Bear, and Arctic Fox"
+          },
+          {
+            "id": "D",
+            "text": "Green Frog, Scorpion, and Boar"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-H5",
+        "question": "How many souls does the Cultist Staff spend to raise an ordinary dead Cultist and the Cultist King, respectively?",
+        "options": [
+          {
+            "id": "A",
+            "text": "1 and 4 souls"
+          },
+          {
+            "id": "B",
+            "text": "3 and 10 souls"
+          },
+          {
+            "id": "C",
+            "text": "2 and 5 souls"
+          },
+          {
+            "id": "D",
+            "text": "5 and 15 souls"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-H6",
+        "question": "Which order turns mined Raw Obsidiron Ore into an Obsidiron Ingot?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Drop it from height until its shell breaks, dip the shard in lava, then cool it in water"
+          },
+          {
+            "id": "B",
+            "text": "Heat it in lava, break the shell from height, then cool it in water"
+          },
+          {
+            "id": "C",
+            "text": "Drop it from height, cool the shard in water, then heat it in lava"
+          },
+          {
+            "id": "D",
+            "text": "Break the shell with a tool, heat it over a Campfire, then cool it in water"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-H7",
+        "question": "Starting with a full standard Alien Tech bar, about how many rapid Raygun shots can cause it to overheat?",
+        "options": [
+          {
+            "id": "A",
+            "text": "7"
+          },
+          {
+            "id": "B",
+            "text": "20"
+          },
+          {
+            "id": "C",
+            "text": "26"
+          },
+          {
+            "id": "D",
+            "text": "13"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-H8",
+        "question": "Without class bonuses, what damage does a direct Laser Cannon hit deal to the body and head, respectively?",
+        "options": [
+          {
+            "id": "A",
+            "text": "70 body damage and 70 head damage"
+          },
+          {
+            "id": "B",
+            "text": "70 body damage and 105 head damage"
+          },
+          {
+            "id": "C",
+            "text": "35 body damage and 70 head damage"
+          },
+          {
+            "id": "D",
+            "text": "35 body damage and 52.5 head damage"
+          }
+        ],
+        "correctOptionId": "A",
+        "image": null
+      },
+      {
+        "id": "NNF-H9",
+        "question": "Which trio of Tier 5 machines each costs 40 Wood, 40 Scrap, and 1 Gem of the Forest?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Respawn Capsule, Ammo Crate, and Weather Machine"
+          },
+          {
+            "id": "B",
+            "text": "Respawn Capsule, Temporal Accelerometer, and Weather Machine"
+          },
+          {
+            "id": "C",
+            "text": "Respawn Capsule, Temporal Accelerometer, and Teleporter"
+          },
+          {
+            "id": "D",
+            "text": "Oil Drill, Temporal Accelerometer, and Weather Machine"
+          }
+        ],
+        "correctOptionId": "B",
+        "image": null
+      },
+      {
+        "id": "NNF-H10",
+        "question": "In Hard Mode, what happens when a Corrupted Axe is used up?",
+        "options": [
+          {
+            "id": "A",
+            "text": "It explodes and permanently lowers map-wide Corruption by 10%."
+          },
+          {
+            "id": "B",
+            "text": "It explodes and temporarily raises map-wide Corruption by 10%."
+          },
+          {
+            "id": "C",
+            "text": "It explodes and permanently raises map-wide Corruption by 10%."
+          },
+          {
+            "id": "D",
+            "text": "It explodes and permanently raises map-wide Corruption by 1%."
+          }
+        ],
+        "correctOptionId": "C",
+        "image": null
+      },
+      {
+        "id": "NNF-H11",
+        "question": "In which biome does the Mossy Mammoth spawn?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Snow"
+          },
+          {
+            "id": "B",
+            "text": "Forest"
+          },
+          {
+            "id": "C",
+            "text": "Volcanic"
+          },
+          {
+            "id": "D",
+            "text": "Jungle"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      },
+      {
+        "id": "NNF-H12",
+        "question": "Without class food discounts, which foods are used for a Polar Bear's full tame?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Ribs, Stew, and Salmon"
+          },
+          {
+            "id": "B",
+            "text": "Steak, Stew, and Swordfish"
+          },
+          {
+            "id": "C",
+            "text": "Steak, Pumpkin, and Salmon"
+          },
+          {
+            "id": "D",
+            "text": "Ribs, Stew, and Swordfish"
+          }
+        ],
+        "correctOptionId": "D",
+        "image": null
+      }
+    ]
+  }
+}

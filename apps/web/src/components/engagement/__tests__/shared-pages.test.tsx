@@ -5,7 +5,8 @@ import { ChecklistIndexPage } from "@/components/checklists/ChecklistIndexPage";
 import { QuizIndexPage } from "@/components/quizzes/QuizIndexPage";
 import { QuizPageTemplate, quizMetadata } from "@/components/quizzes/QuizPageTemplate";
 import { checklistMetadata } from "@/components/ChecklistPageTemplate";
-import { ROBLOX_CHECKLISTS, GTA_CHECKLISTS, ROBLOX_QUIZZES } from "@/lib/engagement/config";
+import { ROBLOX_CHECKLISTS, gameChecklistConfig, ROBLOX_QUIZZES } from "@/lib/engagement/config";
+const GTA_CHECKLISTS = gameChecklistConfig("gta", "/checklists/gta-5");
 import { engagementProgressKey, type QuizConfig, type QuizTemplateData } from "@/lib/engagement/types";
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/markdown", () => ({ markdownToPlainText: (text: string) => text, renderMarkdown: async (text: string) => `<p>${text}</p>` }));
@@ -35,7 +36,7 @@ describe("shared engagement page templates", () => {
     const classes = (html: string) => [...html.matchAll(/class="([^"]*)"/g)].map(m => m[1]);
     expect(classes(gta)).toEqual(classes(roblox));
     expect(roblox).toContain('href="/checklists/page/2"');
-    expect(gta).toContain('href="/gta/checklists/page/2"');
+    expect(gta).toContain('href="/checklists/page/2"');
     expect(gta).not.toContain("Roblox");
   });
   it("renders quiz index copy and canonical from supplied configuration", () => {
@@ -57,6 +58,6 @@ describe("shared engagement page templates", () => {
   it("builds each platform's canonical without changing the game slug", () => {
     expect(quizMetadata(quizData().page, ROBLOX_QUIZZES).alternates?.canonical).toBe("https://bloxodes.com/quizzes/sample");
     expect(quizMetadata(quizData().page, otherQuiz).alternates?.canonical).toBe("https://bloxodes.com/example/quizzes/sample");
-    expect(checklistMetadata({ page: { id: "1", slug: "gta-5", title: "GTA 5 Checklist", created_at: "2026-09-10", updated_at: "2026-09-10" }, items: [] }, GTA_CHECKLISTS).alternates?.canonical).toBe("https://bloxodes.com/gta/checklists/gta-5");
+    expect(checklistMetadata({ page: { id: "1", slug: "gta-5", title: "GTA 5 Checklist", created_at: "2026-09-10", updated_at: "2026-09-10" }, items: [] }, GTA_CHECKLISTS).alternates?.canonical).toBe("https://bloxodes.com/checklists/gta-5");
   });
 });

@@ -1,0 +1,643 @@
+{
+  "page": {
+    "universe_id": 5750914919,
+    "code": "fisch",
+    "title": "Fisch Roblox Quiz: 15 Questions on Fishing and Progression",
+    "description_md": "Think you know your way around Fisch? Every attempt pulls 15 questions: five easy, five medium and five hard. Questions cover fishing controls, bait, navigation and permanent progression.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Fisch knowledge on reeling, stats, baits, the Orc, GPS directions and the Rod of the Depths. Fifteen questions across easy, medium and hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Where do new players first spawn?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Moosewood"
+          },
+          {
+            "id": "b",
+            "text": "Roslit Bay"
+          },
+          {
+            "id": "c",
+            "text": "Sunstone Island"
+          },
+          {
+            "id": "d",
+            "text": "Terrapin Island"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "Which rod do you get first when you join?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carbon Rod"
+          },
+          {
+            "id": "b",
+            "text": "Plastic Rod"
+          },
+          {
+            "id": "c",
+            "text": "Flimsy Rod"
+          },
+          {
+            "id": "d",
+            "text": "Training Rod"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What does the Merchant do with the fish you bring?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Repairs Treasure Maps"
+          },
+          {
+            "id": "b",
+            "text": "Buys fish from you"
+          },
+          {
+            "id": "c",
+            "text": "Requests a fish quest"
+          },
+          {
+            "id": "d",
+            "text": "Sells you a boat"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What is C$ in Fisch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Bestiary score"
+          },
+          {
+            "id": "b",
+            "text": "A rod stat"
+          },
+          {
+            "id": "c",
+            "text": "A fish rarity"
+          },
+          {
+            "id": "d",
+            "text": "A currency"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "After casting, what does Shake help you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reduce the time before a bite"
+          },
+          {
+            "id": "b",
+            "text": "Extend the cast distance"
+          },
+          {
+            "id": "c",
+            "text": "Raise the fish's sale value"
+          },
+          {
+            "id": "d",
+            "text": "Refill your bait"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What must the bottom progress bar do for you to land a fish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Drop to zero"
+          },
+          {
+            "id": "b",
+            "text": "Fill completely"
+          },
+          {
+            "id": "c",
+            "text": "Turn blue"
+          },
+          {
+            "id": "d",
+            "text": "Stop at halfway"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What does the GPS show you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The fish's rarity"
+          },
+          {
+            "id": "b",
+            "text": "Your rod's maximum weight limit"
+          },
+          {
+            "id": "c",
+            "text": "Your current coordinates"
+          },
+          {
+            "id": "d",
+            "text": "The Angler's request"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "What can Fish Radar reveal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A fish's preferred bait"
+          },
+          {
+            "id": "b",
+            "text": "Fish Abundances"
+          },
+          {
+            "id": "c",
+            "text": "Your current quest list"
+          },
+          {
+            "id": "d",
+            "text": "Boat routes and speeds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "Which direction is Roslit Bay from Moosewood?",
+        "options": [
+          {
+            "id": "a",
+            "text": "West"
+          },
+          {
+            "id": "b",
+            "text": "East"
+          },
+          {
+            "id": "c",
+            "text": "North"
+          },
+          {
+            "id": "d",
+            "text": "South"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What should you keep inside the white control bar while reeling?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The bobber"
+          },
+          {
+            "id": "b",
+            "text": "The progress bar"
+          },
+          {
+            "id": "c",
+            "text": "The cast distance"
+          },
+          {
+            "id": "d",
+            "text": "The fish"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What appears above your head when a fish is hooked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A checkmark"
+          },
+          {
+            "id": "b",
+            "text": "A question mark"
+          },
+          {
+            "id": "c",
+            "text": "An exclamation mark"
+          },
+          {
+            "id": "d",
+            "text": "A star"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "What does the Control stat change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The length of your cast"
+          },
+          {
+            "id": "b",
+            "text": "The fish's sale price"
+          },
+          {
+            "id": "c",
+            "text": "The boat's steering"
+          },
+          {
+            "id": "d",
+            "text": "The width of the control bar"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What does a higher Lure Speed do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hooks fish sooner"
+          },
+          {
+            "id": "b",
+            "text": "Raises a fish's sale value"
+          },
+          {
+            "id": "c",
+            "text": "Increases a boat's top speed"
+          },
+          {
+            "id": "d",
+            "text": "Restocks your bait"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which of these baits does Pufferfish prefer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Worm"
+          },
+          {
+            "id": "b",
+            "text": "Seaweed"
+          },
+          {
+            "id": "c",
+            "text": "Fish Head"
+          },
+          {
+            "id": "d",
+            "text": "Minnow"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Which fish does the Orc ask for in return for the Magma Rod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Alligator"
+          },
+          {
+            "id": "b",
+            "text": "Piranha"
+          },
+          {
+            "id": "c",
+            "text": "Manta Ray"
+          },
+          {
+            "id": "d",
+            "text": "Pufferfish"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What can still affect whether you catch a fish in an area shown by Fish Radar?",
+        "options": [
+          {
+            "id": "a",
+            "text": "How much the Merchant would pay"
+          },
+          {
+            "id": "b",
+            "text": "How fast your boat can travel"
+          },
+          {
+            "id": "c",
+            "text": "The fish's time and weather conditions"
+          },
+          {
+            "id": "d",
+            "text": "The color of your fishing line"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What does an Angler quest ask you to bring back?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A specific fish"
+          },
+          {
+            "id": "b",
+            "text": "A boat part"
+          },
+          {
+            "id": "c",
+            "text": "A fishing rod"
+          },
+          {
+            "id": "d",
+            "text": "A stack of C$"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "What can you set when you talk to an Innkeeper?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your fishing line color"
+          },
+          {
+            "id": "b",
+            "text": "Your boat's top speed"
+          },
+          {
+            "id": "c",
+            "text": "Your bait preference"
+          },
+          {
+            "id": "d",
+            "text": "Your spawn location"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "What rarity is Pufferfish?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Common"
+          },
+          {
+            "id": "b",
+            "text": "Rare"
+          },
+          {
+            "id": "c",
+            "text": "Uncommon"
+          },
+          {
+            "id": "d",
+            "text": "Legendary"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "What happens when reeling progress reaches zero?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The fish is caught, but the streak ends"
+          },
+          {
+            "id": "b",
+            "text": "The line snaps and you lose the fish"
+          },
+          {
+            "id": "c",
+            "text": "The rod unequips and the streak stays"
+          },
+          {
+            "id": "d",
+            "text": "The fish is saved and progress resets"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "How does Preferred Luck work?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rod luck for every fish"
+          },
+          {
+            "id": "b",
+            "text": "Location luck for all fish"
+          },
+          {
+            "id": "c",
+            "text": "Bait luck for certain fish"
+          },
+          {
+            "id": "d",
+            "text": "Mutation luck for heavy fish"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "On the GPS, which direction are you moving when your X number falls?",
+        "options": [
+          {
+            "id": "a",
+            "text": "West"
+          },
+          {
+            "id": "b",
+            "text": "North"
+          },
+          {
+            "id": "c",
+            "text": "East"
+          },
+          {
+            "id": "d",
+            "text": "South"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Who repairs Treasure Maps, and where?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Caleia at The Arch"
+          },
+          {
+            "id": "b",
+            "text": "Jack Marrow at Forsaken Shores"
+          },
+          {
+            "id": "c",
+            "text": "Pierre at Moosewood"
+          },
+          {
+            "id": "d",
+            "text": "The Orc at Roslit Volcano"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Which Enchant Relics open the Rod of the Depths passage at its two altars?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Abyssal and Hexed Enchant Relics"
+          },
+          {
+            "id": "b",
+            "text": "Two Abyssal Enchant Relics"
+          },
+          {
+            "id": "c",
+            "text": "Two Hexed Enchant Relics"
+          },
+          {
+            "id": "d",
+            "text": "Abyssal and Exalted Enchant Relics"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "What bonus does the Rod of the Depths give on every third catch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A guaranteed Enchant Relic"
+          },
+          {
+            "id": "b",
+            "text": "A fish from Moosewood, wherever you fish"
+          },
+          {
+            "id": "c",
+            "text": "An extra fish from the pool at your location"
+          },
+          {
+            "id": "d",
+            "text": "A guaranteed Legendary fish"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "What does 100% Bestiary completion award you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Golden Flimsy Rod Skin"
+          },
+          {
+            "id": "b",
+            "text": "Abyssal Glow Lantern"
+          },
+          {
+            "id": "c",
+            "text": "Orc's Best Friend title"
+          },
+          {
+            "id": "d",
+            "text": "Aurora Bobber"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,931 @@
+{
+  "page": {
+    "universe_id": 3761186887,
+    "code": "apeirophobia",
+    "title": "Apeirophobia Roblox Quiz: 15 Questions on Chapter 1 Levels",
+    "description_md": "Think you know Apeirophobia's original Chapter 1? It covers Levels 0–16, and each attempt draws 15 random questions: five easy, five medium and five hard. See how well you remember the routes, puzzles and entity rules.",
+    "seo_title": null,
+    "seo_description": "Test your knowledge of Roblox Apeirophobia's original Chapter 1 across Levels 0 to 16, from route markers to the ending. Each attempt gets 15 random questions.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "Which route leads out of Level 0?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A ladder into a wall vent."
+          },
+          {
+            "id": "b",
+            "text": "A ladder through a ceiling opening."
+          },
+          {
+            "id": "c",
+            "text": "A ladder over a dividing wall."
+          },
+          {
+            "id": "d",
+            "text": "A ladder through a window."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "How many valves must you turn to open the Level 1 gate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four."
+          },
+          {
+            "id": "b",
+            "text": "Five."
+          },
+          {
+            "id": "c",
+            "text": "Six."
+          },
+          {
+            "id": "d",
+            "text": "Seven."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "What takes you to Level 3 at the end of Level 2's main path?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Returning to the starting room."
+          },
+          {
+            "id": "b",
+            "text": "Searching the kitchen drawers."
+          },
+          {
+            "id": "c",
+            "text": "Jumping into the giant pit."
+          },
+          {
+            "id": "d",
+            "text": "Exploring the bathroom."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "What should you follow when you are near Level 5's glowing purple exit portal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The loudest whistle nearby."
+          },
+          {
+            "id": "b",
+            "text": "The nearest footsteps."
+          },
+          {
+            "id": "c",
+            "text": "The quietest passage."
+          },
+          {
+            "id": "d",
+            "text": "The strange noises it makes."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "What do you enter to finish the chase in Level 6?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A glowing door."
+          },
+          {
+            "id": "b",
+            "text": "A wall vent."
+          },
+          {
+            "id": "c",
+            "text": "A locker."
+          },
+          {
+            "id": "d",
+            "text": "A stairwell."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "Which light sequence leads toward the exit vent in Level 8?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red, then green."
+          },
+          {
+            "id": "b",
+            "text": "Green, then red."
+          },
+          {
+            "id": "c",
+            "text": "Green, then blue."
+          },
+          {
+            "id": "d",
+            "text": "Red, then blue."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "In Level 9's New Objective route, which markers identify the pool leading to Level 10?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Arrows pointing to it and a green light above it."
+          },
+          {
+            "id": "b",
+            "text": "No arrows and an orange light above it."
+          },
+          {
+            "id": "c",
+            "text": "Arrows pointing to it and an orange light above it."
+          },
+          {
+            "id": "d",
+            "text": "No arrows and a green light above it."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "In Level 10, what do you use to unlock the correct corner door and reach Level 11?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A key found at the stop sign."
+          },
+          {
+            "id": "b",
+            "text": "A switch beside a street lamp."
+          },
+          {
+            "id": "c",
+            "text": "A code found on a locker."
+          },
+          {
+            "id": "d",
+            "text": "A key found on a locker."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "In Level 12, how many paintings must you place correctly on the rack to open the exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three."
+          },
+          {
+            "id": "b",
+            "text": "Two."
+          },
+          {
+            "id": "c",
+            "text": "Four."
+          },
+          {
+            "id": "d",
+            "text": "Five."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "Which objectives must you complete in Level 13 before entering the theater exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three Star Buttons, then five Partypooper Plushies."
+          },
+          {
+            "id": "b",
+            "text": "Five Star Buttons, then three Partypooper Plushies."
+          },
+          {
+            "id": "c",
+            "text": "Five Star Buttons, then five Partypooper Plushies."
+          },
+          {
+            "id": "d",
+            "text": "Three Star Buttons, then three Partypooper Plushies."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "After opening the electric door in Level 14, which letter do you enter at the computer to open the exit gate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "x."
+          },
+          {
+            "id": "b",
+            "text": "n."
+          },
+          {
+            "id": "c",
+            "text": "y."
+          },
+          {
+            "id": "d",
+            "text": "q."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "In Level 15's island facility, which floor has the dip leading to Level 16?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first floor."
+          },
+          {
+            "id": "b",
+            "text": "The second floor."
+          },
+          {
+            "id": "c",
+            "text": "The fourth floor."
+          },
+          {
+            "id": "d",
+            "text": "The third floor."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "What opens the first gate and then the exit door in Level 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three cabinet keys, then all the second-area buttons."
+          },
+          {
+            "id": "b",
+            "text": "Two cabinet keys, then all the second-area buttons."
+          },
+          {
+            "id": "c",
+            "text": "Three cabinet keys, then only one second-area button."
+          },
+          {
+            "id": "d",
+            "text": "Three cabinet keys, then all the second-area lockers."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "How do you recover stamina while moving through the chase in Level 6?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold sprint continuously between obstacles."
+          },
+          {
+            "id": "b",
+            "text": "Walk briefly between bursts of running."
+          },
+          {
+            "id": "c",
+            "text": "Keep sprint held while jumping between obstacles."
+          },
+          {
+            "id": "d",
+            "text": "Keep sprint held while sliding through obstacles."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "Which numbers should you try at Level 7's later keypad in the shelf room?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The output from the first computer."
+          },
+          {
+            "id": "b",
+            "text": "The sample number on the computer's note."
+          },
+          {
+            "id": "c",
+            "text": "The candidate codes in the shelf-room book."
+          },
+          {
+            "id": "d",
+            "text": "The numbers in the color-priority table."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "In Level 11, how do you use the crowbar to reach the computer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Use it on the color keypad."
+          },
+          {
+            "id": "b",
+            "text": "Use it on the main gate."
+          },
+          {
+            "id": "c",
+            "text": "Use it on the computer itself."
+          },
+          {
+            "id": "d",
+            "text": "Remove the planks from the computer-room door."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "Which key sequence lets you continue toward the final button gate in Level 11's second area?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The first key opens a gate; the second opens a door."
+          },
+          {
+            "id": "b",
+            "text": "The first key opens a door; the second opens a gate."
+          },
+          {
+            "id": "c",
+            "text": "The first key opens a gate; the second opens another gate."
+          },
+          {
+            "id": "d",
+            "text": "The first key opens a door; the second opens another door."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "What confirms that a painting is in the right place in Level 12?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A sound plays and the room becomes greener."
+          },
+          {
+            "id": "b",
+            "text": "A sound plays and the room becomes redder."
+          },
+          {
+            "id": "c",
+            "text": "No sound plays and the room becomes redder."
+          },
+          {
+            "id": "d",
+            "text": "No sound plays and the room becomes greener."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "Which tool order opens Level 14's electric box and then cuts its wires?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bolt Cutters, then Screwdriver."
+          },
+          {
+            "id": "b",
+            "text": "Screwdriver, then Crowbar."
+          },
+          {
+            "id": "c",
+            "text": "Screwdriver, then Bolt Cutters."
+          },
+          {
+            "id": "d",
+            "text": "Crowbar, then Bolt Cutters."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "Which electrical panels must you activate to advance from the first two floors of Level 15's island facility?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every panel on each floor."
+          },
+          {
+            "id": "b",
+            "text": "Only faulty panels on each floor."
+          },
+          {
+            "id": "c",
+            "text": "No panels on either floor."
+          },
+          {
+            "id": "d",
+            "text": "One working panel on each floor."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "When the lifeboat engine stalls in Level 15, how do you use its repair prompt?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Repeatedly press E on PC or repeatedly tap the mobile prompt."
+          },
+          {
+            "id": "b",
+            "text": "Hold E on PC or hold the mobile prompt."
+          },
+          {
+            "id": "c",
+            "text": "Press E once on PC or tap the mobile prompt once."
+          },
+          {
+            "id": "d",
+            "text": "Wait for sailing to resume before using either prompt."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "After either of the first two required item pickups in Level 16, where do the arrows point?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Toward the item just collected."
+          },
+          {
+            "id": "b",
+            "text": "Toward the next required item."
+          },
+          {
+            "id": "c",
+            "text": "Toward the nearest entity."
+          },
+          {
+            "id": "d",
+            "text": "Toward the level's starting point."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which route leads through Level 4 to Level 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hallways, maze, stairs, white glitching portal."
+          },
+          {
+            "id": "b",
+            "text": "Stairs, hallways, maze, white glitching portal."
+          },
+          {
+            "id": "c",
+            "text": "Hallways, stairs, maze, white glitching portal."
+          },
+          {
+            "id": "d",
+            "text": "Maze, hallways, stairs, white glitching portal."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "Which actions match the repeating obstacles in Level 6?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sliding, standing still and using open doors."
+          },
+          {
+            "id": "b",
+            "text": "Crouching, standing still and using closed doors."
+          },
+          {
+            "id": "c",
+            "text": "Sliding, standing still and using closed doors."
+          },
+          {
+            "id": "d",
+            "text": "Sliding, crouching and using open doors."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "What should you do when your screen shakes because the Hound is close in Level 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay crouched and still, with lockers and drawers shut."
+          },
+          {
+            "id": "b",
+            "text": "Walk crouched while opening lockers and drawers."
+          },
+          {
+            "id": "c",
+            "text": "Stand still while opening lockers and drawers."
+          },
+          {
+            "id": "d",
+            "text": "Sprint past while leaving lockers and drawers shut."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "Which sense does the Hound use to detect players in Level 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sight, without hearing."
+          },
+          {
+            "id": "b",
+            "text": "Hearing, without sight."
+          },
+          {
+            "id": "c",
+            "text": "Both hearing and sight."
+          },
+          {
+            "id": "d",
+            "text": "Neither hearing nor sight."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "How do you build the input for Level 7's first color-code computer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Put each color's number before its count; arrange the pairs by priority."
+          },
+          {
+            "id": "b",
+            "text": "Put each color's count before its color number; arrange the pairs in reverse priority."
+          },
+          {
+            "id": "c",
+            "text": "Put each color's number before its count; arrange the pairs in reverse priority."
+          },
+          {
+            "id": "d",
+            "text": "Put each color's count before its color number; arrange the pairs by priority."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "Which entity does the Cameraman alert with its screech and screen-blurring blue shockwaves in Level 0?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Hound."
+          },
+          {
+            "id": "b",
+            "text": "The Starfish."
+          },
+          {
+            "id": "c",
+            "text": "The Howler."
+          },
+          {
+            "id": "d",
+            "text": "The Skin Stealer."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "In Level 1 multiplayer, what can a teammate do from a safe spot to help keep the Starfish nearby?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep a flashlight aimed at it."
+          },
+          {
+            "id": "b",
+            "text": "Whistle repeatedly."
+          },
+          {
+            "id": "c",
+            "text": "Keep a camera aimed at it."
+          },
+          {
+            "id": "d",
+            "text": "Stay silent beside it."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "How does crouch-walking through the Hound in Level 3 differ between Normal and Nightmare Mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is safe in Normal but unsafe in Nightmare."
+          },
+          {
+            "id": "b",
+            "text": "It is unsafe in Normal but safe in Nightmare."
+          },
+          {
+            "id": "c",
+            "text": "It is safe in both modes."
+          },
+          {
+            "id": "d",
+            "text": "It is unsafe in both modes."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "Which pair of traits fits a Skin Walker disguised as a player in Level 5?",
+        "options": [
+          {
+            "id": "a",
+            "text": "No glowing white eyes; a copied held flashlight or camera."
+          },
+          {
+            "id": "b",
+            "text": "Glowing white eyes; a copied held flashlight or camera."
+          },
+          {
+            "id": "c",
+            "text": "No glowing white eyes; no copied held flashlight or camera."
+          },
+          {
+            "id": "d",
+            "text": "Glowing white eyes; no copied held flashlight or camera."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-06",
+        "question": "What can vary between runs and change the combination for Level 7's first computer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The color numbers printed on the computer."
+          },
+          {
+            "id": "b",
+            "text": "The color priorities printed on the computer."
+          },
+          {
+            "id": "c",
+            "text": "The number of gems of each color."
+          },
+          {
+            "id": "d",
+            "text": "The number of digits in each shelf-room book code."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-07",
+        "question": "In Level 11, which direction do you read the gem colors to get the color-keypad sequence?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Left to right."
+          },
+          {
+            "id": "b",
+            "text": "Right to left."
+          },
+          {
+            "id": "c",
+            "text": "Alphabetically by color name."
+          },
+          {
+            "id": "d",
+            "text": "In the order you first notice the gems."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-08",
+        "question": "After a Stalker scare starts the alarm in Level 14, what must you do with the levers to survive its next scare?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Flip all three levers."
+          },
+          {
+            "id": "b",
+            "text": "Flip only one lever."
+          },
+          {
+            "id": "c",
+            "text": "Flip only two levers."
+          },
+          {
+            "id": "d",
+            "text": "Leave all three levers untouched."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-09",
+        "question": "In Level 14, what can trigger a Stalker jumpscare?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your camera must face it even if your avatar already does."
+          },
+          {
+            "id": "b",
+            "text": "Your avatar and camera must both face it at once."
+          },
+          {
+            "id": "c",
+            "text": "Neither avatar nor camera direction affects its jumpscares."
+          },
+          {
+            "id": "d",
+            "text": "Your avatar can trigger it while your camera points down."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "After you successfully finish the Kameloha encounter in Level 15, how long does it leave you alone?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only until sailing resumes."
+          },
+          {
+            "id": "b",
+            "text": "Only until the boat reaches the island."
+          },
+          {
+            "id": "c",
+            "text": "For the rest of the exploration."
+          },
+          {
+            "id": "d",
+            "text": "Only until the island facility's first floor lights up."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-11",
+        "question": "In Level 16, wall strikes have sound cues and the count eventually resets. How many strikes send the Deformed Howler berserk before that reset?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One."
+          },
+          {
+            "id": "b",
+            "text": "Three."
+          },
+          {
+            "id": "c",
+            "text": "Two."
+          },
+          {
+            "id": "d",
+            "text": "Four."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-12",
+        "question": "After the Deformed Howler reaches the Bear Trap in Level 16, which sequence is shown in the ending cutscene?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The lever lowers the cage, gasoline is poured, then a match burns the entity."
+          },
+          {
+            "id": "b",
+            "text": "Gasoline is poured, a match burns the entity, then the lever lowers the cage."
+          },
+          {
+            "id": "c",
+            "text": "A match burns the entity, the lever lowers the cage, then gasoline is poured."
+          },
+          {
+            "id": "d",
+            "text": "The lever lowers the cage, a match burns the entity, then gasoline is poured."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

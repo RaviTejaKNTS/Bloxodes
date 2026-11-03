@@ -1,0 +1,547 @@
+{
+  "page": {
+    "universe_id": 10708913337,
+    "code": "anime-dice",
+    "title": "Anime Dice Roblox Quiz: 15 Questions on Rolls, Units and Upgrades",
+    "description_md": "Think you know Anime Dice beyond your usual rolls? Each attempt draws 15 random questions, five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Take 15 random Roblox Anime Dice questions, five each on easy, medium and hard. Test what you know about rolls, upgrades, unit modifiers and Tower combat.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which stat does a stronger die directly multiply?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Income"
+          },
+          {
+            "id": "b",
+            "text": "Luck"
+          },
+          {
+            "id": "c",
+            "text": "Damage"
+          },
+          {
+            "id": "d",
+            "text": "Health"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "Which currency do placed units earn while you are offline?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cash"
+          },
+          {
+            "id": "b",
+            "text": "Gems"
+          },
+          {
+            "id": "c",
+            "text": "Tickets"
+          },
+          {
+            "id": "d",
+            "text": "Trait Rerolls"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "Where must a unit stand to generate plot income?",
+        "options": [
+          {
+            "id": "a",
+            "text": "In the Backpack"
+          },
+          {
+            "id": "b",
+            "text": "At the Dice Shop"
+          },
+          {
+            "id": "c",
+            "text": "In a Tower team slot"
+          },
+          {
+            "id": "d",
+            "text": "On a pedestal"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Which currency pays Storm's normal Dice Shop price?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Gems"
+          },
+          {
+            "id": "b",
+            "text": "Tickets"
+          },
+          {
+            "id": "c",
+            "text": "Cash"
+          },
+          {
+            "id": "d",
+            "text": "Trait Rerolls"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "Which menu tracks your unit collection rather than your carried inventory?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Backpack"
+          },
+          {
+            "id": "b",
+            "text": "Index"
+          },
+          {
+            "id": "c",
+            "text": "Quests"
+          },
+          {
+            "id": "d",
+            "text": "Upgrades"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "How many Traits can one unit hold at a time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Two"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "Which button stops Auto Roll when you press it again?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Home"
+          },
+          {
+            "id": "b",
+            "text": "Hub"
+          },
+          {
+            "id": "c",
+            "text": "Roll"
+          },
+          {
+            "id": "d",
+            "text": "Index"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which effect does a green Tower potion give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Damage"
+          },
+          {
+            "id": "b",
+            "text": "Income"
+          },
+          {
+            "id": "c",
+            "text": "Roll Speed"
+          },
+          {
+            "id": "d",
+            "text": "Luck"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "How many unit slots does a Tower team have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four"
+          },
+          {
+            "id": "b",
+            "text": "Three"
+          },
+          {
+            "id": "c",
+            "text": "Five"
+          },
+          {
+            "id": "d",
+            "text": "Six"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "What does a normal Rebirth wipe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Your Gems"
+          },
+          {
+            "id": "b",
+            "text": "Your Trait Rerolls"
+          },
+          {
+            "id": "c",
+            "text": "Your Cash"
+          },
+          {
+            "id": "d",
+            "text": "Your owned units"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "Which pair gets the permanent multiplier shown in the Rebirth menu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cash and Luck"
+          },
+          {
+            "id": "b",
+            "text": "Damage and Health"
+          },
+          {
+            "id": "c",
+            "text": "Cash and Damage"
+          },
+          {
+            "id": "d",
+            "text": "Luck and Health"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Which modifier is baked into a unit when it is pulled?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Trait"
+          },
+          {
+            "id": "b",
+            "text": "Grade"
+          },
+          {
+            "id": "c",
+            "text": "Quirk"
+          },
+          {
+            "id": "d",
+            "text": "Mutation"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What does one basic Grade roll cost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One Trait Reroll"
+          },
+          {
+            "id": "b",
+            "text": "One Gem"
+          },
+          {
+            "id": "c",
+            "text": "One Ticket"
+          },
+          {
+            "id": "d",
+            "text": "One Lucky Spin"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Which upgrade branches directly raise Tower combat stats?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Damage and Health"
+          },
+          {
+            "id": "b",
+            "text": "Money and Luck"
+          },
+          {
+            "id": "c",
+            "text": "Roll Speed and Unit Storage"
+          },
+          {
+            "id": "d",
+            "text": "Sell and Walkspeed"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "What is Storm's base die multiplier?",
+        "options": [
+          {
+            "id": "a",
+            "text": "200x"
+          },
+          {
+            "id": "b",
+            "text": "750x"
+          },
+          {
+            "id": "c",
+            "text": "400x"
+          },
+          {
+            "id": "d",
+            "text": "1,500x"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "What happens to a unit's old Grade when you accept a new Grade roll?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The unit keeps both Grades"
+          },
+          {
+            "id": "b",
+            "text": "The new Grade replaces it"
+          },
+          {
+            "id": "c",
+            "text": "The higher Grade is always kept"
+          },
+          {
+            "id": "d",
+            "text": "The old Grade is stored for the next roll"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "How do a Grade and an Income-boosting Trait affect the same unit's earnings?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only the Grade multiplier applies"
+          },
+          {
+            "id": "b",
+            "text": "Only the Trait multiplier applies"
+          },
+          {
+            "id": "c",
+            "text": "Only the higher multiplier applies"
+          },
+          {
+            "id": "d",
+            "text": "Both multipliers apply"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Which full multiplier set does the Genesis Trait give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "120x Income, 140x Damage, 120x Health"
+          },
+          {
+            "id": "b",
+            "text": "120x Income, 120x Damage, 140x Health"
+          },
+          {
+            "id": "c",
+            "text": "140x Income, 140x Damage, 120x Health"
+          },
+          {
+            "id": "d",
+            "text": "140x Income, 120x Damage, 120x Health"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What Income multiplier does the Omega Grade give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "50x"
+          },
+          {
+            "id": "b",
+            "text": "250x"
+          },
+          {
+            "id": "c",
+            "text": "125x"
+          },
+          {
+            "id": "d",
+            "text": "500x"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "Which rolls receive a Clover's Luck multiplier?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Standard rolls only"
+          },
+          {
+            "id": "b",
+            "text": "Lucky Spins only"
+          },
+          {
+            "id": "c",
+            "text": "Jackpot Spins only"
+          },
+          {
+            "id": "d",
+            "text": "Standard rolls and both Spin types"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Which bonus pair does the Prodigy Quirk give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+20% Luck and +20% Money Multiplier"
+          },
+          {
+            "id": "b",
+            "text": "+20% Grade Luck and +20% Money Multiplier"
+          },
+          {
+            "id": "c",
+            "text": "+20% Trait Luck and +20% Money Multiplier"
+          },
+          {
+            "id": "d",
+            "text": "+20% Grade Luck and +20% Trait Luck"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Which bonus pair does the Midas Touch Quirk give?",
+        "options": [
+          {
+            "id": "a",
+            "text": "+75% Luck and +15% Money Multiplier"
+          },
+          {
+            "id": "b",
+            "text": "+15% Grade Luck and +75% Trait Luck"
+          },
+          {
+            "id": "c",
+            "text": "+15% Luck and +75% Money Multiplier"
+          },
+          {
+            "id": "d",
+            "text": "+75% Grade Luck and +15% Trait Luck"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}

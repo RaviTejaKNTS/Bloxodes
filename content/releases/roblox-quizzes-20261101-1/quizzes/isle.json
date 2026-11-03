@@ -1,0 +1,883 @@
+{
+  "page": {
+    "universe_id": 1116949753,
+    "code": "isle",
+    "title": "Isle Roblox Quiz: 15 Questions on Escapes, Gear and Threats",
+    "description_md": "Think you know Isle? Test your knowledge of escape routes, gear, daily threats and The Facility's puzzles with 15 random questions. Each attempt draws five per difficulty, with no timer.",
+    "seo_title": null,
+    "seo_description": "Take 15 random Roblox Isle questions on escapes, gear, daily threats and Facility puzzles. Five questions come from each difficulty, with no timer to rush you.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "Where does a normal Isle run begin?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Docks."
+          },
+          {
+            "id": "b",
+            "text": "Grand Lake."
+          },
+          {
+            "id": "c",
+            "text": "Impact Zone."
+          },
+          {
+            "id": "d",
+            "text": "Lighthouse."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "Where is the plane used for The Air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Grand Lake."
+          },
+          {
+            "id": "b",
+            "text": "Cliff Runway."
+          },
+          {
+            "id": "c",
+            "text": "Plane Shed."
+          },
+          {
+            "id": "d",
+            "text": "Hangar."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "Which three parts repair the plane for The Air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Plane Steering Wheel, Plane Wheel, and Fuse."
+          },
+          {
+            "id": "b",
+            "text": "Plane Steering Wheel, Propeller, and Fuel."
+          },
+          {
+            "id": "c",
+            "text": "Plane Steering Wheel, Propeller, and Plane Wheel."
+          },
+          {
+            "id": "d",
+            "text": "Plane Wheel, Propeller, and Decoy Module."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "What is the maximum number of players who can leave together using The Air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four."
+          },
+          {
+            "id": "b",
+            "text": "Two."
+          },
+          {
+            "id": "c",
+            "text": "Three."
+          },
+          {
+            "id": "d",
+            "text": "One."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "What shape of light does a switched-on Flashlight produce?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A cone ahead of you."
+          },
+          {
+            "id": "b",
+            "text": "A thin line along the ground."
+          },
+          {
+            "id": "c",
+            "text": "A ring at your feet."
+          },
+          {
+            "id": "d",
+            "text": "A narrow column above you."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "What shape of light does a switched-on Lantern produce while you hold it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A narrow column above you."
+          },
+          {
+            "id": "b",
+            "text": "A patch directly beneath you."
+          },
+          {
+            "id": "c",
+            "text": "A flat ring at your feet."
+          },
+          {
+            "id": "d",
+            "text": "A sphere around you."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "What visible signal does a Flare Gun send into the air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A large red exclamation point."
+          },
+          {
+            "id": "b",
+            "text": "A large yellow cross."
+          },
+          {
+            "id": "c",
+            "text": "A large blue arrow."
+          },
+          {
+            "id": "d",
+            "text": "A large green circle."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "What health benefit does a placed Campfire give players sitting nearby?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A larger maximum health pool."
+          },
+          {
+            "id": "b",
+            "text": "Less damage from incoming attacks."
+          },
+          {
+            "id": "c",
+            "text": "A full heal when the next day begins."
+          },
+          {
+            "id": "d",
+            "text": "Health regeneration while they sit nearby."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "Which item shows a digital island map and tracks other players who also have it equipped?",
+        "options": [
+          {
+            "id": "a",
+            "text": "GPS."
+          },
+          {
+            "id": "b",
+            "text": "Watch."
+          },
+          {
+            "id": "c",
+            "text": "Walky Talky."
+          },
+          {
+            "id": "d",
+            "text": "Treasure Map."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "Which item switches between 24-hour and 12-hour time when you click with it equipped?",
+        "options": [
+          {
+            "id": "a",
+            "text": "GPS."
+          },
+          {
+            "id": "b",
+            "text": "Watch."
+          },
+          {
+            "id": "c",
+            "text": "Fishing Rod."
+          },
+          {
+            "id": "d",
+            "text": "Treasure Map."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "How many pieces of bait come with a newly obtained Fishing Rod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four."
+          },
+          {
+            "id": "b",
+            "text": "One."
+          },
+          {
+            "id": "c",
+            "text": "Three."
+          },
+          {
+            "id": "d",
+            "text": "Two."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "What changes when you equip Night Vision Goggles?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The view turns blue and nearby people show through terrain."
+          },
+          {
+            "id": "b",
+            "text": "The view turns purple and people glow orange through walls."
+          },
+          {
+            "id": "c",
+            "text": "The view turns red and distant terrain disappears."
+          },
+          {
+            "id": "d",
+            "text": "Dark areas look lit and the view turns green."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "How do you attach a required part to the plane for The Air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hold it near its matching spot on the plane."
+          },
+          {
+            "id": "b",
+            "text": "Drop it inside the plane's cockpit."
+          },
+          {
+            "id": "c",
+            "text": "Drop it beside the plane's front seat."
+          },
+          {
+            "id": "d",
+            "text": "Hold it near a Generator's fuse slot."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "Past what in-game time is a new attempt to use The Air refused because it is too dark?",
+        "options": [
+          {
+            "id": "a",
+            "text": "21:00."
+          },
+          {
+            "id": "b",
+            "text": "23:00."
+          },
+          {
+            "id": "c",
+            "text": "18:00."
+          },
+          {
+            "id": "d",
+            "text": "22:30."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "The plane is repaired and two players are ready for The Air. When should the passenger sit in the back?",
+        "options": [
+          {
+            "id": "a",
+            "text": "After the plane starts moving."
+          },
+          {
+            "id": "b",
+            "text": "After the plane clears the island."
+          },
+          {
+            "id": "c",
+            "text": "Before the pilot sits in front."
+          },
+          {
+            "id": "d",
+            "text": "After the plane leaves the runway."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "How do you open the gated Warehouse for The Air?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn on the Lighthouse's light."
+          },
+          {
+            "id": "b",
+            "text": "Power the Observatory at the Generators."
+          },
+          {
+            "id": "c",
+            "text": "Activate the Hangar's fuel pump."
+          },
+          {
+            "id": "d",
+            "text": "Power the Warehouses at the Generators."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "What happens to the Shipwreck at the start of Day 2 in a normal run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It floods, blocking entry but leaving idle players safe."
+          },
+          {
+            "id": "b",
+            "text": "It burns, blocking entry and killing idle players inside."
+          },
+          {
+            "id": "c",
+            "text": "It sinks, carrying idle players to a new shore."
+          },
+          {
+            "id": "d",
+            "text": "It opens, giving players a new entrance to its lower rooms."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "With Isle+ and Monster+ off, what is the first day the Monster can attack during daytime in its territory?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Day 2."
+          },
+          {
+            "id": "b",
+            "text": "Day 4."
+          },
+          {
+            "id": "c",
+            "text": "Day 3."
+          },
+          {
+            "id": "d",
+            "text": "Day 1."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "In a normal run, which day is the last chance to escape before the Reset?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Day 6."
+          },
+          {
+            "id": "b",
+            "text": "Day 5."
+          },
+          {
+            "id": "c",
+            "text": "Day 3."
+          },
+          {
+            "id": "d",
+            "text": "Day 4."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "Which location must you power to read The Facility's portal code on its computer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Observatory."
+          },
+          {
+            "id": "b",
+            "text": "Radio Tower."
+          },
+          {
+            "id": "c",
+            "text": "Warehouses."
+          },
+          {
+            "id": "d",
+            "text": "Docks."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "Where can you refill Diving Gear once the local oxygen pump has power?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Generators."
+          },
+          {
+            "id": "b",
+            "text": "Grand Lake."
+          },
+          {
+            "id": "c",
+            "text": "Lighthouse."
+          },
+          {
+            "id": "d",
+            "text": "Docks."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "Which action can trigger The Air's escape-related Frogspawn near the plane?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Beginning the plane's takeoff."
+          },
+          {
+            "id": "b",
+            "text": "Picking up the first plane part."
+          },
+          {
+            "id": "c",
+            "text": "Falling asleep for the night."
+          },
+          {
+            "id": "d",
+            "text": "Picking up the final plane part."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "In a normal run, what is the first day Tornadoes begin appearing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Day 3."
+          },
+          {
+            "id": "b",
+            "text": "Day 2."
+          },
+          {
+            "id": "c",
+            "text": "Day 4."
+          },
+          {
+            "id": "d",
+            "text": "Day 5."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "When all your weapons are loaded guns, which does the game use automatically in a Monster night encounter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The gun with the most ammunition."
+          },
+          {
+            "id": "b",
+            "text": "Your most powerful gun."
+          },
+          {
+            "id": "c",
+            "text": "The last gun you picked up."
+          },
+          {
+            "id": "d",
+            "text": "The lightest gun you carry."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "After you fall asleep in the Monster's territory, which result signals safety from that night's encounter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You wake up to a noise."
+          },
+          {
+            "id": "b",
+            "text": "The Monster appears and approaches you."
+          },
+          {
+            "id": "c",
+            "text": "You fumble for your gun."
+          },
+          {
+            "id": "d",
+            "text": "You dream of a random Point of Interest."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "In a normal run, when does the Monster's territory change to a different Point of Interest?",
+        "options": [
+          {
+            "id": "a",
+            "text": "At the start of each new in-game day."
+          },
+          {
+            "id": "b",
+            "text": "After it hits a player."
+          },
+          {
+            "id": "c",
+            "text": "Whenever someone starts an escape."
+          },
+          {
+            "id": "d",
+            "text": "Whenever someone turns on a light."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "With Facility security still active, which numbered gate do you need to open to continue toward the portal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Gate 02."
+          },
+          {
+            "id": "b",
+            "text": "Gate 01."
+          },
+          {
+            "id": "c",
+            "text": "Gate 03."
+          },
+          {
+            "id": "d",
+            "text": "Gate 04."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-15",
+        "question": "At the end of Wing A, which action unlocks Wing B?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Disable the Tripwire explosive."
+          },
+          {
+            "id": "b",
+            "text": "Enter the portal coordinates."
+          },
+          {
+            "id": "c",
+            "text": "Press the purple button."
+          },
+          {
+            "id": "d",
+            "text": "Destroy the Junction Turret."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "In a normal run, how far into Day 2's morning does the first Mercenary helicopter fly in?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30 seconds."
+          },
+          {
+            "id": "b",
+            "text": "10 seconds."
+          },
+          {
+            "id": "c",
+            "text": "120 seconds."
+          },
+          {
+            "id": "d",
+            "text": "60 seconds."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "How many bullets does a fully supplied Assistant Drone hold?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20."
+          },
+          {
+            "id": "b",
+            "text": "40."
+          },
+          {
+            "id": "c",
+            "text": "80."
+          },
+          {
+            "id": "d",
+            "text": "60."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "In default rules, how many counted stuns reach the Monster's rage limit on Day 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three."
+          },
+          {
+            "id": "b",
+            "text": "Four."
+          },
+          {
+            "id": "c",
+            "text": "Two."
+          },
+          {
+            "id": "d",
+            "text": "One."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "With Facility security active, how many beep-matched values must you add for the complete Gate Control result on the portal route?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four."
+          },
+          {
+            "id": "b",
+            "text": "Two."
+          },
+          {
+            "id": "c",
+            "text": "One."
+          },
+          {
+            "id": "d",
+            "text": "Three."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "Under default rules, what is the Alpha Squad Spotter's sight distance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "300 studs."
+          },
+          {
+            "id": "b",
+            "text": "1200 studs."
+          },
+          {
+            "id": "c",
+            "text": "900 studs."
+          },
+          {
+            "id": "d",
+            "text": "600 studs."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-06",
+        "question": "In what fixed order does Alpha Squad drop from its helicopter?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Commander, Spotter, Sniper, Medic, Gunner."
+          },
+          {
+            "id": "b",
+            "text": "Commander, Medic, Sniper, Spotter, Gunner."
+          },
+          {
+            "id": "c",
+            "text": "Commander, Sniper, Spotter, Medic, Gunner."
+          },
+          {
+            "id": "d",
+            "text": "Sniper, Commander, Spotter, Gunner, Medic."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-07",
+        "question": "Before Alpha Squad's Day 2 landing in a normal run, the Hangar fuel pump is active and the Lighthouse light is off. Where does the squad land?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Plane Shed."
+          },
+          {
+            "id": "b",
+            "text": "The beacon beside the Shipwreck."
+          },
+          {
+            "id": "c",
+            "text": "Cargo Ship."
+          },
+          {
+            "id": "d",
+            "text": "Lighthouse."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-08",
+        "question": "How many numbers make up The Facility's complete portal-coordinate sequence?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Ten."
+          },
+          {
+            "id": "b",
+            "text": "Twelve."
+          },
+          {
+            "id": "c",
+            "text": "Six."
+          },
+          {
+            "id": "d",
+            "text": "Eight."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

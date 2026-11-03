@@ -1,3 +1,5 @@
+import { SCOPE_ENTITY_TYPES } from "@/lib/search-scopes";
+import { isRetiredMusicGameCatalogUrl } from "@/lib/game-specific-id-pages";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -56,16 +58,6 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   music_artist: "music",
   wiki: "wiki",
   wiki_collection: "wiki",
-  gta_checklist: "checklist",
-  gta_game: "wiki",
-  gta_wiki: "wiki",
-  gta_wiki_collection: "wiki",
-  red_dead_game: "wiki",
-  red_dead_wiki: "wiki",
-  red_dead_wiki_collection: "wiki",
-  minecraft_wiki: "wiki",
-  minecraft_wiki_collection: "wiki",
-  minecraft_tool: "tool",
   game_wiki: "wiki",
   game_collection: "wiki",
   game_code: "codes",
@@ -77,24 +69,6 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   stats_game: "stats"
 };
 
-const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
-  codes: ["code"],
-  articles: ["article"],
-  checklists: ["checklist"],
-  quizzes: ["quiz"],
-  puzzles: ["puzzle"],
-  stats: ["stats_game"],
-  tools: ["tool"],
-  catalog: ["catalog"],
-  events: ["event"],
-  authors: ["author"],
-  music: ["music_hub", "music_genre", "music_artist"],
-  wiki: ["wiki", "wiki_collection"],
-  gta: ["gta_wiki", "gta_wiki_collection", "gta_checklist"],
-  "gta-checklists": ["gta_checklist"],
-  "red-dead": ["red_dead_wiki", "red_dead_wiki_collection"],
-  minecraft: ["minecraft_wiki", "minecraft_wiki_collection", "minecraft_tool"]
-};
 
 const DEFAULT_LIMIT = 120;
 const MAX_LIMIT = 200;
@@ -187,25 +161,6 @@ function rowKey(row: SearchRow): string {
   return `${row.entity_type}:${row.entity_id}`;
 }
 
-function gta5MapSearchRow(query: string, entityTypes: string[] | null): SearchRow[] {
-  if (entityTypes?.length && !entityTypes.includes("gta_wiki")) return [];
-  const title = "GTA 5 Interactive Map";
-  const searchText = "gta 5 gta v interactive map los santos blaine county story mode spaceship parts letter scraps nuclear waste submarine pieces monkey mosaics peyote plants epsilon tracts hidden packages stunt jumps under the bridge knife flights landmarks hospitals travel collectible locations";
-  const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
-  if (!terms.length || !terms.every((term) => searchText.includes(term))) return [];
-  return [{
-    entity_type: "gta_wiki",
-    entity_id: "gta5-interactive-map",
-    slug: "gta5-interactive-map",
-    title,
-    subtitle: "377 Story Mode collection locations, 92 places, and progress tracking",
-    url: "/gta/maps/gta5",
-    updated_at: null,
-    active_code_count: null,
-    search_text: searchText
-  }];
-}
-
 function rankSearchRow(row: SearchRow, query: string): number {
   const normalizedQuery = query.toLowerCase();
   const title = row.title.toLowerCase();
@@ -221,7 +176,9 @@ function rankSearchRow(row: SearchRow, query: string): number {
   // A collection title often puts the game after the subject (for example,
   // "Vehicles in Grand Theft Auto Online"). Rank all meaningful query words
   // ahead of loose RPC matches even when the word order differs.
-  const filler = new Set(["all", "gta", "grand", "theft", "auto", "in", "of", "the", "story", "mode"]);
+  // Preserve the original ranking words for every Roblox entity.
+  const isGame = row.entity_type.startsWith("game_");
+  const filler = new Set(isGame ? ["all", "in", "of", "the"] : ["all", "gta", "grand", "theft", "auto", "in", "of", "the", "story", "mode"]);
   const terms = (value: string) => value.split(/[^a-z0-9]+/).filter((word) => word && !filler.has(word));
   const queryTerms = terms(normalizedQuery);
   const titleTerms = new Set(terms(title));
@@ -235,6 +192,7 @@ function mergeAndRankRows(query: string, rows: SearchRow[], entityTypes: string[
 
   for (const row of rows) {
     if (entityTypes?.length && !entityTypes.includes(row.entity_type)) continue;
+    if (isRetiredMusicGameCatalogUrl(row.url)) continue;
     const key = rowKey(row);
     const current = merged.get(key);
     if (!current || rankSearchRow(row, query) < rankSearchRow(current, query)) {
@@ -293,7 +251,7 @@ export async function GET(request: Request) {
       searchStatsGames(rawQuery, safeLimit, entityTypes)
     ]);
     const rpcRows = error ? [] : ((data ?? []) as SearchRow[]);
-    const rows = mergeAndRankRows(rawQuery, [...gta5MapSearchRow(rawQuery, entityTypes), ...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
+    const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

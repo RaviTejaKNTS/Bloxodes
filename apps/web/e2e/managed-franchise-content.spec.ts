@@ -43,6 +43,8 @@ async function usefulFields(page: Page, entry: CollectionEntry, view: 'cards' | 
 async function htmlEvidence(page: Page, info: TestInfo, route: string, pageTwo = false) {
   const response = await page.goto(route, {waitUntil: 'load'});
   expect(response?.status()).toBe(200);
+  expect(response?.request().redirectedFrom(), route).toBeNull();
+  expect(new URL(page.url()).pathname).toBe(route);
   const body = await response!.body();
   const result = {path: route, previewUrl: page.url(), status: response!.status(), bytes: body.length, warning: body.length > 1_000_000, limitBytes: 1_800_000, warnBytes: 1_000_000};
   await info.attach(`html-size-${route.replaceAll('/', '-')}.json`, {body: JSON.stringify(result), contentType: 'application/json'});
@@ -83,7 +85,9 @@ for (const url of selected.urls) {
     expect(sitemap.status()).toBe(200);
     const xml = await sitemap.text();
     expect(xml).toContain(`<loc>https://bloxodes.com${url.path}</loc>`);
-    expect(xml).not.toMatch(new RegExp(`<loc>https://bloxodes\\.com/${selected.namespace}/[^<]*/page/[0-9]+</loc>`));
+    for (const collection of selected.collections) {
+      expect(xml).not.toContain(`<loc>https://bloxodes.com${collection.path}/page/`);
+    }
   });
 }
 for (const hub of selected.pages.filter(page => page.kind === 'hub')) {

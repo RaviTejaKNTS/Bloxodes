@@ -1,0 +1,883 @@
+{
+  "page": {
+    "universe_id": 1318971886,
+    "code": "break-in-story",
+    "title": "Break In (Story) Roblox Quiz: 15 Questions on Roles and Nights",
+    "description_md": "Think you know the original Break In (Story)? Each attempt draws 15 random questions, five each from Easy, Medium and Hard. Expect house survival, role gear, Safe puzzles, night invasions and the Sewer fight.",
+    "seo_title": null,
+    "seo_description": "Test what you know about Roblox Break In (Story) with 15 random questions on house survival, role gear, Safe puzzles, night invasions and the Sewer fight.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-e01",
+        "question": "On Night 1, how many of the three bedrooms are invaded?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One room"
+          },
+          {
+            "id": "b",
+            "text": "Two rooms"
+          },
+          {
+            "id": "c",
+            "text": "Three rooms"
+          },
+          {
+            "id": "d",
+            "text": "No rooms"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e02",
+        "question": "How many bites can you take from one Night 1 pizza slice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One bite"
+          },
+          {
+            "id": "b",
+            "text": "Three bites"
+          },
+          {
+            "id": "c",
+            "text": "Ten bites"
+          },
+          {
+            "id": "d",
+            "text": "Five bites"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e03",
+        "question": "How much energy does one bite of a medium Night 1 pizza slice restore?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 energy"
+          },
+          {
+            "id": "b",
+            "text": "1 energy"
+          },
+          {
+            "id": "c",
+            "text": "6 energy"
+          },
+          {
+            "id": "d",
+            "text": "15 energy"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e05",
+        "question": "On Day 2, how many boards secure one entrance?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5 boards"
+          },
+          {
+            "id": "b",
+            "text": "16 boards"
+          },
+          {
+            "id": "c",
+            "text": "10 boards"
+          },
+          {
+            "id": "d",
+            "text": "20 boards"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e07",
+        "question": "How many digits are in the Safe code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four digits"
+          },
+          {
+            "id": "b",
+            "text": "Three digits"
+          },
+          {
+            "id": "c",
+            "text": "Five digits"
+          },
+          {
+            "id": "d",
+            "text": "Six digits"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e08",
+        "question": "Which role starts with a Bag of Chips?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Stealthy"
+          },
+          {
+            "id": "b",
+            "text": "The Hungry"
+          },
+          {
+            "id": "c",
+            "text": "The Protector"
+          },
+          {
+            "id": "d",
+            "text": "The Medic"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e09",
+        "question": "Which item does The Stealthy start with?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Toy Sword"
+          },
+          {
+            "id": "b",
+            "text": "A Baseball Bat"
+          },
+          {
+            "id": "c",
+            "text": "A Medkit"
+          },
+          {
+            "id": "d",
+            "text": "A Teddy Bear"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e10",
+        "question": "What keeps running in the house after the Night 1 power cut?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The bedroom laptop"
+          },
+          {
+            "id": "b",
+            "text": "The upstairs lights"
+          },
+          {
+            "id": "c",
+            "text": "The living-room television"
+          },
+          {
+            "id": "d",
+            "text": "The kitchen lights"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e11",
+        "question": "What happens if nobody answers the Night 1 pizza delivery?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Pizza Man leaves the pizza on the table"
+          },
+          {
+            "id": "b",
+            "text": "The Pizza Man returns after the invasion"
+          },
+          {
+            "id": "c",
+            "text": "The Pizza Man breaks in and delivers it"
+          },
+          {
+            "id": "d",
+            "text": "The Pizza Man leaves without giving the players pizza"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e12",
+        "question": "Where can the Basement Key be found on Day 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "In a house drawer"
+          },
+          {
+            "id": "b",
+            "text": "In an Attic crate"
+          },
+          {
+            "id": "c",
+            "text": "Inside the Safe"
+          },
+          {
+            "id": "d",
+            "text": "On a Grocery Store shelf"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-m06",
+        "question": "How much energy does a full Bag of Chips provide across all its charges?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30 energy"
+          },
+          {
+            "id": "b",
+            "text": "75 energy"
+          },
+          {
+            "id": "c",
+            "text": "150 energy"
+          },
+          {
+            "id": "d",
+            "text": "100 energy"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-m08",
+        "question": "Which weapon rule applies while your character is alive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Carry two weapons and drop either one"
+          },
+          {
+            "id": "b",
+            "text": "Carry one weapon; you cannot voluntarily drop it"
+          },
+          {
+            "id": "c",
+            "text": "Carry three weapons and drop any one"
+          },
+          {
+            "id": "d",
+            "text": "Carry any number of weapons and drop them freely"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-e04",
+        "question": "What does a regular Bloxy Cola give you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5 energy and a 10-second speed boost"
+          },
+          {
+            "id": "b",
+            "text": "15 energy and a permanent speed boost"
+          },
+          {
+            "id": "c",
+            "text": "15 energy and a 10-second speed boost"
+          },
+          {
+            "id": "d",
+            "text": "30 energy and a 10-second speed boost"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-e06",
+        "question": "How many clicks knock down the first-floor painting hiding the Safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four clicks"
+          },
+          {
+            "id": "b",
+            "text": "One click"
+          },
+          {
+            "id": "c",
+            "text": "Two clicks"
+          },
+          {
+            "id": "d",
+            "text": "Six clicks"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m01",
+        "question": "How are the three leftover slices assigned among players seated at the Dining Table on Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "By lowest energy, with no role preference"
+          },
+          {
+            "id": "b",
+            "text": "By most money, with no role preference"
+          },
+          {
+            "id": "c",
+            "text": "At random, with The Guest left out"
+          },
+          {
+            "id": "d",
+            "text": "At random, with The Guest more likely"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-m04",
+        "question": "Which food has unlimited stock at the Grocery Store?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Apples"
+          },
+          {
+            "id": "b",
+            "text": "Cookies"
+          },
+          {
+            "id": "c",
+            "text": "Bloxy Cola"
+          },
+          {
+            "id": "d",
+            "text": "Bags of Chips"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m05",
+        "question": "Which recipe makes a pie?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two food items in a Pie Dish, then the oven"
+          },
+          {
+            "id": "b",
+            "text": "Three food items in a Pie Dish, then the fridge"
+          },
+          {
+            "id": "c",
+            "text": "Three food items in a Pie Dish, then the oven"
+          },
+          {
+            "id": "d",
+            "text": "Three food items in a saucepan, then the oven"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-m09",
+        "question": "What happens if nobody opens the door on Night 4?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The visitor leaves the pizza outside and walks away"
+          },
+          {
+            "id": "b",
+            "text": "The visitor leaves, so the miniboss fight is skipped"
+          },
+          {
+            "id": "c",
+            "text": "The Impostor waits outside until Day 5"
+          },
+          {
+            "id": "d",
+            "text": "The Impostor breaks in, but no pizza is delivered"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-m10",
+        "question": "What stops further Basement invasions on Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Picking up the Padlock"
+          },
+          {
+            "id": "b",
+            "text": "Getting a Perfect boarding grade"
+          },
+          {
+            "id": "c",
+            "text": "Filling all three bedrolls"
+          },
+          {
+            "id": "d",
+            "text": "Winning the Lights Challenge"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m11",
+        "question": "With only three Basement bedrolls on Night 3, what happens if you do not sleep?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You lose 60 energy for missing sleep"
+          },
+          {
+            "id": "b",
+            "text": "You lose no energy for missing sleep"
+          },
+          {
+            "id": "c",
+            "text": "You lose 15 energy for missing sleep"
+          },
+          {
+            "id": "d",
+            "text": "You lose 120 energy for missing sleep"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m12",
+        "question": "What happens to a non-Guest player still outside when the Day 4 return timer ends?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lose 15 energy and teleport home"
+          },
+          {
+            "id": "b",
+            "text": "Lose 60 energy and teleport home"
+          },
+          {
+            "id": "c",
+            "text": "Lose 15 energy and stay outside"
+          },
+          {
+            "id": "d",
+            "text": "Lose 60 energy and stay outside"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-h03",
+        "question": "After the Lights Challenge turns on the Basement lights, what else is needed for early entry?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Open the Safe before entering"
+          },
+          {
+            "id": "b",
+            "text": "Board up the Basement door"
+          },
+          {
+            "id": "c",
+            "text": "Move the ladder to the Basement door"
+          },
+          {
+            "id": "d",
+            "text": "Unlock the door with the Basement Key"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-h06",
+        "question": "What is the intended sequence when Scary Larry leaves the Basement on Day 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fight him, then return to a bedroom upstairs"
+          },
+          {
+            "id": "b",
+            "text": "Run upstairs, then wait there until the next night"
+          },
+          {
+            "id": "c",
+            "text": "Hide, then run downstairs after he goes upstairs"
+          },
+          {
+            "id": "d",
+            "text": "Stay outside, then return after the invasion ends"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-h09",
+        "question": "If the Impostor survives Night 4, where is he when players enter the Sewer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Following them along the Sewer course"
+          },
+          {
+            "id": "b",
+            "text": "Outside the Sewer, unable to enter"
+          },
+          {
+            "id": "c",
+            "text": "Waiting on the Sewer boss platform"
+          },
+          {
+            "id": "d",
+            "text": "Blocking the Sewer exit ladder"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-m02",
+        "question": "Which entrances must be boarded for a Perfect grade on Day 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "All 14 windows and the front door, but not the toilet"
+          },
+          {
+            "id": "b",
+            "text": "The front door and toilet, but none of the 14 windows"
+          },
+          {
+            "id": "c",
+            "text": "All 14 windows, but not the front door or toilet"
+          },
+          {
+            "id": "d",
+            "text": "All 14 windows, the front door and the toilet"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-m03",
+        "question": "How much energy does The Guest lose from one slip on Day 4 ice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "60 energy"
+          },
+          {
+            "id": "b",
+            "text": "15 energy"
+          },
+          {
+            "id": "c",
+            "text": "30 energy"
+          },
+          {
+            "id": "d",
+            "text": "45 energy"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-m07",
+        "question": "Which rule applies to The Medic's starting Medkit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Six 50-energy uses, including the user and The Guest"
+          },
+          {
+            "id": "b",
+            "text": "Three 50-energy uses, excluding the user and The Guest"
+          },
+          {
+            "id": "c",
+            "text": "Six 50-energy uses, excluding the user and The Guest"
+          },
+          {
+            "id": "d",
+            "text": "Six 25-energy uses, excluding the user and The Guest"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h01",
+        "question": "Where can the Safe's code slip be hidden when it appears?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Under a movable object in the Attic"
+          },
+          {
+            "id": "b",
+            "text": "Under a movable object in the Basement"
+          },
+          {
+            "id": "c",
+            "text": "Inside a drawer in the Kitchen"
+          },
+          {
+            "id": "d",
+            "text": "Behind a painting in the Living Room"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h02",
+        "question": "How many switches must a non-Guest player click in the Lights Challenge, and within how long?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Eight switches in 20 seconds"
+          },
+          {
+            "id": "b",
+            "text": "Nine switches in 15 seconds"
+          },
+          {
+            "id": "c",
+            "text": "Nine switches in 20 seconds"
+          },
+          {
+            "id": "d",
+            "text": "Ten switches in 30 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h04",
+        "question": "What is the Night 2 invasion pattern after a Terrible boarding grade?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two villains in two bedrooms, leaving one safe"
+          },
+          {
+            "id": "b",
+            "text": "One villain in one bedroom and two in another"
+          },
+          {
+            "id": "c",
+            "text": "One villain in each of three bedrooms"
+          },
+          {
+            "id": "d",
+            "text": "Two villains in each of three bedrooms"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-h05",
+        "question": "On Night 4, which invasion pattern applies across the three bedrooms and the Basement?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One room invaded, with two villains"
+          },
+          {
+            "id": "b",
+            "text": "Three rooms invaded, with two villains each"
+          },
+          {
+            "id": "c",
+            "text": "Two rooms invaded, with two villains each"
+          },
+          {
+            "id": "d",
+            "text": "All four rooms invaded, with two villains each"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h07",
+        "question": "What removes one heart from Scary Larry during the Sewer fight?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn his back key while he is stunned"
+          },
+          {
+            "id": "b",
+            "text": "Hit him while he is spinning"
+          },
+          {
+            "id": "c",
+            "text": "Defeat three groups of his minions"
+          },
+          {
+            "id": "d",
+            "text": "Collect the Golden Crowbar before the fight"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-h08",
+        "question": "What warns a non-Guest player of Scary Larry's charge direction in the Sewer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red circles on the floor"
+          },
+          {
+            "id": "b",
+            "text": "A white spiral above his head"
+          },
+          {
+            "id": "c",
+            "text": "A line of red arrows"
+          },
+          {
+            "id": "d",
+            "text": "A green line on the floor"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h10",
+        "question": "What condition lets a survivor claim the Golden Crowbar and trigger the Evil Ending after the Sewer boss?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Having a Perfect boarding grade"
+          },
+          {
+            "id": "b",
+            "text": "Having a full energy bar"
+          },
+          {
+            "id": "c",
+            "text": "Having completed Uncle Pete's quest"
+          },
+          {
+            "id": "d",
+            "text": "Having no weapon in their inventory"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h11",
+        "question": "What happens when you enter the wrong Safe code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It opens and you lose 10 energy"
+          },
+          {
+            "id": "b",
+            "text": "It stays closed and you lose no energy"
+          },
+          {
+            "id": "c",
+            "text": "It opens and you lose no energy"
+          },
+          {
+            "id": "d",
+            "text": "It stays closed and you lose 10 energy"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-h12",
+        "question": "What happens if a non-Guest player fails or exits the Lights Challenge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lose 15 energy and cannot retry from that laptop"
+          },
+          {
+            "id": "b",
+            "text": "Lose 60 energy and cannot retry from that laptop"
+          },
+          {
+            "id": "c",
+            "text": "Lose no energy and can retry from that laptop"
+          },
+          {
+            "id": "d",
+            "text": "Lose 15 energy and can retry from that laptop"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

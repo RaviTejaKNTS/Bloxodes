@@ -42,10 +42,15 @@ jobs:
       - run: npm run supabase:migrations:check
       - run: node --import tsx scripts/ci/managed-schema.ts --apply
       - run: npm run supabase:managed-dev:check
+      - name: Save read-only site route report
+        continue-on-error: true
+        run: npm run --silent routes:report > "$RUNNER_TEMP/site-routes-report.json"
       - uses: actions/upload-artifact@v4
         with:
           name: managed-schema-${{ inputs.sha }}
-          path: ${{ runner.temp }}/managed-schema-receipt.json
+          path: |
+            ${{ runner.temp }}/managed-schema-receipt.json
+            ${{ runner.temp }}/site-routes-report.json
           retention-days: 1
   production:
     if: inputs.production

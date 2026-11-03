@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -42,9 +43,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = await getWikiPageBySlug(slug);
 
   if (!page) {
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${(await params).slug}`);
+    if (gameRoute) return gameRoute.metadata();
+
+    // Metadata must fail with the page so Next also recovers the hydrated head.
+    notFound();
   }
 
   const title = resolveSeoTitle(page.seo_title) ?? page.title ?? `Roblox Wiki | ${SITE_NAME}`;
@@ -85,6 +88,9 @@ export default async function WikiDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const data = await loadWikiDetailPageData(slug);
   if (!data) {
+    const gameRoute = await resolvePageTypeGameRoute(`/wiki/${(await params).slug}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
 

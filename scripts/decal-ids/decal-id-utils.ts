@@ -1,3 +1,5 @@
+import { planMissingDecalBatch } from "../shared/decal-discovery";
+
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const DECAL_ASSET_TYPE_ID = 13;
@@ -92,6 +94,7 @@ export type InsertMissingDecalRowsResult = {
   attempted: number;
   inserted: number;
   existing: number;
+  skippedAssetIds: number[];
 };
 
 export function clampNumber(value: string | undefined, fallback: number, min: number, max: number): number {
@@ -253,21 +256,18 @@ export async function upsertDecalRows(rows: DecalUpsertRow[], options?: { dryRun
 
 export async function insertMissingDecalRows(
   rows: DecalUpsertRow[],
-  options?: { dryRun?: boolean }
+  options?: { dryRun?: boolean; maxInserts?: number }
 ): Promise<InsertMissingDecalRowsResult> {
   const result: InsertMissingDecalRowsResult = {
     attempted: rows.length,
     inserted: 0,
-    existing: 0
+    existing: 0,
+    skippedAssetIds: []
   };
 
   if (!rows.length) return result;
-  if (options?.dryRun) {
-    console.log(`Dry run: would insert ${rows.length} missing decal rows.`);
-    result.inserted = rows.length;
-    return result;
-  }
 
+  // Dry runs still read existing IDs so known candidates never spend the insert budget.
   const sb = supabaseAdmin();
   for (const chunk of chunkArray(rows, 200)) {
     const ids = chunk.map((row) => row.asset_id);
@@ -278,9 +278,16 @@ export async function insertMissingDecalRows(
     if (existingError) throw new Error(`Failed to load existing decal rows: ${existingError.message}`);
 
     const existingIds = new Set((existingRows ?? []).map((row) => Number(row.asset_id)).filter(Number.isFinite));
-    const missingRows = chunk.filter((row) => !existingIds.has(row.asset_id));
-    result.existing += chunk.length - missingRows.length;
+    const missingRows = planMissingDecalBatch(chunk, existingIds, (options?.maxInserts ?? Infinity) - result.inserted);
+    result.existing += chunk.filter((row) => existingIds.has(row.asset_id)).length;
+    const retainedIds = new Set([...existingIds, ...missingRows.map((row) => row.asset_id)]);
+    result.skippedAssetIds.push(...chunk.filter((row) => !retainedIds.has(row.asset_id)).map((row) => row.asset_id));
     if (!missingRows.length) continue;
+    if (options?.dryRun) {
+      console.log(`Dry run: would insert ${missingRows.length} missing decal rows.`);
+      result.inserted += missingRows.length;
+      continue;
+    }
 
     const { error } = await sb.from("roblox_decal_ids").insert(missingRows);
     if (error) throw new Error(`Failed to insert missing decal rows: ${error.message}`);

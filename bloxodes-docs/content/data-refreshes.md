@@ -1,6 +1,6 @@
 # Data refreshes
 
-Last verified: 2026-10-22
+Last verified: 2026-10-30
 
 Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all run on the VPS through the stats worker (see [stats](stats.md#the-stats-worker)) and write production directly. Times are UTC.
 
@@ -18,11 +18,14 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 - **Page date:** the collectors set `catalog_pages.updated_at` for `roblox-music-ids` only when a run adds new songs (exact asset-ID lookup before writing) and the current date is at least seven days old (`scripts/shared/music-catalog-freshness.ts`). Reranking and chart-order changes never touch it, so the visible "Updated on" date and `dateModified` don't move daily.
 - `collect:top-songs` writes the new ranks first, then clears ranks for songs that left the list, so the trending list is never empty mid-run.
 - Game-specific music and decal usage is by hand: `sync:game-specific-id-sources` writes `data/game-specific-ids/source-backed.json`, then `seed:game-specific-id-usage` loads `roblox_music_id_game_usage` and `roblox_decal_id_game_usage`.
+- Hand-checked community songs live in `data/game-specific-ids/community-music.json` (A Dusty Trip's 30 car radio songs). Both full and `--only-music-game` syncs merge them in; a live row with the same game, asset and use type wins. To load one game into production, seed a file holding only that game's rows (`{"music":[...],"decals":[]}`) without `--replace-source-rows`, which only upserts those rows. Run it against managed development first (default profile, `--dry-run`, then for real), check the page, then repeat with `BLOXODES_ENV_PROFILE=production-preview`: `--dry-run`, then `--allow-prod`.
 
 ## Decal IDs
 
-- **Schedule:** 06:55 daily: `refresh:decal-ids` (`scripts/decal-ids/run-decal-id-refresh.ts`) collects, verifies and reranks.
-- **Data:** `roblox_decal_ids` and its views. 38,573 rows.
+- **Schedule:** 06:55 daily: `refresh:decal-ids` (`scripts/decal-ids/run-decal-id-refresh.ts`) collects, imports candidates, verifies and reranks.
+- **Data:** `roblox_decal_ids` and its views. 38,574 rows.
+- **Discovery:** Roblox Toolbox search ignores the requested sort and returns the same old decals for the evergreen queries, so the collector searches the current year (for example `2026`) first. `ROBLOX_DECAL_COLLECT_MAX_ASSETS` (3,000 on the worker) limits **new inserts**; already-known candidates don't count, so later queries still run. Roblox ignores the requested sort, so a sort whose first page matches an earlier sort of the same query is skipped, and a page that repeats the query's earlier pages ends it. Every Toolbox request waits `ROBLOX_DECAL_TOOLBOX_DELAY_MS`. If Roblox still rate-limits the search (HTTP 429 after retries), discovery stops early, keeps what it inserted, verify and rerank still run, and the ledger records `partial` with `rate_limited: 1` on the collect step (exit stays 0). The first fixed run on 2026-10-30 inserted 490 decals before a 429.
+- **Health:** each run writes a `decal_ids_refresh` row to `stats_job_runs` with per-step counts in `metadata.steps` and `latest_first_seen_at`. If no decal has been inserted for 7 days, the run finishes every step, records `partial` and exits nonzero, so the wrapper logs a failure.
 
 ## Marketplace items
 

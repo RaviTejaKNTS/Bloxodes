@@ -1,0 +1,475 @@
+{
+  "page": {
+    "universe_id": 66654135,
+    "code": "murder-mystery-2",
+    "title": "Murder Mystery 2 Roblox Quiz: 15 Questions on Roles and XP",
+    "description_md": "Think you have Murder Mystery 2 figured out? This quiz covers which roles a round starts with, how Innocents and the Murderer win, how XP and the coin bag add up, how Prestige works, and a few crafting and trading rules.\n\nThe easy questions cover the basics. The hard ones test how well you know the game's rules.",
+    "seo_title": null,
+    "seo_description": "Test what you know about Roblox Murder Mystery 2 roles, XP, the coin bag, Prestige, crafting and trading, from easy basics to hard questions on the rules.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which three roles does a standard round assign at the start?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Innocent, Sheriff and Hero"
+          },
+          {
+            "id": "b",
+            "text": "Innocent, Sheriff and Murderer"
+          },
+          {
+            "id": "c",
+            "text": "Innocent, Murderer and Detective"
+          },
+          {
+            "id": "d",
+            "text": "Sheriff, Murderer and Hero"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "What are Innocents supposed to do in a standard round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep the Sheriff from reaching the Murderer"
+          },
+          {
+            "id": "b",
+            "text": "Collect coins and fill the coin bag first"
+          },
+          {
+            "id": "c",
+            "text": "Craft the rarest weapon before the Murderer finds you"
+          },
+          {
+            "id": "d",
+            "text": "Avoid the Murderer and expose them with detective skills"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What is the Murderer's goal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Eliminate everyone and avoid being shot by the Sheriff"
+          },
+          {
+            "id": "b",
+            "text": "Protect the Innocents from the Sheriff's gun"
+          },
+          {
+            "id": "c",
+            "text": "Collect the most coins in the round"
+          },
+          {
+            "id": "d",
+            "text": "Stay hidden from every Innocent for the whole round"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "What is the most players one Murder Mystery 2 server can hold?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8 players"
+          },
+          {
+            "id": "b",
+            "text": "16 players"
+          },
+          {
+            "id": "c",
+            "text": "12 players"
+          },
+          {
+            "id": "d",
+            "text": "20 players"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "How can Innocents win a standard round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Murderer eliminates everyone"
+          },
+          {
+            "id": "b",
+            "text": "The timer runs out, or the Murderer is shot"
+          },
+          {
+            "id": "c",
+            "text": "Every Innocent fills a coin bag"
+          },
+          {
+            "id": "d",
+            "text": "The Sheriff is eliminated"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "What happens to the materials when you craft an item?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They are used up"
+          },
+          {
+            "id": "b",
+            "text": "They are sold to the Shop"
+          },
+          {
+            "id": "c",
+            "text": "They are returned to your inventory"
+          },
+          {
+            "id": "d",
+            "text": "They stay in your inventory for the next craft"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "How much base XP (before any multiplier) does an Innocent earn for each second they stay alive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "2 XP"
+          },
+          {
+            "id": "b",
+            "text": "3 XP"
+          },
+          {
+            "id": "c",
+            "text": "8 XP"
+          },
+          {
+            "id": "d",
+            "text": "5 XP"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "How many coins can a player without Elite collect in one round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40 coins"
+          },
+          {
+            "id": "b",
+            "text": "20 coins"
+          },
+          {
+            "id": "c",
+            "text": "30 coins"
+          },
+          {
+            "id": "d",
+            "text": "50 coins"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Who can take a Sheriff's dropped gun and become the Hero?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only the Murderer, who takes the gun from the Sheriff"
+          },
+          {
+            "id": "b",
+            "text": "Only the player with the most coins"
+          },
+          {
+            "id": "c",
+            "text": "Any Innocent who picks up the dropped gun"
+          },
+          {
+            "id": "d",
+            "text": "Only a player who was assigned the Hero role at the start"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "How much base XP does filling a full coin bag give an Innocent?",
+        "options": [
+          {
+            "id": "a",
+            "text": "300 XP"
+          },
+          {
+            "id": "b",
+            "text": "900 XP"
+          },
+          {
+            "id": "c",
+            "text": "750 XP"
+          },
+          {
+            "id": "d",
+            "text": "450 XP"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "How much base XP does a Sheriff earn for each Innocent saved after shooting the Murderer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "250 XP"
+          },
+          {
+            "id": "b",
+            "text": "500 XP"
+          },
+          {
+            "id": "c",
+            "text": "450 XP"
+          },
+          {
+            "id": "d",
+            "text": "320 XP"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "How much base XP does the Murderer earn for each Innocent eliminated?",
+        "options": [
+          {
+            "id": "a",
+            "text": "700 XP"
+          },
+          {
+            "id": "b",
+            "text": "350 XP"
+          },
+          {
+            "id": "c",
+            "text": "500 XP"
+          },
+          {
+            "id": "d",
+            "text": "800 XP"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "How much bonus base XP does a Hero earn for shooting the Murderer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "250 XP"
+          },
+          {
+            "id": "b",
+            "text": "400 XP"
+          },
+          {
+            "id": "c",
+            "text": "600 XP"
+          },
+          {
+            "id": "d",
+            "text": "800 XP"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "By how much does winning a standard round multiply the round's XP?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1.25 times"
+          },
+          {
+            "id": "b",
+            "text": "1.5 times"
+          },
+          {
+            "id": "c",
+            "text": "2 times"
+          },
+          {
+            "id": "d",
+            "text": "3 times"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "After you accept your first Prestige at Level 100, what level do you go back to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Level 2"
+          },
+          {
+            "id": "b",
+            "text": "Level 25"
+          },
+          {
+            "id": "c",
+            "text": "Level 50"
+          },
+          {
+            "id": "d",
+            "text": "Level 1"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What is the highest number of Prestiges a player can accept?",
+        "options": [
+          {
+            "id": "a",
+            "text": "7 Prestiges"
+          },
+          {
+            "id": "b",
+            "text": "10 Prestiges"
+          },
+          {
+            "id": "c",
+            "text": "15 Prestiges"
+          },
+          {
+            "id": "d",
+            "text": "20 Prestiges"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "What does Prestige change about a player's gameplay?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It makes the player run faster"
+          },
+          {
+            "id": "b",
+            "text": "It gives the player a bigger coin bag"
+          },
+          {
+            "id": "c",
+            "text": "Nothing, because it gives no gameplay ability"
+          },
+          {
+            "id": "d",
+            "text": "It improves the odds of becoming the Murderer"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "Which group contains only item types that cannot be traded to another player?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Effects, emotes and radios"
+          },
+          {
+            "id": "b",
+            "text": "Pets, emotes and radios"
+          },
+          {
+            "id": "c",
+            "text": "Effects, pets and radios"
+          },
+          {
+            "id": "d",
+            "text": "Effects, emotes and guns"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "If you craft a Random Painted Seer, do you always get a Chroma Seer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Yes, every time you craft one"
+          },
+          {
+            "id": "b",
+            "text": "Yes, once you have enough Godly Shards"
+          },
+          {
+            "id": "c",
+            "text": "No, you can never get a Chroma Seer from it"
+          },
+          {
+            "id": "d",
+            "text": "No, a Chroma Seer is only one possible result"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ]
+  }
+}

@@ -1,34 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { isNavLinkActive, minecraftNavLinks, resolveSearchScope, siteNavLinks, siteNavLinksForPath } from "@/lib/site-navigation";
+import { isNavLinkActive, resolveSearchScope, siteNavLinks, siteNavLinksForPath } from "@/lib/site-navigation";
 import { cacheTagsForEvent, cacheTagsForPath } from "@/lib/public-cache-tags";
 
 describe("Minecraft navigation and publication invalidation", () => {
   it("keeps the edition directory and tool navigation", () => {
-    expect(minecraftNavLinks.map((link) => link.href)).toEqual(["/minecraft", "/minecraft/wiki", "/minecraft/tools", "/games"]);
-    expect(siteNavLinksForPath("/minecraft/bedrock/wiki/enchantments")).toBe(minecraftNavLinks);
+    const menu = { namespace: "minecraft", title: "Minecraft", href: "/games/minecraft", image: "/cover.webp", pages: [{ kind: "wiki", gameId: "java", title: "Java", href: "/wiki/minecraft-java" }, { kind: "collection", gameId: "java", title: "Enchantments", href: "/wiki/minecraft-java/enchantments" }] };
+    expect(siteNavLinksForPath(menu.pages[1].href, {}, [menu]).map(link => link.href)).toEqual([menu.href, menu.pages[0].href]);
     expect(siteNavLinksForPath("/minecraft-tools")).toBe(siteNavLinks);
-    expect(isNavLinkActive("/minecraft/bedrock/wiki/enchantments", "/minecraft")).toBe(false);
-    expect(isNavLinkActive("/minecraft/bedrock/wiki/enchantments", "/minecraft/wiki")).toBe(true);
-    expect(resolveSearchScope("/minecraft/tools/xp-calculator")).toEqual({ scope: "minecraft", label: "Minecraft" });
+    expect(isNavLinkActive(menu.pages[1].href, menu.pages[0].href)).toBe(true);
+    expect(resolveSearchScope(menu.pages[1].href, {}, [menu])).toEqual({ scope: "games", label: "games" });
     expect(resolveSearchScope("/minecraft-tools").scope).not.toBe("minecraft");
   });
 
-  it("invalidates published collections, their pagination, tool dependencies and indexes", () => {
-    const tags = cacheTagsForEvent("minecraft_wiki_collection", "minecraft-bedrock-enchantments");
-    for (const path of ["/minecraft", "/minecraft/wiki", "/minecraft/bedrock/wiki/enchantments", "/minecraft/bedrock/wiki/enchantments/page/2", "/minecraft/tools/anvil-enchantment-planner", "/sitemaps/minecraft.xml", "/feed.xml"]) {
-      expect(cacheTagsForPath(path).some((tag) => tags.includes(tag)), path).toBe(true);
-    }
-    expect(tags).toContain("minecraft-wiki-collection:minecraft-bedrock-enchantments");
-    expect(tags).not.toContain("wiki-collection-index");
-    expect(tags).not.toContain("tools-index");
-  });
-
-  it("refreshes cached wiki identity and isolated tool metadata", () => {
-    expect(cacheTagsForEvent("minecraft_game", "minecraft")).toEqual(expect.arrayContaining(["minecraft-games-index", "minecraft-game:minecraft", "minecraft-wiki:minecraft"]));
-    expect(cacheTagsForEvent("minecraft_wiki", "minecraft")).toContain("minecraft-wiki:minecraft");
-    expect(cacheTagsForEvent("minecraft_tool", "xp-calculator")).toContain("minecraft-tool:xp-calculator");
-    for (const event of ["minecraft_game", "minecraft_wiki"] as const) {
-      expect(cacheTagsForPath("/minecraft/wiki/weapons").some(tag => cacheTagsForEvent(event, "minecraft").includes(tag))).toBe(true);
-    }
+  it("uses shared publication events and stored page dependencies", () => {
+    expect(cacheTagsForEvent("game_content", "wiki/minecraft-bedrock/enchantments")).toContain("sitemap:games");
+    expect(cacheTagsForPath("/wiki/minecraft-bedrock/enchantments/page/99")).toContain("page:/wiki/minecraft-bedrock/enchantments");
+    expect(cacheTagsForPath("/tools/minecraft-xp-calculator")).toContain("page:/tools/minecraft-xp-calculator");
   });
 });

@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/evade",
+  "title": "Evade Music IDs",
+  "seo_title": "Evade Music IDs [70 Boombox Songs]",
+  "meta_description": "Find 70 Evade music IDs for the Boombox. Search by title or artist, copy the number, and learn why some songs stay silent or stop playing.",
+  "intro_md": "These 70 Evade songs are Roblox audio tracks tied to the game. Search by title or artist, copy the number, and paste it into the Boombox when its controls show an ID field.\n\nEvade is a fast movement game with loud sounds and changing item systems. Roblox audio rules can change too, and that can affect any of these songs.",
+  "description_md": "## Using music IDs with the Evade Boombox\n\nAn Evade Music ID is the number for one Roblox audio track. Players also call it an Evade song code or Boombox code. Use a number only if the Boombox accepts custom IDs. It isn't a reward, and it doesn't unlock a cosmetic, perk or nextbot. Track details may include an artist, album, duration or cover art.\n\n## Playing an Evade song with its number\n\n1. Join [Evade on Roblox](https://www.roblox.com/games/9872472334/Evade).\n2. Open the shop or inventory and check how Boombox access works in your current server.\n3. Equip the Boombox or open its music menu.\n4. Paste the digits from the song when the menu shows an ID or search field.\n5. Play the track, then adjust the in-game music volume if needed.\n\nBoombox controls and button layouts can differ by device. If the Boombox only offers favorites, a soundtrack list or a search field, use that instead. Older tips may describe controls that no longer appear. The [Evade wiki's Boombox page](https://evade.fandom.com/wiki/Boombox) covers the item in more detail.",
+  "how_it_works_md": "## Why an Evade song might not play\n\n- **The Boombox no longer accepts that input.** Use its current search, favorites or soundtrack list.\n- **The track was moderated or restricted.** Roblox can change a track's availability or permissions, and older songs can stop playing after those changes.\n- **Your Boombox access changed.** Recheck the shop and inventory in your current server.\n- **The number had extra text.** Paste only the digits.\n- **The volume is muted.** Check Evade's music volume, Roblox's volume and your device output.\n\nTo narrow it down, try a second song and a built-in Evade track. If only one song fails, that audio is probably unavailable. If every ID fails while a built-in track plays, the Boombox input has probably changed.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. The current Boombox may not accept custom IDs, and Roblox can restrict an audio asset.",
+      "q": "Are these guaranteed working Evade Boombox codes?"
+    },
+    {
+      "a": "Equip or open the Boombox and use its visible ID or search field. Paste only the digits. If it shows a favorites or soundtrack list instead, use that menu.",
+      "q": "Where do I enter an Evade Music ID?"
+    },
+    {
+      "a": "Roblox audio permissions and Evade's Boombox controls have changed over time. Older lists can include removed songs or steps for an old version of the Boombox.",
+      "q": "Why do older Evade Boombox lists look different?"
+    },
+    {
+      "a": "The track may be unavailable, the Boombox may have changed, access may be missing, or your game or device volume may be muted. Test a built-in track and a second song.",
+      "q": "Why is an Evade song silent?"
+    },
+    {
+      "a": "Not confirmed. A song being tied to Evade doesn't make it an official Evade recording, and it doesn't prove the song shows up in the current Boombox menu.",
+      "q": "Are these official Evade soundtrack songs?"
+    },
+    {
+      "a": "Not guaranteed. Test the ID in the other game before you rely on it.",
+      "q": "Can I use an Evade Music ID in other Roblox games?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Evade's Boombox is part of its item and soundtrack systems, which can change alongside Roblox audio rules. For the movement and survival experience, see [Evade on Roblox](https://www.roblox.com/games/9872472334/Evade).",
+  "wiki_sort_order": null
+}

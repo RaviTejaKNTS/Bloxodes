@@ -1,3 +1,4 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { mapPublishConcurrent, readPublishQuery } from "../shared/publish-network.mjs";
 import { requireFranchiseCollectionImage } from "../ci/franchise-image-contract.mjs";
 import { assertProductionPublication } from "../ci/publication-guard";
@@ -19,15 +20,7 @@ type Namespace = string;
 
 type FranchiseConfig = {
   label: string;
-  routePrefix: string;
-  tablePrefix: string;
   mediaPrefix: string;
-};
-
-const FRANCHISES: Record<Namespace, FranchiseConfig> = {
-  gta: { label: "GTA", routePrefix: "/gta/wiki", tablePrefix: "gta", mediaPrefix: "gta" },
-  minecraft: { label: "Minecraft", routePrefix: "/minecraft/wiki", tablePrefix: "minecraft", mediaPrefix: "minecraft" },
-  "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki", tablePrefix: "red_dead", mediaPrefix: "red-dead" }
 };
 
 type Manifest = {
@@ -86,7 +79,7 @@ const publish = argv.includes("--publish");
 const uploadMedia = argv.includes("--upload-media");
 const allowProd = argv.includes("--allow-prod");
 const namespace = value("--namespace") as Namespace | "";
-const minecraftMediaConcurrency = Number(value("--minecraft-media-concurrency") || "8");
+const mediaConcurrency = Number(value("--media-concurrency") || "8");
 const manifestPaths = collectValues("--manifest").map((entry) => path.resolve(entry));
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const ALLOWED_SYSTEM_FIELDS = new Set(["slug", "section", "sortOrder", "image"]);
@@ -97,7 +90,7 @@ const FORBIDDEN_PUBLIC_FIELDS = new Set([
 
 function usage(): never {
   console.log(
-    "Usage: npm run sync:franchise-collection-runtime -- --namespace <game-namespace> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod] [--minecraft-media-concurrency <1-8>]"
+    "Usage: npm run sync:franchise-collection-runtime -- --namespace <game-namespace> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod] [--media-concurrency <1-8>]"
   );
   process.exit(0);
 }
@@ -179,8 +172,8 @@ function resolveInside(root: string, valueToResolve: string, label: string): str
   return resolved;
 }
 
-export async function planManifest(namespaceValue: Namespace, manifestPath: string, context?: { wikiCanonicalPath: string; strictPaths?: boolean }): Promise<Plan> {
-  const config = FRANCHISES[namespaceValue] ?? { label: namespaceValue, routePrefix: `/${namespaceValue}/wiki`, tablePrefix: namespaceValue, mediaPrefix: namespaceValue };
+export async function planManifest(namespaceValue: Namespace, manifestPath: string, context?: { wikiCanonicalPath: string; strictPaths?: boolean; db?: SupabaseClient }): Promise<Plan> {
+  const config = { label: namespaceValue, mediaPrefix: namespaceValue };
   const root = path.dirname(manifestPath);
   const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8")) as Manifest;
   if (manifest.schemaVersion !== 1) throw new Error(`${manifestPath} must use schemaVersion 1.`);
@@ -191,8 +184,6 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
   const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
   if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
-  if (namespaceValue === "minecraft" && (!["minecraft", "minecraft-java", "minecraft-bedrock"].includes(gameSlug) || pageType !== "database")) throw new Error("Minecraft requires an approved edition identity and database collections.");
-  if (namespaceValue === "minecraft" && (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length || manifest.sourceUrls.some(url => typeof url !== "string" || !url.startsWith("https://")))) throw new Error("Minecraft collections need verified HTTPS source URLs.");
   let wikiPath = context?.wikiCanonicalPath;
   if (!wikiPath) {
     const sb = gameDatabase(supabaseAdmin(), namespaceValue);
@@ -223,6 +214,22 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
     throw new Error(`${datasetPath} identity does not match its manifest.`);
   }
 
+  // Reuse exact immutable keys by byte hash, including historical shared artwork
+  // prefixes. New objects use the same content-addressed rule for every game.
+  const existingImages = new Map<string, string>();
+  const existingDb = gameDatabase(context?.db ?? supabaseAdmin(), namespaceValue);
+  const existingPage = await readPublishQuery(() => existingDb.from("wiki_collection_pages").select("published_dataset_id").eq("wiki_slug", gameSlug).eq("collection_slug", collectionSlug).maybeSingle());
+  if (existingPage.error) throw existingPage.error;
+  if (existingPage.data?.published_dataset_id) {
+    for (let offset = 0; ; offset += 500) {
+      const stored = await readPublishQuery(() => existingDb.from("wiki_collection_items").select("item_slug,image_key,image_sha256").eq("dataset_id", existingPage.data!.published_dataset_id).order("item_slug").range(offset, offset + 499));
+      if (stored.error) throw stored.error;
+      for (const row of stored.data ?? []) {
+        if (row.image_key?.startsWith(`${namespaceValue}/`) && row.image_sha256) existingImages.set(`${row.item_slug}:${row.image_sha256}`, row.image_key);
+      }
+      if ((stored.data?.length ?? 0) < 500) break;
+    }
+  }
   const seen = new Set<string>();
   const items = await mapPublishConcurrent(document.items, async (row, index): Promise<PlannedItem> => {
     const item = row.item ?? {};
@@ -259,7 +266,7 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
       }
       const prepared = await prepareImage(source);
       image = {
-        image_key: collectionImageKey({ namespace: namespaceValue, mediaPrefix: config.mediaPrefix, gameSlug: namespaceValue === "minecraft" ? "minecraft" : gameSlug, collectionSlug, itemSlug, hash: prepared.hash, extension: extensionForMime(prepared.mime) }),
+        image_key: existingImages.get(`${itemSlug}:${prepared.hash}`) ?? collectionImageKey({ namespace: namespaceValue, mediaPrefix: config.mediaPrefix, gameSlug: gameSlug, collectionSlug, itemSlug, hash: prepared.hash, extension: extensionForMime(prepared.mime) }),
         image_mime: prepared.mime,
         image_width: prepared.width,
         image_height: prepared.height,
@@ -305,7 +312,7 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
     namespace: namespaceValue,
     manifest,
     manifestPath,
-    code: `${gameSlug}-${collectionSlug}`,
+    code: `${finalJson?.wiki_slug ?? gameSlug}-${collectionSlug}`,
     pageType,
     datasetPath,
     contentHash: sha256(JSON.stringify(stableValue(hashDocument))),
@@ -327,9 +334,8 @@ function resolveCountTokens<T>(valueToResolve: T, count: number): T {
 export function pageCopy(plan: Plan): Record<string, unknown> | null {
   if (!plan.finalJson) return null;
   const final = resolveCountTokens(plan.finalJson, plan.items.length);
-  const gameSlug = plan.manifest.game.slug;
   const collectionSlug = plan.manifest.collection.slug;
-  if (final.wiki_slug !== gameSlug || final.collection_slug !== collectionSlug || final.code !== plan.code) {
+  if (typeof final.wiki_slug !== "string" || !SAFE_SLUG.test(final.wiki_slug) || final.collection_slug !== collectionSlug || final.code !== `${final.wiki_slug}-${collectionSlug}` || final.code !== plan.code) {
     throw new Error(`${plan.code} final.json identity does not match its manifest.`);
   }
   for (const key of ["title", "display_name", "seo_title", "meta_description"] as const) {
@@ -375,6 +381,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   const wiki = await readPublishQuery(() => sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("game_id", game.data!.id).maybeSingle());
   if (wiki.error) throw wiki.error;
   if (!wiki.data || !stageRevision && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
+  if (plan.finalJson && plan.finalJson.wiki_slug !== wiki.data.slug) throw new Error(`${plan.code} final.json wiki owner does not match the published wiki.`);
   const copy = pageCopy(plan);
   let pageQuery = await readPublishQuery(() => sb
     .from(pagesTable)
@@ -422,7 +429,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
         runtimeManifestSchemaVersion: plan.manifest.schemaVersion,
         namespace: plan.namespace,
         datasetFile: path.basename(plan.datasetPath),
-        mediaPrefix: `${plan.config.mediaPrefix}/${plan.namespace === "minecraft" ? "minecraft" : plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
+        mediaPrefix: `${plan.config.mediaPrefix}/${plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
         sourceUrls: plan.manifest.sourceUrls
       }
     }).select("id, item_count").single();
@@ -462,8 +469,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
 export async function runFranchiseCollectionRuntimeCli() {
   if (argv.includes("--help") || argv.includes("-h")) usage();
   if (!SAFE_SLUG.test(namespace) || namespace === "roblox") throw new Error("--namespace must be a non-Roblox game namespace.");
-  if (argv.includes("--minecraft-media-concurrency") && namespace !== "minecraft") throw new Error("--minecraft-media-concurrency is only supported for Minecraft.");
-  if (!Number.isInteger(minecraftMediaConcurrency) || minecraftMediaConcurrency < 1 || minecraftMediaConcurrency > 8) throw new Error("--minecraft-media-concurrency must be an integer from 1 to 8.");
+  if (!Number.isInteger(mediaConcurrency) || mediaConcurrency < 1 || mediaConcurrency > 8) throw new Error("--media-concurrency must be an integer from 1 to 8.");
   if (!manifestPaths.length) throw new Error("At least one --manifest is required.");
   if (stage && publish) throw new Error("--stage creates unpublished revisions and cannot use --publish.");
   if (publish && !apply) throw new Error("--publish requires --apply.");
@@ -471,7 +477,7 @@ export async function runFranchiseCollectionRuntimeCli() {
 
   if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && apply) assertProductionPublication();
   const namespaceValue = namespace as Namespace;
-  const config = FRANCHISES[namespaceValue] ?? { label: namespaceValue, routePrefix: `/${namespaceValue}/wiki`, tablePrefix: namespaceValue, mediaPrefix: namespaceValue };
+  const config = { label: namespaceValue, mediaPrefix: namespaceValue };
   const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
   if (apply && !managed && !allowProd) throw new Error(`${config.label} collection writes default to managed development; production requires --allow-prod.`);
@@ -481,7 +487,6 @@ export async function runFranchiseCollectionRuntimeCli() {
   for (const manifestPath of manifestPaths) plans.push(await planManifest(namespaceValue, manifestPath));
   // Dry plans are also publication preflights in selected-content CI.
   for (const plan of plans) requireFranchiseCollectionImage(plan.items, plan.code);
-  if (stage && plans.some(plan => plan.manifest.game.slug === "minecraft")) throw new Error("Staging requires independent edition identities.");
   console.table(plans.map((plan) => ({ namespace: plan.namespace, code: plan.code, pageType: plan.pageType, items: plan.items.length, images: plan.items.filter((item) => item.image_key).length, contentHash: plan.contentHash })));
   if (!apply) return;
 
@@ -489,10 +494,10 @@ export async function runFranchiseCollectionRuntimeCli() {
   const r2Config = needsR2 && (uploadMedia || publish) ? loadR2ClientConfig(process.env) : null;
   if (r2Config && r2Config.bucket !== "bloxodes-wiki") throw new Error(`Expected shared R2 bucket bloxodes-wiki, received ${r2Config.bucket}.`);
   const r2 = r2Config ? new R2Client(r2Config) : null;
-  const confirmedMediaKeys = namespaceValue === "minecraft" ? new Set<string>() : undefined;
+  const confirmedMediaKeys = new Set<string>();
   for (const plan of plans) {
-    if (uploadMedia && r2) await uploadCollectionImages(plan.items, r2, confirmedMediaKeys, minecraftMediaConcurrency);
-    if (publish && r2) await verifyCollectionImages(plan.items, r2, plan.code, confirmedMediaKeys, minecraftMediaConcurrency);
+    if (uploadMedia && r2) await uploadCollectionImages(plan.items, r2, confirmedMediaKeys, mediaConcurrency);
+    if (publish && r2) await verifyCollectionImages(plan.items, r2, plan.code, confirmedMediaKeys, mediaConcurrency);
     await applyPlan(plan);
   }
 }

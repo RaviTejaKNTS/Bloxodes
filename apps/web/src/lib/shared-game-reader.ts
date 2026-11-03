@@ -25,6 +25,7 @@ function humanizeSlug(value: string): string {
 }
 
 export type SharedGameGame = {
+  url_style?: "namespace" | "page_type";
   id: string;
   namespace: string;
   kind: "game" | "franchise";
@@ -162,14 +163,6 @@ export function createGameReader(namespace: string) {
 async function withCache<T>(key: string[], tags: string[], loader: () => Promise<T>): Promise<T> {
   if (BYPASS_CACHE) return loader();
   return publicContentCache(loader, key, { revalidate: REVALIDATE_SECONDS, tags })();
-}
-
-function buildSharedGameWikiPath(slug: string): string {
-  return `/${namespace}/wiki/${normalizeSlug(slug)}`;
-}
-
-function buildSharedGameCollectionPath(wikiSlug: string, collectionSlug: string): string {
-  return `${buildSharedGameWikiPath(wikiSlug)}/${normalizeSlug(collectionSlug)}`;
 }
 
 type SharedGameWikiImageFields = {
@@ -441,5 +434,5 @@ async function loadPublishedSharedGameWikiCollectionRuntime(
 
 const getPublishedSharedGameWikiCollectionRuntime = cache(loadPublishedSharedGameWikiCollectionRuntime);
 
-return { buildSharedGameWikiPath, buildSharedGameCollectionPath, resolveSharedGameWikiCoverImage, resolveSharedGameWikiThumbnailImage, listPublishedSharedGameGames, getSharedGameGameBySlug, listPublishedSharedGameWikiPages, getSharedGameWikiPageBySlug, getSharedGameWikiCollectionPageByPath, listPublishedSharedGameWikiCollectionsByWikiSlug, listPublishedSharedGameWikiCollections, listPublishedSharedGameWikiCollectionImageUrls, getPublishedSharedGameWikiCollectionRuntime };
+return { resolveSharedGameWikiCoverImage, resolveSharedGameWikiThumbnailImage, listPublishedSharedGameGames, getSharedGameGameBySlug, listPublishedSharedGameWikiPages, getSharedGameWikiPageBySlug, getSharedGameWikiCollectionPageByPath, listPublishedSharedGameWikiCollectionsByWikiSlug, listPublishedSharedGameWikiCollections, listPublishedSharedGameWikiCollectionImageUrls, getPublishedSharedGameWikiCollectionRuntime };
 }

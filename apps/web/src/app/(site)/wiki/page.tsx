@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { WIKI_INDEX_TITLE, WIKI_INDEX_DESCRIPTION } from "./index-content";
@@ -34,5 +35,5 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
 
 export default async function WikiIndexPage({ searchParams }: PageProps) {
   const data = await loadWikiIndexPageData(1, await searchParams);
-  return renderWikiIndexPage(data);
+  return <>{await renderWikiIndexPage(data)}<OtherGamesSection kind="wiki" /></>;
 }

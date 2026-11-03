@@ -1,0 +1,40 @@
+{
+  "code": "admin-commands",
+  "title": "Roblox Admin Commands: What They Are, How to Use Them",
+  "seo_title": "Roblox Admin Commands: What They Are, How to Use Them",
+  "meta_description": "Learn how Roblox admin commands work and browse command lists for HD Admin, Kohl's Admin, Basic Admin Essentials, and Adonis.",
+  "intro_md": "Four admin systems each have their own command list: [HD Admin](https://bloxodes.com/catalog/admin-commands/hd-admin), [Kohl's Admin](https://bloxodes.com/catalog/admin-commands/kohls-admin), [Basic Admin Essentials](https://bloxodes.com/catalog/admin-commands/basic-admin), and [Adonis Admin](https://bloxodes.com/catalog/admin-commands/adonis-admin).\n\nEach system page lists commands, grouped by the system's own categories, with aliases, arguments, and rank or permission details where available.\n\nWhether you just got a moderator rank in someone's game, run your own experience, or simply want to know what that person typing `;fly me` is doing, start here.",
+  "description_md": "## What are Roblox admin commands?\n\nAdmin commands are text or menu-driven commands that let trusted players moderate and control a Roblox server. They come from an **admin system**: a script the game's creator installs that adds a command bar or chat commands, a rank system, and moderation tools.\n\nTypical things admin commands can do:\n\n- **Moderation:** kick, ban, mute, warn, or teleport players.\n- **Server control:** lock the server, shut it down, or send announcements.\n- **Player effects:** fly, speed, jump power, forcefields, sizes, and morphs.\n- **Utility and fun:** give gear, spawn objects, change the time of day, play effects.\n\nCommands are typed with a **prefix** such as `;` or `:` followed by the command name and its arguments, for example `;kick PlayerName` or `:fly me`.\n\n## Four admin systems\n\n- **[HD Admin](https://bloxodes.com/catalog/admin-commands/hd-admin)**: a GUI-driven system with a command bar and configurable rank ladder.\n- **[Kohl's Admin](https://bloxodes.com/catalog/admin-commands/kohls-admin)**: the classic chat-command system that powered many admin house games, now rebuilt with roles and addons.\n- **[Basic Admin Essentials](https://bloxodes.com/catalog/admin-commands/basic-admin)**: a command pack organized around five permission levels.\n- **[Adonis Admin](https://bloxodes.com/catalog/admin-commands/adonis-admin)**: an open-source, configurable suite with hundreds of commands, logging, and plugin support.\n\n## How to tell which admin system a game uses\n\nThe systems look different in game, so a few clues usually give it away:\n\n1. **Type the prefix.** Try `;cmds` then `:cmds`. Whichever opens a command list tells you the prefix the game uses.\n2. **Look at the UI.** HD Admin shows a rounded command bar and rank menu. Adonis opens a themed window with settings and logs. Kohl's and BAE are chat-first with simpler list GUIs.\n3. **Check join messages.** Many systems print a load message or show a version tag in their menu.\n\nOnce you know the system, browse its command reference instead of guessing syntax.\n\n## How do you get admin in a game?\n\nThere is no universal way to get admin, because ranks belong to each game:\n\n- **The owner grants it.** Owners can rank friends and staff through the admin system's config or in-game rank commands.\n- **Gamepasses.** Some games sell admin or VIP access as a gamepass, depending on the owner's setup.\n- **Group roles.** Group games often map admin levels to group ranks automatically.\n\nBe careful with anything else: websites or downloads that promise \"free admin\" in other people's games are scams or exploits. A game only has admin commands if its creator installed an admin system, and only that game's configuration decides who can use them.\n\n## Installing an admin system in your own game\n\nInstallation differs by system and version. Use the current official documentation for each system, then review its configuration and permissions before publishing your experience.\n\nEach linked command reference includes setup notes, rank overviews, and tips specific to that system.",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "Admin commands are moderation and utility commands added by an admin system script that a game's creator installs. Trusted players type a prefix like ; or : followed by a command, such as ;kick PlayerName, to moderate the server, control players, or trigger effects.",
+      "q": "What are admin commands in Roblox?"
+    },
+    {
+      "a": "Ranks are controlled by each game. You get admin when the owner ranks you, when you buy an admin gamepass the game sells, or when your group rank maps to an admin level. There is no way to give yourself admin in someone else's game, and sites that promise free admin are scams.",
+      "q": "How do I get admin commands in a Roblox game?"
+    },
+    {
+      "a": "Try typing ;cmds and :cmds in chat. Whichever opens a command list reveals the prefix and system. The menu style also helps: HD Admin uses a rounded command bar, Adonis opens a themed window with logs and settings, while Kohl's Admin and Basic Admin Essentials are chat-first.",
+      "q": "Which admin system does my favorite game use?"
+    },
+    {
+      "a": "HD Admin, Kohl's Admin, and Adonis provide free official installation options. Basic Admin Essentials has multiple versions in circulation, so check the specific version before installing it.",
+      "q": "Are admin systems free to add to my own game?"
+    },
+    {
+      "a": "The most common reasons are a wrong prefix, a rank that is too low for that command, or the game owner disabling the command. Check the command's required rank and default prefix, then confirm your rank in the game's admin menu.",
+      "q": "Why is a command not working for me?"
+    },
+    {
+      "a": "Using commands granted to you by a game is fine. What gets accounts in trouble is using exploits to fake admin, or abusing moderation powers in games where you are staff. Roblox also moderates games, so owners are expected to keep command abuse under control.",
+      "q": "Can admin commands get me banned?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}

@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 5995470825,
+    "code": "hypershot",
+    "title": "Hypershot Roblox Quiz: 15 Questions on Modes and Abilities",
+    "description_md": "Think you know Hypershot's modes, guns and passives? Each run draws 15 questions: five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "How well do you know Roblox Hypershot? Take 15 questions on Team Deathmatch, Capture the Flag, passives and abilities, from easy questions up to hard ones.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Which of these do you get when you join Hypershot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A flag"
+          },
+          {
+            "id": "b",
+            "text": "A gun"
+          },
+          {
+            "id": "c",
+            "text": "A healing potion"
+          },
+          {
+            "id": "d",
+            "text": "A passive ability"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "When you get a kill, what happens to your streak?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It resets with each kill"
+          },
+          {
+            "id": "b",
+            "text": "It counts assists instead of kills"
+          },
+          {
+            "id": "c",
+            "text": "It changes only when the round ends"
+          },
+          {
+            "id": "d",
+            "text": "It increases with each kill"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "How are players grouped in Team Deathmatch?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two teams"
+          },
+          {
+            "id": "b",
+            "text": "One team"
+          },
+          {
+            "id": "c",
+            "text": "Three teams"
+          },
+          {
+            "id": "d",
+            "text": "Four teams"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "In Capture the Flag, what are the teams trying to capture?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The opposing team's spawn zone"
+          },
+          {
+            "id": "b",
+            "text": "The opposing team's kill total"
+          },
+          {
+            "id": "c",
+            "text": "The opposing team's flag"
+          },
+          {
+            "id": "d",
+            "text": "A neutral flag at map center"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "In Free for All, what happens to team assignments?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Players join one shared squad"
+          },
+          {
+            "id": "b",
+            "text": "Players compete without teams"
+          },
+          {
+            "id": "c",
+            "text": "Players move into three squads"
+          },
+          {
+            "id": "d",
+            "text": "Players are paired into fixed duos"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "In Gun Game, what does a kill usually do to your gun?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It switches you to a different gun"
+          },
+          {
+            "id": "b",
+            "text": "It refills the gun you are holding"
+          },
+          {
+            "id": "c",
+            "text": "It adds a second gun to your loadout"
+          },
+          {
+            "id": "d",
+            "text": "It switches guns only after a death"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What does the Double Jump passive let you do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Sprint faster"
+          },
+          {
+            "id": "b",
+            "text": "Take less fall damage"
+          },
+          {
+            "id": "c",
+            "text": "Extend a weapon's range"
+          },
+          {
+            "id": "d",
+            "text": "Jump again in midair"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "When Feather is equipped and you hold jump in midair, what happens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You move faster"
+          },
+          {
+            "id": "b",
+            "text": "You teleport back"
+          },
+          {
+            "id": "c",
+            "text": "You glide down"
+          },
+          {
+            "id": "d",
+            "text": "You freeze in place"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "Which sound does Ninja silence?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Footstep sounds"
+          },
+          {
+            "id": "b",
+            "text": "Weapon reload sounds"
+          },
+          {
+            "id": "c",
+            "text": "Announcer sounds"
+          },
+          {
+            "id": "d",
+            "text": "Menu sounds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "After you hit a target with X Ray Bullets, what happens briefly?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nearby items are marked through walls"
+          },
+          {
+            "id": "b",
+            "text": "The target is revealed through walls"
+          },
+          {
+            "id": "c",
+            "text": "Your weapon gains an accuracy boost"
+          },
+          {
+            "id": "d",
+            "text": "Nearby teammates are outlined through walls"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Which two actions are disabled for a player holding the flag in Capture the Flag?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Firing and reloading"
+          },
+          {
+            "id": "b",
+            "text": "Aiming and jumping"
+          },
+          {
+            "id": "c",
+            "text": "Ability use and sliding"
+          },
+          {
+            "id": "d",
+            "text": "Sprinting and switching weapons"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "While you carry the flag in Capture the Flag, how does your health change?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Double health"
+          },
+          {
+            "id": "b",
+            "text": "Half health"
+          },
+          {
+            "id": "c",
+            "text": "Normal health"
+          },
+          {
+            "id": "d",
+            "text": "Triple health"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "What is the maximum number of passives you can equip at once?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Three"
+          },
+          {
+            "id": "c",
+            "text": "Four"
+          },
+          {
+            "id": "d",
+            "text": "Two"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "What does the Quick Hands passive change about reloads?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Reloads are 12% faster"
+          },
+          {
+            "id": "b",
+            "text": "Reloads are 30% faster"
+          },
+          {
+            "id": "c",
+            "text": "Reloads are 22% faster"
+          },
+          {
+            "id": "d",
+            "text": "Reloads are 42% faster"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "What kind of damage does the Flak Jacket passive reduce, and by how much?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fall damage by 25%"
+          },
+          {
+            "id": "b",
+            "text": "Bullet damage by 35%"
+          },
+          {
+            "id": "c",
+            "text": "Explosive damage by 40%"
+          },
+          {
+            "id": "d",
+            "text": "Melee damage by 55%"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "Which tradeoff comes with the Lightweight passive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Slower running and higher jumps, but 20% less health"
+          },
+          {
+            "id": "b",
+            "text": "Faster running and lower jumps, but 20% less health"
+          },
+          {
+            "id": "c",
+            "text": "Faster running and higher jumps, but 20% more health"
+          },
+          {
+            "id": "d",
+            "text": "Faster running and higher jumps, but 20% less health"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "After a successful kill, how much ammo does Scavenger return?",
+        "options": [
+          {
+            "id": "a",
+            "text": "30% of a clip of ammo"
+          },
+          {
+            "id": "b",
+            "text": "15% of a clip of ammo"
+          },
+          {
+            "id": "c",
+            "text": "50% of a clip of ammo"
+          },
+          {
+            "id": "d",
+            "text": "60% of a clip of ammo"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "Which tradeoff comes with Juggernaut?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15% extra health but slower running"
+          },
+          {
+            "id": "b",
+            "text": "30% extra health but slower running"
+          },
+          {
+            "id": "c",
+            "text": "30% extra health but faster running"
+          },
+          {
+            "id": "d",
+            "text": "30% less health but slower running"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "What does Siphon restore after a kill?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15% of your health"
+          },
+          {
+            "id": "b",
+            "text": "25% of your health"
+          },
+          {
+            "id": "c",
+            "text": "40% of your health"
+          },
+          {
+            "id": "d",
+            "text": "60% of your health"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "In Team Deathmatch, if the 10-minute limit ends the match before the kill cap does, what decides the winner?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The team with fewer deaths"
+          },
+          {
+            "id": "b",
+            "text": "The player with the longest streak"
+          },
+          {
+            "id": "c",
+            "text": "The team that joined first"
+          },
+          {
+            "id": "d",
+            "text": "The team with more kills"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "What kill count reaches the hard cap that ends a Team Deathmatch match?",
+        "options": [
+          {
+            "id": "a",
+            "text": "200 kills"
+          },
+          {
+            "id": "b",
+            "text": "125 kills"
+          },
+          {
+            "id": "c",
+            "text": "175 kills"
+          },
+          {
+            "id": "d",
+            "text": "225 kills"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "How many flag captures does a team need to end a Capture the Flag match?",
+        "options": [
+          {
+            "id": "a",
+            "text": "3 captures"
+          },
+          {
+            "id": "b",
+            "text": "10 captures"
+          },
+          {
+            "id": "c",
+            "text": "6 captures"
+          },
+          {
+            "id": "d",
+            "text": "12 captures"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "One player needs how many kills to win Free for All?",
+        "options": [
+          {
+            "id": "a",
+            "text": "24 kills"
+          },
+          {
+            "id": "b",
+            "text": "38 kills"
+          },
+          {
+            "id": "c",
+            "text": "50 kills"
+          },
+          {
+            "id": "d",
+            "text": "64 kills"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "Which package of effects belongs to the Bulletproof passive?",
+        "options": [
+          {
+            "id": "a",
+            "text": "40% less damage, slower running, and no sliding while taking damage"
+          },
+          {
+            "id": "b",
+            "text": "40% more damage, slower running, and no sliding while taking damage"
+          },
+          {
+            "id": "c",
+            "text": "40% less damage, faster running, and no sliding while taking damage"
+          },
+          {
+            "id": "d",
+            "text": "40% less damage, slower running, and sliding allowed while taking damage"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "With Guardian Angel equipped in a mode where it works, what chance does it give you to respawn immediately when you die?",
+        "options": [
+          {
+            "id": "a",
+            "text": "5%"
+          },
+          {
+            "id": "b",
+            "text": "15%"
+          },
+          {
+            "id": "c",
+            "text": "35%"
+          },
+          {
+            "id": "d",
+            "text": "20%"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Which match format disables Guardian Angel?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Team Deathmatch"
+          },
+          {
+            "id": "b",
+            "text": "Free for All"
+          },
+          {
+            "id": "c",
+            "text": "Duels"
+          },
+          {
+            "id": "d",
+            "text": "Capture the Flag"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "What does Helmet block, and how often can it trigger?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One body shot every 45 seconds"
+          },
+          {
+            "id": "b",
+            "text": "One headshot every 45 seconds"
+          },
+          {
+            "id": "c",
+            "text": "Two headshots every 45 seconds"
+          },
+          {
+            "id": "d",
+            "text": "One headshot every 90 seconds"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "What tradeoff comes with Air Slide?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Midair sliding with 10% more health"
+          },
+          {
+            "id": "b",
+            "text": "Midair sliding with 20% less health"
+          },
+          {
+            "id": "c",
+            "text": "Midair sliding with 50% less health"
+          },
+          {
+            "id": "d",
+            "text": "Midair sliding with 10% less health"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-10",
+        "question": "What happens during continuous fire with Explosive Bullets equipped?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One bullet explodes each second"
+          },
+          {
+            "id": "b",
+            "text": "Every bullet explodes each second"
+          },
+          {
+            "id": "c",
+            "text": "Three bullets explode each second"
+          },
+          {
+            "id": "d",
+            "text": "One bullet explodes every three seconds"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

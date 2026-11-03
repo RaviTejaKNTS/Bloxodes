@@ -3,8 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
+import sharp from 'sharp';
 import {tsImport} from 'tsx/esm/api';
-const {assertEnvironment, selectedPlan, selectedImageInput, robloxCollectibleFacts, robloxMetadata, cleanupAccounts} = await tsImport('../selected-roblox-qa.ts', import.meta.url);
+const {assertEnvironment, selectedPlan, selectedImageInput, robloxCollectibleFacts, robloxMetadata, cleanupAccounts, verifyPublishedHubArtwork} = await tsImport('../selected-roblox-qa.ts', import.meta.url);
 const target = 'https://bbtcaurrtyoukvjbxbbj.supabase.co';
 const env = () => ({GITHUB_ACTIONS: 'true', GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_RUN_ID: '1', GITHUB_RUN_ATTEMPT: '1', RUNNER_TEMP: '/tmp', BLOXODES_MANAGED_QA: 'true', BLOXODES_SELECTED_ROBLOX_QA: 'true', BLOXODES_ENV_PROFILE: 'process-only', SUPABASE_URL: target, NEXT_PUBLIC_SUPABASE_URL: target, ARTICLE_DEV_SUPABASE_URL: target, SUPABASE_MEDIA_PUBLIC_URL: target, TEST_BASE_URL: 'http://bloxodes.test:3000', BUNDLE_HASH: 'a'.repeat(64), BLOXODES_VERIFIED_BUNDLE: 'a'.repeat(64), BATCH: `content/releases/${'a'.repeat(64)}/batch.json`});
 test('explicit dispatch, all managed targets, exact download and no production inputs are mandatory', () => {
@@ -172,4 +174,104 @@ test('cleanup refuses a real user if private fixture ownership no longer matches
   const failures = await cleanupAccounts(db, [{project: 'desktop', userId: 'owned', sessionId: 'session', displayName: 'Selected Roblox QA test'}], ['example-islands']);
   assert.deepEqual(failures, ['desktop:ownership']);
   assert.deepEqual(calls, ['app_users']);
+});
+
+const {publishedHubCover} = await tsImport('../selected-roblox-qa-contract.ts', import.meta.url);
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+const fixtureImage = (width, height) => sharp({create: {width, height, channels: 3, background: '#123456'}}).png().toBuffer();
+const coverEvidence = bytes => ({file: 'hub/cover.png', sha256: sha256(bytes), format: 'png'});
+const hubBatch = {version: 1, operations: [{publisher: 'roblox-wiki', file: 'hub/final.json'}], urls: [{path: '/wiki/example', contains: 'Example'}], events: [{type: 'wiki', slug: 'example'}]};
+
+test('hub selection requires frozen exact cover evidence while leaving authoring final null', async t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'roblox-hub-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  fs.mkdirSync(path.join(root, 'hub'));
+  const bytes = await fixtureImage(768, 432), evidence = coverEvidence(bytes);
+  const final = {slug: 'example', universe_id: 7, cover_image: null};
+  const put = (file, value) => fs.writeFileSync(path.join(root, file), JSON.stringify(value));
+  put('hub/final.json', final);
+  fs.writeFileSync(path.join(root, evidence.file), bytes);
+  assert.throws(() => selectedPlan(root, hubBatch)); // Missing evidence cannot fall back to a mutable CDN URL.
+  put('hub/final.json.qa-cover.json', evidence);
+  const before = fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8');
+  assert.equal(selectedPlan(root, hubBatch).hubs[0].cover.url, `https://media.bloxodes.com/wiki/7/hubs/cover-${evidence.sha256.slice(0, 16)}.png`);
+  assert.equal(fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8'), before);
+  for (const mutation of [{...evidence, sha256: 'a'.repeat(64)}, {...evidence, file: '../escape.png'}, {...evidence, file: '/cover.png'}, {...evidence, format: 'svg'}, {...evidence, url: 'https://example.com/cover.png'}]) {
+    put('hub/final.json.qa-cover.json', mutation);
+    assert.throws(() => selectedPlan(root, hubBatch));
+  }
+  put('hub/final.json.qa-cover.json', evidence);
+  fs.renameSync(path.join(root, evidence.file), path.join(root, 'hub/original.png'));
+  fs.symlinkSync('original.png', path.join(root, evidence.file));
+  assert.throws(() => selectedPlan(root, hubBatch));
+  fs.unlinkSync(path.join(root, evidence.file));
+  fs.writeFileSync(path.join(root, evidence.file), Buffer.alloc(1_000_001));
+  assert.throws(() => selectedPlan(root, hubBatch));
+  fs.writeFileSync(path.join(root, evidence.file), bytes);
+  put('hub/final.json', {...final, cover_image: publishedHubCover(7, evidence).url});
+  assert.throws(() => selectedPlan(root, hubBatch));
+});
+
+test('published artwork checks the exact R2 bytes, never the malformed first official thumbnail', async () => {
+  const bytes = await fixtureImage(768, 432), iconBytes = await fixtureImage(512, 512);
+  for (const universeId of [10769464063, 10767012496]) {
+    const cover = publishedHubCover(universeId, coverEvidence(bytes));
+    const hub = {final: {universe_id: universeId, cover_image: null}, cover};
+    const icon = 'https://tr.rbxcdn.com/icon.png', thumbnail = 'https://tr.rbxcdn.com/768x429.png';
+    const calls = [];
+    const fetcher = async (url, options) => {
+      calls.push(url);
+      assert.equal(options.redirect, 'error'); assert.ok(options.signal);
+      assert.ok([cover.url, icon].includes(url), 'Official thumbnail must not be fetched');
+      return new Response(url === icon ? iconBytes : bytes, {headers: {'content-type': 'image/png'}});
+    };
+    const result = await verifyPublishedHubArtwork(hub, {cover_image: cover.url}, {icon_url: icon, thumbnail_urls: [thumbnail]}, fetcher);
+    assert.equal(result.cover.sha256, sha256(bytes)); assert.equal(result.cover.bytes, bytes.length);
+    assert.deepEqual(calls, [cover.url, icon]);
+    for (const wrong of [null, thumbnail, icon, cover.url.replace(String(universeId), '1'), cover.url.replace('media.bloxodes.com', 'evil.example'), cover.url.replace('https:', 'http:'), cover.url + '?v=1', cover.url + '#fragment', cover.url.replace('.png', '.jpg'), cover.url.replace('cover-', 'cover-a'), cover.url.replace('/wiki/', '/wiki/../wiki/'), cover.url.replace('media.bloxodes.com', 'media.bloxodes.com:443'), cover.url.replace('media.bloxodes.com', 'user@media.bloxodes.com')]) {
+      calls.length = 0;
+      await assert.rejects(verifyPublishedHubArtwork(hub, {cover_image: wrong}, {icon_url: icon}, fetcher));
+      assert.deepEqual(calls, [], 'Invalid URLs must fail before network access');
+    }
+  }
+});
+
+test('published artwork rejects corrupt bytes, full-hash mismatches, dimensions, format, HTTP failures and bad icons', async () => {
+  const good = await fixtureImage(768, 432), iconBytes = await fixtureImage(512, 512), icon = 'https://tr.rbxcdn.com/icon.png';
+  const wrongDimensions = await fixtureImage(768, 429);
+  const jpeg = await sharp(good).jpeg().toBuffer();
+  for (const [bytes, evidence] of [
+    [Buffer.concat([good, Buffer.from('different')]), coverEvidence(good)],
+    // Identical key prefix cannot stand in for the full frozen SHA256.
+    [good, {...coverEvidence(good), sha256: sha256(good).slice(0, 16) + '0'.repeat(48)}],
+    [wrongDimensions, coverEvidence(wrongDimensions)],
+    [Buffer.from('not an image'), coverEvidence(Buffer.from('not an image'))],
+    [good.subarray(0, 50), coverEvidence(good.subarray(0, 50))],
+    [jpeg, coverEvidence(jpeg)], // Matching bytes/hash but wrong key extension.
+    [Buffer.concat([good, Buffer.alloc(1_000_001)]), coverEvidence(Buffer.concat([good, Buffer.alloc(1_000_001)]))]
+  ]) {
+    const cover = publishedHubCover(7, evidence);
+    await assert.rejects(verifyPublishedHubArtwork({final: {universe_id: 7}, cover}, {cover_image: cover.url}, {icon_url: icon}, async url => new Response(url === icon ? iconBytes : bytes, {headers: {'content-type': 'image/png'}})));
+  }
+  const cover = publishedHubCover(7, coverEvidence(good)), hub = {final: {universe_id: 7}, cover};
+  for (const response of [() => new Response('missing', {status: 404}), () => new Response(good, {headers: {'content-type': 'text/html'}}), () => {throw new Error('redirect or timeout');}]) {
+    await assert.rejects(verifyPublishedHubArtwork(hub, {cover_image: cover.url}, {icon_url: icon}, async () => response()));
+  }
+  for (const badIcon of [await fixtureImage(511, 512), iconBytes.subarray(0, 50)]) {
+    await assert.rejects(verifyPublishedHubArtwork(hub, {cover_image: cover.url}, {icon_url: icon}, async url => new Response(url === icon ? badIcon : good, {headers: {'content-type': 'image/png'}})));
+  }
+  for (const badUrl of [null, 'http://tr.rbxcdn.com/icon.png', cover.url]) {
+    await assert.rejects(verifyPublishedHubArtwork(hub, {cover_image: cover.url}, {icon_url: badUrl}, async () => new Response(good, {headers: {'content-type': 'image/png'}})));
+  }
+});
+
+test('published JPEG and WebP covers bind decoded formats to the publisher extension', async () => {
+  const png = await fixtureImage(768, 432), iconBytes = await fixtureImage(512, 512);
+  for (const format of ['jpeg', 'webp']) {
+    const bytes = await sharp(png).toFormat(format).toBuffer();
+    const cover = publishedHubCover(7, {...coverEvidence(bytes), format});
+    assert.ok(cover.url.endsWith(format === 'jpeg' ? '.jpg' : '.webp'));
+    const result = await verifyPublishedHubArtwork({final: {universe_id: 7}, cover}, {cover_image: cover.url}, {icon_url: 'https://tr.rbxcdn.com/icon.png'}, async url => new Response(url === cover.url ? bytes : iconBytes, {headers: {'content-type': url === cover.url ? `image/${format}` : 'image/png'}}));
+    assert.equal(result.cover.format, format);
+  }
 });

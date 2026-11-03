@@ -1,0 +1,907 @@
+{
+  "page": {
+    "universe_id": 4987467534,
+    "code": "residence-massacre",
+    "title": "Residence Massacre Roblox Quiz: 15 Questions Across All 3 Nights",
+    "description_md": "Know your way around the house, factory, and camp? Each attempt draws 15 random questions, five from each difficulty. See how many survival details you remember from all three nights.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Residence Massacre survival knowledge of the house, factory and camp with 15 random questions per attempt, five from each difficulty.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "rm-e01",
+        "question": "Which key makes you sprint on a PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Shift"
+          },
+          {
+            "id": "b",
+            "text": "Ctrl"
+          },
+          {
+            "id": "c",
+            "text": "C"
+          },
+          {
+            "id": "d",
+            "text": "R"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-e02",
+        "question": "Which key turns on the flashlight on a PC?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Q"
+          },
+          {
+            "id": "b",
+            "text": "F"
+          },
+          {
+            "id": "c",
+            "text": "T"
+          },
+          {
+            "id": "d",
+            "text": "G"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-e03",
+        "question": "Which interaction starts Night 1's clock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Boarding a house window"
+          },
+          {
+            "id": "b",
+            "text": "Installing an outdoor camera"
+          },
+          {
+            "id": "c",
+            "text": "Playing the house radio broadcast"
+          },
+          {
+            "id": "d",
+            "text": "Refueling the shed generator"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-e05",
+        "question": "Where is Night 1's built-in camera viewing station?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The living-room television"
+          },
+          {
+            "id": "b",
+            "text": "The factory office computer"
+          },
+          {
+            "id": "c",
+            "text": "A portable Camera Tablet"
+          },
+          {
+            "id": "d",
+            "text": "The upstairs bedroom computer"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-e07",
+        "question": "How do you start the clock for your Night 2 work shift?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Punch in at the central clock"
+          },
+          {
+            "id": "b",
+            "text": "Play the entrance voicemail"
+          },
+          {
+            "id": "c",
+            "text": "Repair a floodlight cable"
+          },
+          {
+            "id": "d",
+            "text": "Refill the power generator"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-e08",
+        "question": "Where is the key for the Night 3 lodge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The right side of the lodge porch"
+          },
+          {
+            "id": "b",
+            "text": "The left side of the lodge porch"
+          },
+          {
+            "id": "c",
+            "text": "The lodge's central room"
+          },
+          {
+            "id": "d",
+            "text": "The cabin campfire"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-e09",
+        "question": "What must you pick up before escaping the lodge after The Worker transforms in Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A gas can"
+          },
+          {
+            "id": "b",
+            "text": "A trail camera"
+          },
+          {
+            "id": "c",
+            "text": "The shotgun"
+          },
+          {
+            "id": "d",
+            "text": "A marshmallow"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-e10",
+        "question": "What is the Night 3 shotgun's maximum loaded capacity?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One shell"
+          },
+          {
+            "id": "b",
+            "text": "Three shells"
+          },
+          {
+            "id": "c",
+            "text": "Four shells"
+          },
+          {
+            "id": "d",
+            "text": "Two shells"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-e11",
+        "question": "Which Night 3 cabins start functional in every round, before any doors are destroyed?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cabins 1, 2 and 3"
+          },
+          {
+            "id": "b",
+            "text": "Cabins 1, 2 and 4"
+          },
+          {
+            "id": "c",
+            "text": "Cabins 2, 3 and 4"
+          },
+          {
+            "id": "d",
+            "text": "Cabins 1, 3 and 4"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-e12",
+        "question": "Who do you speak to beside your stranded car at the start of Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Miner"
+          },
+          {
+            "id": "b",
+            "text": "The Worker"
+          },
+          {
+            "id": "c",
+            "text": "The Ghost"
+          },
+          {
+            "id": "d",
+            "text": "The Lead Factory Worker"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-h02",
+        "question": "What do you steer with the movement controls in Night 1's closet minigame?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The flashlight beam"
+          },
+          {
+            "id": "b",
+            "text": "The closet door"
+          },
+          {
+            "id": "c",
+            "text": "The slider"
+          },
+          {
+            "id": "d",
+            "text": "The camera view"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "rm-m01",
+        "question": "What is the maximum number of outdoor cameras you can install around the Night 1 house?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Four"
+          },
+          {
+            "id": "b",
+            "text": "Three"
+          },
+          {
+            "id": "c",
+            "text": "Five"
+          },
+          {
+            "id": "d",
+            "text": "Six"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-m02",
+        "question": "What is the minimum number of ready charges needed for a Night 1 camera flash?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One charge"
+          },
+          {
+            "id": "b",
+            "text": "Two charges"
+          },
+          {
+            "id": "c",
+            "text": "Three charges"
+          },
+          {
+            "id": "d",
+            "text": "Zero charges"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-m03",
+        "question": "How long does one Night 1 camera charge take to recharge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "15 seconds"
+          },
+          {
+            "id": "b",
+            "text": "30 seconds"
+          },
+          {
+            "id": "c",
+            "text": "45 seconds"
+          },
+          {
+            "id": "d",
+            "text": "60 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-m04",
+        "question": "When Night 1's generator is empty, how many charges does one gas can restore?",
+        "options": [
+          {
+            "id": "a",
+            "text": "10 charges"
+          },
+          {
+            "id": "b",
+            "text": "20 charges"
+          },
+          {
+            "id": "c",
+            "text": "40 charges"
+          },
+          {
+            "id": "d",
+            "text": "30 charges"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-m05",
+        "question": "When can turning on a room's lights scare The Mutant away in Night 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "While it is at that room's window"
+          },
+          {
+            "id": "b",
+            "text": "While it is chasing you indoors"
+          },
+          {
+            "id": "c",
+            "text": "While it is roaming in the forest"
+          },
+          {
+            "id": "d",
+            "text": "While it is inspecting your closet"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-m06",
+        "question": "Which tool must you hold to repair Night 1's fuse box?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Hammer"
+          },
+          {
+            "id": "b",
+            "text": "A Wrench"
+          },
+          {
+            "id": "c",
+            "text": "A Battery"
+          },
+          {
+            "id": "d",
+            "text": "A Camera Tablet"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-m07",
+        "question": "With Night 2's radio tower working, what drives The Pest away from a ceiling hole before it cuts a cable?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Flashing a placed camera"
+          },
+          {
+            "id": "b",
+            "text": "Flashing the nearby floodlight"
+          },
+          {
+            "id": "c",
+            "text": "Turning on the nearest radio"
+          },
+          {
+            "id": "d",
+            "text": "Closing a nearby locker"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-m08",
+        "question": "What goes into Night 2's generator chamber to restore power?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A gas can from the shed"
+          },
+          {
+            "id": "b",
+            "text": "A Camera Tablet from the office"
+          },
+          {
+            "id": "c",
+            "text": "A Wrench from the loot"
+          },
+          {
+            "id": "d",
+            "text": "A battery from storage"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-m09",
+        "question": "Which fixed floor feature marks a possible Night 2 Stalker spawn point before it appears?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A crack in the floor"
+          },
+          {
+            "id": "b",
+            "text": "A metal floor hatch"
+          },
+          {
+            "id": "c",
+            "text": "A floor drain"
+          },
+          {
+            "id": "d",
+            "text": "A painted floor arrow"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-m10",
+        "question": "Which clock time marks the start of The Stalker's appearances in Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Midnight"
+          },
+          {
+            "id": "b",
+            "text": "2 AM"
+          },
+          {
+            "id": "c",
+            "text": "1 AM"
+          },
+          {
+            "id": "d",
+            "text": "4 AM"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-m11",
+        "question": "How do working cabin lights affect The Spider's entry in Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They speed up its entry"
+          },
+          {
+            "id": "b",
+            "text": "They stop its entry until dawn"
+          },
+          {
+            "id": "c",
+            "text": "They slow its entry"
+          },
+          {
+            "id": "d",
+            "text": "They leave its entry speed unchanged"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-m12",
+        "question": "What is The Pest trying to disable when it cuts a ceiling cable in Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The radio tower's signal to the radios"
+          },
+          {
+            "id": "b",
+            "text": "A camera's view of the floor"
+          },
+          {
+            "id": "c",
+            "text": "The office computer's repair menu"
+          },
+          {
+            "id": "d",
+            "text": "A floodlight's connection to the generator"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-h01",
+        "question": "At what time does The Mutant start spawning more often in Night 1?",
+        "options": [
+          {
+            "id": "a",
+            "text": "4 AM"
+          },
+          {
+            "id": "b",
+            "text": "2 AM"
+          },
+          {
+            "id": "c",
+            "text": "3 AM"
+          },
+          {
+            "id": "d",
+            "text": "5 AM"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-h04",
+        "question": "What does a full Night 1 camera-use meter cause to fail?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The generator's fuel supply"
+          },
+          {
+            "id": "b",
+            "text": "The fuse box"
+          },
+          {
+            "id": "c",
+            "text": "The window barricades"
+          },
+          {
+            "id": "d",
+            "text": "The outdoor ladder"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-h07",
+        "question": "What happens if The Stalker finishes emerging before you scare it away in Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It retreats into the floor"
+          },
+          {
+            "id": "b",
+            "text": "It shuts off the generator"
+          },
+          {
+            "id": "c",
+            "text": "It starts rampaging"
+          },
+          {
+            "id": "d",
+            "text": "It hides in a locker"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-h09",
+        "question": "How many shotgun shots from a cabin trigger The Mutated Worker to investigate it in Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One shot"
+          },
+          {
+            "id": "b",
+            "text": "Three shots"
+          },
+          {
+            "id": "c",
+            "text": "Four shots"
+          },
+          {
+            "id": "d",
+            "text": "Two shots"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "rm-h03",
+        "question": "During a Night 1 chase, which closet timing skips the minigame when The Mutant checks your hiding spot?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hide while it creates a trap"
+          },
+          {
+            "id": "b",
+            "text": "Hide while it chases you directly"
+          },
+          {
+            "id": "c",
+            "text": "Hide while it searches for you"
+          },
+          {
+            "id": "d",
+            "text": "Hide as it first starts chasing you"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-h05",
+        "question": "With modifiers off, at which two times does lightning break Night 2's radio tower?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 AM and 3 AM"
+          },
+          {
+            "id": "b",
+            "text": "2 AM and 4 AM"
+          },
+          {
+            "id": "c",
+            "text": "2 AM and 5 AM"
+          },
+          {
+            "id": "d",
+            "text": "3 AM and 5 AM"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-h06",
+        "question": "What happens if you send the Night 2 Repair Worker to a broken cable while The Pest is still on it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The worker repairs it and returns safely"
+          },
+          {
+            "id": "b",
+            "text": "The worker waits until The Pest leaves"
+          },
+          {
+            "id": "c",
+            "text": "The worker dies and repairs become unavailable"
+          },
+          {
+            "id": "d",
+            "text": "The worker scares The Pest away and returns"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-h08",
+        "question": "What does a UV Light flash do to a Stalker that is already rampaging in Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Despawns it until its next emergence"
+          },
+          {
+            "id": "b",
+            "text": "Stops its teleports for the rest of the night"
+          },
+          {
+            "id": "c",
+            "text": "Slows it until it reaches another puddle"
+          },
+          {
+            "id": "d",
+            "text": "Stuns it until its next teleport"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-h10",
+        "question": "What is the maximum number of shotgun stuns The Mutated Worker can take in Night 3?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Three stuns"
+          },
+          {
+            "id": "b",
+            "text": "One stun"
+          },
+          {
+            "id": "c",
+            "text": "Two stuns"
+          },
+          {
+            "id": "d",
+            "text": "Four stuns"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-h11",
+        "question": "Which layout do the active shotgun-ammo spots follow each Night 3 round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two spots, both at one crossroads"
+          },
+          {
+            "id": "b",
+            "text": "Two spots, one at each crossroads"
+          },
+          {
+            "id": "c",
+            "text": "Four spots, two at each crossroads"
+          },
+          {
+            "id": "d",
+            "text": "One spot, at either crossroads"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "rm-r01",
+        "question": "The Mutated Worker did not see you hide under a bed in Night 3. Which situation still lets it find you there?",
+        "options": [
+          {
+            "id": "a",
+            "text": "You are marked and the cabin door is intact"
+          },
+          {
+            "id": "b",
+            "text": "You are unmarked and the cabin door is broken"
+          },
+          {
+            "id": "c",
+            "text": "You are marked and the cabin door is broken"
+          },
+          {
+            "id": "d",
+            "text": "You are unmarked and the cabin door is intact"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "rm-r02",
+        "question": "What happens when a Night 3 shotgun blast hits a closed shutter with The Spider behind it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It passes through the shutter and despawns The Spider"
+          },
+          {
+            "id": "b",
+            "text": "It breaks the window but leaves The Spider unharmed"
+          },
+          {
+            "id": "c",
+            "text": "It breaks the shutter and window and despawns The Spider"
+          },
+          {
+            "id": "d",
+            "text": "The shutter blocks it; the window and Spider are unharmed"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "rm-r03",
+        "question": "How low can damage from a rampaging Stalker's black puddles alone reduce your health in Night 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "1 health"
+          },
+          {
+            "id": "b",
+            "text": "0 health"
+          },
+          {
+            "id": "c",
+            "text": "5 health"
+          },
+          {
+            "id": "d",
+            "text": "10 health"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "rm-r04",
+        "question": "After hiding from The Mutant in a locker once in Night 2, what happens if you later hide in a different locker?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It listens for breathing and then leaves"
+          },
+          {
+            "id": "b",
+            "text": "It opens the locker and kills you"
+          },
+          {
+            "id": "c",
+            "text": "It disables that locker but spares you"
+          },
+          {
+            "id": "d",
+            "text": "It leaves without checking the locker"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

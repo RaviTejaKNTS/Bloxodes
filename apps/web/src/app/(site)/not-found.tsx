@@ -1,6 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { PageNotFoundTracker } from "@/components/PageNotFoundTracker";
 import { SITE_NAME } from "@/lib/seo";
+
+// Replace inherited page metadata on every site 404. Next fills the social
+// titles from this absolute document title after resolving the error boundary.
+// A missing page has no canonical or Open Graph URL, even if its parent has one.
+export const metadata: Metadata = {
+  title: { absolute: `404 — Page Not Found | ${SITE_NAME}` },
+  alternates: { canonical: null },
+  robots: { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME
+  },
+  twitter: { card: "summary" }
+};
 
 export default function SiteNotFound() {
   return (

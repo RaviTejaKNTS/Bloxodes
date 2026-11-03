@@ -57,6 +57,11 @@ async function main() {
    if (row.is_published !== undefined && typeof row.is_published !== "boolean") throw new Error("Publication state must be boolean");
    if (key === "games") {
     if (!validId(row.id)) throw new Error("Games need an explicit reviewed UUID");
+    const current = await sb.from("games").select("url_style").eq("id", row.id).maybeSingle();
+    if (current.error) throw current.error;
+    if (row.url_style !== undefined && row.url_style !== (current.data?.url_style ?? "page_type")) throw new Error("Ordinary publication cannot move a namespace's URL style.");
+    if (current.data) row.url_style = current.data.url_style;
+
     if (row.parent_id != null && !validId(row.parent_id)) throw new Error("Invalid parent game ID");
     if (!["franchise", "game"].includes(String(row.kind)) || typeof row.slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(row.slug) || typeof row.title !== "string" || !row.title.trim()) throw new Error("Games need a title, slug and franchise/game kind.");
     if (!row.parent_id && row.slug !== namespace) throw new Error("Root game slug must match its namespace.");

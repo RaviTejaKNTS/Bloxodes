@@ -1,46 +1,14 @@
-import { describe, expect, it, vi } from "vitest";
-
-const pages = vi.hoisted(() => {
-  const dates = { published_at: "2020-01-01T00:00:00Z", created_at: "2020-01-01T00:00:00Z", updated_at: "2020-01-02T00:00:00Z", content_updated_at: "2020-01-02T00:00:00Z" };
-  return {
-    wiki: [{ ...dates, title: "GTA VI Wiki", canonical_path: "/gta/wiki/gta-6", meta_description: "Pre-launch announcements." }],
-    collections: ["characters", "locations", "editions", "trailers"].map(slug => ({
-      ...dates, title: `GTA VI ${slug}`, canonical_path: `/gta/wiki/gta-6/${slug}`, meta_description: "Announced details."
-    }))
-  };
-});
-
+import { expect, it, vi } from "vitest";
+const pages = vi.hoisted(() => ["gta", "red-dead", "minecraft", "peak"].flatMap(namespace => ["wiki", "tools", "maps", "checklists"].map(section => ({ namespace, title: `${namespace} ${section}`, canonical_path: `/${section}/${namespace}-example`, meta_description: "Details", published_at: "2020-01-01", created_at: "2020-01-01", updated_at: "2020-01-02" }))));
 vi.mock("server-only", () => ({}));
-vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: () => {
-  const query = {
-    select: () => query, eq: () => query, not: () => query, order: () => query, limit: () => query,
-    then: (resolve: (result: unknown) => unknown) => resolve({ data: [], error: null })
-  };
-  return query;
-} }) }));
-vi.mock("@/lib/game-content-db", () => ({ gameDatabase: (client: unknown) => client }));
-vi.mock("@/lib/game-content-index", () => ({ listSharedGameDiscoveryPages: async () => [] }));
-vi.mock("@/lib/gta", () => ({
-  listPublishedGtaWikiPages: async () => pages.wiki,
-  listPublishedGtaWikiCollections: async () => pages.collections
-}));
-vi.mock("@/lib/minecraft", () => ({
-  listPublishedMinecraftWikiPages: async () => [], listPublishedMinecraftCollections: async () => [], listPublishedMinecraftTools: async () => [],
-  buildMinecraftWikiPath: vi.fn(), buildMinecraftCollectionPath: vi.fn()
-}));
-
+vi.mock("@/lib/game-content-index", () => ({listSharedGameDiscoveryPages: async () => [...pages, pages[0]]}));
+vi.mock("@/lib/supabase", () => ({supabaseAdmin: () => ({from: () => {
+ const q = {select: () => q, eq: () => q, not: () => q, order: () => q, limit: () => q, then: (resolve: (r: unknown) => unknown) => resolve({data: [], error: null})}; return q;
+}})}));
 import { GET } from "@/app/feed.xml/route";
-
-describe("GTA pre-launch feed discovery", () => {
-  it("includes the published hub and all four collections once using their canonical paths", async () => {
-    const response = await GET();
-    expect(response.status).toBe(200);
-    const xml = await response.text();
-    for (const page of [...pages.wiki, ...pages.collections]) {
-      const link = `<link>https://bloxodes.com${page.canonical_path}</link>`;
-      expect(xml.split(link)).toHaveLength(2);
-      expect(xml).toContain(`<title>${page.title}</title>`);
-    }
-    expect(xml).toContain("Pre-launch announcements.");
-  });
+it("feeds every game's published canonical pages once", async () => {
+ const response = await GET();
+ expect(response.status).toBe(200);
+ const xml = await response.text();
+ for (const page of pages) expect(xml.split(`<link>https://bloxodes.com${page.canonical_path}</link>`)).toHaveLength(2);
 });

@@ -1,8 +1,8 @@
-import type { NextRequest } from "next/server";
+import type { NextRequest, NextFetchEvent } from "next/server";
 import { proxy } from "./src/proxy";
 
-export function middleware(req: NextRequest) {
-  return proxy(req);
+export function middleware(req: NextRequest, event: NextFetchEvent) {
+  return proxy(req, event);
 }
 
 export const config = {

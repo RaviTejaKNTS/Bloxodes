@@ -1,6 +1,6 @@
 # Stats
 
-Last verified: 2026-10-23
+Last verified: 2026-10-30
 
 Live Roblox game stats at `/stats` (players, visits, ranks, risers, genres, creators) and the monthly Roblox reports. Metric meanings and chart rules are in [stats metrics](stats-metrics.md).
 

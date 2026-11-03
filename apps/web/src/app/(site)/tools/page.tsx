@@ -1,3 +1,4 @@
+import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TOOLS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
@@ -29,12 +30,12 @@ export default async function ToolsPage() {
     notFound();
   }
 
-  return renderToolsPage({
+  return <>{await renderToolsPage({
     tools,
     total,
     totalPages,
     currentPage: 1,
     showHero: true,
     latestUpdatedAt
-  });
+  })}<OtherGamesSection kind="tool" /></>;
 }

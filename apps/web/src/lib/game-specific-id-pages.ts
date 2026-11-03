@@ -109,14 +109,6 @@ export const MUSIC_GAME_ID_PAGES: MusicGameIdPage[] = [
     seoCountLabel: "Radio Songs"
   },
   {
-    slug: "work-at-a-pizza-place",
-    title: "Work at a Pizza Place Music IDs",
-    description: "Find Roblox music IDs for Work at a Pizza Place's car radio and Radio pass.",
-    datasetPreset: "music",
-    idLabel: "Music ID",
-    seoCountLabel: "Radio Songs"
-  },
-  {
     slug: "basketball-zero",
     title: "Basketball Zero Music IDs",
     description: "Browse Roblox music IDs for Basketball Zero's lobby Boombox and custom song controls.",
@@ -231,4 +223,20 @@ export function musicGameCatalogCode(slug: string): string {
 
 export function decalGameCatalogCode(slug: string): string {
   return `roblox-decal-ids/games/${slug}`;
+}
+
+// Retired pages keep a published catalog_pages row; readers filter them out.
+export const RETIRED_MUSIC_GAME_CATALOG_CODES = ["roblox-music-ids/games/work-at-a-pizza-place"] as const;
+
+export function isRetiredMusicGameCatalogCode(code: string): boolean {
+  return (RETIRED_MUSIC_GAME_CATALOG_CODES as readonly string[]).includes(code.trim());
+}
+
+// Search rows carry absolute or relative URLs; match the retired page and anything under it.
+export function isRetiredMusicGameCatalogUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  const path = url.trim().replace(/^https?:\/\/[^/]+/i, "").split(/[?#]/)[0].replace(/\/+$/, "");
+  if (!path.startsWith("/catalog/")) return false;
+  const code = path.slice("/catalog/".length);
+  return RETIRED_MUSIC_GAME_CATALOG_CODES.some((retired) => code === retired || code.startsWith(`${retired}/`));
 }

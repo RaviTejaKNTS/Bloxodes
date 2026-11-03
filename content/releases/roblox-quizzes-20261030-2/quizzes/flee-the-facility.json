@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 372226183,
+    "code": "flee-the-facility",
+    "title": "Flee the Facility Roblox Quiz: 15 Questions on Hacking and Escape",
+    "description_md": "How well do you read a round? Answer 15 questions on hacking, Exit Doors, rescues, Beast powers and maps. Each attempt gives you five easy, five medium and five hard questions.",
+    "seo_title": null,
+    "seo_description": "Can you hack computers, pick the right exit and track the Beast? Take 15 Roblox Flee the Facility questions on hacking, rescues, Beast powers and maps.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "E01",
+        "question": "How many players take the Beast role at the start of a regular round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Every player"
+          },
+          {
+            "id": "b",
+            "text": "One player"
+          },
+          {
+            "id": "c",
+            "text": "Two players"
+          },
+          {
+            "id": "d",
+            "text": "No player"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "E02",
+        "question": "Which requirement must the team meet before the Exit Doors unlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Hack the number of computers the game prompts for"
+          },
+          {
+            "id": "b",
+            "text": "Hack every computer on the map, including the extra"
+          },
+          {
+            "id": "c",
+            "text": "Rescue every captured Survivor"
+          },
+          {
+            "id": "d",
+            "text": "Open both Exit Doors"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "E03",
+        "question": "What color does a computer screen turn after its hack is complete?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Blue"
+          },
+          {
+            "id": "c",
+            "text": "Yellow"
+          },
+          {
+            "id": "d",
+            "text": "Green"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "E04",
+        "question": "What's the maximum number of Survivors who can hack one computer at a time?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Two"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "E05",
+        "question": "Which PC key starts a computer hack at the keyboard?",
+        "options": [
+          {
+            "id": "a",
+            "text": "E"
+          },
+          {
+            "id": "b",
+            "text": "R"
+          },
+          {
+            "id": "c",
+            "text": "Q"
+          },
+          {
+            "id": "d",
+            "text": "Space"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "E06",
+        "question": "How many Exit Doors does a regular match map have?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One"
+          },
+          {
+            "id": "b",
+            "text": "Two"
+          },
+          {
+            "id": "c",
+            "text": "Three"
+          },
+          {
+            "id": "d",
+            "text": "Four"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "E07",
+        "question": "What does a yellow light on an Exit Door mean?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The door is locked"
+          },
+          {
+            "id": "b",
+            "text": "The door is open"
+          },
+          {
+            "id": "c",
+            "text": "The door is unlocked"
+          },
+          {
+            "id": "d",
+            "text": "The computer hack is complete"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "E08",
+        "question": "Which role can crawl through a Vent during a round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Beast"
+          },
+          {
+            "id": "b",
+            "text": "Both roles"
+          },
+          {
+            "id": "c",
+            "text": "Neither role"
+          },
+          {
+            "id": "d",
+            "text": "Survivors"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "E09",
+        "question": "Who can free a Survivor from a Freeze Pod before they freeze?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Another Survivor"
+          },
+          {
+            "id": "b",
+            "text": "The Beast"
+          },
+          {
+            "id": "c",
+            "text": "The captured player alone"
+          },
+          {
+            "id": "d",
+            "text": "A player in the lobby"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "E10",
+        "question": "How does a Survivor escape the round?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stay in the facility until the round ends"
+          },
+          {
+            "id": "b",
+            "text": "Pass through an open Exit Door"
+          },
+          {
+            "id": "c",
+            "text": "Get rescued from a Freeze Pod"
+          },
+          {
+            "id": "d",
+            "text": "Open a door but remain inside"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "R-E",
+        "question": "Can an Exit Door be closed again after it opens?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Yes, either Survivor can close it"
+          },
+          {
+            "id": "b",
+            "text": "It closes automatically after 12 seconds"
+          },
+          {
+            "id": "c",
+            "text": "No, it cannot be closed again"
+          },
+          {
+            "id": "d",
+            "text": "The Beast can relock it"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "M01",
+        "question": "What alert follows a failed Skill Check while hacking?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The computer fails quietly, with no sound or icon"
+          },
+          {
+            "id": "b",
+            "text": "The hack completes automatically, with no Skill Check"
+          },
+          {
+            "id": "c",
+            "text": "Only the hacker is alerted and nobody hears"
+          },
+          {
+            "id": "d",
+            "text": "Everyone hears an error sound and sees a fail icon"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "M02",
+        "question": "What changes when more Survivors hack the same computer together?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Progress slows down and checks appear less often"
+          },
+          {
+            "id": "b",
+            "text": "Progress speeds up and checks appear less often"
+          },
+          {
+            "id": "c",
+            "text": "Progress speeds up and checks appear more often"
+          },
+          {
+            "id": "d",
+            "text": "Neither progress nor checks change"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "M03",
+        "question": "Where does the Beast wait during the Survivors' 15-second head start?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Beast Cave"
+          },
+          {
+            "id": "b",
+            "text": "Camp Lapis"
+          },
+          {
+            "id": "c",
+            "text": "An Exit Door"
+          },
+          {
+            "id": "d",
+            "text": "A Freeze Pod"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "M04",
+        "question": "How is the next map picked when the intermission vote has a clear winner?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The map with the fewest computers"
+          },
+          {
+            "id": "b",
+            "text": "The first map in the vote list"
+          },
+          {
+            "id": "c",
+            "text": "The map with the most votes"
+          },
+          {
+            "id": "d",
+            "text": "A random map from the options"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "M05",
+        "question": "If at least one player votes and two maps tie for the most votes, which map is picked?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The rightmost tied map"
+          },
+          {
+            "id": "b",
+            "text": "The leftmost tied map"
+          },
+          {
+            "id": "c",
+            "text": "The map played in the last round"
+          },
+          {
+            "id": "d",
+            "text": "A random tied map"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "M06",
+        "question": "If a Survivor stops partway through opening an unlocked Exit Door, what happens to that progress?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It resumes from the same point if you return"
+          },
+          {
+            "id": "b",
+            "text": "The progress transfers to the other Exit Door"
+          },
+          {
+            "id": "c",
+            "text": "The opening stays saved after the round ends"
+          },
+          {
+            "id": "d",
+            "text": "Opening progress isn't saved once you stop"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "M08",
+        "question": "After a rescued Survivor is captured again, what happens to the health still left in their bar?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It keeps draining from where it left off"
+          },
+          {
+            "id": "b",
+            "text": "It returns to full health"
+          },
+          {
+            "id": "c",
+            "text": "It is cut in half"
+          },
+          {
+            "id": "d",
+            "text": "It slowly regenerates over time"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "M09",
+        "question": "When does a captured Survivor lose health while in their Freeze Pod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "While the Beast stands beside the pod"
+          },
+          {
+            "id": "b",
+            "text": "When the Beast is far enough from their pod"
+          },
+          {
+            "id": "c",
+            "text": "Only while another Survivor is being carried"
+          },
+          {
+            "id": "d",
+            "text": "Whenever an exit opens"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "M10",
+        "question": "Which map uses laptops for its computers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Airport"
+          },
+          {
+            "id": "b",
+            "text": "School"
+          },
+          {
+            "id": "c",
+            "text": "The Library"
+          },
+          {
+            "id": "d",
+            "text": "Homestead"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "X1",
+        "question": "After a Survivor freezes in a Freeze Pod, when can another Survivor be placed in that pod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Right away, while the first Survivor is still in it"
+          },
+          {
+            "id": "b",
+            "text": "As soon as the Beast leaves the pod"
+          },
+          {
+            "id": "c",
+            "text": "Not for the rest of the round"
+          },
+          {
+            "id": "d",
+            "text": "As soon as the Exit Doors open"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "H01",
+        "question": "How long does the Seer warning give Survivors to hide?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One second"
+          },
+          {
+            "id": "b",
+            "text": "Five seconds"
+          },
+          {
+            "id": "c",
+            "text": "No warning"
+          },
+          {
+            "id": "d",
+            "text": "Three seconds"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "H02",
+        "question": "What does a red eye icon over a Survivor mean during Seer?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Beast spotted them"
+          },
+          {
+            "id": "b",
+            "text": "They hid successfully"
+          },
+          {
+            "id": "c",
+            "text": "Their computer just failed"
+          },
+          {
+            "id": "d",
+            "text": "They are standing near an Exit Door"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "H03",
+        "question": "Which Beast power briefly turns off the Beast's heartbeat, footstep sounds and gemstone glow?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Runner"
+          },
+          {
+            "id": "b",
+            "text": "Seer"
+          },
+          {
+            "id": "c",
+            "text": "Stalker"
+          },
+          {
+            "id": "d",
+            "text": "No power"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "H04",
+        "question": "Which action does Runner disable for the Beast?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Swinging the hammer"
+          },
+          {
+            "id": "b",
+            "text": "Jumping"
+          },
+          {
+            "id": "c",
+            "text": "Hitting a Survivor"
+          },
+          {
+            "id": "d",
+            "text": "Running fast"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "H05",
+        "question": "Which power does the Beast get if they do not choose one?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stalker"
+          },
+          {
+            "id": "b",
+            "text": "Seer"
+          },
+          {
+            "id": "c",
+            "text": "No power"
+          },
+          {
+            "id": "d",
+            "text": "Runner"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "H07",
+        "question": "What happens if the last Survivor is captured inside a Freeze Pod?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Their health drains at the usual pace"
+          },
+          {
+            "id": "b",
+            "text": "They freeze instantly, whatever their health"
+          },
+          {
+            "id": "c",
+            "text": "They pause until another Survivor rescues them"
+          },
+          {
+            "id": "d",
+            "text": "They return to Camp Lapis without freezing"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "H10",
+        "question": "If a Survivor opens an unlocked Exit Door without stopping, how long does it take?",
+        "options": [
+          {
+            "id": "a",
+            "text": "8 seconds"
+          },
+          {
+            "id": "b",
+            "text": "20 seconds"
+          },
+          {
+            "id": "c",
+            "text": "12 seconds"
+          },
+          {
+            "id": "d",
+            "text": "30 seconds"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "R-H",
+        "question": "What happens when the Beast goes through an Exit Door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Nothing happens"
+          },
+          {
+            "id": "b",
+            "text": "The Beast escapes"
+          },
+          {
+            "id": "c",
+            "text": "The round ends"
+          },
+          {
+            "id": "d",
+            "text": "The door locks"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ]
+  }
+}

@@ -6,9 +6,9 @@ These routes back interactive site features, search, tool data, session/progress
 
 ## Shared game integration
 
-`/api/games/[namespace]/collections/progress` uses the shared progress handler. Existing GTA and Red Dead progress endpoints wrap it and preserve their client contracts. Keep session ownership, trusted-origin checks, rate limits, published collection/item validation and private no-store responses. Roblox progress uses its existing tables and endpoints.
+`/api/games/[namespace]/collections/progress` is the one progress endpoint for every non-Roblox game, including GTA map progress. Keep session ownership, trusted-origin checks, rate limits, published collection/item validation and private no-store responses. Roblox progress uses its existing tables and endpoints.
 
-Shared comments resolve their exact published canonical paths. Search accepts generic game content types alongside preserved GTA, Red Dead and Minecraft types. `/api/revalidate` consumes `game_content` with a namespace-owned path and invalidates dependent hubs, maps, tools, sitemaps and feeds. These changes currently target managed development.
+Shared comments resolve their exact published canonical paths. Search returns shared `game_*` types. `/api/revalidate` consumes `game_content` with a namespace-owned path and invalidates dependent hubs, maps, tools, sitemaps and feeds.
 
 ## Endpoint Groups
 
@@ -41,7 +41,7 @@ Shared comments resolve their exact published canonical paths. Search accepts ge
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
   - `wiki/collections/progress`
-  - `gta/collections/progress`
+  - `games/[namespace]/collections/progress`
   - `quizzes/session`, `quizzes/progress`
   - `account/avatar`
 - Community and preferences:
@@ -99,7 +99,7 @@ Shared comments resolve their exact published canonical paths. Search accepts ge
 - `/api/mobile/content/[kind]/[slug]` returns mobile detail sections and passes query/page controls through to native catalog sections. For `kind=catalog`, codes that match a published `wiki_collection_pages` row fall back to that collection so game wiki collections render natively.
 - `/api/mobile/quizzes/[code]/play` returns the full `QuizData` (questions, options, correct option ids) for the native quiz player.
 - `/api/mobile/stats/games` and its `[universeId]` + `[universeId]/chart` children wrap `apps/web/src/lib/stats.ts` with CORS headers for the app; the web `/api/stats/*` routes are unchanged.
-- `/api/gta/collections/progress` is a session-scoped GET/PUT endpoint for GTA collection checklist rows. It validates that the requested GTA collection is a published `checklist` page, stores checked item slugs in `user_gta_collection_progress` for signed-in users, and returns 401 to anonymous API callers; the browser checklist keeps a local-first copy when signed out.
+- `/api/games/[namespace]/collections/progress` is a session-scoped GET/PUT endpoint for non-Roblox collection checklist rows. It validates that the requested collection is a published `collectible` page with a published dataset, stores checked item slugs in `game_collection_progress` for signed-in users, and returns 401 to anonymous API callers; the browser checklist keeps a local-first copy when signed out.
 - `/api/wiki/collections/progress` is the Roblox wiki collection counterpart. It validates a published `wiki_collection_pages` row with `page_type = collectible`, stores namespaced progress in the existing `user_checklist_progress` table, and keeps the same signed-in account contract while the shared browser renderer uses local-first progress when signed out. It must not be used for global `/checklists` rows.
 - Mobile auth: the app opens `/api/mobile/auth/complete` in an auth browser session; after web Roblox login it redirects to `bloxodes://auth?code=<short-lived signed code>`. `/api/mobile/auth/exchange` swaps that code for an `app_sessions` bearer token. `/api/mobile/auth/session` and `/api/mobile/auth/logout` accept `Authorization: Bearer`.
 - Mobile progress routes (`mobile/codes/progress`, `mobile/checklists/progress`, `mobile/quizzes/progress`) accept bearer tokens with a cookie fallback via `apps/web/src/lib/auth/mobile-session.ts`; they write the same `user_*_progress` tables as the web routes.
@@ -112,18 +112,13 @@ Shared comments resolve their exact published canonical paths. Search accepts ge
 2. Reuse existing data helpers from `apps/web/src/lib/*` where possible.
 3. Add cache invalidation if the endpoint mutates data consumed by cached pages or loaders.
 
-## Red Dead and collectible rollout (2026-09-07)
+## Collection page types
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Before October 6, Red Dead used isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+Wiki collection page types are `database` and `collectible` for every game. Standalone `/checklists` pages and progress storage keys are separate from them.
 
-Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+## Standalone game checklists
 
-
-## GTA standalone checklist support (2026-09-10)
-
-Minecraft reuses search, comments and revalidation. Search entries and comment ownership resolve to the saved edition’s permanent wiki/collection URL. Wiki/game events carry the editorial edition slug; collection events carry the full collection code. Revalidation covers the edition hub, collection pagination, neutral indexes, Minecraft sitemap and feed. Shared tool events retain tool slugs. No cookie selects public content.
-
-`checklists/progress` also serves GTA standalone checklists using `gta:<game-slug>` keys. Validate GTA published-page membership and real leaf IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/gta/collections/progress`.
+`checklists/progress` serves standalone checklists for every game through `<namespace>:<slug>` keys. `game-checklist-progress.ts` validates published membership and leaf task IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/api/games/[namespace]/collections/progress`.
 
 ## Shared quiz progress
 

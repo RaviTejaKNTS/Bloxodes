@@ -1,4 +1,3 @@
-import { buildMinecraftWikiPath, buildMinecraftCollectionPath } from "@/lib/minecraft-paths";
 import { NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session-user";
@@ -20,13 +19,6 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "tool",
   "wiki",
   "wiki_collection",
-  "gta_wiki",
-  "gta_wiki_collection",
-  "red_dead_wiki",
-  "red_dead_wiki_collection",
-  "minecraft_wiki",
-  "minecraft_wiki_collection",
-  "minecraft_tool",
   "game_wiki",
   "game_collection",
   "game_tool",
@@ -35,6 +27,12 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "game_quiz",
   "game_catalog"
 ]);
+// Old web instances can still POST these during deployment overlap.
+const LEGACY_COMMENT_TYPES: Record<string, CommentEntityType> = {
+  gta_wiki: "game_wiki", gta_wiki_collection: "game_collection",
+  red_dead_wiki: "game_wiki", red_dead_wiki_collection: "game_collection",
+  minecraft_wiki: "game_wiki", minecraft_wiki_collection: "game_collection", minecraft_tool: "game_tool",
+};
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
 const MAX_GUEST_EMAIL_LENGTH = 120;
@@ -52,20 +50,13 @@ type CommentEntityType =
   | "tool"
   | "wiki"
   | "wiki_collection"
-  | "gta_wiki"
-  | "gta_wiki_collection"
-  | "red_dead_wiki"
-  | "red_dead_wiki_collection"
-  | "minecraft_wiki"
-  | "minecraft_wiki_collection"
-  | "minecraft_tool"
-    | "game_wiki"
-    | "game_collection"
-    | "game_tool"
-    | "game_code"
-    | "game_map"
-    | "game_quiz"
-    | "game_catalog";
+  | "game_wiki"
+  | "game_collection"
+  | "game_tool"
+  | "game_code"
+  | "game_map"
+  | "game_quiz"
+  | "game_catalog";
 
 type CommentPageTarget = {
   pageType: string;
@@ -114,18 +105,18 @@ function hasWikiCollectionPath(row: unknown): row is { wiki_slug: string; collec
 
 async function resolveCommentPageTarget(entityType: CommentEntityType, entityId: string): Promise<CommentPageTarget | null> {
   const admin = supabaseAdmin();
-  const gameTargets: Record<string, { table: string; namespace?: string }> = {
-    game_map:{table:"game_map_pages_view"},game_quiz:{table:"game_quiz_pages_view"},game_catalog:{table:"game_catalog_pages_view"},
-    game_wiki: { table: "game_wiki_pages_view" }, game_collection: { table: "game_collection_pages_view" }, game_tool: { table: "game_tool_pages_view" }, game_code: { table: "game_code_pages_view" },
-    gta_wiki: { table: "game_wiki_pages_view", namespace: "gta" }, gta_wiki_collection: { table: "game_collection_pages_view", namespace: "gta" },
-    red_dead_wiki: { table: "game_wiki_pages_view", namespace: "red-dead" }, red_dead_wiki_collection: { table: "game_collection_pages_view", namespace: "red-dead" },
-    minecraft_wiki: { table: "game_wiki_pages_view", namespace: "minecraft" }, minecraft_wiki_collection: { table: "game_collection_pages_view", namespace: "minecraft" }, minecraft_tool: { table: "game_tool_pages_view", namespace: "minecraft" }
+  const gameTargets: Record<string, string> = {
+    game_wiki: "game_wiki_pages_view",
+    game_collection: "game_collection_pages_view",
+    game_tool: "game_tool_pages_view",
+    game_code: "game_code_pages_view",
+    game_map: "game_map_pages_view",
+    game_quiz: "game_quiz_pages_view",
+    game_catalog: "game_catalog_pages_view"
   };
-  const target = gameTargets[entityType];
-  if (target) {
-    let query = admin.from(target.table).select("canonical_path").eq("id", entityId).eq("is_published", true);
-    if (target.namespace) query = query.eq("namespace", target.namespace);
-    const { data, error } = await query.maybeSingle();
+  const table = gameTargets[entityType];
+  if (table) {
+    const { data, error } = await admin.from(table).select("canonical_path").eq("id", entityId).eq("is_published", true).maybeSingle();
     if (error || !data?.canonical_path) return null;
     return { pageType: entityType, pageUrl: buildPageUrl(data.canonical_path) };
   }
@@ -231,7 +222,8 @@ export async function POST(request: Request) {
     }
 
     const payload = await request.json();
-    const entityType = normalizeString(payload?.entityType) as CommentEntityType;
+    const requestedType = normalizeString(payload?.entityType);
+    const entityType = (LEGACY_COMMENT_TYPES[requestedType] ?? requestedType) as CommentEntityType;
     const entityId = normalizeString(payload?.entityId);
     const parentId = normalizeString(payload?.parentId || "");
     const body = normalizeString(payload?.body);

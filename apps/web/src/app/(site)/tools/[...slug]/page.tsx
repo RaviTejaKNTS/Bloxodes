@@ -1,3 +1,4 @@
+import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
@@ -39,16 +40,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const code = normalizeToolCode(slug ?? []);
   const canonical = `${SITE_URL.replace(/\/$/, "")}/tools/${code}`;
   if (!code) {
-    return {
-      alternates: buildAlternates(`${SITE_URL.replace(/\/$/, "")}/tools`)
-    };
+    notFound();
   }
 
   const tool = await getToolContentWithDevFallback(code);
   if (!tool) {
-    return {
-      alternates: buildAlternates(canonical)
-    };
+    const gameRoute = await resolvePageTypeGameRoute(`/tools/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.metadata();
+
+    notFound();
   }
 
   const title = resolveSeoTitle(tool.seo_title) ?? tool.title ?? undefined;
@@ -89,6 +89,9 @@ export default async function ToolFallbackPage({ params }: PageProps) {
 
   const tool = await getToolContentWithDevFallback(code);
   if (!tool) {
+    const gameRoute = await resolvePageTypeGameRoute(`/tools/${(await params).slug.join("/")}`);
+    if (gameRoute) return gameRoute.render();
+
     notFound();
   }
   const contentHtml = await buildPageContentHtml(tool);

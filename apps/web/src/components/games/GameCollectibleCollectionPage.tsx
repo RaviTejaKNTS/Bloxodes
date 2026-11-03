@@ -104,7 +104,7 @@ export function renderGameCollectibleCollectionPage({
   const breadcrumbs = gameBreadcrumbs([
     { label: "Home", href: "/" },
     { label: namespaceTitle, href: landingPath },
-    { label: "Wiki", href: `/${page.namespace}/wiki` },
+    ...(page.canonical_path.startsWith("/wiki/") ? (landingPath?.startsWith("/games/") ? [] : [{ label: "Wiki", href: "/wiki" }]) : [{ label: "Wiki", href: `/${page.namespace}/wiki` }]),
     { label: config.gameName, href: wikiPath },
     { label: config.label, href: null }
   ], canonicalPath);
@@ -146,7 +146,7 @@ export function renderGameCollectibleCollectionPage({
         afterContent={<>{detailNodes}<CollectionFaq items={faqNodes} /></>}
       />
 
-      {contentHtml?.id ? <CommentsSection entityType={page.namespace === "gta" ? "gta_wiki_collection" : page.namespace === "red-dead" ? "red_dead_wiki_collection" : page.namespace === "minecraft" ? "minecraft_wiki_collection" : "game_collection"} entityId={contentHtml.id} /> : null}
+      {contentHtml?.id ? <CommentsSection entityType={"game_collection"} entityId={contentHtml.id} /> : null}
     </div>
   );
 }

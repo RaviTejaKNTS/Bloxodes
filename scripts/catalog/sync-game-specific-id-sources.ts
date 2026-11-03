@@ -3,6 +3,8 @@ import "../shared/load-env";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import * as cheerio from "cheerio";
+import communityMusic from "../../data/game-specific-ids/community-music.json";
+import { mergeMusicSources } from "./music-source-merge";
 
 type MusicUsage = {
   game_slug: string;
@@ -142,14 +144,6 @@ const EXPERIENCE_SONG_SOURCES: ExperienceSongSource[] = [
     useType: "vehicle_radio_song",
     category: "Songs associated with A Dusty Trip",
     tags: ["vehicle radio", "radio", "experience song"],
-    minimumRows: 1
-  },
-  {
-    gameSlug: "work-at-a-pizza-place",
-    universeId: 47545,
-    useType: "radio_catalog_song",
-    category: "Songs associated with Work at a Pizza Place",
-    tags: ["radio", "radio pass", "experience song"],
     minimumRows: 1
   },
   {
@@ -868,7 +862,11 @@ async function refreshOneMusicGame(gameSlug: string) {
   };
   const experienceRows = source ? await collectExperienceSongs(source) : [];
   const wikiRows = wikiSource ? await collectWikiMusicRows(wikiSource) : [];
-  const refreshedRows = Array.from(new Map([...wikiRows, ...experienceRows].map((row) => [row.asset_id, row])).values())
+  const staticRows = (communityMusic as MusicUsage[]).filter((row) => row.game_slug === gameSlug);
+  const refreshedRows = mergeMusicSources(
+    Array.from(new Map([...wikiRows, ...experienceRows].map((row) => [row.asset_id, row])).values()),
+    staticRows
+  )
     .map((row, index) => ({ ...row, sort_order: index + 1 }));
   const music = (existing.music ?? []).filter((row) => row.game_slug !== gameSlug);
   music.push(...refreshedRows);
@@ -909,13 +907,13 @@ async function main() {
     Promise.all(EXPERIENCE_SONG_SOURCES.map(collectExperienceSongs)),
     Promise.all(WIKI_MUSIC_SOURCES.map(collectWikiMusicRows))
   ]);
-  const music = [
+  const music = mergeMusicSources([
     ...parseJjsKillSounds(jjsHtml),
     ...parseForsakenHitSounds(forsakenHtml),
     ...buildTsbSourceSeed(),
     ...experienceSongGroups.flat(),
     ...wikiMusicGroups.flat()
-  ];
+  ], communityMusic as MusicUsage[]);
   const [bloxstrikeDecals, jjsCreatorStoreGroups, bloxburgCandidates] = await Promise.all([
     collectCreatorStoreDecals({
       gameSlug: "bloxstrike",

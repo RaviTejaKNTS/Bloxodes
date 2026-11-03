@@ -1,3 +1,4 @@
+vi.mock("next/headers", () => ({ headers: async () => new Headers() }));
 // @vitest-environment jsdom
 import { useState } from "react";
 import { flushSync } from "react-dom";
@@ -10,6 +11,8 @@ import { GameToolPageLayout } from "../../games/GameToolPage";
 import type { ToolContent } from "@/lib/tools";
 const { readTool } = vi.hoisted(() => ({ readTool: vi.fn() }));
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
+vi.mock("@/lib/game-site-data", () => ({ listGameMenus: async () => [] }));
+vi.mock("server-only", () => ({}));
 vi.mock("@/lib/tools", () => ({ getToolContentWithDevFallback: readTool }));
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: ({ entityType }: { entityType: string }) => <span data-comment-type={entityType}>Comments</span> }));
 vi.mock("@/components/more-content", () => ({ MoreTools: () => <span>Roblox related tools</span> }));
@@ -32,9 +35,9 @@ describe("shared dedicated tool contract", () => {
   const config = { toolCode: content.code, fallbackTitle: content.title, fallbackDescription: content.meta_description, content, canonicalPath: "/minecraft/tools/xp-calculator" };
   const metadata = await buildDedicatedToolMetadata(config);
   expect(metadata.alternates?.canonical).toContain("/minecraft/tools/xp-calculator");
-  const html = renderToStaticMarkup(await DedicatedToolPage({ ...config, commentEntityType: "minecraft_tool", breadcrumbItems: [{ label: "Minecraft", href: "/minecraft" }, { label: "Tools", href: "/minecraft/tools" }, { label: content.title }], relatedContent: <span>Minecraft related tools</span>, children: <div>Calculator</div> }));
+  const html = renderToStaticMarkup(await DedicatedToolPage({ ...config, commentEntityType: "game_tool", breadcrumbItems: [{ label: "Minecraft", href: "/minecraft" }, { label: "Tools", href: "/minecraft/tools" }, { label: content.title }], relatedContent: <span>Minecraft related tools</span>, children: <div>Calculator</div> }));
   expect(readTool).not.toHaveBeenCalled();
-  expect(html).toContain('data-comment-type="minecraft_tool"');
+  expect(html).toContain('data-comment-type="game_tool"');
   expect(html).toContain("Minecraft related tools");
   expect(html).not.toContain("Roblox related tools");
   expect(html.indexOf("Intro")).toBeLessThan(html.indexOf("Calculator</div>"));
@@ -52,7 +55,7 @@ describe("shared dedicated tool contract", () => {
 
  });
  it("gives shared-game calculators the same sidebar and content contract", async () => {
-  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
+  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", slug: "resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
   const page = GameToolPageLayout({ tool: sharedTool, namespaceTitle: "Example Game", children: <div>Resource calculator</div> });
   const html = renderToStaticMarkup(await DedicatedToolPage(page.props));
   expect(readTool).not.toHaveBeenCalled();
@@ -64,7 +67,7 @@ describe("shared dedicated tool contract", () => {
  });
 
  it("renders shared-game navigation supplied by its server route", async () => {
-  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
+  const sharedTool = { ...content, namespace: "example-game", canonical_path: "/example-game/tools/resource-cost", slug: "resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" }, id: "shared-tool", game_id: "owner" };
   const page = GameToolPageLayout({ tool: sharedTool, namespaceTitle: "Example Game", sidebarContent: <a href="/example-game/wiki/owner">Owner wiki</a>, children: <div>Resource calculator</div> });
   const html = renderToStaticMarkup(await DedicatedToolPage(page.props));
   expect(html).toContain('href="/example-game/wiki/owner"');

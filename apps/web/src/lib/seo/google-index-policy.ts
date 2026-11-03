@@ -225,11 +225,12 @@ function normalizePath(pathname: string): string {
   return pathname.split(/[?#]/, 1)[0].replace(/\/+$/, "") || "/";
 }
 
-export function isGoogleIndexable(pathname: string): boolean {
+export function isGoogleIndexable(pathname: string, gamePaths: ReadonlySet<string> = new Set()): boolean {
   if (!pathname.startsWith("/")) return false;
   // Query variants are separate URLs, not allowlist entries.
   if (pathname.includes("?")) return false;
   const path = normalizePath(pathname);
+  if (gamePaths.has(path) || gamePaths.has(path.replace(/\/page\/[1-9]\d*$/, ""))) return true;
   if (indexablePaths.has(path)) return true;
   if (indexablePathPrefixes.some((prefix) => path.startsWith(`${prefix}/`))) return true;
   // Author profiles allow one slug, without nested routes.
@@ -245,8 +246,8 @@ export function isGooglePolicyHtmlPath(pathname: string): boolean {
   return !/\.(?:xml|rss|atom|txt|json|webmanifest|js|mjs|css|map|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|otf|eot|pdf|mp4|webm|mp3|wav|zip)$/i.test(path);
 }
 
-export function googleIndexHeader(pathname: string): string | null {
-  return isGooglePolicyHtmlPath(pathname) && !isGoogleIndexable(pathname)
+export function googleIndexHeader(pathname: string, gamePaths?: ReadonlySet<string>): string | null {
+  return isGooglePolicyHtmlPath(pathname) && !isGoogleIndexable(pathname, gamePaths)
     ? GOOGLE_NOINDEX_HEADER
     : null;
 }

@@ -13,6 +13,7 @@ describe("catalog sitemap core paths", () => {
     const query = {
       select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), not: vi.fn().mockReturnThis(),
       order: vi.fn().mockResolvedValue({ data: [
+        { code: "roblox-music-ids/games/work-at-a-pizza-place", updated_at: "2026-10-20", published_at: "2025-01-01" },
         { code: "roblox-music-ids", content_updated_at: "2026-10-01", updated_at: "2026-10-20", published_at: "2025-01-01" },
         { code: "roblox-decal-ids", content_updated_at: null, updated_at: "2026-09-30", published_at: "2025-01-01" },
         { code: "free-roblox-items", content_updated_at: null, updated_at: null, published_at: "2025-01-01" }
@@ -22,6 +23,7 @@ describe("catalog sitemap core paths", () => {
     const response = await GET();
     expect(response.status).toBe(200);
     const xml = await response.text();
+    expect(xml).not.toContain("work-at-a-pizza-place");
     const urls = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
     for (const [path, lastmod] of [
       ["roblox-music-ids", "2026-10-01T00:00:00.000Z"],

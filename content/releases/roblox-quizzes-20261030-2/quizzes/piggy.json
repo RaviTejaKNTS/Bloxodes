@@ -1,0 +1,715 @@
+{
+  "page": {
+    "universe_id": 1516533665,
+    "code": "piggy",
+    "title": "Piggy Roblox Quiz: 15 Questions on Chapter Puzzles and Modes",
+    "description_md": "Think you know Piggy's chapter puzzles and modes? Test Book 1 map mechanics and Bot behavior from Book 2's Sewers. Each run draws 15 questions: five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Piggy knowledge across Book 1 keys, safes, exits and Plant puzzles, plus mode rules and Bot behavior. Take 15 random questions per attempt.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "Where does the Red Key spawn in standard House?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Red Key room"
+          },
+          {
+            "id": "b",
+            "text": "The Green Key room"
+          },
+          {
+            "id": "c",
+            "text": "The backyard shed"
+          },
+          {
+            "id": "d",
+            "text": "The Yellow Safe"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-2",
+        "question": "Where does the Blue Key spawn in standard House?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Green Key room"
+          },
+          {
+            "id": "b",
+            "text": "The garage"
+          },
+          {
+            "id": "c",
+            "text": "The bathroom"
+          },
+          {
+            "id": "d",
+            "text": "The Red Key room"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-3",
+        "question": "What do you get from the Yellow Safe in standard House?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Key Code"
+          },
+          {
+            "id": "b",
+            "text": "White Key"
+          },
+          {
+            "id": "c",
+            "text": "Hammer"
+          },
+          {
+            "id": "d",
+            "text": "Green Gear"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-4",
+        "question": "Who is the main bot in standard House?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Little Brother"
+          },
+          {
+            "id": "b",
+            "text": "Mother"
+          },
+          {
+            "id": "c",
+            "text": "Penny"
+          },
+          {
+            "id": "d",
+            "text": "Father"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-5",
+        "question": "What item does the Station escape car need?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Two Batteries"
+          },
+          {
+            "id": "b",
+            "text": "Gas"
+          },
+          {
+            "id": "c",
+            "text": "Key Code"
+          },
+          {
+            "id": "d",
+            "text": "White Key"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-6",
+        "question": "Which rooms contain Hospital's two Vials?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Green Keycard room and Blue Keycard room"
+          },
+          {
+            "id": "b",
+            "text": "The waiting room and the cafeteria"
+          },
+          {
+            "id": "c",
+            "text": "The room with the purple safe and cafeteria"
+          },
+          {
+            "id": "d",
+            "text": "The cafeteria and the orange hallway"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-7",
+        "question": "What item is in Hospital's Yellow Safe?",
+        "options": [
+          {
+            "id": "a",
+            "text": "White Key"
+          },
+          {
+            "id": "b",
+            "text": "Gun"
+          },
+          {
+            "id": "c",
+            "text": "Carrot"
+          },
+          {
+            "id": "d",
+            "text": "Plank"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-8",
+        "question": "Which spot in City holds the Key Code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Yellow Safe"
+          },
+          {
+            "id": "b",
+            "text": "Grandma Piggy's Poutine"
+          },
+          {
+            "id": "c",
+            "text": "The Red Keycard room"
+          },
+          {
+            "id": "d",
+            "text": "The roof of Elly Enterprises"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-9",
+        "question": "Where does the Blue Keycard spawn in Outpost?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The room with the Cracked Door"
+          },
+          {
+            "id": "b",
+            "text": "The medibay, near the Yellow Safe"
+          },
+          {
+            "id": "c",
+            "text": "The cafeteria, by the Laser Gate"
+          },
+          {
+            "id": "d",
+            "text": "The planning quarter, under the stairs"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What is inside the Purple Safe in standard House?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Key Code"
+          },
+          {
+            "id": "b",
+            "text": "Gun"
+          },
+          {
+            "id": "c",
+            "text": "Plank"
+          },
+          {
+            "id": "d",
+            "text": "Red Key"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-1",
+        "question": "Which four items does the standard House front exit require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "White Key, Yellow Key, Hammer and Wrench"
+          },
+          {
+            "id": "b",
+            "text": "White Key, Key Code, Plank and Wrench"
+          },
+          {
+            "id": "c",
+            "text": "White Key, Key Code, Hammer and Wrench"
+          },
+          {
+            "id": "d",
+            "text": "White Key, Key Code, Hammer and Gas"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-2",
+        "question": "In standard House, what must go into the backyard Gear Box before the White Key appears in the well?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Both the Red Gear and the Green Gear"
+          },
+          {
+            "id": "b",
+            "text": "The Red Gear and the Yellow Key"
+          },
+          {
+            "id": "c",
+            "text": "The Red Key and the Green Key"
+          },
+          {
+            "id": "d",
+            "text": "The Red Key and the Blue Key"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-3",
+        "question": "Which two items does Hospital's exit require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The White Key and Key Code"
+          },
+          {
+            "id": "b",
+            "text": "The Yellow Key and Crowbar"
+          },
+          {
+            "id": "c",
+            "text": "The Blue Keycard and Wrench"
+          },
+          {
+            "id": "d",
+            "text": "The White Key and Hammer"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-4",
+        "question": "Which set of items does City's Exit Gate require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fire Extinguisher, Carrot, Key Code and Hammer"
+          },
+          {
+            "id": "b",
+            "text": "Fire Extinguisher, Carrot, Key Code and Wrench"
+          },
+          {
+            "id": "c",
+            "text": "Fire Extinguisher, Carrot, White Key and Wrench"
+          },
+          {
+            "id": "d",
+            "text": "Fire Extinguisher, Plank, Key Code and Wrench"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-5",
+        "question": "Which set of items opens Mall's exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "White Key, Hammer and Key Code"
+          },
+          {
+            "id": "b",
+            "text": "Yellow Key, Crowbar and Wrench"
+          },
+          {
+            "id": "c",
+            "text": "White Key, Crowbar and Wrench"
+          },
+          {
+            "id": "d",
+            "text": "White Key, Hammer and Wrench"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-6",
+        "question": "Which set of items does Outpost's exit require?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Blue Keycard, Fire Extinguisher and Wrench"
+          },
+          {
+            "id": "b",
+            "text": "White Key, Fire Extinguisher and Wrench"
+          },
+          {
+            "id": "c",
+            "text": "Blue Keycard, Gas and Hammer"
+          },
+          {
+            "id": "d",
+            "text": "Key Code, Hammer and Wrench"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-7",
+        "question": "How is Piggy chosen in Player mode?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The map's main bot is always picked"
+          },
+          {
+            "id": "b",
+            "text": "A random player in the lobby is picked"
+          },
+          {
+            "id": "c",
+            "text": "Every lobby player becomes Piggy"
+          },
+          {
+            "id": "d",
+            "text": "The server owner is always picked"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-8",
+        "question": "In Infection mode, what happens when the infected player kills a survivor?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The survivor returns to the lobby"
+          },
+          {
+            "id": "b",
+            "text": "The survivor respawns as a normal survivor"
+          },
+          {
+            "id": "c",
+            "text": "The survivor becomes a bot"
+          },
+          {
+            "id": "d",
+            "text": "The survivor respawns as an infected player"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-9",
+        "question": "Where do you find Hospital's White Key?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside the Vial Safe"
+          },
+          {
+            "id": "b",
+            "text": "Inside the Yellow Safe"
+          },
+          {
+            "id": "c",
+            "text": "Inside the Purple Safe"
+          },
+          {
+            "id": "d",
+            "text": "In the Green Keycard room"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Where do you find Mall's Wrench?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside the Purple Safe"
+          },
+          {
+            "id": "b",
+            "text": "Inside the ATM"
+          },
+          {
+            "id": "c",
+            "text": "Inside the Yellow Safe"
+          },
+          {
+            "id": "d",
+            "text": "Inside the Green Keycard Safe"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-1",
+        "question": "Starting at Book 2's Sewers, how do Bot-mode bots behave?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They patrol the map, skip traps and chase players on sight"
+          },
+          {
+            "id": "b",
+            "text": "They patrol the map, place traps and never chase players"
+          },
+          {
+            "id": "c",
+            "text": "They patrol the map, place traps and chase players on sight"
+          },
+          {
+            "id": "d",
+            "text": "They follow the nearest player without spotting them, place traps and chase that player"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-2",
+        "question": "In normal Infection mode, how many traps can an infected player place?",
+        "options": [
+          {
+            "id": "a",
+            "text": "0"
+          },
+          {
+            "id": "b",
+            "text": "1"
+          },
+          {
+            "id": "c",
+            "text": "2"
+          },
+          {
+            "id": "d",
+            "text": "3"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-3",
+        "question": "In Swarm mode, what happens after the chapter's primary bot spawns?",
+        "options": [
+          {
+            "id": "a",
+            "text": "One extra bot every 30 seconds"
+          },
+          {
+            "id": "b",
+            "text": "One extra bot every five minutes"
+          },
+          {
+            "id": "c",
+            "text": "One extra bot for each survivor"
+          },
+          {
+            "id": "d",
+            "text": "One extra bot every minute"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-4",
+        "question": "What triggers Plant's second phase?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Giving Georgie an Apple"
+          },
+          {
+            "id": "b",
+            "text": "Placing the Dynamite"
+          },
+          {
+            "id": "c",
+            "text": "Shooting Badgy with the Gun"
+          },
+          {
+            "id": "d",
+            "text": "Opening the Orange Keycard area"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-5",
+        "question": "What does Georgie do if you give him an Apple in Plant?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He stuns Piggy for 10 seconds"
+          },
+          {
+            "id": "b",
+            "text": "He stuns the player for 20 seconds"
+          },
+          {
+            "id": "c",
+            "text": "He stuns Piggy for 20 seconds"
+          },
+          {
+            "id": "d",
+            "text": "He gives the player a White Key"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-6",
+        "question": "When Mr. P fires an energy sphere at you in Plant, how does it move and what happens on contact?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It tracks you briefly and stuns any player it touches"
+          },
+          {
+            "id": "b",
+            "text": "It travels straight and explodes without stunning"
+          },
+          {
+            "id": "c",
+            "text": "It instantly eliminates a player on contact"
+          },
+          {
+            "id": "d",
+            "text": "It only stuns a player who has placed a trap"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-7",
+        "question": "Which pairing matches Plant's two standard ending choices?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Leave with Georgie: Bad Ending; stay with Mr. P: Good Ending"
+          },
+          {
+            "id": "b",
+            "text": "Leave with Georgie: Good Ending; stay with Mr. P: Bad Ending"
+          },
+          {
+            "id": "c",
+            "text": "Leave with Georgie: Good Ending; stay with Mr. P: Good Ending"
+          },
+          {
+            "id": "d",
+            "text": "Leave with Georgie: Bad Ending; stay with Mr. P: Bad Ending"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-8",
+        "question": "What makes the White Key appear in Mall?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Using one coin at the ATM"
+          },
+          {
+            "id": "b",
+            "text": "Opening the Green Keycard Safe"
+          },
+          {
+            "id": "c",
+            "text": "Stunning The Prototype"
+          },
+          {
+            "id": "d",
+            "text": "Using both tokens at the vending machine"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-9",
+        "question": "For the first City step of Plant's True Ending quest, which mode must be active?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Bot"
+          },
+          {
+            "id": "b",
+            "text": "Player"
+          },
+          {
+            "id": "c",
+            "text": "Player + Bot"
+          },
+          {
+            "id": "d",
+            "text": "Infection"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}

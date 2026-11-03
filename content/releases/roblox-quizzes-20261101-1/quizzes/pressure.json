@@ -1,0 +1,883 @@
+{
+  "page": {
+    "universe_id": 4367208330,
+    "code": "pressure",
+    "title": "Pressure Roblox Quiz: 15 Questions on the Hadal Blacksite",
+    "description_md": "Think you know Pressure? Try 15 random questions about the Hadal Blacksite, with five easy, five medium and five hard.",
+    "seo_title": null,
+    "seo_description": "Test your Roblox Pressure knowledge with 15 random questions, five each on easy, medium and hard, covering Hadal Blacksite threats, gear and escape routes.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-01",
+        "question": "What role does the Crystal serve in the Hadal Blacksite?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Power source"
+          },
+          {
+            "id": "b",
+            "text": "Door key"
+          },
+          {
+            "id": "c",
+            "text": "Repair tool"
+          },
+          {
+            "id": "d",
+            "text": "Medical supply"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-02",
+        "question": "Outside The Ridge, what warning pattern does Angler give as it approaches?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Steady lights followed by a quiet knock"
+          },
+          {
+            "id": "b",
+            "text": "Brief flickering followed by a close screech"
+          },
+          {
+            "id": "c",
+            "text": "A red screen followed by a spoken countdown"
+          },
+          {
+            "id": "d",
+            "text": "A green flash followed by a doorbell"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-03",
+        "question": "What sound warns you that Pinkie is approaching in a normal Blacksite hall?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A low mechanical hum"
+          },
+          {
+            "id": "b",
+            "text": "A sequence of electronic beeps"
+          },
+          {
+            "id": "c",
+            "text": "A distant, high-pitched scream"
+          },
+          {
+            "id": "d",
+            "text": "A burst of metallic knocking"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-04",
+        "question": "What does Froger do after pausing at an unopened door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Disappear through the ceiling"
+          },
+          {
+            "id": "b",
+            "text": "Wait for a player to open it"
+          },
+          {
+            "id": "c",
+            "text": "Continue straight through it"
+          },
+          {
+            "id": "d",
+            "text": "Rebound toward the previous door"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-05",
+        "question": "What should you do with your view when Eyefestation pulls it toward her eyes?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn it away from her eyes"
+          },
+          {
+            "id": "b",
+            "text": "Keep it fixed on her eyes"
+          },
+          {
+            "id": "c",
+            "text": "Move it closer to her eyes"
+          },
+          {
+            "id": "d",
+            "text": "Follow her eyes as she moves"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-06",
+        "question": "Where do Squiddles normally spawn in the Blacksite?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Inside lockers"
+          },
+          {
+            "id": "b",
+            "text": "Dark rooms"
+          },
+          {
+            "id": "c",
+            "text": "The submarine cabin"
+          },
+          {
+            "id": "d",
+            "text": "The tram cabin"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-07",
+        "question": "How do you make a stalking Wall Dweller retreat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep your back turned to it"
+          },
+          {
+            "id": "b",
+            "text": "Keep a flashlight aimed at its old wall"
+          },
+          {
+            "id": "c",
+            "text": "Keep looking directly at it"
+          },
+          {
+            "id": "d",
+            "text": "Keep moving without looking back"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-08",
+        "question": "Which sight is a warning that a locker contains Void-Mass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A blue room number on its door"
+          },
+          {
+            "id": "b",
+            "text": "A red direction arrow beside it"
+          },
+          {
+            "id": "c",
+            "text": "A green exit lamp above it"
+          },
+          {
+            "id": "d",
+            "text": "Glowing purple eyes in its window"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-09",
+        "question": "What does the number on a held Blue Keycard identify?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The next room's door number"
+          },
+          {
+            "id": "b",
+            "text": "The previous room's door number"
+          },
+          {
+            "id": "c",
+            "text": "The current room's keypad code"
+          },
+          {
+            "id": "d",
+            "text": "The number of unopened drawers"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-10",
+        "question": "What happens to a Code Breacher after it successfully opens a normal locked door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It recharges"
+          },
+          {
+            "id": "b",
+            "text": "It is consumed"
+          },
+          {
+            "id": "c",
+            "text": "It becomes a Keycard"
+          },
+          {
+            "id": "d",
+            "text": "It stays ready for another lock"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-11",
+        "question": "What shape does a switched-on standard Flashlight illuminate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A circle around your feet"
+          },
+          {
+            "id": "b",
+            "text": "A beam behind your back"
+          },
+          {
+            "id": "c",
+            "text": "A cone in front of you"
+          },
+          {
+            "id": "d",
+            "text": "A ring above your head"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-12",
+        "question": "With an empty standard Flashlight, what charge does one battery add?",
+        "options": [
+          {
+            "id": "a",
+            "text": "25%"
+          },
+          {
+            "id": "b",
+            "text": "75%"
+          },
+          {
+            "id": "c",
+            "text": "100%"
+          },
+          {
+            "id": "d",
+            "text": "50%"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-13",
+        "question": "Which Trenchbleeder lights the final Searchlights repair area?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lucy"
+          },
+          {
+            "id": "b",
+            "text": "Leon"
+          },
+          {
+            "id": "c",
+            "text": "Rose"
+          },
+          {
+            "id": "d",
+            "text": "Rivers"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-14",
+        "question": "After the final Airlock drains, what must you do at the docking bay?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Closing the final Ridge gate"
+          },
+          {
+            "id": "b",
+            "text": "Entering the extraction submarine"
+          },
+          {
+            "id": "c",
+            "text": "Taking the Crystal from its container"
+          },
+          {
+            "id": "d",
+            "text": "Clearing the Lunar Dock generators"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-01",
+        "question": "What locker rule applies during the first five doors of a standard run?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Cleithrophobia does not force you out"
+          },
+          {
+            "id": "b",
+            "text": "Cleithrophobia forces you out immediately"
+          },
+          {
+            "id": "c",
+            "text": "Lockers cannot be entered"
+          },
+          {
+            "id": "d",
+            "text": "Lockers can hold two players"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-02",
+        "question": "Outside The Ridge, how does Blitz's warning flicker compare with the usual one?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It lasts about half as long"
+          },
+          {
+            "id": "b",
+            "text": "It lasts about twice as long"
+          },
+          {
+            "id": "c",
+            "text": "It lasts the same amount of time"
+          },
+          {
+            "id": "d",
+            "text": "It is absent"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-03",
+        "question": "How does Chainsmoker's gas affect you while hiding in a locker?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It prevents cleithrophobia from starting"
+          },
+          {
+            "id": "b",
+            "text": "It restores lost health"
+          },
+          {
+            "id": "c",
+            "text": "It brings on cleithrophobia sooner"
+          },
+          {
+            "id": "d",
+            "text": "It extends your safe hiding time"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-04",
+        "question": "How does Angler's warning change when it attacks from the front rather than behind?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The same audio and less reaction time"
+          },
+          {
+            "id": "b",
+            "text": "Different audio and more reaction time"
+          },
+          {
+            "id": "c",
+            "text": "The same audio and more reaction time"
+          },
+          {
+            "id": "d",
+            "text": "Different audio and less reaction time"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-05",
+        "question": "What restores energy during Pandemonium's locker minigame?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Holding the cursor on the central white indicator"
+          },
+          {
+            "id": "b",
+            "text": "Holding the cursor at the screen's edge"
+          },
+          {
+            "id": "c",
+            "text": "Clicking the locker handle repeatedly"
+          },
+          {
+            "id": "d",
+            "text": "Moving the cursor away from the indicator"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-06",
+        "question": "When you open the next door during a normal, unenraged Eyefestation encounter, what can she do?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Remain at the same window indefinitely"
+          },
+          {
+            "id": "b",
+            "text": "Leave or move to the next room"
+          },
+          {
+            "id": "c",
+            "text": "Enter the hallway behind you"
+          },
+          {
+            "id": "d",
+            "text": "Move into your locker"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-07",
+        "question": "Which of these lights can shine on a passive Squiddle without provoking it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Lantern"
+          },
+          {
+            "id": "b",
+            "text": "Standard Flashlight"
+          },
+          {
+            "id": "c",
+            "text": "Blacklight"
+          },
+          {
+            "id": "d",
+            "text": "Hand-Cranked Flashlight"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-08",
+        "question": "In an ordinary dark room, which visible cue warns of a Good People door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "An unlit Navi-Path room number"
+          },
+          {
+            "id": "b",
+            "text": "A Blue Keycard beside the door"
+          },
+          {
+            "id": "c",
+            "text": "A green beacon on the floor"
+          },
+          {
+            "id": "d",
+            "text": "A glowing Navi-Path room number"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-09",
+        "question": "What door is a Purple Keycard commonly used for?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A Heavy Containment door off the numbered route"
+          },
+          {
+            "id": "b",
+            "text": "A red-scanner treasure door"
+          },
+          {
+            "id": "c",
+            "text": "The next numbered door in an ordinary locked room"
+          },
+          {
+            "id": "d",
+            "text": "The next numbered door in The Ridge"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-10",
+        "question": "Which carried item can bypass a red Keycard scanner without entering a code?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Blue Keycard"
+          },
+          {
+            "id": "b",
+            "text": "Code Breacher"
+          },
+          {
+            "id": "c",
+            "text": "Purple Keycard"
+          },
+          {
+            "id": "d",
+            "text": "Yellow Keycard"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-11",
+        "question": "Which room type has beds you can hide under without encountering Void-Mass?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Heavy Containment"
+          },
+          {
+            "id": "b",
+            "text": "Server Farms"
+          },
+          {
+            "id": "c",
+            "text": "Employee Accommodation"
+          },
+          {
+            "id": "d",
+            "text": "Oxygen Gardens"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-12",
+        "question": "For an ordinary Angler rush, when does entering a valid hiding spot begin protecting you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Only when the hiding animation finishes"
+          },
+          {
+            "id": "b",
+            "text": "Only after Angler has passed"
+          },
+          {
+            "id": "c",
+            "text": "Only after you leave the hiding spot"
+          },
+          {
+            "id": "d",
+            "text": "When the hiding animation triggers"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-13",
+        "question": "How does the Control Room lighting change when you take the Crystal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Regular lights go out and emergency lights come on"
+          },
+          {
+            "id": "b",
+            "text": "Regular lights stay on and emergency lights stay off"
+          },
+          {
+            "id": "c",
+            "text": "Both regular and emergency lights stay off"
+          },
+          {
+            "id": "d",
+            "text": "Both regular and emergency lights stay on"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-14",
+        "question": "What guides you to the correct door in the ordinary post-Crystal Ridge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Numbered door signs"
+          },
+          {
+            "id": "b",
+            "text": "Green guidance lights"
+          },
+          {
+            "id": "c",
+            "text": "Orange Searchlights beams"
+          },
+          {
+            "id": "d",
+            "text": "Red keypad screens"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-15",
+        "question": "What color lights mark the route outside the final Airlock?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Red"
+          },
+          {
+            "id": "b",
+            "text": "Blue"
+          },
+          {
+            "id": "c",
+            "text": "Green"
+          },
+          {
+            "id": "d",
+            "text": "Purple"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-16",
+        "question": "What happens to the Searchlight pursuing you as you leave the cannon tunnels?",
+        "options": [
+          {
+            "id": "a",
+            "text": "HQ traps it behind a door"
+          },
+          {
+            "id": "b",
+            "text": "The cannon draws it into the shaft"
+          },
+          {
+            "id": "c",
+            "text": "It retreats when the Airlock opens"
+          },
+          {
+            "id": "d",
+            "text": "Lucy crushes it"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-01",
+        "question": "Which control opens the Crystal's container in the Control Room?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The power switch at the bridge's center"
+          },
+          {
+            "id": "b",
+            "text": "The lever inside the final Airlock"
+          },
+          {
+            "id": "c",
+            "text": "A breaker inside the cannon side tunnels"
+          },
+          {
+            "id": "d",
+            "text": "The control box in the tram station"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-02",
+        "question": "What happens when you flip the switch beyond the open gate at the end of the ordinary Ridge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The bridge lowers"
+          },
+          {
+            "id": "b",
+            "text": "The gate closes"
+          },
+          {
+            "id": "c",
+            "text": "The Airlock drains"
+          },
+          {
+            "id": "d",
+            "text": "The next numbered door opens"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-03",
+        "question": "Once enough finale transformers are repaired, where is the router HQ tells you to activate?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The boarding area inside the extraction sub"
+          },
+          {
+            "id": "b",
+            "text": "The tram station before the Lunar Dock"
+          },
+          {
+            "id": "c",
+            "text": "The transformer room inside the middle shaft"
+          },
+          {
+            "id": "d",
+            "text": "The bridge inside the Control Room"
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-04",
+        "question": "What extra hazard appears in the third and fourth cannon tunnel sections while you flip breakers?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turret fire from ceiling guns"
+          },
+          {
+            "id": "b",
+            "text": "Laser beams from scanner doors"
+          },
+          {
+            "id": "c",
+            "text": "Falling rocks from the ceiling"
+          },
+          {
+            "id": "d",
+            "text": "Steam from damaged pipes"
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-05",
+        "question": "In a standard Hadal Blacksite run without Modifiers, what is Pandemonium's maximum spawn frequency before and within The Ridge?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Once before, once within"
+          },
+          {
+            "id": "b",
+            "text": "Twice before, once within"
+          },
+          {
+            "id": "c",
+            "text": "Once before, twice within"
+          },
+          {
+            "id": "d",
+            "text": "Twice before, twice within"
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-06",
+        "question": "After Painter's rescue changes the run to the Salvation ending, which area becomes the final area?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Lunar Dock"
+          },
+          {
+            "id": "b",
+            "text": "The Ridge"
+          },
+          {
+            "id": "c",
+            "text": "The Control Room"
+          },
+          {
+            "id": "d",
+            "text": "The cannon repair area"
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      }
+    ]
+  }
+}

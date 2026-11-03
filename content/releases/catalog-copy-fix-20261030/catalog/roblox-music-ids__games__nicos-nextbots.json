@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/nicos-nextbots",
+  "title": "Nico's Nextbots Music IDs",
+  "seo_title": "Nico's Nextbots Music IDs [53 Boombox Songs]",
+  "meta_description": "Find 53 Nico's Nextbots music IDs for soundtrack, map and event songs. Search by track name, then try a number if the Boombox accepts it.",
+  "intro_md": "These 53 songs are tied to Nico's Nextbots, and most are soundtrack songs from the game. They cover locations, events, safe zones and other game audio.\n\nSearch by track name, then copy the number for any song the Boombox accepts.",
+  "description_md": "## What the Boombox does in Nico's Nextbots\n\nA Nico's Nextbots Music ID is a number for one Roblox audio track. Players may call it a Boombox code or song code, but it doesn't redeem XP, cash, maps or nextbots. Track details may include an artist, album or duration.\n\nThe Boombox has an ID input and an in-game soundtrack list. Its price and item details can change, so follow the live shop and menu. The [Boombox page on the Nico's Nextbots wiki](https://nicos-nextbots.fandom.com/wiki/Boombox) covers the item in more detail.\n\n## Using the Nico's Nextbots Boombox\n\n1. Join [Nico's Nextbots on Roblox](https://www.roblox.com/games/10118559731/nicos-nextbots).\n2. Check the shop for Boombox access, then equip the item from your inventory when you have it.\n3. Open the Boombox music menu. If it accepts IDs, enter the number for the song you want.\n4. Use the play, favorites, soundtrack or control buttons the current Boombox shows.\n5. Adjust the volume or mute settings if the song isn't audible.",
+  "how_it_works_md": "## Why a Nico's Nextbots song won't play\n\n- **The Boombox input changed.** Use its current ID field, search, favorites or soundtrack control.\n- **The track was removed or restricted.** Roblox moderation and creator permissions can change older audio.\n- **The Boombox isn't available to you.** Check the shop and your inventory for access.\n- **Some songs are environmental audio.** These aren't manual Boombox tracks, so typing the number may not play them.\n- **The game or device is muted.** Check Nico's Nextbots, Roblox and device volume.\n\nTry a second song to narrow it down. If built-in music plays but typed IDs fail, the Boombox may be limiting custom songs in its current version.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. Some entries are soundtrack or environmental audio, and Roblox can remove or restrict an upload.",
+      "q": "Are these guaranteed working Nico's Nextbots Boombox codes?"
+    },
+    {
+      "a": "Equip the Boombox and use the visible ID or search field. Paste the plain digits when manual input is available.",
+      "q": "Where do I enter a Nico's Nextbots Music ID?"
+    },
+    {
+      "a": "Soundtrack songs are game audio from Nico's Nextbots. A Boombox may only let you play some of them, depending on the current item and permissions.",
+      "q": "What is the difference between a soundtrack song and a Boombox song?"
+    },
+    {
+      "a": "The track may be removed, the Boombox may limit custom input, access may be missing, or a mute setting may be active. Test a built-in track and another song.",
+      "q": "Why does a Nico's Nextbots song stay silent?"
+    },
+    {
+      "a": "Not necessarily. Most are soundtrack songs from the game, but that doesn't tell you who made each upload or whether it will stay available.",
+      "q": "Are these all official Nico's Nextbots soundtrack uploads?"
+    },
+    {
+      "a": "Not necessarily. Some songs are map or event audio rather than Boombox tracks, so they may not play when typed in.",
+      "q": "Can every song play when I type its number?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Nico's Nextbots uses location, event, safe-zone, and Boombox audio throughout its chase-focused maps. For the game and its current item systems, see [nico's nextbots on Roblox](https://www.roblox.com/games/10118559731/nicos-nextbots).",
+  "wiki_sort_order": null
+}

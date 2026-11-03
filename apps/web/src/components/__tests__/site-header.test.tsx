@@ -55,13 +55,10 @@ describe("site header", () => {
     expect(drawer.textContent).toContain("Theme");
   });
 
-  it("shows franchise links in the bar and keeps every site section in the drawer", () => {
-    navigation.pathname = "/gta/wiki/gta-5/vehicles";
+  it("uses the Roblox fallback in server HTML on game URLs before a bridge publishes", () => {
+    navigation.pathname = "/wiki/gta-5/vehicles";
     const container = render();
-    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(["/gta", "/gta/wiki", "/gta/maps", "/gta/checklists", "/games"]);
-    const drawer = container.querySelector("#site-more-drawer")!;
-    for (const link of siteNavLinks) expect(hrefs(drawer)).toContain(link.href);
-    expect(container.querySelector('nav[aria-label="Game wikis"]')).toBeNull();
-    expect(hrefs(container)).not.toContain("/gta/wiki/gta-6");
+    expect(hrefs(container.querySelector('nav[aria-label="Primary"]'))).toEqual(siteNavLinks.map(link => link.href));
+    for (const link of siteNavLinks) expect(hrefs(container.querySelector("#site-more-drawer"))).toContain(link.href);
   });
 });

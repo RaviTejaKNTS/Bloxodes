@@ -1,6 +1,6 @@
 # Franchise games
 
-Last verified: 2026-10-21
+Last verified: 2026-11-01
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
@@ -9,7 +9,7 @@ Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever
 The T3 schedule "Bloxodes nightly other games (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
 
 1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
-2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data and images, a Haiku writer, run headless from an empty folder through the factory's `bin/haiku-write`, writes the copy from its prompt files, and the main agent builds the page.
+2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data, images and source pages, a Haiku writer in a T3 thread on Pi, run through the factory's `bin/pi-write` as a plain API call, writes the copy in chat from its prompt files and that research, and the main agent builds the page.
 3. Publishes each game as a `game-wiki@1` bundle with `content:publish`, managed development first, then production. No PR or GitHub run.
 4. Sets `Done`, or `Waiting for approval` when the plan has page types the factory doesn't build yet, and writes the Run report.
 
@@ -33,14 +33,11 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 
 ## Routes
 
-| Page | URL |
-| --- | --- |
-| Franchise or game root wiki | `/<namespace>/wiki` |
-| Child game wiki (franchise) | `/<namespace>/wiki/<game-slug>` |
-| Collection | the owning wiki URL plus `/<collection-slug>` |
-| Maps, quizzes, catalogs, checklists | `/<namespace>/maps|quizzes|catalog|checklists/<slug>` |
+Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections `/wiki/<game-slug>/<collection-slug>`, and `/maps|checklists|quizzes/<slug>`, `/codes/<game-slug>`, `/tools|catalog/<namespace>-<slug>`. Full rules and how the routes find a page are in [URLs](urls.md#other-games).
 
-New namespaces use the registry-backed `[slug]/[[...segments]]` route. Reserved namespaces are listed in `apps/web/src/lib/game-route-names.ts`. Minecraft keeps its `/minecraft/<edition>/wiki` URLs.
+Every game is handled the same way from its data: menus, sidebar links, `/games` cards, the home page games section, collection pages, progress, checklists, related links, search, comments, the feed, sitemaps and cache refresh. Only tools, calculators and interactive maps have their own engines. Don't add code for a single game.
+
+Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `expected_game_page_path` gives the right URL; `content:publish` and `publish:game-pages` use it.
 
 ## Data
 
@@ -74,9 +71,9 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Publishing
 
-- **Wiki bundles (hubs and collections):** `npm run content:publish -- <abs-bundle>` with a `game-wiki@1` bundle (`contracts/game-wiki/v1/README.md`). It dry-runs by default, writes with `--target managed-dev --apply` and `--target production --apply --allow-prod`, and uses the same production guard as Roblox ([publishing](roblox-wiki.md#publishing)). Each target resolves its own game and page rows by namespace and slug, so development and production IDs don't need to match, and existing page UUIDs are kept. Cover and hero art, and item images, upload to R2 through the command. New games in registry-backed namespaces need no code. `content:status -- --namespace <ns> --game <slug>` shows what exists.
+- **Wiki bundles (hubs and collections):** `npm run content:publish -- <abs-bundle>` with a `game-wiki@1` bundle (`contracts/game-wiki/v1/README.md`). It dry-runs by default, writes with `--target managed-dev --apply` and `--target production --apply --allow-prod`, and uses the same production guard as Roblox ([publishing](roblox-wiki.md#publishing)). Each target resolves its own game and page rows by namespace and slug, so development and production IDs don't need to match, and existing page UUIDs are kept. Cover and hero art, and item images, upload to R2 through the command. New games need no code. Dry runs and applies reject links in the retired `/<namespace>/wiki/...` style anywhere in the copy, naming the field and link. `content:status -- --namespace <ns> --game <slug>` shows what exists.
 - `publish:game-pages` (`scripts/games/publish-game-pages.ts`) validates a whole typed batch and rolls it back unless `--apply`. It uses the `game-pages` publisher on GitHub.
-- Collections use `sync:shared-game-collection-runtime` (the `franchise-collection` publisher). Export an existing one with `npm run export:shared-game-collection-workspace`.
+- `sync:shared-game-collection-runtime` (the `franchise-collection` publisher) also publishes single collections. Export an existing one with `npm run export:shared-game-collection-workspace -- --namespace <slug>`. New images get `<namespace>/<game>/<collection>/<item>-<hash>` keys; an unchanged item keeps its stored key.
 - Hubs use the `franchise-wiki` publisher.
 - Stage new game identities and hubs before their collections or quizzes. Shared page payloads need stable page UUIDs: choose them before first staging, or read and keep the existing IDs. A missing ID can fail the route ownership guard.
 - Fully imaged collections are checked with `--require-images`. A missing item image needs an exact per-item accepted-gap record in the bundle's `images.json`.
@@ -84,7 +81,7 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Page type rules
 
-- **Maps:** the default map has search, categories, zoom and guide links. The nine GTA maps keep their registered `gta-layered` and `gta5` engines and frozen snapshots. Changing a frozen snapshot needs a reviewed migration. New simple maps use `image-pins`.
+- **Maps:** the default map has search, categories, zoom and guide links. The nine GTA maps keep their registered `gta-layered` and `gta5` engines and frozen snapshots. The snapshot guard accepts each original snapshot and its exact reviewed canonical-link version. Migration `20261102230000` adds those nine hashes before the stored-link repair in `20261103000000`; it also rewrites only exact approved old map data by GTA namespace and map slug, so differing development UUIDs do not skip the repair. Already-canonical snapshots are unchanged. It does not relax the renderer or full-data hash checks. Geometry, assets, prose and other snapshot changes still need a reviewed migration. New simple maps use `image-pins`.
 - **Catalogs:** the default body is a table. An interactive catalog needs code.
 - **Tools:** a new calculator needs a registered `tool_key` and checked client code. `resource-cost` is the one generic calculator. Minecraft calculators keep their own rules and publisher.
 - **Codes:** a code in `check` status stays hidden. Codes are verified from the game's own sources. There's no automatic refresh for non-Roblox codes.
@@ -94,4 +91,4 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 - Managed development has 25 `games` rows whose IDs differ from production (the GTA, Red Dead and Minecraft roots were aligned on 2026-10-19). `publish:game-pages` on the GitHub path needs matching IDs, so the first update to one of those games fails in CI staging until its development ID is aligned. `content:publish` isn't affected.
 - `game_catalog_pages`, `game_code_pages` and `game_codes` have no production rows yet. The tables, skills and publishers exist, but nothing is published.
-- `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`.
+- `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`. Importer navigation and guide links use canonical page-type URLs; static `/gta/maps/` asset paths stay unchanged.

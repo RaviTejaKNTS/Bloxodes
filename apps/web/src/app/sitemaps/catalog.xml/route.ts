@@ -1,3 +1,4 @@
+import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import { buildAvatarCatalogPath, isAvatarCatalogCode } from "@/lib/roblox-avatar-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -38,7 +39,7 @@ export async function GET() {
 
     for (const row of rows) {
       const code = row.code?.trim();
-      if (!code) continue;
+      if (!code || isRetiredMusicGameCatalogCode(code)) continue;
       if (code.startsWith("free-roblox-items/") || code.startsWith("roblox-free-items/")) continue;
       if (code === "roblox-music-ids/games" || code === "roblox-decal-ids/games") continue;
 

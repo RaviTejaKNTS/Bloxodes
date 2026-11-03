@@ -1,4 +1,3 @@
-import { gameDatabase } from "@/lib/game-content-db";
 import { listSharedGameDiscoveryPages } from "@/lib/game-content-index";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -7,8 +6,6 @@ import { resolveContentDates } from "@/lib/content-dates";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
-import { listPublishedGtaWikiPages, listPublishedGtaWikiCollections } from "@/lib/gta";
-import { buildMinecraftWikiPath, buildMinecraftCollectionPath, listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -39,6 +36,7 @@ type GameRow = {
 };
 
 type ChecklistRow = {
+  canonical_path?: string;
   slug: string | null;
   title: string | null;
   updated_at: string | null;
@@ -104,7 +102,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools, gtaWiki, gtaCollections] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at, created_at")
@@ -140,19 +138,12 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .not("slug", "is", null)
       .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40),
-    gameDatabase(sb, "gta").from("checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
-    listPublishedMinecraftWikiPages(),
-    listPublishedMinecraftCollections(),
-    listPublishedMinecraftTools(),
-    listPublishedGtaWikiPages(),
-    listPublishedGtaWikiCollections()
   ]);
 
   const firstError =
     articlesRes.error ||
     gamesRes.error ||
     checklistsRes.error ||
-    gtaChecklistsRes.error ||
     eventsRes.error ||
     puzzlesRes.error;
   if (firstError) {
@@ -161,34 +152,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
 
   const items: FeedItem[] = [];
   for (const page of await listSharedGameDiscoveryPages()) {
-    const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
-    if (item) items.push(item);
-  }
-  for (const page of [...gtaWiki, ...gtaCollections]) {
-    const item = toFeedItem({
-      title: page.title,
-      path: page.canonical_path,
-      description: page.meta_description ?? "GTA wiki and collections.",
-      updatedAt: page.content_updated_at ?? page.updated_at,
-      publishedAt: page.published_at,
-      createdAt: page.created_at
-    });
-    if (item) items.push(item);
-  }
-  const minecraftPages = [
-    ...minecraftWiki.filter(page => page.slug !== "minecraft").map(page => ({ ...page, path: buildMinecraftWikiPath(page.slug) })),
-    ...minecraftCollections.map((page) => ({ ...page, path: buildMinecraftCollectionPath(page.wiki_slug, page.collection_slug) })),
-    ...minecraftTools.map((page) => ({ ...page, path: `/minecraft/tools/${page.slug}` }))
-  ];
-  for (const page of minecraftPages) {
-    const item = toFeedItem({
-      title: page.title,
-      path: page.path,
-      description: page.meta_description ?? "Minecraft wiki and tools.",
-      updatedAt: page.content_updated_at ?? page.updated_at,
-      publishedAt: page.published_at,
-      createdAt: page.created_at
-    });
+    const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.content_updated_at ?? page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
     if (item) items.push(item);
   }
   for (const report of [robloxSeptember2026Report, robloxJuly2026Report, robloxJune2026Report]) {
@@ -242,19 +206,6 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     if (item) items.push(item);
   }
 
-  for (const checklist of (gtaChecklistsRes.data ?? []) as ChecklistRow[]) {
-    if (!checklist.slug || !checklist.title) continue;
-    const item = toFeedItem({
-        title: checklist.title,
-        path: `/gta/checklists/${checklist.slug}`,
-        description: "Checklist update.",
-        updatedAt: checklist.updated_at,
-        publishedAt: checklist.published_at,
-        createdAt: checklist.created_at
-      });
-    if (item) items.push(item);
-  }
-
   for (const eventsPage of (eventsRes.data ?? []) as EventsRow[]) {
     if (!eventsPage.slug || !eventsPage.title) continue;
     const item = toFeedItem({
@@ -281,7 +232,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     if (item) items.push(item);
   }
 
-  return items.sort((a, b) => b.updatedAtMs - a.updatedAtMs).slice(0, FEED_LIMIT);
+  return [...new Map(items.map(item => [item.link, item])).values()].sort((a, b) => b.updatedAtMs - a.updatedAtMs).slice(0, FEED_LIMIT);
 }
 
 function buildRssXml(items: FeedItem[]): string {

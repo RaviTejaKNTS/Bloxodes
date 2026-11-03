@@ -1,0 +1,835 @@
+{
+  "page": {
+    "universe_id": 2294168059,
+    "code": "the-mimic",
+    "title": "The Mimic Roblox Quiz: 15 Questions on Control's Book",
+    "description_md": "Think you know Control's Book in The Mimic? Take 15 random questions about its routes, puzzles, enemy behavior and boss fights, with five questions at each difficulty.",
+    "seo_title": null,
+    "seo_description": "Test your knowledge of Control's Book in Roblox The Mimic with 15 random questions on routes, puzzles, patrols and boss fights, from easy to hard.",
+    "is_published": true
+  },
+  "quizData": {
+    "easy": [
+      {
+        "id": "easy-e01",
+        "question": "In Control's Book, Chapter I, which entrance does Yasu first use to get into La Quinta High School?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The swimming pool."
+          },
+          {
+            "id": "b",
+            "text": "The locked gym entrance."
+          },
+          {
+            "id": "c",
+            "text": "The back door."
+          },
+          {
+            "id": "d",
+            "text": "The basement stairs."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e02",
+        "question": "In Control's Book, Chapter I's House of Death, where is the key?",
+        "options": [
+          {
+            "id": "a",
+            "text": "On the farmer's lap, left of the starting point."
+          },
+          {
+            "id": "b",
+            "text": "On the table beside the exit."
+          },
+          {
+            "id": "c",
+            "text": "In a bathroom stall near the entrance."
+          },
+          {
+            "id": "d",
+            "text": "Behind the door at the right corridor's end."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e03",
+        "question": "In Control's Book, Chapter I's Arari Village cave, how do the two paths affect where you end up?",
+        "options": [
+          {
+            "id": "a",
+            "text": "They lead to separate endings."
+          },
+          {
+            "id": "b",
+            "text": "The right path dead-ends unless you clear the left first."
+          },
+          {
+            "id": "c",
+            "text": "You must explore both paths to open the exit."
+          },
+          {
+            "id": "d",
+            "text": "Both paths reach the same place."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e04",
+        "question": "In Control's Book, Chapter I's Arari Village cave, how fast are the moving statues compared with you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Faster than you."
+          },
+          {
+            "id": "b",
+            "text": "Slower than you."
+          },
+          {
+            "id": "c",
+            "text": "The same speed as you."
+          },
+          {
+            "id": "d",
+            "text": "They start slower, then overtake you."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e05",
+        "question": "In Control's Book, Chapter II's Imperial Palace, where is the library key?",
+        "options": [
+          {
+            "id": "a",
+            "text": "On a table in the fireplace room."
+          },
+          {
+            "id": "b",
+            "text": "In the garden on the left."
+          },
+          {
+            "id": "c",
+            "text": "Beside the torture chair."
+          },
+          {
+            "id": "d",
+            "text": "On the island beyond the ladder."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e06",
+        "question": "In Control's Book, Chapter II's Imperial Palace, which two butterfly colors open glowing doors?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Black and red."
+          },
+          {
+            "id": "b",
+            "text": "Red and yellow."
+          },
+          {
+            "id": "c",
+            "text": "White and blue."
+          },
+          {
+            "id": "d",
+            "text": "Yellow and black."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-e07",
+        "question": "In Control's Book, Chapter II's Realm of the Forgotten, what do the butterflies guide you toward?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The nearest hiding place."
+          },
+          {
+            "id": "b",
+            "text": "The correct path to the next area."
+          },
+          {
+            "id": "c",
+            "text": "A key that opens every door."
+          },
+          {
+            "id": "d",
+            "text": "The monster's patrol route."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-e08",
+        "question": "In Control's Book, Chapter III's Sakura Swamp, what does the shelf puzzle in the hut reveal?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A katana."
+          },
+          {
+            "id": "b",
+            "text": "A crowbar."
+          },
+          {
+            "id": "c",
+            "text": "A key."
+          },
+          {
+            "id": "d",
+            "text": "A wooden sword."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "easy-e09",
+        "question": "In Control's Book, Chapter III's Indigent Family's Minka, how many bells must you ring to unlock Mihari's spirit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Five."
+          },
+          {
+            "id": "b",
+            "text": "Three."
+          },
+          {
+            "id": "c",
+            "text": "Six."
+          },
+          {
+            "id": "d",
+            "text": "Four."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "easy-e10",
+        "question": "In Control's Book, Chapter IV's La Quinta High School on Normal, how many butterfly spirits must you collect to finish the school section?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Twelve."
+          },
+          {
+            "id": "b",
+            "text": "Thirteen."
+          },
+          {
+            "id": "c",
+            "text": "Fourteen."
+          },
+          {
+            "id": "d",
+            "text": "Ten."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "easy-er01",
+        "question": "In Control's Book, Chapter II's Akuyami Village, what light source do you pick up after your flashlight dies?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A lighter."
+          },
+          {
+            "id": "b",
+            "text": "A glow stick."
+          },
+          {
+            "id": "c",
+            "text": "A lantern."
+          },
+          {
+            "id": "d",
+            "text": "A red butterfly spirit."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "easy-er02",
+        "question": "In Control's Book, Chapter I's Hotel maze, where does the escape elevator take Yasu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Arari Village."
+          },
+          {
+            "id": "b",
+            "text": "The school gym."
+          },
+          {
+            "id": "c",
+            "text": "The Hospital."
+          },
+          {
+            "id": "d",
+            "text": "The Imperial Palace."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      }
+    ],
+    "medium": [
+      {
+        "id": "medium-m01",
+        "question": "In Control's Book, Chapter I's Hotel maze, where does the map place the floor-crawling monster?",
+        "options": [
+          {
+            "id": "a",
+            "text": "At the bottom of the map."
+          },
+          {
+            "id": "b",
+            "text": "At the top of the map."
+          },
+          {
+            "id": "c",
+            "text": "In the middle of the map."
+          },
+          {
+            "id": "d",
+            "text": "The map does not show it."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m02",
+        "question": "In Control's Book, Chapter I's Arari Village cave, which spot helps you lose the statues chasing you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The Komainu gate."
+          },
+          {
+            "id": "b",
+            "text": "The small house with a dead geisha."
+          },
+          {
+            "id": "c",
+            "text": "The house where Kuriko looks out."
+          },
+          {
+            "id": "d",
+            "text": "The hotel elevator."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m03",
+        "question": "In Control's Book, Chapter II's Imperial Palace, what does the lever beside the torture chair open?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The library's main gate."
+          },
+          {
+            "id": "b",
+            "text": "The ladder to the floating islands."
+          },
+          {
+            "id": "c",
+            "text": "The large central corridor door."
+          },
+          {
+            "id": "d",
+            "text": "The central glowing door."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-m04",
+        "question": "In Control's Book, Chapter II's Imperial Palace, what is near the corridor door where someone is pleading?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The key from the fireplace room."
+          },
+          {
+            "id": "b",
+            "text": "A lantern."
+          },
+          {
+            "id": "c",
+            "text": "A crowbar."
+          },
+          {
+            "id": "d",
+            "text": "A blue butterfly spirit."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-m07",
+        "question": "In Control's Book, Chapter II's Akuyami Village, what is in the garden the map leads you to?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A safe house and the white butterfly spirit."
+          },
+          {
+            "id": "b",
+            "text": "A key and the blue butterfly spirit."
+          },
+          {
+            "id": "c",
+            "text": "A lever and a rope."
+          },
+          {
+            "id": "d",
+            "text": "A red door and a crowbar."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-m08",
+        "question": "In Control's Book, Chapter III's Sakura Swamp, what opens the chained exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Put the sword in the white flame."
+          },
+          {
+            "id": "b",
+            "text": "Place the wooden sword on the shrine."
+          },
+          {
+            "id": "c",
+            "text": "Hang the sword from a tree."
+          },
+          {
+            "id": "d",
+            "text": "Return the sword to the hut's cabinet."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-m09",
+        "question": "In Control's Book, Chapter III's Indigent Family's Minka, which three offerings open the chained door?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A wooden sword, a white butterfly spirit, and a key."
+          },
+          {
+            "id": "b",
+            "text": "A yellow rose, a crowbar, and a lantern."
+          },
+          {
+            "id": "c",
+            "text": "A yellow rose, a katana, and a corrupted butterfly spirit."
+          },
+          {
+            "id": "d",
+            "text": "A katana, a crowbar, and a key."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "medium-m10",
+        "question": "In Control's Book, Chapter III's Ōmukade's Lair, what opens the skull exit?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Turn all four pillar lights red."
+          },
+          {
+            "id": "b",
+            "text": "Turn only one pillar light green."
+          },
+          {
+            "id": "c",
+            "text": "Turn three pillar lights green."
+          },
+          {
+            "id": "d",
+            "text": "Turn all four pillar lights green."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "medium-mr11",
+        "question": "In Control's Book, Chapter IV's La Quinta High School on Normal, which pickup changes location between runs?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Butterfly spirits."
+          },
+          {
+            "id": "b",
+            "text": "Keys."
+          },
+          {
+            "id": "c",
+            "text": "Both keys and butterfly spirits."
+          },
+          {
+            "id": "d",
+            "text": "Neither; every pickup stays in one place."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "medium-mr12",
+        "question": "In Control's Book, Chapter IV's Cursed Forest on Normal, what must you collect and where do you take it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Six cursed armor pieces to a flame by the entrance."
+          },
+          {
+            "id": "b",
+            "text": "Six cursed armor pieces to the white flame by the central tree."
+          },
+          {
+            "id": "c",
+            "text": "Six cursed armor pieces to the red flame by the central tree."
+          },
+          {
+            "id": "d",
+            "text": "Six cursed armor pieces to a shrine by the central tree."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "medium-h07",
+        "question": "In Control's Book, Chapter IV's La Quinta High School on Normal, which monster patrols the school?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keiko."
+          },
+          {
+            "id": "b",
+            "text": "Tokito."
+          },
+          {
+            "id": "c",
+            "text": "Daku."
+          },
+          {
+            "id": "d",
+            "text": "Kusunoki."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ],
+    "hard": [
+      {
+        "id": "hard-h01",
+        "question": "In Control's Book, Chapter I's Hotel maze, when do the vines fail to hide you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When the monster sees you during a chase."
+          },
+          {
+            "id": "b",
+            "text": "When it is nearby but hard to locate."
+          },
+          {
+            "id": "c",
+            "text": "When you stay still beside the vines."
+          },
+          {
+            "id": "d",
+            "text": "When you are near the escape elevator."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-h02",
+        "question": "In Control's Book, Chapter II's Imperial Palace library, what loop does Megumi repeat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Right, left, down the stairs, then up."
+          },
+          {
+            "id": "b",
+            "text": "Left, right, up the stairs, then down."
+          },
+          {
+            "id": "c",
+            "text": "Up the stairs, left, down, then right."
+          },
+          {
+            "id": "d",
+            "text": "Left, up the stairs, right, then down."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h03",
+        "question": "In Control's Book, Chapter II's flooded Hospital maze, which route does giant Shaku mostly repeat?",
+        "options": [
+          {
+            "id": "a",
+            "text": "From the center to the entrance, then left, then back to center."
+          },
+          {
+            "id": "b",
+            "text": "From the right side to the butterfly, then left, then back right."
+          },
+          {
+            "id": "c",
+            "text": "From the center to the butterfly, then right, then back to center."
+          },
+          {
+            "id": "d",
+            "text": "From the butterfly to the center, then the entrance, then right."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h04",
+        "question": "In Control's Book, Chapter III's Sakura Swamp, Kaito is faster than you. What keeps you safe near him?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Stand beside any cherry tree."
+          },
+          {
+            "id": "b",
+            "text": "Wait in the hut before solving its puzzle."
+          },
+          {
+            "id": "c",
+            "text": "Run to the chained exit before opening it."
+          },
+          {
+            "id": "d",
+            "text": "Hide near a lantern, where he cannot catch you."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-h05",
+        "question": "In Control's Book, Chapter III's Indigent Family's Minka, which spot is a reliable refuge while Mihari chases you?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The area around the small Buddha altar and white flame."
+          },
+          {
+            "id": "b",
+            "text": "Any closet."
+          },
+          {
+            "id": "c",
+            "text": "The hallway with someone crying behind a door."
+          },
+          {
+            "id": "d",
+            "text": "The room where the first key is found."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-h06",
+        "question": "In Control's Book, Chapter III's Ōmukade's Lair, how does Ōmukade move after detecting Yasu?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It chases Yasu and follows each turn."
+          },
+          {
+            "id": "b",
+            "text": "It follows a fixed, very fast patrol instead of chasing."
+          },
+          {
+            "id": "c",
+            "text": "It stops moving until you touch a pillar."
+          },
+          {
+            "id": "d",
+            "text": "It teleports to the entrance."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-h08",
+        "question": "In Control's Book, Chapter IV's Cursed Forest on Normal, when do bushes stop hiding you from Kusunoki?",
+        "options": [
+          {
+            "id": "a",
+            "text": "When the white flame is in view."
+          },
+          {
+            "id": "b",
+            "text": "After you pick up any armor piece."
+          },
+          {
+            "id": "c",
+            "text": "When Kusunoki is already pursuing you."
+          },
+          {
+            "id": "d",
+            "text": "When you stand at the edge of the map."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      },
+      {
+        "id": "hard-h09",
+        "question": "In Control's Book, Chapter IV's Sakura Arena on Normal, how much health does interacting with a red butterfly spirit restore?",
+        "options": [
+          {
+            "id": "a",
+            "text": "20."
+          },
+          {
+            "id": "b",
+            "text": "30."
+          },
+          {
+            "id": "c",
+            "text": "50."
+          },
+          {
+            "id": "d",
+            "text": "40."
+          }
+        ],
+        "correctOptionId": "d",
+        "image": null
+      },
+      {
+        "id": "hard-h10",
+        "question": "In Control's Book, Chapter IV's Sakura Arena on Normal, what can happen if you stand still during Saigomo's scream?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Webbing can trap you until it breaks."
+          },
+          {
+            "id": "b",
+            "text": "Contact with her deals more damage."
+          },
+          {
+            "id": "c",
+            "text": "Her health resets to full."
+          },
+          {
+            "id": "d",
+            "text": "The scream disables the blessed blade."
+          }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      },
+      {
+        "id": "hard-hr11",
+        "question": "In Control's Book, Chapter IV's Sakura Arena on Normal, how can you tell Saigomo has entered Phase 2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Her eyes stay dark; her movement and attacks speed up."
+          },
+          {
+            "id": "b",
+            "text": "Her eyes light up; her movement and attacks speed up."
+          },
+          {
+            "id": "c",
+            "text": "Her eyes light up; her movement slows, but her attacks speed up."
+          },
+          {
+            "id": "d",
+            "text": "Her eyes light up; her movement speeds up, but her attacks slow."
+          }
+        ],
+        "correctOptionId": "b",
+        "image": null
+      },
+      {
+        "id": "hard-hr12",
+        "question": "In Control's Book, Chapter IV's Sakura Arena on Normal, what happens when Saigomo's body glows at certain health intervals?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Yasu is healed automatically."
+          },
+          {
+            "id": "b",
+            "text": "Saigomo's attacks deal double damage."
+          },
+          {
+            "id": "c",
+            "text": "Saigomo becomes invulnerable for several seconds."
+          },
+          {
+            "id": "d",
+            "text": "Saigomo stops moving but can still be hurt."
+          }
+        ],
+        "correctOptionId": "c",
+        "image": null
+      }
+    ]
+  }
+}

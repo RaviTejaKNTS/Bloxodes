@@ -1,4 +1,5 @@
 "use client";
+import { gameCollectionProgressOptions } from "@/lib/game-collection-progress-options";
 
 import type { ReactNode } from "react";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -10,14 +11,6 @@ import {
 
 export type GameCollectibleItem = CollectionChecklistItem;
 export type GameCollectibleSection = CollectionChecklistSection;
-
-const LEGACY_PROGRESS_OPTIONS = {
-  endpoint: "/api/gta/collections/progress",
-  requestKey: "code",
-  storageKeyPrefix: "gta-collection:",
-  eventName: "gta-collection-progress",
-  analyticsPrefix: "gta_collection"
-} as const;
 
 export function GameCollectibleChecklist({
   namespace,
@@ -42,11 +35,7 @@ export function GameCollectibleChecklist({
   beforeToolbar?: ReactNode;
   afterContent?: ReactNode;
 }) {
-  const progressOptions = namespace === "gta" ? LEGACY_PROGRESS_OPTIONS : {
-    endpoint: namespace === "red-dead" ? "/api/red-dead/collections/progress" : `/api/games/${namespace}/collections/progress`,
-    requestKey: "code", storageKeyPrefix: `${namespace}-collection:`,
-    eventName: `${namespace}-collection-progress`, analyticsPrefix: `${namespace.replaceAll("-", "_")}_collection`
-  };
+  const progressOptions = gameCollectionProgressOptions(namespace);
   return (
     <CollectionChecklist
       stream

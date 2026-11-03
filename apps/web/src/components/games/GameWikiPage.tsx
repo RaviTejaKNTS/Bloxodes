@@ -21,7 +21,6 @@ import { createGameReader, type SharedGameWikiPage } from "@/lib/shared-game-rea
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { breadcrumbJsonLd, buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
-export function legacyWikiCommentType(namespace: string): "gta_wiki" | "red_dead_wiki" | "minecraft_wiki" | "game_wiki" { return namespace === "gta" ? "gta_wiki" : namespace === "red-dead" ? "red_dead_wiki" : namespace === "minecraft" ? "minecraft_wiki" : "game_wiki"; }
 export function gameWikiMetadata(page: GameWikiPresentationPage): Metadata {
  const canonical = `${SITE_URL}${gameWikiCanonicalPath(page)}`;
  const title = resolveSeoTitle(page.seo_title) ?? page.title;
@@ -88,7 +87,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
   const breadcrumbs = gameBreadcrumbs([
     { label: "Home", href: "/" },
     { label: namespaceTitle, href: landingPath },
-    ...([`/${namespace}`, `/${namespace}/wiki`].includes(page.canonical_path) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]),
+    ...(page.canonical_path.startsWith("/wiki/") || page.canonical_path.startsWith("/games/") ? (landingPath.startsWith("/games/") ? [] : [{ label: "Wiki", href: "/wiki" }]) : ([`/${namespace}`, `/${namespace}/wiki`].includes(page.canonical_path) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }])),
     { label: page.game_short_title || page.game_title, href: null }
   ], canonicalPath);
   const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
@@ -212,7 +211,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
         </PageSidebar>
 
         <div className="min-w-0 lg:col-start-1">
-          {page.id !== page.game_id ? <CommentsSection entityType={legacyWikiCommentType(namespace)} entityId={page.id} /> : null}
+          {page.id !== page.game_id ? <CommentsSection entityType={"game_wiki"} entityId={page.id} /> : null}
         </div>
       </div>
     </div>
