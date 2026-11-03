@@ -6,9 +6,9 @@ Each Roblox game gets a wiki hub at `/wiki/<game-slug>` and item collections at 
 
 Roblox wiki content is built in the [Bloxodes Content Factory](#content-factory), a separate content-only repo. The skills below still work here for manual runs.
 
-## Nightly run (MacBook Pro, 02:30 IST)
+## Scheduled run (MacBook Pro, every 2 days)
 
-The T3 schedule "Bloxodes nightly Roblox wiki (Content Factory)" runs in the factory's root checkout with its `roblox-wiki-main` skill. It picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, builds the hub and collections, and publishes them as one `roblox-wiki@1` bundle with `content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. A game too thin to publish is marked `Blocked` and the run tries the next one, up to 3.
+The T3 schedule "Bloxodes Roblox wiki every 2 days (Content Factory)" runs in the factory's root checkout with its `roblox-wiki-main` skill. It picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, builds the hub and collections, and publishes them as one `roblox-wiki@1` bundle with `content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. A game too thin to publish is marked `Blocked` and the run tries the next one, up to 3.
 
 ## Workflow
 
