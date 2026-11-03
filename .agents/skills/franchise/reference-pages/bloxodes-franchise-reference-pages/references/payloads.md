@@ -1,6 +1,6 @@
 # Shared page payloads
 
-All page rows need `namespace`, `game_id`, `slug` and `title`. Use an explicit `id` when another group refers to the row. Named page URLs are `/<namespace>/<section>/<slug>`. The database derives `canonical_path`; omit it for a new page. Existing routes and owners are permanent.
+All page rows need `namespace`, `game_id`, `slug` and `title`. Use an explicit `id` when another group refers to the row. Named page URLs are `/maps|checklists|quizzes/<slug>` and `/tools|catalog/<namespace>-<slug>`. The database derives `canonical_path`; omit it for a new page. Existing routes and owners are permanent.
 
 Maps, quizzes and catalogs accept `seo_title`, `meta_description`, `intro_md`, `description_md`, `sources_json`, `is_published` and `published_at`. Maps, catalogs and checklists also accept `faq_json`. Cards and social previews use the owning game's art: `games.cover_image` (16:9) and `games.hero_image` (square). There's no per-page image field; make sure the game row has both. Publishing fails if they're missing, blank, the Bloxodes logo, unreachable or the wrong shape.
 
