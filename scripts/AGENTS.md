@@ -59,7 +59,6 @@ Article bundle verification and pre-promotion release reads use the resolved man
 
 - `dev/`: workstation development and worktree setup.
   - `setup-worktree.sh` delegates to dependency-free `setup-worktree.mjs` for `npm run setup:worktree`. It checks the canonical main checkout, private env permissions and existing links before linking `.envs/` and creating the checkout's own empty `tmp/`. A conflicting `.envs` path stops setup. It enforces HDD paths on the homelab. It never installs dependencies or runs checks.
-  - `cleanup-task-worktree.mjs` accepts exact clean merged tasks under the T3 HDD or legacy task directory. Apply requires a prior T3 settled/no-active-run check and `--inactive-confirmed`. It deletes the task branch and checkout, including its `tmp/`. Detached runtimes and the current checkout remain intact.
   - `start-managed-dev.ts` powers both `npm run dev` and `npm run dev:managed`. It loads `.envs/targets/managed-dev.env` and refuses targets outside HTTPS `*.supabase.co`.
   - `env-doctor.ts` owns workstation readiness and safety checks; `check-env-contract.ts` owns committed example coverage. The one-time legacy env migration commands are retired.
   - `check-migration-integrity.ts` validates migration filenames, version uniqueness, the convergence policy, seed retirement, and future `SECURITY DEFINER` search paths without connecting to a database.

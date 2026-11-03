@@ -13,7 +13,7 @@ How code and content reach production. GitHub does the checking, building and de
 5. **`Required PR checks`** is the single required check. Branch protection enforces it, including for admins, and blocks force pushes. No human approval is required by GitHub; release permission comes from the owner.
 6. **`codex-review.yml`** (Selective Claude review) runs a read-only Claude Haiku 5.5 code review through the Claude Code CLI when a ready, same-repo code PR opens. It may only read files and run `git diff/show/log`. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
 7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly.
-8. **Clean up.** GitHub deletes the remote branch. Fast-forward the clean main checkouts (homelab and Mac) to the released SHA. On the homelab, once the thread is finished in T3, run `cleanup:task-worktree` from another checkout with `--inactive-confirmed`. On the Mac, the hourly `com.ravitejaknts.t3-worktree-reaper` removes settled T3 worktrees; the helper doesn't accept Mac paths.
+8. **Sync.** GitHub deletes the remote branch. Fast-forward the clean main checkouts (homelab and Mac) to the released SHA. Agents don't delete worktrees. `t3-worktree-reaper` runs on the homelab and the MacBook Pro and removes a clean worktree after its thread has been settled for 3 days. It keeps the local branch and refuses a worktree with uncommitted changes.
 
 Use `bloxodes-release-e2e` for the full release flow.
 

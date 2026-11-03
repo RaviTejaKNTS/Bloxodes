@@ -31,7 +31,7 @@ export async function checkoutPaths(cwd = process.cwd(), suppliedMain = process.
   if (suppliedMain && await fs.realpath(suppliedMain) !== main) throw new Error("T3CODE_PROJECT_ROOT must be this repository's main checkout.");
   const common = async checkout => fs.realpath(git(checkout, "rev-parse", "--path-format=absolute", "--git-common-dir"));
   if (await common(root) !== await common(main)) throw new Error("The task and main checkout must belong to the same repository.");
-  return { root, main, records };
+  return { root, main };
 }
 
 export async function inspectLink(source, destination) {
@@ -59,22 +59,4 @@ export async function privateEnvFiles(directory) {
   }
   await walk(directory);
   return files;
-}
-
-export async function taskLocationAllowed(main, target, current) {
-  const resolved = await fs.realpath(target);
-  if (resolved === await fs.realpath(current) || resolved === main) return false;
-  const roots = [path.join(main, "tmp/worktrees"), "/srv/data/t3code/worktrees/Bloxodes"];
-  return roots.some(root => contains(root, resolved) && root !== resolved);
-}
-
-export async function findWorktreeRecord(records, target) {
-  for (const record of records) {
-    try {
-      if (await fs.realpath(record.worktree) === target) return record;
-    } catch (error) {
-      if (error.code !== "ENOENT") throw error;
-    }
-  }
-  return undefined;
 }

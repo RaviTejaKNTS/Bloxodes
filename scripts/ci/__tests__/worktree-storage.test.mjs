@@ -5,28 +5,13 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { setupWorktree } from "../../dev/setup-worktree.mjs";
-import { inspectPrivatePaths } from "../../dev/worktree-cleanup-storage.mjs";
-import { contains, findWorktreeRecord, inspectLink, privateEnvFiles, checkoutPaths, taskLocationAllowed } from "../../dev/worktree-storage.mjs";
+import { contains, inspectLink, privateEnvFiles, checkoutPaths } from "../../dev/worktree-storage.mjs";
 
 async function temporary(t) {
   const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), "bloxodes-worktree-")));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   return root;
 }
-
-test("cleanup refuses checkout-owned private env files", async t => {
-  const root = await temporary(t), main = path.join(root, "main"), task = path.join(root, "task");
-  await fs.mkdir(main); await fs.mkdir(task);
-  await fs.writeFile(path.join(task, ".env.local"), "private", { mode: 0o600 });
-  await assert.rejects(inspectPrivatePaths(task, main), /checkout-owned/);
-});
-
-test("a missing unrelated worktree does not hide the selected task record", async t => {
-  const main = await temporary(t), task = path.join(main, "task");
-  await fs.mkdir(task);
-  const selected = { worktree: task, branch: "refs/heads/task" };
-  assert.equal(await findWorktreeRecord([{ worktree: path.join(main, "gone") }, selected], task), selected);
-});
 
 test("links preserve existing files and reject different or broken destinations", async t => {
   const root = await temporary(t);
@@ -86,7 +71,6 @@ test("setup links private env storage and creates only local scratch", async t =
   await fs.writeFile(path.join(worktree, "tmp/keep.json"), "task scratch");
   await setupWorktree({ cwd: worktree, suppliedMain: main });
   assert.equal(await fs.readFile(path.join(worktree, "tmp/keep.json"), "utf8"), "task scratch");
-  await inspectPrivatePaths(worktree, main);
   await fs.writeFile(path.join(worktree, ".envs/targets/public.env"), "fixture", { mode: 0o644 });
   await assert.rejects(setupWorktree({ cwd: worktree, suppliedMain: main }), /private regular file/);
   await fs.unlink(path.join(main, ".envs/targets/public.env"));
@@ -98,13 +82,10 @@ test("setup links private env storage and creates only local scratch", async t =
   await assert.rejects(setupWorktree({ cwd: worktree, suppliedMain: main }), /tmp must belong to this checkout/);
   assert.equal(await fs.readFile(path.join(mainTmp, "keep.json"), "utf8"), "main scratch");
   await assert.rejects(checkoutPaths(worktree, worktree), /main checkout/);
-  assert.equal(await taskLocationAllowed(main, main, worktree), false);
-  assert.equal(await taskLocationAllowed(main, worktree, worktree), false);
   assert.equal(contains("/srv/data", "/srv/database"), false);
   await fs.unlink(path.join(worktree, "tmp"));
   await fs.mkdir(path.join(worktree, "tmp"));
   await fs.writeFile(path.join(worktree, "tmp/disposable.json"), "task scratch");
-  await inspectPrivatePaths(worktree, main);
   git("worktree", "remove", worktree);
   await assert.rejects(fs.access(worktree), /ENOENT/);
   assert.equal(await fs.readFile(path.join(mainTmp, "keep.json"), "utf8"), "main scratch");

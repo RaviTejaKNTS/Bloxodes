@@ -13,7 +13,6 @@
     "content:deployed-sha": "tsx scripts/content/roblox-wiki-cli.ts deployed-sha",
     "content:status": "tsx scripts/content/roblox-wiki-cli.ts status",
     "content:candidates": "tsx scripts/content/roblox-wiki-cli.ts candidates",
-    "cleanup:task-worktree": "node scripts/dev/cleanup-task-worktree.mjs",
     "ci:events:publish": "node --import tsx scripts/ci/publish-events.ts",
     "setup:worktree": "bash scripts/dev/setup-worktree.sh",
     "env:check": "node --import tsx scripts/dev/check-env-contract.ts",
