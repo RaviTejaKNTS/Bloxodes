@@ -77,7 +77,7 @@ URL rules for new content:
 
 - New games use page-type URLs ([URLs](../../../../../bloxodes-docs/content/urls.md#other-games)): `/wiki/<game-slug>`, `/codes/<game-slug>`, `/maps|checklists|quizzes/<page-slug>`, and `/tools|catalog/<namespace>-<page-slug>`.
 - Collections append their slug to the owning game's wiki. A franchise hub can't own collections.
-- A new title in a namespace that hasn't moved yet keeps that namespace's existing URL style. Read the root's `games.url_style` and use `expected_game_page_path` for exact URLs.
+- Use `expected_game_page_path` for exact URLs.
 
 If the request is only to plan, return the plan. If it also authorizes creation, carry on with the matching skills within that scope. Don't ask again for work the user already authorized.
 

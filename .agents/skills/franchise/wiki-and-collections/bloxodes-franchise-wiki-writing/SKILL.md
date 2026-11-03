@@ -74,7 +74,7 @@ Both images are served from Bloxodes media (`https://media.bloxodes.com/wiki/...
 
 These are the only places this skill differs from the Roblox one.
 
-- **Identity:** no `universe_id` or any Roblox identifier. The hub belongs to a namespace and a `games` row. `games.kind` is `franchise` or `game`, and a child game sets `parent_id`. Routes are `/<namespace>/wiki` for a root and `/<namespace>/wiki/<game-slug>` for a child. See `bloxodes-docs/content/franchise.md`.
+- **Identity:** no `universe_id` or any Roblox identifier. The hub belongs to a namespace and a `games` row. `games.kind` is `franchise` or `game`, and a child game sets `parent_id`. Routes are `/games/<namespace>` for a franchise root and `/wiki/<game-slug>` for every game. See `bloxodes-docs/content/franchise.md`.
 - **Artwork:** Roblox hubs get images from the universe automatically. Franchise hubs, roots included, must supply `cover_image` and `hero_image` in `game.json`.
 - **Scope:** keep campaign, online service, expansion, mode, edition, platform and release-generation boundaries from the brief. Don't blend inventories, progression, prices or ranks from separate scopes.
 - **Unreleased games:** write only restrained, verified facts. Tips can be empty.
