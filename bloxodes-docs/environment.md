@@ -67,4 +67,5 @@ The Content Factory has no env files. Its `bin/publisher` runs these commands fr
 ## Known issues
 
 - `WIKI_MEDIA_PUBLIC_BASE_URL` sits in `env/examples/retired.env.example` but `apps/web/src/lib/wiki-media.ts` still reads it as an optional override.
-- Legacy names `HOSTINGER_Token`, `Northflank_API_Token`, `VPS_ADMIN_PASSWORD1` and the `ARTICLE_WRITER_PI_*` group remain in private profiles with no code consumer.
+- Legacy names `HOSTINGER_Token`, `VPS_ADMIN_PASSWORD1` and the `ARTICLE_WRITER_PI_*` group remain in private profiles with no code consumer.
+- `env/examples/infrastructure/` still lists the removed Northflank names: accounts 2 to 5 in `northflank-stats.env.example`, and the token, project and `NORTHFLANK_ROBLOXGO_*` names in `northflank.env.example`. The real `northflank.env` holds only `NORTHFLANK_API_BASE`, and no code reads it. Remove the examples and the `northflank` overlay in `env/config.json` with the next code release, because changes under `env/` go through code checks and can rebuild the stats worker.
