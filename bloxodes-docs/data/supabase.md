@@ -1,6 +1,6 @@
 # Database
 
-Last verified: 2026-10-20
+Last verified: 2026-11-03
 
 Two Supabase databases: production (self-hosted on the VPS) and managed development (Supabase cloud). There is no local Supabase.
 
@@ -13,6 +13,24 @@ Two Supabase databases: production (self-hosted on the VPS) and managed developm
 - **Edge Functions:** `revalidate` and `cache-warm` are ours. `main` and `hello` are vendor defaults.
 - **Extensions:** `pg_net` and `supabase_vault`. No `pg_cron`; the minute workers are called from VPS cron.
 - Postgres stays private inside the VPS. Schema changes reach it only through GitHub over HTTPS Studio.
+
+## Rotating the production keys
+
+`JWT_SECRET` signs `ANON_KEY` and `SERVICE_ROLE_KEY`. Kong doesn't check keys on `/storage/v1/` or `/functions/v1/`, and Storage verifies tokens itself, so removing a leaked key from Kong doesn't revoke it. Only a new `JWT_SECRET` does. Supabase Auth signs user tokens with the ES256 key, and the `sb_*` and `*_ASYMMETRIC` keys use their own signing, so they keep working. The website is affected for about 90 seconds, until step 5 finishes.
+
+1. Back up `.env`, `env.stats-worker` and the crontab. Between HOT runs, comment out the crontab's `bloxodes-stats-worker/bin/` lines.
+2. In `.env`, set a new alphanumeric `JWT_SECRET` and put its unpadded base64url form in the `k` of the `oct` entry in both `JWT_KEYS` and `JWT_JWKS`. Sign a new `ANON_KEY` and `SERVICE_ROLE_KEY` with HS256, keeping the `role` and `iss` claims.
+3. From `/home/codex-admin/bloxodes-supabase`, with all five Compose files, run `docker compose <files> up -d --no-deps --no-build rest rest-proxy auth storage realtime functions supavisor studio kong`, then restart `supabase-rest-proxy`. Leave `db` running: it reads `JWT_SECRET` only when a new database is first set up, and the next full `up` recreates it. Realtime re-seeds its tenant secret on start.
+4. In the database, as `supabase_admin`, run `alter database postgres set "app.settings.jwt_secret"` with the new secret and `vault.update_secret` on `revalidate_cron_jwt` with the new service role key.
+5. Put the new keys in every other store:
+   - VPS `env.stats-worker`: `SUPABASE_SERVICE_ROLE`.
+   - Homelab `targets/production.env`: `SUPABASE_SERVICE_ROLE`, `SUPABASE_ANON_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+   - GitHub: secrets `SUPABASE_SERVICE_ROLE` and `SUPABASE_ANON_KEY`, variable `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+   - Dokploy web env: `SUPABASE_SERVICE_ROLE` and `SUPABASE_ANON_KEY`, then redeploy. The website doesn't read the anon key in the browser, so the current image is fine and no rebuild is needed.
+   - Northflank `stats-hot-hourly` runtime env: `SUPABASE_SERVICE_ROLE`.
+6. Check that the old service role key gets `401` on `/rest/v1/` and `403` on `/storage/v1/bucket`, and that the new key gets `200`. Check `/api/health?scope=deploy`, then restore the crontab and confirm one VPS job and one HOT run succeed.
+
+Old `.env` backups on the VPS keep the old keys, which no longer work after this. Northflank's job holds a full-access key, so include it in every rotation.
 
 ## Managed development
 
