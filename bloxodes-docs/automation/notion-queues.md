@@ -2,13 +2,13 @@
 
 Last verified: 2026-10-19
 
-Two Notion databases coordinate the nightly content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
+Two Notion databases coordinate the scheduled content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
 
 ## Roblox Wiki Queue
 
 - Database: https://app.notion.com/p/b49555b7263b44939d71da109e0b2cfa
 - Data source: `collection://9e104b46-a080-49de-905c-667111aa47eb`
-- Used by: the nightly Roblox wiki run, and any manual Roblox wiki run.
+- Used by: the scheduled Roblox wiki run, and any manual Roblox wiki run.
 
 This queue is a claim log, not a to-do list. It stops two runs from building the same game.
 
@@ -30,7 +30,7 @@ This queue is a claim log, not a to-do list. It stops two runs from building the
 
 - Database: https://app.notion.com/p/5185dc698b5b47c698bc882dfdedb8d7
 - Data source: `collection://3f3e6551-1fe9-4bc0-9dfa-e2ad78c5de8b`
-- Used by: the Content Factory's nightly franchise run (`franchise-wiki-main`).
+- Used by: the Content Factory's scheduled franchise run (`franchise-wiki-main`).
 
 New non-Roblox games only. The owner updates games we already cover (like ARC Raiders) by hand.
 

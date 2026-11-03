@@ -1,12 +1,12 @@
 # Franchise games
 
-Last verified: 2026-11-03
+Last verified: 2026-11-04
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
-## Nightly run (MacBook Pro, 02:00 IST)
+## Scheduled run (MacBook Pro, every 6 hours)
 
-The T3 schedule "Bloxodes nightly other games (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
+The T3 schedule "Bloxodes other games every 6 hours (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
 
 1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
 2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data, images and source pages, a Haiku writer, run through the factory's `bin/haiku-write` as a plain API call, writes the copy from its prompt files and that research, and the main agent builds the page.
