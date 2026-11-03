@@ -73,7 +73,7 @@ The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitH
 | --- | --- | --- |
 | `stats-hot-hourly` | :12 hourly | Universe HOT refresh. |
 
-It's the only Northflank job. The env files keep tokens for accounts 1 to 5.
+It's the only Northflank job. It runs in team `ravitejakntss-team`, the only Northflank team we use. `infrastructure/northflank-stats.env` holds its one token, as `NORTHFLANK_STATS_API_TOKEN_1`.
 
 ## GitHub Actions
 
