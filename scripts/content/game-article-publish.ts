@@ -15,6 +15,7 @@ import { verifyArticleAssets, verifyArticleLive } from "./article-publish";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 import { fetchImageBytes } from "../shared/fetch-image-bytes";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { parseArticleContentPages } from "@/lib/article-blocks";
 import { resolveSeoTitle } from "@/lib/seo";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
@@ -117,8 +118,9 @@ export async function publishGameArticleBundle(options:ContentOptions) {
     const key=`articles/${final.slug}/cover-${createHash("sha256").update(coverBytes).digest("hex")}.webp`;
     const upload=await db.storage.from(bucket).upload(key,coverBytes,{contentType:"image/webp",upsert:true});
     if(upload.error) throw upload.error;
-    const origin=process.env.SUPABASE_MEDIA_PUBLIC_URL || process.env.SUPABASE_URL!;
-    promoted.cover_image=`${origin.replace(/\/$/,"")}/storage/v1/object/public/${bucket}/${key}`;
+    const coverUrl=toMediaPublicUrl(db.storage.from(bucket).getPublicUrl(key).data.publicUrl);
+    if(!coverUrl) throw new Error("Storage returned no public cover URL.");
+    promoted.cover_image=coverUrl;
     await verifyArticleAssets(promoted,promoted.cover_image);
     const payload=gameArticlePayload(promoted,bundle.namespace,game.id);
     // Recheck after media work. The route registry serializes competing inserts.

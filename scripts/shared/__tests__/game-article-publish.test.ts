@@ -53,14 +53,14 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
         throw new Error('Unexpected request '+method+' '+url.pathname);
       };`;
     const apply=["apply","bad-readback"].includes(scenario);
-    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:dev}});
+    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${dev}/storage/v1/object/public/media`}});
     assert.equal(result.status,["apply","dry-run"].includes(scenario)?0:1,result.stderr);
     if(scenario==='archive-clash') assert.match(result.stderr+result.stdout,/already belongs to a Roblox game/);
     if(scenario==='duplicate-slug') assert.match(result.stderr+result.stdout,/another game with this slug/);
     const report=JSON.parse(await fs.readFile(path.join(root,"report.json"),"utf8"));
     assert.ok(report.calls.every((call:{path:string})=>!call.path.includes('article_generation_queue')&&!call.path.includes('roblox_universes')));
     if(!apply) assert.ok(report.calls.every((call:{method:string;path:string})=>call.method==='GET'||call.path.endsWith('/expected_game_page_path')));
-    if(scenario==='apply') {assert.equal(report.stored.game_id,id);assert.equal(report.stored.namespace,'example');assert.equal(report.stored.canonical_path,'/articles/example-guide');}
+    if(scenario==='apply') {assert.equal(report.stored.game_id,id);assert.equal(report.stored.namespace,'example');assert.equal(report.stored.canonical_path,'/articles/example-guide');assert.match(report.stored.cover_image,new RegExp(`^${dev}/storage/v1/object/public/media/articles/example-guide/cover-[0-9a-f]+\\.webp$`));}
   } finally {await fs.rm(root,{recursive:true,force:true});}
 });
 
