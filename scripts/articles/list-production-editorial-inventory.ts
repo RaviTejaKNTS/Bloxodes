@@ -1,6 +1,6 @@
 import "../shared/load-env";
 
-import { fetchProductionEditorialInventory, inventoryPublicPath } from "./production-editorial-inventory";
+import { fetchProductionEditorialInventory, inventoryPublicPath, inventoryMatchesSearch } from "./production-editorial-inventory";
 
 type Options = {
   family: string | null;
@@ -33,12 +33,12 @@ function parseArgs(argv: string[]): Options {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const payload = await fetchProductionEditorialInventory();
+  const payload = await fetchProductionEditorialInventory({ includeGames: true });
   const needle = options.search?.toLowerCase() ?? null;
   const items = payload.items.filter((item) =>
     (!options.family || item.family === options.family) &&
     (!options.universeId || item.universe_id === options.universeId) &&
-    (!needle || `${item.title} ${item.key}`.toLowerCase().includes(needle))
+    (!needle || inventoryMatchesSearch(item, needle))
   ).map(item => ({ ...item, public_path: inventoryPublicPath(item, payload.items) }));
   if (options.json) {
     console.log(JSON.stringify({ generated_at: payload.generated_at, items }, null, 2));

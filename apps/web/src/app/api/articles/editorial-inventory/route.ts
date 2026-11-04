@@ -11,9 +11,10 @@ const RESPONSE_HEADERS = {
   "X-Content-Type-Options": "nosniff"
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const items = await loadEditorialInventory(supabaseAdmin());
+    const includeGames = new URL(request.url).searchParams.get("scope") === "all";
+    const items = await loadEditorialInventory(supabaseAdmin(), { includeGames });
     return NextResponse.json(
       {
         version: EDITORIAL_INVENTORY_VERSION,
