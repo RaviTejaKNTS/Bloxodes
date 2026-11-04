@@ -252,7 +252,7 @@ async function collectOne(browser: any, sample: any, device: "mobile" | "desktop
       oldHeight = newHeight;
     }
     await page.evaluate(() => scrollTo(0, 0));
-    const data = await page.evaluate((sidebarSelector, requestedUrls) => {
+    const data = await page.evaluate(({ sidebarSelector, requestedUrls }) => {
       const r = (el: Element) => {
         const x = el.getBoundingClientRect();
         return { top: Math.round(x.top + scrollY), width: Math.round(x.width), height: Math.round(x.height), bottom: Math.round(x.bottom + scrollY) };
@@ -326,7 +326,7 @@ async function collectOne(browser: any, sample: any, device: "mobile" | "desktop
         totalRequests: requestedUrls.length,
         navTiming: nav ? { responseStart: Math.round(nav.responseStart), domContentLoaded: Math.round(nav.domContentLoadedEventEnd), load: Math.round(nav.loadEventEnd) } : null
       };
-    }, "aside.space-y-4", requested);
+    }, { sidebarSelector: "aside.space-y-4", requestedUrls: requested });
     const adEvents = await page.evaluate(() => (window as any).__baselineAdEvents || []);
     const knownAd = (url: string) => /mediavine|adthrive|googlesyndication|doubleclick|amazon-adsystem|adnxs|criteo/i.test(url);
     return { type: sample.type, path: sample.path, url: sample.url, device, httpStatus: status, ...data, requestsExcludingKnownAdHosts: Math.max(0, requested.length - requested.filter(knownAd).length), knownAdHostRequests: requested.filter(knownAd).length, adEvents, responseStatuses: responseList };
