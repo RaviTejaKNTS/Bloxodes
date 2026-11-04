@@ -64,6 +64,7 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   game_tool: "tool",
   game_checklist: "checklist",
   game_map: "tool",
+  game_article: "article",
   game_quiz: "quiz",
   game_catalog: "catalog",
   stats_game: "stats"

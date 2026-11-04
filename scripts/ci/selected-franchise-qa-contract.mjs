@@ -44,11 +44,11 @@ export function selectedFranchisePlan(base, input) {
   const namespace = String([...namespaces][0]);
   const collections = [], pages = [], games = [];
   for (const operation of batch.operations) {
-    if (!['franchise-collection', 'game-pages'].includes(operation.publisher)) throw new Error('Selected QA supports only shared identities, hubs, quizzes and franchise collections.');
+    if (!['franchise-collection', 'game-pages'].includes(operation.publisher)) throw new Error('Selected QA supports only shared identities, hubs, articles, quizzes and franchise collections.');
     const file = bundleInput(base, operation.file);
     const payload = json(file);
     if (operation.publisher === 'game-pages') {
-      if (!Object.keys(payload).length || Object.keys(payload).some(key => !['games', 'wiki', 'quizzes'].includes(key))) throw new Error('Only selected games, wiki and quizzes groups are supported.');
+      if (!Object.keys(payload).length || Object.keys(payload).some(key => !['games', 'wiki', 'quizzes', 'articles'].includes(key))) throw new Error('Only selected games, wiki, articles and quizzes groups are supported.');
       for (const [group, rows] of Object.entries(payload)) {
         if (!Array.isArray(rows) || !rows.length || rows.length > 20) throw new Error('Invalid bounded page inventory.');
         for (const row of rows) {
@@ -58,7 +58,7 @@ export function selectedFranchisePlan(base, input) {
           // from a permanent wiki slug or from the namespace's old URL shape.
           const route = row.canonical_path ?? null;
           if (route !== null && (typeof route !== 'string' || !/^\/(?:[a-z0-9-]+\/)*[a-z0-9-]+$/.test(route))) throw new Error('Unexpected selected canonical path.');
-          pages.push({kind: group === 'wiki' ? 'hub' : 'quiz', path: route, row});
+          pages.push({kind: group === 'wiki' ? 'hub' : group === 'articles' ? 'article' : 'quiz', path: route, row});
         }
       }
       continue;
@@ -102,7 +102,7 @@ function assertSelectedPaths(plan, resolved = true) {
 export async function resolveSelectedFranchisePaths(plan, db) {
   for (const entry of [...plan.pages, ...plan.collections]) {
     const collection = Boolean(entry.manifest);
-    let query = db.from(collection ? 'games' : entry.kind === 'hub' ? 'game_wiki_pages' : 'game_quiz_pages')
+    let query = db.from(collection ? 'games' : entry.kind === 'hub' ? 'game_wiki_pages' : entry.kind === 'article' ? 'game_article_pages' : 'game_quiz_pages')
       .select(collection ? 'id' : 'game_id').eq('namespace', plan.namespace);
     query = query.eq('slug', collection ? entry.manifest.game.slug : entry.row.slug);
     if (collection) query = query.eq('kind', 'game');
@@ -116,7 +116,7 @@ export async function resolveSelectedFranchisePaths(plan, db) {
       if (wiki.data.slug !== entry.final.wiki_slug) throw new Error('Selected collection wiki owner differs from frozen input.');
     }
     const expected = await db.rpc('expected_game_page_path', {
-      p_game_id: gameId, p_type: collection ? 'collection' : entry.kind === 'hub' ? 'wiki' : 'quiz',
+      p_game_id: gameId, p_type: collection ? 'collection' : entry.kind === 'hub' ? 'wiki' : entry.kind === 'article' ? 'article' : 'quiz',
       p_slug: collection ? entry.manifest.collection.slug : entry.row.slug
     });
     if (expected.error) throw expected.error;

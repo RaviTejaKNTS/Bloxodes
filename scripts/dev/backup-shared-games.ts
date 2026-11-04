@@ -9,7 +9,7 @@ const url = process.env.SUPABASE_URL;
 assertManagedDevelopmentSupabaseUrl(url, "shared games backup");
 if (new URL(url).hostname !== "bbtcaurrtyoukvjbxbbj.supabase.co") throw new Error("Unexpected development project");
 const sb = createClient(url, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false } });
-const tables = ["games", "game_wiki_pages", "game_collection_pages", "game_collection_datasets", "game_collection_items", "game_checklist_pages", "game_checklist_items", "game_tool_pages", "game_releases", "game_collection_progress", "game_code_pages", "game_codes", "game_map_pages", "game_quiz_pages", "game_catalog_pages", "game_quiz_progress", "comments", "user_checklist_progress"];
+const tables = ["games", "game_wiki_pages", "game_collection_pages", "game_collection_datasets", "game_collection_items", "game_checklist_pages", "game_checklist_items", "game_tool_pages", "game_releases", "game_collection_progress", "game_code_pages", "game_codes", "game_map_pages", "game_article_pages", "game_quiz_pages", "game_catalog_pages", "game_quiz_progress", "comments", "user_checklist_progress"];
 async function main() {
 const root = path.resolve(`tmp/shared-games/backups/${new Date().toISOString().replaceAll(":", "-")}`);
 await fs.mkdir(root, { recursive: true, mode: 0o700 });

@@ -15,14 +15,13 @@ type ArticleSitemapRow = {
 export async function GET() {
   try {
     const sb = supabaseAdmin();
-    const { data, error } = await sb
-      .from("articles")
-      .select("slug, updated_at")
-      .eq("is_published", true)
-      .not("slug", "is", null)
-      .order("updated_at", { ascending: false });
-
-    if (error) throw error;
+    const data: ArticleSitemapRow[] = [];
+    for (let offset=0;;offset+=1000) {
+      const result=await sb.from("published_articles_view").select("slug,updated_at").order("slug").range(offset,offset+999);
+      if(result.error) throw result.error;
+      data.push(...result.data);
+      if(result.data.length<1000) break;
+    }
 
     const [rows, articleGames] = [(data ?? []) as ArticleSitemapRow[], await listArticleGameSummaries()];
     const pages: SitemapUrlSetEntry[] = [];

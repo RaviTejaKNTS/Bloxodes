@@ -17,7 +17,7 @@ Roblox URLs put the page type first.
 | Checklist | `/checklists/<slug>` | `checklist_pages.slug` |
 | Tool | `/tools/<code>` | `tools.code` |
 | Event | `/events/<slug>` | `events_pages.slug` |
-| Article | `/articles/<slug>` | `articles.slug` |
+| Article | `/articles/<slug>` | `articles.slug`, then `game_article_pages.slug` |
 | Catalog | `/catalog/<code>` and its hand-built sections | `catalog_pages.code` |
 | Stats | `/stats/games/<stats-slug>`, `/stats/items/<asset-id>` | `roblox_universes.slug`, asset ID |
 

@@ -1,6 +1,6 @@
 # Articles
 
-Last verified: 2026-11-03
+Last verified: 2026-11-04
 
 Articles are guides, explainers and tier lists at `/articles/<slug>`. Topics are found and curated on the homelab; the articles are written and published by the Content Factory's T3 article run. The owner can also ask for one by hand.
 
@@ -59,7 +59,7 @@ Neither publishes by itself. The next normal drain does.
 
 ### Direct publishing
 
-`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory doesn't use it yet; its scheduled run still publishes as above.
+`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory's `bin/article publish` uses it for new articles.
 
 | Command | Does |
 | --- | --- |
@@ -76,6 +76,16 @@ Neither publishes by itself. The next normal drain does.
 ### Runtime releases
 
 The homelab runs discovery and site health from a packaged release at `/srv/data/bloxodes-automation-runtime/current`, not the repo checkout. Merging code doesn't change it. To ship code there: run `automation-runtime.yml` on GitHub to package dependencies, then the reviewed prepare and install scripts select the new release. Don't touch the installed env, timers or running jobs while doing it.
+
+## Articles for other games
+
+Non-Roblox articles live in `game_article_pages`, the `game_*` partner of `articles`. They use the same `/articles/<slug>` URL, page design and pagination. The article reader checks `articles` first, then `site_routes`. A slug can't be used by both tables, and the `articles` table doesn't change.
+
+- **Lists:** `published_articles_view` merges both tables for `/articles`, author pages, the feed and the sitemap.
+- **Game archive:** `/articles/games/<game-slug>`, one per game (`/articles/games/gta-6`), from `game_article_game_summary`. A Roblox archive keeps its URL if a slug clashes, and the publisher refuses the clash.
+- **News:** a row with the `news` tag. There's no `/news` route, and every row needs a game.
+- **Publishing:** `content:publish` with a `game-article@1` bundle (`contracts/game-article/v1/README.md`), with no queue row and no GitHub job. The game and its parent must already be published, and `author_id` must exist on the target. The Content Factory has no skill or schedule for these yet.
+- **Revalidation:** `game_content` events refresh the page, every numbered page, both lists, the archive, the author page, the feed and the sitemap.
 
 ## Manual articles
 
@@ -99,7 +109,7 @@ Every article needs a real image pass before writing (`scripts/content/check-art
 
 ## Data
 
-Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and `article_source_images` provenance. The old production article queue (three rows, last touched in August) isn't used.
+Other-game articles are in `game_article_pages` (see above). Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and `article_source_images` provenance. The old production article queue (three rows, last touched in August) isn't used.
 
 ## Known issues
 

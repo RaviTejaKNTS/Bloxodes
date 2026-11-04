@@ -5,7 +5,7 @@ import { gameLandingPath } from "./game-root-page";
 import type { SharedGameGame } from "./shared-game-reader";
 import type { GameMenu } from "./game-site-navigation";
 
-const PAGE_TABLES = ["wiki", "collection", "map", "checklist", "quiz", "tool", "code", "catalog"] as const;
+const PAGE_TABLES = ["wiki", "collection", "map", "checklist", "quiz", "article", "tool", "code", "catalog"] as const;
 export const listGameMenus = cache(async (namespace?: string, gameId?: string, includeCollections = true): Promise<GameMenu[]> => {
   let roots = supabaseAdmin().from("games").select("*").is("parent_id", null).eq("is_published", true);
   if (namespace) roots = roots.eq("namespace", namespace);

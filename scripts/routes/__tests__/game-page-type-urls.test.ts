@@ -143,6 +143,15 @@ test("game URL styles, atomic moves, immutable ownership and publisher paths", {
    ),'published, hidden, missing-dataset and dated rows have the correct search visibility');
    select pg_temp.url_assert(not exists(select * from search_before where entity_type='wiki' except select * from public.search_index),'deferred rebuild preserves Roblox rows');
    ${storedGameLinkMigrationFixture(migration("20261103000000_repair_remaining_stored_game_links.sql"), migration("20261102230000_allow_canonical_gta_map_snapshots.sql"))}
+   alter table public.games add unique(id,namespace),add column title text,add column hero_image text;
+   create table public.authors(id uuid primary key default gen_random_uuid(),name text,slug text,avatar_url text,gravatar_email text);
+   create table public.roblox_universes(universe_id bigint primary key,slug text,display_name text,name text,icon_url text);
+   alter table public.articles add column author_id uuid,add column universe_id bigint,add column meta_description text,add column cover_image text,add column created_at timestamptz default now();
+   drop function public.refresh_game_content_index(text);
+   alter function public.fixture_refresh_game_content_index(text) rename to refresh_game_content_index;
+   ${migration("20261104120000_game_article_pages.sql")}
+   create trigger game_content_changed after insert or update or delete on public.games for each row execute function public.trg_game_content_changed();
+   ${readFileSync(new URL("../../../supabase/tests/game_article_pages.sql",import.meta.url),"utf8")}
    rollback;`);
  } finally { sql(url,`drop database if exists ${db} with (force);`); }
 });

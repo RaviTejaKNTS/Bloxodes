@@ -47,10 +47,10 @@ function ArticlesPageView({
       {showHero ? (
         <header className="space-y-4">
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-            Fresh Roblox guides, tips, and updates from Bloxodes
+            Game guides, news, and walkthroughs
           </h1>
           <p className="max-w-2xl text-base text-muted md:text-lg">
-            Long-form guides, recommendations, and redemption walkthroughs updated regularly to help you get more from every Roblox game.
+            Guides, news and updates for Roblox and the other games we cover.
           </p>
           <IndexPageStats
             items={[
