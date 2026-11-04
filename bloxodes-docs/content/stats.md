@@ -32,7 +32,11 @@ rank snapshots -> current read indexes
 
 Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:new|hot|warm|cold` (`update-universe-hourly-stats.ts`), `discover:universes:priority`, `stats:rank:hourly`, `stats:index:refresh`, `stats:rollup-daily`, `stats:platform:refresh`, `stats:prune-hourly` and `stats:audit`. Every run is recorded in `stats_job_runs`.
 
-WARM runs every 6 hours, and a successful sample schedules the next one 12 hours later. That due time lands just after a cron run starts, so `claim_roblox_universe_stats_rows` also claims healthy WARM rows (0 attempts, no error, not unavailable) that are due within the next hour. Without that, WARM games refreshed about every 18 hours. Retries, leases and the 500-row claim cap are unchanged, and the other tiers claim only rows that are due now.
+WARM runs every 6 hours, and a successful sample schedules the next one 12 hours later. That due time lands just after a cron run starts, so `claim_roblox_universe_stats_rows` also claims healthy WARM rows (0 attempts, no error, not unavailable) that are due within the next hour. Without that, WARM games refreshed about every 18 hours.
+
+HOT has the same gap on a smaller scale. It runs every hour and a successful sample schedules the next one an hour later, so rows sampled during a run come due just after the next run starts. The same claim therefore also takes healthy HOT rows due within the next 15 minutes. Without that, HOT games refreshed about every 2 hours and about 4,000 of them showed as overdue every other hour. A run that lasted more than 45 minutes could claim rows it sampled earlier in the same run, because they'd be back inside the window. HOT runs take about 5 minutes (9.1 at most across 500 runs from Oct 13 to Nov 4, 2026), and the job has no run deadline of its own.
+
+Retries, leases and the 500-row claim cap are unchanged for both, and NEW and COLD claim only rows that are due now.
 
 **Run status:** games Roblox no longer returns are normal removals. They're retried, then moved to COLD, and counted in `missing_rows` in the run's metadata, not in `rows_failed`. So `partial` means a request, chunk or write really failed while other rows succeeded, and `failed` means rows failed and none succeeded. A run with only missing rows ends `success` with `rows_succeeded` at 0. The item refresh job follows the same rule.
 

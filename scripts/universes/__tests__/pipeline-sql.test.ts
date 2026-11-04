@@ -98,7 +98,7 @@ test("universe SQL claims: 500-row narrow contract, disjoint workers and lease o
     section(migration("20260919000004_harden_universe_stats_claims"), "create or replace function public.release_roblox_universe_stats_rows(", "revoke all on function public.claim_roblox_universe_stats_rows"),
     // Lease table, claim/release functions and grants, without unrelated rebuild.
     section(migration("20260920000001_repair_universe_stats_claim_pipeline"), "create table if not exists public.stats_pipeline_leases", "create or replace function public.refresh_stats_current_indexes_serialized()"),
-    migration("20261030073408_warm_universe_stats_claim_grace")
+    migration("20261104045000_hot_universe_stats_claim_grace")
   ].join("\n"));
 });
 
