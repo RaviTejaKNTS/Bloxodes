@@ -220,6 +220,7 @@ async function collectOne(browser: any, sample: any, device: "mobile" | "desktop
     ? await browser.newContext({ ...devices["iPhone 13"], viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 })
     : await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
   const page = await context.newPage();
+  await context.addInitScript({ content: "window.__name = window.__name || ((fn) => fn);" });
   const requested: string[] = [];
   const responseList: any[] = [];
   page.on("request", (req: any) => requested.push(req.url()));
@@ -383,6 +384,7 @@ async function collect() {
     publicRoutes: publicRouteFiles(),
     basics,
     houseAds: fs.existsSync(path.join(OUT, "houseads", "results.json")) ? JSON.parse(fs.readFileSync(path.join(OUT, "houseads", "results.json"), "utf8")) : [],
+    houseAdsSmoke: fs.existsSync(path.join(OUT, "houseads-smoke", "results.json")) ? JSON.parse(fs.readFileSync(path.join(OUT, "houseads-smoke", "results.json"), "utf8")) : [],
     houseAdsSkipped: fs.existsSync(path.join(OUT, "houseads-skipped.txt")) ? fs.readFileSync(path.join(OUT, "houseads-skipped.txt"), "utf8").trim() : null,
     speed: { pagespeedApiNoKey: psiFailure ? { available: false, error: psiFailure, firstProbeStatus: psiTest.status, firstProbeBody: psiTest.body } : { available: true, firstResponse: psiTest.body }, lighthouseRunsRequestedPerUrlAndDevice: 3, lighthouseRunsCompleted: 0, lighthouseResults: routes.flatMap((s) => ["mobile", "desktop"].map((device) => ({ path: s.path, device, runs: [], error: psiFailure || "Only one no-key preflight request was made; three-run PSI sampling was not started" }))), cruxOrigin: cruxTest.ok ? { lcpMs: cruxTest.body?.record?.metrics?.largest_contentful_paint?.percentiles?.p75 ?? null, inpMs: cruxTest.body?.record?.metrics?.interaction_to_next_paint?.percentiles?.p75 ?? null, cls: cruxTest.body?.record?.metrics?.cumulative_layout_shift?.percentiles?.p75 ?? null } : null, cruxOriginError: cruxFailure, cruxUrlResults: routes.map((s) => ({ path: s.path, available: false, error: cruxFailure || "Origin query succeeded, URL record not queried" })) },
     notes: [
