@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-import { itemClaimBatches } from "../update-item-hourly-stats";
+import { itemClaimBatches } from "../item-stats-utils";
 import { statsRefreshRunStatus } from "../../shared/stats-job-run";
 
 import { internalCatalogItemId, robloxCatalogSortParams, useLiveLegacyBundleIds } from "../../catalog/catalog-discovery-db";
@@ -146,6 +146,16 @@ test("explicit assets still respect the total refresh limit", async () => {
   assert.deepEqual(requested, [[10]]);
 });
 
+test("explicit assets stop at the limit when earlier slices return nothing", async () => {
+  const ids = Array.from({ length: 3000 }, (_, index) => index + 1);
+  const requested: number[] = [];
+  for await (const _rows of itemClaimBatches({ limit: 1500, assetIds: ids, dryRun: false }, async ({ assetIds }) => {
+    requested.push(assetIds.length);
+    return [];
+  })) { /* No rows are returned. */ }
+  assert.deepEqual(requested, [1000, 500]);
+});
+
 test("item dry run previews once with the original options", async () => {
   const options = { limit: 1500, assetIds: [10, 10], dryRun: true };
   let calls = 0;
@@ -165,9 +175,11 @@ test("item refresh separates missing rows from real failures and keeps missing h
   assert.match(source, /await markMissingResponses\(missingRows, workerId\)/);
   assert.match(source, /missing_rows: missingRowCount/);
   assert.match(source, /rowsClaimed: claimedRows/);
-  assert.match(source, /statsRefreshRunStatus\(succeededRows, failedRows\)/);
-  assert.equal(statsRefreshRunStatus(100, 0), "success");
-  assert.equal(statsRefreshRunStatus(0, 0), "success", "missing-only work completes successfully");
-  assert.equal(statsRefreshRunStatus(100, 2), "partial");
-  assert.equal(statsRefreshRunStatus(0, 2), "failed");
+  assert.match(source, /statsRefreshRunStatus\(succeededRows, failedRows, missingRowCount\)/);
+  assert.equal(statsRefreshRunStatus(100, 0, 0), "success");
+  assert.equal(statsRefreshRunStatus(984, 0, 16), "success", "a few removals are normal");
+  assert.equal(statsRefreshRunStatus(100, 2, 0), "partial");
+  assert.equal(statsRefreshRunStatus(0, 2, 0), "failed");
+  assert.equal(statsRefreshRunStatus(970, 0, 30), "success", "one whole missing batch in a large run stays under the share");
+  assert.equal(statsRefreshRunStatus(0, 0, 30), "failed", "a run with only a full batch missing is not a success");
 });

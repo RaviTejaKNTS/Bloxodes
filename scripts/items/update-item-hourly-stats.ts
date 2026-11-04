@@ -6,6 +6,7 @@ import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../s
 import {
   addHours,
   assignItemStatsTier,
+  itemClaimBatches,
   chunkArray,
   fetchAssetEconomyDetails,
   fetchCatalogItemDetailsBatch,
@@ -182,32 +183,6 @@ async function loadItems(options: Options, workerId: string): Promise<ItemStatsS
   const { data, error } = await query;
   if (error) throw new Error(`Failed to load item stats refresh rows: ${error.message}`);
   return (data ?? []) as ItemStatsSourceRow[];
-}
-
-// Resume claiming only after the caller has processed and written the current batch.
-export async function* itemClaimBatches<T>(
-  options: { limit: number; assetIds: number[]; dryRun: boolean },
-  load: (options: { limit: number; assetIds: number[]; dryRun: boolean }) => Promise<T[]>
-): AsyncGenerator<T[]> {
-  if (options.dryRun) {
-    yield await load(options);
-    return;
-  }
-  const explicitIds = [...new Set(options.assetIds)];
-  let claimed = 0;
-  let offset = 0;
-  while (claimed < options.limit) {
-    const limit = Math.min(1000, options.limit - claimed);
-    const assetIds = explicitIds.slice(offset, offset + limit);
-    if (explicitIds.length && !assetIds.length) break;
-    offset += assetIds.length;
-    const requested = explicitIds.length ? assetIds.length : limit;
-    const rows = await load({ ...options, limit: requested, assetIds });
-    claimed += rows.length;
-    if (rows.length) yield rows;
-    // Explicit ID slices can contain unavailable IDs; still visit later slices.
-    if (!explicitIds.length && rows.length < requested) break;
-  }
 }
 
 function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDetails, economy: Record<string, unknown> | null, nowIso: string) {
@@ -530,7 +505,7 @@ async function main() {
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;
-    const status = statsRefreshRunStatus(succeededRows, failedRows);
+    const status = statsRefreshRunStatus(succeededRows, failedRows, missingRowCount);
 
     await finishStatsJobRun(run, {
       status,
@@ -578,9 +553,7 @@ async function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main().catch((error) => {
-    console.error(error instanceof Error ? error.message : String(error));
-    process.exit(1);
-  });
-}
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exit(1);
+});

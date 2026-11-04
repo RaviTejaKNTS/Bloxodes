@@ -727,7 +727,7 @@ async function main() {
       : { queued: 0, events: [] as string[] };
 
     await finishStatsJobRun(run, {
-      status: statsRefreshRunStatus(updatedRows, failedRows),
+      status: statsRefreshRunStatus(updatedRows, failedRows, missingRows),
       rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,

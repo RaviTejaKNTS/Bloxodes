@@ -38,7 +38,7 @@ HOT has the same gap on a smaller scale. It runs every hour and a successful sam
 
 Retries, leases and the 500-row claim cap are unchanged for both, and NEW and COLD claim only rows that are due now.
 
-**Run status:** games Roblox no longer returns are normal removals. They're retried, then moved to COLD, and counted in `missing_rows` in the run's metadata, not in `rows_failed`. So `partial` means a request, chunk or write really failed while other rows succeeded, and `failed` means rows failed and none succeeded. A run with only missing rows ends `success` with `rows_succeeded` at 0. The item refresh job follows the same rule.
+**Run status:** games Roblox no longer returns are normal removals. They're retried, then moved to COLD, and counted in `missing_rows` in the run's metadata, not in `rows_failed`. So a few missing rows leave a run `success`, even if they're all it claimed. At 30 or more missing rows that are over 10% of the run, it looks like a bad Roblox response rather than removals, so the run is treated as failed work. `partial` means real failures while other rows succeeded, and `failed` means nothing succeeded. The item refresh job follows the same rule.
 
 **Tables:** `roblox_universes`, `roblox_universe_stats_hourly` / `_daily`, `roblox_universe_rank_snapshots*`, `roblox_platform_stats_hourly` / `_daily`, `stats_visit_share_summaries`, `stats_game_current_index` (101,029 games on 2026-10-19), genre, creator and riser indexes, `roblox_universe_update_events`.
 

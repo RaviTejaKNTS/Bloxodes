@@ -507,3 +507,29 @@ export function assignItemStatsTier(row: {
   }
   return { tier: "COLD", reason: "long_tail", refreshHours: 2_160 };
 }
+
+// Resume claiming only after the caller has processed and written the current batch.
+export async function* itemClaimBatches<T>(
+  options: { limit: number; assetIds: number[]; dryRun: boolean },
+  load: (options: { limit: number; assetIds: number[]; dryRun: boolean }) => Promise<T[]>
+): AsyncGenerator<T[]> {
+  if (options.dryRun) {
+    yield await load(options);
+    return;
+  }
+  const explicitIds = [...new Set(options.assetIds)];
+  let claimed = 0;
+  let offset = 0;
+  while ((explicitIds.length ? offset : claimed) < options.limit) {
+    const limit = Math.min(1000, options.limit - (explicitIds.length ? offset : claimed));
+    const assetIds = explicitIds.slice(offset, offset + limit);
+    if (explicitIds.length && !assetIds.length) break;
+    offset += assetIds.length;
+    const requested = explicitIds.length ? assetIds.length : limit;
+    const rows = await load({ ...options, limit: requested, assetIds });
+    claimed += rows.length;
+    if (rows.length) yield rows;
+    // Explicit ID slices can contain unavailable IDs; still visit later slices.
+    if (!explicitIds.length && rows.length < requested) break;
+  }
+}

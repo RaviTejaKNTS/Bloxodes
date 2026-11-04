@@ -395,9 +395,13 @@ test("universe refresh records missing rows separately and still fails unusable 
   assert.match(source, /await markMissingResponses\(missingRows\)/);
   assert.match(source, /await markFailures\(emptyRows,/);
   assert.match(source, /missing_rows: missingRows/);
-  assert.match(source, /statsRefreshRunStatus\(updatedRows, failedRows\)/);
-  assert.equal(statsRefreshRunStatus(10, 0), "success");
-  assert.equal(statsRefreshRunStatus(0, 0), "success", "missing-only runs are completed work, not skipped work");
-  assert.equal(statsRefreshRunStatus(10, 1), "partial");
-  assert.equal(statsRefreshRunStatus(0, 1), "failed");
+  assert.match(source, /statsRefreshRunStatus\(updatedRows, failedRows, missingRows\)/);
+  assert.equal(statsRefreshRunStatus(10, 0, 0), "success");
+  assert.equal(statsRefreshRunStatus(848, 0, 4), "success", "a few removals are normal");
+  assert.equal(statsRefreshRunStatus(0, 0, 17), "success", "a small all-missing COLD run is normal");
+  assert.equal(statsRefreshRunStatus(10, 1, 0), "partial");
+  assert.equal(statsRefreshRunStatus(0, 1, 0), "failed");
+  assert.equal(statsRefreshRunStatus(450, 0, 50), "success", "exactly 10% missing stays normal");
+  assert.equal(statsRefreshRunStatus(440, 0, 60), "partial", "a large missing share is suspect");
+  assert.equal(statsRefreshRunStatus(0, 0, 50), "failed", "a whole batch missing is not a success");
 });
