@@ -4,6 +4,12 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 
 type StatsJobStatus = "running" | "success" | "failed" | "partial" | "skipped";
 
+// Missing Roblox rows are handled outcomes, not failed work.
+export function statsRefreshRunStatus(succeededRows: number, failedRows: number): "success" | "partial" | "failed" {
+  if (failedRows === 0) return "success";
+  return succeededRows > 0 ? "partial" : "failed";
+}
+
 type StartStatsJobInput = {
   jobName: string;
   workerId?: string;

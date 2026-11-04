@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
+
+import { itemClaimBatches } from "../update-item-hourly-stats";
+import { statsRefreshRunStatus } from "../../shared/stats-job-run";
 
 import { internalCatalogItemId, robloxCatalogSortParams, useLiveLegacyBundleIds } from "../../catalog/catalog-discovery-db";
 import {
@@ -93,4 +97,77 @@ test("resale fetch distinguishes unsupported items from transient failures", asy
 
   const result = await fetchResaleDataResult(10, { userAgent: "test", minRequestMs: 0, maxRetries: 0 });
   assert.equal(result.kind, "unsupported");
+});
+
+test("item refresh claims and processes all 1500 rows without exceeding the API cap", async () => {
+  const limits: number[] = [];
+  let processed = 0;
+  for await (const rows of itemClaimBatches({ limit: 1500, assetIds: [], dryRun: false }, async ({ limit }) => {
+    assert.equal(processed, limits.reduce((total, size) => total + size, 0), "previous claim must be processed before claiming again");
+    limits.push(limit);
+    return Array.from({ length: limit }, (_, index) => index);
+  })) {
+    processed += rows.length;
+  }
+  assert.deepEqual(limits, [1000, 500]);
+  assert.equal(processed, 1500);
+});
+
+test("item refresh stops on a short claim", async () => {
+  let calls = 0;
+  const batches = [];
+  for await (const rows of itemClaimBatches({ limit: 1500, assetIds: [], dryRun: false }, async () => {
+    calls += 1;
+    return [123];
+  })) batches.push(rows);
+  assert.equal(calls, 1);
+  assert.deepEqual(batches, [[123]]);
+});
+
+test("explicit asset IDs are deduplicated and visited once despite short or empty slices", async () => {
+  const ids = Array.from({ length: 1002 }, (_, index) => index + 1);
+  const requested: number[][] = [];
+  const returned: number[] = [];
+  for await (const rows of itemClaimBatches({ limit: 1500, assetIds: [...ids, 1], dryRun: false }, async ({ assetIds, limit }) => {
+    requested.push(assetIds);
+    assert.equal(limit, assetIds.length);
+    return requested.length === 1 ? [] : assetIds;
+  })) returned.push(...rows);
+  assert.deepEqual(requested, [ids.slice(0, 1000), [1001, 1002]]);
+  assert.deepEqual(returned, [1001, 1002]);
+});
+
+test("explicit assets still respect the total refresh limit", async () => {
+  const requested: number[][] = [];
+  for await (const _rows of itemClaimBatches({ limit: 1, assetIds: [10, 20], dryRun: false }, async ({ assetIds }) => {
+    requested.push(assetIds);
+    return assetIds;
+  })) { /* Consume each processed batch. */ }
+  assert.deepEqual(requested, [[10]]);
+});
+
+test("item dry run previews once with the original options", async () => {
+  const options = { limit: 1500, assetIds: [10, 10], dryRun: true };
+  let calls = 0;
+  for await (const rows of itemClaimBatches(options, async (actual) => {
+    calls += 1;
+    assert.deepEqual(actual, options);
+    return [10];
+  })) assert.deepEqual(rows, [10]);
+  assert.equal(calls, 1);
+});
+
+test("item refresh separates missing rows from real failures and keeps missing handling", () => {
+  const source = readFileSync(new URL("../update-item-hourly-stats.ts", import.meta.url), "utf8");
+  const missingBranch = source.slice(source.indexOf("if (!payload)"), source.indexOf("const economy =", source.indexOf("if (!payload)")));
+  assert.match(missingBranch, /missingRowCount \+= 1/);
+  assert.doesNotMatch(missingBranch, /failedRows|failedSamples/);
+  assert.match(source, /await markMissingResponses\(missingRows, workerId\)/);
+  assert.match(source, /missing_rows: missingRowCount/);
+  assert.match(source, /rowsClaimed: claimedRows/);
+  assert.match(source, /statsRefreshRunStatus\(succeededRows, failedRows\)/);
+  assert.equal(statsRefreshRunStatus(100, 0), "success");
+  assert.equal(statsRefreshRunStatus(0, 0), "success", "missing-only work completes successfully");
+  assert.equal(statsRefreshRunStatus(100, 2), "partial");
+  assert.equal(statsRefreshRunStatus(0, 2), "failed");
 });

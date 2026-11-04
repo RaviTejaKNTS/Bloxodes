@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { enqueueRevalidationEvents } from "../shared/revalidation-events";
-import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../shared/stats-job-run";
 import {
   addHours,
   assignItemStatsTier,
@@ -182,6 +182,32 @@ async function loadItems(options: Options, workerId: string): Promise<ItemStatsS
   const { data, error } = await query;
   if (error) throw new Error(`Failed to load item stats refresh rows: ${error.message}`);
   return (data ?? []) as ItemStatsSourceRow[];
+}
+
+// Resume claiming only after the caller has processed and written the current batch.
+export async function* itemClaimBatches<T>(
+  options: { limit: number; assetIds: number[]; dryRun: boolean },
+  load: (options: { limit: number; assetIds: number[]; dryRun: boolean }) => Promise<T[]>
+): AsyncGenerator<T[]> {
+  if (options.dryRun) {
+    yield await load(options);
+    return;
+  }
+  const explicitIds = [...new Set(options.assetIds)];
+  let claimed = 0;
+  let offset = 0;
+  while (claimed < options.limit) {
+    const limit = Math.min(1000, options.limit - claimed);
+    const assetIds = explicitIds.slice(offset, offset + limit);
+    if (explicitIds.length && !assetIds.length) break;
+    offset += assetIds.length;
+    const requested = explicitIds.length ? assetIds.length : limit;
+    const rows = await load({ ...options, limit: requested, assetIds });
+    claimed += rows.length;
+    if (rows.length) yield rows;
+    // Explicit ID slices can contain unavailable IDs; still visit later slices.
+    if (!explicitIds.length && rows.length < requested) break;
+  }
 }
 
 function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDetails, economy: Record<string, unknown> | null, nowIso: string) {
@@ -386,120 +412,137 @@ async function main() {
     }
   });
 
-  const rows = await loadItems(options, workerId);
-  if (!rows.length) {
-    await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_items" } });
-    console.log("No item stats rows ready for refresh.");
-    return;
-  }
+  let rows: ItemStatsSourceRow[] = [];
+  let claimedRows = 0;
+  let succeededRows = 0;
+  let hourlyRowCount = 0;
+  let thumbnailRowCount = 0;
+  let failedBatches = 0;
+  let failedRows = 0;
+  let missingRowCount = 0;
+  let handledMissingRows = 0;
+  const failedSamples: number[] = [];
 
   try {
-    const nowIso = new Date().toISOString();
-    const hourIso = hourStart(new Date(nowIso));
-    const itemUpdates: Record<string, unknown>[] = [];
-    const hourlyRows: Record<string, unknown>[] = [];
-    const thumbnailRows: Record<string, unknown>[] = [];
-    let failedBatches = 0;
-    let failedRows = 0;
-    const failedSamples: number[] = [];
+    for await (const batch of itemClaimBatches(options, (claim) => loadItems({ ...options, ...claim }, workerId))) {
+      rows = batch;
+      claimedRows += rows.length;
+      const nowIso = new Date().toISOString();
+      const hourIso = hourStart(new Date(nowIso));
+      const itemUpdates: Record<string, unknown>[] = [];
+      const hourlyRows: Record<string, unknown>[] = [];
+      const thumbnailRows: Record<string, unknown>[] = [];
 
-    for (const detailBatch of chunkArray(rows, DETAILS_BATCH)) {
-      let payloads: CatalogItemDetails[];
-      let thumbnails: Awaited<ReturnType<typeof fetchThumbnails>>;
+      for (const detailBatch of chunkArray(rows, DETAILS_BATCH)) {
+        let payloads: CatalogItemDetails[];
+        let thumbnails: Awaited<ReturnType<typeof fetchThumbnails>>;
 
-      try {
-        payloads = await fetchCatalogItemDetailsBatch(detailBatch, {
-          userAgent: USER_AGENT,
-          minRequestMs: REQUEST_MIN_MS,
-          maxRetries: MAX_RETRIES
-        });
-        thumbnails = await fetchThumbnails(detailBatch, {
-          userAgent: USER_AGENT,
-          size: THUMBNAIL_SIZE,
-          format: THUMBNAIL_FORMAT,
-          maxRetries: MAX_RETRIES
-        });
-      } catch (error) {
-        failedBatches += 1;
-        failedRows += detailBatch.length;
-        failedSamples.push(...summarizeRows(detailBatch).slice(0, Math.max(0, 10 - failedSamples.length)));
-        console.warn(
-          `Roblox item stats request failed for ${detailBatch.length} rows; backing off batch. Sample asset ids: ${summarizeRows(detailBatch).join(", ")}. ${error instanceof Error ? error.message : String(error)}`
-        );
-        if (!options.dryRun) await markFailures(detailBatch, workerId, error);
-        continue;
-      }
-
-      const payloadById = catalogPayloadByTargetId(payloads);
-      const missingRows: ItemStatsSourceRow[] = [];
-
-      for (const row of detailBatch) {
-        const targetId = robloxTargetId(row);
-        const payload = payloadById.get(targetId) ?? null;
-        if (!payload) {
-          failedRows += 1;
-          failedSamples.push(...summarizeRows([row]).slice(0, Math.max(0, 10 - failedSamples.length)));
-          missingRows.push(row);
-          continue;
-        }
-        const economy =
-          options.includeEconomyDetails && itemTypeForRoblox(row.item_type) === "Asset"
-            ? await fetchAssetEconomyDetails(targetId, { userAgent: USER_AGENT, minRequestMs: REQUEST_MIN_MS, maxRetries: MAX_RETRIES }).catch((error) => {
-                console.warn(`Economy details skipped for ${row.asset_id}:`, error instanceof Error ? error.message : String(error));
-                return null;
-              })
-            : null;
-        const update = itemUpdateFromPayload(row, payload, economy, nowIso);
-        const thumbnail = thumbnails.get(row.asset_id) ?? null;
-        const thumbnailUrl = normalizeText(thumbnail?.imageUrl);
-        const thumbnailState = normalizeText(thumbnail?.state);
-
-        if (thumbnail) {
-          thumbnailRows.push({
-            asset_id: row.asset_id,
+        try {
+          payloads = await fetchCatalogItemDetailsBatch(detailBatch, {
+            userAgent: USER_AGENT,
+            minRequestMs: REQUEST_MIN_MS,
+            maxRetries: MAX_RETRIES
+          });
+          thumbnails = await fetchThumbnails(detailBatch, {
+            userAgent: USER_AGENT,
             size: THUMBNAIL_SIZE,
             format: THUMBNAIL_FORMAT,
-            image_url: thumbnailUrl,
-            state: thumbnailState,
-            version: normalizeText(thumbnail.version),
-            last_checked_at: nowIso
+            maxRetries: MAX_RETRIES
           });
-          update.last_thumbnail_health_checked_at = nowIso;
-          if (thumbnailUrl && thumbnailState?.toLowerCase() === "completed") {
-            update.last_thumbnail_verified_at = nowIso;
-            update.thumbnail_http_status = 200;
-            update.thumbnail_last_error = null;
-          } else {
-            update.thumbnail_last_error = `Roblox thumbnail state: ${thumbnailState ?? "missing"}`;
-          }
+        } catch (error) {
+          failedBatches += 1;
+          failedRows += detailBatch.length;
+          failedSamples.push(...summarizeRows(detailBatch).slice(0, Math.max(0, 10 - failedSamples.length)));
+          console.warn(
+            `Roblox item stats request failed for ${detailBatch.length} rows; backing off batch. Sample asset ids: ${summarizeRows(detailBatch).join(", ")}. ${error instanceof Error ? error.message : String(error)}`
+          );
+          if (!options.dryRun) await markFailures(detailBatch, workerId, error);
+          continue;
         }
 
-        itemUpdates.push(update);
-        hourlyRows.push(hourlyRowFromUpdate(row, update, thumbnailUrl, thumbnailState, nowIso, hourIso));
+        const payloadById = catalogPayloadByTargetId(payloads);
+        const missingRows: ItemStatsSourceRow[] = [];
+
+        for (const row of detailBatch) {
+          const targetId = robloxTargetId(row);
+          const payload = payloadById.get(targetId) ?? null;
+          if (!payload) {
+            missingRowCount += 1;
+            missingRows.push(row);
+            continue;
+          }
+          const economy =
+            options.includeEconomyDetails && itemTypeForRoblox(row.item_type) === "Asset"
+              ? await fetchAssetEconomyDetails(targetId, { userAgent: USER_AGENT, minRequestMs: REQUEST_MIN_MS, maxRetries: MAX_RETRIES }).catch((error) => {
+                  console.warn(`Economy details skipped for ${row.asset_id}:`, error instanceof Error ? error.message : String(error));
+                  return null;
+                })
+              : null;
+          const update = itemUpdateFromPayload(row, payload, economy, nowIso);
+          const thumbnail = thumbnails.get(row.asset_id) ?? null;
+          const thumbnailUrl = normalizeText(thumbnail?.imageUrl);
+          const thumbnailState = normalizeText(thumbnail?.state);
+
+          if (thumbnail) {
+            thumbnailRows.push({
+              asset_id: row.asset_id,
+              size: THUMBNAIL_SIZE,
+              format: THUMBNAIL_FORMAT,
+              image_url: thumbnailUrl,
+              state: thumbnailState,
+              version: normalizeText(thumbnail.version),
+              last_checked_at: nowIso
+            });
+            update.last_thumbnail_health_checked_at = nowIso;
+            if (thumbnailUrl && thumbnailState?.toLowerCase() === "completed") {
+              update.last_thumbnail_verified_at = nowIso;
+              update.thumbnail_http_status = 200;
+              update.thumbnail_last_error = null;
+            } else {
+              update.thumbnail_last_error = `Roblox thumbnail state: ${thumbnailState ?? "missing"}`;
+            }
+          }
+
+          itemUpdates.push(update);
+          hourlyRows.push(hourlyRowFromUpdate(row, update, thumbnailUrl, thumbnailState, nowIso, hourIso));
+        }
+        if (!options.dryRun) await markMissingResponses(missingRows, workerId);
+        handledMissingRows += missingRows.length;
       }
-      if (!options.dryRun) await markMissingResponses(missingRows, workerId);
+
+      if (!options.dryRun) {
+        await upsertRows("roblox_catalog_items", itemUpdates, "asset_id", 100);
+        await upsertRows("roblox_catalog_item_images", thumbnailRows, "asset_id,size,format", 100);
+        await upsertRows("roblox_catalog_item_stats_hourly", hourlyRows, "asset_id,hour_start", 100);
+        await acknowledgeCatalogRefreshFromStats(supabaseAdmin(), itemUpdates);
+      }
+
+      succeededRows += itemUpdates.length;
+      hourlyRowCount += hourlyRows.length;
+      thumbnailRowCount += thumbnailRows.length;
+      rows = [];
     }
 
-    if (!options.dryRun) {
-      await upsertRows("roblox_catalog_items", itemUpdates, "asset_id", 100);
-      await upsertRows("roblox_catalog_item_images", thumbnailRows, "asset_id,size,format", 100);
-      await upsertRows("roblox_catalog_item_stats_hourly", hourlyRows, "asset_id,hour_start", 100);
-      await acknowledgeCatalogRefreshFromStats(supabaseAdmin(), itemUpdates);
+    if (!claimedRows) {
+      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_items" } });
+      console.log("No item stats rows ready for refresh.");
+      return;
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;
-    const status = failedRows > 0 ? (itemUpdates.length > 0 ? "partial" : "failed") : "success";
+    const status = statsRefreshRunStatus(succeededRows, failedRows);
 
     await finishStatsJobRun(run, {
       status,
-      rowsClaimed: rows.length,
-      rowsSucceeded: itemUpdates.length,
+      rowsClaimed: claimedRows,
+      rowsSucceeded: succeededRows,
       rowsFailed: failedRows,
       metadata: {
-        hourly_rows: hourlyRows.length,
-        thumbnail_rows: thumbnailRows.length,
+        hourly_rows: hourlyRowCount,
+        thumbnail_rows: thumbnailRowCount,
         failed_batches: failedBatches,
         failed_rows: failedRows,
+        missing_rows: missingRowCount,
         failed_sample_asset_ids: failedSamples,
         index_result: indexResult
       }
@@ -510,12 +553,13 @@ async function main() {
         {
           dryRun: options.dryRun,
           status,
-          refreshed: itemUpdates.length,
+          refreshed: succeededRows,
           failedRows,
+          missingRows: missingRowCount,
           failedBatches,
           failedSamples,
-          hourlyRows: hourlyRows.length,
-          thumbnailRows: thumbnailRows.length,
+          hourlyRows: hourlyRowCount,
+          thumbnailRows: thumbnailRowCount,
           indexResult
         },
         null,
@@ -525,12 +569,18 @@ async function main() {
     if (status === "failed") process.exitCode = 1;
   } catch (error) {
     if (!options.dryRun) await markFailures(rows, workerId, error);
-    await finishStatsJobRun(run, { status: "failed", rowsClaimed: rows.length, error });
+    await finishStatsJobRun(run, {
+      status: "failed", rowsClaimed: claimedRows, rowsSucceeded: succeededRows,
+      rowsFailed: Math.max(failedRows, claimedRows - succeededRows - handledMissingRows),
+      metadata: { missing_rows: missingRowCount }, error
+    });
     throw error;
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : String(error));
-  process.exit(1);
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  });
+}

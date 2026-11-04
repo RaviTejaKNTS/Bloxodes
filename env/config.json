@@ -22,7 +22,6 @@
     "dokploy": ["infrastructure/dokploy.env"],
     "homelab": ["infrastructure/homelab.env", "pipelines/articles.env"],
     "indexing": ["pipelines/indexing.env"],
-    "northflank": ["infrastructure/northflank.env"],
     "northflank-stats": ["infrastructure/northflank-stats.env"],
     "umami": ["operations/umami.env"],
     "vps": ["infrastructure/vps.env"]

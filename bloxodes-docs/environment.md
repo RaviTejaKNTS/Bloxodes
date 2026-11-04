@@ -29,7 +29,7 @@ Each T3 worktree links `.envs` to its machine's main checkout, so every worktree
   targets/{managed-dev,production}.env
   pipelines/{articles,indexing}.env
   operations/{analytics,umami}.env
-  infrastructure/{cloudflare,devices,dokploy,homelab,northflank,northflank-stats,vps}.env
+  infrastructure/{cloudflare,devices,dokploy,homelab,northflank-stats,vps}.env
   secrets/google-indexing-service-account.json
 ```
 
@@ -47,7 +47,7 @@ Pick one with `BLOXODES_ENV_PROFILE`.
 | `production-preview` | same, with the production target | never; choose it explicitly |
 | `process-only` | no files | `NODE_ENV=production` or `test`, all CI, the VPS worker |
 
-`BLOXODES_ENV_OVERLAYS` adds files for one command, comma separated: `analytics`, `articles`, `cloudflare`, `dokploy`, `homelab`, `indexing`, `northflank`, `northflank-stats`, `umami`, `vps`. Overlays load even under `process-only`.
+`BLOXODES_ENV_OVERLAYS` adds files for one command, comma separated: `analytics`, `articles`, `cloudflare`, `dokploy`, `homelab`, `indexing`, `northflank-stats`, `umami`, `vps`. Overlays load even under `process-only`.
 
 Process variables always win over file values. Within files, the first file wins.
 
@@ -68,4 +68,3 @@ The Content Factory has no env files. Its `bin/publisher` runs these commands fr
 
 - `WIKI_MEDIA_PUBLIC_BASE_URL` sits in `env/examples/retired.env.example` but `apps/web/src/lib/wiki-media.ts` still reads it as an optional override.
 - Legacy names `HOSTINGER_Token`, `VPS_ADMIN_PASSWORD1` and the `ARTICLE_WRITER_PI_*` group remain in private profiles with no code consumer.
-- `env/examples/infrastructure/` still lists the removed Northflank names: accounts 2 to 5 in `northflank-stats.env.example`, and the token, project and `NORTHFLANK_ROBLOXGO_*` names in `northflank.env.example`. The real `northflank.env` holds only `NORTHFLANK_API_BASE`, and no code reads it. Remove the examples and the `northflank` overlay in `env/config.json` with the next code release, because changes under `env/` go through code checks and can rebuild the stats worker.
