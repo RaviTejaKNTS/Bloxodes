@@ -57,6 +57,22 @@ Owner recovery commands:
 
 Neither publishes by itself. The next normal drain does.
 
+### Direct publishing
+
+`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory doesn't use it yet; its scheduled run still publishes as above.
+
+| Command | Does |
+| --- | --- |
+| `npm run content:publish -- --bundle <abs-folder>` | Dry run: schema, slug, queue row, game identity, copy, image readiness, images that decode and videos that resolve. No writes. |
+| `... --target managed-dev --apply` | Writes the article to managed development and reads it back. |
+| `... --target production --apply --allow-prod` | Uses the wiki production guard, moves images to production storage, writes the article, reads it back, revalidates and checks the live page, then marks the queue row `published`. |
+| `npm run content:status -- --article <slug> [--target production]` | The article's state on that target. |
+
+- The queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
+- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article is verified without being rewritten. On managed development, `--apply` always writes the bundle.
+- It refuses a row with an unresolved GitHub dispatch, and shares the drain's lock, so it can report "busy". Retry when it does.
+- It has no browser check. It checks the live status, titles, canonical URL, description, body text, cover, body images, and video iframes and availability. It doesn't check layout or overflow on desktop and phone, JavaScript errors, hydration, lazy loading or video playback, so the run opens the live page itself.
+
 ### Runtime releases
 
 The homelab runs discovery and site health from a packaged release at `/srv/data/bloxodes-automation-runtime/current`, not the repo checkout. Merging code doesn't change it. To ship code there: run `automation-runtime.yml` on GitHub to package dependencies, then the reviewed prepare and install scripts select the new release. Don't touch the installed env, timers or running jobs while doing it.

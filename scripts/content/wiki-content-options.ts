@@ -7,6 +7,7 @@ export type ContentOptions = {
   allowProd: boolean;
   bundle?: string;
   game?: string;
+  article?: string;
   namespace?: string;
   kind?: "game" | "franchise";
   only?: string[];
@@ -36,7 +37,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
       else options.allowProd = true;
       continue;
     }
-    if (!["--target", "--bundle", "--game", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+    if (!["--target", "--bundle", "--game", "--article", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
     const value = inline ?? argv[++index];
     if (!value || value.startsWith("--")) throw new Error(`${flag} needs a value.`);
     if (flag === "--only") {
@@ -49,7 +50,8 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     else if (flag === "--bundle") {
       if (options.bundle) throw new Error("Supply one bundle folder.");
       options.bundle = value;
-    } else if (flag === "--namespace") options.namespace = value;
+    } else if (flag === "--article") options.article = value;
+    else if (flag === "--namespace") options.namespace = value;
     else if (flag === "--kind") {
       if (value !== "game" && value !== "franchise") throw new Error("--kind must be game or franchise.");
       options.kind = value;
@@ -59,7 +61,8 @@ export function parseContentOptions(argv: string[]): ContentOptions {
   if (command === "publish" && !options.bundle) throw new Error("Supply a bundle folder, for example: npm run content:publish -- /path/to/game-bundle");
   if (command !== "publish" && (options.bundle || options.apply || options.allowProd || options.only)) throw new Error(`${command} is read-only; bundle, --only and apply flags are invalid.`);
   if (command === "deployed-sha" && seen.size) throw new Error("deployed-sha takes no options.");
-  if (command === "status" && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.game ?? "")) throw new Error("status requires --game <editorial-slug>.");
+  if (options.article && (command !== "status" || options.game || options.namespace || options.kind || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.article))) throw new Error("--article requires status with an article slug and no game options.");
+  if (command === "status" && !options.article && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.game ?? "")) throw new Error("status requires --game <editorial-slug>.");
   if (command !== "status" && options.game) throw new Error("--game is only valid for status. Publish identity belongs in bundle.json.");
   if (options.namespace && (command !== "status" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.namespace))) throw new Error("--namespace requires status and a valid non-Roblox namespace.");
   if (options.kind && (command !== "status" || !options.namespace)) throw new Error("--kind requires franchise status with --namespace.");

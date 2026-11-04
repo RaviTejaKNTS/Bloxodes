@@ -4,6 +4,7 @@ import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {retainChecklistIds} from '../ci/checklist-proof.mjs';
 import {randomUUID} from 'node:crypto';
 
@@ -415,7 +416,7 @@ async function verifyProductionArticleMedia(params: {
   }
 }
 
-async function importArticle(
+export async function importArticle(
   finalJson: ArticleFinal,
   dryRun: boolean,
   coverSourceFile: string | null,
@@ -662,7 +663,7 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch((error) => {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 });
