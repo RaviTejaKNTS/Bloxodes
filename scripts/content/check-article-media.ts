@@ -17,6 +17,7 @@ import {
 
 export type ArticleMediaInput = {
   slug: string;
+  env?: NodeJS.ProcessEnv;
   content_md: string;
   cover_image?: string | null;
   /** Absolute or cwd-relative path to final.json, used only for error labels */
@@ -114,6 +115,7 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
       requireLocalFiles,
       requireImageAlt,
       context: "body",
+      env: input.env,
     });
   }
 
@@ -143,6 +145,7 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
         requireLocalFiles,
         requireImageAlt,
         context: "body",
+        env: input.env,
         allowRobloxGameIcon: image.kind === "roblox-game-card",
       }
     );
@@ -160,7 +163,7 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
   if (cover) {
     // Covers may be media CDN URLs generated at import time, or local article assets.
     if (cover.startsWith("/")) {
-      const classified = classifyArticleImageSrc(cover, input.slug);
+      const classified = classifyArticleImageSrc(cover, input.slug, input.env);
       if (!classified.ok) {
         // Cover can also live under /article-covers/ for legacy/generated covers.
         if (!cover.startsWith("/article-covers/") && !cover.startsWith(articlePublicDir(input.slug))) {
@@ -181,7 +184,7 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
         }
       }
     } else {
-      const classified = classifyArticleImageSrc(cover, input.slug);
+      const classified = classifyArticleImageSrc(cover, input.slug, input.env);
       if (!classified.ok) {
         findings.push({
           level: "error",
@@ -228,6 +231,7 @@ async function collectImageFindings(
     requireImageAlt: boolean;
     context: "body" | "cover";
     allowRobloxGameIcon?: boolean;
+    env?: NodeJS.ProcessEnv;
   }
 ) {
   if (options.requireImageAlt && !image.alt.trim()) {
@@ -249,7 +253,7 @@ async function collectImageFindings(
 
   if (options.allowRobloxGameIcon && isRobloxGameIconUrl(image.src)) return;
 
-  const classified = classifyArticleImageSrc(image.src, slug);
+  const classified = classifyArticleImageSrc(image.src, slug, options.env);
   if (!classified.ok) {
     findings.push({
       level: "error",
