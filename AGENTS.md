@@ -60,6 +60,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 - Stay in the worktree T3 assigned to your thread. Don't create other branches, worktrees or threads for the same task.
 - Scratch work goes in the worktree's `tmp/`. It's yours alone and is deleted with the worktree.
+- Never delete a worktree. T3's reaper removes it after its thread has been settled for 3 days.
 - Work on the machine where the task started. Ask the owner before moving work elsewhere.
 
 **Checks and releases**

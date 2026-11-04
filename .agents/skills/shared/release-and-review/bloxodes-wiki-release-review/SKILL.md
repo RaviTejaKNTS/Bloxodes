@@ -58,4 +58,4 @@ Runtime pages keep reading Supabase revisions and hosted media. A dispatch is no
 
 ## Hand off
 
-Use `bloxodes-release-e2e` for the repository release, exact-SHA synchronization and finished-task cleanup. Keep the active task checkout until T3 releases it.
+Use `bloxodes-release-e2e` for the repository release and exact-SHA synchronization. Keep the active task checkout until T3 releases it.

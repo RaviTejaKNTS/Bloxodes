@@ -1,11 +1,11 @@
 ---
 name: bloxodes-release-e2e
-description: Publish completed, user-approved Bloxodes work through a production PR and GitHub release jobs. Verify the deployed SHA or selected database content, synchronize clean local production, and clean up finished tasks after T3 releases their checkout. Use only for an explicit e2e or end-to-end production release request.
+description: Publish completed, user-approved Bloxodes work through a production PR and GitHub release jobs. Verify the deployed SHA or selected database content, and synchronize clean local production. Use only for an explicit e2e or end-to-end production release request.
 ---
 
 # Bloxodes release
 
-You take completed, user-approved work to production: a PR into `production`, GitHub release jobs, verified deployment or content readback, a synced main checkout and cleanup of the finished task.
+You take completed, user-approved work to production: a PR into `production`, GitHub release jobs, verified deployment or content readback, and a synced main checkout.
 
 ## Ground rules
 
@@ -30,7 +30,7 @@ You take completed, user-approved work to production: a PR into `production`, Gi
 4. Let `Pull request checks` run. Fix failures through task commits. GitHub owns dependency installs, managed-development schema verification, tests, builds and browser screenshots. Guidance-only PRs skip heavy work.
 5. Use T3 `watch_pull_request` and end the turn while awaiting checks. A wake is evidence to inspect, not approval to merge. Require `Required PR checks` to pass and confirm the approved scope.
    - T3 watches only pull requests. The production deploy after a merge and dispatched runs such as `Publish selected content` never wake you. Wait for them in the same turn with `gh run watch <run-id> --exit-status`, then do the readback.
-6. Merge with a merge commit so task ancestry stays available for cleanup. GitHub deletes the remote branch after merge.
+6. Merge with a merge commit. GitHub deletes the remote branch after merge.
 7. The production workflow applies schema before the dependent web deployment.
    - It uses the same migration bytes verified in managed development, production history proof, rollback planning, exact-SHA gates and ledger readback.
    - Additions must work with the running app.
@@ -60,20 +60,14 @@ When new code is needed, release it first. Use the fixed publishers in `scripts/
 
 Leave failed queue publication unfinished, and keep its frozen bundle for a guarded retry. A dispatch is not a published receipt.
 
-## Synchronization and cleanup
+## Synchronization
 
 1. Fast-forward the clean main `production` checkout to the merged SHA. Never reset a dirty checkout. No dependency install or local platform check is part of synchronization.
 2. Keep the active T3 task checkout while this thread uses it.
-3. After checking that the task is settled in T3 with no active run, release its shared game claims first.
-4. Then, from another checkout, run `npm run cleanup:task-worktree -- --worktree <exact-finished-path> --released-sha <full-sha>`. Inspect its plan, then add `--apply --inactive-confirmed`.
+3. After checking that the task is settled in T3 with no active run, release its shared game claims.
+4. Never delete the worktree. T3's reaper removes it after its thread has been settled for 3 days.
 
-What the cleanup helper does:
-
-- It supports T3 HDD paths.
-- It refuses checkout-owned private env files and unknown ignored data.
-- It removes the clean merged task with its `tmp/` scratch; nothing is archived.
-
-Remote branches disappear automatically after merge. Unfinished tasks and detached runtimes stay.
+Remote branches disappear automatically after merge.
 
 Don't synchronize or activate installed automation runtimes as a side effect. A separate, explicit runtime change must preserve active jobs and their owned env.
 
