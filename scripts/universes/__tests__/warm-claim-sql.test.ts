@@ -10,7 +10,7 @@ test("WARM claim grace preserves cadence, backoff, leases and other tiers", {
   const databaseUrl = process.env.CI_TRANSACTION_DATABASE_URL!;
   assert.ok(["localhost", "127.0.0.1"].includes(new URL(databaseUrl).hostname));
   const migration = readFileSync(new URL(
-    "../../../supabase/migrations/20261030073408_warm_universe_stats_claim_grace.sql", import.meta.url
+    "../../../supabase/migrations/20261104045000_hot_universe_stats_claim_grace.sql", import.meta.url
   ), "utf8");
   const fixtures = readFileSync(new URL("../../../supabase/tests/warm_universe_stats_claim_grace.sql", import.meta.url), "utf8");
   const sql = `
