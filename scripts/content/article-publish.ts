@@ -121,9 +121,9 @@ export async function verifyArticleLive(final: ArticleFinal, cover: string) {
     if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(final.title)) throw new Error("Live article titles differ from final.json.");
     if (!html("#article-body").text().trim() || /application error|unhandled runtime error|internal server error/i.test(html("body").text())) throw new Error("Live article body is empty or reports an application error.");
     if (html('link[rel="canonical"]').attr("href") !== url || !html('meta[name="description"]').attr("content")?.trim()) throw new Error("Live canonical or description is missing or incorrect.");
-    const sources = html("img").map((_, el) => html(el).attr("src") ?? "").get();
+    // The article page shows its cover in the social image tags, not as an <img>.
+    if (html('meta[property="og:image"]').attr("content") !== new URL(cover, url).href) throw new Error("Live cover is missing.");
     const matches = (src: string, expected: string) => src === expected || new URL(src || "/", url).searchParams.get("url") === expected;
-    if (!sources.some(src => matches(src, cover))) throw new Error("Live cover is missing.");
     const bodySources = html("#article-body img").map((_, el) => html(el).attr("src") ?? "").get();
     for (const image of findArticleImages(final.content_md)) if (!bodySources.some(src => matches(src, image.src))) throw new Error("Live body image is missing.");
     for (const { videoId } of findYouTubeDirectives(final.content_md)) {
