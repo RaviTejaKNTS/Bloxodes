@@ -1,6 +1,6 @@
 # SEO, indexing and analytics
 
-Last verified: 2026-11-01
+Last verified: 2026-11-04
 
 ## Sitemaps, feed and search
 
@@ -22,6 +22,7 @@ Since October 2025 Google has indexed only our homepage. So we give Google an al
 - To add a game, add one typed entry to `GOOGLE_INDEXABLE_GAMES` with its confirmed slugs. An entry only lifts the Google block; it never overrides a page's own noindex.
 - Don't set `googleBot: { index: true }` in page metadata.
 - Sitemaps still list Google-blocked pages.
+- Google gets only family sitemaps that hold allowed pages: main, codes, articles, tools, checklists, quizzes, wiki, authors, catalog and stats. `games`, `events`, `puzzles` and `moved` have none and stay unsubmitted, and so does the `/sitemap.xml` index, which lists them. Bing gets the index.
 
 ## Indexing APIs
 
@@ -31,4 +32,5 @@ Since October 2025 Google has indexed only our homepage. So we give Google an al
 ## Analytics
 
 - The site loads GA4 and self-hosted Umami through separate public variables (`NEXT_PUBLIC_*`), injected by GitHub and Dokploy in production.
+- Search Console writes, such as sitemap changes, use service account `indexing@bloxodes.iam.gserviceaccount.com` (Full user, key at `.envs/secrets/google-indexing-service-account.json`). The saved Google OAuth token is read-only.
 - Operator credentials: GA4, Search Console, Bing and Google OAuth in `.envs/operations/analytics.env`; Umami login and `UMAMI_WEBSITE_ID` in `.envs/operations/umami.env` (load with the `umami` overlay).
