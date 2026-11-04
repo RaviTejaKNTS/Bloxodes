@@ -21,7 +21,7 @@ The T3 schedule "Bloxodes Roblox wiki every 2 days (Content Factory)" runs in th
 
 ## Publishing
 
-The code repo owns one versioned publish command with two contracts: `contracts/roblox-wiki/v1/` for Roblox and `contracts/game-wiki/v1/` for franchise games ([franchise publishing](franchise.md#publishing)). Each has `schema.ts` and a README with the folder layout. The command picks the contract from `bundle.json`. Whatever passes it is what the live site can render.
+The code repo owns one versioned publish command with three contracts: `contracts/roblox-wiki/v1/` for Roblox, `contracts/game-wiki/v1/` for franchise games ([franchise publishing](franchise.md#publishing)) and `contracts/article/v1/` for [articles](articles.md#direct-publishing). Each has `schema.ts` and a README with the folder layout. The command picks the contract from `bundle.json`. Whatever passes it is what the live site can render.
 
 | Command | Does |
 | --- | --- |

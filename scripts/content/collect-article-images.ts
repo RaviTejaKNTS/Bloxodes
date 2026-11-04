@@ -161,8 +161,7 @@ export function collectableArticleImages(manifest: ArticleImageManifest, finalJs
   return selected.filter(entry => !(entry.public_url?.startsWith("/") && classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok));
 }
 
-async function main() {
-  const options = parseArgs(process.argv.slice(2));
+export async function collectArticleImages(options: CliOptions) {
   const manifestPath = path.resolve(process.cwd(), options.manifest);
   const manifest = await readArticleImageManifest(manifestPath);
   const finalPath = options.finalFile ? path.resolve(process.cwd(), options.finalFile) : "";
@@ -261,6 +260,10 @@ async function main() {
   }
 
   console.log(`Article image collection complete: uploaded=${uploaded} manifest=${manifestPath}`);
+}
+
+async function main() {
+  await collectArticleImages(parseArgs(process.argv.slice(2)));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
