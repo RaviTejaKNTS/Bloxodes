@@ -24,6 +24,7 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "game_tool",
   "game_code",
   "game_map",
+  "game_article",
   "game_quiz",
   "game_catalog"
 ]);
@@ -55,6 +56,7 @@ type CommentEntityType =
   | "game_tool"
   | "game_code"
   | "game_map"
+  | "game_article"
   | "game_quiz"
   | "game_catalog";
 
@@ -111,6 +113,7 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
     game_tool: "game_tool_pages_view",
     game_code: "game_code_pages_view",
     game_map: "game_map_pages_view",
+    game_article: "game_article_pages_view",
     game_quiz: "game_quiz_pages_view",
     game_catalog: "game_catalog_pages_view"
   };

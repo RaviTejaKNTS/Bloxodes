@@ -84,6 +84,8 @@ Migration `20260920000032` clarifies that GTA Online contains selected tasks onl
 
 Managed development and production have `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See `bloxodes-docs/content/franchise.md` for the shared page contract and verified production release.
 
+`game_article_pages` is the non-Roblox partner of `articles`. `game_article_pages_view`, the merged `published_articles_view` and `game_article_game_summary` are service-only and filter publication. New article families must stay in the `site_routes`, search, comments and namespace move functions with their siblings. See `bloxodes-docs/content/articles.md`.
+
 ## SQL regression fixtures
 
 PR checks run every fixture in `supabase/tests/` through `npm run test:universe-stats-pipeline` (harnesses in `scripts/universes/__tests__/*-sql.test.ts`). They need `CI=true` and `CI_TRANSACTION_DATABASE_URL`, accept only a localhost URL with no query string, load the relevant migration SQL into GitHub's PostgreSQL 17 service and roll everything back. When a migration redefines a function a fixture tests, point the harness at the new migration. Never run these fixtures against managed development or production.

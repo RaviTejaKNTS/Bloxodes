@@ -90,7 +90,7 @@ describe("moved game comment ownership", () => {
     ["game_wiki", "/wiki/peak"], ["game_collection", "/wiki/peak/items"],
     ["game_wiki", "/games/risk-of-rain"], ["game_map", "/maps/peak-map"],
     ["game_tool", "/tools/peak-cost"], ["game_code", "/codes/peak"],
-    ["game_quiz", "/quizzes/peak"], ["game_catalog", "/catalog/peak-items"]
+    ["game_article", "/articles/peak-guide"], ["game_quiz", "/quizzes/peak"], ["game_catalog", "/catalog/peak-items"]
   ])("%s discovers %s from its unchanged page ID", async (entityType, path) => {
     const filters: Record<string, unknown> = {};
     const query = {

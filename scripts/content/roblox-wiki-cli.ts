@@ -16,7 +16,7 @@ npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --ga
 npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
 npm run content:status -- --article <slug> [--target managed-dev|production]
-Supported contracts: roblox-wiki@1, game-wiki@1 and article@1. See contracts/<contract>/v1/.
+Supported contracts: roblox-wiki@1, game-wiki@1, article@1 and game-article@1. See contracts/<contract>/v1/.
 Default target: managed-dev. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
@@ -37,7 +37,7 @@ Without it, a local cover must match the current official thumbnail bytes. All i
     console.log(await deployedContentSha());
     return;
   }
-  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | undefined;
+  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | undefined;
   if (options.command === "publish") {
     const { readWikiContract } = await import("../shared/wiki-publish-contract");
     contract = await readWikiContract(options.bundle!);
@@ -60,7 +60,11 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   if (!process.env.SUPABASE_SERVICE_ROLE) throw new Error("Missing SUPABASE_SERVICE_ROLE for the selected target.");
   const { publishBundle, contentStatus, contentCandidates } = await import("./roblox-wiki-publish");
   if (options.command === "publish") {
-    if (contract === "article@1") {
+    if (contract === "game-article@1") {
+      process.env.NODE_ENV = options.target === "production" ? "production" : "development";
+      const { publishGameArticleBundle } = await import("./game-article-publish");
+      await publishGameArticleBundle(options);
+    } else if (contract === "article@1") {
       process.env.NODE_ENV = options.target === "production" ? "production" : "development";
       const { publishArticleBundle } = await import("./article-publish");
       await publishArticleBundle(options);

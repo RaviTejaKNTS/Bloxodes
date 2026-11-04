@@ -10,7 +10,7 @@ export const SITE_DESCRIPTION =
 export const CODES_DESCRIPTION =
   "Track active Roblox game codes, rewards, and redemption tips with frequent updates.";
 export const ARTICLES_DESCRIPTION =
-  "Roblox articles and guides with tips, updates, and walkthroughs to help you play smarter.";
+  "Guides, news and walkthroughs for Roblox and the other games we cover.";
 export const CHECKLISTS_DESCRIPTION =
   "Guided Roblox checklists to track steps, tasks, and rewards in your favorite games. Stay organized and mark progress as you play.";
 export const QUIZZES_DESCRIPTION =

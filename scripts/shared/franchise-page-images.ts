@@ -62,7 +62,7 @@ export async function verifyFranchisePageImage({ url, role, label }: { url: stri
   return { bytes, metadata };
 }
 
-const tables: Record<string, string> = { wiki: "game_wiki_pages", codesPages: "game_code_pages", tools: "game_tool_pages", maps: "game_map_pages", quizzes: "game_quiz_pages", catalog: "game_catalog_pages", checklists: "game_checklist_pages" };
+const tables: Record<string, string> = { wiki: "game_wiki_pages", codesPages: "game_code_pages", tools: "game_tool_pages", maps: "game_map_pages", articles: "game_article_pages", quizzes: "game_quiz_pages", catalog: "game_catalog_pages", checklists: "game_checklist_pages" };
 
 export async function validateFranchisePublicationImages(sb: SupabaseClient, namespace: string, payload: Record<string, Array<Record<string, unknown>>>) {
   const storedGames: Array<Record<string, unknown>> = [];

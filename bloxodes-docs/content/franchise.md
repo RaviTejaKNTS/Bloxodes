@@ -33,7 +33,7 @@ Start with `bloxodes-franchise-plan`. It decides whether the title is a single g
 
 ## Routes
 
-Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections `/wiki/<game-slug>/<collection-slug>`, and `/maps|checklists|quizzes/<slug>`, `/codes/<game-slug>`, `/tools|catalog/<namespace>-<slug>`. Full rules and how the routes find a page are in [URLs](urls.md#other-games).
+Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/wiki/<game-slug>`, collections `/wiki/<game-slug>/<collection-slug>`, and `/maps|checklists|quizzes/<slug>`, `/codes/<game-slug>`, `/tools|catalog/<namespace>-<slug>`, and `/articles/<slug>`. Full rules and how the routes find a page are in [URLs](urls.md#other-games).
 
 Every game is handled the same way from its data: menus, sidebar links, `/games` cards, the home page games section, collection pages, progress, checklists, related links, search, comments, the feed, sitemaps and cache refresh. Only tools, calculators and interactive maps have their own engines. Don't add code for a single game.
 
@@ -53,6 +53,7 @@ Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `e
 | Checklists | `game_checklist_pages`, `game_checklist_items`, progress in `user_checklist_progress` with `<namespace>:<slug>` keys |
 | Codes | `game_code_pages`, `game_codes` |
 | Tools | `game_tool_pages` |
+| Articles | `game_article_pages` (see [articles](articles.md#articles-for-other-games)) |
 
 RLS is on and only the service role reads tables directly. Public reads go through published views. Collection media uses the same R2 bucket as Roblox.
 
@@ -71,6 +72,7 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Publishing
 
+- **Articles:** `npm run content:publish` with a `game-article@1` bundle ([articles](articles.md#articles-for-other-games)). It never creates a game, so publish the hub first.
 - **Wiki bundles (hubs and collections):** `npm run content:publish -- <abs-bundle>` with a `game-wiki@1` bundle (`contracts/game-wiki/v1/README.md`). It dry-runs by default, writes with `--target managed-dev --apply` and `--target production --apply --allow-prod`, and uses the same production guard as Roblox ([publishing](roblox-wiki.md#publishing)). Each target resolves its own game and page rows by namespace and slug, so development and production IDs don't need to match, and existing page UUIDs are kept. Cover and hero art, and item images, upload to R2 through the command. New games need no code. Dry runs and applies reject links in the retired `/<namespace>/wiki/...` style anywhere in the copy, naming the field and link. `content:status -- --namespace <ns> --game <slug>` shows what exists.
 - `publish:game-pages` (`scripts/games/publish-game-pages.ts`) validates a whole typed batch and rolls it back unless `--apply`. It uses the `game-pages` publisher on GitHub.
 - `sync:shared-game-collection-runtime` (the `franchise-collection` publisher) also publishes single collections. Export an existing one with `npm run export:shared-game-collection-workspace -- --namespace <slug>`. New images get `<namespace>/<game>/<collection>/<item>-<hash>` keys; an unchanged item keeps its stored key.

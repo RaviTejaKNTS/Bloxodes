@@ -1,6 +1,6 @@
 import { mapPublishConcurrent } from "../shared/publish-network.mjs";
 
-const pageGroups = ['wiki', 'codesPages', 'tools', 'maps', 'quizzes', 'catalog', 'checklists'];
+const pageGroups = ['wiki', 'codesPages', 'tools', 'maps', 'quizzes', 'articles', 'catalog', 'checklists'];
 const published = (group, row) => row?.[group === 'checklists' ? 'is_public' : 'is_published'] === true;
 // Stored franchise media uses this origin; arbitrary Supabase projects are not trusted.
 const imageHosts = new Set(['media.bloxodes.com']);
@@ -50,7 +50,11 @@ export async function assertFranchisePageImages({ namespace, payload, storedGame
     const game = games.get(row.game_id);
     if (!game || game.namespace !== namespace && game.namespace !== undefined) throw new Error(`${group}/${row.slug}: missing owning game for image validation.`);
     const label = `${namespace}/${group}/${row.slug}`;
-    if (group === 'wiki') {
+    if (group === 'articles') {
+      const cover = franchiseImageUrl(row.cover_image);
+      if (!cover) throw new Error(`${label}: article requires its own hosted cover_image.`);
+      images.push({url: cover, role: 'cover', label});
+    } else if (group === 'wiki') {
       images.push(...requireFranchiseHubImages(game, `${label} owning game`));
       if (row.cover_image != null) {
         const cover = franchiseImageUrl(row.cover_image);

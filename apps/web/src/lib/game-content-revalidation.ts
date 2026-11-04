@@ -2,7 +2,7 @@ import "server-only";
 import { supabaseAdmin } from "./supabase";
 
 const INDEXES: Record<string, string> = {
-  wiki: "/wiki", collection: "/wiki", code: "/codes", tool: "/tools",
+  article: "/articles", wiki: "/wiki", collection: "/wiki", code: "/codes", tool: "/tools",
   map: "/maps", quiz: "/quizzes", checklist: "/checklists", catalog: "/catalog", hub: "/games"
 };
 
@@ -29,8 +29,8 @@ export async function gameContentRevalidationTargets(slug: string) {
   // A namespace event expands every owner; a page event never expands siblings.
   const namespace = namespaceEvent ? slug : null;
   const games = namespace
-    ? await rows("games", "id,namespace,parent_id,url_style", { namespace })
-    : owners[0]?.game_id ? await rows("games", "id,namespace,parent_id,url_style", { id: owners[0].game_id }) : [];
+    ? await rows("games", "id,namespace,slug,parent_id,url_style", { namespace })
+    : owners[0]?.game_id ? await rows("games", "id,namespace,slug,parent_id,url_style", { id: owners[0].game_id }) : [];
   const paths = new Set<string>(namespaceEvent ? [] : [`/${slug}`]);
   const tags = new Set<string>();
   const indexes = new Set<string>(["/games", "/feed.xml", "/sitemap.xml", "/sitemaps/games.xml"]);
@@ -40,15 +40,28 @@ export async function gameContentRevalidationTargets(slug: string) {
     const routes = await rows("site_routes", "path", { source: "game", page_type: owner.page_type, page_id: owner.page_id });
     for (const route of routes) {
       pagePaths.add(route.path);
-      if (owner.page_type === "collection") {
+      if (["collection","article"].includes(owner.page_type)) {
         collectionPaths.add(route.path);
         // Invalidate the subtree and shared pagination tag, including drafts
         // and collections whose published runtime has been removed.
       }
     }
+    if (owner.page_type === "article") {
+      indexes.add("/"); tags.add("home");
+      indexes.add("/articles"); indexes.add("/sitemaps/articles.xml");
+      tags.add("articles-index");
+      for (const route of routes) if (route.path.startsWith("/articles/")) tags.add(`article:${route.path.split("/")[2]}`);
+      indexes.add("/authors"); tags.add("authors-index");
+      for (const page of await rows("game_article_pages","id,author_id",{id:owner.page_id})) {
+        if (page.author_id) for (const author of await rows("authors","id,slug",{id:page.author_id})) {
+          indexes.add(`/authors/${author.slug}`); tags.add(`author:${author.slug}`);
+        }
+      }
+      for (const g of games) { indexes.add(`/articles/games/${g.slug}`); tags.add(`article-game:${g.slug}`); }
+    }
     const game = games.find(game => game.id === owner.game_id);
     const index = INDEXES[owner.page_type];
-    if (index) indexes.add(game?.url_style === "namespace" ? `/${game.namespace}${index === "/games" ? "" : index}` : index);
+    if (index) indexes.add(game?.url_style === "namespace" && owner.page_type !== "article" ? `/${game.namespace}${index === "/games" ? "" : index}` : index);
   };
   for (const game of games) {
     const root = (await rows("games", "id,namespace,parent_id,url_style", { namespace: game.namespace })).find(row => !row.parent_id);
@@ -82,7 +95,7 @@ export async function gameContentRevalidationTargets(slug: string) {
   for (const index of indexes) {
     paths.add(index);
     tags.add(`page:${index}`);
-    if (["/wiki", "/codes", "/tools", "/checklists"].includes(index)) paths.add(`${index}/page/[page]`);
+    if (index.startsWith("/articles/games/") || ["/wiki", "/codes", "/tools", "/checklists", "/articles"].includes(index)) paths.add(`${index}/page/[page]`);
   }
   tags.add("games-index");
   tags.add("feed");

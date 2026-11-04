@@ -110,15 +110,15 @@ export async function verifyArticleAssets(final: ArticleFinal, cover?: string | 
   console.log(`PASS decodable images (${images.length}) and resolvable video embeds`);
 }
 
-export async function verifyArticleLive(final: ArticleFinal, cover: string) {
-  const url = `https://bloxodes.com/articles/${final.slug}`;
+export async function verifyArticleLive(final: ArticleFinal, cover: string, seoTitle = final.title, pageNumber = 1) {
+  const url = `https://bloxodes.com/articles/${final.slug}${pageNumber > 1 ? `/page/${pageNumber}` : ""}`;
   await retryPublishNetwork(async () => {
     const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
     await requirePublishResponse(response, "Live article");
     if (response.status !== 200 || response.url.replace(/\/$/, "") !== url) throw new Error("Live article must return HTTP 200 without a redirect.");
     const html = load(await response.text());
     const normalize = (text: string) => text.replace(/\s+/g, " ").trim();
-    if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(final.title)) throw new Error("Live article titles differ from final.json.");
+    if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(seoTitle)) throw new Error("Live article titles differ from final.json.");
     if (!html("#article-body").text().trim() || /application error|unhandled runtime error|internal server error/i.test(html("body").text())) throw new Error("Live article body is empty or reports an application error.");
     if (html('link[rel="canonical"]').attr("href") !== url || !html('meta[name="description"]').attr("content")?.trim()) throw new Error("Live canonical or description is missing or incorrect.");
     // The article page shows its cover in the social image tags, not as an <img>.
@@ -251,6 +251,7 @@ export async function publishArticleBundle(options: ContentOptions) {
 
 export async function articleContentStatus(options: ContentOptions) {
   const db = client(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!);
-  const row = await read(() => db.from("articles").select("id,slug,title,is_published,published_at,updated_at").eq("slug", options.article!).maybeSingle());
+  const roblox = await read(() => db.from("articles").select("id,slug,title,is_published,published_at,updated_at").eq("slug", options.article!).maybeSingle());
+  const row = roblox ?? await read(() => db.from("game_article_pages").select("id,namespace,game_id,slug,title,is_published,published_at,updated_at").eq("slug",options.article!).maybeSingle());
   console.log(JSON.stringify({ target: options.target, article: row, url: `https://bloxodes.com/articles/${options.article}` }, null, 2));
 }
