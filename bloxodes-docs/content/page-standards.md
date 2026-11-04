@@ -18,12 +18,12 @@ A non-Roblox page is the same page as its Roblox counterpart, minus the Roblox-o
 
 - Readable by a person first. It should say exactly what the page gives them.
 - About 50 to 65 characters, so Google shows it in full. Put the game name and the main search phrase near the start.
-- Use a number when there's a real count. Numbers make titles easier to click. Collections use the `{count}` token, which fills in from the live data: `All {count} Characters in Mario Kart World and How to Unlock Them`.
+- Use a number when there's a real count. Numbers make titles easier to click. Collections use the `{count}` token, which fills in from the live data: `All {count} Characters and How to Unlock Them in Mario Kart World`.
 - No clickbait, no stacked colons, no keyword lists.
 
 | Weak | Better |
 | --- | --- |
-| Mario Kart World Characters and How to Unlock Them | All {count} Mario Kart World Characters and How to Unlock Them |
+| Mario Kart World Characters and How to Unlock Them | All {count} Characters and How to Unlock Them in Mario Kart World |
 | Mario Kart World Quiz | Mario Kart World Quiz: How Well Do You Know the Tracks and Racers? |
 | ARC Raiders | ARC Raiders Wiki: Raids, Workshop Gear, Skill Tree and Feats |
 
