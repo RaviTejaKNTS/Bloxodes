@@ -126,6 +126,29 @@ test("article covers are treated as development covers only on the development o
   assert.equal(isDevelopmentCover(null, dev), false);
 });
 
+test("article live check reads the cover from og:image, as the article page renders it", async () => {
+  const { verifyArticleLive } = await import("../../content/article-publish");
+  const url = `https://bloxodes.com/articles/${slug}`;
+  const cover = "https://media.bloxodes.com/storage/v1/object/public/article-media/cover.webp";
+  const image = await sharp({ create: { width: 8, height: 8, channels: 3, background: "red" } }).png().toBuffer();
+  const page = (og: string) => `<html><head><title>Guide</title><link rel="canonical" href="${url}"/><meta name="description" content="About it"/>${og}</head><body><h1>Guide</h1><div id="article-body"><p>Body</p></div></body></html>`;
+  const realFetch = globalThis.fetch;
+  const serve = (og: string) => {
+    globalThis.fetch = (async (input: string | URL) => {
+      if (String(input) !== url) return new Response(image, { headers: { "content-type": "image/png" } });
+      const response = new Response(page(og), { headers: { "content-type": "text/html" } });
+      Object.defineProperty(response, "url", { value: url });
+      return response;
+    }) as typeof fetch;
+  };
+  try {
+    serve(`<meta property="og:image" content="${cover}"/>`);
+    await verifyArticleLive({ slug, title: "Guide", content_md: "Body" }, cover);
+    serve(`<meta property="og:image" content="https://media.bloxodes.com/other.webp"/>`);
+    await assert.rejects(() => verifyArticleLive({ slug, title: "Guide", content_md: "Body" }, cover), /Live cover is missing/);
+  } finally { globalThis.fetch = realFetch; }
+});
+
 test("article bundle files reject symlink escapes", async () => {
   const { bundlePath } = await import("../roblox-wiki-bundle");
   const root = path.resolve("tmp", `article-path-${randomUUID()}`);
