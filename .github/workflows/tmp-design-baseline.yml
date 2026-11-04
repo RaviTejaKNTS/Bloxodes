@@ -1,0 +1,66 @@
+name: Temporary Design Baseline
+
+on:
+  push:
+    branches:
+      - t3/fbc587f8
+    paths:
+      - .github/workflows/tmp-design-baseline.yml
+      - scripts/ads/tmp-design-baseline.ts
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tmp-design-baseline
+  cancel-in-progress: false
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Record production branch commit
+        run: |
+          SHA="$(git ls-remote https://github.com/RaviTejaKNTS/Bloxodes.git refs/heads/production | awk '{print $1}')"
+          echo "PRODUCTION_COMMIT_SHA=$SHA" >> "$GITHUB_ENV"
+          echo "Production branch SHA: $SHA"
+      - name: Prepare exact sample list
+        run: npx tsx scripts/ads/tmp-design-baseline.ts --prepare
+      - name: Smoke test house ads before the full ad audit
+        run: |
+          mkdir -p tmp/baseline/houseads-smoke
+          if npx tsx scripts/ads/audit-ad-slots.ts --paths / --devices mobile,desktop --out tmp/baseline/houseads-smoke --settle-ms 5000; then
+            if node -e "const r=require('./tmp/baseline/houseads-smoke/results.json');const bad=r.find(x=>x.httpStatus!==200||/cloudflare|just a moment|checking your browser/i.test(x.title||''));const slots=r.reduce((n,x)=>n+(x.counts?.content||0)+(x.counts?.sidebar||0),0);if(bad||slots===0){console.log('House-ad audit skipped: '+(bad?'runner response '+bad.httpStatus+' title='+bad.title:'zero house-ad slots on smoke pages'));process.exit(1)}"; then
+              echo "HOUSEADS_OK=true" >> "$GITHUB_ENV"
+            else
+              echo "HOUSEADS_OK=false" >> "$GITHUB_ENV"
+            fi
+          else
+            echo "House-ad audit skipped: smoke audit command failed."
+            echo "HOUSEADS_OK=false" >> "$GITHUB_ENV"
+          fi
+      - name: Run house-ad audit for all pages and devices
+        if: env.HOUSEADS_OK == 'true'
+        run: npx tsx scripts/ads/audit-ad-slots.ts --paths-file tmp/baseline/paths.txt --devices mobile,desktop --out tmp/baseline/houseads --settle-ms 5000
+      - name: Record skipped house-ad run
+        if: env.HOUSEADS_OK != 'true'
+        run: echo "House-ad measurements skipped because the GitHub runner failed the home-page smoke check. See houseads-smoke/results.json." > tmp/baseline/houseads-skipped.txt
+      - name: Collect basics, real-fill sample, and API availability
+        run: npx tsx scripts/ads/tmp-design-baseline.ts --collect
+      - name: Upload baseline artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: tmp-design-baseline-${{ github.run_id }}
+          path: tmp/baseline
+          if-no-files-found: warn
+
