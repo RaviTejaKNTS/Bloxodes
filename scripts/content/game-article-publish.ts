@@ -19,6 +19,7 @@ import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { parseArticleContentPages } from "@/lib/article-blocks";
 import { resolveSeoTitle } from "@/lib/seo";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
+import { pickEligibleArticleAuthorId } from "../shared/article-author-selection";
 import { equalFields } from "./roblox-wiki-publish";
 
 const json = async (file:string)=>JSON.parse(await fs.readFile(file,"utf8"));
@@ -28,7 +29,7 @@ async function read(query:()=>PromiseLike<any>) {
   return result.data;
 }
 export async function resolveGameArticleIdentity(db:SupabaseClient, namespace:string, game:{slug:string;kind:string}) {
-  const row = await read(()=>db.from("games").select("id,namespace,slug,kind,parent_id,is_published").eq("namespace",namespace).eq("slug",game.slug).eq("kind",game.kind).single());
+  const row = await read(()=>db.from("games").select("id,namespace,slug,kind,parent_id,is_published,cover_image").eq("namespace",namespace).eq("slug",game.slug).eq("kind",game.kind).single());
   if (!row.is_published) throw new Error("Article requires a published owning game.");
   if (row.parent_id) {
     const parent = await read(()=>db.from("games").select("is_published").eq("namespace",namespace).eq("id",row.parent_id).single());
@@ -86,7 +87,11 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   const current=await assertGameArticleRoute(db,final.slug,game.id,bundle.namespace);
   await assertGameArticleArchive(db,game.slug);
   await assertGameArticleArchiveOwner(db,game);
-  await read(()=>db.from("authors").select("id").eq("id",final.author_id).single());
+  const authorId=current?.author_id ?? pickEligibleArticleAuthorId(
+    await read(()=>db.from("authors").select("id,name,slug")),
+    {preferredAuthorId:final.author_id},
+  );
+  final.author_id=authorId;
   const expected=await read(()=>db.rpc("expected_game_page_path",{p_game_id:game.id,p_type:"article",p_slug:final.slug}));
   if(expected!==`/articles/${final.slug}`) throw new Error("Target article route differs from contract.");
   const findings=publicCopyFindings(final,finalFile);
@@ -97,10 +102,13 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   const sourceEnv={...process.env,SUPABASE_URL:dev.url};
   assertArticleImageReadiness(checkArticleImageReadiness({manifest,finalJson:final,env:sourceEnv}),mediaFile);
   assertNoArticleMediaErrors(await checkArticleMedia({...final,env:sourceEnv,requireLocalFiles:true}));
-  if(findArticleImages(final.content_md).some(image=>image.src===final.cover_image)) throw new Error("Article cover must not repeat a body image.");
-  await verifyArticleAssets(final,final.cover_image);
+  if(final.cover_image && findArticleImages(final.content_md).some(image=>image.src===final.cover_image)) throw new Error("Article cover must not repeat a body image.");
+  const coverSource=final.cover_image || findArticleImages(final.content_md)[0]?.src || game.cover_image;
+  if(!coverSource) throw new Error("Article cover is missing: provide cover_image, a body image, or the owning game cover_image.");
+  await verifyArticleAssets(final,coverSource);
+  // Derive from the source bundle before promotion rewrites body URLs to target Storage.
   // Decode and prepare cover before any writes, including body image uploads.
-  const cover=await fetchImageBytes(final.cover_image);
+  const cover=await fetchImageBytes(new URL(coverSource,"https://bloxodes.com").href);
   const coverBytes=await sharp(cover).webp().toBuffer();
   if(!options.apply) { console.log("PASS game-article@1 preflight; no writes."); return; }
   if(!process.env.SUPABASE_MEDIA_BUCKET) throw new Error("Article apply requires SUPABASE_MEDIA_BUCKET.");

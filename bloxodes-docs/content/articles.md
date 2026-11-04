@@ -84,7 +84,8 @@ Non-Roblox articles live in `game_article_pages`, the `game_*` partner of `artic
 - **Lists:** `published_articles_view` merges both tables for `/articles`, author pages, the feed and the sitemap.
 - **Game archive:** `/articles/games/<game-slug>`, one per game (`/articles/games/gta-6`), from `game_article_game_summary`. A Roblox archive keeps its URL if a slug clashes, and the publisher refuses the clash.
 - **News:** a row with the `news` tag. There's no `/news` route, and every row needs a game.
-- **Publishing:** `content:publish` with a `game-article@1` bundle (`contracts/game-article/v1/README.md`), with no queue row and no GitHub job. The game and its parent must already be published, and `author_id` must exist on the target. The Content Factory has no skill or schedule for these yet.
+- **Publishing:** `content:publish` with a `game-article@1` bundle (`contracts/game-article/v1/README.md`), with no queue row and no GitHub job. The game and its parent must already be published. The publisher picks the author on each database and keeps it on reruns. With no `cover_image`, it uses the first body image, then the game's cover.
+- **Content Factory:** the `game-article-main` skill writes these from `content/game-articles/topics.md` (requested topics, then priority games) or topics it finds, with `bin/article game-existing` to find duplicates and the game, and `bin/article game-publish`. News is allowed, and the `news` tag marks it.
 - **Revalidation:** `game_content` events refresh the page, every numbered page, both lists, the archive, the author page, the feed and the sitemap.
 
 ## Manual articles
