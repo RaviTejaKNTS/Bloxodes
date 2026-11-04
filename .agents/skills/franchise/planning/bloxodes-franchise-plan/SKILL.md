@@ -63,6 +63,7 @@ Keep it lean:
 Proposed titles become real page titles, so write them in the words a player would type, not internal labels.
 
 - Use the game's own nouns and the common short game name: "GTA 5 Stunt Jump Locations", not "GTA V Aerial Challenge Collection".
+- Collection titles use `All {count} <Collection> in <Game>`, with the exact game name and any short angle before `in <Game>`: `All {count} Cargo Types and What They Do in Transport Fever 3`. Use the `{count}` token, not a typed number. The publish check rejects a collection title without ` in <Game>`.
 - In "what it contains", say what the player gets in one plain line ("every stunt jump with its location and the vehicle that clears it"), not "a comprehensive resource for players."
 - Give each row its own angle. If every row reads like the same template with a different noun, rethink it.
 
