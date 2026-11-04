@@ -69,7 +69,7 @@ Neither publishes by itself. The next normal drain does.
 | `npm run content:status -- --article <slug> [--target production]` | The article's state on that target. |
 
 - The queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
-- Rerun the same bundle after a failure. A failed publish leaves the row retryable, and a published article is verified without being rewritten.
+- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article is verified without being rewritten. On managed development, `--apply` always writes the bundle.
 - It refuses a row with an unresolved GitHub dispatch, and shares the drain's lock, so it can report "busy". Retry when it does.
 - It has no browser check. It checks the live status, titles, canonical URL, description, body text, cover, body images, and video iframes and availability. It doesn't check layout or overflow on desktop and phone, JavaScript errors, hydration, lazy loading or video playback, so the run opens the live page itself.
 
