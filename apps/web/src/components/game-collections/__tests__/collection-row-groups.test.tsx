@@ -59,7 +59,7 @@ describe("collection ad boundaries", () => {
       flushSync(() => resize([{ contentRect: { width: 677 } } as ResizeObserverEntry], {} as ResizeObserver));
       expect(rows()).toEqual([2, 2, 2, 2, 2, 2, 1]);
       expect(stream.querySelector("article")?.getAttribute("data-row-fields")).toBe("0,1");
-      expect(stream.querySelector(".collections-card-grid")?.getAttribute("style")).toContain("--collection-card-rows:3");
+      expect(stream.querySelector(".collections-card-grid")?.getAttribute("style")).toMatch(/--collection-card-rows:\s*3/);
       flushSync(() => resize([{ contentRect: { width: 1120 } } as ResizeObserverEntry], {} as ResizeObserver));
       expect(rows()).toEqual([3, 3, 3, 3, 1]);
       expect([...stream.children]).toEqual(groups);

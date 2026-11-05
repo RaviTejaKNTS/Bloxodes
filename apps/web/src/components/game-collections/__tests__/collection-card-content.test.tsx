@@ -128,12 +128,12 @@ describe("shared collection card content", () => {
         slug: "items", label: "Items", groupLabel: "Items",
         stats: [{ key: "price", label: "Price" }, { key: "status", label: "Status" }, { key: "best", label: "Best use" }],
         fieldPresentation: { price: "chip", status: { kind: "highlight", tone: "positive" }, best: "highlight" }
-      }} sections={[{ id: "items", label: "Items", items: [{ id: "a", name: "Alpha", price: "25 Coins", status: "Available", best: "x".repeat(101) }] }]} />));
+      }} sections={[{ id: "items", label: "Items", items: [{ id: "a", name: "Alpha", price: "25 Coins", status: "Current", best: "x".repeat(101) }] }]} />));
       const list = [...container.querySelectorAll("button")].find(button => button.textContent === "List")!;
       flushSync(() => list.click());
       const values = [...container.querySelectorAll("tbody td")].slice(1);
       expect(values[0].innerHTML).not.toMatch(/rounded|inline-flex|bg-background/);
-      expect(values[1].querySelector(".text-emerald-300")?.textContent).toBe("Available");
+      expect(values[1].querySelector(".text-emerald-300")?.textContent).toBe("Current");
       expect(values[2].querySelector(".text-foreground")?.textContent).toBe("x".repeat(101));
       expect(container.querySelector("table [aria-expanded], table [class*=line-clamp]")).toBeNull();
     } finally { root.unmount(); }
