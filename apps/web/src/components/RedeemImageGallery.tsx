@@ -129,7 +129,7 @@ export function RedeemImageGallery({
             <button
               type="button"
               onClick={close}
-              className="absolute right-3 top-3 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+              className="absolute right-3 top-3 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             >
               Close
             </button>
@@ -143,7 +143,7 @@ export function RedeemImageGallery({
                 <button
                   type="button"
                   onClick={() => setActiveIndex((activeIndex + images.length - 1) % images.length)}
-                  className="rounded-full bg-white/10 px-3 py-1 font-semibold uppercase tracking-wide transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                  className="rounded-md bg-white/10 px-3 py-1 font-semibold uppercase tracking-wide transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                 >
                   Prev
                 </button>
@@ -153,7 +153,7 @@ export function RedeemImageGallery({
                 <button
                   type="button"
                   onClick={() => setActiveIndex((activeIndex + 1) % images.length)}
-                  className="rounded-full bg-white/10 px-3 py-1 font-semibold uppercase tracking-wide transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                  className="rounded-md bg-white/10 px-3 py-1 font-semibold uppercase tracking-wide transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                 >
                   Next
                 </button>

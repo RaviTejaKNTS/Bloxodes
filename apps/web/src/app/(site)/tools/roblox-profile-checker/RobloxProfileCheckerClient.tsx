@@ -218,7 +218,7 @@ export function RobloxProfileCheckerClient() {
             value={input}
             onChange={(event) => setInput(event.target.value)}
             aria-label="Roblox username"
-            className="w-full rounded-full border border-border/60 bg-white/5 px-5 py-3 text-base text-foreground outline-none ring-2 ring-transparent transition focus:ring-accent/50 dark:bg-white/10"
+            className="w-full rounded-md border border-border/60 bg-white/5 px-5 py-3 text-base text-foreground outline-none ring-2 ring-transparent transition focus:ring-accent/50 dark:bg-white/10"
             placeholder="Roblox username, for example builderman"
             autoComplete="off"
             spellCheck={false}
@@ -227,7 +227,7 @@ export function RobloxProfileCheckerClient() {
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-70 dark:bg-accent-dark dark:hover:bg-accent"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-70 dark:bg-accent-dark dark:hover:bg-accent"
           >
             {loading ? "Checking..." : "Check profile"}
           </button>
@@ -244,7 +244,7 @@ export function RobloxProfileCheckerClient() {
                   key={suggestion.username}
                   type="button"
                   onClick={() => handleSuggestion(suggestion.username)}
-                  className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-surface px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent"
+                  className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent"
                 >
                   @{suggestion.username}
                   {suggestion.hasVerifiedBadge ? <VerifiedBadge /> : null}
@@ -331,7 +331,7 @@ export function RobloxProfileCheckerClient() {
                     href={url}
                     target="_blank"
                     rel="noreferrer nofollow"
-                    className="inline-flex items-center rounded-full border border-border/60 bg-surface px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent"
+                    className="inline-flex items-center rounded-md border border-border/60 bg-surface px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent"
                   >
                     {SOCIAL_LABELS[key] ?? key}
                   </a>
@@ -341,7 +341,7 @@ export function RobloxProfileCheckerClient() {
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                  className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
                 >
                   <svg aria-hidden className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <circle cx="18" cy="5" r="3" />
@@ -355,7 +355,7 @@ export function RobloxProfileCheckerClient() {
                   href={result.profileUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center rounded-full border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent"
+                  className="inline-flex items-center rounded-md border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent"
                 >
                   Open on Roblox
                 </a>

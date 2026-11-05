@@ -111,7 +111,7 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
 
   return (
     <div className="space-y-12">
-      <div className={sidebar ? "grid gap-8 content-sidebar-grid content-sidebar-grid--prose" : "grid gap-8"}>
+      <div className={sidebar ? "grid gap-8 content-sidebar-grid" : "grid gap-8"}>
       <section
         id="article-body"
         itemProp="articleBody"
@@ -147,11 +147,11 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
         ) : null}
         {descriptionHtml ? (
           <div
-            className="article-content prose dark:prose-invert game-copy max-w-3xl"
+            className="article-content prose dark:prose-invert game-copy"
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           />
         ) : description ? (
-          <p className="max-w-3xl text-sm text-muted md:text-base">{description}</p>
+          <p className=" text-sm text-muted md:text-base">{description}</p>
         ) : null}
       </header>
       <div className="ads-content-quiz-widget">

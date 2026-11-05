@@ -41,8 +41,8 @@ tokens:
     sidebar: "13px medium"
     sectionLabel: "11px uppercase"
   radius:
-    compact: "0.375rem"
-    panel: "1.25rem"
+    compact: "0.1875rem"
+    panel: "0.25rem"
   layout:
     topBarHeight: "3.5rem"
     rightRailWidth: "21rem (336px) from 1200px"
@@ -68,7 +68,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
 - Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, a More drawer and the account button. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
-- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early.
+- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early. Page text fills the main column, on every page with a rail, so no gap opens between the text and the rail.
 
 ## Layout
 
@@ -88,6 +88,17 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Navigation sections should use quiet labels where they help scanning, but avoid turning the public site into a literal workspace clone.
 - "More …" page lists in the rail use `RailLinkList`: one row per page with its image when it has one, otherwise an icon picked from the URL, and a one-line description. New pages need no extra data to look right.
 - Copyable codes and IDs on cards use `CopyCodeButton` with `variant="bar"`: one full-width button showing the code and a Copy label.
+- Images in page text stop at 720px wide and 480px tall (`--content-image-max-width` and `--content-image-max-height` in `article-content.css`). Galleries are exempt.
+
+### Collection cards
+
+Wiki collections and collectables use one card design for every game (`CollectionCardContent`). There are at most 3 cards per row.
+
+- Order: centered title, inset 16:10 image or video, left-aligned description, then fact rows in the order the collection's data gives. Collectables put the checkbox left of the title and the `#n` right of it.
+- Fact rows: label on the left, value on the right, thin lines between. There are no pills and no panels. Lists show one line per item.
+- Long text: descriptions over 135 characters stop at 3 lines and values over 100 characters stop at 4, each with a small Read more. Clip with CSS only, so the full text stays in the page HTML. Lists and links are never cut.
+- Color: only a label reading `Status` gets the green, amber or red value color, in cards and in List view. `chip` and `highlight` in `fieldPresentation` stay as data for the mobile app; they don't change the website's look.
+- Rows line up: every card in a row shares CSS subgrid tracks, so the tallest title, description or fact sets the height for all of them. Facts are matched by field key. A field empty on all cards in a row is dropped; otherwise a card without it shows `-`. A row with an image keeps the initials box on cards that have none, and a page with no images leaves no image space.
 
 ## Content
 

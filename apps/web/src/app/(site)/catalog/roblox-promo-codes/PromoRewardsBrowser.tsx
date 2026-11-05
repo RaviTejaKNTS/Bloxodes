@@ -82,7 +82,7 @@ function PromoRewardRow({
             {displayName}
           </ItemHeading>
           {isPast ? (
-            <span className="mt-1 inline-flex rounded-full border border-border/70 px-2 py-0.5 text-[11px] font-semibold text-muted">
+            <span className="mt-1 inline-flex rounded-md border border-border/70 px-2 py-0.5 text-[11px] font-semibold text-muted">
               {item.status === "expired" ? "Expired" : "Unavailable"}
             </span>
           ) : null}

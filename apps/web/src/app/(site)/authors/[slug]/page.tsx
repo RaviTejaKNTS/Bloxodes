@@ -119,11 +119,11 @@ export default async function AuthorPage({ params }: Params) {
             </div>
             {bioHtml ? (
               <div
-                className="max-w-3xl text-sm leading-7 text-muted md:text-base md:leading-8 [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
+                className=" text-sm leading-7 text-muted md:text-base md:leading-8 [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
                 dangerouslySetInnerHTML={{ __html: bioHtml }}
               />
             ) : (
-              <p className="max-w-3xl text-sm leading-7 text-muted md:text-base md:leading-8">{bioText}</p>
+              <p className=" text-sm leading-7 text-muted md:text-base md:leading-8">{bioText}</p>
             )}
             <AuthorSocialLinks author={author} size="sm" />
           </div>

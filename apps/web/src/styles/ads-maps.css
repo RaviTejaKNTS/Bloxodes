@@ -17,7 +17,7 @@
   overflow: hidden;
   isolation: isolate;
   border: 1px solid rgb(var(--color-border));
-  border-radius: 0.375rem;
+  border-radius: 0.1875rem;
   color: rgb(var(--color-foreground));
   background: rgb(var(--color-surface));
 }
@@ -63,7 +63,7 @@
   width: max-content;
   max-width: calc(100% - 2rem);
   padding: 0.75rem 1rem;
-  border-radius: 0.375rem;
+  border-radius: 0.1875rem;
   color: white;
   background: rgb(0 0 0 / 0.8);
   text-align: center;

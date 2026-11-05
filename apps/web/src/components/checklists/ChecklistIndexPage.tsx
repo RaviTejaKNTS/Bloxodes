@@ -46,7 +46,7 @@ export function ChecklistIndexPage({
             <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
               {config.heading}
             </h1>
-            <p className="max-w-2xl text-base text-muted md:text-lg">
+            <p className=" text-base text-muted md:text-lg">
               {config.intro}
             </p>
             <IndexPageStats

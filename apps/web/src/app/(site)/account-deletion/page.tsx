@@ -54,7 +54,7 @@ export default async function AccountDeletionPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+    <div className="grid gap-8 content-sidebar-grid">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">{title}</h1>

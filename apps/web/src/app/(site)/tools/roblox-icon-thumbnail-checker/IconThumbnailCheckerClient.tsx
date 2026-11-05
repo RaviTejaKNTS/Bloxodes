@@ -42,7 +42,7 @@ function statusClass(status: CheckStatus): string {
 function ResultCard({ title, result, notes }: { title: string; result: ImageTargetResult; notes: string }) {
   return (
     <div className="rounded-lg border border-border/60 bg-surface p-5">
-      <div className="flex items-start justify-between gap-4"><h3 className="text-lg font-semibold text-foreground">{title}</h3><span className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusClass(result.status)}`}>{STATUS_COPY[result.status]}</span></div>
+      <div className="flex items-start justify-between gap-4"><h3 className="text-lg font-semibold text-foreground">{title}</h3><span className={`rounded-md border px-3 py-1 text-xs font-semibold ${statusClass(result.status)}`}>{STATUS_COPY[result.status]}</span></div>
       <dl className="mt-4 grid grid-cols-2 gap-2 text-sm">
         <dt className="text-muted">Aspect ratio</dt><dd className="text-right font-semibold text-foreground">{STATUS_COPY[result.aspect]}</dd>
         <dt className="text-muted">Resolution</dt><dd className="text-right font-semibold text-foreground">{STATUS_COPY[result.resolution]}</dd>

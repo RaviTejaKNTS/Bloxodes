@@ -97,7 +97,7 @@ export default async function GenreMusicIdsPage({ params }: PageProps) {
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           {catalogIdTitle(`${genre.label} Roblox music IDs`)}
         </h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">
+        <p className=" text-base text-muted md:text-lg">
           Every music ID tagged with {genre.label}, ready for quick copy and play.
         </p>
         <IndexPageStats

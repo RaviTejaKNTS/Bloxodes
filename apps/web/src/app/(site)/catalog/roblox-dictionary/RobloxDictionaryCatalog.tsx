@@ -320,7 +320,7 @@ export function RobloxDictionaryDirectory({
           <div key={`${section.key}-heading`} hidden={!section.items.length} className="flex flex-wrap items-end justify-between gap-3">
             <div className="space-y-1">
               <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
-              <p className="max-w-3xl text-sm text-muted">{section.blurb}</p>
+              <p className=" text-sm text-muted">{section.blurb}</p>
             </div>
             <span className="rounded-md border border-border/60 bg-surface/60 px-2.5 py-1 text-xs font-semibold text-muted">
               {section.items.length} {section.items.length === 1 ? "term" : "terms"}

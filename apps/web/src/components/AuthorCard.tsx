@@ -37,11 +37,11 @@ export function AuthorCard({ author, bioHtml }: AuthorCardProps) {
           </h2>
           {bioHtml ? (
             <div
-              className="max-w-3xl text-sm leading-7 text-muted [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
+              className=" text-sm leading-7 text-muted [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
               dangerouslySetInnerHTML={typeof bioHtml === "string" ? { __html: bioHtml } : bioHtml}
             />
           ) : (
-            <p className="max-w-3xl text-sm leading-7 text-muted">
+            <p className=" text-sm leading-7 text-muted">
               {author.name} curates the latest Roblox codes and keeps this guide up to date.
             </p>
           )}

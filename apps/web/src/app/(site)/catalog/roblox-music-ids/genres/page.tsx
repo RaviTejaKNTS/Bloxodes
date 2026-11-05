@@ -72,7 +72,7 @@ export default async function MusicIdGenresPage() {
       <header className="space-y-4">
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle("Roblox music ID genres")}</h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">
+        <p className=" text-base text-muted md:text-lg">
           Jump into a genre to explore every Roblox music ID we have tagged for that sound.
         </p>
         <IndexPageStats

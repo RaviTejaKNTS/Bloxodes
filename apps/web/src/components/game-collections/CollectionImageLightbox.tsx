@@ -82,7 +82,7 @@ export function CollectionImageLightbox({ containerId }: { containerId: string }
           ref={closeButton}
           type="button"
           onClick={() => setImage(null)}
-          className="absolute right-0 top-0 z-10 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          className="absolute right-0 top-0 z-10 rounded-md bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
         >
           Close
         </button>

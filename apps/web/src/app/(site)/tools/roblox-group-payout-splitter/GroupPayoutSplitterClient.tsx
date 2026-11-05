@@ -141,7 +141,7 @@ export function GroupPayoutSplitterClient() {
 
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="text-sm text-muted">{MODE_COPY[mode].help}</p>
-            <button type="button" onClick={addRow} disabled={rows.length >= GROUP_PAYOUT_MAX_RECIPIENTS} className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground hover:bg-black/5 disabled:opacity-40 dark:hover:bg-white/5">Add recipient</button>
+            <button type="button" onClick={addRow} disabled={rows.length >= GROUP_PAYOUT_MAX_RECIPIENTS} className="rounded-md border border-border px-4 py-2 text-sm font-semibold text-foreground hover:bg-black/5 disabled:opacity-40 dark:hover:bg-white/5">Add recipient</button>
           </div>
           <p className="text-xs text-muted">Calculator limit: {GROUP_PAYOUT_MAX_RECIPIENTS} recipients. This is not a published Roblox batch limit.</p>
         </div>
@@ -168,7 +168,7 @@ export function GroupPayoutSplitterClient() {
                 ))}
               </div>
               {mode !== "fixed" ? <details className="rounded-lg border border-border/60 bg-surface p-4 text-sm leading-6"><summary className="cursor-pointer font-semibold text-foreground">Why did a row get one more Robux?</summary><p className="mt-2 text-muted">This calculator floors each exact quota, then gives remaining whole Robux to the largest fractional remainders. Original row order breaks a tie. This is the calculator&apos;s planning method, not a claim about Roblox&apos;s internal rounding.</p></details> : null}
-              <div className="flex flex-wrap gap-3"><button type="button" onClick={copyPlan} className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white">Copy plan</button><button type="button" onClick={downloadCsv} disabled={!result.csvDraft} className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground disabled:opacity-40">Download CSV draft</button>{copyStatus ? <span className="self-center text-sm font-semibold text-accent">{copyStatus}</span> : null}</div>
+              <div className="flex flex-wrap gap-3"><button type="button" onClick={copyPlan} className="rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-white">Copy plan</button><button type="button" onClick={downloadCsv} disabled={!result.csvDraft} className="rounded-md border border-border px-5 py-2.5 text-sm font-semibold text-foreground disabled:opacity-40">Download CSV draft</button>{copyStatus ? <span className="self-center text-sm font-semibold text-accent">{copyStatus}</span> : null}</div>
               {!result.csvDraft ? <p className="text-xs leading-5 text-muted">Add a valid Roblox user ID to every positive payout row to enable the two-column CSV draft.</p> : null}
               <div className="rounded-lg border border-sky-500/25 bg-sky-500/10 p-4 text-sm leading-6 text-foreground">Planning result only. Check group funds, the sender&apos;s <strong>Configure and spend group revenue</strong> permission, and every recipient&apos;s membership and eligibility in Creator Dashboard before sending.</div>
               <div className="rounded-lg border border-border/60 bg-surface p-4 text-sm leading-6 text-muted">Use payouts only as legitimate compensation for collaborative content development. The calculator cannot check payout restrictions, paid-access exceptions, agreements, or policy compliance.</div>

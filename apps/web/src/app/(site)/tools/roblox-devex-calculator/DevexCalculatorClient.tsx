@@ -209,7 +209,7 @@ export function DevexCalculatorClient({
             <div className="rounded-lg border border-border/60 bg-surface px-4 py-4 space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted">DevEx eligibility</p>
-                <span className="rounded-full border border-border/60 px-3 py-1 text-xs font-semibold text-foreground">
+                <span className="rounded-md border border-border/60 px-3 py-1 text-xs font-semibold text-foreground">
                   Minimum {formatNumber(DEVEX_MIN)} Robux
                 </span>
               </div>
@@ -227,7 +227,7 @@ export function DevexCalculatorClient({
               <div className="rounded-lg border border-border/60 bg-surface px-4 py-4 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3 className="text-lg font-semibold text-foreground">Advanced breakdown</h3>
-                  <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                  <span className="rounded-md bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
                     Rate change: {DEVEX_RATE_EFFECTIVE_DATE}
                   </span>
                 </div>
@@ -304,7 +304,7 @@ export function DevexCalculatorClient({
             <div className="rounded-lg border border-border/60 bg-surface px-4 py-4 space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted">DevEx eligibility</p>
-                <span className="rounded-full border border-border/60 px-3 py-1 text-xs font-semibold text-foreground">
+                <span className="rounded-md border border-border/60 px-3 py-1 text-xs font-semibold text-foreground">
                   Minimum {formatNumber(DEVEX_MIN)} Robux
                 </span>
               </div>

@@ -137,7 +137,7 @@ The shared game collection renderer treats cards as the main view and the list/t
 **Every row**
 
 - Give each item a clear `items[].item.name`, one useful description field (`cardSummary`, `description` or `summary`) and the same public comparison fields as the other rows.
-- If a value isn't source-backed for one item, leave it empty or null so the renderer shows `-`. Don't remove the field from that row.
+- If a value isn't source-backed for one item, leave it empty or null. The card shows `-` when another card in its row has that field, and drops the row when none do. Don't remove the field from that row.
 - Include every important player-facing detail in dataset fields. Don't drop useful details because cards are compact. The renderer decides how to show long values.
 
 **Field presentation**
@@ -147,8 +147,8 @@ Set the presentation per collection, not per value. Give every card and table fi
 | Kind | Use it for |
 | --- | --- |
 | `plain` | Normal comparable text: source, shop, main use, role, route names. |
-| `chip` | Prices, rarity, tier, levels, duration, cooldown, chance, cost, BPS, damage and other important short numbers. If a key is a chip on one card, it's a chip on every card. |
-| `highlight` | Source-backed status, availability, strength, best use or recommendation. Don't invent a highlight just to fill the layout. |
+| `chip` | Prices, rarity, tier, levels, duration, cooldown, chance, cost, BPS, damage and other important short numbers. If a key is a chip on one card, it's a chip on every card. The website shows these as plain values; the mobile app uses the kind. |
+| `highlight` | Source-backed status, availability, strength, best use or recommendation. Don't invent a highlight just to fill the layout. On the website only a field labelled `Status` gets a color, so label availability fields `Status`. |
 | `detail` | Full-sentence values: obtainment notes, behavior, weakness, effect notes, route notes, strategy notes. Concise enough to scan on cards and complete in the table. |
 
 - Don't rely on the renderer guessing from words. A value containing "Coins," "rare," "available," "cost," "event" or "source" won't change styling by itself.

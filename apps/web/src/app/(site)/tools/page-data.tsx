@@ -57,7 +57,7 @@ function ToolsPageView({
             Roblox tools and calculators to plan faster
           </h1>
           <UpdatedTimestamp value={latestUpdatedAt} />
-          <p className="max-w-2xl text-base text-muted md:text-lg">
+          <p className=" text-base text-muted md:text-lg">
             Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.
           </p>
           <IndexPageStats

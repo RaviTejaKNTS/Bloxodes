@@ -12,8 +12,9 @@
   --color-border: 198 202 224;
   --color-accent: 79 70 229;
   --color-accent-dark: 67 56 202;
-  --radius-sm: 0.75rem;
-  --radius-lg: 1.25rem;
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.1875rem;
+  --radius-lg: 0.25rem;
   --shadow-soft: none;
   --sidebar-background: 220 14% 96%;
   --sidebar-foreground: 224 18% 18%;
@@ -96,7 +97,7 @@ body {
   }
 
   .chip {
-    border-radius: 9999px;
+    border-radius: var(--radius-sm);
     @apply inline-flex items-center gap-2 border border-border/50 bg-surface-muted px-3 py-1 text-xs font-medium text-muted;
   }
 
@@ -134,14 +135,6 @@ body {
     }
   }
 
-  /*
-   * Wide main columns (collections, catalogs, hubs): markdown text keeps a comfortable reading
-   * width while grids, tables and widgets use the full column. Low specificity on purpose, so
-   * any page-level max-width still wins.
-   */
-  :where(#article-body) > :where(p, ul, ol, blockquote, h2, h3, h4)[data-md-copy] {
-    max-width: 50rem;
-  }
 }
 
 @layer utilities {
@@ -159,17 +152,11 @@ body {
 
   /*
    * From 1200px the right rail keeps a fixed 336px (Mediavine needs 300px or more for sticky
-   * sidebar ads) and the main column takes the rest. Prose pages cap the main column at a
-   * comfortable reading width and keep the rail on the right edge.
+   * sidebar ads) and the main column takes the rest on every page.
    */
   @media (min-width: 1200px) {
     .content-sidebar-grid {
       grid-template-columns: minmax(0, 1fr) 21rem;
-    }
-
-    .content-sidebar-grid.content-sidebar-grid--prose {
-      grid-template-columns: minmax(0, 50rem) 21rem;
-      justify-content: space-between;
     }
   }
 
@@ -182,7 +169,7 @@ body {
   }
 
   .tool-surface .panel {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     border-color: rgb(var(--color-border) / 0.7);
     background: rgb(var(--color-surface));
     box-shadow: none;
@@ -193,15 +180,15 @@ body {
   }
 
   .tool-surface :is(.rounded-2xl, .rounded-xl) {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
   }
 
   .tool-surface :is(.rounded-lg, .rounded-md) {
-    border-radius: 0.375rem;
+    border-radius: 0.1875rem;
   }
 
   .tool-surface :is(input, select, textarea) {
-    border-radius: 0.375rem;
+    border-radius: 0.1875rem;
   }
 
   .tool-surface button {
@@ -217,7 +204,7 @@ body {
   }
 
   .catalog-surface .panel {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     border-color: rgb(var(--color-border) / 0.7);
     background: rgb(var(--color-surface));
     box-shadow: none;
@@ -228,15 +215,15 @@ body {
   }
 
   .catalog-surface :is(.rounded-2xl, .rounded-xl) {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
   }
 
   .catalog-surface :is(.rounded-lg, .rounded-md) {
-    border-radius: 0.375rem;
+    border-radius: 0.1875rem;
   }
 
   .catalog-surface :is(input, select, textarea) {
-    border-radius: 0.375rem;
+    border-radius: 0.1875rem;
   }
 
   .catalog-surface button {
@@ -413,8 +400,7 @@ body {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .journey-content-stream--collection,
-    .journey-content-stream--collection-wide {
+    .journey-content-stream--collection {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
@@ -441,10 +427,6 @@ body {
     .journey-content-stream--puzzles {
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
-
-    .journey-content-stream--collection:not(.journey-content-stream--collection-wide) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
   }
 
   @media (min-width: 1536px) {
@@ -463,11 +445,11 @@ body {
   }
 
   .stats-surface :is(.rounded-2xl, .rounded-xl) {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
   }
 
   .stats-surface :is(.rounded-lg, .rounded-md) {
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
   }
 
   .stats-surface :is(input, select, textarea, button, a) {

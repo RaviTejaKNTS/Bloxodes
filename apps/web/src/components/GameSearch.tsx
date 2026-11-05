@@ -188,7 +188,7 @@ export function GameSearch({ games, autoFocus = false }: GameSearchProps) {
               <button
                 type="button"
                 onClick={() => setVisibleCount((count) => count + 15)}
-                className="w-full rounded-full border border-border/60 bg-surface px-4 py-2 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+                className="w-full rounded-md border border-border/60 bg-surface px-4 py-2 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
                 Show more results
               </button>
