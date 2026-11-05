@@ -55,13 +55,12 @@ export type GameWikiPageProps = {
   page: GameWikiPresentationPage;
   namespace: string;
   namespaceTitle: string;
-  extraLinks?: Array<{ href: string; title: string }>;
   directoryPages?: GameDirectoryPage[];
   sidebarContent?: ReactNode;
   landingPath?: string;
 };
 
-export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [], directoryPages = [], sidebarContent, landingPath = `/${namespace}` }: GameWikiPageProps) {
+export async function renderGameWikiPage({ page, namespace, namespaceTitle, directoryPages = [], sidebarContent, landingPath = `/${namespace}` }: GameWikiPageProps) {
   const reader = createGameReader(namespace);
 
   const isFranchiseHub = page.game_kind === "franchise";
@@ -158,7 +157,6 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
         </div>
       </header>
 
-      {extraLinks.map(link => <p key={link.href}><Link href={link.href} className="text-accent underline underline-offset-4">{link.title}</Link></p>)}
       <div className="grid gap-8 content-sidebar-grid">
         <article id="article-body" itemProp="articleBody" className={`min-w-0 journey-content-stream ${isFranchiseHub ? "content-start gap-5 sm:grid-cols-2 lg:grid-cols-3" : "space-y-9 journey-content-stream--prose"}`}>
           {descriptionHtml ? (

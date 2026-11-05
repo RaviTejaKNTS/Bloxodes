@@ -7,6 +7,3 @@ export function gameMenuForPath(path: string, menus: GameMenu[]) {
 export function gameSidebarLinks(menu: GameMenu, gameId?: string) {
   return menu.pages.filter(page => !gameId || page.gameId === gameId).map(page => ({ href: page.href, title: page.title }));
 }
-export function gameRelatedPages(menu: GameMenu, gameId?: string) {
-  return menu.pages.filter(page => !["wiki", "collection"].includes(page.kind) && (!gameId || page.gameId === gameId));
-}

@@ -75,22 +75,13 @@ describe("wiki route navigation adapter", () => {
     expect(props.sidebarContent.props).toEqual({ namespace: "example", gameId: "owner", canonicalPath: page.canonical_path });
   });
 
-  it.each(["/example/wiki/child", "/example/edition/wiki", "/example/wiki"])("passes game navigation for %s without loading an unused body directory", async canonical_path => {
+  it.each(["/example/wiki/child", "/example/edition/wiki", "/example/wiki"])("passes the sidebar for %s without loading an unused body directory", async canonical_path => {
     const page = { game_kind: "game", canonical_path, game_id: "child" } as SharedGameWikiPage;
-    const extraLinks = [{ href: "/example/maps/child", title: "Map" }];
-    await renderGameWikiPage({ page, namespace: "example", namespaceTitle: "Example", extraLinks });
+    await renderGameWikiPage({ page, namespace: "example", namespaceTitle: "Example" });
     expect(mocks.directory).not.toHaveBeenCalled();
     expect(mocks.wikis).not.toHaveBeenCalled();
     const props = mocks.render.mock.calls[0][0];
     expect(props.directoryPages).toEqual([]);
-    expect(props.extraLinks).toBe(extraLinks);
     expect(props.sidebarContent.props).toEqual({ namespace: "example", gameId: "child", canonicalPath: page.canonical_path });
   });
-});
-
-it.each(["gta", "red-dead", "minecraft", "arc-raiders"])("gives %s wikis the same owned reference links", async namespace => {
-  const pages = ["map", "checklist", "quiz", "tool", "code", "catalog"].map(kind => ({ kind, gameId: "owner", title: kind, href: `/${kind}s/${namespace}-game` }));
-  mocks.menus.mockResolvedValue([{ namespace, pages: [...pages, { kind: "tool", gameId: "other", title: "Other", href: "/tools/other" }] }]);
-  await renderGameWikiPage({ page: { game_kind: "game", canonical_path: `/wiki/${namespace}-game`, game_id: "owner" } as SharedGameWikiPage, namespace, namespaceTitle: namespace });
-  expect(mocks.render.mock.calls[0][0].extraLinks).toEqual(pages.map(({ href, title }) => ({ href, title })));
 });

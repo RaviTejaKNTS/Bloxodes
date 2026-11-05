@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { siteNavLinks, resolveSearchScope } from "../site-navigation";
-import { gameMenuForPath, gameSidebarLinks, gameRelatedPages, type GameMenu } from "../game-site-navigation";
+import { gameMenuForPath, gameSidebarLinks, type GameMenu } from "../game-site-navigation";
 import { gameCollectionProgressOptions } from "../game-collection-progress-options";
 import { gameChecklistConfig } from "../engagement/config";
 import { engagementProgressKey } from "../engagement/types";
@@ -21,9 +21,8 @@ describe.each(["gta", "red-dead", "minecraft", "arc-raiders"])("%s shared naviga
     expect(gameMenuForPath(`${menu.pages[1].href}/page/2`, [menu])).toBe(menu);
     expect(gameMenuForPath(`${menu.href}-other`, [menu])).toBeUndefined();
   });
-  it("scopes sidebar and wiki related links to the owner", () => {
+  it("scopes sidebar links to the owner", () => {
     expect(gameSidebarLinks(menu, "owner")).toHaveLength(8);
-    expect(gameRelatedPages(menu, "owner").map(page => page.kind)).toEqual(["map", "checklist", "quiz", "tool", "code", "catalog"]);
     expect(gameSidebarLinks(menu, "missing")).toEqual([]);
   });
   it("keeps saved collection and standalone checklist keys", () => {
