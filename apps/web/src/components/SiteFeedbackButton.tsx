@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { Heart, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,14 +89,13 @@ export function SiteFeedbackButton({ className, labelClassName }: SiteFeedbackBu
           type="button"
           variant="ghost"
           className={cn(
-            "h-9 shrink-0 gap-2 rounded-md px-3 text-[13px] font-semibold text-muted hover:bg-muted/60 hover:text-foreground",
+            "h-auto justify-start rounded-none p-0 text-sm font-medium text-muted transition hover:bg-transparent hover:text-foreground",
             className
           )}
           aria-label="Give feedback to improve Bloxodes"
           title="Give feedback to improve Bloxodes"
         >
-          <Heart aria-hidden className="h-4 w-4" />
-          <span className={cn("hidden lg:inline", labelClassName)}>Give feedback</span>
+          <span className={cn("inline", labelClassName)}>Give feedback</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-[min(24rem,_92vw)] overflow-y-auto">

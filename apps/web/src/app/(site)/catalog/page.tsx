@@ -232,7 +232,7 @@ export default async function CatalogIndexPage() {
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           Roblox catalogs organized by item type
         </h1>
-        <p className=" text-base text-muted md:text-lg">
+        <p className="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
           Browse Roblox catalog pages for free items, music IDs, admin commands, promo codes, decal IDs, and more.
         </p>
         <IndexPageStats

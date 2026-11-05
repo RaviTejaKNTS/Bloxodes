@@ -47,13 +47,13 @@ describe("site header", () => {
     expect(container.textContent).toContain("Account");
   });
 
-  it("keeps the closed More drawer in the HTML with every section, feedback and theme", () => {
+  it("keeps the closed More drawer in the HTML with every section and theme", () => {
     const container = render();
     const drawer = container.querySelector("#site-more-drawer")!;
     expect(drawer.hasAttribute("hidden")).toBe(true);
     expect(drawer.querySelector("h2")).toBeNull();
     for (const link of siteNavLinks) expect(hrefs(drawer)).toContain(link.href);
-    expect(drawer.textContent).toContain("Give feedback");
+    expect(drawer.textContent).not.toContain("Give feedback");
     expect(drawer.textContent).toContain("Theme");
   });
 

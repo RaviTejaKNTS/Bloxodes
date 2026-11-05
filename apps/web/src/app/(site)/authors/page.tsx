@@ -4,7 +4,6 @@ import { AuthorSocialLinks } from "@/components/AuthorSocialLinks";
 import { authorAvatarUrl } from "@/lib/avatar";
 import { listAuthors } from "@/lib/db";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
-import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
 const title = "Bloxodes Authors";
 const description = "Meet the editors and contributors who verify Roblox codes for Bloxodes.";
@@ -58,11 +57,10 @@ export default async function AuthorsIndexPage() {
   });
 
   return (
-    <HubsSidebarLayout canonicalPath="/authors" title={title} shareHeading="Share with your friends" heading="Popular pages" links={POPULAR_LINKS}>
-    <section className="space-y-8">
-      <header className="space-y-3">
-        <h1 className="text-4xl font-semibold text-foreground">{title}</h1>
-        <p className="text-sm text-muted md:text-base">{description}</p>
+    <section className="space-y-10">
+      <header className="space-y-4">
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-muted md:text-lg">{description}</p>
       </header>
 
       <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
@@ -144,6 +142,5 @@ export default async function AuthorsIndexPage() {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
     </section>
-    </HubsSidebarLayout>
   );
 }

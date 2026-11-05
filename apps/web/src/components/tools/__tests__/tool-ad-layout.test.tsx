@@ -70,11 +70,10 @@ it.each([ProfilePage, AccountValuePage, UsernamePage])("keeps the same direct ch
   }
 });
 
-it.each([1, 2])("keeps tool index page %i ad boundaries and a single rail", page => {
+it.each([1, 2])("keeps tool index page %i ad boundaries without a rail", page => {
   const $ = load(renderToStaticMarkup(renderToolsPage({ tools: [{ id: "first", code: "first", title: "First tool", seo_title: "", intro_md: "", meta_description: "First", thumb_url: null }, { id: "second", code: "second", title: "Second tool", seo_title: "", intro_md: "", meta_description: "Second", thumb_url: null }], total: 2, totalPages: 2, currentPage: page, showHero: page === 1, latestUpdatedAt: null })));
   expect($("#article-body")).toHaveLength(1);
-  expect($(".content-sidebar-grid > aside#sidebar.space-y-4")).toHaveLength(1);
-  expect($("aside#sidebar")).toHaveLength(1);
+  expect($("aside")).toHaveLength(0);
   expect($("#article-body > [data-journey-item]")).toHaveLength(2);
   expect($("#article-body [data-journey-item] [data-journey-item]")).toHaveLength(0);
 });

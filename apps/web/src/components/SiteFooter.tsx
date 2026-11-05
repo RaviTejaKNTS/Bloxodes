@@ -1,3 +1,4 @@
+import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,9 +39,11 @@ const topPageLinks = [
 
 function FooterLinkList({
   columns = false,
-  links
+  links,
+  feedback = false
 }: {
   columns?: boolean;
+  feedback?: boolean;
   links: Array<{ href: string; label: string }>;
 }) {
   return (
@@ -52,6 +55,7 @@ function FooterLinkList({
           </Link>
         </li>
       ))}
+      {feedback ? <li><SiteFeedbackButton /></li> : null}
     </ul>
   );
 }
@@ -83,7 +87,7 @@ export function SiteFooter() {
               className="block h-12 w-auto max-w-none dark:hidden"
             />
           </Link>
-          <FooterLinkList links={companyLinks} />
+          <FooterLinkList links={companyLinks} feedback />
         </section>
 
         <section className="space-y-4">

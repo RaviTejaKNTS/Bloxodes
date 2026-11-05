@@ -160,8 +160,12 @@ function auditPage(snapshot: PageSnapshot) {
     failures.push("manual Mediavine content hints are present and would disable automatic placement");
   }
 
+  const pathname = new URL(snapshot.responseUrl).pathname;
+  const noRailIndex = /^\/(?:catalog|stats|authors)$/.test(pathname) || /^\/(?:tools|checklists)(?:\/page\/\d+)?$/.test(pathname);
+  if (noRailIndex && $("aside").length) failures.push("index must not render an aside");
+  if (pathname === "/wiki" && $("aside.space-y-4").length) failures.push("wiki inline panel must not match the ad rail selector");
   const widgets = $(".ads-tools-widget");
-  if (widgets.length || /^\/(?:catalog|tools|maps)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
+  if (!noRailIndex && (widgets.length || /^\/(?:catalog|tools|maps)(?:\/|$)/.test(pathname))) {
     const sidebar = $("aside.space-y-4");
     if (sidebar.length !== 1 || !sidebar.is("aside#sidebar") || $("aside#sidebar").length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
       failures.push("sidebar must be one direct grid child outside the article body");
