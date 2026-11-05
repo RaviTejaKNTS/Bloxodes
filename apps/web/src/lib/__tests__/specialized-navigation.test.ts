@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resolveSearchScope, siteNavGroupsForPath, siteNavLinksForPath } from "../site-navigation";
+import { resolveSearchScope } from "../site-navigation";
 
 const paths = {
   "/gta": "/games/gta", "/gta/wiki": "/games/gta", "/gta/maps": "/games/gta",
@@ -18,21 +18,10 @@ describe("specialized navigation follows registry ownership", () => {
   it.each([
     ["/maps/gta5", "GTA"], ["/wiki/red-dead-redemption-2/horses", "Red Dead"],
     ["/wiki/minecraft-java/enchantments/page/2", "Minecraft"]
-  ])("keeps the franchise group on %s", (path, label) => {
-    expect(siteNavGroupsForPath(path, paths, menus)[0].label).toBe(label);
+  ])("keeps game search on %s", (path) => {
     expect(resolveSearchScope(path, paths, menus).scope).toBe("games");
-    expect(siteNavLinksForPath(path, paths, menus).every(link => !/^\/(gta|red-dead|minecraft)(\/|$)/.test(link.href))).toBe(true);
-  });
-  it("uses global navigation when no published menu owns the path", () => {
-    expect(siteNavLinksForPath("/gta/wiki/gta-5")[0].href).toBe("/");
   });
   it("does not infer ownership from an unrelated shared slug", () => {
-    expect(siteNavGroupsForPath("/wiki/unrelated", paths)[0].label).toBe("Browse");
+    expect(resolveSearchScope("/wiki/unrelated", paths, menus).scope).toBe("wiki");
   });
-});
-
-it.each(menus)("uses published navigation for $namespace", menu => {
-  const expected = [[menu.href, menu.title], ...menu.pages.map(page => [page.href, page.title])];
-  expect(siteNavLinksForPath(menu.pages[0].href, {}, menus).map(link => [link.href, link.label])).toEqual(expected);
-  expect(siteNavGroupsForPath(menu.pages[0].href, {}, menus)[0].links.map(link => [link.href, link.label])).toEqual(expected);
 });

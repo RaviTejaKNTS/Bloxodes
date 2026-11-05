@@ -917,7 +917,8 @@ export async function POST(request: Request) {
   }
 
   purgePaths = Array.from(new Set(purgePaths));
-  purgeTags = Array.from(new Set(purgeTags));
+  // Any published page can change the type links on every page for its game.
+  purgeTags = Array.from(new Set([...purgeTags, "top-nav"]));
   impactedWikiSlugs = Array.from(new Set(impactedWikiSlugs));
   impactedListSlugs = Array.from(new Set(impactedListSlugs));
 

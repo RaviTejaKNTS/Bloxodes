@@ -9,7 +9,7 @@ import { AccountSheetButton } from "@/components/AccountSheetButton";
 import { GlobalSearchOverlay } from "@/components/GlobalSearchOverlay";
 import { SiteLogo } from "@/components/SiteLogo";
 import { SiteMoreDrawer } from "@/components/SiteMoreDrawer";
-import { isNavLinkActive, siteNavLinksForPath, type SidebarAccount } from "@/lib/site-navigation";
+import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
 
 type SiteHeaderProps = {
   account: SidebarAccount;
@@ -28,7 +28,7 @@ const iconButtonClass =
 export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
   const pathname = usePathname() ?? "/";
   const gameMenus = useGameMenus(pathname);
-  const links = siteNavLinksForPath(gameMenus[0]?.href ?? pathname, linkPaths, gameMenus);
+  const links = siteNavLinks;
   const listRef = useRef<HTMLUListElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -108,7 +108,7 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
           </div>
         </div>
       </header>
-      <SiteMoreDrawer linkPaths={linkPaths}
+      <SiteMoreDrawer
         id={SITE_MORE_DRAWER_ID}
         open={moreOpen}
         onClose={closeMore}

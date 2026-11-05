@@ -1,4 +1,4 @@
-import { gameMenuForPath, gameMenuLinks, type GameMenu } from "./game-site-navigation";
+import { gameMenuForPath, type GameMenu } from "./game-site-navigation";
 import type { LucideIcon } from "lucide-react";
 import {
   Award,
@@ -10,7 +10,6 @@ import {
   Home,
   KeyRound,
   LayoutGrid,
-  Map,
   SquareCheckBig,
   Wrench
 } from "lucide-react";
@@ -56,17 +55,6 @@ export const siteNavLinks: SiteNavLink[] = [
   { href: "/events", label: "Events", icon: Calendar },
   { href: "/games", label: "Games", icon: Gamepad2 }
 ];
-
-const gameIcons: Record<string, LucideIcon> = { home: Home, wiki: BookOpen, map: Map, checklist: SquareCheckBig, quiz: Award, tool: Wrench, code: KeyRound, catalog: LayoutGrid };
-export function siteNavLinksForPath(pathname: string | null | undefined, _paths: Record<string, string> = {}, menus: GameMenu[] = []): SiteNavLink[] {
-  const menu = gameMenuForPath(pathname ?? "/", menus);
-  return menu ? gameMenuLinks(menu).map(page => ({ href: page.href, label: page.title, icon: gameIcons[page.kind] ?? BookOpen })) : siteNavLinks;
-}
-export type SiteNavGroup = { label: string; links: SiteNavLink[] };
-export function siteNavGroupsForPath(pathname: string | null | undefined, paths: Record<string, string> = {}, menus: GameMenu[] = []): SiteNavGroup[] {
-  const menu = gameMenuForPath(pathname ?? "/", menus);
-  return menu ? [{ label: menu.title, links: siteNavLinksForPath(pathname, paths, menus) }, { label: "Browse", links: siteNavLinks }] : [{ label: "Browse", links: siteNavLinks }];
-}
 
 export const signedOutSidebarAccount: SidebarAccount = {
   avatarUrl: null,

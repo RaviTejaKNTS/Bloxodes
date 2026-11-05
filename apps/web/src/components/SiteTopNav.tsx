@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Award, BarChart3, BookOpen, Calendar, ChevronDown, FileText, KeyRound, SquareCheckBig, Wrench } from "lucide-react";
+import { Award, BarChart3, BookOpen, Calendar, ChevronDown, FileText, KeyRound, Map, SquareCheckBig, Wrench } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,6 +27,7 @@ const gameNavIcons = {
   codes: KeyRound,
   events: Calendar,
   checklists: SquareCheckBig,
+  map: Map,
   quizzes: Award
 } satisfies Record<GameTopNavLink["type"], typeof BookOpen>;
 
@@ -37,6 +38,7 @@ const gameNavOrder = {
   codes: 3,
   events: 4,
   checklists: 5,
+  map: 7,
   quizzes: 6
 } satisfies Record<GameTopNavLink["type"], number>;
 

@@ -74,7 +74,8 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 
 - Main content starts with the same vertical rhythm across page families: `py-6 md:py-8 xl:py-10`.
 - Every section link stays in the server HTML. Top bar links that don't fit wrap out of view, and the More drawer (a right-side sheet on every screen size) lists them all. Keep the drawer compact and readable rather than full-screen.
-- Game and catalog pages can add a second bar under the header (`SiteGameTopBar`) with that game's or catalog's pages. Pages without contextual links show no second bar.
+- The header and More drawer always show the same 11 section links, on every page. Game-specific links never go there.
+- Game and catalog pages can add a second bar under the header (`SiteGameTopBar`). On a game page it shows that game's name and one plain link per page type it has (Wiki, Articles, Codes, Gameplay Checklist, Quiz, Map), plus a Tools menu, for Roblox and non-Roblox alike. Articles links to the game's article list, never to single articles. Pages without contextual links, and franchise pages spanning several games, show no second bar.
 - The homepage has no rail. From 1280px some of its blocks share a row in pairs; see Advertising in `bloxodes-docs/overview.md` for why each block stays a separate element.
 
 ## Components

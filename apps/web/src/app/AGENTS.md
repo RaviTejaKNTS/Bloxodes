@@ -53,3 +53,7 @@ Use this file for route-level work. For public content route specifics, also rea
 1. Put the route in the correct group: `(site)`, `(secure)`, `api`, `auth`, `feed.xml`, or `sitemaps`.
 2. Decide whether the route is static, ISR, or dynamic and make that explicit.
 3. If the route is public and canonical, make sure sitemap/feed/revalidation coverage stays correct.
+
+## Navigation
+
+Keep the header and More drawer fixed to `siteNavLinks`. Game context belongs in the second bar. `GameMenuBridge` stays only for search scope. Shared game navigation uses route ownership and game IDs, with no links to sibling games.
