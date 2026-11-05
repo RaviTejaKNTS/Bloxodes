@@ -41,7 +41,7 @@ Old `.env` backups on the VPS keep the old keys, which no longer work after this
 ## Moving data between them
 
 - **Schema** moves forward only, as migrations in `supabase/migrations/`, through GitHub. See [release](../operations/release.md#schema).
-- **Content** moves to production only through the selected publishers in `publish-content.yml`, or `content:publish` for Roblox and franchise wiki bundles. Rows are never copied by cloning a database.
+- **Content** moves to production only through the selected publishers in `publish-content.yml`, or `content:publish` for Roblox and franchise wiki bundles and article bundles. Rows are never copied by cloning a database.
 - `npm run sync:managed-dev-public-sample` copies a public production sample into development (dry run unless `--apply`).
 - `sync:production-collection-runtime:managed-dev` copies missing published collection revisions from production into development. It never writes production.
 

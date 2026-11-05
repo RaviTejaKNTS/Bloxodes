@@ -3,7 +3,7 @@ import { supabaseAdmin } from "./supabase";
 export type GameContentIndexEntry = { namespace: string; canonical_path: string; title: string; meta_description: string | null; updated_at: string | null; content_updated_at?: string | null; published_at: string | null; created_at: string | null };
 export async function listSharedGameDiscoveryPages(): Promise<GameContentIndexEntry[]> {
  const sb = supabaseAdmin();
- const groups = ["game_wiki_pages_view", "game_collection_pages_view", "game_tool_pages_view", "game_code_pages_view", "game_map_pages_view", "game_quiz_pages_view", "game_catalog_pages_view", "game_checklist_pages_view"];
+ const groups = ["game_wiki_pages_view", "game_collection_pages_view", "game_tool_pages_view", "game_code_pages_view", "game_map_pages_view", "game_article_pages_view", "game_quiz_pages_view", "game_catalog_pages_view", "game_checklist_pages_view"];
  const results = await Promise.all(groups.map(async table => {
   const rows: GameContentIndexEntry[] = [];
   for(let offset=0;;offset+=1000) {

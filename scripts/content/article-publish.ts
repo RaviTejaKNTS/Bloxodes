@@ -4,6 +4,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { load } from "cheerio";
 import sharp from "sharp";
 import { articleFinalSchema, bundleSchema, type ArticleFinal } from "../../contracts/article/v1/schema";
+import { productionArticleDecision, publishedArticleAction, publishedArticlePayload, type PublishedArticleIdentity } from "./article-published-update";
 import type { ContentOptions } from "./wiki-content-options";
 import { bundlePath } from "../shared/roblox-wiki-bundle";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
@@ -72,6 +73,20 @@ export function articleReadbackMismatch(stored: Record<string, unknown>, final: 
   return null;
 }
 
+// Compare source bundle URLs with the URLs promotion will store, without uploading.
+export function productionArticleExpectation(final: ArticleFinal, manifest: ArticleImageManifest, bucket: string | undefined) {
+  if (!bucket?.trim()) return null;
+  const expected = structuredClone(final);
+  const expectedManifest = structuredClone(manifest);
+  for (const entry of usedVerifiedArticleImages(expectedManifest, expected.content_md)) {
+    if (!entry.public_url || entry.public_url.startsWith("/")) continue;
+    const url = `https://media.bloxodes.com/storage/v1/object/public/${bucket}/${entry.uploaded_path}`;
+    expected.content_md = expected.content_md.split(entry.public_url).join(url);
+    entry.public_url = url;
+  }
+  return { expected, expectedManifest };
+}
+
 export const isDevelopmentCover = (cover: string | null | undefined, devUrl: string) =>
   Boolean(cover) && new URL(cover!, "https://bloxodes.com").origin === new URL(devUrl).origin;
 
@@ -110,15 +125,15 @@ export async function verifyArticleAssets(final: ArticleFinal, cover?: string | 
   console.log(`PASS decodable images (${images.length}) and resolvable video embeds`);
 }
 
-export async function verifyArticleLive(final: ArticleFinal, cover: string) {
-  const url = `https://bloxodes.com/articles/${final.slug}`;
+export async function verifyArticleLive(final: ArticleFinal, cover: string, seoTitle = final.title, pageNumber = 1) {
+  const url = `https://bloxodes.com/articles/${final.slug}${pageNumber > 1 ? `/page/${pageNumber}` : ""}`;
   await retryPublishNetwork(async () => {
     const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
     await requirePublishResponse(response, "Live article");
     if (response.status !== 200 || response.url.replace(/\/$/, "") !== url) throw new Error("Live article must return HTTP 200 without a redirect.");
     const html = load(await response.text());
     const normalize = (text: string) => text.replace(/\s+/g, " ").trim();
-    if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(final.title)) throw new Error("Live article titles differ from final.json.");
+    if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(seoTitle)) throw new Error("Live article titles differ from final.json.");
     if (!html("#article-body").text().trim() || /application error|unhandled runtime error|internal server error/i.test(html("body").text())) throw new Error("Live article body is empty or reports an application error.");
     if (html('link[rel="canonical"]').attr("href") !== url || !html('meta[name="description"]').attr("content")?.trim()) throw new Error("Live canonical or description is missing or incorrect.");
     // The article page shows its cover in the social image tags, not as an <img>.
@@ -178,34 +193,61 @@ export async function publishArticleBundle(options: ContentOptions) {
   if (final.cover_image && findArticleImages(final.content_md).some(image => image.src === final.cover_image)) throw new Error("Article cover must not repeat a body image.");
   await verifyArticleAssets(final, final.cover_image);
   console.log("PASS article schema, slug, queue, game identity, copy, image readiness and media checks");
-  if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes."); return; }
-  const unlock = await acquireAgentWorkLock(path.resolve("tmp/article-publication"), "direct-article-publish");
-  if (!unlock) throw new Error("Publication outbox is busy; retry after it finishes.");
+  const projection = productionArticleExpectation(final, manifest, process.env.SUPABASE_MEDIA_BUCKET);
+  const readPublished = () => read(() => db.from("articles").select("*").eq("slug", final.slug).maybeSingle());
+  const actionFor = (stored: Record<string, unknown> | null) => {
+    const mismatch = !projection ? undefined : !stored?.is_published ? null :
+      articleReadbackMismatch(stored, projection.expected) ?? ((stored.universe_id ?? null) !== (projection.expected.universe_id ?? null) ? "universe_id" : null);
+    const decision = productionArticleDecision({ live: stored, mismatch, queueStatus: queue.status,
+      updatePublished: Boolean(options.updatePublished), explicitCover: final.cover_image != null });
+    if (decision.action === "refuse") publishedArticleAction(mismatch!, false);
+    return decision;
+  };
+  if (options.target === "production" && final.cover_image != null && !options.updatePublished) {
+    console.warn("WARNING: An explicit cover is not compared with the live cover. Use --update-published to apply it to an existing published article.");
+  }
+  if (!options.apply) {
+    if (options.target === "production") {
+      const decision = actionFor(projection ? await readPublished() : null);
+      if (decision.action === "skip") console.log("Production article comparison skipped because SUPABASE_MEDIA_BUCKET is not set.");
+      else console.log(`Production article: ${decision.action}.`);
+    } else if (queue.status === "published") {
+      console.log("Published queue row: would stage an update in managed development; queue remains published.");
+    }
+    console.log("PASS all checks. Dry run complete; no database or media writes."); return;
+  }
+  const unlock = await acquireAgentWorkLock(path.resolve("tmp/content-publish/article"), "direct-article-publish");
+  if (!unlock) throw new Error("Article publication is busy; retry after it finishes.");
   let staging: string | undefined;
   try {
     const currentQueue = await read(() => queueDb.from("article_generation_queue").select("*").eq("id", bundle.queueId).single()) as QueueRow;
     if (stable(currentQueue) !== stable(queue)) throw new Error("Queue row changed during preflight; rerun the bundle.");
-    const intent = await json(path.resolve("tmp/article-publication", `${bundle.queueId}.json`)).catch(error => { if (error.code !== "ENOENT") throw error; return null; });
-    if (intent?.dispatchHash && !intent.publishedAt && queue.status !== "published") throw new Error("An old GitHub dispatch exists for this row. Resolve it before direct publication.");
     if (options.target === "production") {
       if (!process.env.REVALIDATE_SECRET) throw new Error("Production requires REVALIDATE_SECRET.");
       await assertLocalContentPublication();
     }
-    if (options.target === "production" && queue.status === "published") {
-      const expected = structuredClone(final);
-      const expectedManifest = structuredClone(manifest);
-      for (const entry of usedVerifiedArticleImages(expectedManifest, expected.content_md)) {
-        if (!entry.public_url || entry.public_url.startsWith("/")) continue;
-        const url = `https://media.bloxodes.com/storage/v1/object/public/${process.env.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`;
-        expected.content_md = expected.content_md.split(entry.public_url).join(url);
-        entry.public_url = url;
+    let publishedUpdate: (PublishedArticleIdentity & { preserveCover: boolean }) | undefined;
+    let acknowledgeQueue = false;
+    if (options.target === "production" || queue.status === "published") {
+      // Development always stages the requested bundle, including updates to published rows.
+      const current = await readPublished();
+      const decision = options.target === "production" ? actionFor(current) : null;
+      acknowledgeQueue = decision?.acknowledgeQueue ?? false;
+      if (decision?.action === "verify") {
+        const { expected, expectedManifest } = projection!;
+        const stored = await articleReadback(db, expected, expectedManifest, true);
+        await verifyArticleAssets(expected, stored.cover_image);
+        await revalidatePublishedContent(process.env, [{ type: "article", slug: final.slug }]);
+        await verifyArticleLive(expected, stored.cover_image);
+        console.log(`PASS already published: https://bloxodes.com/articles/${final.slug}`);
+        return;
       }
-      const stored = await articleReadback(db, expected, expectedManifest, true);
-      await verifyArticleAssets(expected, stored.cover_image);
-      await revalidatePublishedContent(process.env, [{ type: "article", slug: final.slug }]);
-      await verifyArticleLive(expected, stored.cover_image);
-      console.log(`PASS already published: https://bloxodes.com/articles/${final.slug}`);
-      return;
+      if (current?.is_published && (options.target === "production" || (current.author_id && current.published_at && current.cover_image))) {
+        publishedUpdate = { ...current, preserveCover: decision?.action === "retry" || final.cover_image == null } as PublishedArticleIdentity & { preserveCover: boolean };
+        // Validate the identity before media writes, not just when importing.
+        publishedArticlePayload({ slug: final.slug, author_id: current.author_id, published_at: current.published_at,
+          is_published: true, cover_image: current.cover_image }, publishedUpdate, final);
+      }
     }
     await fs.mkdir(path.resolve("tmp/article-direct"), { recursive: true });
     staging = await fs.mkdtemp(path.resolve("tmp/article-direct/run-"));
@@ -226,6 +268,7 @@ export async function publishArticleBundle(options: ContentOptions) {
     const promotedManifest = await readArticleImageManifest(stagedMedia);
     // A development cover can't pass the target's media checks. Its bytes become the cover source instead.
     let cover: string | null = null;
+    if (publishedUpdate?.preserveCover) promoted.cover_image = null;
     if (isDevelopmentCover(promoted.cover_image, dev.url)) {
       cover = path.join(staging, "cover-source.webp");
       await fs.writeFile(cover, await fetchImageBytes(promoted.cover_image!));
@@ -233,15 +276,21 @@ export async function publishArticleBundle(options: ContentOptions) {
     }
     assertArticleImageReadiness(checkArticleImageReadiness({ manifest: promotedManifest, finalJson: promoted }), stagedMedia);
     assertNoArticleMediaErrors(await checkArticleMedia(promoted));
-    cover ??= await downloadCoverSource({ finalJson: promoted, manifest: promotedManifest }, staging);
-    await importArticle(promoted, false, cover, false);
+    if (!publishedUpdate?.preserveCover) cover ??= await downloadCoverSource({ finalJson: promoted, manifest: promotedManifest }, staging);
+    await importArticle(promoted, false, cover, false, publishedUpdate);
     await syncArticleImageProvenance(promotedManifest, { apply: true }, db);
     const stored = await articleReadback(db, promoted, promotedManifest, options.target === "production");
+    if (publishedUpdate && (stored.id !== publishedUpdate.id || stored.author_id !== publishedUpdate.author_id || stored.published_at !== publishedUpdate.published_at || stored.is_published !== true)) throw new Error("Published article identity changed during update.");
+    if (publishedUpdate?.preserveCover && stored.cover_image !== publishedUpdate.cover_image) throw new Error("Published article cover changed during update.");
     await verifyArticleAssets(promoted, stored.cover_image);
-    if (options.target === "production") await completeArticlePublication(queueDb, queue, final.slug, async () => {
-      await revalidatePublishedContent(process.env, [{ type: "article", slug: final.slug }]);
-      await verifyArticleLive(promoted, stored.cover_image);
-    });
+    if (options.target === "production") {
+      const verify = async () => {
+        await revalidatePublishedContent(process.env, [{ type: "article", slug: final.slug }]);
+        await verifyArticleLive(promoted, stored.cover_image);
+      };
+      if (acknowledgeQueue) await completeArticlePublication(queueDb, queue, final.slug, verify);
+      else await verify();
+    }
     console.log(`PASS published article to ${options.target}: https://bloxodes.com/articles/${final.slug}`);
   } finally {
     try { if (staging) await fs.rm(staging, { recursive: true, force: true }); }
@@ -251,6 +300,7 @@ export async function publishArticleBundle(options: ContentOptions) {
 
 export async function articleContentStatus(options: ContentOptions) {
   const db = client(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!);
-  const row = await read(() => db.from("articles").select("id,slug,title,is_published,published_at,updated_at").eq("slug", options.article!).maybeSingle());
+  const roblox = await read(() => db.from("articles").select("id,slug,title,is_published,published_at,updated_at").eq("slug", options.article!).maybeSingle());
+  const row = roblox ?? await read(() => db.from("game_article_pages").select("id,namespace,game_id,slug,title,is_published,published_at,updated_at").eq("slug",options.article!).maybeSingle());
   console.log(JSON.stringify({ target: options.target, article: row, url: `https://bloxodes.com/articles/${options.article}` }, null, 2));
 }

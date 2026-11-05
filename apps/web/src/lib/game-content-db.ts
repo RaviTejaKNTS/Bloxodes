@@ -17,6 +17,7 @@ export const gameTables = {
   releases: "game_releases",
   collection_progress: "game_collection_progress",
   map_pages:"game_map_pages", map_pages_view:"game_map_pages_view",
+  article_pages:"game_article_pages", article_pages_view:"game_article_pages_view",
   quiz_pages:"game_quiz_pages", quiz_pages_view:"game_quiz_pages_view", quiz_progress:"game_quiz_progress",
   catalog_pages:"game_catalog_pages", catalog_pages_view:"game_catalog_pages_view"
 } as const satisfies Record<string, keyof SharedGameDatabase["public"]["Tables"] | keyof SharedGameDatabase["public"]["Views"]>;

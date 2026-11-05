@@ -72,6 +72,10 @@ export type RobloxUniverseInfo = {
 };
 
 export type Article = {
+  namespace?: string | null;
+  game_id?: string | null;
+  game_title?: string | null;
+  game_slug?: string | null;
   id: string;
   title: string;
   seo_title?: string | null;
@@ -112,6 +116,8 @@ export type ArticleWithRelations = Article & {
 };
 
 export type ArticleGameSummary = {
+  namespace?: string;
+  gameId?: string;
   slug: string;
   title: string;
   universeId: number | null;
@@ -171,6 +177,7 @@ const ARTICLE_INDEX_FIELDS =
   `universe_id,author_id,` +
   `author:authors(id,name,slug,avatar_url,gravatar_email),` +
   `universe:roblox_universes(universe_id,slug,display_name,name,icon_url)`;
+const MERGED_ARTICLE_INDEX_FIELDS = "id,title,slug,seo_title,cover_image,meta_description,published_at,created_at,updated_at,is_published,universe_id,author_id,namespace,game_id,game_title,author,universe";
 const ARTICLE_DETAIL_FIELDS =
   `*, author:authors(id,name,slug,avatar_url,gravatar_email,bio_md,twitter,youtube,website,facebook,linkedin,instagram,roblox,discord,created_at,updated_at), universe:roblox_universes(universe_id,slug,display_name,name,icon_url,genre_l1,genre_l2)`;
 const BYPASS_ARTICLE_CACHE = process.env.NODE_ENV === "development";
@@ -513,10 +520,10 @@ function mapArticleIndexRows(rows: unknown[] | null | undefined): ArticleWithRel
 async function fetchPublishedArticles(limit: number, offset: number): Promise<ArticleWithRelations[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("articles")
-    .select(ARTICLE_INDEX_FIELDS)
+    .from("published_articles_view")
+    .select(MERGED_ARTICLE_INDEX_FIELDS)
     .eq("is_published", true)
-    .order("published_at", { ascending: false })
+    .order("published_at", { ascending: false }).order("id", {ascending:true})
     .range(offset, offset + limit - 1);
 
   if (error) throw error;
@@ -525,16 +532,13 @@ async function fetchPublishedArticles(limit: number, offset: number): Promise<Ar
 
 async function fetchPublishedArticleSlugs(): Promise<string[]> {
   const sb = supabaseAdmin();
-  const { data, error } = await sb
-    .from("articles")
-    .select("slug")
-    .eq("is_published", true)
-    .not("slug", "is", null)
-    .order("published_at", { ascending: false });
-  if (error) throw error;
-  return (data ?? [])
-    .map((row) => (row as { slug: string | null }).slug)
-    .filter((slug): slug is string => typeof slug === "string" && slug.length > 0);
+  const slugs: string[] = [];
+  for (let offset=0;;offset+=1000) {
+    const {data,error}=await sb.from("published_articles_view").select("slug").order("slug").range(offset,offset+999);
+    if(error) throw error;
+    slugs.push(...(data??[]).map(row=>String(row.slug)));
+    if(!data || data.length<1000) return slugs;
+  }
 }
 
 async function fetchPublishedArticlesPage(
@@ -545,8 +549,8 @@ async function fetchPublishedArticlesPage(
   const sb = supabaseAdmin();
   try {
     const { data, count, error, status } = await sb
-      .from("articles")
-      .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
+      .from("published_articles_view")
+      .select(MERGED_ARTICLE_INDEX_FIELDS, { count: "exact" })
       .eq("is_published", true)
       .order("published_at", { ascending: false })
       .order("id", { ascending: true })
@@ -555,7 +559,7 @@ async function fetchPublishedArticlesPage(
     if (error) {
       if (!isOutOfRangePaginationFailure(status, error)) throw error;
       const { count, error: countError } = await sb
-        .from("articles")
+        .from("published_articles_view")
         .select("id", { count: "exact", head: true })
         .eq("is_published", true);
       if (countError) throw countError;
@@ -566,7 +570,7 @@ async function fetchPublishedArticlesPage(
   } catch (error) {
     if (!isOutOfRangePaginationError(error)) throw error;
     const { count, error: countError } = await sb
-      .from("articles")
+      .from("published_articles_view")
       .select("id", { count: "exact", head: true })
       .eq("is_published", true);
     if (countError) throw countError;
@@ -636,6 +640,27 @@ async function fetchArticleGameSummaries(): Promise<ArticleGameSummary[]> {
     });
   }
 
+  const shared = await sb.from("game_article_game_summary").select("*");
+  if (shared.error) throw shared.error;
+  for (const row of shared.data ?? []) {
+    // The publisher refuses these clashes. If a later Roblox article creates one,
+    // the Roblox archive keeps its URL and every other archive still works.
+    if (groups.has(row.game_slug)) {
+      console.warn(`[articles] Archive slug is already used, skipping game archive: ${row.game_slug}`);
+      continue;
+    }
+    groups.set(row.game_slug, {
+      slug: row.game_slug,
+      namespace: row.namespace,
+      gameId: row.game_id,
+      title: row.title,
+      universeId: null,
+      universe: null,
+      iconUrl: row.icon_url,
+      articleCount: Number(row.article_count),
+      latestUpdatedAt: row.latest_updated_at
+    });
+  }
   return Array.from(groups.values()).sort(
     (left, right) =>
       right.articleCount - left.articleCount ||
@@ -663,10 +688,10 @@ async function fetchPublishedArticlesByArticleGameSlugPage(
   const offset = (safePage - 1) * safePageSize;
   const sb = supabaseAdmin();
   let query = sb
-    .from("articles")
-    .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
+    .from("published_articles_view")
+    .select(MERGED_ARTICLE_INDEX_FIELDS, { count: "exact" })
     .eq("is_published", true);
-  query = game.universeId == null ? query.is("universe_id", null) : query.eq("universe_id", game.universeId);
+  query = game.gameId ? query.eq("game_id", game.gameId) : game.universeId == null ? query.is("universe_id", null).is("namespace",null) : query.eq("universe_id", game.universeId);
   const scopedQuery = query
     .order("published_at", { ascending: false })
     .order("id", { ascending: true })
@@ -711,7 +736,16 @@ async function fetchArticleBySlug(normalizedSlug: string): Promise<ArticleWithRe
     .maybeSingle();
 
   if (error) throw error;
-  if (!data) return null;
+  if (!data) {
+    const { getLiveSiteRoute } = await import("./site-route-page");
+    const route = await getLiveSiteRoute(`/articles/${normalizedSlug}`);
+    if (route === null || route?.source === "roblox" || route && route.page_type !== "article") return null;
+    let query = sb.from("game_article_pages_view").select("*,author:authors(id,name,slug,avatar_url,gravatar_email,bio_md,twitter,youtube,website,facebook,linkedin,instagram,roblox,discord,created_at,updated_at)").eq("canonical_path", `/articles/${normalizedSlug}`);
+    if (route) query = query.eq("id",route.page_id).eq("game_id",route.game_id!);
+    const result = await query.maybeSingle();
+    if (result.error) throw result.error;
+    return result.data ? {...result.data,universe_id:null,universe:null,sources:(result.data.sources_json ?? []).map((source: {url:string})=>source.url)} as ArticleWithRelations : null;
+  }
   return data as unknown as ArticleWithRelations;
 }
 
@@ -722,8 +756,8 @@ async function fetchPublishedArticlesByAuthor(
 ): Promise<ArticleWithRelations[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("articles")
-    .select(ARTICLE_INDEX_FIELDS)
+    .from("published_articles_view")
+    .select(MERGED_ARTICLE_INDEX_FIELDS)
     .eq("is_published", true)
     .eq("author_id", authorId)
     .order("published_at", { ascending: false })

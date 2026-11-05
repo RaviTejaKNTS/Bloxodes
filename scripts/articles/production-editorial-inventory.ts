@@ -5,6 +5,10 @@ export type ProductionInventoryItem = {
   title: string;
   key: string;
   universe_id: number | null;
+  public_path?: string;
+  namespace?: string;
+  slug?: string;
+  kind?: "game" | "franchise";
 };
 
 type ProductionInventoryResponse = {
@@ -18,6 +22,7 @@ export const DEFAULT_PRODUCTION_INVENTORY_URL =
 
 /** Resolve editorial routes centrally; collection codes are not URL path segments. */
 export function inventoryPublicPath(item: ProductionInventoryItem, inventory: ProductionInventoryItem[]): string | null {
+  if (item.namespace && item.public_path) return item.public_path;
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.key)) return null;
   const roots: Record<string, string> = { article: "articles", codes: "codes", wiki: "wiki", catalog: "catalog", event: "events", checklist: "checklists", quiz: "quizzes", tool: "tools" };
   if (roots[item.family]) return `/${roots[item.family]}/${item.key}`;
@@ -28,6 +33,12 @@ export function inventoryPublicPath(item: ProductionInventoryItem, inventory: Pr
   return `/wiki/${hubs[0].key}/${item.key.slice(hubs[0].key.length + 1)}`;
 }
 
+export function inventoryMatchesSearch(item: ProductionInventoryItem, search: string): boolean {
+  const needle = search.toLowerCase();
+  const identity = item.namespace ? ` ${item.namespace} ${item.slug}`.replaceAll("-", " ") : "";
+  return `${item.title} ${item.key}${identity}`.toLowerCase().includes(needle);
+}
+
 function isInventoryItem(value: unknown): value is ProductionInventoryItem {
   if (!value || typeof value !== "object") return false;
   const row = value as Record<string, unknown>;
@@ -35,7 +46,12 @@ function isInventoryItem(value: unknown): value is ProductionInventoryItem {
     typeof row.family === "string" &&
     typeof row.title === "string" &&
     typeof row.key === "string" &&
-    (typeof row.universe_id === "number" || row.universe_id === null)
+    (typeof row.universe_id === "number" || row.universe_id === null) &&
+    (row.namespace === undefined || (
+      typeof row.namespace === "string" && typeof row.slug === "string" &&
+      (row.kind === "game" || row.kind === "franchise") &&
+      typeof row.public_path === "string" && row.public_path.startsWith("/") && !row.public_path.startsWith("//")
+    ))
   );
 }
 
@@ -48,8 +64,12 @@ export function productionInventoryUrl(): string {
   return url.toString();
 }
 
-export async function fetchProductionEditorialInventory(): Promise<ProductionInventoryResponse> {
-  const response = await fetchWithTransientRetries(productionInventoryUrl(), {
+export async function fetchProductionEditorialInventory(
+  { includeGames = false }: { includeGames?: boolean } = {}
+): Promise<ProductionInventoryResponse> {
+  const url = new URL(productionInventoryUrl());
+  if (includeGames) url.searchParams.set("scope", "all");
+  const response = await fetchWithTransientRetries(url.toString(), {
     headers: { Accept: "application/json", "User-Agent": "BloxodesArticleAutomation/1.0" },
   });
   if (!response.ok) {

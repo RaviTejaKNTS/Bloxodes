@@ -5,6 +5,7 @@ export type ContentOptions = {
   target: "managed-dev" | "production";
   apply: boolean;
   allowProd: boolean;
+  updatePublished?: boolean;
   bundle?: string;
   game?: string;
   article?: string;
@@ -31,10 +32,11 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     }
     if (seen.has(flag) && flag !== "--only") throw new Error(`Duplicate option: ${flag}`);
     seen.add(flag);
-    if (flag === "--apply" || flag === "--allow-prod") {
+    if (flag === "--apply" || flag === "--allow-prod" || flag === "--update-published") {
       if (inline !== undefined) throw new Error(`${flag} takes no value.`);
       if (flag === "--apply") options.apply = true;
-      else options.allowProd = true;
+      else if (flag === "--allow-prod") options.allowProd = true;
+      else options.updatePublished = true;
       continue;
     }
     if (!["--target", "--bundle", "--game", "--article", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
@@ -57,6 +59,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
       options.kind = value;
     } else options.game = value;
   }
+  if (options.updatePublished && command !== "publish") throw new Error("--update-published is only valid for publish.");
   assertApprovedHubCoverOption(options);
   if (command === "publish" && !options.bundle) throw new Error("Supply a bundle folder, for example: npm run content:publish -- /path/to/game-bundle");
   if (command !== "publish" && (options.bundle || options.apply || options.allowProd || options.only)) throw new Error(`${command} is read-only; bundle, --only and apply flags are invalid.`);
@@ -85,4 +88,9 @@ export function assertApprovedHubCoverScope(options: ContentOptions, contract: s
   if (options.approvedHubCoverSha256 === undefined) return;
   if (contract !== "roblox-wiki@1") throw new Error("--approved-hub-cover-sha256 is only valid for Roblox hub publication, not franchise bundles.");
   if (!hub?.coverImage) throw new Error("--approved-hub-cover-sha256 requires a selected Roblox hub with an explicit local hub.coverImage path.");
+}
+
+// Resolve bundle type before loading credentials or running publication checks.
+export function assertUpdatePublishedScope(options: ContentOptions, contract: string) {
+  if (options.updatePublished && contract !== "article@1") throw new Error("--update-published is only valid for article@1 bundles.");
 }

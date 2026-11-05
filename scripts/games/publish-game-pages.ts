@@ -1,3 +1,4 @@
+import { gameArticleFinalSchema } from "../../contracts/game-article/v1/schema";
 import { validateFranchisePublicationImages } from "../shared/franchise-page-images";
 import "../shared/load-env";
 import { reservedGameNamespaces } from "../../apps/web/src/lib/game-route-names";
@@ -23,8 +24,8 @@ async function main() {
   assertProductionPublication();
  }
  const payload = JSON.parse(await fs.readFile(file, "utf8")) as Record<string, Array<Record<string, unknown>>>;
- const contract = { games: { table: "games", conflict: "namespace,slug,kind" }, wiki: { table: "game_wiki_pages", conflict: "game_id" }, codesPages: { table: "game_code_pages", conflict: "game_id" }, tools: { table: "game_tool_pages", conflict: "namespace,slug" }, maps: { table: "game_map_pages", conflict:"namespace,slug" }, quizzes:{table:"game_quiz_pages",conflict:"namespace,slug"}, catalog:{table:"game_catalog_pages",conflict:"namespace,slug"}, checklists:{table:"game_checklist_pages",conflict:"namespace,slug"}, checklistItems:{table:"game_checklist_items",conflict:"page_id,item_key"}, codes: { table: "game_codes", conflict: "code_page_id,code" } } as const;
- if (!Object.keys(payload).length || Object.keys(payload).some(key => !(key in contract))) throw new Error("Supported groups: games, wiki, codesPages, tools, maps, quizzes, catalog, checklists, checklistItems, codes.");
+ const contract = { games: { table: "games", conflict: "namespace,slug,kind" }, wiki: { table: "game_wiki_pages", conflict: "game_id" }, codesPages: { table: "game_code_pages", conflict: "game_id" }, tools: { table: "game_tool_pages", conflict: "namespace,slug" }, maps: { table: "game_map_pages", conflict:"namespace,slug" }, articles:{table:"game_article_pages",conflict:"namespace,slug"}, quizzes:{table:"game_quiz_pages",conflict:"namespace,slug"}, catalog:{table:"game_catalog_pages",conflict:"namespace,slug"}, checklists:{table:"game_checklist_pages",conflict:"namespace,slug"}, checklistItems:{table:"game_checklist_items",conflict:"page_id,item_key"}, codes: { table: "game_codes", conflict: "code_page_id,code" } } as const;
+ if (!Object.keys(payload).length || Object.keys(payload).some(key => !(key in contract))) throw new Error("Supported groups: games, wiki, codesPages, tools, maps, articles, quizzes, catalog, checklists, checklistItems, codes.");
  const sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false } });
  const validated = new Map<keyof typeof contract, Array<Record<string, unknown>>>();
  if(payload.checklists || payload.checklistItems) {
@@ -89,6 +90,10 @@ async function main() {
      if (error || data.namespace !== namespace) throw new Error("Page game ownership mismatch");
     }
     if (key === "maps") { if (row.renderer_key && row.renderer_key !== "image-pins") throw new Error("Existing GTA map engines use the specialist import."); row.map_data=parseGameMapData(row.map_data); }
+    if (key === "articles") {
+      const {id,namespace:rowNamespace,game_id,canonical_path,published_at,created_at,updated_at,word_count,...final}=row;
+      Object.assign(row,gameArticleFinalSchema.parse(final));
+    }
     if (key === "quizzes") row.quiz_data=parseGameQuizData(row.quiz_data);
     if (key === "catalog") row.catalog_data=parseGameCatalogData(row.catalog_data);
     if (key === "checklists" && (typeof row.is_public!=="boolean" || row.is_public && (typeof row.published_at!=="string" || !Number.isFinite(Date.parse(row.published_at))))) throw new Error("Checklists need an explicit public state and publication date.");

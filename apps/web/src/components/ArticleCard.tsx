@@ -9,7 +9,7 @@ type ArticleCardProps = {
 };
 
 export function ArticleCard({ article }: ArticleCardProps) {
-  const universeLabel = article.universe?.display_name ?? article.universe?.name ?? "Roblox";
+  const universeLabel = article.game_title ?? article.universe?.display_name ?? article.universe?.name ?? "Roblox";
   const updatedLabel = new Date(article.updated_at).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",

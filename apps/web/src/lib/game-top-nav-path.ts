@@ -54,6 +54,7 @@ export function parseGameTopNavPath(path: string | null | undefined): RouteTarge
   if (segments.length === 5 && segments[0] === "articles" && segments[1] === "games" && segments[2] && segments[3] === "page") {
     return { type: "articleGame", slug: segments[2] };
   }
+  if (segments.length === 4 && segments[0] === "articles" && segments[2] === "page" && /^[1-9]\d*$/.test(segments[3])) return {type:"articleDetail",slug:segments[1]};
   if (segments.length === 2 && segments[0] === "articles" && segments[1]) {
     return { type: "articleDetail", slug: segments[1] };
   }

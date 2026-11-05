@@ -19,6 +19,10 @@ export type EditorialInventoryItem = {
   title: string;
   key: string;
   universe_id: number | null;
+  public_path?: string;
+  namespace?: string;
+  slug?: string;
+  kind?: "game" | "franchise";
 };
 
 type InventoryConfig = {
@@ -74,8 +78,48 @@ async function fetchInventoryFamily(
   return rows;
 }
 
-export async function loadEditorialInventory(supabase: SupabaseClient): Promise<EditorialInventoryItem[]> {
-  const families = await Promise.all(INVENTORY_CONFIGS.map((config) => fetchInventoryFamily(supabase, config)));
+// Read published views so game/parent visibility and scheduled articles match public pages.
+async function fetchGameInventory(supabase: SupabaseClient): Promise<EditorialInventoryItem[]> {
+  async function pages<T>(table: string, columns: string): Promise<T[]> {
+    const rows: T[] = [];
+    for (let from = 0; ; from += 1000) {
+      const { data, error } = await supabase.from(table).select(columns)
+        .eq("is_published", true).order("id").range(from, from + 999);
+      if (error) throw new Error(`Could not load ${table} editorial inventory: ${error.message}`);
+      rows.push(...((data ?? []) as unknown as T[]));
+      if ((data ?? []).length < 1000) return rows;
+    }
+  }
+  type GameIdentity = { id: string; namespace: string; slug: string; kind: "game" | "franchise" };
+  type GamePage = { id: string; game_id: string; namespace: string; title: string; slug: string; canonical_path: string };
+  const [games, articles, wikis] = await Promise.all([
+    pages<GameIdentity>("games", "id,namespace,slug,kind"),
+    pages<GamePage>("game_article_pages_view", "id,game_id,namespace,title,slug,canonical_path"),
+    pages<GamePage>("game_wiki_pages_view", "id,game_id,namespace,title,slug,canonical_path"),
+  ]);
+  const owners = new Map(games.map(game => [game.id, game]));
+  const items: EditorialInventoryItem[] = [];
+  for (const [family, rows] of [["article", articles], ["wiki", wikis]] as const) {
+    for (const row of rows) {
+      const game = owners.get(row.game_id);
+      if (!game || game.namespace !== row.namespace) continue;
+      items.push({ family, title: row.title, key: row.slug, universe_id: null,
+        public_path: row.canonical_path, namespace: game.namespace, slug: game.slug, kind: game.kind });
+    }
+  }
+  return items;
+}
+
+// Roblox callers read the default projection, so non-Roblox rows can't affect their
+// duplicate checks and a failed game read can't stop them.
+export async function loadEditorialInventory(
+  supabase: SupabaseClient,
+  { includeGames = false }: { includeGames?: boolean } = {}
+): Promise<EditorialInventoryItem[]> {
+  const families = await Promise.all([
+    ...INVENTORY_CONFIGS.map((config) => fetchInventoryFamily(supabase, config)),
+    ...(includeGames ? [fetchGameInventory(supabase)] : [])
+  ]);
   return families.flat().sort((left, right) =>
     left.family.localeCompare(right.family) || left.title.localeCompare(right.title)
   );

@@ -147,7 +147,7 @@ export function cacheTagsForPath(pathname: string) {
   const segments = pathnameOnly.split("/").filter(Boolean);
   const [first, second, third, fourth] = segments;
   const tags = ["site"];
-  if (["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists", "games"].includes(first) || ["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists"].includes(second)) {
+  if (["articles", "wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists", "games"].includes(first) || ["wiki", "codes", "tools", "maps", "quizzes", "catalog", "checklists"].includes(second)) {
     tags.push(`page:${pathnameOnly.replace(/\/page\/[1-9]\d*$/, "")}`);
   }
 

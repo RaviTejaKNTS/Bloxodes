@@ -1,16 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cacheTagsForPath } from "../public-cache-tags";
 
-const state = vi.hoisted(() => ({ dependents: false, pages: 83, namespace: "risk-of-rain", queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
+const state = vi.hoisted(() => ({ article: false, dependents: false, pages: 83, namespace: "risk-of-rain", queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({ getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: {} }) }) }));
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: state.pages }) }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   const filters: Record<string, unknown> = {};
   state.queries.push({ table, filters });
-  const root = { id: "root", namespace: state.namespace, parent_id: null, url_style: "page_type" };
-  const child = { ...root, id: "child", parent_id: "root" };
+  const root = { id: "root", namespace: state.namespace, slug: state.namespace, parent_id: null, url_style: "page_type" };
+  const child = { ...root, id: "child", slug: "risk-of-rain-2", parent_id: "root" };
   const routes = [
+    ...(state.article ? [{source:"game",game_id:"child",page_type:"article",page_id:"article",path:"/articles/example-guide",status:"live"}] : []),
     { source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/wiki/risk-of-rain-2/items", status: "live" },
     { source: "game", game_id: "child", page_type: "collection", page_id: "items", path: "/risk-of-rain/wiki/second/items", status: "old" },
     { source: "game", game_id: "child", page_type: "tool", page_id: "tool", path: "/tools/risk-of-rain-cost", status: "live" },
@@ -43,7 +44,7 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from(table: string) {
   return query;
 } }) }));
 import { gameContentRevalidationTargets } from "../game-content-revalidation";
-beforeEach(() => { state.dependents = false; state.queries.length = 0; state.pages = 83; state.namespace = "risk-of-rain"; });
+beforeEach(() => { state.article=false; state.dependents = false; state.queries.length = 0; state.pages = 83; state.namespace = "risk-of-rain"; });
 describe("game_content event contract", () => {
   it.each(["risk-of-rain", "gta", "red-dead", "minecraft"])("root wiki events purge the %s namespace homepage tag", async namespace => {
     state.namespace = namespace;
@@ -97,4 +98,13 @@ it.each(["gta", "red-dead", "minecraft", "risk-of-rain"])("%s refreshes calculat
  expect(paths).toEqual(expect.arrayContaining(["/maps/sibling-map", "/tools/root-tool", "/maps", "/tools"]));
  expect(tags).toContain("page:/maps/sibling-map");
  expect(tags).toContain("page:/tools/root-tool");
+});
+
+it("article events invalidate merged archives and every numbered detail page",async()=>{
+ state.article=true;
+ const result=await gameContentRevalidationTargets("articles/example-guide");
+ expect(result.paths).toEqual(expect.arrayContaining(["/articles","/articles/games/risk-of-rain-2","/sitemaps/articles.xml"]));
+ expect(result.tags).toEqual(expect.arrayContaining(["articles-index","article:example-guide","article-game:risk-of-rain-2","page:/articles/example-guide"]));
+ expect(result.collectionPaths).toContain("/articles/example-guide");
+ expect(cacheTagsForPath("/articles/example-guide/page/42")).toContain("page:/articles/example-guide");
 });

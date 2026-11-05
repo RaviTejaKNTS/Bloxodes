@@ -27,6 +27,7 @@ type CommentsClientProps = {
     | "game_tool"
     | "game_code"
     | "game_map"
+    | "game_article"
     | "game_quiz"
     | "game_catalog";
   entityId: string;

@@ -196,7 +196,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     ];
     if (new Set(expected.map(page => page.route)).size !== expected.length) throw new Error("Selected pages claim the same route.");
     if (!expected.length) return;
-    await mapPublishConcurrent(["game_wiki_pages", "game_collection_pages", "game_code_pages", "game_tool_pages", "game_checklist_pages", "game_map_pages", "game_quiz_pages", "game_catalog_pages"], async table => {
+    await mapPublishConcurrent(["game_wiki_pages", "game_collection_pages", "game_code_pages", "game_tool_pages", "game_checklist_pages", "game_map_pages", "game_article_pages", "game_quiz_pages", "game_catalog_pages"], async table => {
       const result = await readPublishQuery(() => db.from(table).select("id,canonical_path").eq("namespace", bundle.namespace).in("canonical_path", expected.map(page => page.route)));
       if (result.error) throw result.error;
       for (const row of result.data ?? []) {

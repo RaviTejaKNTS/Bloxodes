@@ -1,3 +1,6 @@
+import { GameMenuBridge } from "@/components/games/GameMenuBridge";
+import { getGameMenuForPath } from "@/lib/game-site-data";
+import { GameRelatedLinks } from "@/components/games/GameRelatedLinks";
 import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
 import { Fragment } from "react";
@@ -114,7 +117,7 @@ export async function generateArticlePageMetadata(slug: string, pageNumber = 1):
     description,
     alternates: buildAlternates(canonicalUrl),
     robots: pageNumber > 1 ? { index: false, follow: true } : undefined,
-    category: article.universe?.display_name ?? article.universe?.name ?? "Gaming",
+    category: article.game_title ?? article.universe?.display_name ?? article.universe?.name ?? "Gaming",
     openGraph: {
       type: "article",
       url: canonicalUrl,
@@ -167,8 +170,9 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
     )
   }));
 
+  const menu = article.namespace ? await getGameMenuForPath(`/articles/${article.slug}`).catch(()=>null) : null;
   const universeId = (article as any).universe_id ?? null;
-  const universeLabel = article.universe?.display_name ?? article.universe?.name ?? article.title;
+  const universeLabel = article.game_title ?? article.universe?.display_name ?? article.universe?.name ?? article.title;
   const authorAvatar = article.author ? authorAvatarUrl(article.author, 72) : null;
   const authorName = article.author?.name?.trim() || article.author?.name || null;
   const publishedAt = resolvePublishedAt(article) ?? article.created_at;
@@ -187,8 +191,8 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
   const authorSameAs = collectAuthorSameAs(article.author);
   const authorBioPlain = article.author?.bio_md ? markdownToPlainText(article.author.bio_md) : null;
   const universeName = article.universe?.display_name ?? article.universe?.name ?? null;
-  const articleGameTitle = universeName ?? "Roblox";
-  const articleGameSlug = article.universe ? articleGameSlugFromUniverse(article.universe) : ROBLOX_ARTICLE_GAME_SLUG;
+  const articleGameTitle = article.game_title ?? universeName ?? "Roblox";
+  const articleGameSlug = article.game_slug ?? (article.universe ? articleGameSlugFromUniverse(article.universe) : ROBLOX_ARTICLE_GAME_SLUG);
   const articleGameHref = `/articles/games/${articleGameSlug}`;
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -265,6 +269,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
 
   return (
     <div className="space-y-12">
+      {article.namespace && <GameMenuBridge path={canonicalPath} menu={menu} />}
       <div className="grid gap-8 content-sidebar-grid">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
@@ -401,7 +406,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
 
         {showEndMatter ? (
           <div className="mt-10">
-            <CommentsSection entityType="article" entityId={article.id} />
+            <CommentsSection entityType={article.namespace ? "game_article" : "article"} entityId={article.id} />
           </div>
         ) : null}
 
@@ -432,7 +437,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
           minHeight="clamp(280px, 40vw, 600px)"
         />
 
-        <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" currentSlug={article.slug} />
+        {article.namespace ? <GameRelatedLinks namespace={article.namespace} gameId={article.game_id??undefined} canonicalPath={`/articles/${article.slug}`} /> : <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" currentSlug={article.slug} />}
       </PageSidebar>
       </div>
       {showEndMatter ? <MoreArticles excludeSlug={article.slug} /> : null}

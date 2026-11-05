@@ -79,3 +79,62 @@ test("editorial review retains original user feedback after the writer reports c
   assert.match(prompt, /Keep the useful opening and remove repeated cautions/);
   assert.match(prompt, /\/repo\/tmp\/baseline\/content\/final.json/);
 });
+
+
+test("production inventory includes game article routes and wiki game identity without changing Roblox rows", async () => {
+  const { loadEditorialInventory } = await import("../../../apps/web/src/lib/editorial-inventory");
+  const { fetchProductionEditorialInventory, inventoryPublicPath, inventoryMatchesSearch } = await import("../production-editorial-inventory");
+  const games = [
+    { id: "game", namespace: "example", slug: "example-six", kind: "game", is_published: true },
+    { id: "root", namespace: "example", slug: "example", kind: "franchise", is_published: true },
+    { id: "hidden", namespace: "example", slug: "hidden", kind: "game", is_published: false },
+  ];
+  const rows: Record<string, Record<string, unknown>[]> = {
+    articles: [{ title: "Roblox Guide", slug: "roblox-guide", universe_id: 123, is_published: true }],
+    games,
+    game_article_pages_view: [
+      { id: "article", game_id: "game", namespace: "example", title: "Example Six Guide", slug: "example-six-guide", canonical_path: "/articles/example-six-guide", is_published: true },
+      { id: "draft", game_id: "game", namespace: "example", title: "Draft", slug: "draft", canonical_path: "/articles/draft", is_published: false },
+    ],
+    game_wiki_pages_view: [
+      // The page slug can differ from the game slug; use the game's identity.
+      { id: "wiki", game_id: "game", namespace: "example", title: "Example Six Wiki", slug: "six-wiki", canonical_path: "/example/wiki/example-six", is_published: true },
+      { id: "hub", game_id: "root", namespace: "example", title: "Example Hub", slug: "example-hub", canonical_path: "/example/wiki", is_published: true },
+      { id: "hidden-wiki", game_id: "hidden", namespace: "example", title: "Hidden", slug: "hidden", canonical_path: "/example/wiki/hidden", is_published: true },
+    ],
+  };
+  const db = { from(table: string) {
+    let selected = rows[table] ?? [];
+    return { select() { return this; }, eq(field: string, value: unknown) { selected = selected.filter(row => row[field] === value); return this; }, order() { return this; },
+      range(from: number, to: number) { return Promise.resolve({ data: selected.slice(from, to + 1), error: null }); } };
+  } };
+  const robloxOnly = await loadEditorialInventory(db as unknown as Parameters<typeof loadEditorialInventory>[0]);
+  assert.deepEqual(robloxOnly, [{ family: "article", title: "Roblox Guide", key: "roblox-guide", universe_id: 123 }]);
+  const failingGames = { from(table: string) { return table.startsWith("game") ? { select() { throw new Error("game read failed"); } } : db.from(table); } };
+  assert.deepEqual(await loadEditorialInventory(failingGames as unknown as Parameters<typeof loadEditorialInventory>[0]), robloxOnly);
+  const inventory = await loadEditorialInventory(db as unknown as Parameters<typeof loadEditorialInventory>[0], { includeGames: true });
+  assert.equal(inventory.length, 4);
+  assert.deepEqual(inventory.find(item => item.key === "roblox-guide"), { family: "article", title: "Roblox Guide", key: "roblox-guide", universe_id: 123 });
+  assert.deepEqual(inventory.find(item => item.key === "six-wiki"), {
+    family: "wiki", title: "Example Six Wiki", key: "six-wiki", universe_id: null,
+    public_path: "/example/wiki/example-six", namespace: "example", slug: "example-six", kind: "game",
+  });
+  assert.equal(inventory.find(item => item.key === "example-hub")?.kind, "franchise");
+  const originalFetch = globalThis.fetch;
+  try {
+    const urls: string[] = [];
+    globalThis.fetch = async (input) => { urls.push(String(input)); return new Response(JSON.stringify({ version: 1, generated_at: "2026-11-04", items: inventory })); };
+    await fetchProductionEditorialInventory();
+    assert.ok(!urls[0].includes("scope="));
+    const payload = await fetchProductionEditorialInventory({ includeGames: true });
+    assert.match(urls[1], /scope=all/);
+    const article = payload.items.find(item => item.key === "example-six-guide")!;
+    assert.equal(inventoryPublicPath(article, payload.items), "/articles/example-six-guide");
+    assert.equal(inventoryPublicPath(payload.items.find(item => item.key === "six-wiki")!, payload.items), "/example/wiki/example-six");
+    assert.deepEqual(payload.items, inventory);
+    const wiki = payload.items.find(item => item.key === "six-wiki")!;
+    assert.equal(inventoryMatchesSearch({...wiki,title:"The Sixth Game Wiki"}, "Example Six"), true);
+    assert.equal(inventoryMatchesSearch({family:"wiki",title:"Grand Theft Auto VI",key:"gta-6-wiki",universe_id:null,namespace:"gta",slug:"gta-6",kind:"game"}, "GTA 6"), true);
+    assert.equal(inventoryMatchesSearch({family:"wiki",title:"Roblox Game",key:"roblox-game",universe_id:1}, "roblox game"), true);
+  } finally { globalThis.fetch = originalFetch; }
+});
