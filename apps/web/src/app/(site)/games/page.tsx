@@ -63,6 +63,7 @@ export default async function GamesPage() {
   };
 
   // Each group fills whole rows at 1, 2 and 4 columns, so an ad between groups never splits a row.
+  // The grid sits inside a plain wrapper: with the grid as the direct child, the ad audit found only 1 slot on the page.
   const rows = Array.from({ length: Math.ceil(publishedPlatforms.length / ROW_SIZE) }, (_, index) =>
     publishedPlatforms.slice(index * ROW_SIZE, (index + 1) * ROW_SIZE)
   );
@@ -77,7 +78,8 @@ export default async function GamesPage() {
 
       <section id="article-body" className="journey-content-stream gap-5" aria-label="Games and puzzles">
         {rows.map((row, rowIndex) => (
-          <div key={row[0].href} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div key={row[0].href}>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {row.map(({ href, label, image }, index) => (
               <Link
                 key={href}
@@ -102,6 +104,7 @@ export default async function GamesPage() {
                 </Card>
               </Link>
             ))}
+            </div>
           </div>
         ))}
       </section>
