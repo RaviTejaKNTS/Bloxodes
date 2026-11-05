@@ -1,6 +1,6 @@
 import path from "node:path";
 
-const publishers = new Set(["events-final", "roblox-codes-page", "article-queue", "game-pages", "content-final", "roblox-wiki", "roblox-collection", "franchise-wiki", "franchise-collection", "minecraft-tools", "catalog", "tool-finals"]);
+const publishers = new Set(["events-final", "roblox-codes-page", "game-pages", "content-final", "roblox-wiki", "roblox-collection", "franchise-wiki", "franchise-collection", "minecraft-tools", "catalog", "tool-finals"]);
 const eventTypes = new Set(["code", "article", "event", "checklist", "tool", "catalog", "quiz", "wiki", "wiki_collection", "gta_game", "gta_wiki", "gta_wiki_collection", "red_dead_game", "red_dead_wiki", "red_dead_wiki_collection", "minecraft_game", "minecraft_wiki", "minecraft_wiki_collection", "minecraft_tool", "game_content"]);
 
 export function batchPath(input) {
@@ -22,14 +22,8 @@ export function ownedPath(base, input) {
 }
 export function parseBatch(input) {
   if (!input || input.version !== 1 || !Array.isArray(input.operations) || input.operations.length > 20 || !Array.isArray(input.urls) || !input.urls.length || input.urls.length > 20 || !Array.isArray(input.events) || input.events.length > 100) throw new Error("Invalid content batch.");
-  const articleIds = new Set();
   for (const operation of input.operations) {
     if (!operation || !publishers.has(operation.publisher)) throw new Error("Unknown content publisher.");
-    if (operation.publisher === "article-queue" && !/^[0-9a-f-]{36}$/i.test(operation.queueId ?? "")) throw new Error("Article releases need an exact queue ID.");
-    if (operation.publisher === "article-queue") {
-      if (articleIds.has(operation.queueId)) throw new Error("An article queue ID may appear only once per batch.");
-      articleIds.add(operation.queueId);
-    }
     if (operation.file !== undefined) ownedPath("batch", operation.file);
     if (operation.workspace !== undefined) ownedPath("batch", operation.workspace);
     if (!operation.file && !operation.workspace) throw new Error("Each publisher needs its own reviewed input.");
@@ -38,7 +32,7 @@ export function parseBatch(input) {
     if (operation.publisher === "franchise-wiki" && (!operation.workspace || !operation.games?.length || !operation.namespace)) throw new Error("Franchise hubs need an exact workspace, namespace and game allowlist.");
     if (["game-pages", "franchise-collection"].includes(operation.publisher) && !operation.namespace) throw new Error("A game namespace is required.");
     if (operation.publisher !== "franchise-wiki" && !operation.file) throw new Error("A reviewed file is required.");
-    if (Object.keys(operation).some(key => !["publisher", "file", "workspace", "namespace", "games", "queueId"].includes(key))) throw new Error("Extra publisher arguments are not allowed.");
+    if (Object.keys(operation).some(key => !["publisher", "file", "workspace", "namespace", "games"].includes(key))) throw new Error("Extra publisher arguments are not allowed.");
   }
   for (const url of input.urls) {
     if (!url || typeof url.path !== "string" || !/^\/[a-z0-9/-]*$/.test(url.path) || url.path.includes("//") || url.path.includes("..") || typeof url.contains !== "string" || !url.contains.trim()) throw new Error("Each public URL needs an exact path and expected text.");
@@ -53,4 +47,10 @@ export function parseBatch(input) {
         input.operations.some(operation => !["roblox-wiki","roblox-collection"].includes(operation.publisher))) throw new Error("Invalid exact wiki receipt batch.");
   }
   return input;
+}
+
+export function assertCiContentFinal(value) {
+  if (value?.slug && value?.title && value?.content_md) {
+    throw new Error("Articles publish through content:publish with an article@1 bundle.");
+  }
 }

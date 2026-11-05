@@ -216,14 +216,12 @@ export async function publishArticleBundle(options: ContentOptions) {
     }
     console.log("PASS all checks. Dry run complete; no database or media writes."); return;
   }
-  const unlock = await acquireAgentWorkLock(path.resolve("tmp/article-publication"), "direct-article-publish");
-  if (!unlock) throw new Error("Publication outbox is busy; retry after it finishes.");
+  const unlock = await acquireAgentWorkLock(path.resolve("tmp/content-publish/article"), "direct-article-publish");
+  if (!unlock) throw new Error("Article publication is busy; retry after it finishes.");
   let staging: string | undefined;
   try {
     const currentQueue = await read(() => queueDb.from("article_generation_queue").select("*").eq("id", bundle.queueId).single()) as QueueRow;
     if (stable(currentQueue) !== stable(queue)) throw new Error("Queue row changed during preflight; rerun the bundle.");
-    const intent = await json(path.resolve("tmp/article-publication", `${bundle.queueId}.json`)).catch(error => { if (error.code !== "ENOENT") throw error; return null; });
-    if (intent?.dispatchHash && !intent.publishedAt && queue.status !== "published") throw new Error("An old GitHub dispatch exists for this row. Resolve it before direct publication.");
     if (options.target === "production") {
       if (!process.env.REVALIDATE_SECRET) throw new Error("Production requires REVALIDATE_SECRET.");
       await assertLocalContentPublication();

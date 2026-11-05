@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { batchPath, changedContentBatches, ownedPath, parseBatch } from "../content-contract.mjs";
+import { assertCiContentFinal, batchPath, changedContentBatches, ownedPath, parseBatch } from "../content-contract.mjs";
 const batch = () => ({version: 1, operations: [{publisher: "game-pages", namespace: "sandustry", file: "pages.json"}], urls: [{path: "/sandustry/wiki", contains: "Sandustry"}], events: [{type: "game_content", slug: "sandustry/wiki"}]});
 test("publication rejects arbitrary commands and arguments", () => {
   assert.throws(() => parseBatch({...batch(), operations: [{publisher: "shell", file: "pages.json"}]}));
@@ -30,4 +30,12 @@ test("batch verification skips removed releases and keeps surviving batches with
 });
 test("a surviving release directory still requires verification when its batch manifest is removed", () => {
   assert.deepEqual(changedContentBatches(["content/releases/incomplete/batch.json"], directory => directory === "content/releases/incomplete"), ["content/releases/incomplete/batch.json"]);
+});
+
+test("retired article publication cannot use queue operations or the shared final importer", () => {
+  assert.throws(() => parseBatch({...batch(), operations: [{publisher: "article-queue", queueId: "11111111-1111-4111-8111-111111111111", file: "final.json"}]}), /Unknown content publisher/);
+  assert.throws(() => parseBatch({...batch(), operations: [{publisher: "content-final", queueId: "11111111-1111-4111-8111-111111111111", file: "final.json"}]}), /Extra publisher arguments/);
+  assert.throws(() => assertCiContentFinal({slug: "example", title: "Example", content_md: "Article body"}), /content:publish/);
+  assert.doesNotThrow(() => assertCiContentFinal({code: "quiz", quizData: {}}));
+  assert.doesNotThrow(() => assertCiContentFinal({slug: "checklist", title: "Checklist", sections: []}));
 });

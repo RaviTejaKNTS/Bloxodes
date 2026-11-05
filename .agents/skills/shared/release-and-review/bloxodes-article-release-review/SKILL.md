@@ -1,11 +1,11 @@
 ---
 name: bloxodes-article-release-review
-description: Review completed Bloxodes article queue work and its GitHub QA evidence, publish only explicitly approved articles through GitHub CI, and keep queue state separate from verified production publication.
+description: Review completed Bloxodes article queue work, publish only explicitly approved articles with content:publish, and keep queue state separate from verified production publication.
 ---
 
 # Article release review
 
-You review completed article queue work, then publish only the articles the user explicitly approves, through GitHub CI. Queue state and verified production publication stay separate.
+You review completed article queue work, then publish only the articles the user explicitly approves, with `content:publish`. Queue state and verified production publication stay separate.
 
 Read `AGENTS.md` and `bloxodes-docs/content/articles.md` first.
 
@@ -17,29 +17,26 @@ Read `AGENTS.md` and `bloxodes-docs/content/articles.md` first.
 
 ## Review
 
-1. For a review request, inspect the exact completed queue rows, the retained final, the media manifest, the pipeline approval hashes and the GitHub QA reports.
-2. Use GitHub screenshots and browser reports. Don't start a local build or preview.
-3. Read the article copy against `.agents/skills/bloxodes-voice/SKILL.md`: an answer-first opening, a player's voice, no template openings, research voice, hype, filler or repeated facts, and headings that say what's under them. Report any problems in your review, since publishing dispatches the selected run unchanged.
+1. For a review request, inspect the exact completed queue rows, the retained final, the media manifest, and the pipeline approval hashes.
+2. `content:publish` has its own checks but no browser report, so don't wait for one. Don't start a local build or preview.
+3. Read the article copy against `.agents/skills/bloxodes-voice/SKILL.md`: an answer-first opening, a player's voice, no template openings, research voice, hype, filler or repeated facts, and headings that say what's under them. Report any problems in your review, since publishing sends the selected bundle unchanged.
 4. A retained draft from a blocked run is not a completed approval.
 5. Present only the selected articles, with their title, source evidence and review links.
 
 ## Permission to publish
 
 - Review alone doesn't grant publication permission.
-- An existing durable automatic publication intent can supply that permission for its exact queue ID.
 
 ## Publish (after explicit approval only)
 
-1. Use `dispatchArticle(queueId, artifactRoot)` from `scripts/ci/dispatch-article.ts`. It freezes the unchanged selected run and sends it to `Publish selected content`.
-2. Let the existing article publisher in CI handle media promotion, article and provenance readback, revalidation, exact public verification and queue acknowledgement.
-3. Don't run `articles:release --apply` locally.
+1. Publish the approved `article@1` bundle from the up-to-date main checkout: `npm run content:publish -- --bundle <absolute-folder> --target production --apply --allow-prod`. Add `--update-published` to change an article that's already live.
+2. The publisher handles media promotion, article and provenance readback, revalidation, exact public verification and queue acknowledgement.
 
 ## Queue state
 
-- The queue stays `completed` while CI runs. It becomes `published` only after production verification.
+- The queue stays `completed` until the publisher finishes production verification. Only then does it become `published`.
 - Never label a failed or merely dispatched release as published.
-- The outbox records its frozen hash before dispatch, reconciles the exact GitHub run, leaves pending runs alone and preserves bounded attempts.
-- GitHub first checks that exact final in development and requires its hash-bound QA receipt before production writes.
+- `content:publish` has no browser check. Open the live page at desktop and phone widths yourself.
 
 ## Rejection
 
