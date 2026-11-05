@@ -8,7 +8,7 @@ import {
   releaseStatsPipelineLease,
   statsPipelineLeaseName
 } from "../shared/stats-pipeline-lease";
-import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../shared/stats-job-run";
 import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
@@ -395,6 +395,7 @@ type ChunkWriteResult = {
   attempted: number;
   updated: number;
   missing: number;
+  failed: number;
   hourlyRows: number;
   updateEvents: number;
   detailEvents: RevalidationEvent[];
@@ -514,7 +515,8 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   return {
     attempted: chunk.length,
     updated,
-    missing: missingRows.length + emptyRows.length,
+    missing: missingRows.length,
+    failed: emptyRows.length,
     hourlyRows: hourlyPayloads.length,
     updateEvents: updateEventPayloads.length,
     detailEvents
@@ -624,6 +626,7 @@ async function main() {
   let claimedRows = 0;
   let updatedRows = 0;
   let failedRows = 0;
+  let missingRows = 0;
   let hourlyRows = 0;
   let updateEvents = 0;
   let claimBatches = 0;
@@ -679,7 +682,8 @@ async function main() {
             const statsMap = await fetchStats(ids);
             const result = await writeChunk(chunk, statsMap, latestSampledAt);
             updatedRows += result.updated;
-            failedRows += result.missing;
+            missingRows += result.missing;
+            failedRows += result.failed;
             hourlyRows += result.hourlyRows;
             updateEvents += result.updateEvents;
             for (const event of result.detailEvents) {
@@ -723,11 +727,12 @@ async function main() {
       : { queued: 0, events: [] as string[] };
 
     await finishStatsJobRun(run, {
-      status: failedRows > 0 ? "partial" : "success",
+      status: statsRefreshRunStatus(updatedRows, failedRows, missingRows),
       rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
       metadata: {
+        missing_rows: missingRows,
         hourly_rows: hourlyRows,
         claim_batches: claimBatches,
         update_events: updateEvents,
@@ -746,6 +751,7 @@ async function main() {
       rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
+      metadata: { missing_rows: missingRows },
       error
     });
     throw error;

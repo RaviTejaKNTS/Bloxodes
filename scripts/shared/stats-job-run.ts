@@ -4,6 +4,23 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 
 type StatsJobStatus = "running" | "success" | "failed" | "partial" | "skipped";
 
+// Roblox removes a few rows per run, and those are handled outcomes, not failed work.
+// Many missing at once looks like a bad Roblox response, so it must not read as success.
+const SUSPECT_MISSING_MIN_ROWS = 30;
+const SUSPECT_MISSING_SHARE = 0.1;
+
+export function statsRefreshRunStatus(
+  succeededRows: number,
+  failedRows: number,
+  missingRows: number
+): "success" | "partial" | "failed" {
+  const suspectMissing =
+    missingRows >= SUSPECT_MISSING_MIN_ROWS &&
+    missingRows / (succeededRows + failedRows + missingRows) > SUSPECT_MISSING_SHARE;
+  if (failedRows === 0 && !suspectMissing) return "success";
+  return succeededRows > 0 ? "partial" : "failed";
+}
+
 type StartStatsJobInput = {
   jobName: string;
   workerId?: string;
