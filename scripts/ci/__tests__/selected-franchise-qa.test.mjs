@@ -249,3 +249,31 @@ test('collection manifests support permanent wiki identities and Minecraft editi
     }
   } finally {fs.rmSync(root, {recursive: true, force: true});}
 });
+
+test('selected articles retain their family and resolve flat target-owned paths', async () => {
+  fs.mkdirSync('tmp', {recursive: true});
+  const root = fs.mkdtempSync(path.resolve('tmp/selected-article-'));
+  const row = {slug: 'example-guide', title: 'Example Guide', is_published: true, game_id: 'owner'};
+  const batch = {version: 1, operations: [{publisher: 'game-pages', namespace: 'example', file: 'pages.json'}], urls: [{path: '/articles/example-guide', contains: 'Example Guide'}], events: [{type: 'game_content', slug: 'example'}]};
+  try {
+    fs.writeFileSync(path.join(root, 'pages.json'), JSON.stringify({articles: [row]}));
+    const plan = selectedFranchisePlan(root, batch);
+    assert.equal(plan.pages[0].kind, 'article');
+    const calls = [];
+    const db = {
+      from(table) {
+        calls.push(table);
+        const query = {select: () => query, eq: () => query, single: async () => ({data: {game_id: 'owner'}, error: null})};
+        return query;
+      },
+      async rpc(name, args) {
+        assert.equal(name, 'expected_game_page_path');
+        assert.deepEqual(args, {p_game_id: 'owner', p_type: 'article', p_slug: 'example-guide'});
+        return {data: '/articles/example-guide', error: null};
+      }
+    };
+    await resolveSelectedFranchisePaths(plan, db);
+    assert.deepEqual(calls, ['game_article_pages']);
+    assert.equal(plan.pages[0].path, '/articles/example-guide');
+  } finally {fs.rmSync(root, {recursive: true, force: true});}
+});

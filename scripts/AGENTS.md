@@ -8,6 +8,8 @@ Scope: `scripts/`.
 
 These files are operational jobs, imports, backfills, collectors, and automation workers. Many are side-effectful.
 
+Anything here that runs without a person follows `workflow/runners.md` in the Cockpit checkout.
+
 ## Shared non-Roblox game commands
 
 Every non-Roblox game uses shared `games`/`game_*` storage with an explicit namespace. Publish non-Roblox hubs and collections with `content:publish` and a reviewed `game-wiki@1` bundle. It validates, uploads and reads back hub and collection media, for every game and edition. GitHub publication uses the selected-content CI job and keeps exact target and input guards.
@@ -34,7 +36,7 @@ The MacBook Pro T3 schedule "Bloxodes nightly Roblox wiki" runs daily at 02:30 I
 
 ## Content QA and runtime activation
 
-The article publication drain checks approved copy before freezing or spending an attempt, records findings in the intent and `health.json`, and reports once per final hash while unchanged bad copy stays blocked.
+`content:publish` checks article copy and image readiness before it writes. A failed check stops the publish.
 
 Roblox collection finals leave `how_it_works_md` empty and explain game systems without website instructions. `content/roblox-collection-copy.ts` owns the shared check used by the public-copy gate, Claude writer and runtime publication plan. See `bloxodes-docs/content/roblox-wiki.md#content-rules` for the copy repair and verification boundary.
 
@@ -53,9 +55,9 @@ Roblox collection finals leave `how_it_works_md` empty and explain game systems 
 - `ci/review-scope.mjs` decides whether a PR needs the selective Claude review. Docs, skills and content-only changes skip it. Same-repository production PRs review when opened ready or changed to ready; pushes cancel stale reviews and explicit workflow dispatch reviews completed fixes. It performs no database or publication operations. Review feedback accepts only changed files, normalizing an absolute path only when it starts with the known runner checkout root. GitHub runs its policy tests.
 - `ci/migration-history.mjs` proves the finite managed-development timestamp aliases with exact source/local hashes and current objects. It copies original ledger evidence without executing retired SQL. `ci/wiki-publication-state.mjs` defines the durable request and bounded retry rules for wiki releases. GitHub owns their tests.
 - `ci/wiki-publication-binding.mjs` binds queue receipts to the stored approved result paths, exact frozen bundle, artifact hashes and canonical pages. The selected-content job checks production migration history before publication with the read-only `supabase:production:release -- --check-ledger` mode.
-- `ci/migration-byte-proof.mjs` rejects unproven applied SQL before CI issues a receipt. `ci/article-publication-binding.mjs` ties each selected final and canonical URL to its exact article queue row before publication. GitHub runs their mismatch/replay tests.
+- `ci/migration-byte-proof.mjs` rejects unproven applied SQL before CI issues a receipt. GitHub runs its mismatch tests.
 
-Article bundle verification and pre-promotion release reads use the resolved managed-development media origin. Post-promotion reads use the production target and checkout staging root. Keep those checks separate without changing the process environment, approved bundle bytes, or canonical production image readback.
+The direct article publisher runs its preflight against managed-development media and reads back against promoted production media. Keep those checks separate without changing the approved bundle bytes or canonical production image readback.
 
 - `dev/`: workstation development and worktree setup.
   - `setup-worktree.sh` delegates to dependency-free `setup-worktree.mjs` for `npm run setup:worktree`. It checks the canonical main checkout, private env permissions and existing links before linking `.envs/` and creating the checkout's own empty `tmp/`. A conflicting `.envs` path stops setup. It enforces HDD paths on the homelab. It never installs dependencies or runs checks.
@@ -106,6 +108,7 @@ Article bundle verification and pre-promotion release reads use the resolved man
   - The game and collection registry lives in the `roblox_wiki_registry` table, not in TypeScript. `content:publish` (`scripts/content/roblox-wiki-publish.ts`, contract in `contracts/roblox-wiki/v1/`) creates and merges registrations; scripts read them through `apps/web/src/lib/game-collections/registry.ts`.
   - The same `content:publish` publishes franchise wiki hubs and collections from `game-wiki@1` bundles (`scripts/content/game-wiki-publish.ts`, contract in `contracts/game-wiki/v1/`). It resolves rows per target by natural key and reuses the franchise hub and collection publishers. Its dry run is the same scoped local exception as the Roblox one.
   - The same `content:publish` publishes articles from `article@1` bundles (`scripts/content/article-publish.ts`, contract in `contracts/article/v1/`), with the same production guard. See `bloxodes-docs/content/articles.md`.
+  - The same `content:publish` publishes non-Roblox articles from `game-article@1` bundles (`scripts/content/game-article-publish.ts`, contract in `contracts/game-article/v1/`). No queue row is involved, and the game must already be published.
   - `audit-game-collection-datasets-v2.ts` and `check-game-collection-data.ts` require an explicit workspace `--file`; neither reads repository game data. `check-game-collection-data.ts` needs no credentials; `--check-registry` adds an informational Roblox registry lookup, skipped for non-Roblox `--namespace` values.
   - `collect-collection-images.ts` downloads item images into a workspace `media/` directory and updates schema-v2 `items[].system.image` filenames.
   - `sync-game-collection-runtime.ts` requires one or more explicit workspace `--manifest` paths. It creates immutable `wiki_collection_datasets` and `wiki_collection_items` revisions, uploads/verifies R2 media, writes approved page copy, and moves `wiki_collection_pages.published_dataset_id` only after readback succeeds.
@@ -126,7 +129,7 @@ Article bundle verification and pre-promotion release reads use the resolved man
   - `curate-article-topics.ts` claims at most 12 managed-dev discovery candidates by default and sends public source leads, bounded page evidence, plus intent-matched published Bloxodes page titles from the GET-only production editorial inventory endpoint to Groq Llama JSON mode. It turns update/patch-note leads into zero or more source-supported focused guides, tier lists, or explainers, so one source URL may support several distinct topic keys. Local validation requires interchangeable search intent before grouping publishers, while same-game/different-task angles remain separate; production coverage is relevant only for the same player task, not merely the same game. Prompt upgrades selectively re-curate prior thin/evidence/overlap rejects and approved rows that ended skipped or failed, without reopening deliberate codes/collection/event exclusions. The inventory payload is capped and Groq output tokens scale with batch size to stay beneath free-tier TPM limits. Three consecutive current-prompt runs with zero approvals are marked degraded and return non-zero so systemd exposes the condition. `GROQ_API_KEY` is required.
   - `list-article-queue.ts` is the read-only input path for the article workflow runner. It lists only Groq-curated `agent_runner` rows, defaults to pending work ordered by newest source publication time, and supports JSON output for agent selection.
   - `list-article-release-review.ts` lists only managed-dev `completed` `agent_runner` rows and returns their localhost preview URLs, result paths, queue IDs, and source provenance for human publication review.
-  - `release-completed-articles.ts` publishes only an explicit queue-ID allowlist after importing the exact final/media artifacts, verifying production database readback, provenance, and live canonical URLs, then closes each verified queue row as `published`.
+  - `release-completed-articles.ts` holds the snapshot and cover helpers for direct article publication and the pipeline approval-path check. It has no CLI.
     Cover selection uses the first used verified image and falls back to the importer's normal cover selection if the optional source is unavailable or invalid.
   - `update-article-queue-item.ts` is the guarded lifecycle writer for managed-dev `agent_runner` rows. Article workflow runners mark a selected row `processing`, then `completed` only after local verification and rendered browser preview; temporary operational/evidence failures become retryable `blocked` rows, while duplicate or unsuitable leads become terminal `skipped`. Human review moves completed rows to `published` only after exact production verification or to `rejected` with a reason. Completed updates require an existing, parseable `final.json`, and published updates require the exact canonical production URL.
   - `run-local-article-writer.ts` is the one-row compatibility entrypoint to the code-controlled batch with production release disabled. Queue writes require --apply; models do not own queue state.
@@ -239,7 +242,7 @@ Wiki collection page types are `database` and `collectible` for every game. Stan
 ## Article reliability commands
 
 - `articles:runtime:prepare -- --sha <commit>` prepares an independent versioned runtime and npm install, copies existing article state once, links protected profiles/shared leases, and runs readiness. The sudo installer activates only a checked exact SHA while jobs are inactive.
-- `articles:publication:drain -- --apply` consumes durable, previously authorized exact queue IDs with bounded retry/backoff and production approval verification. It can mutate production only through the guarded publisher; never use it to authorize arbitrary manual completed work.
+- `content:publish -- --bundle <absolute-folder> --target production --apply --allow-prod` publishes an approved `article@1` bundle and closes its queue row after verification. Add `--update-published` to change a live article.
 - `articles:automation:audit` reads managed queue and installed timer health, writes an ignored report, and exits nonzero for actionable findings.
 - `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.
 
@@ -259,12 +262,7 @@ The article importer can obtain missing official landscape cover metadata, and c
 
 `shared/revalidate-published-content.ts` is trusted publication code only. It requires the production target and its protected `REVALIDATE_SECRET`, sends an exact article/wiki batch to `/api/revalidate`, and rejects unsuccessful cache purges before live verification. Never pass this credential to model execution.
 
-For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
-
-The publication drain records `exhaustionReportedAt` and reports exhaustion once; later health reports retain the blocker and new failures still fail. Frozen inputs skip hidden entries while visible symlink and unsafe-path guards remain.
-
-- `articles:publication:drain -- --retry-exhausted --queue-id <UUID> [--queue-id <UUID>] --operator <name> --reason <text> --apply` audits an exact exhausted/unpublished budget reset without launching publication.
-- `articles:approval:owner-edit -- --queue-id <UUID> --expected-final-hash <SHA256> --operator <name> --reason <text> --apply` records an owner copy approval for any authorized unpublished intent without an unresolved dispatch, preserving prior evidence and all GitHub QA/publication gates; it clears copy blocking and makes non-exhausted intents due without resetting attempts.
+- `articles:approval:owner-edit -- --queue-id <UUID> --expected-final-hash <SHA256> --operator <name> --reason <text> --apply` records an owner copy approval for a completed, unpublished pipeline article, keeping earlier evidence and the original brief, media and approvals. It uses the publisher's lock and doesn't publish.
 
 ## October 2 reliability controls
 
@@ -288,4 +286,4 @@ Minecraft tools are published with `publish:minecraft-tools` and read validated 
 `import:gta-shared-maps` reads the nine reviewed committed snapshots, validates stored hashes and ownership, then uses atomic publication. It is rollback-only by default; `--apply` writes managed development. Production requires the production environment plus `--allow-prod` and explicit authorization. Snapshot changes require a reviewed migration. `publish:game-pages` additionally supports maps, quizzes, catalog, checklists and checklistItems. `audit:shared-games-preview` crawls all eight shared page views. `backup:shared-games` includes reference pages and quiz account history. See `bloxodes-docs/content/franchise.md`.
 
 - Wiki release recovery retries only stale preparation claims. The dispatch callback rejects replaced claims. Submitted claims record matching GitHub run evidence, recheck recorded conclusions and retry unsuccessful completed runs within the existing limit. Unknown outcomes stay pending. Dispatch selection reads past ineligible rows; recovery reads all receipt pages by ID. Never reset a queued release because it has waited a long time.
-- `ci/`: GitHub path scope, injected env checks, transaction composition and rollback tests, managed schema receipts, production publication guards, frozen selected content bundles and article/wiki dispatch/readback. Use the owning deployment doc for commands and credentials.
+- `ci/`: GitHub path scope, injected env checks, transaction composition and rollback tests, managed schema receipts, production publication guards, frozen selected content bundles and wiki dispatch/readback. Use the owning deployment doc for commands and credentials.

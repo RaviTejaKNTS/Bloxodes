@@ -1,3 +1,4 @@
+import { publishedArticlePayload, type PublishedArticleIdentity } from "./article-published-update";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
@@ -421,6 +422,7 @@ export async function importArticle(
   dryRun: boolean,
   coverSourceFile: string | null,
   regenerateCovers: boolean,
+  publishedUpdate?: PublishedArticleIdentity & { preserveCover: boolean },
 ) {
   const sb = supabaseAdmin();
   const slug = finalJson.slug.trim().toLowerCase();
@@ -430,11 +432,15 @@ export async function importArticle(
 
   const { data: existing, error: existingError } = await sb
     .from("articles")
-    .select("id,published_at,author_id,cover_image")
+    .select("id,slug,published_at,author_id,cover_image,is_published")
     .eq("slug", slug)
     .maybeSingle();
   if (existingError) throw new Error(`Failed to check article ${slug}: ${existingError.message}`);
 
+  if (publishedUpdate && (!existing || ["id", "slug", "author_id", "published_at", "cover_image", "is_published"].some(key => existing[key] !== publishedUpdate[key as keyof PublishedArticleIdentity]))) {
+    throw new Error("Published article identity changed before import; rerun the bundle.");
+  }
+  const preserveCover = publishedUpdate?.preserveCover;
   const existingAuthorId = ((existing as { author_id?: string | null } | null)?.author_id || null) ?? null;
   const authorId =
     existingAuthorId ??
@@ -449,7 +455,7 @@ export async function importArticle(
   const existingCover = normalizeArticleCover(
     ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null
   );
-  const universeCover = await pickUniverseCoverImage(sb, universeId);
+  const universeCover = preserveCover ? null : await pickUniverseCoverImage(sb, universeId);
   const forceEditedCover = process.env.ARTICLE_WRITER_REGENERATE_COVERS === "true";
   const storage = SUPABASE_MEDIA_BUCKET
     ? (sb.storage.from(SUPABASE_MEDIA_BUCKET) as unknown as ArticleCoverStorage)
@@ -469,7 +475,9 @@ export async function importArticle(
     });
   };
   let coverImage: string | null;
-  if (coverSourceFile) {
+  if (preserveCover) {
+    coverImage = publishedUpdate!.cover_image;
+  } else if (coverSourceFile) {
     coverImage = await generateCover(null, coverSourceFile);
     if (!coverImage) throw new Error(`Article importer could not generate and upload the required edited cover for ${slug}.`);
   } else if (forceEditedCover || regenerateCovers) {
@@ -490,7 +498,7 @@ export async function importArticle(
 
   assertProductionArticleMedia({ slug, coverImage, contentMd, isPublished });
 
-  const payload = {
+  let payload = {
     title: finalJson.title.trim(),
     slug,
     content_md: contentMd,
@@ -509,6 +517,8 @@ export async function importArticle(
   if (existing?.published_at && isPublished) {
     payload.published_at = existing.published_at as string;
   }
+
+  if (publishedUpdate) payload = publishedArticlePayload(payload, publishedUpdate, { cover_image: preserveCover ? null : coverImage });
 
   if (dryRun) {
     console.log(existing ? `Would update article ${slug}` : `Would create article ${slug}`);

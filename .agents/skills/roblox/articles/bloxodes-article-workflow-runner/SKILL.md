@@ -100,7 +100,7 @@ When the user explicitly authorizes more editorial refinement:
 ## Scheduled reliability
 
 - Scheduled code runs from a prepared, versioned runtime, separate from the main development checkout. The installer turns it on only after readiness passes.
-- Durable publication intents are recorded before an automatically publishable queue job starts. The separate publication drain retries only those exact authorized IDs, after every approval and technical check has passed.
+- Completed articles publish through `content:publish` with an approved `article@1` bundle. There's no publication intent or separate drain.
 - Manual `--skip-production-release` work never creates publication authorization.
 - Don't bypass approval hashes or reset exhausted review counters to clear a backlog.
 - When the brief names one exact universe, code confirms any missing managed-development universe record from official Roblox metadata before images, and rechecks the final identity before import. That's reference-data setup, not new editorial evidence.

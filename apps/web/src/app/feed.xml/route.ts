@@ -104,7 +104,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
   const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes] = await Promise.all([
     sb
-      .from("articles")
+      .from("published_articles_view")
       .select("slug, title, updated_at, published_at, created_at")
       .eq("is_published", true)
       .not("slug", "is", null)

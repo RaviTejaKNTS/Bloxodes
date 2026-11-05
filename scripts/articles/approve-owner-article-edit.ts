@@ -7,8 +7,8 @@ import { pathToFileURL } from "node:url";
 import { createClient } from "@supabase/supabase-js";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { artifactHashes, saveJson, type PipelineState } from "./article-pipeline";
-import { assertUnpublishedIntent, type PublicationIntent } from "./article-publication-outbox";
 import { exactQueueIds, ownerEvidence, parseOwnerArgs } from "./article-owner-actions";
+import { resolveReleaseArtifactPath } from "./release-completed-articles";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 
 export type OwnerApproval = ReturnType<typeof ownerEvidence> & {
@@ -22,16 +22,15 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
   exactQueueIds([id]);
   const evidence = ownerEvidence(operator, reason);
   if (!/^[0-9a-f]{64}$/.test(expectedHash)) throw new Error("Approval requires --expected-final-hash SHA256.");
-  const unlock = await acquireAgentWorkLock(path.join(root, "tmp/article-publication"), "publication-owner-approval");
-  if (!unlock) throw new Error("Publication outbox is busy; retry after its owner finishes.");
+  const unlock = await acquireAgentWorkLock(path.join(root, "tmp/content-publish/article"), "publication-owner-approval");
+  if (!unlock) throw new Error("Article publication is busy; retry after it finishes.");
   let unlockRun: (() => Promise<void>) | undefined;
   try {
     const db = createClient(dev.url, dev.serviceRole, { auth: { persistSession: false, autoRefreshToken: false } });
     const { data: row, error } = await db.from("article_generation_queue").select("id,status,result_slug,result_path,production_url").eq("id", id).eq("workflow_mode", "agent_runner").maybeSingle();
     if (error) throw new Error(error.message);
-    const intent = JSON.parse(await readFile(path.join(root, "tmp/article-publication", `${id}.json`), "utf8")) as PublicationIntent;
-    assertUnpublishedIntent(intent, id, row ?? undefined);
-    if (!row?.result_path || path.isAbsolute(row.result_path)) throw new Error("Owner approval requires a stored relative pipeline result_path.");
+    if (!row || row.status !== "completed" || row.production_url) throw new Error("Owner approval requires a completed unpublished article.");
+    if (!row.result_path || path.isAbsolute(row.result_path)) throw new Error("Owner approval requires a stored relative pipeline result_path.");
     const pipeline = await realpath(path.join(root, "tmp/article-pipeline"));
     const finalPath = await realpath(path.resolve(root, row.result_path));
     const content = path.dirname(finalPath), run = path.dirname(content);
@@ -59,9 +58,9 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     execFileSync(process.execPath, ["--import", pathToFileURL(createRequire(import.meta.url).resolve("tsx")).href, path.join(root, "scripts/content/check-public-copy.ts"), finalPath], { cwd: root, stdio: "inherit", timeout: 60_000 });
     if (JSON.stringify(await artifactHashes(content)) !== JSON.stringify(hashes)) throw new Error("Article inputs changed during copy validation.");
     let approval = state.ownerApprovals?.slice(-1).pop();
-    // Resume a crash after the completed approval was saved but before the outbox.
+    // Repeating the same completed approval keeps its original audit entry.
     if (approval?.status === "completed" && state.artifacts["final.json"] === expectedHash && approval.operator === evidence.operator && approval.reason === evidence.reason && JSON.stringify(approval.approvedArtifacts) === JSON.stringify(hashes)) {
-      await makeEditedIntentDue(root, intent);
+      await resolveReleaseArtifactPath(finalPath, id, row.result_slug, root);
       return;
     }
     if (approval?.status === "pending") {
@@ -83,16 +82,9 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     state.artifacts = hashes;
     approval.status = "completed";
     await saveJson(stateFile, state);
-    await makeEditedIntentDue(root, intent);
-    console.log(`Recorded owner approval for ${id} at ${expectedHash}; publication budget unchanged.`);
+    await resolveReleaseArtifactPath(finalPath, id, row.result_slug, root);
+    console.log(`Recorded owner approval for ${id} at ${expectedHash}.`);
   } finally { if (unlockRun) await unlockRun(); await unlock(); }
-}
-
-async function makeEditedIntentDue(root: string, intent: PublicationIntent) {
-  // Keep exhausted budgets explicit; all other approved edits are due again.
-  delete intent.copyBlocked;
-  if (intent.attempts < 6) { delete intent.nextAttemptAt; delete intent.error; }
-  await saveJson(path.join(root, "tmp/article-publication", `${intent.queueId}.json`), intent);
 }
 
 async function main() {

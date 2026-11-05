@@ -10,8 +10,8 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
  return q;
 } }) }));
 import { listSharedGameDiscoveryPages } from "../game-content-index";
-it("reads all eight published game views without namespace exclusions", async () => {
+it("reads all nine published game views without namespace exclusions", async () => {
  const rows = await listSharedGameDiscoveryPages();
- expect(state.tables).toHaveLength(8);
- for (const namespace of ["gta", "red-dead", "minecraft", "peak"]) expect(rows.filter(row => row.namespace === namespace)).toHaveLength(8);
+ expect(state.tables).toHaveLength(9);
+ for (const namespace of ["gta", "red-dead", "minecraft", "peak"]) expect(rows.filter(row => row.namespace === namespace)).toHaveLength(9);
 });

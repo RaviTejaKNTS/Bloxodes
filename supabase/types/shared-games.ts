@@ -909,6 +909,80 @@ export type SharedGameDatabase = {
           },
         ]
       }
+      game_article_pages: {
+        Row: {
+          canonical_path: string
+          created_at: string
+          game_id: string
+          id: string
+          is_published: boolean
+          meta_description: string | null
+          namespace: string
+          published_at: string | null
+          content_md: string
+          cover_image: string | null
+          author_id: string | null
+          tags: string[]
+          faq_json: Json
+          word_count: number | null
+          seo_title: string | null
+          slug: string
+          sources_json: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_path: string
+          created_at?: string
+          game_id: string
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          namespace: string
+          published_at?: string | null
+          content_md: string
+          cover_image?: string | null
+          author_id?: string | null
+          tags?: string[]
+          faq_json?: Json
+          word_count?: number | null
+          seo_title?: string | null
+          slug: string
+          sources_json?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_path?: string
+          created_at?: string
+          game_id?: string
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          namespace?: string
+          published_at?: string | null
+          content_md?: string
+          cover_image?: string | null
+          author_id?: string | null
+          tags?: string[]
+          faq_json?: Json
+          word_count?: number | null
+          seo_title?: string | null
+          slug?: string
+          sources_json?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_article_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
       game_quiz_pages: {
         Row: {
           canonical_path: string
@@ -1373,6 +1447,40 @@ export type SharedGameDatabase = {
           },
         ]
       }
+      game_article_pages_view: {
+        Row: {
+          canonical_path: string | null
+          created_at: string | null
+          game_id: string | null
+          game_slug: string | null
+          game_title: string | null
+          id: string | null
+          is_published: boolean | null
+          meta_description: string | null
+          namespace: string | null
+          published_at: string | null
+          content_md: string | null
+          cover_image: string | null
+          author_id: string | null
+          tags: string[] | null
+          faq_json: Json
+          word_count: number | null
+          seo_title: string | null
+          slug: string | null
+          sources_json: Json | null
+          title: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_article_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
       game_quiz_pages_view: {
         Row: {
           canonical_path: string | null
@@ -1435,6 +1543,14 @@ export type SharedGameDatabase = {
             referencedColumns: ["id", "namespace"]
           },
         ]
+      }
+      game_article_game_summary: {
+        Row: { game_id: string | null; game_slug: string | null; namespace: string | null; title: string | null; icon_url: string | null; article_count: number | null; latest_updated_at: string | null }
+        Relationships: []
+      }
+      published_articles_view: {
+        Row: { id: string | null; slug: string | null; title: string | null; seo_title: string | null; meta_description: string | null; cover_image: string | null; author_id: string | null; universe_id: number | null; is_published: boolean | null; published_at: string | null; created_at: string | null; updated_at: string | null; namespace: string | null; game_id: string | null; game_title: string | null; author: Json | null; universe: Json | null }
+        Relationships: []
       }
     }
     Functions: {

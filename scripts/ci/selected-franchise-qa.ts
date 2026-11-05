@@ -68,11 +68,11 @@ async function verify() {
     readback.push({kind: 'game', slug: game.slug, id: result.data.id, parentId: result.data.parent_id, gameKind: result.data.kind});
   }
   for (const entry of plan.pages) {
-    const table = entry.kind === 'hub' ? 'game_wiki_pages' : 'game_quiz_pages';
+    const table = entry.kind === 'hub' ? 'game_wiki_pages' : entry.kind === 'article' ? 'game_article_pages' : 'game_quiz_pages';
     const result = await db.from(table).select('*').eq('namespace', plan.namespace).eq('slug', entry.row.slug).single();
     if (result.error) throw result.error;
     for (const [key, value] of Object.entries(entry.row)) same(key === 'quiz_data' ? parseGameQuizData(value) : value, result.data[key], `${table}.${entry.row.slug}.${key}`);
-    const expectedPath = await db.rpc('expected_game_page_path', {p_game_id: result.data.game_id, p_type: entry.kind === 'hub' ? 'wiki' : 'quiz', p_slug: entry.row.slug});
+    const expectedPath = await db.rpc('expected_game_page_path', {p_game_id: result.data.game_id, p_type: entry.kind === 'hub' ? 'wiki' : entry.kind === 'article' ? 'article' : 'quiz', p_slug: entry.row.slug});
     if (expectedPath.error) throw expectedPath.error;
     same(entry.path, expectedPath.data, 'Expected game path');
     const view = await db.from(`${table}_view`).select('canonical_path').eq('namespace', plan.namespace).eq('id', result.data.id).single();

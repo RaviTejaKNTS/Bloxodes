@@ -1,6 +1,6 @@
 # Articles
 
-Last verified: 2026-11-03
+Last verified: 2026-11-04
 
 Articles are guides, explainers and tier lists at `/articles/<slug>`. Topics are found and curated on the homelab; the articles are written and published by the Content Factory's T3 article run. The owner can also ask for one by hand.
 
@@ -12,7 +12,7 @@ Every 6 hours (about 00:00, 06:00, 12:00 and 18:00 IST) the T3 schedule "Bloxode
 2. A Luna builder researches each topic into `brief.md`, saves the source pages the writer works from, and gathers its images into `media.json`, uploaded to managed-dev Storage with `collect:article-images`.
 3. A Haiku 5.5 writer writes the article from `prompts/haiku-article.md`, the brief and the source pages. It runs through the factory's `bin/haiku-write`, a plain API call with no system prompt and no tools, which saves the reply.
 4. The main agent builds `final.json`, checks Haiku's facts against the brief, places the images, and runs `content:check-copy` and `check:article-image-readiness`.
-5. `bin/article publish` copies the article into the MacBook Pro checkout's `tmp/content-workspace/content-factory/<slug>/`, marks the row `completed`, writes the publication intent and runs `articles:publication:drain`, which dispatches `publish-content.yml` as below.
+5. `bin/article publish` copies the article into the MacBook Pro checkout's `tmp/content-workspace/content-factory/<slug>/`, marks the row `completed` and publishes an `article@1` bundle with `content:publish`. The publisher marks the row `published` only after it has checked production.
 
 The factory's article content lives in its `content/articles/<slug>/`.
 
@@ -22,7 +22,7 @@ Four times a day (00:00, 06:00, 12:00, 18:00 IST) the homelab runs:
 
 1. **Discover:** `articles:discover` (`scripts/articles/discover-article-topics.ts`) collects dated Roblox editorial leads.
 2. **Curate:** `articles:curate` (`curate-article-topics.ts`) uses Groq to accept `guide`, `tier_list` and `explainer` topics and reject overlaps with existing pages.
-That's all the homelab does for articles. The Content Factory writes and publishes them (above). Its `bin/article publish` runs `articles:publication:drain` from the MacBook Pro checkout, and the drain only sees intents in that checkout's `tmp/article-publication/`. The homelab writer, publication and audit units were removed on 2026-10-30. `articles:automation:audit` still works by hand.
+That's all the homelab does for articles. The Content Factory writes and publishes them (above), with `content:publish` from the MacBook Pro checkout. The homelab writer, publication and audit units were removed on 2026-10-30. `articles:automation:audit` still works by hand.
 
 Queue and curation rows live in managed development (`article_discovery_candidates`, `article_curation_runs`, `article_generation_queue`).
 
@@ -48,18 +48,17 @@ Models only write their own files. Code does the queue claims, uploads, imports 
 
 ### Publishing
 
-The drain freezes the approved article (final, media, brief and approval hashes) into a private bundle and dispatches `publish-content.yml`. GitHub stages it in managed development, checks images and embeds on desktop and mobile, publishes it, reads it back, revalidates and checks the live URL. Only then is the queue row closed. A green dispatch alone isn't a publication.
+Articles publish through `content:publish` with `article@1` bundles, with no GitHub job. It checks the bundle, moves images to production storage, writes the article, reads it back, revalidates and checks the live URL. Only then is the queue row closed.
 
-Owner recovery commands:
+Owner edit to a finished article from the old writer pipeline:
 
-- `articles:publication:drain -- --retry-exhausted --queue-id <id> --operator <name> --reason <text> --apply` resets a publication that ran out of attempts.
-- `articles:approval:owner-edit -- --queue-id <id> --expected-final-hash <sha> --operator <name> --reason <text> --apply` approves an owner edit to a finished article's `content/final.json`. It works for any authorized unpublished article without an unresolved GitHub dispatch, clears a copy block and keeps the attempt count.
+- `articles:approval:owner-edit -- --queue-id <id> --expected-final-hash <sha> --operator <name> --reason <text> --apply` approves an owner edit to a completed, unpublished article's `content/final.json`, after checking its exact hash, its unchanged brief and media, the copy check and the earlier approvals. It keeps that evidence.
 
-Neither publishes by itself. The next normal drain does.
+It doesn't publish. Publish the matching bundle with `content:publish` afterwards.
 
 ### Direct publishing
 
-`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory doesn't use it yet; its scheduled run still publishes as above.
+`content:publish` takes an article bundle (`contracts/article/v1/`). The Content Factory's `bin/article publish` uses it for new articles, and `bin/article update` for published ones.
 
 | Command | Does |
 | --- | --- |
@@ -68,14 +67,26 @@ Neither publishes by itself. The next normal drain does.
 | `... --target production --apply --allow-prod` | Uses the wiki production guard, moves images to production storage, writes the article, reads it back, revalidates and checks the live page, then marks the queue row `published`. |
 | `npm run content:status -- --article <slug> [--target production]` | The article's state on that target. |
 
-- The queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
-- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article is verified without being rewritten. On managed development, `--apply` always writes the bundle.
-- It refuses a row with an unresolved GitHub dispatch, and shares the drain's lock, so it can report "busy". Retry when it does.
+- A new article's queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
+- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article that matches the bundle is verified without being rewritten. The exception is a row still `completed` after a failed first publish: the same content is written again, keeping the author, date and cover, so the publish can finish. On managed development, `--apply` always writes the bundle.
+- To change a published article, add `--update-published` to the production command. Without it, a bundle that differs from the live article is refused, so rerunning an old bundle can't overwrite a live article or an owner's edit. An update keeps the row, slug, author, `published_at` and queue row. With `cover_image` null it also keeps the cover, even if the first body image changed. The flag applies only to `article@1`; `game-article@1` bundles update without it.
+- It holds a lock under `tmp/content-publish/article/`, so a parallel publish can report `Article publication is busy`. Retry when it does.
 - It has no browser check. It checks the live status, titles, canonical URL, description, body text, cover, body images, and video iframes and availability. It doesn't check layout or overflow on desktop and phone, JavaScript errors, hydration, lazy loading or video playback, so the run opens the live page itself.
 
 ### Runtime releases
 
 The homelab runs discovery and site health from a packaged release at `/srv/data/bloxodes-automation-runtime/current`, not the repo checkout. Merging code doesn't change it. To ship code there: run `automation-runtime.yml` on GitHub to package dependencies, then the reviewed prepare and install scripts select the new release. Don't touch the installed env, timers or running jobs while doing it.
+
+## Articles for other games
+
+Non-Roblox articles live in `game_article_pages`, the `game_*` partner of `articles`. They use the same `/articles/<slug>` URL, page design and pagination. The article reader checks `articles` first, then `site_routes`. A slug can't be used by both tables, and the `articles` table doesn't change.
+
+- **Lists:** `published_articles_view` merges both tables for `/articles`, author pages, the feed and the sitemap.
+- **Game archive:** `/articles/games/<game-slug>`, one per game (`/articles/games/gta-6`), from `game_article_game_summary`. A Roblox archive keeps its URL if a slug clashes, and the publisher refuses the clash.
+- **News:** a row with the `news` tag. There's no `/news` route, and every row needs a game.
+- **Publishing:** `content:publish` with a `game-article@1` bundle (`contracts/game-article/v1/README.md`), with no queue row and no GitHub job. The game and its parent must already be published. The publisher picks the author on each database and keeps it on reruns. With no `cover_image`, it uses the first body image, then the game's cover.
+- **Content Factory:** the `game-article-main` skill writes these from `content/game-articles/topics.md` (requested topics, then priority games) or topics it finds, with `bin/article game-existing` to find duplicates and the game, and `bin/article game-publish`. News is allowed, and the `news` tag marks it.
+- **Revalidation:** `game_content` events refresh the page, every numbered page, both lists, the archive, the author page, the feed and the sitemap.
 
 ## Manual articles
 
@@ -93,13 +104,13 @@ Publish with `bloxodes-release-e2e`.
 - Article rules: `.agents/skills/roblox/articles/bloxodes-article-writing/references/editorial-standard.md`.
 - `scripts/shared/article-editorial-standard.ts` feeds both into automated prompts, so any checkout that runs the code pipeline needs those skill files.
 
-Before a finished article is frozen for publication, the drain re-checks its copy. Bad copy stays blocked and is reported once per final hash, without spending a publication attempt.
+`content:publish` checks an article's copy and image readiness before it writes anything. A failed check stops the publish: fix the bundle and rerun it.
 
 Every article needs a real image pass before writing (`scripts/content/check-article-image-readiness.ts`).
 
 ## Data
 
-Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and `article_source_images` provenance. The old production article queue (three rows, last touched in August) isn't used.
+Other-game articles are in `game_article_pages` (see above). Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and `article_source_images` provenance. The old production article queue (three rows, last touched in August) isn't used.
 
 ## Known issues
 

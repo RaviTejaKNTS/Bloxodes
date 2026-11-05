@@ -108,6 +108,23 @@ export async function getGameTopNavContext(path: string | null | undefined): Pro
   const target = parseGameTopNavPath(path);
   if (!target) return null;
 
+  if (target.type === "articleDetail" || target.type === "articleGame") {
+    const { getArticleBySlug } = await import("./db");
+    const article = target.type === "articleDetail" ? await getArticleBySlug(target.slug) : null;
+    const summary = target.type === "articleGame" ? await getArticleGameSummaryBySlug(target.slug) : null;
+    const namespace = article?.namespace ?? summary?.namespace;
+    const gameSlug = article?.game_slug ?? summary?.slug;
+    if (namespace && gameSlug) {
+      const { listGameMenus } = await import("./game-site-data");
+      const menu = (await listGameMenus(namespace,article?.game_id??summary?.gameId,false))[0];
+      if (!menu) return null;
+      const kinds:Record<string,GameTopNavLink["type"]>={wiki:"wiki",code:"codes",quiz:"quizzes",checklist:"checklists",article:"articles"};
+      return {gameName:menu.title,thumbnailUrl:menu.image,links:uniqueByHref([
+        ...menu.pages.filter(page=>kinds[page.kind]).map(page=>({label:page.title,href:page.href,type:kinds[page.kind],active:page.href===path})),
+        {label:"Articles",href:`/articles/games/${gameSlug}`,type:"articles" as const,active:target.type==="articleGame"}
+      ]),tools:menu.pages.filter(page=>page.kind==="tool").map(page=>({label:page.title,href:page.href})),toolsActive:false};
+    }
+  }
   const resolved = await resolveRouteTarget(target);
   if (!resolved) return null;
 

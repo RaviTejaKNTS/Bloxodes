@@ -7,7 +7,7 @@ const state = vi.hoisted(() => ({ read: vi.fn(async (_type: string, _id: string)
 vi.mock("@/lib/comments", () => ({ getApprovedComments: state.read }));
 import { CommentsSection } from "../CommentsSection";
 
-it.each(["game_wiki", "game_collection", "game_tool", "game_code", "game_map", "game_quiz", "game_catalog"] as const)("reads and posts the same stored %s identity", async entityType => {
+it.each(["game_wiki", "game_collection", "game_tool", "game_code", "game_map", "game_article", "game_quiz", "game_catalog"] as const)("reads and posts the same stored %s identity", async entityType => {
   const section = await CommentsSection({ entityType, entityId: "page-id" });
   expect(state.read).toHaveBeenLastCalledWith(entityType, "page-id");
   const fetcher = vi.fn(async (url: RequestInfo | URL, options?: RequestInit) => {
