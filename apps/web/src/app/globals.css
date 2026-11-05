@@ -30,22 +30,22 @@
 
 .dark {
   color-scheme: dark;
-  --color-background: 5 6 8;
-  --color-surface: 12 14 18;
-  --color-surface-muted: 20 23 29;
+  --color-background: 5 5 5;
+  --color-surface: 13 13 13;
+  --color-surface-muted: 22 22 22;
   --color-foreground: 238 241 247;
   --color-muted: 164 173 190;
-  --color-border: 49 56 68;
+  --color-border: 52 52 52;
   --color-accent: 132 169 255;
   --color-accent-dark: 79 70 229;
   --shadow-soft: 0 28px 80px -48px rgba(0, 0, 0, 0.95);
-  --sidebar-background: 220 9% 7%;
+  --sidebar-background: 0 0% 7%;
   --sidebar-foreground: 220 16% 92%;
   --sidebar-primary: 221 100% 76%;
   --sidebar-primary-foreground: 220 23% 3%;
-  --sidebar-accent: 220 8% 12%;
+  --sidebar-accent: 0 0% 12%;
   --sidebar-accent-foreground: 220 16% 92%;
-  --sidebar-border: 220 8% 19%;
+  --sidebar-border: 0 0% 19%;
   --sidebar-ring: 221 100% 76%;
 }
 

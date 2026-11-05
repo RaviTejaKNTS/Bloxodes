@@ -6,13 +6,13 @@ tokens:
   color:
     background:
       light: "rgb(237 240 248)"
-      dark: "rgb(5 6 8)"
+      dark: "rgb(5 5 5)"
     surface:
       light: "rgb(226 229 243)"
-      dark: "rgb(12 14 18)"
+      dark: "rgb(13 13 13)"
     surfaceMuted:
       light: "rgb(212 215 231)"
-      dark: "rgb(20 23 29)"
+      dark: "rgb(22 22 22)"
     foreground:
       light: "rgb(32 38 60)"
       dark: "rgb(238 241 247)"
@@ -21,20 +21,20 @@ tokens:
       dark: "rgb(164 173 190)"
     border:
       light: "rgb(198 202 224)"
-      dark: "rgb(49 56 68)"
+      dark: "rgb(52 52 52)"
     accent:
       light: "rgb(79 70 229)"
       dark: "rgb(132 169 255)"
     sidebar:
       background:
         light: "hsl(220 14% 96%)"
-        dark: "hsl(220 9% 7%)"
+        dark: "hsl(0 0% 7%)"
       accent:
         light: "hsl(220 13% 91%)"
-        dark: "hsl(220 8% 12%)"
+        dark: "hsl(0 0% 12%)"
       border:
         light: "hsl(220 12% 84%)"
-        dark: "hsl(220 8% 19%)"
+        dark: "hsl(0 0% 19%)"
   typography:
     family: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     body: "text-[1.05rem] md:text-[1.09rem] leading-relaxed"
