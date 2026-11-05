@@ -2,14 +2,14 @@ import { formatPublishError } from "../shared/publish-network.mjs";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { loadBloxodesEnv } from "../shared/env-files";
-import { assertApprovedHubCoverScope, parseContentOptions, type ContentOptions } from "./wiki-content-options";
+import { assertApprovedHubCoverScope, assertUpdatePublishedScope, parseContentOptions, type ContentOptions } from "./wiki-content-options";
 
 export { parseContentOptions, type ContentOptions };
 
 async function main() {
   if (process.argv.includes("--help")) {
     const { PUBLICATION_RELEVANT_PATHS } = await import("../shared/local-content-publication-guard");
-    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]]
+    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
 npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --game <editorial-slug> [--target managed-dev|production]
@@ -17,6 +17,7 @@ npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
 npm run content:status -- --article <slug> [--target managed-dev|production]
 Supported contracts: roblox-wiki@1, game-wiki@1, article@1 and game-article@1. See contracts/<contract>/v1/.
+--update-published permits deliberate updates to published article@1 bundles only. Matching bundles still only verify on production.
 Default target: managed-dev. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
@@ -41,6 +42,7 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   if (options.command === "publish") {
     const { readWikiContract } = await import("../shared/wiki-publish-contract");
     contract = await readWikiContract(options.bundle!);
+    assertUpdatePublishedScope(options, contract);
     if (contract !== "roblox-wiki@1") assertApprovedHubCoverScope(options, contract);
   }
   if (process.env.BLOXODES_ENV_PROFILE !== "process-only") {
