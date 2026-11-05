@@ -9,6 +9,7 @@ import { AccountSheetButton } from "@/components/AccountSheetButton";
 import { GlobalSearchOverlay } from "@/components/GlobalSearchOverlay";
 import { SiteLogo } from "@/components/SiteLogo";
 import { SiteMoreDrawer } from "@/components/SiteMoreDrawer";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
 
 type SiteHeaderProps = {
@@ -24,6 +25,7 @@ const iconButtonClass =
 /**
  * The sticky site header. Section links sit on one line that wraps out of view when the window is
  * too narrow, so every link stays in the server HTML and the More drawer lists them all.
+ * The More button shows only when links are out of view; otherwise that spot is the theme button.
  */
 export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
   const pathname = usePathname() ?? "/";
@@ -32,6 +34,9 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
   const listRef = useRef<HTMLUListElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
   const [moreOpen, setMoreOpen] = useState(false);
+  // Below md the links are hidden and CSS shows More. From md, More only replaces the theme
+  // button while some links don't fit; both buttons are the same width, so nothing shifts.
+  const [linksOverflow, setLinksOverflow] = useState(false);
   const closeMore = useCallback(() => setMoreOpen(false), [setMoreOpen]);
 
   useEffect(() => {
@@ -46,7 +51,13 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
     const update = () => {
       const items = Array.from(list.children) as HTMLElement[];
       const firstTop = items[0]?.offsetTop ?? 0;
-      for (const item of items) item.toggleAttribute("data-overflow", item.offsetTop > firstTop);
+      let overflow = false;
+      for (const item of items) {
+        const wrapped = item.offsetTop > firstTop;
+        item.toggleAttribute("data-overflow", wrapped);
+        overflow ||= wrapped;
+      }
+      setLinksOverflow(overflow);
     };
     update();
     const observer = new ResizeObserver(update);
@@ -96,14 +107,17 @@ export function SiteHeader({ account, linkPaths = {} }: SiteHeaderProps) {
               type="button"
               onClick={() => setMoreOpen(true)}
               aria-label="More"
+              title="More"
               aria-haspopup="dialog"
               aria-expanded={moreOpen}
               aria-controls={SITE_MORE_DRAWER_ID}
-              className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md px-2 text-[13px] font-semibold text-foreground/70 transition-colors hover:bg-muted/60 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-2.5"
+              className={`${iconButtonClass} ${linksOverflow ? "" : "md:hidden"}`}
             >
               <Menu aria-hidden className="h-[18px] w-[18px]" />
-              <span className="hidden sm:inline">More</span>
             </button>
+            <ThemeToggle
+              className={`h-9 w-9 rounded-md border-0 bg-transparent text-muted-foreground shadow-none hover:translate-y-0 hover:bg-muted/60 hover:text-foreground ${linksOverflow ? "hidden" : "hidden md:inline-flex"}`}
+            />
             <AccountSheetButton account={account} />
           </div>
         </div>

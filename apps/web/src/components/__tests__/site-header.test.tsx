@@ -42,6 +42,8 @@ describe("site header", () => {
     expect(primary?.querySelector('[aria-current="page"]')?.getAttribute("href")).toBe("/wiki");
     expect(container.querySelector('button[aria-label="Search"][data-search-trigger]')).not.toBeNull();
     expect(container.querySelector('button[aria-label="More"]')?.getAttribute("aria-expanded")).toBe("false");
+    // All links fit by default, so More shows only below md.
+    expect(container.querySelector('button[aria-label="More"]')?.className).toContain("md:hidden");
     expect(container.textContent).toContain("Account");
   });
 

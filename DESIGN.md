@@ -67,7 +67,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Use clean, restrained shadcn-style primitives for interface surfaces: navigation items, search inputs, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
-- Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, a More drawer and the account button. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
+- Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, the theme button and the account button. The theme button becomes a More button, which opens the More drawer, on phones or whenever some links don't fit. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
 - Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early. Page text fills the main column, on every page with a rail, so no gap opens between the text and the rail.
 
 ## Layout
