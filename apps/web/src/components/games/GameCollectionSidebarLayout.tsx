@@ -1,21 +1,10 @@
 import type { ReactNode } from "react";
 import { PageSidebar } from "@/components/PageSidebar";
-import { RailLinkList } from "@/components/RailLinkList";
+import { GameCollectionsRail, type CollectionRailLink } from "@/components/game-sidebar/GameCollectionsRail";
+import { WikiCard } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { SocialShare } from "@/components/SocialShare";
 import { SITE_URL } from "@/lib/seo";
 import "@/styles/ads-collections.css";
-
-type CollectionLink = { value: string; label: string; href: string; description?: string | null };
-
-const MAX_RELATED = 6;
-
-/** Sibling collections that follow the current one, wrapping around, so every collection gets linked from somewhere. */
-function pickRelated(options: CollectionLink[], currentCode: string): CollectionLink[] {
-  const index = options.findIndex(option => option.value === currentCode);
-  if (index < 0) return options.slice(0, MAX_RELATED);
-  const ordered = [...options.slice(index + 1), ...options.slice(0, index)];
-  return ordered.slice(0, MAX_RELATED);
-}
 
 /**
  * Shared game collection pages: main column plus the
@@ -28,7 +17,9 @@ export function GameCollectionSidebarLayout({
   code,
   gameName,
   wikiPath,
-  collectionOptions
+  collectionOptions,
+  wikiImage,
+  otherPages
 }: {
   children: ReactNode;
   canonicalPath: string;
@@ -36,12 +27,14 @@ export function GameCollectionSidebarLayout({
   code: string;
   gameName: string;
   wikiPath: string;
-  collectionOptions: CollectionLink[];
+  collectionOptions: CollectionRailLink[];
+  wikiImage: string | null;
+  otherPages?: ReactNode;
 }) {
-  const related = pickRelated(collectionOptions, code);
+  const rail = <GameCollectionsRail gameName={gameName} collections={collectionOptions} />;
   return (
     <div className="grid gap-8 content-sidebar-grid">
-      <div className="min-w-0">{children}</div>
+      <div className="min-w-0">{children}<div className="mt-10 lg:hidden">{rail}</div></div>
       <PageSidebar className="hidden lg:block">
         <SocialShare
           url={`${SITE_URL.replace(/\/$/, "")}${canonicalPath}`}
@@ -49,11 +42,9 @@ export function GameCollectionSidebarLayout({
           heading="Share this collection with your friends"
           analytics={{ contentType: "game_collection", itemId: code }}
         />
-        <RailLinkList
-          heading={`More ${gameName} collections`}
-          links={related.map(option => ({ href: option.href, title: option.label, description: option.description }))}
-          footer={{ href: wikiPath, label: `${gameName} wiki` }}
-        />
+        <WikiCard href={wikiPath} title={`${gameName} Wiki`} iconUrl={wikiImage} />
+        {rail}
+        {otherPages}
       </PageSidebar>
     </div>
   );

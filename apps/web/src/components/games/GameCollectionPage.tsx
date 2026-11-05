@@ -7,6 +7,9 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { buildPageContentHtml } from "@/lib/page-content";
 import { buildAlternates, resolveSeoTitle, SITE_URL, SITE_NAME } from "@/lib/seo";
 import { renderGameCollectibleCollectionPage } from "./GameCollectibleCollectionPage";
+import { getGameDirectoryPages } from "@/lib/game-registry";
+import { GameCollectionOtherPages } from "@/components/game-sidebar/GameCollectionOtherPages";
+import { orderOtherCollections } from "@/components/game-sidebar/GameCollectionsRail";
 import { GameCollectionSidebarLayout } from "./GameCollectionSidebarLayout";
 
 export async function gameCollectionMetadata(page: SharedGameWikiCollectionPage, currentPage = 1): Promise<Metadata> {
@@ -25,12 +28,17 @@ export async function renderSharedGameCollection({ page, namespaceTitle, current
   if (!runtime) throw new Error(`Published collection ${page.code} has no verified runtime.`);
   const prepared = prepareGameCollectionDocument(runtime.config, runtime.document);
   if (!Number.isSafeInteger(currentPage) || currentPage < 1 || currentPage > prepared.totalPages || (page.page_type === "collectible" && currentPage !== 1)) notFound();
-  const [contentHtml, collections, wiki] = await Promise.all([buildPageContentHtml(page), reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.wiki_slug), supabaseAdmin().from("game_wiki_pages_view").select("canonical_path").eq("id", page.wiki_page_id).eq("is_published", true).single()]);
+  const [contentHtml, collections, wiki] = await Promise.all([buildPageContentHtml(page), reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.wiki_slug, page.game_id), supabaseAdmin().from("game_wiki_pages_view").select("canonical_path,cover_image,game_cover_image").eq("id", page.wiki_page_id).eq("is_published", true).single()]);
   if (wiki.error || !wiki.data) throw new Error("Published collection wiki is missing.");
-  const collectionOptions = collections.map(p => ({ value: p.code, label: p.display_name, href: p.canonical_path, pageType: p.page_type }));
+  const collectionOptions = collections.filter(p => p.wiki_slug === page.wiki_slug).map(p => ({ value: p.code, label: p.display_name, href: p.canonical_path, pageType: p.page_type }));
   const landing = await getGameLandingForLinks(page.namespace);
   const rendered = page.page_type === "collectible"
     ? renderGameCollectibleCollectionPage({ page, namespaceTitle, wikiPath: wiki.data.canonical_path, config: runtime.config, dataset: prepared.dataset, groupedSections: prepared.groupedSections, contentHtml, collectionOptions, landingPath: landing?.path })
-    : renderGameCollectionPage({ config: runtime.config, dataset: prepared.dataset, contentHtml, currentPage, prepared, collectionBasePath: page.canonical_path, routeBase: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? landing.path : "/wiki") : `/${page.namespace}/wiki`, wikiHomePath: wiki.data.canonical_path, wikiLabel: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? namespaceTitle : "Wiki") : `${namespaceTitle} Wiki`, collectionOptions, commentsEntityType: "game_collection", showMoreCollections: false, enableItemFinder: true, stream: true });
-  return <GameCollectionSidebarLayout canonicalPath={page.canonical_path} title={page.title} code={page.code} gameName={page.game_short_title || page.game_title} wikiPath={wiki.data.canonical_path} collectionOptions={collections.map(p => ({ value: p.code, label: p.display_name, href: p.canonical_path, description: p.meta_description }))}>{rendered}</GameCollectionSidebarLayout>;
+    : renderGameCollectionPage({ config: runtime.config, dataset: prepared.dataset, contentHtml, currentPage, prepared, collectionBasePath: page.canonical_path, routeBase: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? landing.path : "/wiki") : `/${page.namespace}/wiki`, wikiHomePath: wiki.data.canonical_path, wikiLabel: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? namespaceTitle : "Wiki") : `${namespaceTitle} Wiki`, collectionOptions, commentsEntityType: "game_collection", enableItemFinder: true, stream: true });
+  const gameName = page.game_short_title || page.game_title;
+  const ordered = orderOtherCollections(collections.map(p => ({ value: p.code, label: p.display_name?.trim() || p.title, href: p.canonical_path, count: p.item_count, page: p })), page.code);
+  const railCollections = await Promise.all(ordered.map(async (entry, index) => ({ ...entry, image: index < 3 ? (await reader.listPublishedSharedGameWikiCollectionImageUrls(entry.page, 1))[0] ?? null : null })));
+  // Skip collections entirely: the directory normally looks up an image for every collection.
+  const otherPages = await getGameDirectoryPages(page.namespace, page.game_id, false);
+  return <GameCollectionSidebarLayout canonicalPath={page.canonical_path} title={page.title} code={page.code} gameName={gameName} wikiPath={wiki.data.canonical_path} wikiImage={wiki.data.cover_image || wiki.data.game_cover_image || null} collectionOptions={railCollections} otherPages={<GameCollectionOtherPages pages={otherPages} gameName={gameName} />}>{rendered}</GameCollectionSidebarLayout>;
 }

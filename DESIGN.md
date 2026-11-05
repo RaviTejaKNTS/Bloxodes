@@ -87,6 +87,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Search results should read as list rows, not heavy cards.
 - Navigation sections should use quiet labels where they help scanning, but avoid turning the public site into a literal workspace clone.
 - "More …" page lists in the rail use `RailLinkList`: one row per page with its image when it has one, otherwise an icon picked from the URL, and a one-line description. New pages need no extra data to look right.
+- Wiki collection pages have one sidebar for every game and collection type (`GameCollectionsRail`, instead of a "More …" `RailLinkList`). The order is: share, wiki card, a `More <game> collections` panel with the next 3 collections, a flat unboxed `All other <game> collections` list of inline links, then the game's other pages. Articles on these pages have no cover image. Below 1024px, only the panel and list show, below the page content.
 - Copyable codes and IDs on cards use `CopyCodeButton` with `variant="bar"`: one full-width button showing the code and a Copy label.
 - Images in page text stop at 720px wide and 480px tall (`--content-image-max-width` and `--content-image-max-height` in `article-content.css`). Galleries are exempt.
 

@@ -1,7 +1,6 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
-import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
 import { getCollectionFieldLabels } from "@/lib/game-collections";
@@ -490,7 +489,6 @@ export function renderTheForgeCollectionPage({
               <CommentsSection entityType="wiki_collection" entityId={contentHtml.id} />
             </div>
           ) : null}
-          <MoreWikiCollections wikiSlug="the-forge" excludeCollectionSlug={config.slug} gameName="The Forge" />
         </>
       ) : null}
 
