@@ -10,13 +10,7 @@
   grid-template-columns: minmax(0, 1fr);
 }
 @container hubs (min-width: 520px) {
-  .hubs-main .journey-content-stream--index:not(.hubs-card-stream) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-/* Large image cards with big titles (/games, map cards) keep one column until 640px. */
-@container hubs (min-width: 640px) {
-  .hubs-main .hubs-card-stream {
+  .hubs-main .journey-content-stream--index {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

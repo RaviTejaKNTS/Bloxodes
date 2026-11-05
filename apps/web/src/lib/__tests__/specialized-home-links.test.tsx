@@ -32,7 +32,7 @@ it("includes every published root with the same home card and directory contract
     expect(markup).toContain(`href="${game.pages[0].href}"`);
   }
   const page = await GamesPage();
-  // Inspect the exact cards passed to the server layout without resolving its rail.
-  const markup = renderToStaticMarkup(<>{page.props.children}</>);
+  const markup = renderToStaticMarkup(page);
+  expect(markup).not.toContain("<aside");
   for (const game of games) expect(markup).toContain(`href="${game.href}"`);
 });
