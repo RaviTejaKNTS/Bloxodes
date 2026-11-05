@@ -59,7 +59,7 @@ Neither publishes by itself. The next normal drain does.
 
 ### Direct publishing
 
-`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory's `bin/article publish` uses it for new articles.
+`content:publish` also takes an article bundle (`contracts/article/v1/`), with no GitHub job. The Content Factory's `bin/article publish` uses it for new articles, and `bin/article update` for published ones.
 
 | Command | Does |
 | --- | --- |
@@ -68,8 +68,9 @@ Neither publishes by itself. The next normal drain does.
 | `... --target production --apply --allow-prod` | Uses the wiki production guard, moves images to production storage, writes the article, reads it back, revalidates and checks the live page, then marks the queue row `published`. |
 | `npm run content:status -- --article <slug> [--target production]` | The article's state on that target. |
 
-- The queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
-- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article is verified without being rewritten. On managed development, `--apply` always writes the bundle.
+- A new article's queue row must be `completed`, and `final.json` must match its `result_path` byte for byte.
+- Rerun the same bundle after a failure. A failed publish leaves the row retryable. On production, a published article that matches the bundle is verified without being rewritten. The exception is a row still `completed` after a failed first publish: the same content is written again, keeping the author, date and cover, so the publish can finish. On managed development, `--apply` always writes the bundle.
+- To change a published article, add `--update-published` to the production command. Without it, a bundle that differs from the live article is refused, so rerunning an old bundle can't overwrite a live article or an owner's edit. An update keeps the row, slug, author, `published_at` and queue row. With `cover_image` null it also keeps the cover, even if the first body image changed. The flag applies only to `article@1`; `game-article@1` bundles update without it.
 - It refuses a row with an unresolved GitHub dispatch, and shares the drain's lock, so it can report "busy". Retry when it does.
 - It has no browser check. It checks the live status, titles, canonical URL, description, body text, cover, body images, and video iframes and availability. It doesn't check layout or overflow on desktop and phone, JavaScript errors, hydration, lazy loading or video playback, so the run opens the live page itself.
 
