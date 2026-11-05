@@ -8,7 +8,7 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-All run with full access in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro. The article and game article runs use Codex `gpt-6.1-sol` high; the other games and Roblox wiki runs use Claude Opus 5.5 high. They have standing permission to publish (wikis and articles with `content:publish`) and to commit and push the factory repo. None opens code PRs.
+All run with full access in the "Bloxodes Content Factory" project on the MacBook Pro, in its root checkout, except the game article run, which gets its own worktree. The article run uses Codex `gpt-6.1-sol` high; the game article, other games and Roblox wiki runs use Claude Opus 5.5 high. They have standing permission to publish (wikis and articles with `content:publish`) and to commit and push the factory repo. None opens code PRs.
 
 
 | Schedule | Time | Does |
