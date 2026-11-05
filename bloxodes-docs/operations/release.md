@@ -53,7 +53,7 @@ Other database content, and existing Roblox CI batches, go out through `publish-
 3. **Checks:** the production schema ledger must have no pending migrations, and the live code must be current and compatible.
 4. **Publish** (`apply=true`): runs the selected publishers, reads back, revalidates and checks the exact URLs, text, metadata and sitemap. `apply=false` only verifies.
 
-Publishers: `events-final`, `roblox-codes-page`, `article-queue`, `game-pages`, `content-final`, `roblox-wiki`, `roblox-collection`, `franchise-wiki`, `franchise-collection`, `minecraft-tools`, `catalog`, `tool-finals` (see `scripts/ci/content-contract.mjs`).
+Publishers: `events-final`, `roblox-codes-page`, `game-pages`, `content-final`, `roblox-wiki`, `roblox-collection`, `franchise-wiki`, `franchise-collection`, `minecraft-tools`, `catalog`, `tool-finals` (see `scripts/ci/content-contract.mjs`). `content-final` refuses article files; articles publish with `content:publish`.
 
 `content/releases/verify-existing/batch.json` is a read-only canary. Dispatch it with `apply=false` to test the pipeline. Never test by creating junk content.
 
@@ -61,7 +61,6 @@ Publishers: `events-final`, `roblox-codes-page`, `article-queue`, `game-pages`, 
 
 - Checklist QA builds temporary boards and compares every field and task, then removes only its own boards, tasks and test accounts. If cleanup fails, production is blocked.
 - Browser QA ticks, reloads and unticks checklist tasks with a runner-only account on desktop and mobile.
-- Article QA also checks that body images load and videos embed.
 - **Selected franchise QA:** for franchise hubs, collections and quizzes, dispatch `pull-request.yml` on the task branch with `selected_franchise_bundle_hash=<sha256>` (`scripts/ci/selected-franchise-qa.ts`). `selected_franchise_stage=false` is the default and verifies content already staged in development; set it to `true` to stage first. It audits datasets, compares rows and media, builds a preview, checks desktop and mobile with isolated accounts and cleans up its fixtures.
 - **Selected Roblox QA:** for Roblox wiki hubs and collections, dispatch `pull-request.yml` on the task branch with `selected_roblox_bundle_hash=<sha256>` (`scripts/ci/selected-roblox-qa.ts`). It only verifies content already staged in development; it stages nothing and uploads no media. It compares every stored row, revision hash, copy field and public media byte before and after the browser run, checks Cards/List fields, images, metadata, sitemap entries, pagination and saved progress on desktop and mobile with isolated accounts, then removes those accounts. For each hub, keep `cover_image: null` in the authoring final and freeze `<operation.file>.qa-cover.json` with `file` (bundle-relative cover path), `sha256` (full lowercase hash) and `format` (`png`, `jpeg`, `webp` or `avif`), plus the exact already-staged R2 cover bytes. QA verifies the hosted URL and hash, fully decodes the 768×432 cover and separate 512×512 official icon, and checks the cover in social metadata and directory cards. Its report is development evidence, not a production receipt.
 - You can run `managed-content-qa.yml` on its own with the exact `approved_sha` and a `batch` or `bundle_hash`. It only writes development.

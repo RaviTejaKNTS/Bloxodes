@@ -1,6 +1,5 @@
 import "../shared/load-env";
 
-import { authorizePublication, drainPublications } from "./article-publication-outbox";
 import { accessSync, constants as fsConstants } from "node:fs";
 import { access } from "node:fs/promises";
 import os from "node:os";
@@ -73,7 +72,7 @@ Options:
   --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
   --max-attempts N           Retry threshold for blocked rows, 1-10 (default: 3)
   --timeout-minutes N        Batch timeout, 30-330 (default: 300)
-  --release-completed        Publish only code-verified completed rows to production (default)
+  --release-completed        Retired publication flag; use content:publish for completed rows
   --skip-production-release  Leave completed rows in the queue for manual release
   --help                     Show this help
 
@@ -386,7 +385,6 @@ async function main() {
   }
   try {
     if (options.apply) {
-      if (options.releaseCompleted) await drainPublications(options.worktree, dev).catch(error => console.error(errorMessage(error)));
       const staleClaims = await recoverStaleBatchClaims(dev, options.maxAttempts, options.timeoutMinutes + 30, options.queueId);
       if (staleClaims) console.log(`Recovered ${staleClaims} stale homelab batch claim(s).`);
       const retryResult = await requeueDueBlockedRows(dev, options.maxAttempts, options.queueId);
@@ -416,7 +414,7 @@ async function main() {
       );
       console.log(
         options.releaseCompleted
-          ? "Post-verification release: enabled for the exact completed IDs selected by this batch."
+          ? "Publication uses content:publish; completed rows remain available for review."
           : "Post-verification release: disabled; completed rows remain queued for manual release."
       );
       return;
@@ -441,7 +439,6 @@ async function main() {
           for (const id of selectedIds) {
             if (controller.signal.aborted || Date.now() >= deadline) break;
             try {
-              if (options.releaseCompleted) await authorizePublication(options.worktree, id);
               const result = await processArticleQueueRow(dev, id, {
                 worktree: options.worktree, runDir: path.join(options.worktree, "tmp/article-pipeline", id), env, baseUrl,
                 deadline, stageTimeoutMs: stageMinutes * 60_000, signal: controller.signal,
@@ -467,8 +464,7 @@ async function main() {
         throw new Error("DEGRADED ARTICLE WRITER: A non-empty batch completed zero verified managed-dev articles.");
       }
       console.log(`Article writer completed ${completedRows.length} managed-dev article(s).`);
-      if (options.releaseCompleted && !controller.signal.aborted) await drainPublications(options.worktree, dev);
-      else console.log("Automatic production release is disabled for this batch; completed rows remain available for review.");
+      console.log("Completed rows remain available for review and publication with content:publish.");
       if (providerError) throw providerError;
     } catch (error) {
       const reason = `Homelab article batch did not finish: ${errorMessage(error)}`.slice(0, 1_000);
