@@ -26,6 +26,13 @@ const repoRoot = path.resolve(import.meta.dirname, "../..");
 const json = async (file: string) => JSON.parse(await fs.readFile(file, "utf8"));
 const digest = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 
+// <Game> is the game's name or its short title, such as "GTA 6" for Grand Theft Auto VI.
+export function assertCollectionTitle(title: string, gameNames: Array<string | null | undefined>, itemCount: number) {
+  const match = /^All (\{count\}|[\d,]+) .+ in .+/.exec(title);
+  const namesGame = gameNames.some(name => name && title.includes(` in ${name}`));
+  if (!match || !namesGame || match[1] !== "{count}" && Number(match[1].replaceAll(",", "")) !== itemCount) throw new Error("Use All {count} <Collection> in <Game> as the collection title; literal counts must match the dataset.");
+}
+
 export async function planGameWikiImage(root: string, value: string, namespace: string, gameSlug: string, role: "cover" | "hero") {
   let bytes: Buffer;
   let metadata: sharp.Metadata;
@@ -177,8 +184,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     plan.manifest.collection.sortOrder = order;
     plan.finalJson = final;
     if (final.display_name !== manifest.collection.label) throw new Error("display_name must equal collection.label.");
-    const title = /^All (\{count\}|[\d,]+) .+ in .+/.exec(final.title);
-    if (!title || !final.title.includes(` in ${bundle.game.name}`) || title[1] !== "{count}" && Number(title[1].replaceAll(",", "")) !== plan.items.length) throw new Error("Use All {count} <Collection> in <Game> as the collection title; literal counts must match the dataset.");
+    assertCollectionTitle(final.title, [bundle.game.name, gameInput.short_title], plan.items.length);
     assertCollectionMissingImages(plan.items, entry.missingImages, manifest.missingImages);
     requireFranchiseCollectionImage(plan.items, plan.code);
     for (const item of plan.items) checkCopy({ description_json: { name: item.item_name, ...item.fields_json } }, `${slug}/${item.item_slug}`);

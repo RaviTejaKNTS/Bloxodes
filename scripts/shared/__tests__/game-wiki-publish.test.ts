@@ -669,3 +669,16 @@ test("repeat publication preserves stored media identities without namespace rul
     } finally { await fs.rm(root, { recursive: true, force: true }); }
   }
 });
+
+test("collection titles may use the game's name or short title, and literal counts must match", async () => {
+  const { assertCollectionTitle } = await import("../../content/game-wiki-publish");
+  const names = ["Grand Theft Auto VI", "GTA 6"];
+  assert.doesNotThrow(() => assertCollectionTitle("All {count} Weapons in GTA 6", names, 5));
+  assert.doesNotThrow(() => assertCollectionTitle("All {count} Weapons in Grand Theft Auto VI", names, 5));
+  assert.doesNotThrow(() => assertCollectionTitle("All 5 Weapons in GTA 6: Confirmed and Spotted", names, 5));
+  assert.doesNotThrow(() => assertCollectionTitle("All {count} Items in Example", ["Example", null], 2));
+  assert.throws(() => assertCollectionTitle("All {count} Weapons in Red Dead", names, 5), /as the collection title/);
+  assert.throws(() => assertCollectionTitle("All 4 Weapons in GTA 6", names, 5), /as the collection title/);
+  assert.throws(() => assertCollectionTitle("Every Weapon in GTA 6", names, 5), /as the collection title/);
+  assert.throws(() => assertCollectionTitle("All {count} Weapons in GTA 6", [null], 5), /as the collection title/);
+});

@@ -150,7 +150,7 @@ Required fields in `collections/<slug>/final.json`:
 
 - `wiki_slug`, `collection_slug`, `code`: game slug, collection slug and `<game-slug>-<collection-slug>`.
 - `display_name`: exactly the manifest's collection label.
-- `title`: `All {count} <Collection> in <Game>`, optionally followed by a useful angle. A literal count must match the dataset.
+- `title`: `All {count} <Collection> in <Game>`, optionally followed by a useful angle. `<Game>` is the game's name or its `short_title`. A literal count must match the dataset.
 - `seo_title`, `meta_description`, `intro_md`, `description_md`, `wiki_md`: non-empty strings.
 - `description_json`: section-note object with string values. Keys must match dataset sections; `{}` is valid.
 - `faq_json`: array of `{ "q": "Question", "a": "Answer" }`; `[]` is valid.
