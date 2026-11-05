@@ -8,6 +8,8 @@ Scope: `scripts/`.
 
 These files are operational jobs, imports, backfills, collectors, and automation workers. Many are side-effectful.
 
+Anything here that runs without a person follows `workflow/runners.md` in the Cockpit checkout.
+
 ## Shared non-Roblox game commands
 
 Every non-Roblox game uses shared `games`/`game_*` storage with an explicit namespace. Publish non-Roblox hubs and collections with `content:publish` and a reviewed `game-wiki@1` bundle. It validates, uploads and reads back hub and collection media, for every game and edition. GitHub publication uses the selected-content CI job and keeps exact target and input guards.

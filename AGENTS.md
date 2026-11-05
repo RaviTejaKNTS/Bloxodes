@@ -71,6 +71,11 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 - Open PRs against `production` and link them to T3. Merge only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly or bypass protection.
 - Use `bloxodes-release-e2e` only when a release is explicitly requested.
 
+**Scripts that run by themselves**
+
+- Before you add or change a timer, cron job, worker, T3 schedule or scheduled workflow, read `workflow/runners.md` in the Cockpit checkout (`~/projects/cockpit` on the Macs, `/srv/data/projects/cockpit` on the homelab) and follow it. It has to survive restarts, crashes and overloads.
+- List it in `bloxodes-docs/automation/monitoring.json` and [schedules](bloxodes-docs/automation/schedules.md) in the same change.
+
 **Data and secrets**
 
 - Never print, log or commit secrets. Env files are edited only on the homelab; Mac copies are read-only. See [environment](bloxodes-docs/environment.md).
