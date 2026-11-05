@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
+import { statsRefreshRunStatus } from "../../shared/stats-job-run";
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
 import { formatDataApiError } from "../../shared/data-api-retry";
 import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
@@ -382,4 +383,25 @@ test("daily badge and pass attachment refreshes share discovery capacity and exp
   assert.match(badges[0], /JOB_TIMEOUT_SECONDS=600/);
   assert.match(badges[0], /refresh:stats-badges -- --allow-live/);
   assert.match(cron.split('\n').find(line => line.includes(' wiki-game-passes-refresh '))!, /--include-hot/);
+});
+
+test("universe refresh records missing rows separately and still fails unusable responses", () => {
+  const source = readFileSync(new URL("../update-universe-hourly-stats.ts", import.meta.url), "utf8");
+  assert.match(source, /missing: missingRows.length,/);
+  assert.match(source, /failed: emptyRows.length,/);
+  assert.match(source, /missingRows \+= result.missing/);
+  assert.match(source, /failedRows \+= result.failed/);
+  assert.doesNotMatch(source, /failedRows \+= result.missing/);
+  assert.match(source, /await markMissingResponses\(missingRows\)/);
+  assert.match(source, /await markFailures\(emptyRows,/);
+  assert.match(source, /missing_rows: missingRows/);
+  assert.match(source, /statsRefreshRunStatus\(updatedRows, failedRows, missingRows\)/);
+  assert.equal(statsRefreshRunStatus(10, 0, 0), "success");
+  assert.equal(statsRefreshRunStatus(848, 0, 4), "success", "a few removals are normal");
+  assert.equal(statsRefreshRunStatus(0, 0, 17), "success", "a small all-missing COLD run is normal");
+  assert.equal(statsRefreshRunStatus(10, 1, 0), "partial");
+  assert.equal(statsRefreshRunStatus(0, 1, 0), "failed");
+  assert.equal(statsRefreshRunStatus(450, 0, 50), "success", "exactly 10% missing stays normal");
+  assert.equal(statsRefreshRunStatus(440, 0, 60), "partial", "a large missing share is suspect");
+  assert.equal(statsRefreshRunStatus(0, 0, 50), "failed", "a whole batch missing is not a success");
 });
