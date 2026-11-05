@@ -23,14 +23,14 @@ vi.mock("@/lib/game-sidebar", () => ({ getGameSidebarData: async () => ({
 
 describe("collection discovery", () => {
   it("preserves the default codes, wiki, covered article and checklist order for other callers", async () => {
-    const $ = load(renderToStaticMarkup(await GameDiscoverySidebar({ universeId: 1, universeName: "Example", currentType: "tool" })));
+    const $ = load(renderToStaticMarkup((await GameDiscoverySidebar({ universeId: 1, universeName: "Example", currentType: "tool" }))!));
     expect($("a").map((_, a) => $(a).attr("href")).get()).toEqual(["/codes/example", "/wiki/example", "/articles/guide", "/articles/guide"]);
     expect($("img[src='https://example.com/cover.png']")).toHaveLength(1);
     expect($.text().indexOf("Example guide")).toBeLessThan($.text().indexOf("Checklist"));
   });
 
   it("omits the wiki and article cover only when collection options are passed", async () => {
-    const $ = load(renderToStaticMarkup(await GameDiscoverySidebar({ universeId: 1, universeName: "Example", currentType: "collection", hideWiki: true, articlesWithoutCover: true })));
+    const $ = load(renderToStaticMarkup((await GameDiscoverySidebar({ universeId: 1, universeName: "Example", currentType: "collection", hideWiki: true, articlesWithoutCover: true }))!));
     expect($("a[href='/wiki/example']")).toHaveLength(0);
     expect($("img[src='https://example.com/cover.png']")).toHaveLength(0);
     expect($("a[href='/articles/guide']")).toHaveLength(1);
