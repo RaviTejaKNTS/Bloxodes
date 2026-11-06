@@ -45,7 +45,7 @@ export async function GameContentPage({ page, children }: { page: GameExtendedPa
     ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])
   ];
   const isMap = page.renderer_key === "image-pins" || page.canonical_path.includes("/maps/");
-  return <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+  return <div className="grid gap-8 content-sidebar-grid">
     <div className="min-w-0 space-y-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": graph }) }} />
       <PageBreadcrumb items={breadcrumbs} />

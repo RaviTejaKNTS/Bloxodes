@@ -332,7 +332,11 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 
     const content = selectors[0];
     const widgets = document.querySelectorAll<HTMLElement>(".ads-tools-widget");
-    if (widgets.length || /^\/(?:tools|maps)(?:\/|$)/.test(window.location.pathname)) {
+    const pathname = window.location.pathname;
+    const noRailIndex = /^\/(?:catalog|stats|authors)$/.test(pathname) || /^\/(?:tools|checklists)(?:\/page\/\d+)?$/.test(pathname);
+    if (noRailIndex && document.querySelector("aside")) throw new Error("index must not render an aside");
+    if (pathname === "/wiki" && document.querySelector("aside.space-y-4")) throw new Error("wiki inline panel must not match the ad rail selector");
+    if (!noRailIndex && (widgets.length || /^\/(?:tools|maps)(?:\/|$)/.test(pathname))) {
       const rails = document.querySelectorAll<HTMLElement>("aside.space-y-4");
       if (rails.length !== 1 || !rails[0].matches("aside#sidebar") || document.querySelectorAll("aside#sidebar").length !== 1 || !rails[0].parentElement?.classList.contains("content-sidebar-grid") || content.contains(rails[0])) {
         throw new Error("map/tool sidebar must be one direct grid child outside the article body");

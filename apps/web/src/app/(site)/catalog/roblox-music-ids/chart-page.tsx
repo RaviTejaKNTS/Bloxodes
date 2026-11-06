@@ -103,7 +103,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
           {catalogIdTitle(config.heading)}
         </h1>
         {pageNumber === 1 ? (
-          <p className="max-w-2xl text-base text-muted md:text-lg">{config.description}</p>
+          <p className=" text-base text-muted md:text-lg">{config.description}</p>
         ) : null}
         <IndexPageStats
           items={[
@@ -115,7 +115,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
       </header>
 
       {showTrendingGuide ? (
-        <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">
+        <p className=" text-base leading-7 text-muted md:text-lg">
           Trending Roblox music IDs are songs currently placed in Roblox&apos;s daily top-song feed. Use the rankings to find popular audio quickly, compare titles and artists, and copy an asset ID for a game that supports Radios, Boomboxes, Jukeboxes, or custom music.
         </p>
       ) : null}
@@ -127,10 +127,10 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
           <h2 className="text-2xl font-semibold leading-snug text-foreground">
             How trending Roblox music IDs are ranked
           </h2>
-          <p className="max-w-3xl leading-7 text-muted">
+          <p className=" leading-7 text-muted">
             The order comes from Roblox&apos;s daily top-song data. A lower rank number means the audio appears higher in that feed. Bloxodes keeps the Roblox asset ID, song title, artist, duration, and current rank together so you can compare songs without opening every asset separately.
           </p>
-          <p className="max-w-3xl leading-7 text-muted">
+          <p className=" leading-7 text-muted">
             Rankings can move whenever Roblox refreshes its music data. A song may rise because more players are finding it, then fall as other tracks become more popular. The list shows discovery trends across Roblox. It does not guarantee that every experience allows the audio in its radio, Boombox, or custom sound field.
           </p>
         </section>
@@ -146,10 +146,10 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
             <h2 className="text-2xl font-semibold leading-snug text-foreground">
               How to use a trending Roblox music ID
             </h2>
-            <p className="max-w-3xl leading-7 text-muted">
+            <p className=" leading-7 text-muted">
               Copy the number shown beside the song, then paste it into a Roblox experience that accepts audio asset IDs. The exact control depends on the game. It may be called Radio, Boombox, Jukebox, Music ID, or Custom Audio. Some controls are free, while others require a game pass or an in-game item.
             </p>
-            <p className="max-w-3xl leading-7 text-muted">
+            <p className=" leading-7 text-muted">
               If the game rejects the number, check that you copied only the digits. The experience may also restrict which audio assets it can play. Try another ranked song before assuming the input itself is broken.
             </p>
           </section>
@@ -158,7 +158,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
             <h2 className="text-2xl font-semibold leading-snug text-foreground">
               Why a trending Roblox music ID can stop playing
             </h2>
-            <p className="max-w-3xl leading-7 text-muted">
+            <p className=" leading-7 text-muted">
               Roblox audio availability can change after moderation, privacy, ownership, or licensing updates. Game developers can also disable their music controls or limit them to approved audio. A ranking proves that Roblox reported the song in its music feed, but it cannot override the rules of the experience where you try to play it.
             </p>
           </section>

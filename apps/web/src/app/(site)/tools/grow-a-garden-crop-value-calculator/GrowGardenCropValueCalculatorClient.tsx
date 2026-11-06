@@ -87,7 +87,7 @@ function MutationCard({
         </span>
         <span className="truncate text-sm font-semibold text-foreground">{mutation.name}</span>
       </div>
-      <span className="shrink-0 rounded-full bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
+      <span className="shrink-0 rounded-md bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
         ×{mutation.multiplier ?? "?"}
       </span>
     </button>
@@ -290,7 +290,7 @@ export function GrowGardenCropValueCalculatorClient({
                         )}
                         <div className="flex flex-1 items-center justify-between gap-2">
                           <p className="text-sm font-semibold text-foreground">{crop.name}</p>
-                          <span className="rounded-full bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
+                          <span className="rounded-md bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
                             {crop.tier}
                           </span>
                         </div>
@@ -400,7 +400,7 @@ export function GrowGardenCropValueCalculatorClient({
                       </span>
                       <span className="text-sm font-semibold text-foreground">{temp.label}</span>
                     </div>
-                    <span className="shrink-0 rounded-full bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
+                    <span className="shrink-0 rounded-md bg-surface-muted px-2 py-[2px] text-[11px] font-semibold text-muted">
                       ×{temp.multiplier}
                     </span>
                   </button>
@@ -526,7 +526,7 @@ export function GrowGardenCropValueCalculatorClient({
                       {calculation.appliedMutations.map((mutation) => (
                         <span
                           key={mutation.name}
-                          className="rounded-full border border-border/60 bg-surface-muted px-3 py-1 text-xs font-semibold text-foreground"
+                          className="rounded-md border border-border/60 bg-surface-muted px-3 py-1 text-xs font-semibold text-foreground"
                         >
                           {mutation.name} {mutation.multiplier ? `×${mutation.multiplier}` : "×?"}
                         </span>

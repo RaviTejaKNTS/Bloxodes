@@ -40,15 +40,15 @@ export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; n
   function copySection(index: number) {
     const section = copy[index];
     return section.nodes.length ? <Fragment key={section.heading}>
-      <div className="ads-content-code-heading article-content md-copy-scope max-w-3xl"><h2>{section.heading}</h2></div>
-      <ContentCopyNodes nodes={section.nodes} group={`game-codes-${section.heading}`} className="max-w-3xl" />
+      <div className="ads-content-code-heading article-content md-copy-scope"><h2>{section.heading}</h2></div>
+      <ContentCopyNodes nodes={section.nodes} group={`game-codes-${section.heading}`} className="" />
     </Fragment> : null;
   }
-  return <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose"><div className="min-w-0 space-y-8">
+  return <div className="grid gap-8 content-sidebar-grid"><div className="min-w-0 space-y-8">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": [webPageJsonLd({ siteUrl: SITE_URL, slug: page.canonical_path.slice(1), title: page.title, description: page.meta_description ?? "", image: page.image, author: null, publishedAt: page.published_at, updatedAt: page.updated_at }), ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])] }) }} />
     <header className="space-y-4"><PageBreadcrumb items={breadcrumbs} /><h1 className="text-4xl font-semibold md:text-5xl">{page.title}</h1><UpdatedTimestamp value={page.updated_at} /></header>
     <article id="article-body" className="journey-content-stream journey-content-stream--prose space-y-8">
-      <ContentCopyNodes nodes={copy[0].nodes} group="game-codes-intro" className="max-w-3xl" />
+      <ContentCopyNodes nodes={copy[0].nodes} group="game-codes-intro" className="" />
       {codeRows("active")}
       {copySection(1)}
       {codeRows("expired")}

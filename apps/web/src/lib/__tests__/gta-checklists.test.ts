@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { siteNavLinksForPath } from "@/lib/site-navigation";
+import { resolveSearchScope } from "@/lib/site-navigation";
 import { getChecklistStorageKey, readLocalChecklistProgress, writeLocalChecklistProgress, loadAccountChecklistProgress, saveAccountChecklistProgress } from "@/lib/checklist-progress-client";
 
 const db = vi.hoisted(() => ({ page: { id: "gta-page" } as { id: string } | null, items: [{ id: "leaf", section_code: "1.0.1" }, { id: "heading", section_code: "1" }] }));
@@ -44,7 +44,7 @@ describe("GTA checklist contracts", () => {
     expect(await saveAccountChecklistProgress("gta:gta-5", ["leaf"])).toBe(true);
   });
   it("has discoverable navigation and matching publish/purge tags", () => {
-    expect(siteNavLinksForPath("/checklists/gta-5", {}, [{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "checklist", gameId: "gta5", title: "Checklist", href: "/checklists/gta-5" }] }]).some(x => x.href === "/checklists/gta-5")).toBe(true);
+    expect(resolveSearchScope("/checklists/gta-5", {}, [{ namespace: "gta", title: "GTA", href: "/games/gta", image: "/cover.webp", pages: [{ kind: "checklist", gameId: "gta5", title: "Checklist", href: "/checklists/gta-5" }] }]).scope).toBe("games");
 
   });
   it("ships every completion task at the renderer's leaf depth with stable keys", () => {

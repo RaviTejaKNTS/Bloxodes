@@ -203,10 +203,10 @@ export function RobloxAccountValueCalculatorClient() {
               autoComplete="off"
               spellCheck={false}
               maxLength={21}
-              className="h-12 rounded-full px-5"
+              className="h-12 rounded-md px-5"
             />
           </label>
-          <Button type="submit" disabled={loading} className="mt-auto h-12 rounded-full px-6">
+          <Button type="submit" disabled={loading} className="mt-auto h-12 rounded-md px-6">
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
             {loading ? "Checking..." : "Check visible value"}
           </Button>
@@ -275,7 +275,7 @@ export function RobloxAccountValueCalculatorClient() {
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="truncate text-2xl font-semibold text-foreground">{result.profile.displayName}</h2>
                   {result.profile.hasVerifiedBadge ? <BadgeCheck className="h-5 w-5 text-sky-500" aria-label="Verified" /> : null}
-                  {result.profile.isBanned ? <span className="rounded-full bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-700 dark:text-rose-300">Banned</span> : null}
+                  {result.profile.isBanned ? <span className="rounded-md bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-700 dark:text-rose-300">Banned</span> : null}
                 </div>
                 <p className="text-sm text-muted">@{result.profile.username} · User ID {fullNumber.format(result.profile.userId)}</p>
                 <p className="mt-2 text-sm text-muted">{formatCheckedAt(result.checkedAt)}</p>

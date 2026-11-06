@@ -43,7 +43,7 @@ export default function HowWeGatherAndVerifyCodesPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+    <div className="grid gap-8 content-sidebar-grid">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">How We Gather and Verify Codes</h1>
 

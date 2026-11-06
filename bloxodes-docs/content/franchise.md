@@ -37,6 +37,8 @@ Every game uses page-type URLs: franchise hub `/games/<namespace>`, game wiki `/
 
 Every game is handled the same way from its data: menus, sidebar links, `/games` cards, the home page games section, collection pages, progress, checklists, related links, search, comments, the feed, sitemaps and cache refresh. Only tools, calculators and interactive maps have their own engines. Don't add code for a single game.
 
+The game bar under the header finds a page's game through `site_routes.game_id`, then shows that game's short title and artwork, one link per page type it has and the Tools menu. Articles links to the game's article list. Franchise pages get no bar. The header and More drawer never change. Publishing purges the `top-nav` Cloudflare tag so the bar picks up new page types.
+
 Prefer the page's stored `canonical_path`. For a page that doesn't exist yet, `expected_game_page_path` gives the right URL; `content:publish` and `publish:game-pages` use it.
 
 ## Data

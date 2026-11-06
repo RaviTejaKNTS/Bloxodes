@@ -139,7 +139,7 @@ export async function MusicChartsPage({
           {catalogIdTitle("Roblox music ID charts")}
         </h1>
         {pageNumber === 1 ? (
-          <p className="max-w-2xl text-base text-muted md:text-lg">
+          <p className=" text-base text-muted md:text-lg">
             Switch between weekly, monthly, and yearly Creator Store music charts.
           </p>
         ) : null}

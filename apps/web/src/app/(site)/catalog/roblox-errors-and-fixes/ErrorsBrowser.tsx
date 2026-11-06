@@ -46,7 +46,7 @@ export function RobloxErrorCard({ item }: { item: RobloxErrorItem }) {
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold leading-snug text-foreground">{item.name}</h3>
         {item.errorCode ? (
-          <span className="shrink-0 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent">
+          <span className="shrink-0 rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-accent">
             Code {item.errorCode}
           </span>
         ) : null}

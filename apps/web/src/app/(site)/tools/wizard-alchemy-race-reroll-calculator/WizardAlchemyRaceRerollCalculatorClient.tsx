@@ -175,7 +175,7 @@ export function WizardAlchemyRaceRerollCalculatorClient({ races }: Props) {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <p className="break-words text-sm font-semibold leading-tight text-foreground">{race.name}</p>
-                      <span className="shrink-0 rounded-full bg-surface-muted px-2 py-1 text-xs font-bold text-foreground">
+                      <span className="shrink-0 rounded-md bg-surface-muted px-2 py-1 text-xs font-bold text-foreground">
                         {formatPercent(chance)}
                       </span>
                     </div>

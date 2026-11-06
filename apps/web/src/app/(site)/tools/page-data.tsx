@@ -1,4 +1,3 @@
-import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import { ToolCard } from "@/components/ToolCard";
 import { listPublishedTools, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { TOOLS_DESCRIPTION, SITE_URL } from "@/lib/seo";
@@ -49,7 +48,6 @@ function ToolsPageView({
   latestUpdatedAt: string | null;
 }) {
   return (
-    <ToolPageLayout title="Roblox tools and calculators" canonicalPath={currentPage === 1 ? "/tools" : `/tools/page/${currentPage}`} >
     <div className="space-y-10">
       {showHero ? (
         <header className="space-y-4">
@@ -57,7 +55,7 @@ function ToolsPageView({
             Roblox tools and calculators to plan faster
           </h1>
           <UpdatedTimestamp value={latestUpdatedAt} />
-          <p className="max-w-2xl text-base text-muted md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
             Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.
           </p>
           <IndexPageStats
@@ -118,7 +116,6 @@ function ToolsPageView({
         />
       ) : null}
     </div>
-    </ToolPageLayout>
   );
 }
 

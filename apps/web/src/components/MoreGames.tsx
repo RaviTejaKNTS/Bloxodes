@@ -69,7 +69,7 @@ export function MoreGames({ games }: MoreGamesProps) {
           <button
             type="button"
             onClick={() => setRowsVisible((rows) => Math.min(rows + ROWS_PER_PAGE, maxRows))}
-            className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface px-5 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+            className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-surface px-5 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
           >
             Load more games
           </button>

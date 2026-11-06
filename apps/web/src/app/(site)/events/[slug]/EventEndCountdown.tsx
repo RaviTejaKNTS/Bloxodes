@@ -32,7 +32,7 @@ export function EventEndCountdown({ endUtc, initialLabel }: EventEndCountdownPro
   }, [target]);
 
   return (
-    <div className="inline-flex items-center rounded-full border border-border/60 bg-surface/70 px-3 py-1 text-sm font-semibold text-foreground shadow-soft">
+    <div className="inline-flex items-center rounded-md border border-border/60 bg-surface/70 px-3 py-1 text-sm font-semibold text-foreground shadow-soft">
       {label}
     </div>
   );

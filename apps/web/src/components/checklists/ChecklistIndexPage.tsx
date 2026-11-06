@@ -17,7 +17,8 @@ export function ChecklistIndexPage({
   currentPage,
   showHero,
   config,
-  relatedLinks = []
+  relatedLinks = [],
+  showSidebar = true
 }: {
   cards: ChecklistCardData[];
   total: number;
@@ -27,6 +28,7 @@ export function ChecklistIndexPage({
   config: ChecklistConfig;
   /** Short "More to explore" list in the right sidebar. */
   relatedLinks?: ChecklistRelatedLink[];
+  showSidebar?: boolean;
 }) {
   const latest = cards.reduce<Date | null>((latestDate, card) => {
     if (!card.updatedAt) return latestDate;
@@ -39,14 +41,14 @@ export function ChecklistIndexPage({
   const pageUrl = `${SITE_URL}${config.basePath}${currentPage > 1 ? `/page/${currentPage}` : ""}`;
 
   return (
-    <div className="grid gap-8 content-sidebar-grid">
-      <article className="checklists-index-main space-y-8">
+    <div className={showSidebar ? "grid gap-8 content-sidebar-grid" : "min-w-0"}>
+      <article className={showSidebar ? "checklists-index-main space-y-10" : "min-w-0 space-y-10"}>
         {showHero ? (
           <header className="space-y-4">
             <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
               {config.heading}
             </h1>
-            <p className="max-w-2xl text-base text-muted md:text-lg">
+            <p className="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
               {config.intro}
             </p>
             <IndexPageStats
@@ -112,7 +114,7 @@ export function ChecklistIndexPage({
           />
         ) : null}
       </article>
-      <PageSidebar>
+      {showSidebar ? <PageSidebar>
         <SocialShare
           url={pageUrl}
           title={config.title}
@@ -120,7 +122,7 @@ export function ChecklistIndexPage({
           analytics={{ contentType: "checklists_index", itemId: config.basePath }}
         />
         <ChecklistRelatedList heading="More to explore" links={relatedLinks} />
-      </PageSidebar>
+      </PageSidebar> : null}
     </div>
   );
 }

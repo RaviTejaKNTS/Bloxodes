@@ -76,6 +76,21 @@ describe("game top bar", () => {
     expect(html).toBe("");
   });
 
+  it.each(["/maps/gta5", "/games/gta", "/wiki/gta-5/weapons/page/2"])("reserves %s only while unresolved", pathname => {
+    navigation.pathname = pathname;
+    expect(barClasses(renderToStaticMarkup(<SiteGameTopBarClient />))).not.toBeNull();
+    expect(renderToStaticMarkup(<SiteGameTopBarClient initialPathname={pathname} initialGameNav={null} />)).toBe("");
+  });
+
+  it("renders the Map type with the current type active", () => {
+    const html = renderToStaticMarkup(<SiteGameTopBarClient initialPathname={navigation.pathname} initialGameNav={{
+      gameName: "GTA 5", thumbnailUrl: null, tools: [], links: [{ label: "Map", href: "/maps/gta5", type: "map", active: true }]
+    }} />);
+    expect(html).toContain('href="/maps/gta5"');
+    expect(html).toContain('aria-current="page"');
+    expect(html).toContain("Map");
+  });
+
   it("shows an initial catalog nav", () => {
     const html = renderToStaticMarkup(
       <SiteGameTopBarClient
@@ -90,6 +105,9 @@ describe("game top bar", () => {
 
 describe("shared game top nav pathname parser", () => {
   it.each([
+    ["/maps/gta5", "shared"],
+    ["/games/gta", "shared"],
+    ["/wiki/gta-5/weapons/page/2", "wikiCatalog"],
     ["/wiki/blox-fruits", "wiki"],
     ["/wiki/blox-fruits/swords", "wikiCatalog"],
     ["/codes/blox-fruits", "codes"],

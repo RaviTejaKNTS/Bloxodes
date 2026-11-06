@@ -150,8 +150,6 @@
 /* Section headings and their complete rows always span the stream. */
 .catalog-main .catalog-stream.catalog-stream--sectioned { grid-template-columns: minmax(0, 1fr); }
 
-.catalog-main .copy-with-sidebar-space > [data-md-copy],
-.catalog-main .copy-with-sidebar-space > .md-copy-node { max-width: 50rem; }
 .catalog-stream .catalog-faq-item { margin-top: -0.5rem; }
 
 .catalog-row-group--free-items .catalog-section-grid { gap: 1rem; }

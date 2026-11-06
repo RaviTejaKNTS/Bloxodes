@@ -545,7 +545,7 @@ function WikiEventsTimeline({
               <div className="min-w-0 space-y-2">
                 <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
                   <h3 className="m-0 flex min-h-7 min-w-0 items-center text-lg font-semibold leading-none text-foreground">{event.name}</h3>
-                  <span className={`inline-flex h-7 shrink-0 items-center rounded-full border px-2.5 text-xs font-semibold leading-none ${status.pillClass}`}>
+                  <span className={`inline-flex h-7 shrink-0 items-center rounded-md border px-2.5 text-xs font-semibold leading-none ${status.pillClass}`}>
                     {status.label}
                   </span>
                 </div>
@@ -554,7 +554,7 @@ function WikiEventsTimeline({
                   <span className="mx-2 text-muted/60">.</span>
                   <span className="font-semibold text-foreground/80">Ends (PT):</span> {endLabel}
                 </p>
-                {event.description ? <p className="max-w-3xl text-sm leading-6 text-muted">{event.description}</p> : null}
+                {event.description ? <p className=" text-sm leading-6 text-muted">{event.description}</p> : null}
                 {event.guideSlug ? (
                   <Link
                     href={`/articles/${event.guideSlug}`}
@@ -1179,7 +1179,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               </div>
             )}
 
-            <div className="min-w-0 max-w-3xl space-y-3">
+            <div className="min-w-0 space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
               <UpdatedTimestamp value={hubUpdatedAt} className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted" />
               {robloxGameUrl ? (
@@ -1220,7 +1220,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
         >
           {descriptionNodes?.length || gameDetailItems.length || heroStats.length ? (
             <>
-              <ContentCopyNodes nodes={descriptionNodes} group="wiki-intro" className="game-copy max-w-3xl min-w-0 text-foreground" />
+              <ContentCopyNodes nodes={descriptionNodes} group="wiki-intro" className="game-copy min-w-0 text-foreground" />
 
               {gameDetailItems.length ? (
                 <section aria-label="Game details" className="ads-content-wiki-intro-extra lg:hidden">
@@ -1247,13 +1247,13 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                       <Link
                         key={stat.label}
                         href={stat.href}
-                        className="group flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3 transition hover:border-accent/60 hover:bg-surface"
+                        className="group flex items-center gap-3 rounded-lg border border-border/60 bg-background/40 px-3 py-3 transition hover:border-accent/60 hover:bg-surface"
                         aria-label={`Open ${universeLabel} stats page`}
                       >
                         {content}
                       </Link>
                     ) : (
-                      <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
+                      <div key={stat.label} className="flex items-center gap-3 rounded-lg border border-border/60 bg-background/40 px-3 py-3">
                         {content}
                       </div>
                     );

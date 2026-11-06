@@ -262,7 +262,7 @@ export async function getPublishedWikiCollectionRuntimeByCode(
 }
 
 export async function listPublishedWikiCollectionRuntimeImages(
-  page: WikiCollectionPageContent,
+  page: Pick<WikiCollectionPageContent, "code" | "published_dataset_id">,
   limit = 6
 ): Promise<string[] | null> {
   if (!shouldReadWikiCollectionDatabase() || !page.published_dataset_id) return null;

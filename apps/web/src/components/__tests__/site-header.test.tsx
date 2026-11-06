@@ -42,16 +42,18 @@ describe("site header", () => {
     expect(primary?.querySelector('[aria-current="page"]')?.getAttribute("href")).toBe("/wiki");
     expect(container.querySelector('button[aria-label="Search"][data-search-trigger]')).not.toBeNull();
     expect(container.querySelector('button[aria-label="More"]')?.getAttribute("aria-expanded")).toBe("false");
+    // All links fit by default, so More shows only below md.
+    expect(container.querySelector('button[aria-label="More"]')?.className).toContain("md:hidden");
     expect(container.textContent).toContain("Account");
   });
 
-  it("keeps the closed More drawer in the HTML with every section, feedback and theme", () => {
+  it("keeps the closed More drawer in the HTML with every section and theme", () => {
     const container = render();
     const drawer = container.querySelector("#site-more-drawer")!;
     expect(drawer.hasAttribute("hidden")).toBe(true);
     expect(drawer.querySelector("h2")).toBeNull();
     for (const link of siteNavLinks) expect(hrefs(drawer)).toContain(link.href);
-    expect(drawer.textContent).toContain("Give feedback");
+    expect(drawer.textContent).not.toContain("Give feedback");
     expect(drawer.textContent).toContain("Theme");
   });
 

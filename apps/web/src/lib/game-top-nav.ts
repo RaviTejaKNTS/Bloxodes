@@ -1,9 +1,13 @@
 import "server-only";
+import { cache } from "react";
+import { getSharedGameTopNavContext } from "./shared-game-top-nav";
 import { parseGameTopNavPath } from "@/lib/game-top-nav-path";
 import { getArticleGameSummaryBySlug } from "@/lib/db";
-import type { GameTopNavContext, GameTopNavLink, GameTopNavToolLink } from "@/lib/game-top-nav-types";
+import type { GameTopNavContext, GameTopNavLink } from "@/lib/game-top-nav-types";
 import { articleGameSlugFromUniverse, statsUniverseSlug } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
+
+const articleGameSummary = cache(getArticleGameSummaryBySlug);
 
 type TargetResolution = {
   universeId: number;
@@ -27,6 +31,7 @@ function parseStatsUniverseIdSlug(slug: string): number | null {
 }
 
 async function resolveRouteTarget(target: NonNullable<ReturnType<typeof parseGameTopNavPath>>): Promise<TargetResolution | null> {
+  if (target.type === "shared") return null;
   const supabase = supabaseAdmin();
 
   if (target.type === "stats") {
@@ -71,7 +76,7 @@ async function resolveRouteTarget(target: NonNullable<ReturnType<typeof parseGam
   }
 
   if (target.type === "articleGame") {
-    const game = await getArticleGameSummaryBySlug(target.slug);
+    const game = await articleGameSummary(target.slug);
     if (!game?.universeId) return null;
     return {
       universeId: game.universeId,
@@ -106,27 +111,10 @@ function uniqueByHref<T extends { href: string }>(items: T[]): T[] {
 
 export async function getGameTopNavContext(path: string | null | undefined): Promise<GameTopNavContext | null> {
   const target = parseGameTopNavPath(path);
-  if (!target) return null;
+  if (!target) return getSharedGameTopNavContext(path);
 
-  if (target.type === "articleDetail" || target.type === "articleGame") {
-    const { getArticleBySlug } = await import("./db");
-    const article = target.type === "articleDetail" ? await getArticleBySlug(target.slug) : null;
-    const summary = target.type === "articleGame" ? await getArticleGameSummaryBySlug(target.slug) : null;
-    const namespace = article?.namespace ?? summary?.namespace;
-    const gameSlug = article?.game_slug ?? summary?.slug;
-    if (namespace && gameSlug) {
-      const { listGameMenus } = await import("./game-site-data");
-      const menu = (await listGameMenus(namespace,article?.game_id??summary?.gameId,false))[0];
-      if (!menu) return null;
-      const kinds:Record<string,GameTopNavLink["type"]>={wiki:"wiki",code:"codes",quiz:"quizzes",checklist:"checklists",article:"articles"};
-      return {gameName:menu.title,thumbnailUrl:menu.image,links:uniqueByHref([
-        ...menu.pages.filter(page=>kinds[page.kind]).map(page=>({label:page.title,href:page.href,type:kinds[page.kind],active:page.href===path})),
-        {label:"Articles",href:`/articles/games/${gameSlug}`,type:"articles" as const,active:target.type==="articleGame"}
-      ]),tools:menu.pages.filter(page=>page.kind==="tool").map(page=>({label:page.title,href:page.href})),toolsActive:false};
-    }
-  }
   const resolved = await resolveRouteTarget(target);
-  if (!resolved) return null;
+  if (!resolved) return getSharedGameTopNavContext(path, target.type === "articleGame" ? await articleGameSummary(target.slug) : null);
 
   const supabase = supabaseAdmin();
   const [universeResult, codes, wiki, events, checklists, quizzes, tools, articles] = await Promise.all([

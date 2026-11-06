@@ -11,7 +11,7 @@
 /maps/gta-online
 # Confirm publication before auditing this shared image-pin example.
 /wiki/sarab/maps
-# Roblox tool indexes and every bespoke/shared-template calculator.
+# Tool indexes have no rail; bespoke/shared-template calculators retain their rail.
 /tools
 /tools/page/2
 /tools/roblox-id-extractor

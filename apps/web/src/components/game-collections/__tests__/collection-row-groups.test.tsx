@@ -3,6 +3,7 @@ import { flushSync } from "react-dom";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { buildCollectionCardLayout } from "../CollectionCardContent";
 import { CollectionRowGroups, collectionCardColumns } from "../CollectionRowGroups";
 
 const items = Array.from({ length: 13 }, (_, index) => ({ id: String(index), name: `Item ${index}` }));
@@ -18,25 +19,28 @@ afterEach(() => {
   resize = undefined as unknown as ResizeObserverCallback;
 });
 
-function Groups({ view = "cards", visible = items, wide = false }: { view?: "cards" | "list"; visible?: typeof items; wide?: boolean }) {
-  return <section className="collections-stream"><CollectionRowGroups items={visible} slots={items.length} activeView={view} wide={wide}
-    renderCard={item => <article>{item.name}</article>}
+function Groups({ view = "cards", visible = items }: { view?: "cards" | "list"; visible?: typeof items }) {
+  return <section className="collections-stream"><CollectionRowGroups items={visible} slots={items.length} activeView={view}
+    getCardLayout={group => buildCollectionCardLayout(group.map(item => ({ fields: [{ key: item.id, label: item.name, value: item.name }] })))}
+    renderCard={(item, { layout }) => <article data-row-fields={layout?.fields.map(field => field.key).join(",")}>{item.name}</article>}
     renderList={group => <table><tbody>{group.map(item => <tr key={item.id}><td>{item.name}</td></tr>)}</tbody></table>}
   /></section>;
 }
 
 describe("collection ad boundaries", () => {
-  it("server-renders one four-card row per group for the 1440px layout", () => {
+  it("server-renders one three-card row per group for the 1440px layout", () => {
     const container = document.createElement("div");
     container.innerHTML = renderToStaticMarkup(<Groups />);
     const groups = [...container.querySelectorAll("[data-collections-group]:not([hidden])")];
-    expect(groups.map(group => group.querySelectorAll("[data-journey-item]").length)).toEqual([4, 4, 4, 1]);
+    expect(groups.map(group => group.querySelectorAll("[data-journey-item]").length)).toEqual([3, 3, 3, 3, 1]);
     expect(container.querySelector(".collections-stream")?.children).toHaveLength(13);
+    expect(container.querySelector(".collections-card-grid")?.getAttribute("style")).toContain("--collection-card-rows:4");
+    expect([...groups[0].querySelectorAll("article")].map(card => card.getAttribute("data-row-fields"))).toEqual(["0,1,2", "0,1,2", "0,1,2"]);
+    expect(container.innerHTML).not.toContain("--wide");
   });
 
   it("matches the card column breakpoints in ads-collections.css", () => {
-    expect([358, 459, 460, 739, 740, 919, 920, 1120].map(width => collectionCardColumns(width, false))).toEqual([1, 1, 2, 2, 3, 3, 4, 4]);
-    expect([358, 519, 520, 849, 850, 1120].map(width => collectionCardColumns(width, true))).toEqual([1, 1, 2, 2, 3, 3]);
+    expect([358, 519, 520, 849, 850, 1120].map(width => collectionCardColumns(width))).toEqual([1, 1, 2, 2, 3, 3]);
   });
 
   it("regroups into exactly one row at every column count without changing boundaries", async () => {
@@ -54,28 +58,22 @@ describe("collection ad boundaries", () => {
       expect(rows()).toEqual([3, 3, 3, 3, 1]);
       flushSync(() => resize([{ contentRect: { width: 677 } } as ResizeObserverEntry], {} as ResizeObserver));
       expect(rows()).toEqual([2, 2, 2, 2, 2, 2, 1]);
+      expect(stream.querySelector("article")?.getAttribute("data-row-fields")).toBe("0,1");
+      expect(stream.querySelector(".collections-card-grid")?.getAttribute("style")).toMatch(/--collection-card-rows:\s*3/);
       flushSync(() => resize([{ contentRect: { width: 1120 } } as ResizeObserverEntry], {} as ResizeObserver));
-      expect(rows()).toEqual([4, 4, 4, 1]);
+      expect(rows()).toEqual([3, 3, 3, 3, 1]);
       expect([...stream.children]).toEqual(groups);
     } finally { root.unmount(); }
   });
 
-  it("server-renders wide cards as complete three-column rows", () => {
-    const container = document.createElement("div");
-    container.innerHTML = renderToStaticMarkup(<Groups wide />);
-    const groups = [...container.querySelectorAll("[data-collections-group]:not([hidden])")];
-    expect(groups.map(group => group.querySelectorAll("[data-journey-item]").length)).toEqual([3, 3, 3, 3, 1]);
-    expect(container.querySelector(".collections-stream")?.children).toHaveLength(13);
-  });
-
-  it("hydrates wide rows without replacing boundaries, then retains an ad on phone", async () => {
+  it("hydrates rows without replacing boundaries, then retains an ad on phone", async () => {
     const container = document.createElement("div");
     document.body.append(container);
-    container.innerHTML = renderToStaticMarkup(<Groups wide />);
+    container.innerHTML = renderToStaticMarkup(<Groups />);
     const stream = container.querySelector(".collections-stream")!;
     const groups = [...stream.children];
     const errors: unknown[] = [];
-    const root = hydrateRoot(container, <Groups wide />, { onRecoverableError: error => errors.push(error) });
+    const root = hydrateRoot(container, <Groups />, { onRecoverableError: error => errors.push(error) });
     try {
       await vi.waitFor(() => expect(resize).toBeTypeOf("function"));
       expect(errors).toEqual([]);
@@ -120,6 +118,7 @@ describe("collection ad boundaries", () => {
       expect([...stream.children].filter(element => element !== ad)).toEqual(groups);
       await render("cards", items.slice(0, 2));
       expect(stream.querySelectorAll("[data-collections-group]:not([hidden])")).toHaveLength(2);
+      expect(stream.querySelector("article")?.getAttribute("data-row-fields")).toBe("0");
       expect([...stream.children].filter(element => element !== ad)).toEqual(groups);
       expect(ad.parentElement).toBe(stream);
     } finally { root.unmount(); }

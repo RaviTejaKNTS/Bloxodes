@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { siteNavGroupsForPath, siteNavLinksForPath, siteNavLinks } from "../site-navigation";
-import { gameMenuForPath, gameSidebarLinks, gameRelatedPages, type GameMenu } from "../game-site-navigation";
+import { siteNavLinks, resolveSearchScope } from "../site-navigation";
+import { gameMenuForPath, gameSidebarLinks, type GameMenu } from "../game-site-navigation";
 import { gameCollectionProgressOptions } from "../game-collection-progress-options";
 import { gameChecklistConfig } from "../engagement/config";
 import { engagementProgressKey } from "../engagement/types";
@@ -13,22 +13,16 @@ export function menuFor(namespace: string): GameMenu {
     { kind: "tool", gameId: "sibling", title: "Sibling tool", href: `/tools/${namespace}-sibling` }
   ] };
 }
-it("keeps the Roblox menu for unowned paths", () => expect(siteNavLinksForPath("/wiki/the-forge")).toBe(siteNavLinks));
 describe.each(["gta", "red-dead", "minecraft", "arc-raiders"])("%s shared navigation", namespace => {
   const menu = menuFor(namespace);
-  it("uses stored page-type links and lists only available page types", () => {
-    const groups = siteNavGroupsForPath(menu.pages[1].href, {}, [menu]);
-    expect(groups.map(group => group.label)).toEqual([namespace, "Browse"]);
-    expect(groups[0].links.map(link => link.href)).toEqual([menu.href, ...menu.pages.filter(page => page.kind !== "collection").map(page => page.href)]);
-    expect(groups[1].links).toBe(siteNavLinks);
-    const sparse = { ...menu, pages: menu.pages.slice(0, 2) };
-    expect(siteNavLinksForPath(sparse.href, {}, [sparse]).map(link => link.href)).toEqual([menu.href, menu.pages[0].href]);
+  it("keeps menu ownership for search and paginated collections", () => {
+    expect(siteNavLinks).toHaveLength(11);
+    expect(resolveSearchScope(menu.pages[1].href, {}, [menu]).scope).toBe("games");
     expect(gameMenuForPath(`${menu.pages[1].href}/page/2`, [menu])).toBe(menu);
     expect(gameMenuForPath(`${menu.href}-other`, [menu])).toBeUndefined();
   });
-  it("scopes sidebar and wiki related links to the owner", () => {
+  it("scopes sidebar links to the owner", () => {
     expect(gameSidebarLinks(menu, "owner")).toHaveLength(8);
-    expect(gameRelatedPages(menu, "owner").map(page => page.kind)).toEqual(["map", "checklist", "quiz", "tool", "code", "catalog"]);
     expect(gameSidebarLinks(menu, "missing")).toEqual([]);
   });
   it("keeps saved collection and standalone checklist keys", () => {

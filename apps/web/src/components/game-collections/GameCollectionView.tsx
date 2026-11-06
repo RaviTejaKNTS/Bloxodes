@@ -10,6 +10,7 @@ import type { CollectionPaginationInfo } from "./collection-pagination";
 import { CollectionImageLightbox } from "./CollectionImageLightbox";
 import { CollectionImagePlaceholder } from "./CollectionImagePlaceholder";
 import { CollectionRowGroups } from "./CollectionRowGroups";
+import { buildCollectionCardLayout, CollectionFactRows, CollectionReadMore, collectionFactColor, type CollectionCardLayout } from "./CollectionCardContent";
 import { GameCollectionViewShell } from "./GameCollectionViewShell";
 
 type GameCollectionStat = { key: string; label: string };
@@ -383,12 +384,6 @@ function buildDisplayStat(label: string, value: unknown): GameCollectionDisplayS
   };
 }
 
-function getFieldToneClass(field: CollectionPresentationField): string {
-  if (field.tone === "negative") return "text-rose-300";
-  if (field.tone === "warning") return "text-amber-300";
-  if (field.kind === "highlight") return "text-emerald-300";
-  return "text-foreground";
-}
 
 function normalizeFieldPresentation(value: CollectionFieldPresentation | CollectionFieldKind | undefined): CollectionFieldPresentation | undefined {
   if (!value) return undefined;
@@ -549,11 +544,14 @@ function buildPresentationField(
     ? videoId ? { label: definition.label, value: `https://www.youtube.com/watch?v=${videoId}` } : null
     : getFieldDisplayStat(definition, item);
   const configured = Boolean(definition.presentation);
+  const rawValue = item[definition.key];
+  const arrayParts = Array.isArray(rawValue) ? rawValue.map(entry => normalizeValue(entry)).filter((entry): entry is string => Boolean(entry)) : undefined;
   return {
     key: definition.key,
     label: fieldLabels?.[definition.key] ?? definition.presentation?.label ?? displayStat?.label ?? definition.label,
     value: displayStat?.value ?? null,
-    parts: configured ? undefined : displayStat?.parts,
+    // A real array is a list on every collection; splitting a string is only a guess for unconfigured fields.
+    parts: arrayParts && arrayParts.length > 1 ? arrayParts : configured ? undefined : displayStat?.parts,
     tone: definition.presentation?.tone ?? displayStat?.tone,
     kind: classifyFieldKind(definition, displayStat),
     omitWhenEmpty: definition.presentation?.omitWhenEmpty
@@ -588,14 +586,6 @@ function buildItemPresentation(
     }),
     fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item, config.fieldLabels))
   };
-}
-
-function presentationHasWideContent(presentation: CollectionItemPresentation): boolean {
-  return (
-    presentation.title.length > 34 ||
-    Boolean(presentation.description && isLongSentenceValue(presentation.description)) ||
-    presentation.fields.some((field) => field.kind === "detail" || Boolean(field.value && isLongSentenceValue(field.value)))
-  );
 }
 
 function renderMissingValue() {
@@ -635,12 +625,6 @@ function ItemDetails({ details }: { details: CollectionItemPresentation["details
   );
 }
 
-function getCardFieldRowClass(field: CollectionPresentationField) {
-  const base = "grid grid-cols-[minmax(7.75rem,0.42fr)_minmax(0,1fr)] items-start gap-4";
-  if (field.kind === "detail") return `${base} min-h-[4.75rem]`;
-  return `${base} min-h-[2.75rem]`;
-}
-
 function VideoWatchLink({ url }: { url: string }) {
   return <a href={url} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">Watch on YouTube</a>;
 }
@@ -652,39 +636,9 @@ function renderFieldValue(field: CollectionPresentationField, size: "card" | "ta
     size === "table"
       ? "[word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:pretty]"
       : "[overflow-wrap:anywhere]";
-  const clampClass = size === "card" ? (field.kind === "detail" ? "line-clamp-3" : "line-clamp-2") : "";
-
-  if (field.kind === "chip") {
-    return (
-      <span
-        className={`inline-flex max-w-full items-center rounded-md border border-border/70 bg-background px-2 py-1 text-xs font-semibold leading-snug text-foreground ${textWrapClass}`}
-      >
-        <span className="min-w-0 whitespace-normal">{field.value}</span>
-      </span>
-    );
-  }
-
-  if (field.parts?.length) {
-    return (
-      <ul className={size === "table" ? "space-y-1" : "space-y-1.5"}>
-        {field.parts.map((part, index) => (
-          <li key={`${field.key}-${part}-${index}`} className={`leading-snug ${textWrapClass} ${getFieldToneClass(field)}`}>
-            {part}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  return (
-    <span
-      className={`block leading-snug ${textWrapClass} ${clampClass} ${
-        field.kind === "detail" ? "text-sm font-medium" : "text-sm font-semibold"
-      } ${getFieldToneClass(field)}`}
-    >
-      {field.value}
-    </span>
-  );
+  return <div className={`block text-sm leading-snug ${textWrapClass} ${collectionFactColor(field)}`}>
+    {field.parts?.length ? <ul>{field.parts.map((part, index) => <li key={index}>{part}</li>)}</ul> : field.value}
+  </div>;
 }
 
 function CollectionImageFrame({
@@ -700,12 +654,12 @@ function CollectionImageFrame({
 
   const frameClass = compact
     ? "relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl bg-surface-muted/70 p-3"
-    : "relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50";
+    : "collection-card-media relative aspect-square overflow-hidden rounded-lg bg-surface-muted/70";
 
   if (!presentation.image) {
     return (
       <div className={frameClass}>
-        <CollectionImagePlaceholder title={presentation.title} compact={compact} />
+        <CollectionImagePlaceholder title={presentation.title} compact />
       </div>
     );
   }
@@ -735,7 +689,7 @@ function CollectionImageFrame({
             alt={presentation.title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, 25vw"
-            className="object-contain p-5 transition duration-300 group-hover/image:scale-[1.03]"
+            className="object-contain p-3 transition duration-300 group-hover/image:scale-[1.03]"
             unoptimized
           />
         )}
@@ -755,43 +709,34 @@ function CollectionImageFrame({
   );
 }
 
-function ForgeItemCard({
-  presentation,
-  showImage
-}: {
+function cardLayout(presentations: CollectionItemPresentation[], showImages: boolean, hideMissing: boolean) {
+  return buildCollectionCardLayout(presentations.map(item => ({
+    fields: item.fields.filter(field => field.kind !== "video"),
+    image: Boolean(item.videoUrl || (showImages && (item.image || !hideMissing))),
+    description: Boolean(item.description), tracks: Boolean(item.tracks.length), details: Boolean(item.details.length)
+  })));
+}
+
+function ForgeItemCard({ presentation, showImage, hideMissing = false, layout }: {
   presentation: CollectionItemPresentation;
   showImage: boolean;
+  hideMissing?: boolean;
+  layout?: CollectionCardLayout;
 }) {
-  const visibleFields = presentation.fields.filter((field) => field.kind !== "video" && !(field.omitWhenEmpty && !field.value));
+  const imageTrack = layout?.image ?? Boolean(presentation.videoUrl || showImage);
   return (
-    <article
-      id={`item-${presentation.id}`}
-      className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
-    >
-      {presentation.videoUrl ? (
-        <CollectionVideo key={presentation.videoUrl} url={presentation.videoUrl} title={presentation.title} poster={presentation.image} />
-      ) : <CollectionImageFrame presentation={presentation} showImage={showImage} />}
-      <div className="flex flex-1 flex-col p-4">
-        <div className={`${presentation.description ? "min-h-[5.75rem]" : ""} space-y-2`}>
-          <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
-            {presentation.title}
-          </h3>
-          {presentation.description ? <p className="text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">{presentation.description}</p> : null}
-        </div>
-
-        {visibleFields.length ? <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
-          {visibleFields.map((field) => (
-              <div key={field.key} className={getCardFieldRowClass(field)}>
-                <dt className="min-w-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted [overflow-wrap:break-word]">
-                  {field.label}
-                </dt>
-                <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
-              </div>
-            ))}
-        </dl> : null}
-        <TracklistDetails tracks={presentation.tracks} />
-        <ItemDetails details={presentation.details} />
-      </div>
+    <article id={`item-${presentation.id}`}
+      className="collection-card group h-full min-w-0 scroll-mt-28 overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
+      <h3 className="collection-card-title text-center text-lg font-semibold leading-snug text-foreground [overflow-wrap:anywhere] [text-wrap:balance]">{presentation.title}</h3>
+      {imageTrack ? presentation.videoUrl ? (
+        <div className="collection-card-media aspect-[4/3] overflow-hidden rounded-lg bg-surface-muted/70"><CollectionVideo key={presentation.videoUrl} url={presentation.videoUrl} title={presentation.title} poster={presentation.image} /></div>
+      ) : !hideMissing || (showImage && presentation.image) ? <CollectionImageFrame presentation={showImage ? presentation : { ...presentation, image: null }} showImage /> : <div /> : null}
+      {(layout?.description ?? Boolean(presentation.description)) ? <div className="collection-card-description">
+        {presentation.description ? <CollectionReadMore text={presentation.description} description /> : null}
+      </div> : null}
+      <CollectionFactRows fields={presentation.fields.filter(field => field.kind !== "video")} layout={layout} />
+      {(layout?.tracks ?? Boolean(presentation.tracks.length)) ? <div className="collection-card-extra"><TracklistDetails tracks={presentation.tracks} /></div> : null}
+      {(layout?.details ?? Boolean(presentation.details.length)) ? <div className="collection-card-extra"><ItemDetails details={presentation.details} /></div> : null}
     </article>
   );
 }
@@ -1010,9 +955,6 @@ export function GameCollectionView({ sections, config, pagination, toolbar, stre
     ...entry,
     tableLayout: stream ? buildForgeTableLayout(tableFieldDefinitions, entry.tableItems, showImages, Boolean(descriptionLabel)) : undefined
   }));
-  const hasWideCardContent = sectionPresentations.some(({ cardItems }) =>
-    cardItems.some(item => presentationHasWideContent(item) || (stream && item.fields.length > 6))
-  );
   const renderCards = totalItemCount <= 600;
   const renderList = true;
   const defaultView = renderCards ? "cards" : "list";
@@ -1042,7 +984,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar, stre
       <CollectionImageLightbox containerId="article-body" />
       <Stream {...(stream ? {} : {
         id: "article-body", itemProp: "articleBody",
-        className: `journey-content-stream journey-content-stream--collection${hasWideCardContent ? " journey-content-stream--collection-wide" : ""}`
+        className: "journey-content-stream journey-content-stream--collection"
       })}>
         {pagination && pagination.totalPages > 1 ? (
           <div className="space-y-3 border-b border-border/60 pb-6">
@@ -1078,11 +1020,11 @@ export function GameCollectionView({ sections, config, pagination, toolbar, stre
                 <p className="text-sm text-muted">Showing {section.items.length.toLocaleString("en-US")} items on this page.</p>
               ) : null}
 
-              {section.noteNodes?.length ? <div className="max-w-3xl">{section.noteNodes}</div> : null}
+              {section.noteNodes?.length ? <div className="">{section.noteNodes}</div> : null}
 
               {!section.noteNodes?.length && section.noteHtml ? (
                 <div
-                  className="md-copy-node md-copy-p max-w-3xl [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
+                  className="md-copy-node md-copy-p [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
                   dangerouslySetInnerHTML={{ __html: section.noteHtml }}
                 />
               ) : null}
@@ -1092,15 +1034,15 @@ export function GameCollectionView({ sections, config, pagination, toolbar, stre
               items={activeView === "cards" ? cardItems : tableItems}
               activeView={activeView}
               slots={section.items.length}
-              wide={hasWideCardContent}
-              renderCard={presentation => <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} />}
+              getCardLayout={items => cardLayout(items, showImages, Boolean(config.hideMissingImagePlaceholders))}
+              renderCard={(presentation, { layout }) => <ForgeItemCard presentation={presentation} layout={layout} showImage={showImages} hideMissing={Boolean(config.hideMissingImagePlaceholders)} />}
               renderList={presentations => <ForgeItemTable presentations={presentations} fieldDefinitions={tableFieldDefinitions} showImages={showImages} hideMissingImagePlaceholders={Boolean(config.hideMissingImagePlaceholders)} descriptionLabel={descriptionLabel} layout={tableLayout} />}
             /> : null}
 
             {!stream && renderCards && activeView === "cards"
               ? cardItems.map((presentation) => (
                   <div key={presentation.id} data-journey-item className="game-collection-card-item h-full">
-                    <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} />
+                    <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} hideMissing={Boolean(config.hideMissingImagePlaceholders)} />
                   </div>
                 ))
               : null}

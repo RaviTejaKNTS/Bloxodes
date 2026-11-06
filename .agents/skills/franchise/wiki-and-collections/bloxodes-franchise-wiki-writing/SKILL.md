@@ -78,7 +78,7 @@ These are the only places this skill differs from the Roblox one.
 - **Artwork:** Roblox hubs get images from the universe automatically. Franchise hubs, roots included, must supply `cover_image` and `hero_image` in `game.json`.
 - **Scope:** keep campaign, online service, expansion, mode, edition, platform and release-generation boundaries from the brief. Don't blend inventories, progression, prices or ranks from separate scopes.
 - **Unreleased games:** write only restrained, verified facts. Tips can be empty.
-- **Collection links:** approved collections link through runtime data and the hub renderer. Don't promise future collections in `description_md`.
+- **Collection links:** approved collections link through runtime data and the hub renderer, in their own section below the copy. Don't list collections or promise future ones in `description_md`.
 - **Publication:** `publish:game-pages -- --namespace <slug> --file <reviewed.json>` (identity before wiki, then collections), through the `game-pages` and `franchise-wiki` publishers.
 
 ## Output shape

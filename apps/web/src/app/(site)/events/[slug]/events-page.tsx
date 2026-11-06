@@ -617,7 +617,7 @@ function UpcomingEventBlock({ event }: { event: UpcomingEventView }) {
               href={`https://www.roblox.com/events/${event.event_id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-md border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
             >
               View event on Roblox
             </a>
@@ -707,14 +707,14 @@ function CurrentEventCard({ event }: { event: CurrentEventView }) {
               href={`https://www.roblox.com/events/${event.event_id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent dark:bg-black/60"
+              className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-white/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent dark:bg-black/60"
             >
               Open on Roblox
             </a>
             {event.guide_slug ? (
               <Link
                 href={`/articles/${event.guide_slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent dark:bg-black/60"
+                className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-white/90 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent dark:bg-black/60"
                 data-analytics-event="event_guide_click"
                 data-analytics-event-id={event.event_id}
                 data-analytics-guide-slug={event.guide_slug}
@@ -947,7 +947,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
 
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+      <div className="grid gap-8 content-sidebar-grid">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">

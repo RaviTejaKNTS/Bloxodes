@@ -38,11 +38,7 @@ export async function GET(request: Request) {
     );
   } catch (error) {
     console.error("Failed to load game top nav", error);
-    return NextResponse.json(
-      { gameNav: null, catalogNav: null },
-      {
-        headers: responseHeaders(path)
-      }
-    );
+    // Never cache a failed lookup as "this page has no bar".
+    return NextResponse.json({ gameNav: null, catalogNav: null }, { status: 503, headers: { "Cache-Control": "no-store" } });
   }
 }

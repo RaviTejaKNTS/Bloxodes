@@ -635,12 +635,12 @@ function StatsGameCardRow({ game, columns }: { game: StatsGame; columns: StatsGa
 
 export function StatsHomeView({ data }: { data: StatsHomeData }) {
   return (
-    <div className="stats-surface space-y-6">
+    <div className="stats-surface space-y-10">
       <header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-        <div className="max-w-3xl">
+        <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Roblox Stats</p>
-          <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Live Roblox game stats</h1>
-          <p className="mt-3 text-sm font-medium leading-6 text-muted">
+          <h1 className="mb-0 mt-2 text-4xl font-semibold leading-tight text-foreground md:text-5xl">Live Roblox game stats</h1>
+          <p className="mt-3 text-base leading-relaxed text-muted md:text-lg">
             Public Roblox game data tracked by Bloxodes, refreshed regularly for players and researchers.
           </p>
           <Link className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline" href="/stats/reports">
@@ -659,10 +659,9 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         </form>
       </header>
 
-      <StatsContentLayout title="Live Roblox game stats" canonicalPath="/stats">
       <section id="article-body" className="stats-stream">
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 journey-content-stream--index">
         <MetricCard
           label="Platform CCU"
           value={formatCompactNumber(data.totals.livePlayers)}
@@ -735,7 +734,6 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" href="/stats/games?sort=visits" />
       </Fragment>
       </section>
-      </StatsContentLayout>
     </div>
   );
 }

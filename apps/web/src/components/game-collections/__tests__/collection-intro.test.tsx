@@ -22,7 +22,7 @@ const contentHtml = { title: "Game pets", introHtml: "<p>Pets boost your harvest
 
 describe("Roblox collection introductions", () => {
   it.each([true, false])("keeps the intro and game advice without legacy help, stream=%s", stream => {
-    const html = renderToStaticMarkup(renderGameCollectionPage({ config, dataset, contentHtml, routeBase: "/wiki/", stream, collectionOptions: [], showMoreCollections: false }));
+    const html = renderToStaticMarkup(renderGameCollectionPage({ config, dataset, contentHtml, routeBase: "/wiki/", stream, collectionOptions: [] }));
     expect(html).toContain("Pets boost your harvest.");
     expect(html).toContain("Item roster");
     expect(html).toContain("Equip a pet before harvesting.");
@@ -32,7 +32,7 @@ describe("Roblox collection introductions", () => {
   });
 
   it("gives GTA the same opening and removes old website instructions", () => {
-    const html = renderToStaticMarkup(renderGameCollectionPage({ config, dataset, contentHtml, routeBase: "/gta/wiki", stream: true, collectionOptions: [], showMoreCollections: false }));
+    const html = renderToStaticMarkup(renderGameCollectionPage({ config, dataset, contentHtml, routeBase: "/gta/wiki", stream: true, collectionOptions: [] }));
     expect(html).not.toContain("Legacy page instructions.");
     expect(html).toContain("Pets boost your harvest.");
     expect(html).toContain("Equip a pet before harvesting.");

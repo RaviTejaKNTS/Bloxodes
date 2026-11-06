@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { load } from "cheerio";
 import { renderToStaticMarkup } from "react-dom/server";
-import type { ReactNode } from "react";
 
 const state = vi.hoisted(() => ({
   roots: [] as Array<{ namespace: string; slug: string; kind: string; title: string; cover_image: string }>,
@@ -24,7 +23,6 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
   };
   return query;
 } }) }));
-vi.mock("@/components/hubs/HubsSidebar", () => ({ HubsSidebarLayout: ({ children }: { children: ReactNode }) => <div>{children}</div>, POPULAR_LINKS: [] }));
 
 import GamesPage from "@/app/(site)/games/page";
 
@@ -40,7 +38,7 @@ async function directory() {
   const $ = load(renderToStaticMarkup(await GamesPage()));
   const graph = JSON.parse($("script[type='application/ld+json']").text())["@graph"];
   const list = graph[1].mainEntity;
-  const paths = $("#article-body > a").map((_, card) => $(card).attr("href")).get();
+  const paths = $("#article-body a[data-journey-item]").map((_, card) => $(card).attr("href")).get();
   expect(list.numberOfItems).toBe(paths.length);
   expect(list.itemListElement.map((entry: { url: string }) => entry.url)).toEqual(paths.map(path => `https://bloxodes.com${path}`));
   expect($("#article-body a[href='/wiki']")).toHaveLength(1);

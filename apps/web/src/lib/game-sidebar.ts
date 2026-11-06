@@ -1,3 +1,4 @@
+import { cache } from "react";
 import "server-only";
 import {
   getEventsPageByUniverseId,
@@ -19,7 +20,7 @@ import { resolveCatalogCardMeta, type CatalogIconKey } from "@/lib/catalog-card-
 /** The card types the sidebar can render. The current page's own type is excluded by the renderer. */
 export type SidebarType = "wiki" | "codes" | "checklist" | "quiz" | "events" | "articles";
 
-export type SidebarArticle = { slug: string; title: string; coverImage: string | null };
+export type SidebarArticle = { href?: string; slug: string; title: string; coverImage: string | null };
 
 export type SidebarCatalogLink = { href: string; title: string; count: number | null };
 
@@ -69,7 +70,8 @@ function mapArticle(row: { slug?: string | null; title?: string | null; cover_im
   return { slug: row.slug, title: row.title, coverImage: row.cover_image ?? null };
 }
 
-export async function getGameSidebarData(universeId: number): Promise<GameSidebarData> {
+/** Request-cached: a collection page reads this twice, for the wiki card and the rest of the rail. */
+export const getGameSidebarData = cache(async (universeId: number): Promise<GameSidebarData> => {
   const [wiki, catalogRows, stats, eventSummary, eventsPage, codesRows, checklistRows, quizEntry, tools, articleRows] =
     await Promise.all([
       getWikiByUniverseId(universeId).catch(() => null),
@@ -195,4 +197,4 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
   const universeIcon = wiki?.iconUrl ?? stats?.iconUrl ?? checklist?.coverImage ?? codes?.coverImage ?? null;
 
   return { universeIcon, wiki, catalogs, stats, event, codes, checklist, quiz, tools, articles, fallback };
-}
+});

@@ -4,6 +4,8 @@ import { gameCollectionMetadata } from "@/components/games/GameCollectionPage";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { gameRootWikiPage } from "../game-root-page";
 import { ROBLOX_CHECKLISTS, gameChecklistConfig } from "../engagement/config";
+
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 const GTA_CHECKLISTS = gameChecklistConfig("gta", "/checklists/gta-5");
 import type { SharedGameGame, SharedGameWikiPage, SharedGameWikiCollectionPage } from "../shared-game-reader";
 

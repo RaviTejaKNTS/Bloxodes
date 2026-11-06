@@ -1,16 +1,13 @@
 "use client";
-import { useGameMenus } from "@/lib/game-menu-store";
 
 import { useEffect, useRef, type RefObject } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
-import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { isNavLinkActive, siteNavGroupsForPath } from "@/lib/site-navigation";
+import { isNavLinkActive, siteNavLinks } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteMoreDrawerProps = {
-  linkPaths?: Record<string, string>;
   id: string;
   open: boolean;
   onClose: () => void;
@@ -43,11 +40,10 @@ export function trapTabKey(event: KeyboardEvent, container: HTMLElement | null) 
  * Right-side drawer with every section link, feedback and the theme switch. It renders in the
  * server HTML (hidden until opened) so crawlers see every section link on every page.
  */
-export function SiteMoreDrawer({ linkPaths = {}, id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
+export function SiteMoreDrawer({ id, open, onClose, pathname, returnFocusRef }: SiteMoreDrawerProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const gameMenus = useGameMenus(pathname);
-  const groups = siteNavGroupsForPath(gameMenus[0]?.href ?? pathname, linkPaths, gameMenus);
+  const groups = [{ label: "Browse", links: siteNavLinks }];
 
   useEffect(() => {
     if (!open) return;
@@ -132,10 +128,6 @@ export function SiteMoreDrawer({ linkPaths = {}, id, open, onClose, pathname, re
         <div className="my-4 h-px shrink-0 bg-border" />
 
         <div className="space-y-1">
-          <SiteFeedbackButton
-            className="flex h-9 w-full justify-start rounded-lg px-2.5 text-[13px] font-semibold text-foreground/70 hover:bg-sidebar-accent hover:text-foreground"
-            labelClassName="inline"
-          />
           <div className="flex h-9 items-center justify-between gap-2 rounded-lg px-2.5">
             <span className="text-[13px] font-semibold text-foreground/70">Theme</span>
             <ThemeToggle className="h-[26px] w-[26px] border-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />

@@ -471,7 +471,7 @@ export function renderRobloxDecalCategoriesPage({
       <header className="space-y-4">
         <DecalBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(baseTitle)}</h1>
-        <p className="max-w-3xl text-base leading-7 text-muted">{description}</p>
+        <p className=" text-base leading-7 text-muted">{description}</p>
       </header>
 
       <section
@@ -687,7 +687,7 @@ export function renderRobloxDecalIdsPage({
         <header className="space-y-4">
           <DecalBreadcrumb items={breadcrumbNavItems} />
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(baseTitle)}</h1>
-          {pageDescription ? <p className="max-w-3xl text-base leading-7 text-muted">{pageDescription}</p> : null}
+          {pageDescription ? <p className=" text-base leading-7 text-muted">{pageDescription}</p> : null}
           <UpdatedTimestamp value={updatedDate} />
         </header>
       ) : (

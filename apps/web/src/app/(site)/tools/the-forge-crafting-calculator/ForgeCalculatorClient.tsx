@@ -84,11 +84,11 @@ function OreCard({
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between text-xs text-muted">
-        <span className="rounded-full bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
+        <span className="rounded-md bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
           {ore.multiplier.toFixed(2)}x
         </span>
         {selected ? (
-          <span className="rounded-full bg-accent px-2 py-[2px] text-[11px] font-bold text-white shadow-soft dark:bg-accent-dark">
+          <span className="rounded-md bg-accent px-2 py-[2px] text-[11px] font-bold text-white shadow-soft dark:bg-accent-dark">
             x{count}
           </span>
         ) : null}
@@ -128,7 +128,7 @@ function TraitPill({ ore, share, tier }: { ore: Ore; share: number; tier: "minor
     <div className="flex min-w-[240px] flex-col gap-1 rounded-xl border border-border/70 bg-surface px-3 py-2 text-xs text-foreground">
       <div className="flex items-center justify-between gap-2">
         <span className="text-sm font-semibold">{ore.traitName ?? ore.name}</span>
-        <span className="rounded-full bg-accent/10 px-2 py-[2px] text-[11px] font-bold uppercase tracking-wide text-accent">
+        <span className="rounded-md bg-accent/10 px-2 py-[2px] text-[11px] font-bold uppercase tracking-wide text-accent">
           {tier === "full" ? "Full" : "Minor"} · {(share * 100).toFixed(1)}%
         </span>
       </div>
@@ -383,10 +383,10 @@ export function ForgeCalculatorClient({
                       {items.map((item) => (
                         <span
                           key={item.weapon.id}
-                          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-surface-muted px-2.5 py-1 text-[11px] font-semibold text-foreground"
+                          className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface-muted px-2.5 py-1 text-[11px] font-semibold text-foreground"
                         >
                           <span>{item.weapon.name}</span>
-                          <span className="rounded-full bg-surface px-2 py-[1px] text-[10px] font-semibold text-muted">
+                          <span className="rounded-md bg-surface px-2 py-[1px] text-[10px] font-semibold text-muted">
                             {formatPercent(isReady ? item.probability : 0)}
                           </span>
                         </span>
@@ -411,10 +411,10 @@ export function ForgeCalculatorClient({
                       {items.map((item) => (
                         <span
                           key={item.armor.id}
-                          className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-surface-muted px-2.5 py-1 text-[11px] font-semibold text-foreground"
+                          className="inline-flex items-center gap-1 rounded-md border border-border/60 bg-surface-muted px-2.5 py-1 text-[11px] font-semibold text-foreground"
                         >
                           <span>{item.armor.name}</span>
-                          <span className="rounded-full bg-surface px-2 py-[1px] text-[10px] font-semibold text-muted">
+                          <span className="rounded-md bg-surface px-2 py-[1px] text-[10px] font-semibold text-muted">
                             {formatPercent(isReady ? item.probability : 0)}
                           </span>
                         </span>
@@ -438,7 +438,7 @@ export function ForgeCalculatorClient({
                 </p>
               </div>
               {!isReady ? (
-                <span className="rounded-full bg-surface-muted px-3 py-1 text-xs font-semibold text-muted">
+                <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-semibold text-muted">
                   Add at least {MIN_TOTAL_ORE_COUNT} ores to see odds
                 </span>
               ) : null}
@@ -471,7 +471,7 @@ export function ForgeCalculatorClient({
                       <button
                         type="button"
                         onClick={() => removeOre(entry.ore.id)}
-                        className="absolute right-2 top-2 rounded-full border border-border/60 bg-surface-muted px-2 py-[2px] text-xs font-bold text-muted transition hover:border-accent/70 hover:text-foreground"
+                        className="absolute right-2 top-2 rounded-md border border-border/60 bg-surface-muted px-2 py-[2px] text-xs font-bold text-muted transition hover:border-accent/70 hover:text-foreground"
                         aria-label={`Remove ${entry.ore.name}`}
                       >
                         ×
@@ -483,10 +483,10 @@ export function ForgeCalculatorClient({
                         <p className="text-sm font-semibold text-foreground">{entry.ore.name}</p>
                       </div>
                       <div className="flex items-center justify-between text-xs text-muted">
-                        <span className="rounded-full bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
+                        <span className="rounded-md bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
                           {entry.ore.multiplier.toFixed(2)}x
                         </span>
-                        <span className="rounded-full bg-accent px-2 py-1 text-[11px] font-bold text-white shadow-soft dark:bg-accent-dark">
+                        <span className="rounded-md bg-accent px-2 py-1 text-[11px] font-bold text-white shadow-soft dark:bg-accent-dark">
                           x{entry.count}
                         </span>
                       </div>
@@ -526,7 +526,7 @@ export function ForgeCalculatorClient({
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted">Ores & traits</p>
               <p className="text-xs text-muted">Select up to four ore types. Click to add; adjust counts below.</p>
             </div>
-            <div className="rounded-full bg-surface-muted px-3 py-1 text-xs font-semibold text-muted">
+            <div className="rounded-md bg-surface-muted px-3 py-1 text-xs font-semibold text-muted">
               {selectedOres.length}/{MAX_ORE_TYPES} types
             </div>
           </div>

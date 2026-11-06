@@ -104,7 +104,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
                 </p>
               </div>
               {selectedCrop ? (
-                <span className="rounded-full border border-border/70 bg-surface px-3 py-1 text-xs font-semibold text-muted">
+                <span className="rounded-md border border-border/70 bg-surface px-3 py-1 text-xs font-semibold text-muted">
                   {selectedCrop.rarity ?? "Crop"}
                 </span>
               ) : null}
@@ -198,7 +198,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
                   >
                     <span className="flex items-center justify-between gap-3">
                       <span className="text-sm font-semibold text-foreground">{mutation.name}</span>
-                      <span className="rounded-full bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
+                      <span className="rounded-md bg-surface-muted px-2 py-1 text-[11px] font-semibold text-muted">
                         {mutation.multiplierLabel}
                       </span>
                     </span>
