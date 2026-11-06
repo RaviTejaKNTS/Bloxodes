@@ -1,3 +1,4 @@
+import { factoryPublicationPayload } from "./factory-commit";
 import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { CodePageFinal } from "./final-contract";
@@ -7,14 +8,12 @@ import type { publicCopyFindings } from "../content/check-public-copy";
 export function bundleFingerprint(final: CodePageFinal) {
   return createHash("sha256").update(JSON.stringify(Object.entries(final).sort(([a], [b]) => a.localeCompare(b)))).digest("hex");
 }
-function matchesLiveBundle(row: any, final: CodePageFinal, fingerprint: string) {
-  if (!row?.is_published) return false;
-  if (row.interlinking_ai?.bundle_hash === fingerprint) return true;
-  return ["slug", "name", "universe_id", "roblox_link", "source_url", "source_url_2", "intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md"].every(
-    field => row[field] === final[field as keyof CodePageFinal]) && row.seo_description === final.meta_description && row.interlinking_ai_copy_md === final.interlinking_copy_md;
+function matchesLiveBundle(row: any, final: CodePageFinal) {
+  return row?.is_published && Object.entries(factoryPublicationPayload(final)).every(
+    ([field, value]) => row[field] === value);
 }
 export async function publishCodesBundle(sb: SupabaseClient, final: CodePageFinal, deps: {
-  context: () => ReturnType<typeof loadCodesContext>;
+  context: (options: { allRelatedPages: true }) => ReturnType<typeof loadCodesContext>;
   guard: () => Promise<unknown>;
   publicCopyFindings: typeof publicCopyFindings;
   ensureIdentity: (link: string) => Promise<{ universeId?: number | null }>;
@@ -25,12 +24,12 @@ export async function publishCodesBundle(sb: SupabaseClient, final: CodePageFina
   if (retryError) throw new Error(`Overlap lookup failed: ${retryError.message}`);
   if ((retryRows ?? []).some((row: any) => row.universe_id !== final.universe_id || row.slug !== final.slug) || (retryRows ?? []).length > 1) throw new Error("Slug or universe overlaps a different code page; review it first");
   const fingerprint = bundleFingerprint(final);
-  if (matchesLiveBundle(retryRows?.[0], final, fingerprint)) return;
-  const context = await deps.context();
+  if (matchesLiveBundle(retryRows?.[0], final)) return;
+  const context = await deps.context({ allRelatedPages: true });
   const allowed = new Set(context.related_pages.map(row => `/codes/${row.slug}`));
   const links = [...final.interlinking_copy_md.matchAll(/\]\(([^)]+)\)/g)].map(match => match[1]);
-  if (links.some(link => !allowed.has(link))) throw new Error("Interlink copy contains a link absent from codes:context");
-  if (context.related_pages.length && !links.length) throw new Error("Interlink copy must link a related page from codes:context");
+  if (links.some(link => !allowed.has(link))) throw new Error("Interlink copy contains an ineligible related-page link");
+  if (context.related_pages.length && !links.length) throw new Error("Interlink copy must link an eligible related page");
   let game = retryRows?.[0];
   await deps.guard();
   const findings = ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "meta_description", "interlinking_copy_md"].flatMap(field =>

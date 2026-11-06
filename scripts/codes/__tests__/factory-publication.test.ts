@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { bundleFingerprint, publishCodesBundle } from "../factory-publication";
-import { commitFactoryPage } from "../factory-commit";
+import { commitFactoryPage, factoryPublicationPayload } from "../factory-commit";
+import { loadCodesContext } from "../factory-context";
 import type { CodePageFinal } from "../final-contract";
 
 const final: CodePageFinal = { slug: "example", name: "Example", universe_id: 1, roblox_link: "https://www.roblox.com/games/2",
@@ -9,7 +10,7 @@ const final: CodePageFinal = { slug: "example", name: "Example", universe_id: 1,
   troubleshoot_md: "Trouble", rewards_md: "Rewards", find_codes_md: "Find", meta_description: "x".repeat(155),
   game_display_name: "Example", interlinking_copy_md: "[Other](/codes/other) [Other again](/codes/other)" };
 function fixture(live = true) {
-  let row: any = live ? { id: "page", ...final, is_published: true, intro_md: "Old copy" } : null;
+  let row: any = live ? { id: "page", ...factoryPublicationPayload(final), is_published: true, intro_md: "Old copy" } : null;
   let readbackFails = false;
   const writes: any[] = [];
   const credited = new Set<string>();
@@ -17,6 +18,7 @@ function fixture(live = true) {
   let commits = 0;
   const sb: any = { rpc: async (name: string, args: any) => {
     assert.equal(name, "publish_factory_code_page"); commits++;
+    for (const key of ["meta_description", "game_display_name", "interlinking_copy_md"]) assert.ok(!(key in args.p_payload));
     for (const id of args.p_linked_ids) if (!credited.has(id)) {
       credited.add(id); counts.set(id, (counts.get(id) ?? 0) + 1);
     }
@@ -32,7 +34,7 @@ function fixture(live = true) {
     guard: async () => {}, publicCopyFindings: () => [], ensureIdentity: async () => ({ universeId: 1 }),
     prepare: async (_game: any, fingerprint: string, linked: string[]) => {
       assert.deepEqual(linked, ["other-id"]);
-      await commitFactoryPage(sb, "page", final, { universeId: 1, fingerprint, linkedIds: linked }, 1, true, async () => {});
+      await commitFactoryPage(sb, "page", factoryPublicationPayload(final), { universeId: 1, fingerprint, linkedIds: linked }, 1, true, async () => {});
     }
   };
   return { sb, deps, writes, counts, commits: () => commits, row: () => row, failReadback: () => { readbackFails = true; } };
@@ -85,7 +87,7 @@ test("prepared content, cover, hash and only actual unique linked IDs commit in 
 
 test("matching pre-factory live copy succeeds without source refresh or mutations", async () => {
   const f = fixture();
-  Object.assign(f.row(), final, { seo_description: final.meta_description, interlinking_ai_copy_md: final.interlinking_copy_md });
+  Object.assign(f.row(), factoryPublicationPayload(final));
   await publishCodesBundle(f.sb, final, { ...f.deps, context: async () => { throw new Error("Unexpected context request"); } });
   assert.equal(f.commits(), 0); assert.deepEqual(f.writes, []);
 });
@@ -94,6 +96,56 @@ test("republish and changed bundle send the same source page to atomic credit tr
   const f = fixture();
   await publishCodesBundle(f.sb, final, f.deps);
   await publishCodesBundle(f.sb, final, f.deps);
-  await publishCodesBundle(f.sb, { ...final, intro_md: "Changed" }, f.deps);
+  const changed = { ...final, intro_md: "Changed" };
+  await publishCodesBundle(f.sb, changed, { ...f.deps, prepare: async (_game, fingerprint, linkedIds) => {
+    await commitFactoryPage(f.sb, "page", factoryPublicationPayload(changed),
+      { universeId: 1, fingerprint, linkedIds }, 1, true, async () => {});
+  } });
+  assert.equal(f.row().intro_md, "Changed");
   assert.equal(f.commits(), 2); assert.equal(f.counts.get("other-id"), 1);
+});
+
+test("a retained bundle hash cannot hide changed live copy", async () => {
+  const f = fixture();
+  await publishCodesBundle(f.sb, final, f.deps);
+  f.row().intro_md = "Another writer changed this";
+  await publishCodesBundle(f.sb, final, f.deps);
+  assert.equal(f.row().intro_md, final.intro_md);
+  assert.equal(f.commits(), 2);
+  assert.equal(f.counts.get("other-id"), 1);
+});
+
+test("publication accepts a context recommendation after its link count moves it outside the top four", async () => {
+  const f = fixture();
+  const game = { universe_id: 1, creator_id: 10, genre_l1: "Action" };
+  const rows = [
+    { id: "other-id", slug: "other", name: "Other", universe_id: 2, internal_links: 0, universe: { creator_id: 10 } },
+    ...Array.from({ length: 4 }, (_, i) => ({ id: `new-${i}`, slug: `new-${i}`, name: `New ${i}`,
+      universe_id: i + 3, internal_links: 1, universe: { creator_id: 20, genre_l1: "Action" } })),
+    { id: "self", slug: "example", name: "Self", universe_id: 1, internal_links: 0, universe: game },
+    { id: "unrelated", slug: "unrelated", name: "Unrelated", universe_id: 99, internal_links: 0,
+      universe: { creator_id: 99, genre_l1: "Puzzle" } }
+  ];
+  const contextSb: any = { from: (table: string) => ({ select: () => ({
+    eq: (_field: string, value: unknown) => {
+      if (table === "roblox_universes") return { maybeSingle: async () => ({ data: game }) };
+      if (_field === "universe_id") return Promise.resolve({ data: [] });
+      assert.equal(_field, "is_published"); assert.equal(value, true);
+      return { order: () => ({ range: async () => ({ data: rows }) }) };
+    }
+  }) }) };
+  const suggestions = await loadCodesContext(contextSb, 1);
+  assert.equal(suggestions.related_pages.length, 4);
+  assert.ok(suggestions.related_pages.some(row => row.id === "other-id"));
+  rows[0].internal_links = 50;
+  assert.ok(!(await loadCodesContext(contextSb, 1)).related_pages.some(row => row.id === "other-id"));
+  await publishCodesBundle(f.sb, final, { ...f.deps,
+    context: options => loadCodesContext(contextSb, 1, options)
+  });
+  assert.equal(f.commits(), 1);
+  const eligible = await loadCodesContext(contextSb, 1, { allRelatedPages: true });
+  assert.equal(eligible.related_pages.length, 5);
+  assert.ok(!eligible.related_pages.some(row => ["self", "unrelated"].includes(row.id)));
+  await assert.rejects(publishCodesBundle(f.sb, { ...final, interlinking_copy_md: "[Bad](/codes/unrelated)" },
+    { ...f.deps, context: options => loadCodesContext(contextSb, 1, options) }), /ineligible/);
 });

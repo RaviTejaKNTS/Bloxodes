@@ -32,7 +32,7 @@ async function main() {
   const { publishCodesBundle } = await import("./factory-publication");
   const { publicCopyFindings } = await import("../content/check-public-copy");
   await publishCodesBundle(sb, final, {
-    context: () => loadCodesContext(sb, final.universe_id),
+    context: options => loadCodesContext(sb, final.universe_id, options),
     guard: async () => {
       if (target === "production") {
         const { assertLocalContentPublication } = await import("../shared/local-content-publication-guard");

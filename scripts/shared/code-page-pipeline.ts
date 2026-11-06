@@ -1,4 +1,4 @@
-import { commitFactoryPage } from "../codes/factory-commit";
+import { commitFactoryPage, factoryPublicationPayload } from "../codes/factory-commit";
 import { loadCodesContext } from "../codes/factory-context";
 import { publicCopyFindings } from "../content/check-public-copy";
 import "./load-env";
@@ -214,7 +214,13 @@ async function generateInterlinkingForGame(params: {
   if (!gameId) return null;
 
   if (!params.universeId) return null;
-  const context = await loadCodesContext(supabase, params.universeId);
+  let context: Awaited<ReturnType<typeof loadCodesContext>>;
+  try {
+    context = await loadCodesContext(supabase, params.universeId);
+  } catch (error) {
+    console.warn("⚠️ Related pages lookup failed; skipping interlinking:", error instanceof Error ? error.message : error);
+    return null;
+  }
   if (!context.related_pages.length) return null;
   const promptContext: InterlinkPromptContext = {
     game: { id: gameId, name: gameName, slug: gameSlug },
@@ -902,8 +908,9 @@ export async function finalizeCodePage(
 
   if (factory) {
     await commitFactoryPage(supabase, game.id, {
-      ...updatePayload, name: game.name, slug: game.slug, source_url: game.source_url, source_url_2: game.source_url_2,
-      interlinking_ai_copy_md: factory.interlinkCopy
+      ...factoryPublicationPayload({ ...game, ...article, universe_id: factory.universeId,
+        roblox_link: game.roblox_link ?? "", interlinking_copy_md: factory.interlinkCopy }),
+      ...updatePayload
     }, factory, resolvedUniverseId, codesSynced, () => maybeAttachCoverImage({
       slug: game.slug, name: game.name, id: game.id, robloxLink: resolvedLinks.roblox_link?.url ?? null
     }, true));

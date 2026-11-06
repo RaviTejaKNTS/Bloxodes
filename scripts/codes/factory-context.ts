@@ -2,7 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { codePageFinalSchema } from "./final-contract";
 
-export async function loadCodesContext(sb: SupabaseClient, universeId: number) {
+export async function loadCodesContext(sb: SupabaseClient, universeId: number, options: { allRelatedPages?: boolean } = {}) {
   const universe = await sb.from("roblox_universes").select("universe_id,name,display_name,root_place_id,playing,creator_id,creator_name,genre_l1,genre_l2").eq("universe_id", universeId).maybeSingle();
   if (universe.error) throw new Error(`Game lookup failed: ${universe.error.message}`);
   const overlaps = await sb.from("code_pages").select("id,slug,name,is_published,source_url,source_url_2,roblox_link").eq("universe_id", universeId);
@@ -33,8 +33,9 @@ export async function loadCodesContext(sb: SupabaseClient, universeId: number) {
     if (!u) return [];
     const basis = developer(game) && developer(game) === developer(u) ? "developer" : genre(game) && genre(game) === genre(u) ? "genre" : null;
     return basis ? [{ id: row.id, slug: row.slug, name: row.name, basis, internal_links: row.internal_links ?? 0 }] : [];
-  }).sort((a, b) => a.internal_links - b.internal_links || a.name.localeCompare(b.name)).slice(0, 4);
-  return { game, game_identity_source: universe.data ? "roblox_universes" : "roblox_api", existing_code_pages: overlaps.data, related_pages: related,
+  }).sort((a, b) => a.internal_links - b.internal_links || a.name.localeCompare(b.name));
+  const picks = options.allRelatedPages ? related : related.slice(0, 4);
+  return { game, game_identity_source: universe.data ? "roblox_universes" : "roblox_api", existing_code_pages: overlaps.data, related_pages: picks,
     slug_rules: "Use a readable editorial game slug. Never copy roblox_universes.slug. Never append -codes or a universe ID. Keep an existing code_pages.slug.",
     final_json_schema: z.toJSONSchema(codePageFinalSchema, { unrepresentable: "any" }) };
 }
