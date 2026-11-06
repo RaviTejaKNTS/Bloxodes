@@ -1,0 +1,11 @@
+[Unit]
+Description=Find new Roblox codes pages every six hours
+
+[Timer]
+OnCalendar=*-*-* 01,07,13,19:15:00 Asia/Kolkata
+Persistent=true
+RandomizedDelaySec=300
+Unit=bloxodes-codes-discovery.service
+
+[Install]
+WantedBy=timers.target

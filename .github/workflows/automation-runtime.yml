@@ -19,7 +19,7 @@ jobs:
         with: {node-version: '22', cache: npm}
       - run: npm ci --workspace @bloxodes/web --include-workspace-root --no-audit --no-fund
       - name: Verify automation helpers on the host Node version
-        run: npm run test:article-queue && npm run test:wiki-runtime
+        run: npm run test:article-queue && npm run test:wiki-runtime && npm run test:codes-factory
       - name: Package dependencies and their source receipt
         run: |
           mkdir -p "$RUNNER_TEMP/runtime"
