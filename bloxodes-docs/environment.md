@@ -16,7 +16,7 @@ How env files are stored, loaded and protected. Never print env values, commit t
 | Dokploy | Production web runtime env. |
 | VPS `/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker` | Stats worker env. |
 | VPS `/home/ravitejaknts/bloxodes-supabase/.env` | Self-hosted Supabase env. Don't copy it into the repo. |
-| Homelab `/etc/bloxodes/article-automation.env` | Article automation runtime env, mode `0640`. |
+| Homelab `/etc/bloxodes/article-automation.env` | Article and codes discovery runtime env, mode `0640`. Holds `NOTION_CODES_QUEUE_TOKEN` for the [Codes Queue](automation/notion-queues.md#codes-queue). |
 
 Each T3 worktree links `.envs` to its machine's main checkout, so every worktree sees the same files.
 

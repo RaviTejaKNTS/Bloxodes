@@ -1,6 +1,6 @@
 # Schedules
 
-Last verified: 2026-11-04
+Last verified: 2026-11-06
 
 Every recurring job, by where it runs. If you add, move or remove a schedule, update this file and [monitoring.json](monitoring.json) in the same change. Build it the way Cockpit's `workflow/runners.md` says, so it survives restarts, crashes and overloads. `monitoring.json` gives each job its name and description in the automation dashboard at `https://monitor.ravitejaknts.com`.
 
@@ -24,11 +24,12 @@ Runs can overlap, and they share the root checkout. Each one claims its own queu
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env`.
+All units run from `/srv/data/bloxodes-automation-runtime/current`. Article and codes discovery read `/etc/bloxodes/article-automation.env`.
 
 | Unit | When | Does |
 | --- | --- | --- |
 | `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the Content Factory article run writes from. Starts nothing else. |
+| `bloxodes-codes-discovery.timer` | 01:15, 07:15, 13:15, 19:15 IST, up to 5 minutes later | `codes:discover`: adds new Beebom and RobloxDen codes games to the [Codes Queue](notion-queues.md#codes-queue). Needs `NOTION_CODES_QUEUE_TOKEN`. State in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/`. Enable once with `sudo systemctl enable --now bloxodes-codes-discovery.timer`. |
 | `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 
 Article writing and publication run in the Content Factory. The homelab writer, publication and audit units were removed on 2026-10-30; the installer removes them if it finds them, and restores the old units if activation fails.
@@ -84,8 +85,8 @@ Scheduled:
 
 | Workflow | Schedule (UTC) | Does |
 | --- | --- | --- |
-| `discover-beebom-codes.yml` | :17 every 6 hours | Finds new codes pages from Beebom. |
-| `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. |
+| `discover-beebom-codes.yml` | :17 every 6 hours | Old Beebom codes discovery. Switched off once the Content Factory codes run publishes. |
+| `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. Switched off with the one above. |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
