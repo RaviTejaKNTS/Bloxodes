@@ -8,7 +8,8 @@ const USER_AGENT =
   process.env.ROBLOX_SCRAPER_UA ??
   "BloxodesUniverseLinker/1.0 (+https://bloxodes.com; contact@bloxodes.com)";
 
-const PLACE_DETAILS_API = "https://games.roblox.com/v1/games/multiget-place-details";
+// Public place-to-universe lookup. games.roblox.com multiget-place-details now needs a signed-in cookie (401).
+const PLACE_UNIVERSE_API = "https://apis.roblox.com/universes/v1/places";
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 
 type RobloxPlaceDetail = {
@@ -60,13 +61,23 @@ async function fetchJson<T>(url: string, fetcher: typeof fetch = fetch): Promise
 }
 
 export async function fetchPlaceDetails(placeId: string, fetcher: typeof fetch = fetch): Promise<RobloxPlaceDetail | null> {
-  const payload = await fetchJson<Array<RobloxPlaceDetail>>(`${PLACE_DETAILS_API}?placeIds=${placeId}`, fetcher).catch(
+  if (!/^\d+$/.test(placeId)) return null;
+  const mapping = await fetchJson<{ universeId?: number | null }>(`${PLACE_UNIVERSE_API}/${placeId}/universe`, fetcher).catch(
     () => null
   );
-  if (!payload?.length) return null;
-  const entry = payload[0];
-  if (!entry || typeof entry.placeId !== "number") return null;
-  return entry;
+  const universeId = mapping?.universeId;
+  if (typeof universeId !== "number" || !Number.isSafeInteger(universeId) || universeId <= 0) return null;
+  const payload = await fetchJson<{ data?: RobloxGameDetail[] }>(`${GAME_DETAILS_API}?universeIds=${universeId}`, fetcher).catch(
+    () => null
+  );
+  const entry = payload?.data?.[0];
+  if (!entry || entry.id !== universeId) return null;
+  return {
+    placeId: Number(placeId),
+    universeId,
+    name: entry.name,
+    rootPlaceId: typeof entry.rootPlaceId === "number" ? entry.rootPlaceId : undefined
+  };
 }
 
 async function fetchUniverseDetails(universeId: number): Promise<RobloxGameDetail | null> {
