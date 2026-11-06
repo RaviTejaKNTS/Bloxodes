@@ -229,7 +229,11 @@
     "audit:shared-games-preview": "node --import tsx scripts/games/audit-shared-games-preview.ts",
     "sync:shared-game-collection-runtime": "node --import tsx scripts/franchise/sync-franchise-collection-runtime.ts",
     "export:shared-game-collection-workspace": "node --import tsx scripts/games/export-game-collection-workspace.ts --workspace",
-    "import:gta-shared-maps": "tsx scripts/games/import-gta-shared-maps.ts"
+    "import:gta-shared-maps": "tsx scripts/games/import-gta-shared-maps.ts",
+    "codes:discover": "tsx scripts/codes/discover-code-pages.ts",
+    "codes:context": "tsx scripts/codes/factory-cli.ts context",
+    "codes:publish": "tsx scripts/codes/factory-cli.ts publish",
+    "test:codes-factory": "NODE_ENV=test node --import tsx --test scripts/codes/__tests__/*.test.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

@@ -1,8 +1,8 @@
 # Notion queues
 
-Last verified: 2026-10-19
+Last verified: 2026-11-06
 
-Two Notion databases coordinate the scheduled content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
+Three Notion databases coordinate the scheduled content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
 
 ## Roblox Wiki Queue
 
@@ -48,3 +48,20 @@ One row per game. Its page holds the whole approved plan: pages, URLs, sources a
 The run also fills in Last run and a short Run report (thread, PRs, published URLs, open items).
 
 Keep the `Template: duplicate this row` row. Copy it to add a new game.
+
+## Codes Queue
+
+- Database: https://app.notion.com/p/485d1be99ef6402c9a9e264249592e3a
+- Data source: `collection://257a3425-d4f8-44c1-af56-4ac96a5bed07`
+- Filled by: the homelab codes finder (`bloxodes-codes-discovery.timer`, through the Notion API with `NOTION_CODES_QUEUE_TOKEN`). See [codes](../content/codes.md#new-pages-homelab-finder-and-content-factory).
+- Used by: the Content Factory's codes run.
+
+One row per Roblox universe (`Universe ID`). Columns: Game, Universe ID, Place ID, Found on (`RobloxDen`, `Beebom`), RobloxDen URL, Beebom URL, Roblox URL, Found, Status, Run report, Live page, Claimed. The finder creates `New` rows and, while a row is still `New`, adds a source it finds later. It never changes a row's status. Run only one finder at a time: Notion can't enforce a unique Universe ID.
+
+| Status | Set by | Meaning |
+| --- | --- | --- |
+| `New` | Finder | Waiting for the codes run. |
+| `Claimed` | Codes run | Being built. Claimed holds the time. A `Claimed` row older than 12 hours was left by a run that stopped, and the next run takes it again. |
+| `Published` | Codes run | Live. Live page holds the URL. |
+| `Skipped` | Codes run | Not worth a page (for example a duplicate game or no working codes source). Run report says why. |
+| `Failed` | Codes run | Couldn't publish. Run report says what. |

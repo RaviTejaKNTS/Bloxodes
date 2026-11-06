@@ -1,0 +1,23 @@
+[Unit]
+Description=Find new Roblox codes pages for the Notion Codes Queue
+After=network-online.target
+Wants=network-online.target
+RequiresMountsFor=/srv/data
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/srv/data/bloxodes-automation-runtime/current
+EnvironmentFile=/etc/bloxodes/article-automation.env
+Environment=BLOXODES_ENV_PROFILE=process-only
+Environment=NODE_ENV=production
+Environment=HOME=/home/teja
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=CODES_DISCOVERY_STATE_PATH=/srv/data/bloxodes-automation-runtime/state/codes-discovery/state.json
+ExecStart=/usr/bin/npm run codes:discover
+UMask=0077
+Nice=19
+CPUWeight=10
+MemoryMax=512M
+TimeoutStartSec=18min

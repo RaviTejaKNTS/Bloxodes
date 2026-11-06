@@ -24,8 +24,15 @@ function isPublicationRelevant(file: string) {
   return PUBLICATION_RELEVANT_PATHS.some(prefix => prefix.endsWith("/") ? file.startsWith(prefix) : file === prefix);
 }
 
+export const PUBLICATION_SUBPROCESS_TIMEOUT_MS = 60_000;
+const subprocessOptions = () => ({
+  cwd: repoRoot, timeout: PUBLICATION_SUBPROCESS_TIMEOUT_MS, killSignal: "SIGKILL" as const,
+  env: { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_SSH_COMMAND: "ssh -o BatchMode=yes -o ConnectTimeout=15" },
+  stdio: ["ignore", "pipe", "pipe"] as ["ignore", "pipe", "pipe"]
+});
+
 function git(...args: string[]) {
-  try { return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim(); }
+  try { return execFileSync("git", args, { ...subprocessOptions(), encoding: "utf8" }).trim(); }
   catch { throw new Error(`git ${args[0]} failed. Check repository access and the origin remote before retrying publication.`); }
 }
 
@@ -103,7 +110,7 @@ export async function assertLocalContentPublication() {
   try {
     execFileSync(process.execPath, ["--import", "tsx", "scripts/ops/release-production-schema.ts",
       "--approved-sha", head, "--check-ledger", "--transport", "studio", "--database-role", "supabase_admin"],
-    { cwd: repoRoot, env: process.env, stdio: ["ignore", "pipe", "pipe"] });
+    subprocessOptions());
   } catch {
     throw new Error("Production migration ledger is not ready or could not be read. Run supabase:production:release -- --approved-sha <HEAD> --check-ledger --transport studio --database-role supabase_admin for details. Apply pending schema through GitHub before publishing.");
   }

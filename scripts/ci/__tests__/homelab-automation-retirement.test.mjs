@@ -6,7 +6,7 @@ import path from "node:path";
 import test from "node:test";
 
 const installer = fs.readFileSync(new URL("../../ops/install-homelab-automation.sh", import.meta.url), "utf8");
-const retained = ["bloxodes-article-discovery.service", "bloxodes-site-health.service", "bloxodes-article-discovery.timer", "bloxodes-site-health.timer"];
+const retained = ["bloxodes-article-discovery.service", "bloxodes-site-health.service", "bloxodes-article-discovery.timer", "bloxodes-site-health.timer", "bloxodes-codes-discovery.service", "bloxodes-codes-discovery.timer"];
 const retired = ["bloxodes-article-publication.timer", "bloxodes-article-writer.service", "bloxodes-article-publication.service", "bloxodes-article-audit.service"];
 
 // Run only on GitHub's Linux runner. All host paths and service commands are
@@ -87,6 +87,7 @@ esac`);
     assert.equal(fs.existsSync(`${state}/${discoveryTimer}`), true);
     assert.equal(fs.readlinkSync(`${units}/timers.target.wants/${discoveryTimer}`), `${units}/${discoveryTimer}`);
     assert.equal(fs.existsSync(`${state}/bloxodes-site-health.timer`), false, "inactive retained timer must stay inactive");
+    assert.equal(fs.existsSync(`${state}/bloxodes-codes-discovery.timer`), false, "a new timer stays off until enabled once");
     if (mode === "rollback") {
       assert.equal(fs.readlinkSync(`${runtime}/current`), `${root}/previous-release`);
       for (const unit of [...retired, ...retained.filter(unit => unit !== "bloxodes-site-health.service")]) assert.equal(fs.readFileSync(`${units}/${unit}`, "utf8"), `old ${unit}\n`);

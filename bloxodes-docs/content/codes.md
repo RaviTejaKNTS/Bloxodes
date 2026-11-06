@@ -1,15 +1,37 @@
 # Codes
 
-Last verified: 2026-10-19
+Last verified: 2026-11-06
 
-Roblox codes pages at `/codes/<game-slug>`. Two separate jobs: GitHub creates new pages, and the VPS keeps codes on existing pages fresh.
+Roblox codes pages at `/codes/<game-slug>`. Two separate jobs: the Content Factory creates new pages, and the VPS keeps codes on existing pages fresh.
 
-## New pages (GitHub Actions)
+## New pages (homelab finder and Content Factory)
 
-1. **Discover:** `discover-beebom-codes.yml` runs at :17 every 6 hours UTC. `discover:beebom-codes` (`scripts/codes/discover-beebom-code-pages.ts`) reads Beebom's Roblox codes tag, checks for overlaps and inserts unpublished `code_pages` rows.
-2. **Write and publish:** `generate-queue.yml` (Draft Code Page Generation) runs 10 times a day. `npm run generate` (`scripts/codes/generate-code-page-copy.ts`) picks up draft `code_pages`, fetches sources, writes copy with Claude Haiku 5.5 (`claude-haiku-5-5`) through the Claude Code CLI (`scripts/shared/claude-print-runner.ts`: one turn, no tools, 32,000 output tokens per call with thinking included, 10 minutes for the page and 3 for interlink text), links the Roblox universe, refreshes codes, adds media and interlinks. It publishes a page only after the universe resolves and the source refresh is clean. Otherwise the page stays a draft.
+1. **Find:** `bloxodes-codes-discovery.timer` on the homelab runs `codes:discover` (`scripts/codes/discover-code-pages.ts`) every 6 hours. It adds one row per Roblox universe to the [Codes Queue](../automation/notion-queues.md#codes-queue) for each game that has a codes page on Beebom or RobloxDen and no `code_pages` row (published or not) and no queue row. It reads production and writes only Notion and its state file.
+2. **Write and publish:** the Content Factory's codes run, twice a day on the MacBook Pro, works through every `New` row: Luna researches, Haiku writes `final.json` through `bin/haiku-write`, and the main agent checks it and runs `codes:publish`.
 
-Both write production directly. Database triggers handle cache refresh. Both workflows (discovery also writes copy for the drafts it inserts) need one GitHub secret, `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN`, and stop at the first step if neither is set. `ANTHROPIC_API_KEY` is set; its source is homelab `.envs/shared/application.env`, so copy it to GitHub again when it changes there. A run whose selected pages all fail ends red.
+### Sources
+
+| Source | How new games are found |
+| --- | --- |
+| RobloxDen | `robloxden.com/sitemap.xml` lists every game codes page (5,168 on 2026-11-06). Pages have no publish date, and `lastmod` is only when RobloxDen last checked codes, so the finder compares the sitemap's `/game-codes/<slug>` list with the slugs it has seen. The first run only saved a baseline: older RobloxDen games are not queued. Each game page links `roblox.com/games/<placeId>`. |
+| Beebom | The first page of `beebom.com/tag/roblox-codes/`, newest first. Most articles no longer link the Roblox game, so a game without a link is matched by exact name only when the match is unambiguous; otherwise it's reported as unresolved and skipped. |
+
+Every candidate is saved as pending before the run works on it, so a crash or the per-run cap never loses one, and the two sources take turns. A game that can't be matched (no Roblox link and no unambiguous name match) is retried up to a cap, then reported as given up. A network error, server error or timeout keeps the candidate pending without using that cap; if those use up the run's retries or the run's time limit, the run exits non-zero and the dashboard shows it failed. State is in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/state.json`. `npm run codes:discover -- --dry-run` prints what a run would add without writing.
+
+### Factory commands
+
+The factory calls these from the MacBook Pro's Bloxodes main checkout through its `bin/publisher`. Neither calls an LLM.
+
+| Command | Does |
+| --- | --- |
+| `codes:context --universe <id>` | Read-only JSON: game identity, root place, playing count, existing `code_pages` overlaps, up to 4 related codes pages for interlinks, slug rules and the `final.json` JSON Schema. |
+| `codes:publish --bundle <folder> --target production` | Validates `final.json` (`scripts/codes/final-contract.ts`), ensures the universe, creates or updates the `code_pages` row unpublished, syncs codes from the sources, adds social links, interlinks and the cover, runs the public copy check, and publishes only when the universe resolves and the source refresh has no errors. Exit 0 only after the row reads back as published; the last line is the page URL. Default target is development. A rerun on a live page whose fields already match `final.json` succeeds without changing it. A changed `final.json` updates a live page without taking it offline: the new content and link credits are applied together by the `publish_factory_code_page` RPC only after every step succeeds. |
+
+`final.json` holds the slug, name, `universe_id`, `roblox_link`, `source_url` (RobloxDen), `source_url_2` (Beebom, at least one source), the five copy sections (`intro_md`, `redeem_md`, `troubleshoot_md`, `rewards_md`, `find_codes_md`), a 150 to 160 character `meta_description`, `game_display_name` and `interlinking_copy_md`. `codes:context` suggests up to 4 related pages; publishing accepts a link to any published codes page with the same developer or genre. Each linked page's `internal_links` count goes up once per page that links it (the credited IDs are stored in `interlinking_ai.credited_page_ids`), so `codes:context` spreads links across pages. The shared steps live in `scripts/shared/code-page-pipeline.ts`.
+
+### Old GitHub workflows
+
+`discover-beebom-codes.yml` and `generate-queue.yml` (Draft Code Page Generation) still run until the factory has published its first pages, then they're switched off. They found nothing after 2026-10-29 because most Beebom articles stopped linking the Roblox game. `npm run generate` still uses the shared pipeline with its own Claude Code CLI call.
 
 ## Code updates (VPS)
 

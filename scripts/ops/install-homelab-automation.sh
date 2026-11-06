@@ -14,8 +14,8 @@ flock -n 9 || { echo 'Another activation is running.' >&2; exit 1; }
 [[ "$(git -C "$RELEASE" rev-parse HEAD)" == "$SHA" ]]
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
 [[ -r /etc/bloxodes/article-automation.env ]]
-SERVICES=(bloxodes-article-discovery.service bloxodes-site-health.service)
-TIMERS=(bloxodes-article-discovery.timer bloxodes-site-health.timer)
+SERVICES=(bloxodes-codes-discovery.service bloxodes-article-discovery.service bloxodes-site-health.service)
+TIMERS=(bloxodes-codes-discovery.timer bloxodes-article-discovery.timer bloxodes-site-health.timer)
 # Writing and publication belong to the Content Factory on the MacBook Pro.
 # Keep these names only for removal and failure rollback, never installation.
 RETIRED=(bloxodes-article-publication.timer bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service)
