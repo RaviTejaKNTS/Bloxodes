@@ -1,3 +1,4 @@
+import { discoveryExitCode } from "./command-outcome";
 import { fetchPlaceDetails } from "@/lib/roblox/universe";
 import { loadBloxodesEnv } from "../shared/env-files";
 
@@ -8,7 +9,7 @@ import { load } from "cheerio";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { CodesQueue, FatalDiscoveryError, makeRequest } from "./discovery-io";
-import { beebomArticles, emptyState, initializeRobloxdenBaseline, queueDecision, pendingKeys, recordAttempt, resolveName, robloxPlaceIds, sitemapSlugs, titleToName, type DiscoveryState } from "./discovery-model";
+import { beebomArticles, emptyState, initializeRobloxdenBaseline, queueDecision, observeCandidates, processPendingBatch, ResolutionError, OperationalDiscoveryError, resolveName, robloxPlaceIds, sitemapSlugs, titleToName, type DiscoveryState } from "./discovery-model";
 
 async function main() {
   const dry = process.argv.includes("--dry-run");
@@ -38,9 +39,11 @@ async function main() {
   const stats: Record<string, number> = { newSlugs: 0, queued: 0, merged: 0, existingPublished: 0, existingUnpublished: 0, alreadyQueued: 0, unresolved: 0, retried: 0, givenUp: 0, fetched: 0 };
   const slugs = sitemapSlugs(await request("https://robloxden.com/sitemap.xml", {}, true));
   if (!slugs.length) throw new FatalDiscoveryError("RobloxDen sitemap contains no game codes pages");
+  initializeRobloxdenBaseline(state, slugs);
+  stats.newSlugs = await observeCandidates(state, slugs.map(slug => `den:${slug}`), save);
   const articles = beebomArticles(await request("https://beebom.com/tag/roblox-codes/", {}, true));
   if (!articles.length) throw new FatalDiscoveryError("Beebom tag page contains no codes articles");
-  if (initializeRobloxdenBaseline(state, slugs)) await save();
+  stats.newSlugs += await observeCandidates(state, articles.map(url => `bee:${url}`), save);
   // Exact normalized matches require the complete universe inventory, not a truncated API response.
   const names: Array<{ universe_id: number; root_place_id: number | null; name: string | null; display_name?: string | null }> = [];
   for (let start = 0; ; start += 1000) {
@@ -48,50 +51,42 @@ async function main() {
     if (result.error) throw new FatalDiscoveryError(`Universe database read failed: ${result.error.message}`);
     names.push(...result.data); if (result.data.length < 1000) break;
   }
-  const keys = pendingKeys([...new Set([...slugs.map(slug => `den:${slug}`), ...articles.map(url => `bee:${url}`), ...Object.keys(state.entries).filter(key => !state.entries[key].done)])], state);
-  stats.newSlugs = keys.filter(key => !state.entries[key]).length;
-  for (const key of keys) {
-    if (stats.fetched >= 100 || stats.queued >= 50 || deadline.aborted) break;
+  await processPendingBatch(state, { signal: deadline, save, process: async key => {
     if (state.entries[key]?.attempts) stats.retried++;
     const den = key.startsWith("den:");
     const url = den ? `https://robloxden.com/game-codes/${key.slice(4)}` : key.slice(4);
-    try {
-      stats.fetched++;
-      const html = await request(url);
-      const $ = load(html); const name = titleToName($("title").text() || $("h1").first().text());
-      const placeIds = robloxPlaceIds(html);
-      let game: { universe_id: number; root_place_id: number; name: string };
-      if (placeIds.length === 1) {
-        const detail = await fetchPlaceDetails(String(placeIds[0]), async (url) => new Response(await request(String(url)), { headers: { "Content-Type": "application/json" } }));
-        if (!detail || !detail.universeId || !Number.isSafeInteger(detail.universeId) || detail.universeId <= 0) throw new Error("Roblox universe lookup failed");
-        game = { universe_id: detail!.universeId!, root_place_id: detail!.rootPlaceId || placeIds[0], name: detail!.name || name };
-        names.push(game);
-      } else if (placeIds.length > 1) throw new Error("Ambiguous Roblox game links");
-      else {
-        const match = resolveName(name, names);
-        if (!match?.root_place_id) throw new Error(`Unresolved or ambiguous game name: ${name}`);
-        game = { universe_id: match.universe_id, root_place_id: match.root_place_id, name: match.name || name };
-      }
-      const existing = await sb.from("code_pages").select("is_published").eq("universe_id", game.universe_id);
-      if (existing.error) throw new FatalDiscoveryError(`Code pages database read failed: ${existing.error.message}`);
-      let reason: string;
-      if (existing.data.length) {
-        reason = queueDecision(existing.data.find(row => !row.is_published) ?? existing.data[0], null, url) === "existing-unpublished" ? "existingUnpublished" : "existingPublished"; stats[reason]++;
-      } else {
-        const action = await queue.put(game, den ? "RobloxDen" : "Beebom", url, dry);
-        reason = action; stats[action === "create" ? "queued" : action === "merge" ? "merged" : "alreadyQueued"]++;
-      }
-      state.entries[key] = { attempts: state.entries[key]?.attempts || 0, done: reason }; await save();
-    } catch (error) {
-      if (error instanceof FatalDiscoveryError || deadline.aborted) throw error;
-      const message = error instanceof Error ? error.message : "Page resolution failed";
-      const entry = recordAttempt(state, key, message);
-      stats.unresolved++; if (entry.done) stats.givenUp++;
-      await save();
+    stats.fetched++;
+    const html = await request(url);
+    const $ = load(html); const name = titleToName($("title").text() || $("h1").first().text());
+    const placeIds = robloxPlaceIds(html);
+    let game: { universe_id: number; root_place_id: number; name: string };
+    if (placeIds.length === 1) {
+      const detail = await fetchPlaceDetails(String(placeIds[0]), async (url) => new Response(await request(String(url)), { headers: { "Content-Type": "application/json" } }));
+      if (!detail || !detail.universeId || !Number.isSafeInteger(detail.universeId) || detail.universeId <= 0) throw new OperationalDiscoveryError("Roblox universe lookup failed");
+      game = { universe_id: detail!.universeId!, root_place_id: detail!.rootPlaceId || placeIds[0], name: detail!.name || name };
+      names.push(game);
+    } else if (placeIds.length > 1) throw new ResolutionError("Ambiguous Roblox game links");
+    else {
+      const match = resolveName(name, names);
+      if (!match?.root_place_id) throw new ResolutionError(`Unresolved or ambiguous game name: ${name}`);
+      game = { universe_id: match.universe_id, root_place_id: match.root_place_id, name: match.name || name };
     }
-  }
+    const existing = await sb.from("code_pages").select("is_published").eq("universe_id", game.universe_id);
+    if (existing.error) throw new FatalDiscoveryError(`Code pages database read failed: ${existing.error.message}`);
+    let reason: string;
+    if (existing.data.length) {
+      reason = queueDecision(existing.data.find(row => !row.is_published) ?? existing.data[0], null, url) === "existing-unpublished" ? "existingUnpublished" : "existingPublished"; stats[reason]++;
+    } else {
+      const action = await queue.put(game, den ? "RobloxDen" : "Beebom", url, dry);
+      reason = action; stats[action === "create" ? "queued" : action === "merge" ? "merged" : "alreadyQueued"]++;
+    }
+    state.entries[key] = { attempts: state.entries[key]?.attempts || 0, done: reason }; await save();
+    return reason === "create";
+  } });
+  stats.unresolved = Object.values(state.entries).filter(entry => entry.error && !entry.done).length;
+  stats.givenUp = Object.values(state.entries).filter(entry => entry.done?.startsWith("given-up:")).length;
   // Keep unresolved and given-up URLs visible in the single-line run report.
   console.log(JSON.stringify({ ...stats, problems: Object.entries(state.entries).filter(([, entry]) => entry.error).map(([key, entry]) => ({ key, ...entry })) }));
 }
 const timer = setTimeout(() => { console.error("Codes discovery failed: whole-run deadline exceeded"); process.exit(1); }, 16 * 60_000);
-main().catch(error => { console.error(`Codes discovery failed: ${error.message}`); process.exitCode = 1; }).finally(() => clearTimeout(timer));
+discoveryExitCode(main).then(code => { process.exitCode = code; }).finally(() => clearTimeout(timer));

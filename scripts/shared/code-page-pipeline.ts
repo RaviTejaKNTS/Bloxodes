@@ -1,3 +1,4 @@
+import { commitFactoryPage } from "../codes/factory-commit";
 import { loadCodesContext } from "../codes/factory-context";
 import { publicCopyFindings } from "../content/check-public-copy";
 import "./load-env";
@@ -791,7 +792,7 @@ export async function finalizeCodePage(
   parsed: ArticleResponse,
   socialLinks: PlaceholderLinks,
   metadata: { communityLink: string | null },
-  factory?: { universeId: number; interlinkCopy: string }
+  factory?: { universeId: number; interlinkCopy: string; fingerprint: string; linkedIds: string[] }
 ): Promise<void> {
   const displayName = sanitizeGameDisplayName(parsed.game_display_name, game.name);
   const robloxExperienceLink = socialLinks.roblox_link?.url ?? game.roblox_link ?? undefined;
@@ -899,8 +900,18 @@ export async function finalizeCodePage(
     }
   }
 
+  if (factory) {
+    await commitFactoryPage(supabase, game.id, {
+      ...updatePayload, name: game.name, slug: game.slug, source_url: game.source_url, source_url_2: game.source_url_2,
+      interlinking_ai_copy_md: factory.interlinkCopy
+    }, factory, resolvedUniverseId, codesSynced, () => maybeAttachCoverImage({
+      slug: game.slug, name: game.name, id: game.id, robloxLink: resolvedLinks.roblox_link?.url ?? null
+    }, true));
+    return;
+  }
+
   if (resolvedUniverseId != null && codesSynced) {
-    updatePayload.is_published = !factory;
+    updatePayload.is_published = true;
     updatePayload.published_at = new Date().toISOString();
     console.log(`🚀 ${game.slug} resolved universe ${resolvedUniverseId} and refreshed codes; publishing code page.`);
   } else {
@@ -916,7 +927,7 @@ export async function finalizeCodePage(
   if (updateError) throw new Error(`Failed to update ${game.slug}: ${updateError.message}`);
   console.log(`✅ "${game.name}" updated successfully (${game.slug})`);
 
-  const interlinking = factory ? { copy: factory.interlinkCopy, meta: { generated_by: "content-factory", version: 1 }, increments: [] } : await generateInterlinkingForGame({
+  const interlinking = await generateInterlinkingForGame({
     gameId: game.id,
     gameName: game.name,
     gameSlug: game.slug,
@@ -932,7 +943,6 @@ export async function finalizeCodePage(
       })
       .eq("id", game.id);
     if (interlinkError) {
-      if (factory) throw new Error(`Failed to store interlinks: ${interlinkError.message}`);
       console.warn("⚠️ Failed to store interlinking copy:", interlinkError.message);
     }
 
@@ -953,13 +963,6 @@ export async function finalizeCodePage(
     id: game.id,
     robloxLink: resolvedLinks.roblox_link?.url ?? null
   });
-  if (factory && !(resolvedUniverseId != null && codesSynced)) {
-    throw new Error("Page remains unpublished: universe did not resolve or source refresh failed");
-  }
-  if (factory) {
-    const result = await supabase.from("code_pages").update({ is_published: true }).eq("id", game.id);
-    if (result.error) throw new Error(`Failed to publish page: ${result.error.message}`);
-  }
 }
 
 export async function runLegacyGeneration() {
@@ -1182,7 +1185,7 @@ function sanitizeGameDisplayName(raw: string | undefined, fallback: string): str
   return cleaned.length ? cleaned : fallbackValue;
 }
 
-async function maybeAttachCoverImage(game: { slug: string; name: string; id?: string; robloxLink?: string | null }) {
+async function maybeAttachCoverImage(game: { slug: string; name: string; id?: string; robloxLink?: string | null }, prepareOnly = false) {
   if (!process.env.SUPABASE_MEDIA_BUCKET) {
     console.log("⚠️ SUPABASE_MEDIA_BUCKET not configured. Skipping cover image upload.");
     return;
@@ -1234,6 +1237,8 @@ async function maybeAttachCoverImage(game: { slug: string; name: string; id?: st
       console.log("⚠️ Upload failed or no URL returned.");
       return;
     }
+
+    if (prepareOnly) return uploadedUrl;
 
     const { error: updateError } = await supabase
       .from("code_pages")
@@ -1387,10 +1392,10 @@ async function downloadResizeAndUploadImage(params: {
   return toMediaPublicUrl(publicUrl.data.publicUrl);
 }
 
-export async function publishFactoryCopy(game: ExistingCodePageRecord, article: ArticleResponse, universeId: number, interlinkCopy: string) {
+export async function publishFactoryCopy(game: ExistingCodePageRecord, article: ArticleResponse, universeId: number, interlinkCopy: string, fingerprint: string, linkedIds: string[]) {
   const social = await collectSocialLinksFromExistingSources(game);
   // The reviewed bundle owns game identity; source social links cannot replace it.
   social.roblox_link = game.roblox_link ? { url: game.roblox_link } : undefined;
   const metadata = await collectRobloxMetadata(game.roblox_link);
-  return finalizeCodePage(game, article, social, metadata, { universeId, interlinkCopy });
+  return finalizeCodePage(game, article, social, metadata, { universeId, interlinkCopy, fingerprint, linkedIds });
 }

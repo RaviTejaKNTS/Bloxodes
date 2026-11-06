@@ -1,24 +1,28 @@
-import { queueDecision } from "./discovery-model";
+import { OperationalDiscoveryError, ResolutionError, queueDecision } from "./discovery-model";
 import { setTimeout as delay } from "node:timers/promises";
 
 export class FatalDiscoveryError extends Error {}
-export function makeRequest(deadline: AbortSignal, fetcher: typeof fetch = fetch) {
+export function makeRequest(deadline: AbortSignal, fetcher: typeof fetch = fetch, wait: (ms: number) => Promise<unknown> = ms => delay(ms, undefined, { signal: deadline })) {
   return async (url: string, init: RequestInit = {}, fatal = false): Promise<string> => {
     for (let attempt = 0; attempt < 3; attempt++) {
-      await delay(350, undefined, { signal: deadline });
+      await wait(350);
       try {
         const response = await fetcher(url, { ...init, headers: {
           "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Bloxodes/1.0",
           ...init.headers }, signal: AbortSignal.any([deadline, AbortSignal.timeout(20_000)]) });
         if (response.ok) return await response.text();
         if ([400,401,403,404].includes(response.status) && url.includes("api.notion.com")) throw new FatalDiscoveryError(`Notion configuration/auth failure (${response.status})`);
-        if (attempt === 2) throw new Error(`HTTP ${response.status}`);
-        await delay(Math.min(30_000, Number(response.headers.get("retry-after") || 1) * 1000), undefined, { signal: deadline });
+        if (response.status >= 400 && response.status < 500 && ![408, 429].includes(response.status)) {
+          throw new ResolutionError(`Wrong page: HTTP ${response.status}`);
+        }
+        if (attempt === 2) throw new OperationalDiscoveryError(`HTTP ${response.status}`);
+        await wait(Math.min(30_000, Number(response.headers.get("retry-after") || 1) * 1000));
       } catch (error) {
-        if (error instanceof FatalDiscoveryError || deadline.aborted) throw error;
+        if (error instanceof FatalDiscoveryError || error instanceof ResolutionError || deadline.aborted) throw error;
         if (attempt === 2) {
-          const message = `Request failed: ${new URL(url).hostname}${new URL(url).pathname}`;
-          throw fatal ? new FatalDiscoveryError(message) : new Error(message);
+          const cause = error instanceof OperationalDiscoveryError ? error.message : "network error or timeout";
+          const message = `Request failed (${cause}): ${new URL(url).hostname}${new URL(url).pathname}`;
+          throw fatal ? new FatalDiscoveryError(message) : new OperationalDiscoveryError(message);
         }
       }
     }

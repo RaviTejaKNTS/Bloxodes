@@ -76,7 +76,7 @@ test("merged histories with harmless differences pass, while relevant difference
 });
 
 // These subprocess fixtures replace all command and network access. GitHub runs them without credentials.
-function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: string; ledgerFails?: boolean; behind?: boolean; headOffProduction?: boolean; deployedOffProduction?: boolean } = {}) {
+function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: string; ledgerFails?: boolean; behind?: boolean; headOffProduction?: boolean; deployedOffProduction?: boolean; timeoutStage?: string } = {}) {
   const fixture = { head, deployed, production, ...options };
   const script = `
     import childProcess from "node:child_process";
@@ -86,8 +86,10 @@ function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: strin
     const assertLocalContentPublication = guard.assertLocalContentPublication ?? guard.default?.assertLocalContentPublication;
     const fixture = ${JSON.stringify(fixture)};
     const calls = [];
-    childProcess.execFileSync = (command, args) => {
+    childProcess.execFileSync = (command, args, options) => {
+      if (options.timeout !== 60000 || options.killSignal !== "SIGKILL" || options.env.GIT_TERMINAL_PROMPT !== "0" || !options.env.GIT_SSH_COMMAND.includes("BatchMode=yes")) throw new Error("Missing subprocess timeout/noninteractive options");
       calls.push([command === process.execPath ? "node" : command, ...args]);
+      if ((fixture.timeoutStage === "fetch" && command === "git" && args[0] === "fetch") || (fixture.timeoutStage === "ledger" && command === process.execPath)) throw Object.assign(new Error("Timed out"), { code: "ETIMEDOUT" });
       if (command === "git") {
         if (args[0] === "fetch") return "";
         if (args[0] === "rev-parse") return args[1] === "HEAD" ? fixture.head : fixture.production;
@@ -175,4 +177,10 @@ test("ledger-only schema checks allow untracked files while schema release keeps
   const options = { encoding: "utf8" as const, env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", BLOXODES_ENV_OVERLAYS: "", SUPABASE_URL: "https://database.bloxodes.com" }, stdio: ["ignore", "pipe", "pipe"] as ["ignore", "pipe", "pipe"] };
   assert.match(execFileSync(process.execPath, [...args, "--check-ledger"], options), /Production migration ledger is ready/);
   assert.throws(() => execFileSync(process.execPath, args, options), error => error instanceof Error && "stderr" in error && String(error.stderr).includes("checkout is dirty"));
+});
+
+
+test("fetch and ledger timeouts fail publication with bounded noninteractive subprocess options", () => {
+  assert.match(runLocalGuard({ timeoutStage: "fetch" }).error!, /git fetch failed/);
+  assert.match(runLocalGuard({ timeoutStage: "ledger" }).error!, /Production migration ledger is not ready/);
 });
