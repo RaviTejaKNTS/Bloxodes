@@ -19,6 +19,7 @@
     "analytics": ["operations/analytics.env"],
     "articles": ["pipelines/articles.env"],
     "cloudflare": ["infrastructure/cloudflare.env"],
+    "codes": ["pipelines/codes.env"],
     "dokploy": ["infrastructure/dokploy.env"],
     "homelab": ["infrastructure/homelab.env", "pipelines/articles.env"],
     "indexing": ["pipelines/indexing.env"],

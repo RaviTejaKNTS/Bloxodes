@@ -16,7 +16,7 @@ How env files are stored, loaded and protected. Never print env values, commit t
 | Dokploy | Production web runtime env. |
 | VPS `/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker` | Stats worker env. |
 | VPS `/home/ravitejaknts/bloxodes-supabase/.env` | Self-hosted Supabase env. Don't copy it into the repo. |
-| Homelab `/etc/bloxodes/article-automation.env` | Article and codes discovery runtime env, mode `0640`. Holds `NOTION_CODES_QUEUE_TOKEN` for the [Codes Queue](automation/notion-queues.md#codes-queue). |
+| Homelab `/etc/bloxodes/article-automation.env` | Article discovery runtime env, mode `0640`. |
 
 Each T3 worktree links `.envs` to its machine's main checkout, so every worktree sees the same files.
 
@@ -27,13 +27,14 @@ Each T3 worktree links `.envs` to its machine's main checkout, so every worktree
   shared/application.env
   integrations/{content,distribution}.env
   targets/{managed-dev,production}.env
-  pipelines/{articles,indexing}.env
+  pipelines/{articles,codes,indexing}.env
   operations/{analytics,umami}.env
   infrastructure/{cloudflare,devices,dokploy,homelab,northflank-stats,vps}.env
   secrets/google-indexing-service-account.json
 ```
 
 - **targets/** hold database and media credentials for one target only.
+- **pipelines/codes.env** holds `NOTION_CODES_QUEUE_TOKEN`, the Notion integration key the homelab codes finder uses for the [Codes Queue](automation/notion-queues.md#codes-queue). The finder's unit reads it and `targets/production.env` straight from the homelab's `.envs`.
 - **infrastructure/devices.env** holds machine hosts, users and sudo passwords. Pipe a sudo password to `sudo -S`; never print it.
 - **infrastructure/vps.env** holds the VPS operator login.
 

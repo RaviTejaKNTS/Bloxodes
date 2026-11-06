@@ -9,7 +9,9 @@ Type=oneshot
 User=teja
 Group=teja
 WorkingDirectory=/srv/data/bloxodes-automation-runtime/current
-EnvironmentFile=/etc/bloxodes/article-automation.env
+# Production database (read-only use) and the Notion key, from the homelab's env source.
+EnvironmentFile=/srv/data/projects/Bloxodes/.envs/targets/production.env
+EnvironmentFile=/srv/data/projects/Bloxodes/.envs/pipelines/codes.env
 Environment=BLOXODES_ENV_PROFILE=process-only
 Environment=NODE_ENV=production
 Environment=HOME=/home/teja

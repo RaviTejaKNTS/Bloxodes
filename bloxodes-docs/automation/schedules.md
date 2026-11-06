@@ -24,7 +24,7 @@ Runs can overlap, and they share the root checkout. Each one claims its own queu
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current`. Article and codes discovery read `/etc/bloxodes/article-automation.env`.
+All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env`. Codes discovery reads `.envs/targets/production.env` and `.envs/pipelines/codes.env` from `/srv/data/projects/Bloxodes`.
 
 | Unit | When | Does |
 | --- | --- | --- |
