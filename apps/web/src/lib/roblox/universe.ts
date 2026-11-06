@@ -45,8 +45,9 @@ type RobloxGameDetail = {
   totalDownVotes?: number;
 };
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const response = await fetch(url, {
+async function fetchJson<T>(url: string, fetcher: typeof fetch = fetch): Promise<T> {
+  const response = await fetcher(url, {
+    signal: AbortSignal.timeout(20_000),
     headers: {
       "user-agent": USER_AGENT,
       accept: "application/json"
@@ -58,8 +59,8 @@ async function fetchJson<T>(url: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-async function fetchPlaceDetails(placeId: string): Promise<RobloxPlaceDetail | null> {
-  const payload = await fetchJson<Array<RobloxPlaceDetail>>(`${PLACE_DETAILS_API}?placeIds=${placeId}`).catch(
+export async function fetchPlaceDetails(placeId: string, fetcher: typeof fetch = fetch): Promise<RobloxPlaceDetail | null> {
+  const payload = await fetchJson<Array<RobloxPlaceDetail>>(`${PLACE_DETAILS_API}?placeIds=${placeId}`, fetcher).catch(
     () => null
   );
   if (!payload?.length) return null;
