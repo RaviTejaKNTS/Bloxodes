@@ -90,7 +90,7 @@
   gap: 0.875rem;
   min-height: 3rem;
   padding: 0.75rem 0.5rem;
-  border-radius: 0.375rem;
+  border-radius: 0.1875rem;
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
@@ -172,5 +172,14 @@ a.checklists-row-title {
 @container checklists-index (min-width: 760px) {
   .checklists-index-main .checklists-index-stream {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .checklists-stream > .checklists-note,
+  .checklists-stream .checklists-row-title,
+  .checklists-stream .checklists-row-note {
+    font-size: 1.125rem;
+    line-height: 1.85;
   }
 }

@@ -70,8 +70,8 @@ export function CopyCodeButton({ code, tone = "surface", size = "md", variant = 
   }
 
   const baseClass = size === "sm"
-    ? "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-    : "inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
+    ? "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+    : "inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-xs font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50";
 
   const toneClass = tone === "accent"
     ? "border border-accent/40 bg-accent/15 text-accent shadow-soft hover:border-accent/60 hover:bg-accent/20"

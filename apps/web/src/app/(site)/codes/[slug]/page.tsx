@@ -664,7 +664,7 @@ export default async function GamePage({ params }: Params) {
   const universeId = game.universe_id ?? null;
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+      <div className="grid gap-8 content-sidebar-grid">
       <article className="min-w-0">
         <nav aria-label="Breadcrumb" className="mb-4 text-xs uppercase tracking-[0.25em] text-muted">
           <ol className="flex flex-wrap items-center gap-2">
@@ -757,7 +757,7 @@ export default async function GamePage({ params }: Params) {
                         data-analytics-event="social_follow_click"
                         data-analytics-platform={key}
                         data-analytics-game-slug={game.slug}
-                        className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                        className="inline-flex items-center gap-2 rounded-md border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
                       >
                         <Icon className="h-4 w-4" aria-hidden />
                         <span>{label}</span>
@@ -780,7 +780,7 @@ export default async function GamePage({ params }: Params) {
                     data-analytics-event="social_follow_click"
                     data-analytics-platform="telegram"
                     data-analytics-game-slug={game.slug}
-                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                    className="inline-flex items-center gap-2 rounded-md border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
                   >
                     <FaTelegramPlane className="h-4 w-4" aria-hidden />
                     <span>@bloxodes</span>
@@ -792,7 +792,7 @@ export default async function GamePage({ params }: Params) {
                     data-analytics-event="social_follow_click"
                     data-analytics-platform="x"
                     data-analytics-game-slug={game.slug}
-                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                    className="inline-flex items-center gap-2 rounded-md border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
                   >
                     <RiTwitterXLine className="h-4 w-4" aria-hidden />
                     <span>@bloxodes</span>
@@ -804,7 +804,7 @@ export default async function GamePage({ params }: Params) {
                     data-analytics-event="social_follow_click"
                     data-analytics-platform="chrome_extension"
                     data-analytics-game-slug={game.slug}
-                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                    className="inline-flex items-center gap-2 rounded-md border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
                   >
                     <SiGooglechrome className="h-4 w-4" aria-hidden />
                     <span>Install Chrome Extension</span>

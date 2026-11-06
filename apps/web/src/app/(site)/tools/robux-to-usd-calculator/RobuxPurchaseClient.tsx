@@ -199,7 +199,7 @@ export function RobuxPurchaseClient({
               <div className="flex h-full flex-col gap-4 rounded-lg border border-border/60 bg-surface px-4 py-4">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-lg font-semibold leading-tight text-foreground max-w-[70%]">Bundle to get just as much as needed</h3>
-                  <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">Cheapest</span>
+                  <span className="rounded-md bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">Cheapest</span>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-4">
                   <p className="text-3xl font-semibold text-foreground">
@@ -213,7 +213,7 @@ export function RobuxPurchaseClient({
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-muted">
                     <span>Bundle breakdown</span>
-                    <span className="rounded-full border border-border/60 px-3 py-1 text-[11px] text-foreground">
+                    <span className="rounded-md border border-border/60 px-3 py-1 text-[11px] text-foreground">
                       {platformLabel(displayRobuxPlan?.platform ?? null)}
                     </span>
                   </div>
@@ -228,7 +228,7 @@ export function RobuxPurchaseClient({
               <div className="flex h-full flex-col gap-4 rounded-lg border border-border/60 bg-surface px-4 py-4">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-lg font-semibold leading-tight text-foreground max-w-[70%]">Best value for money bundle</h3>
-                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">Best value</span>
+                  <span className="rounded-md bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">Best value</span>
                 </div>
                 <div className="flex flex-wrap items-baseline gap-4">
                   <p className="text-3xl font-semibold text-foreground">
@@ -242,7 +242,7 @@ export function RobuxPurchaseClient({
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-muted">
                     <span>Bundle breakdown</span>
-                    <span className="rounded-full border border-border/60 px-3 py-1 text-[11px] text-foreground">
+                    <span className="rounded-md border border-border/60 px-3 py-1 text-[11px] text-foreground">
                       {platformLabel(displayValuePlan?.platform ?? null)}
                     </span>
                   </div>
@@ -312,7 +312,7 @@ export function RobuxPurchaseClient({
               <p className="text-sm text-muted">Roblox only sells Robux in fixed bundles, so we pick the bundle that gives the best value per dollar.</p>
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-foreground">Bundle price (PC / Web / Gift Cards)</h3>
-                <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">Recommended</span>
+                <span className="rounded-md bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">Recommended</span>
               </div>
               <p className="text-3xl font-semibold text-foreground">{displayBudgetPlan ? currency.format(displayBudgetPlan.totalPrice) : "—"}</p>
               <p className="text-lg font-semibold text-foreground">

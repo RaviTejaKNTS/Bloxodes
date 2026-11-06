@@ -224,7 +224,7 @@ function CopyButton({ value }: { value: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 rounded-full border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground transition hover:border-border/30"
+      className="inline-flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground transition hover:border-border/30"
       aria-label={`Copy ${value}`}
     >
       <svg aria-hidden className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -387,7 +387,7 @@ export function RobloxIdExtractorClient() {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-70 dark:bg-accent-dark dark:hover:bg-accent"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark disabled:cursor-not-allowed disabled:opacity-70 dark:bg-accent-dark dark:hover:bg-accent"
         >
           {loading ? "Extracting..." : "Extract IDs"}
         </button>
@@ -411,7 +411,7 @@ export function RobloxIdExtractorClient() {
               href={result.openUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent"
+              className="inline-flex items-center justify-center rounded-md border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent"
             >
               Open on Roblox
             </a>
@@ -449,7 +449,7 @@ export function RobloxIdExtractorClient() {
 
           <div className="flex flex-wrap gap-3">
             {idEntries.map((entry) => (
-              <div key={entry.key} className="flex items-center gap-2 rounded-full border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
+              <div key={entry.key} className="flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
                 <span>{entry.label}:</span>
                 <span className="font-mono text-[0.85rem]">{entry.value}</span>
                 <CopyButton value={entry.value} />

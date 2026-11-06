@@ -102,33 +102,94 @@
   border-top: 0;
   padding-top: 0;
 }
-/*
- * Keep in sync with collectionCardColumns() in CollectionRowGroups.tsx. Each card stays close to
- * its narrowest width in the old full-width layout, so desktop rows hold about as many cards as
- * before the right rail.
- */
-@container collections (min-width: 460px) {
-  .collections-card-grid:not(.collections-card-grid--wide) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+/* Keep in sync with collectionCardColumns() in CollectionRowGroups.tsx. */
 @container collections (min-width: 520px) {
-  .collections-card-grid--wide {
+  .collections-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@container collections (min-width: 740px) {
-  .collections-card-grid:not(.collections-card-grid--wide) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @container collections (min-width: 850px) {
-  .collections-card-grid--wide {
+  .collections-card-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-@container collections (min-width: 920px) {
-  .collections-card-grid:not(.collections-card-grid--wide) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+/* Normal stacking is also the fallback for browsers without subgrid. */
+/* Item art is square, and the spacing keeps cards close to their old height:
+   Mediavine places ads by content height, so shorter cards meant fewer ads. */
+.collection-card {
+  display: flex;
+  flex-direction: column;
+  padding-block: 18px;
+}
+.collection-card-title,
+.collection-card-description,
+.collection-card-extra {
+  margin: 0;
+  padding: 0 14px 16px;
+}
+/* The old card reserved this much for a description too. */
+.collection-card-description {
+  min-height: 6.75rem;
+}
+.collection-card-media {
+  margin: 0 14px 16px;
+  align-self: stretch;
+}
+.collection-card-facts {
+  margin: 0;
+  padding-inline: 14px;
+}
+.collection-card-fact {
+  min-height: 3.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+  padding-block: 12px;
+}
+.collection-card-fact > dt {
+  flex: 0 0 auto;
+  max-width: 42%;
+}
+.collection-card-fact > dd {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+}
+/* Each card spans its own N tracks. Before hydration, a three-card group can
+   wrap to two visual rows; auto-placement starts a fresh N-track block. */
+@supports (grid-template-rows: subgrid) {
+  @container collections (min-width: 520px) {
+    /* The items' bottom margin stands in for the row gap when a group wraps before hydration.
+       The negative margin cancels it after the last line: the stream already spaces its groups. */
+    .collections-card-grid--aligned {
+      row-gap: 0;
+      margin-bottom: -1.25rem;
+    }
+    .collections-card-grid--aligned > [data-journey-item] {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span var(--collection-card-rows);
+      height: auto;
+      margin-bottom: 1.25rem;
+    }
+    .collections-card-grid--aligned > [data-journey-item] > .collection-card {
+      display: grid;
+      height: auto;
+      grid-template-rows: subgrid;
+      grid-row: span var(--collection-card-rows);
+    }
+    .collections-card-grid--aligned .collection-card-facts {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span var(--collection-fact-rows);
+    }
   }
+}
+
+.collection-card-media > [data-collection-video] {
+  height: 100%;
+  aspect-ratio: auto;
+  border: 0;
 }

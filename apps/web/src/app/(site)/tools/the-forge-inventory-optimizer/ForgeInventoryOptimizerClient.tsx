@@ -407,7 +407,7 @@ export function ForgeInventoryOptimizerClient({
                                                 </p>
                                             </div>
                                             <div className="text-right">
-                                                <span className="px-2 py-0.5 rounded-full bg-accent/10 text-[10px] font-bold text-accent whitespace-nowrap block">
+                                                <span className="px-2 py-0.5 rounded-md bg-accent/10 text-[10px] font-bold text-accent whitespace-nowrap block">
                                                     {(suggestion.probability * 100).toFixed(1)}%
                                                 </span>
                                                 <span className="text-[9px] text-muted">chance</span>

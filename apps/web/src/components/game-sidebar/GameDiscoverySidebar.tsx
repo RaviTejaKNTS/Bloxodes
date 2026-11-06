@@ -18,13 +18,15 @@ type GameDiscoverySidebarProps = {
   currentType: CurrentType;
   extended?: boolean;
   currentSlug?: string;
+  hideWiki?: boolean;
+  articlesWithoutCover?: boolean;
 };
 
 const cardClass = "block rounded-lg border border-border/70 bg-card p-4 transition-colors hover:border-border";
 
-function WikiCard({ slug, title, iconUrl }: { slug: string; title: string; iconUrl: string | null }) {
+export function WikiCard({ slug, title, iconUrl, href }: { slug?: string; href?: string; title: string; iconUrl: string | null }) {
   return (
-    <Link href={`/wiki/${slug}`} className={`${cardClass} flex items-center gap-3`}>
+    <Link href={href ?? `/wiki/${slug}`} className={`${cardClass} flex items-center gap-3`}>
       <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
         {iconUrl ? (
           <CardImage src={iconUrl} alt={title} />
@@ -42,19 +44,21 @@ function WikiCard({ slug, title, iconUrl }: { slug: string; title: string; iconU
   );
 }
 
-function CodesCard({
+export function CodesCard({
   slug,
   name,
   activeCount,
-  coverImage
+  coverImage,
+  href
 }: {
   slug: string;
   name: string;
-  activeCount: number;
+  activeCount: number | null;
   coverImage: string | null;
+  href?: string;
 }) {
   return (
-    <Link href={`/codes/${slug}`} className={`${cardClass} flex items-center gap-3`}>
+    <Link href={href ?? `/codes/${slug}`} className={`${cardClass} flex items-center gap-3`}>
       <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md bg-surface-muted">
         <CardImage src={coverImage} alt={name} />
       </span>
@@ -62,30 +66,30 @@ function CodesCard({
         <span className="block line-clamp-1 text-sm font-semibold text-foreground">{name} Codes</span>
         <span className="inline-flex items-center gap-1.5 text-xs text-foreground/70">
           <span className="h-2 w-2 rounded-full bg-green-400" aria-hidden />
-          {activeCount} active {activeCount === 1 ? "code" : "codes"}
+          {activeCount === null ? "Codes & rewards" : `${activeCount} active ${activeCount === 1 ? "code" : "codes"}`}
         </span>
       </span>
     </Link>
   );
 }
 
-function ArticlesCard({ articles, heading = "Articles" }: { articles: SidebarArticle[]; heading?: string }) {
+export function ArticlesCard({ articles, heading = "Articles", withoutCover = false }: { articles: SidebarArticle[]; heading?: string; withoutCover?: boolean }) {
   const [lead, ...rest] = articles;
   if (!lead) return null;
   return (
     <section className="overflow-hidden rounded-lg border border-border/70 bg-card">
-      <Link href={`/articles/${lead.slug}`} className="group block">
+      {!withoutCover ? <Link href={lead.href ?? `/articles/${lead.slug}`} className="group block">
         <span className="relative block aspect-[16/9] overflow-hidden bg-surface-muted">
           <CardImage src={lead.coverImage} alt={lead.title} className="transition duration-500 group-hover:scale-[1.03]" />
         </span>
-      </Link>
+      </Link> : null}
       <div className="space-y-2 p-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{heading}</p>
         <ul className="space-y-2">
           {[lead, ...rest].map((article) => (
             <li key={article.slug}>
               <Link
-                href={`/articles/${article.slug}`}
+                href={article.href ?? `/articles/${article.slug}`}
                 className="block line-clamp-2 text-sm font-medium text-foreground transition-colors hover:text-accent"
               >
                 {article.title}
@@ -98,7 +102,7 @@ function ArticlesCard({ articles, heading = "Articles" }: { articles: SidebarArt
   );
 }
 
-export async function GameDiscoverySidebar({ universeId, universeName, currentType, extended = false, currentSlug }: GameDiscoverySidebarProps) {
+export async function GameDiscoverySidebar({ universeId, universeName, currentType, extended = false, currentSlug, hideWiki = false, articlesWithoutCover = false }: GameDiscoverySidebarProps) {
   if (typeof universeId !== "number") return null;
 
   const data = await getGameSidebarData(universeId);
@@ -122,14 +126,14 @@ export async function GameDiscoverySidebar({ universeId, universeName, currentTy
     return (
       <div className="space-y-4">
         {data.codes && currentType !== "codes" ? <CodesCard slug={data.codes.slug} name={data.codes.name} activeCount={data.codes.activeCount} coverImage={data.codes.coverImage} /> : null}
-        {data.wiki && currentType !== "wiki" ? <WikiCard slug={data.wiki.slug} title={data.wiki.title} iconUrl={data.universeIcon ?? data.wiki.iconUrl} /> : null}
-        {articles.length ? <ArticlesCard articles={articles} heading={relatedArticles.length ? "Articles" : "From the blog"} /> : null}
+        {data.wiki && !hideWiki && currentType !== "wiki" ? <WikiCard slug={data.wiki.slug} title={data.wiki.title} iconUrl={data.universeIcon ?? data.wiki.iconUrl} /> : null}
+        {articles.length ? <ArticlesCard withoutCover={articlesWithoutCover} articles={articles} heading={relatedArticles.length ? "Articles" : "From the blog"} /> : null}
         {checklist ? <ChecklistSidebarCard slug={checklist.slug} title={checklist.title} itemsCount={checklist.itemsCount} /> : quiz ? <QuizSidebarCard code={quiz.code} gameName={gameName} question={quiz.firstQuestion} /> : extraLink ? <Link href={extraLink.href} className={cardClass}><span className="text-sm font-semibold text-foreground">{extraLink.title}</span></Link> : null}
       </div>
     );
   }
 
-  if (data.wiki) {
+  if (data.wiki && !hideWiki) {
     sections.push(
       <WikiCard key="wiki" slug={data.wiki.slug} title={data.wiki.title} iconUrl={data.universeIcon ?? data.wiki.iconUrl} />
     );
@@ -205,12 +209,12 @@ export async function GameDiscoverySidebar({ universeId, universeName, currentTy
   }
 
   if (data.articles.length && currentType !== "articles") {
-    sections.push(<ArticlesCard key="articles" articles={data.articles} />);
+    sections.push(<ArticlesCard withoutCover={articlesWithoutCover} key="articles" articles={data.articles} />);
   }
 
   if (data.fallback) {
     if (data.fallback.articles.length) {
-      sections.push(<ArticlesCard key="fallback-articles" articles={data.fallback.articles} heading="From the blog" />);
+      sections.push(<ArticlesCard withoutCover={articlesWithoutCover} key="fallback-articles" articles={data.fallback.articles} heading="From the blog" />);
     }
     for (const catalog of data.fallback.catalogs) {
       sections.push(

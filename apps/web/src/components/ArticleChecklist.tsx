@@ -147,7 +147,7 @@ export function ArticleChecklist({
         {data.description ? <p className="text-sm leading-6 text-muted-foreground">{data.description}</p> : null}
         <div className="flex flex-wrap items-center gap-2.5">
           <ProgressBar percent={percent} className="h-2.5 flex-1" label={`Progress for ${data.title}`} />
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-3 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
+          <div className="inline-flex items-center gap-2 rounded-md border border-border/70 bg-surface/70 px-3 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
             <span className="text-foreground">{done}/{total}</span>
             <span>tasks done</span>
             <span className="text-border">.</span>

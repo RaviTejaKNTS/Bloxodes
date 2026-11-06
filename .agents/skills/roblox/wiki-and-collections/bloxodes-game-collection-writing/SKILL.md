@@ -78,7 +78,7 @@ Card rules:
 - Keep field names consistent across rows. Missing supported values stay empty or null so the renderer shows `-`.
 - Don't merge labels into values. The value is `Available`, not `Availability: Available`.
 - Detail fields are complete sentences. Arrays are only for real lists.
-- If a field key renders as a chip, highlight, detail or plain value on one card, it renders that way on every card. Style belongs to the field key, not to individual values.
+- If a field key is a chip, highlight, detail or plain value on one card, it's that kind on every card. The kind belongs to the field key, not to individual values.
 
 ### `description_json`
 

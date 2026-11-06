@@ -112,7 +112,7 @@ export function ListQuickNav({ items, variant, title = "Quick jump" }: Props) {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-full border border-border/60 px-3 py-1 text-xs font-semibold text-muted transition hover:border-accent hover:text-accent"
+                className="rounded-md border border-border/60 px-3 py-1 text-xs font-semibold text-muted transition hover:border-accent hover:text-accent"
               >
                 Close
               </button>

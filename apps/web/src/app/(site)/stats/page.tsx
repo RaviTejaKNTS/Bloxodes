@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { StatsHomeView, StatsPageShell } from "./components/StatsViews";
+import { StatsHomeView } from "./components/StatsViews";
 import { getStatsHome } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function StatsPage() {
   const data = await getStatsHome();
   return (
-    <StatsPageShell>
+    <>
       <StatsHomeView data={data} />
       <script
         type="application/ld+json"
@@ -28,6 +28,6 @@ export default async function StatsPage() {
           })
         }}
       />
-    </StatsPageShell>
+    </>
   );
 }

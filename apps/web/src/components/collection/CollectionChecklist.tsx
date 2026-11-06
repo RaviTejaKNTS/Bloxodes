@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useEffect, useMemo, useState, Fragment, type ReactNode } from "react";
 import { RotateCcw, Search } from "lucide-react";
 import { ProgressBar } from "@/components/ProgressBar";
+import { buildCollectionCardLayout, CollectionFactRows, collectionFactColor, type CollectionCardLayout, type CollectionFact } from "@/components/game-collections/CollectionCardContent";
+import { CollectionImagePlaceholder } from "@/components/game-collections/CollectionImagePlaceholder";
 import { CollectionRowGroups } from "@/components/game-collections/CollectionRowGroups";
 import { GameCollectionViewShell } from "@/components/game-collections/GameCollectionViewShell";
 import { CollectionImageLightbox } from "@/components/game-collections/CollectionImageLightbox";
@@ -111,12 +113,51 @@ function resolveWalkthrough(value: unknown): string | null {
     && /^[\w-]{11}$/.test(url.searchParams.get("v") ?? "") ? url.href : null;
 }
 
-function ChecklistFieldValue({ item, field }: { item: CollectionChecklistItem; field: string }) {
+function checklistFact(item: CollectionChecklistItem, key: string, label: string): CollectionFact {
+  const value = key === "walkthroughUrl" ? resolveWalkthrough(item[key]) : normalizeText(item[key]);
+  const tone = /^(no|unavailable|removed|retired|inactive|not available)\b/i.test(value ?? "") ? "negative"
+    : /\b(limited|seasonal|event|exclusive)\b/i.test(value ?? "") ? "warning"
+    : /^(yes|available|active|obtainable)\b/i.test(value ?? "") ? "positive" : undefined;
+  return { key, label, value: value || null, tone, kind: key === "walkthroughUrl" ? "link" : undefined,
+    parts: Array.isArray(item[key]) ? (item[key] as unknown[]).map(normalizeText).filter(Boolean) : undefined };
+}
+
+function ChecklistFieldValue({ item, field, label = FIELD_LABELS[field] ?? humanize(field) }: { item: CollectionChecklistItem; field: string; label?: string }) {
   if (field === "walkthroughUrl") {
     const href = resolveWalkthrough(item[field]);
-    return href ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Watch walkthrough for ${item.name}`} onClick={(event) => event.stopPropagation()} className="underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Watch walkthrough</a> : null;
+    return href ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Watch walkthrough for ${item.name}`} onClick={(event) => event.stopPropagation()} className="underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Watch walkthrough</a> : <span className="text-muted">-</span>;
   }
-  return normalizeText(item[field]) || <span className="text-muted">-</span>;
+  return <span className={collectionFactColor(checklistFact(item, field, label))}>{normalizeText(item[field]) || <span className="text-muted">-</span>}</span>;
+}
+
+function ChecklistCard({ item, code, position, isChecked, hydrated, fields, layout, onToggle }: {
+  item: CollectionChecklistItem; code: string; position: number; isChecked: boolean; hydrated: boolean;
+  fields: CollectionFact[]; layout?: CollectionCardLayout; onToggle: () => void;
+}) {
+  const image = resolveImageSrc(item.image);
+  const credit = resolveImageCredit(item.imageCreditUrl);
+  return <article id={`item-${item.id}`} onClick={event => {
+    if (!hydrated || (event.target as HTMLElement).closest("button, a, input")) return;
+    onToggle();
+  }} className={`collection-card group min-w-0 cursor-pointer overflow-hidden rounded-lg border bg-surface transition hover:border-accent/60 ${isChecked ? "border-accent/50" : "border-border/70"}`}>
+    <div className="collection-card-title grid grid-cols-[34px_minmax(0,1fr)_34px] items-start gap-1">
+      <input id={`collection-check-${code}-${item.id}`} type="checkbox" disabled={!hydrated} checked={isChecked}
+        onChange={onToggle} aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
+        className="h-6 w-6 cursor-pointer rounded border-border/80 bg-background accent-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+        style={{ accentColor: "rgb(var(--color-accent))" }} />
+      <h3 className={`min-w-0 text-center text-lg font-semibold leading-snug text-foreground [overflow-wrap:anywhere] [text-wrap:balance] ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</h3>
+      <span className="text-right text-xs text-muted">{getItemPosition(item, position)}</span>
+    </div>
+    {(layout?.image ?? Boolean(image)) ? <div className="collection-card-media relative aspect-square overflow-hidden rounded-lg bg-surface-muted/70">
+      {image ? <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
+        <Image src={image} alt={item.name} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-contain p-3" unoptimized />
+      </button> : <CollectionImagePlaceholder title={item.name} compact />}
+      {image && credit ? <a href={credit} target="_blank" rel="noopener noreferrer" aria-label={`Image credit for ${item.name}`} className="absolute bottom-2 right-2 rounded bg-background/90 px-2 py-1 text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Image credit</a> : null}
+    </div> : null}
+    <CollectionFactRows fields={fields} layout={layout} renderValue={field => field.key === "walkthroughUrl"
+      ? <ChecklistFieldValue item={item} field={field.key} label={field.label} />
+      : field.parts?.length ? <ul>{field.parts.map((part, index) => <li key={index}>{part}</li>)}</ul> : field.value} />
+  </article>;
 }
 
 function itemSearchText(item: CollectionChecklistItem): string {
@@ -182,12 +223,6 @@ export function CollectionChecklist({
   useEffect(() => { setHydrated(true); }, []);
   const allItems = useMemo(() => sections.flatMap((section) => section.items), [sections]);
   const fieldKeys = useMemo(() => getFieldKeys(allItems, cardFields ?? undefined), [allItems, cardFields]);
-  const hasWideCards = useMemo(() => stream && (
-    fieldKeys.length > 6 || allItems.some(item => fieldKeys.some(key => {
-      const value = normalizeText(item[key]);
-      return value.length > 92 || value.split(/\s+/).length > 14;
-    }))
-  ), [stream, allItems, fieldKeys]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [sectionId, setSectionId] = useState("all");
@@ -304,59 +339,22 @@ export function CollectionChecklist({
                     <span className="whitespace-nowrap">{sourceDone}/{sourceTotal}</span>
                   </div>
                 </div>
-                {section.note ? <p className="max-w-3xl whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
+                {section.note ? <p className=" whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
                 {filter !== "all" || normalizedQuery || sectionTotal !== sourceTotal ? (
                   <p className="text-sm text-muted">Showing {sectionDone} of {sectionTotal} visible entries.</p>
                 ) : null}
 
                   </div>
-                  <CollectionRowGroups items={section.items} slots={sourceTotal} activeView={activeView} wide={hasWideCards} renderCard={item => {
+                  <CollectionRowGroups items={section.items} slots={sourceTotal} activeView={activeView} getCardLayout={items => buildCollectionCardLayout(items.map(item => ({
+                    fields: fieldKeys.map(key => checklistFact(item, key, fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key))),
+                    image: Boolean(resolveImageSrc(item.image))
+                  })))} renderCard={(item, { layout }) => {
 
                     const isChecked = checked.has(item.id);
-                    const position = itemPositions.get(item.id) ?? 0;
-                    const image = resolveImageSrc(item.image);
-                    const imageCredit = resolveImageCredit(item.imageCreditUrl);
-                    const inputId = `collection-check-${code}-${item.id}`;
-                    return (
-                      <label id={`item-${item.id}`} key={item.id} className={`group flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-lg border bg-surface transition hover:border-accent/60 ${isChecked ? "border-accent/50" : "border-border/70"}`}>
-                        <div className="flex min-w-0 items-start gap-3 p-4">
-                          <input
-                            id={inputId}
-                            type="checkbox"
-                            disabled={!hydrated}
-                            checked={isChecked}
-                            onChange={() => handleToggle(item.id, isChecked)}
-                            aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
-                            className="mt-0.5 h-6 w-6 shrink-0 cursor-pointer rounded border-border/80 bg-background accent-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-                            style={{ accentColor: "rgb(var(--color-accent))" }}
-                          />
-                          <span className="min-w-0">
-                            <span className="block text-xs font-medium text-muted">{getItemPosition(item, position)}</span>
-                            <span className={`mt-1 block break-words text-base font-semibold leading-snug text-foreground ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</span>
-                          </span>
-                        </div>
-                        {image ? <div className="relative aspect-[16/9] w-full border-y border-border/60 bg-background/40">
-                          <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
-                          <Image src={image} alt={item.name} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-contain p-4" unoptimized />
-                          </button>
-                          {imageCredit ? <a href={imageCredit} target="_blank" rel="noopener noreferrer" aria-label={`Image credit for ${item.name}`} onClick={(event) => event.stopPropagation()} className="absolute bottom-2 right-2 rounded bg-background/90 px-2 py-1 text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Image credit</a> : null}
-                        </div> : null}
-                        {fieldKeys.length ? (
-                          <dl className="min-w-0 space-y-3 p-4">
-                            {fieldKeys.map((key) => {
-                              const value = normalizeText(item[key]);
-                              if (!value) return null;
-                              return (
-                                <div key={key} className="grid min-w-0 grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-3">
-                                  <dt className="min-w-0 break-words text-xs font-medium text-muted">{fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)}</dt>
-                                  <dd className="min-w-0 break-words text-sm leading-5 text-foreground"><ChecklistFieldValue item={item} field={key} /></dd>
-                                </div>
-                              );
-                            })}
-                          </dl>
-                        ) : null}
-                      </label>
-                    );
+                    return <ChecklistCard key={item.id} item={item} code={code} position={itemPositions.get(item.id) ?? 0}
+                      isChecked={isChecked} hydrated={hydrated} layout={layout}
+                      fields={fieldKeys.map(key => checklistFact(item, key, fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)))}
+                      onToggle={() => handleToggle(item.id, isChecked)} />;
                   }} renderList={group => (
                 <div className="table-scroll-wrapper rounded-lg border border-border/70 bg-surface">
                   <div className="table-scroll-inner">
@@ -415,7 +413,7 @@ export function CollectionChecklist({
                             </td> : null}
                             {fieldKeys.map((key) => (
                               <td key={key} className="min-w-40 px-4 py-4 align-top text-sm leading-5 text-foreground">
-                                <ChecklistFieldValue item={item} field={key} />
+                                <ChecklistFieldValue item={item} field={key} label={fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)} />
                               </td>
                             ))}
                           </tr>
@@ -510,57 +508,17 @@ export function CollectionChecklist({
                     <span className="whitespace-nowrap">{sourceDone}/{sourceTotal}</span>
                   </div>
                 </div>
-                {section.note ? <p className="max-w-3xl whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
+                {section.note ? <p className=" whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
                 {filter !== "all" || normalizedQuery || sectionTotal !== sourceTotal ? (
                   <p className="text-sm text-muted">Showing {sectionDone} of {sectionTotal} visible entries.</p>
                 ) : null}
                 <div className="grid min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {section.items.map((item) => {
                     const isChecked = checked.has(item.id);
-                    const position = itemPositions.get(item.id) ?? 0;
-                    const image = resolveImageSrc(item.image);
-                    const imageCredit = resolveImageCredit(item.imageCreditUrl);
-                    const inputId = `collection-check-${code}-${item.id}`;
-                    return (
-                      <label id={`item-${item.id}`} key={item.id} className={`group flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-lg border bg-surface transition hover:border-accent/60 ${isChecked ? "border-accent/50" : "border-border/70"}`}>
-                        <div className="flex min-w-0 items-start gap-3 p-4">
-                          <input
-                            id={inputId}
-                            type="checkbox"
-                            disabled={!hydrated}
-                            checked={isChecked}
-                            onChange={() => handleToggle(item.id, isChecked)}
-                            aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
-                            className="mt-0.5 h-6 w-6 shrink-0 cursor-pointer rounded border-border/80 bg-background accent-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-                            style={{ accentColor: "rgb(var(--color-accent))" }}
-                          />
-                          <span className="min-w-0">
-                            <span className="block text-xs font-medium text-muted">{getItemPosition(item, position)}</span>
-                            <span className={`mt-1 block break-words text-base font-semibold leading-snug text-foreground ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</span>
-                          </span>
-                        </div>
-                        {image ? <div className="relative aspect-[16/9] w-full border-y border-border/60 bg-background/40">
-                          <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
-                          <Image src={image} alt={item.name} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-contain p-4" unoptimized />
-                          </button>
-                          {imageCredit ? <a href={imageCredit} target="_blank" rel="noopener noreferrer" aria-label={`Image credit for ${item.name}`} onClick={(event) => event.stopPropagation()} className="absolute bottom-2 right-2 rounded bg-background/90 px-2 py-1 text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Image credit</a> : null}
-                        </div> : null}
-                        {fieldKeys.length ? (
-                          <dl className="min-w-0 space-y-3 p-4">
-                            {fieldKeys.map((key) => {
-                              const value = normalizeText(item[key]);
-                              if (!value) return null;
-                              return (
-                                <div key={key} className="grid min-w-0 grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-3">
-                                  <dt className="min-w-0 break-words text-xs font-medium text-muted">{fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)}</dt>
-                                  <dd className="min-w-0 break-words text-sm leading-5 text-foreground"><ChecklistFieldValue item={item} field={key} /></dd>
-                                </div>
-                              );
-                            })}
-                          </dl>
-                        ) : null}
-                      </label>
-                    );
+                    return <ChecklistCard key={item.id} item={item} code={code} position={itemPositions.get(item.id) ?? 0}
+                      isChecked={isChecked} hydrated={hydrated} 
+                      fields={fieldKeys.map(key => checklistFact(item, key, fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)))}
+                      onToggle={() => handleToggle(item.id, isChecked)} />;
                   })}
                 </div>
               </div>
@@ -586,7 +544,7 @@ export function CollectionChecklist({
                     <span className="whitespace-nowrap">{sourceDone}/{sourceTotal}</span>
                   </div>
                 </div>
-                {section.note ? <p className="max-w-3xl whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
+                {section.note ? <p className=" whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
                 {filter !== "all" || normalizedQuery || sectionTotal !== sourceTotal ? (
                   <p className="text-sm text-muted">Showing {sectionDone} of {sectionTotal} visible entries.</p>
                 ) : null}
@@ -639,7 +597,7 @@ export function CollectionChecklist({
                             </td> : null}
                             {fieldKeys.map((key) => (
                               <td key={key} className="min-w-40 px-4 py-4 align-top text-sm leading-5 text-foreground">
-                                <ChecklistFieldValue item={item} field={key} />
+                                <ChecklistFieldValue item={item} field={key} label={fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)} />
                               </td>
                             ))}
                           </tr>

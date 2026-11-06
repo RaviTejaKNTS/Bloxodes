@@ -5,12 +5,12 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { safeJsonLd, breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
 export const revalidate = 3600;
 
 const description = "Find game wikis, maps, checklists, tools and daily puzzles.";
 const canonical = `${SITE_URL}/games`;
+const ROW_SIZE = 4;
 
 export const metadata: Metadata = {
   title: `Games | ${SITE_NAME}`,
@@ -62,8 +62,13 @@ export default async function GamesPage() {
     ]
   };
 
+  // Each group fills whole rows at 1, 2 and 4 columns, so an ad between groups never splits a row.
+  // The grid sits inside a plain wrapper: with the grid as the direct child, the ad audit found only 1 slot on the page.
+  const rows = Array.from({ length: Math.ceil(publishedPlatforms.length / ROW_SIZE) }, (_, index) =>
+    publishedPlatforms.slice(index * ROW_SIZE, (index + 1) * ROW_SIZE)
+  );
+
   return (
-    <HubsSidebarLayout canonicalPath="/games" title="Browse games on Bloxodes" heading="Popular pages" links={POPULAR_LINKS}>
     <div className="space-y-10">
       <header className="space-y-4">
         <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Games", href: null }]} />
@@ -71,34 +76,39 @@ export default async function GamesPage() {
         <p className="max-w-2xl text-base leading-7 text-muted md:text-lg">{description}</p>
       </header>
 
-      <section id="article-body" className="journey-content-stream journey-content-stream--index hubs-card-stream gap-5" aria-label="Games and puzzles">
-        {publishedPlatforms.map(({ href, label, image }, index) => (
-          <Link
-            key={href}
-            href={href}
-            data-journey-item
-            className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
-          >
-            <Card className="relative aspect-[1200/675] overflow-hidden rounded-xl border-border/70 bg-card shadow-none transition-colors group-hover:border-accent/60">
-              <Image
-                src={image}
-                alt=""
-                width={1200}
-                height={675}
-                sizes="(min-width: 1280px) calc((100vw - 20rem) / 2), (min-width: 768px) calc((100vw - 5rem) / 2), calc(100vw - 2rem)"
-                priority={index < 2}
-                className="h-full w-full object-cover"
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/40 to-transparent" aria-hidden />
-              <h2 className="absolute inset-x-0 bottom-0 mb-0 px-5 pb-5 text-2xl font-semibold leading-tight text-white md:px-6 md:pb-6 lg:text-3xl">
-                {label}
-              </h2>
-            </Card>
-          </Link>
+      <section id="article-body" className="journey-content-stream gap-5" aria-label="Games and puzzles">
+        {rows.map((row, rowIndex) => (
+          <div key={row[0].href}>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {row.map(({ href, label, image }, index) => (
+              <Link
+                key={href}
+                href={href}
+                data-journey-item
+                className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+              >
+                <Card className="relative aspect-[1200/675] overflow-hidden rounded-xl border-border/70 bg-card shadow-none transition-colors group-hover:border-accent/60">
+                  <Image
+                    src={image}
+                    alt=""
+                    width={1200}
+                    height={675}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    priority={rowIndex === 0 && index < ROW_SIZE}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/85 via-black/40 to-transparent" aria-hidden />
+                  <h2 className="absolute inset-x-0 bottom-0 mb-0 px-4 pb-3 text-lg font-semibold leading-snug text-white">
+                    {label}
+                  </h2>
+                </Card>
+              </Link>
+            ))}
+            </div>
+          </div>
         ))}
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(structuredData) }} />
     </div>
-    </HubsSidebarLayout>
   );
 }

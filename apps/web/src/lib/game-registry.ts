@@ -59,9 +59,9 @@ export const getGameArtwork = cache(readGameArtwork);
 
 export type GameDirectoryPage = { kind: string; href: string; title: string; image: string | null };
 
-export const getGameDirectoryPages = cache(async (namespace: string, gameId?: string): Promise<GameDirectoryPage[]> => {
+export const getGameDirectoryPages = cache(async (namespace: string, gameId?: string, includeCollections = true): Promise<GameDirectoryPage[]> => {
   const tables = ["game_wiki_pages_view", "game_collection_pages_view", "game_code_pages_view", "game_tool_pages_view", "game_map_pages_view", "game_article_pages_view", "game_quiz_pages_view", "game_catalog_pages_view", "game_checklist_pages_view"];
-  const results = await Promise.all(tables.map(async table => {
+  const results = await Promise.all(tables.filter(table => includeCollections || table !== "game_collection_pages_view").map(async table => {
     const fields = "id,game_id,title,canonical_path" + (["game_wiki_pages_view","game_article_pages_view"].includes(table) ? ",cover_image" : table === "game_tool_pages_view" ? ",thumb_url" : table === "game_collection_pages_view" ? ",namespace,code,wiki_slug,collection_slug,published_dataset_id" : "");
     let query = supabaseAdmin().from(table).select(fields).eq("namespace", namespace);
     if (gameId) query = query.eq("game_id", gameId);

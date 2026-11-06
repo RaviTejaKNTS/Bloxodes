@@ -1,7 +1,6 @@
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
-import { MoreWikiCollections } from "@/components/more-content";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
@@ -940,7 +939,6 @@ export function renderGameCollectionPage({
   wikiLabel = "Wiki",
   collectionOptions,
   commentsEntityType = "wiki_collection",
-  showMoreCollections = true,
   enableItemFinder = false,
   stream: streamOption
 }: {
@@ -958,7 +956,6 @@ export function renderGameCollectionPage({
   wikiLabel?: string;
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
   commentsEntityType?: "wiki_collection" | "game_collection";
-  showMoreCollections?: boolean;
   enableItemFinder?: boolean;
   /** Franchise callers opt into the flat ad stream; Roblox collections always use it. */
   stream?: boolean;
@@ -1185,9 +1182,6 @@ export function renderGameCollectionPage({
             <div className="mt-10">
               <CommentsSection entityType={commentsEntityType} entityId={contentHtml.id} />
             </div>
-          ) : null}
-          {showMoreCollections ? (
-            <MoreWikiCollections wikiSlug={config.gameSlug} excludeCollectionSlug={config.slug} gameName={config.gameName} />
           ) : null}
         </>
       ) : null}

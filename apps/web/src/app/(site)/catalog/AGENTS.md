@@ -37,7 +37,7 @@ Do not re-implement these patterns inside each route unless the catalog page gen
 
 ## Ad layout
 
-`layout.tsx` provides the shared right `PageSidebar`. Keep the page content in its main column and do not add another sidebar inside a catalog page.
+`layout.tsx` uses `CatalogRouteLayout` to give nested catalog routes the shared right `PageSidebar`. The `/catalog` index uses the full width with no sidebar and no `.catalog-main` container. Keep nested page content in the main column and do not add another sidebar.
 
 Give the page's one `#article-body` the `catalog-stream` class alongside its existing Journey variant. `ads-catalog.css` sizes grids from the main column's width. Keep unsectioned cards as direct `data-journey-item` children. Client lists use `CatalogStableItems` with a fixed slot count so filters and sorting replace card contents without removing ad siblings. For paged browsers, take the slot count from `@/lib/catalog-page-sizes`, the same constant the page and its API use. `#article-body` also holds copy, forms and FAQs, so don't give it `role="list"`.
 

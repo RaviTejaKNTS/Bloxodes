@@ -55,13 +55,12 @@ export type GameWikiPageProps = {
   page: GameWikiPresentationPage;
   namespace: string;
   namespaceTitle: string;
-  extraLinks?: Array<{ href: string; title: string }>;
   directoryPages?: GameDirectoryPage[];
   sidebarContent?: ReactNode;
   landingPath?: string;
 };
 
-export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [], directoryPages = [], sidebarContent, landingPath = `/${namespace}` }: GameWikiPageProps) {
+export async function renderGameWikiPage({ page, namespace, namespaceTitle, directoryPages = [], sidebarContent, landingPath = `/${namespace}` }: GameWikiPageProps) {
   const reader = createGameReader(namespace);
 
   const isFranchiseHub = page.game_kind === "franchise";
@@ -136,7 +135,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
             {thumbnailImage ? <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
               <Image src={thumbnailImage} alt={`${page.game_title} artwork`} fill className="object-cover" sizes="112px" priority />
             </div> : null}
-            <div className="min-w-0 max-w-3xl space-y-3">
+            <div className="min-w-0 space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
               <UpdatedTimestamp value={updatedAt} className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted" />
               {page.game_official_url ? (
@@ -158,11 +157,10 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
         </div>
       </header>
 
-      {extraLinks.map(link => <p key={link.href}><Link href={link.href} className="text-accent underline underline-offset-4">{link.title}</Link></p>)}
       <div className="grid gap-8 content-sidebar-grid">
         <article id="article-body" itemProp="articleBody" className={`min-w-0 journey-content-stream ${isFranchiseHub ? "content-start gap-5 sm:grid-cols-2 lg:grid-cols-3" : "space-y-9 journey-content-stream--prose"}`}>
           {descriptionHtml ? (
-            <ContentCopyNodes nodes={renderPageContentNodes(descriptionHtml, `${page.slug}-description`)} group="game-wiki-intro" className="game-copy max-w-3xl min-w-0 text-foreground" />
+            <ContentCopyNodes nodes={renderPageContentNodes(descriptionHtml, `${page.slug}-description`)} group="game-wiki-intro" className="game-copy min-w-0 text-foreground" />
           ) : null}
 
           {hasGameDetails ? (

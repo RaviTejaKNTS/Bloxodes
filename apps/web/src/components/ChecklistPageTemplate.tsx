@@ -124,7 +124,7 @@ export async function ChecklistPageTemplate({
     hasPart: [itemListSchema]
   };
   return (
-    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
+    <div className="grid gap-8 content-sidebar-grid">
       <article className="min-w-0">
         <PageBreadcrumb
           className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"

@@ -36,6 +36,20 @@ for (const fixture of cases) {
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", `https://bloxodes.com${expected.pathname}`);
       await expect(page).toHaveTitle(/\S/);
       await expect(page.locator("h1").first()).toContainText(/\S/);
+      // Game menus must never replace the global links after hydration.
+      const siteLinks = ["/", "/articles", "/wiki", "/catalog", "/tools", "/stats", "/checklists", "/quizzes", "/codes", "/events", "/games"];
+      await expect.poll(() => page.locator("[data-site-nav-link]").evaluateAll(links => links.map(link => link.getAttribute("href")))).toEqual(siteLinks);
+      // All links fit on desktop, so More only appears at a phone width.
+      const desktop = page.viewportSize()!;
+      if (desktop.width >= 1024) await expect(page.getByRole("button", { name: "More", exact: true })).toBeHidden();
+      await page.setViewportSize({ width: 600, height: 800 });
+      await page.getByRole("button", { name: "More", exact: true }).click();
+      const drawer = page.getByRole("dialog", { name: "More", exact: true });
+      await expect(drawer.getByRole("navigation")).toHaveCount(1);
+      await expect(drawer.getByRole("navigation")).toHaveAttribute("aria-label", "Browse");
+      expect(await drawer.getByRole("navigation").locator("a").evaluateAll(links => links.map(link => link.getAttribute("href")))).toEqual(siteLinks);
+      await drawer.getByRole("button", { name: "Close", exact: true }).click();
+      await page.setViewportSize(desktop);
       if (fixture.engine) await expect(page.locator(fixture.engine)).toBeVisible();
       coverage.result = "PASSED";
     } finally {

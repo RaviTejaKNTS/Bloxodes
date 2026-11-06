@@ -44,6 +44,13 @@ export function ThemeToggle({ className }: { className?: string }) {
     setTheme(preferred);
     applyTheme(preferred);
     setHydrated(true);
+    // The header and the More drawer each have a toggle, so follow changes made by the other one.
+    const observer = new MutationObserver(() => {
+      const current = normalizeTheme(document.documentElement.dataset.theme ?? null);
+      if (current) setTheme(current);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
   }, []);
 
   const toggleTheme = () => {

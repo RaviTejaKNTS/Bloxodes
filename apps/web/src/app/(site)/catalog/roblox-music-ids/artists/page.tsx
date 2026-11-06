@@ -72,7 +72,7 @@ export default async function MusicIdArtistsPage() {
       <header className="space-y-4">
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle("Roblox music ID artists")}</h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">
+        <p className=" text-base text-muted md:text-lg">
           Explore every artist name in our catalog and pull their Roblox music IDs.
         </p>
         <IndexPageStats

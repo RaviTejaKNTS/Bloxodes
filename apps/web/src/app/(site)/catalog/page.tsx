@@ -232,7 +232,7 @@ export default async function CatalogIndexPage() {
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           Roblox catalogs organized by item type
         </h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">
+        <p className="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
           Browse Roblox catalog pages for free items, music IDs, admin commands, promo codes, decal IDs, and more.
         </p>
         <IndexPageStats
@@ -296,7 +296,7 @@ export default async function CatalogIndexPage() {
                     <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
                       <div className="space-y-1">
                         <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
-                        <p className="max-w-3xl text-sm text-muted">{card.description}</p>
+                        <p className=" text-sm text-muted">{card.description}</p>
                       </div>
                       {card.updatedLabel ? (
                         <p className="shrink-0 text-sm text-muted md:text-right">Updated {card.updatedLabel}</p>

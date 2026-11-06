@@ -43,7 +43,9 @@ describe("collection video facade", () => {
   });
 
   it("replaces only a declared, valid card video's image", () => {
-    expect(renderItem(url)).toContain("data-collection-video");
+    const container = document.createElement("div");
+    container.innerHTML = renderItem(url);
+    expect(container.querySelector("[data-collection-video]")?.parentElement?.classList.contains("aspect-[4/3]")).toBe(true);
     expect(renderItem(url)).not.toContain("data-collection-image-preview");
     for (const html of [renderItem(null), renderItem("https://evil.test/watch?v=QdBZY2fkU-0"),
       renderItem(url, { ...config, fieldPresentation: undefined })]) {

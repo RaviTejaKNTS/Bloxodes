@@ -9,6 +9,7 @@ const config = {
   theme: {
     extend: {
       container: { center: true, padding: "1rem" },
+      borderRadius: { sm: "2px", DEFAULT: "3px", md: "3px", lg: "4px", xl: "4px", "2xl": "4px", "3xl": "4px" },
       colors: {
         background: "rgb(var(--color-background) / <alpha-value>)",
         surface: "rgb(var(--color-surface) / <alpha-value>)",

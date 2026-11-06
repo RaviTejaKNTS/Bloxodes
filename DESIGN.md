@@ -6,13 +6,13 @@ tokens:
   color:
     background:
       light: "rgb(237 240 248)"
-      dark: "rgb(5 6 8)"
+      dark: "rgb(5 5 5)"
     surface:
       light: "rgb(226 229 243)"
-      dark: "rgb(12 14 18)"
+      dark: "rgb(13 13 13)"
     surfaceMuted:
       light: "rgb(212 215 231)"
-      dark: "rgb(20 23 29)"
+      dark: "rgb(22 22 22)"
     foreground:
       light: "rgb(32 38 60)"
       dark: "rgb(238 241 247)"
@@ -21,28 +21,28 @@ tokens:
       dark: "rgb(164 173 190)"
     border:
       light: "rgb(198 202 224)"
-      dark: "rgb(49 56 68)"
+      dark: "rgb(52 52 52)"
     accent:
       light: "rgb(79 70 229)"
       dark: "rgb(132 169 255)"
     sidebar:
       background:
         light: "hsl(220 14% 96%)"
-        dark: "hsl(220 9% 7%)"
+        dark: "hsl(0 0% 7%)"
       accent:
         light: "hsl(220 13% 91%)"
-        dark: "hsl(220 8% 12%)"
+        dark: "hsl(0 0% 12%)"
       border:
         light: "hsl(220 12% 84%)"
-        dark: "hsl(220 8% 19%)"
+        dark: "hsl(0 0% 19%)"
   typography:
     family: "Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, system-ui, sans-serif"
     body: "text-[1.05rem] md:text-[1.09rem] leading-relaxed"
     sidebar: "13px medium"
     sectionLabel: "11px uppercase"
   radius:
-    compact: "0.375rem"
-    panel: "1.25rem"
+    compact: "0.1875rem"
+    panel: "0.25rem"
   layout:
     topBarHeight: "3.5rem"
     rightRailWidth: "21rem (336px) from 1200px"
@@ -67,14 +67,17 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Use clean, restrained shadcn-style primitives for interface surfaces: navigation items, search inputs, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
-- Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, a More drawer and the account button. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
-- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early.
+- Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, the theme button and the account button. The theme button becomes a More button, which opens the More drawer, on phones or whenever some links don't fit. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
+- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early. From 1024px, body text is 20px and text blocks stop at 52rem (about 830px); cards, tables, images and widgets use the full main column. Full-width paragraphs made text pages shorter and cost ads.
 
 ## Layout
 
 - Main content starts with the same vertical rhythm across page families: `py-6 md:py-8 xl:py-10`.
 - Every section link stays in the server HTML. Top bar links that don't fit wrap out of view, and the More drawer (a right-side sheet on every screen size) lists them all. Keep the drawer compact and readable rather than full-screen.
-- Game and catalog pages can add a second bar under the header (`SiteGameTopBar`) with that game's or catalog's pages. Pages without contextual links show no second bar.
+- The header and More drawer always show the same 11 section links, on every page. Game-specific links never go there.
+- Game and catalog pages can add a second bar under the header (`SiteGameTopBar`). On a game page it shows that game's name and one plain link per page type it has (Wiki, Articles, Codes, Gameplay Checklist, Quiz, Map), plus a Tools menu, for Roblox and non-Roblox alike. Articles links to the game's article list, never to single articles. Pages without contextual links, and franchise pages spanning several games, show no second bar.
+- Index pages (`/catalog`, `/tools`, `/stats`, `/checklists`, `/authors`, `/games` and the other section indexes) use the full page with no rail. Card grids use `.journey-content-stream--index`: 2 per row from 640px, 3 from 1024px, 4 from 1280px.
+- `Give feedback` sits with the footer's company links on every screen size.
 - The homepage has no rail. From 1280px some of its blocks share a row in pairs; see Advertising in `bloxodes-docs/overview.md` for why each block stays a separate element.
 
 ## Components
@@ -87,7 +90,20 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Search results should read as list rows, not heavy cards.
 - Navigation sections should use quiet labels where they help scanning, but avoid turning the public site into a literal workspace clone.
 - "More …" page lists in the rail use `RailLinkList`: one row per page with its image when it has one, otherwise an icon picked from the URL, and a one-line description. New pages need no extra data to look right.
+- Wiki collection pages have one sidebar for every game and collection type (`GameCollectionsRail`, instead of a "More …" `RailLinkList`). The order is: share, wiki card, a `More <game> collections` panel with the next 3 collections, a flat unboxed `All other <game> collections` list of inline links, then the game's other pages. Articles on these pages have no cover image. Below 1024px, only the panel and list show, below the page content.
 - Copyable codes and IDs on cards use `CopyCodeButton` with `variant="bar"`: one full-width button showing the code and a Copy label.
+- Images in page text stop at 720px wide and 480px tall (`--content-image-max-width` and `--content-image-max-height` in `article-content.css`). Galleries are exempt.
+
+### Collection cards
+
+Wiki collections and collectables use one card design for every game (`CollectionCardContent`). There are at most 3 cards per row.
+
+- Order: centered title, inset square image (video stays 4:3), left-aligned description, then fact rows in the order the collection's data gives. Collectables put the checkbox left of the title and the `#n` right of it.
+- Fact rows: label on the left, value on the right, thin lines between, each row at least 3.75rem tall. There are no pills and no panels. Lists show one line per item.
+- Card size matters for ads: Mediavine places in-content ads by content height (30% phone, 25% desktop) and sidebar ads about every 1,460px, so a shorter card means fewer ads. Measure ad slots against the live site before shrinking cards.
+- Long text: descriptions over 180 characters stop at 4 lines and values over 100 characters stop at 4, each with a small Read more. Clip with CSS only, so the full text stays in the page HTML. Lists and links are never cut.
+- Color: only a label reading `Status` gets the green, amber or red value color, in cards and in List view. `chip` and `highlight` in `fieldPresentation` stay as data for the mobile app; they don't change the website's look.
+- Rows line up: every card in a row shares CSS subgrid tracks, so the tallest title, description or fact sets the height for all of them. Facts are matched by field key. A field empty on all cards in a row is dropped; otherwise a card without it shows `-`. A row with an image keeps the initials box on cards that have none, and a page with no images leaves no image space.
 
 ## Content
 

@@ -277,18 +277,19 @@ async function getSharedGameWikiCollectionPageByPath(
 }
 
 async function listPublishedSharedGameWikiCollectionsByWikiSlug(
-  wikiSlug: string
+  wikiSlug: string,
+  gameId?: string
 ): Promise<SharedGameWikiCollectionPage[]> {
   const normalized = normalizeSlug(wikiSlug);
   if (!normalized) return [];
   return withCache(
-    [namespace, "game-wiki-collections-by-wiki-v1", normalized],
+    [namespace, "game-wiki-collections-by-wiki-v1", normalized, gameId ?? ""],
     [namespace, "game-wiki-collection-index", `game-${namespace}:wiki:${normalized}`],
     async () => {
       const { data, error } = await gameDatabase(supabaseAdmin(), namespace)
         .from("wiki_collection_pages_view")
         .select("*")
-        .eq("wiki_slug", normalized)
+        .eq(gameId ? "game_id" : "wiki_slug", gameId ?? normalized)
         .eq("is_published", true)
         .not("published_dataset_id", "is", null)
         .order("wiki_sort_order", { ascending: true, nullsFirst: false })

@@ -1,6 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getGameSidebarData } from "@/lib/game-sidebar";
 
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
+
 vi.mock("server-only", () => ({}));
 
 const mocks = vi.hoisted(() => ({ wiki: vi.fn(), stats: vi.fn() }));

@@ -35,14 +35,17 @@ async function navigate(path: string, menu?: GameMenu | null) {
 }
 const primary = () => [...container.querySelectorAll('nav[aria-label="Primary"] a')].map(a => a.getAttribute("href"));
 const drawer = () => container.querySelector("#site-more-drawer")!;
+const drawerLinks = () => [...drawer().querySelectorAll("nav a")].map(a => a.getAttribute("href"));
 it("follows Roblox → GTA → Terraria → Roblox using page menus without requests", async () => {
  await navigate("/wiki/the-forge");
  expect(primary()).toEqual(siteNavLinks.map(link => link.href));
  await navigate(gta.href, gta);
- expect(primary()).toEqual([gta.href]); expect(drawer().textContent).toContain(gta.title);
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(drawer().textContent).not.toContain(gta.title);
  expect(state.searchMenus).toEqual([gta]);
+ expect(drawerLinks()).toEqual(siteNavLinks.map(link => link.href));
+ expect([...drawer().querySelectorAll("nav")].map(nav => nav.getAttribute("aria-label"))).toEqual(["Browse"]);
  await navigate(terraria.href, terraria);
- expect(primary()).toEqual([terraria.href]); expect(drawer().textContent).toContain(terraria.title);
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(drawer().textContent).not.toContain(terraria.title);
  expect(drawer().textContent).not.toContain(gta.title);
  expect(state.searchMenus).toEqual([terraria]);
  await navigate("/wiki/the-forge");
@@ -51,7 +54,7 @@ it("follows Roblox → GTA → Terraria → Roblox using page menus without requ
  expect(fetchMenu).not.toHaveBeenCalled();
 });
 it("uses the bridge on a direct game visit and falls back when the next menu is unavailable", async () => {
- await navigate(gta.href, gta); expect(primary()).toEqual([gta.href]);
+ await navigate(gta.href, gta); expect(primary()).toEqual(siteNavLinks.map(link => link.href));
  await navigate(terraria.href, null);
  expect(primary()).toEqual(siteNavLinks.map(link => link.href)); expect(state.searchMenus).toEqual([]);
  expect(fetchMenu).not.toHaveBeenCalled();
@@ -72,7 +75,7 @@ it("does not let late outgoing cleanup clear the next game's menu", async () => 
   clearNew = publishGameMenu(terraria.href, terraria);
   clearOld();
  });
- expect(primary()).toEqual([terraria.href]);
+ expect(primary()).toEqual(siteNavLinks.map(link => link.href));
  await act(async () => clearNew());
  expect(primary()).toEqual(siteNavLinks.map(link => link.href));
 });
