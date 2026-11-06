@@ -82,3 +82,14 @@
     grid-column: span 8;
   }
 }
+
+@media (min-width: 1024px) {
+  .hubs-main .author-bio {
+    font-size: 1.25rem;
+    line-height: 1.85;
+  }
+
+  .hubs-main .author-bio p + p {
+    margin-top: 2rem;
+  }
+}

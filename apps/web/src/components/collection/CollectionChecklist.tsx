@@ -148,7 +148,7 @@ function ChecklistCard({ item, code, position, isChecked, hydrated, fields, layo
       <h3 className={`min-w-0 text-center text-lg font-semibold leading-snug text-foreground [overflow-wrap:anywhere] [text-wrap:balance] ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</h3>
       <span className="text-right text-xs text-muted">{getItemPosition(item, position)}</span>
     </div>
-    {(layout?.image ?? Boolean(image)) ? <div className="collection-card-media relative aspect-[16/10] overflow-hidden rounded-lg bg-surface-muted/70">
+    {(layout?.image ?? Boolean(image)) ? <div className="collection-card-media relative aspect-square overflow-hidden rounded-lg bg-surface-muted/70">
       {image ? <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
         <Image src={image} alt={item.name} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-contain p-3" unoptimized />
       </button> : <CollectionImagePlaceholder title={item.name} compact />}

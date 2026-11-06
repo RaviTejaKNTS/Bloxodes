@@ -115,19 +115,25 @@
 }
 
 /* Normal stacking is also the fallback for browsers without subgrid. */
+/* Item art is square, and the spacing keeps cards close to their old height:
+   Mediavine places ads by content height, so shorter cards meant fewer ads. */
 .collection-card {
   display: flex;
   flex-direction: column;
-  padding-block: 14px;
+  padding-block: 18px;
 }
 .collection-card-title,
 .collection-card-description,
 .collection-card-extra {
   margin: 0;
-  padding: 0 14px 12px;
+  padding: 0 14px 16px;
+}
+/* The old card reserved this much for a description too. */
+.collection-card-description {
+  min-height: 6.75rem;
 }
 .collection-card-media {
-  margin: 0 14px 12px;
+  margin: 0 14px 16px;
   align-self: stretch;
 }
 .collection-card-facts {
@@ -135,11 +141,12 @@
   padding-inline: 14px;
 }
 .collection-card-fact {
+  min-height: 3.75rem;
   display: flex;
   align-items: flex-start;
   gap: 14px;
   border-top: 1px solid rgb(var(--color-border) / 0.6);
-  padding-block: 8px;
+  padding-block: 12px;
 }
 .collection-card-fact > dt {
   flex: 0 0 auto;

@@ -49,17 +49,37 @@ describe("shared collection card content", () => {
   });
 
   it.each([false, true])("keeps full clamped text in SSR HTML, description=%s", description => {
-    const limit = description ? 135 : 100;
+    const limit = description ? 180 : 100;
     for (const length of [limit, limit + 1]) {
       const text = "x".repeat(length);
       const container = document.createElement("div");
       container.innerHTML = renderToStaticMarkup(<CollectionReadMore text={text} description={description} />);
       expect(container.textContent).toContain(text);
       expect(container.querySelector("button")?.getAttribute("aria-expanded") ?? null).toBe(length > limit ? "false" : null);
-      expect(container.querySelector(description ? ".line-clamp-3" : ".line-clamp-4") !== null).toBe(length > limit);
+      expect(container.querySelector(".line-clamp-4") !== null).toBe(length > limit);
       expect(container.querySelector("[hidden]")).toBeNull();
       expect(container.innerHTML).not.toContain("display:none");
     }
+  });
+
+  it("leaves 180-character descriptions open and clamps 181 characters to four lines", () => {
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    try {
+      flushSync(() => root.render(<>
+        <CollectionReadMore text={"a".repeat(180)} description />
+        <CollectionReadMore text={"b".repeat(181)} description />
+      </>));
+      expect(container.querySelectorAll("button")).toHaveLength(1);
+      expect(container.querySelectorAll(".line-clamp-4")).toHaveLength(1);
+      expect(container.querySelector(".line-clamp-4")?.textContent).toBe("b".repeat(181));
+      const button = container.querySelector("button")!;
+      flushSync(() => button.click());
+      expect(container.querySelector(".line-clamp-4")).toBeNull();
+      expect(button.getAttribute("aria-expanded")).toBe("true");
+      flushSync(() => button.click());
+      expect(container.querySelector(".line-clamp-4")?.textContent).toBe("b".repeat(181));
+    } finally { root.unmount(); }
   });
 
   it("expands only the clicked text and can close it again", () => {
@@ -152,6 +172,9 @@ describe("shared collection card content", () => {
     expect(cards[1].querySelector(".collection-card-description")?.textContent).toBe("");
     expect(cards[1].querySelector(".collection-card-media") !== null).toBe(!hideMissing);
     expect(cards[1].querySelector("[data-collection-image-preview]")).toBeNull();
+    for (const media of container.querySelectorAll(".collection-card-media")) {
+      expect(media.classList.contains("aspect-square")).toBe(true);
+    }
   });
 
 });

@@ -66,9 +66,9 @@ export function CollectionReadMore({ text, children, description = false }: {
   description?: boolean;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const collapsible = text.length > (description ? 135 : 100);
+  const collapsible = text.length > (description ? 180 : 100);
   return <div className={description ? "text-sm leading-relaxed text-muted" : "text-sm leading-snug"}>
-    <div className={`whitespace-pre-line [overflow-wrap:anywhere] ${collapsible && !expanded ? description ? "line-clamp-3" : "line-clamp-4" : ""}`}>{children ?? text}</div>
+    <div className={`whitespace-pre-line [overflow-wrap:anywhere] ${collapsible && !expanded ? "line-clamp-4" : ""}`}>{children ?? text}</div>
     {collapsible ? <button type="button" aria-expanded={expanded}
       onClick={event => { event.preventDefault(); event.stopPropagation(); setExpanded(value => !value); }}
       className="mt-1 text-xs text-muted underline underline-offset-2 hover:text-foreground focus-visible:outline focus-visible:outline-accent">

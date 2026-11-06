@@ -654,7 +654,7 @@ function CollectionImageFrame({
 
   const frameClass = compact
     ? "relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl bg-surface-muted/70 p-3"
-    : "collection-card-media relative aspect-[16/10] overflow-hidden rounded-lg bg-surface-muted/70";
+    : "collection-card-media relative aspect-square overflow-hidden rounded-lg bg-surface-muted/70";
 
   if (!presentation.image) {
     return (
@@ -729,7 +729,7 @@ function ForgeItemCard({ presentation, showImage, hideMissing = false, layout }:
       className="collection-card group h-full min-w-0 scroll-mt-28 overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
       <h3 className="collection-card-title text-center text-lg font-semibold leading-snug text-foreground [overflow-wrap:anywhere] [text-wrap:balance]">{presentation.title}</h3>
       {imageTrack ? presentation.videoUrl ? (
-        <div className="collection-card-media aspect-[16/10] overflow-hidden rounded-lg bg-surface-muted/70"><CollectionVideo key={presentation.videoUrl} url={presentation.videoUrl} title={presentation.title} poster={presentation.image} /></div>
+        <div className="collection-card-media aspect-[4/3] overflow-hidden rounded-lg bg-surface-muted/70"><CollectionVideo key={presentation.videoUrl} url={presentation.videoUrl} title={presentation.title} poster={presentation.image} /></div>
       ) : !hideMissing || (showImage && presentation.image) ? <CollectionImageFrame presentation={showImage ? presentation : { ...presentation, image: null }} showImage /> : <div /> : null}
       {(layout?.description ?? Boolean(presentation.description)) ? <div className="collection-card-description">
         {presentation.description ? <CollectionReadMore text={presentation.description} description /> : null}

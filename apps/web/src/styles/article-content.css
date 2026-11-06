@@ -1550,4 +1550,40 @@
   margin-top: 0.35rem !important;
 }
 
-/* Keep tool/catalog UIs full-width while markdown copy reserves sidebar-like space on desktop */
+/* Detail copy keeps the full main-column width. From 1024px it is a step above the
+   1.14rem/1.95 used from 768px, so full-width lines stay readable and pages keep their height. UI widgets, card facts and
+   index streams retain their compact type; phones keep the existing rhythm. */
+@media (min-width: 1024px) {
+  #article-body:not(.journey-content-stream--index):is(.prose, .game-copy, .article-content),
+  #article-body:not(.journey-content-stream--index) :is(.prose, .game-copy, .article-content):where(:not(.not-prose, .not-prose *)) {
+    font-size: 1.25rem;
+    line-height: 1.9;
+  }
+
+  #article-body:not(.journey-content-stream--index):is(.prose, .game-copy) :is(p, li, blockquote):where(:not(.not-prose, .not-prose *)),
+  #article-body:not(.journey-content-stream--index) :is(.prose, .game-copy) :is(p, li, blockquote):where(:not(.not-prose, .not-prose *)),
+  #article-body:not(.journey-content-stream--index).article-content > p,
+  #article-body:not(.journey-content-stream--index) .article-content > :is(p, ul, ol, blockquote),
+  #article-body:not(.journey-content-stream--index) :is(p[data-md-copy], li[data-md-copy], blockquote[data-md-copy], .md-copy-p, .md-copy-li, .md-copy-blockquote):where(:not(.not-prose, .not-prose *)) {
+    /* Parsed copy already uses !important in .md-copy-scope and FAQ answers. */
+    font-size: 1.25rem !important;
+    line-height: 1.9 !important;
+  }
+
+  #article-body:not(.journey-content-stream--index):is(.prose, .game-copy) p + p,
+  #article-body:not(.journey-content-stream--index) :is(.prose, .game-copy) p + p,
+  #article-body:not(.journey-content-stream--index) .md-copy-scope > .md-copy-node + .md-copy-p,
+  #article-body:not(.journey-content-stream--index) .md-copy-scope p[data-md-copy] + p[data-md-copy],
+  #article-body:not(.journey-content-stream--index) > .md-copy-node + .md-copy-p {
+    margin-top: 2rem !important;
+  }
+
+  /* Text blocks stop at about 830px; cards, tables, images and widgets keep the full column.
+     Full-width paragraphs took fewer lines, which made text pages shorter and cost ads. */
+  #article-body:not(.journey-content-stream--index) > :is(p, ul, ol, blockquote, h2, h3, h4)[data-md-copy],
+  #article-body:not(.journey-content-stream--index) > .md-copy-node:is(.md-copy-p, .md-copy-heading, .md-copy-ul, .md-copy-ol, .md-copy-blockquote),
+  #article-body:not(.journey-content-stream--index) > .ads-content-copy > :is(p, ul, ol, blockquote, h2, h3, h4, .md-copy-node),
+  #article-body:not(.journey-content-stream--index):is(.prose, .game-copy) > :is(p, ul, ol, blockquote, h2, h3, h4) {
+    max-width: 52rem;
+  }
+}

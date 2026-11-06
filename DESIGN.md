@@ -68,7 +68,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
 - Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, the theme button and the account button. The theme button becomes a More button, which opens the More drawer, on phones or whenever some links don't fit. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
-- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early. Page text fills the main column, on every page with a rail, so no gap opens between the text and the rail.
+- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early. From 1024px, body text is 20px and text blocks stop at 52rem (about 830px); cards, tables, images and widgets use the full main column. Full-width paragraphs made text pages shorter and cost ads.
 
 ## Layout
 
@@ -98,9 +98,10 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 
 Wiki collections and collectables use one card design for every game (`CollectionCardContent`). There are at most 3 cards per row.
 
-- Order: centered title, inset 16:10 image or video, left-aligned description, then fact rows in the order the collection's data gives. Collectables put the checkbox left of the title and the `#n` right of it.
-- Fact rows: label on the left, value on the right, thin lines between. There are no pills and no panels. Lists show one line per item.
-- Long text: descriptions over 135 characters stop at 3 lines and values over 100 characters stop at 4, each with a small Read more. Clip with CSS only, so the full text stays in the page HTML. Lists and links are never cut.
+- Order: centered title, inset square image (video stays 4:3), left-aligned description, then fact rows in the order the collection's data gives. Collectables put the checkbox left of the title and the `#n` right of it.
+- Fact rows: label on the left, value on the right, thin lines between, each row at least 3.75rem tall. There are no pills and no panels. Lists show one line per item.
+- Card size matters for ads: Mediavine places in-content ads by content height (30% phone, 25% desktop) and sidebar ads about every 1,460px, so a shorter card means fewer ads. Measure ad slots against the live site before shrinking cards.
+- Long text: descriptions over 180 characters stop at 4 lines and values over 100 characters stop at 4, each with a small Read more. Clip with CSS only, so the full text stays in the page HTML. Lists and links are never cut.
 - Color: only a label reading `Status` gets the green, amber or red value color, in cards and in List view. `chip` and `highlight` in `fieldPresentation` stay as data for the mobile app; they don't change the website's look.
 - Rows line up: every card in a row shares CSS subgrid tracks, so the tallest title, description or fact sets the height for all of them. Facts are matched by field key. A field empty on all cards in a row is dropped; otherwise a card without it shows `-`. A row with an image keeps the initials box on cards that have none, and a page with no images leaves no image space.
 

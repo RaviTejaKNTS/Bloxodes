@@ -102,3 +102,9 @@
 #article-body > .ads-content-tips-heading + .ads-content-copy {
   margin-top: 1.75rem;
 }
+
+@media (min-width: 1024px) {
+  #article-body:not(.journey-content-stream--index) > .ads-content-copy + .ads-content-copy > .md-copy-p {
+    margin-top: 2rem !important;
+  }
+}

@@ -51,7 +51,7 @@ describe("collectable collection cards", () => {
       expect(card.querySelector("h3")?.textContent).toBe("Alpha");
       expect(card.querySelector(".collection-card-title")?.textContent).toContain("#1");
       expect([...card.querySelectorAll("dt")].map(node => node.textContent)).toEqual(["Sea", "Status", "Reward", "Notes", "Walkthrough Url"]);
-      expect(card.querySelector(".collection-card-media")).not.toBeNull();
+      expect(card.querySelector(".collection-card-media")?.classList.contains("aspect-square")).toBe(true);
       expect(second.querySelector(".collection-card-media") !== null).toBe(stream);
       expect([...second.querySelectorAll("dd")].map(node => node.textContent)).toEqual(stream ? ["-", "Removed", "No", "-", "-"] : ["Removed", "No"]);
       expect(card.querySelector("dd.text-emerald-300")?.textContent).toContain("Available");

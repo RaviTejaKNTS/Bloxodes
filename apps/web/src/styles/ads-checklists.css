@@ -174,3 +174,12 @@ a.checklists-row-title {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+@media (min-width: 1024px) {
+  .checklists-stream > .checklists-note,
+  .checklists-stream .checklists-row-title,
+  .checklists-stream .checklists-row-note {
+    font-size: 1.125rem;
+    line-height: 1.85;
+  }
+}
