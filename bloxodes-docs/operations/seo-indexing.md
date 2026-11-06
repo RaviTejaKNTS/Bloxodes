@@ -26,7 +26,7 @@ Since October 2025 Google has indexed only our homepage. So we give Google an al
 
 ## Indexing APIs
 
-- **Google Indexing API:** off. The VPS cron entry is commented out and `google-indexing.yml` is a manual fallback. A real submission needs `--apply` and `GOOGLE_INDEXING_API_ENABLED=true`. State tables `google_indexing_attempts` and `google_indexing_url_state` haven't changed since 2026-07-01.
+- **Google Indexing API:** off. The VPS cron entry is commented out, and GitHub has no workflow or settings for it. A real submission runs `indexing:google` with `--apply` and needs `GOOGLE_INDEXING_API_ENABLED=true` in `.envs/pipelines/indexing.env`. State tables `google_indexing_attempts` and `google_indexing_url_state` haven't changed since 2026-07-01.
 - **IndexNow:** off (`INDEXNOW_ENABLED=false` on the live site). Don't run `indexnow:bootstrap` to test it; it isn't a dry run.
 
 ## Analytics

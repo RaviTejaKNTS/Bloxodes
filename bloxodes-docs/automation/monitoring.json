@@ -37,7 +37,6 @@
     {"key": "github/RaviTejaKNTS/Bloxodes/discover-beebom-codes.yml", "group": "Codes", "name": "Find new codes pages", "about": "Looks for games that got a codes page on Beebom and adds them to the queue."},
     {"key": "github/RaviTejaKNTS/Bloxodes/generate-queue.yml", "group": "Codes", "name": "Write draft codes pages", "about": "Writes and publishes new codes pages from the queue, ten times a day.", "impact": "No new codes pages. Note: a green run can still write nothing if the AI credits are out."},
     {"key": "bloxodes-vps/google-indexing", "group": "Codes", "name": "Google indexing (VPS)", "about": "Sends updated pages to the Google Indexing API. Switched off."},
-    {"key": "github/RaviTejaKNTS/Bloxodes/google-indexing.yml", "group": "Codes", "name": "Google indexing", "about": "Sends updated pages to the Google Indexing API on request. Switched off."},
     {"key": "bloxodes-vps/puzzles-early-nyt", "group": "Puzzles", "name": "Early NYT puzzles", "about": "Fetches the first NYT puzzle answers of the day (Wordle, Connections and others)."},
     {"key": "bloxodes-vps/puzzles-beebom-with-early", "group": "Puzzles", "name": "Beebom puzzle answers", "about": "Fetches puzzle answers from Beebom, three tries each morning."},
     {"key": "bloxodes-vps/puzzles-late-nyt-linkedin", "group": "Puzzles", "name": "Late NYT and LinkedIn puzzles", "about": "Fetches the NYT and LinkedIn puzzles that publish later in the day."},
