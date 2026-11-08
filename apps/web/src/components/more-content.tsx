@@ -3,7 +3,7 @@ import Link from "next/link";
 import {
   listCodePagesWithActiveCounts,
   listPublishedArticles,
-  listPublishedArticlesByArticleGameSlugPage
+  listRelatedPublishedArticles
 } from "@/lib/db";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { listPublishedTools } from "@/lib/tools";
@@ -119,10 +119,9 @@ export async function MoreArticles({
   game
 }: {
   excludeSlug: string;
-  game?: { slug: string; title: string };
+  game?: { slug: string; title: string; gameId?: string | null; universeId?: number | null };
 }) {
-  const sameGame = game ? await listPublishedArticlesByArticleGameSlugPage(game.slug, 1, 9) : null;
-  const sameGameItems = (sameGame?.articles ?? []).filter((a) => a.slug !== excludeSlug).slice(0, 8);
+  const sameGameItems = game ? await listRelatedPublishedArticles(game, excludeSlug, 8) : [];
   const useGame = Boolean(game && sameGameItems.length);
   const articles = useGame ? sameGameItems : await listPublishedArticles(24);
   const items = articles
