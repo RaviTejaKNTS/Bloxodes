@@ -1,6 +1,10 @@
 import "server-only";
 import Link from "next/link";
-import { listCodePagesWithActiveCounts, listPublishedArticles } from "@/lib/db";
+import {
+  listCodePagesWithActiveCounts,
+  listPublishedArticles,
+  listPublishedArticlesByArticleGameSlugPage
+} from "@/lib/db";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { listPublishedTools } from "@/lib/tools";
 import { listPublishedQuizzes } from "@/lib/quizzes";
@@ -108,15 +112,28 @@ export async function MoreCodes({ excludeSlug }: { excludeSlug: string }) {
   );
 }
 
-export async function MoreArticles({ excludeSlug }: { excludeSlug: string }) {
-  const articles = await listPublishedArticles(24);
+// The article's own game first ("More GTA 6 articles"). When the game has no other
+// articles, recent articles from every game, under a heading that names none.
+export async function MoreArticles({
+  excludeSlug,
+  game
+}: {
+  excludeSlug: string;
+  game?: { slug: string; title: string };
+}) {
+  const sameGame = game ? await listPublishedArticlesByArticleGameSlugPage(game.slug, 1, 9) : null;
+  const sameGameItems = (sameGame?.articles ?? []).filter((a) => a.slug !== excludeSlug).slice(0, 8);
+  const useGame = Boolean(game && sameGameItems.length);
+  const articles = useGame ? sameGameItems : await listPublishedArticles(24);
   const items = articles
     .filter((a) => a.slug !== excludeSlug)
     .sort((a, b) => time(b.updated_at) - time(a.updated_at))
     .slice(0, 8);
   if (!items.length) return null;
+  const title = useGame && game ? `More ${game.title} articles` : "More articles";
+  const viewAllHref = useGame && game ? `/articles/games/${game.slug}` : "/articles";
   return (
-    <MoreSection title="More Roblox articles" viewAllHref="/articles">
+    <MoreSection title={title} viewAllHref={viewAllHref}>
       {items.map((article) => (
         <ArticleCard key={article.id} article={article} />
       ))}
