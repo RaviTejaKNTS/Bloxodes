@@ -395,8 +395,15 @@ revoke all on function public.refresh_catalog_membership_snapshots(text,boolean)
 grant execute on function public.refresh_catalog_membership_snapshots(text,boolean) to service_role;
 
 -- Expiry changes membership without a write. Use the existing database cron runner.
-select cron.schedule('catalog-free-membership-expiry', '* * * * *',
-  $cron$select public.refresh_catalog_membership_snapshots('free');$cron$);
+do $$
+begin
+  -- Managed development has no cron extension. Production's existing scheduler
+  -- persists this job and reconciles missed expirations on its next run.
+  if to_regclass('cron.job') is not null then
+    perform cron.schedule('catalog-free-membership-expiry', '* * * * *',
+      $cron$select public.refresh_catalog_membership_snapshots('free');$cron$);
+  end if;
+end $$;
 create or replace function public.refresh_roblox_promo_rewards(
   p_seen_rows jsonb,
   p_checked_at timestamptz,

@@ -103,7 +103,12 @@ select pg_temp.check_touch('free-roblox-items',1);
 truncate touches;
 update public.roblox_catalog_items set free_verified_at=now()+interval '1 minute' where asset_id=3;
 select pg_temp.check_touch('free-roblox-items',0);
+-- Move the clock boundary in the fixture without firing membership writes.
+alter table public.roblox_catalog_items disable trigger catalog_membership_update;
 update public.roblox_catalog_items set free_verified_at=now()-interval '73 hours' where asset_id=3;
+alter table public.roblox_catalog_items enable trigger catalog_membership_update;
+select pg_temp.check_touch('free-roblox-items',0);
+select public.refresh_catalog_membership_snapshots('free');
 select pg_temp.check_touch('free-roblox-items',1);
 truncate touches;
 select public.refresh_catalog_membership_snapshots('free');
