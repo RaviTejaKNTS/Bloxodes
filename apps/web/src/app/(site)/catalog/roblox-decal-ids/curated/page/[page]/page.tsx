@@ -1,9 +1,11 @@
+import { getCatalogMembershipDate, getCatalogPageContentByCodes } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import {
   buildDecalCuratedPath,
+  buildRobloxDecalCatalogContentHtml,
   loadRobloxDecalIdsPageData,
   renderRobloxDecalIdsPage
 } from "../../../page-data";
@@ -40,7 +42,13 @@ export default async function CuratedRobloxDecalIdsPaginatedPage({ params }: Pag
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, { curated: true });
 
+  const catalog = await getCatalogPageContentByCodes(["roblox-decal-ids/curated", "roblox-decal-ids"]);
+  const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
+  const membershipDate = await getCatalogMembershipDate("roblox-decal-ids/curated");
+  const datedContent = contentHtml ? { ...contentHtml, updatedAt: membershipDate ?? contentHtml.updatedAt } : null;
+
   return renderRobloxDecalIdsPage({
+    contentHtml: datedContent,
     decals,
     total,
     totalPages,

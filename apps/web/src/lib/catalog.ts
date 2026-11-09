@@ -393,3 +393,10 @@ export async function listPublishedCatalogPagesByCodePrefix(
 
   return (fallback ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
 }
+
+export async function getCatalogMembershipDate(code: string): Promise<string | null> {
+  const { data, error } = await supabaseAdmin().from("catalog_membership_snapshots")
+    .select("updated_at").eq("code", code).maybeSingle();
+  if (error) throw new Error(`Failed to load catalog membership date: ${error.message}`);
+  return data?.updated_at ?? null;
+}

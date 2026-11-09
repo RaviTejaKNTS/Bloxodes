@@ -602,7 +602,7 @@ export function renderRobloxDecalIdsPage({
   const faqHtml = contentHtml?.faqHtml ?? [];
   const baseTitle = pageTitleOverride ?? (contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox Decal IDs");
   const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
-  const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : latest;
+  const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
   const basePath =
     section === "curated" ? buildDecalCuratedPath() :
       section === "category" && category ? buildDecalCategoryPath(category.slug) :

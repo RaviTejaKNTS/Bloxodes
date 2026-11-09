@@ -1,3 +1,4 @@
+import { getCatalogMembershipDate } from "@/lib/catalog";
 import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import { buildAvatarCatalogPath, isAvatarCatalogCode } from "@/lib/roblox-avatar-catalog";
@@ -70,7 +71,8 @@ export async function GET() {
     pageMap.set("/catalog/roblox-decal-ids/curated", {
       loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
       changefreq: "weekly",
-      priority: "0.9"
+      priority: "0.9",
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-decal-ids/curated"))
     });
 
     const pages = Array.from(pageMap.values()).sort((a, b) => a.loc.localeCompare(b.loc));

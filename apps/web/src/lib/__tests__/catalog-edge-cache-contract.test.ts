@@ -74,7 +74,7 @@ describe("catalog edge-cache contracts", () => {
     }
   });
 
-  it("keeps the seeder and both collectors wired to their guarded date helpers", () => {
+  it("keeps publication dates stable and leaves roster dates to the database", () => {
     const scripts = new URL("../../../../../scripts/", import.meta.url);
     const seeder = readFileSync(new URL("catalog/seed-catalog-pages.ts", scripts), "utf8");
     expect(seeder).toContain("await preserveCatalogPublicationDates(sb, rows)");
@@ -83,7 +83,8 @@ describe("catalog edge-cache contracts", () => {
     for (const file of ["music/collect-top-100-songs.ts", "music/collect-curated-roblox-music-ids.ts"]) {
       const source = readFileSync(new URL(file, scripts), "utf8");
       expect(source).toContain("await getExistingMusicAssetIds(");
-      expect(source).toContain("await updateMusicCatalogTimestamp(");
+      expect(source).not.toContain("updateMusicCatalogTimestamp");
+      expect(source).not.toContain('from("catalog_pages")');
     }
     const reranker = readFileSync(new URL("music/rerank-roblox-music-ids.ts", scripts), "utf8");
     expect(reranker).not.toContain('from("catalog_pages")');

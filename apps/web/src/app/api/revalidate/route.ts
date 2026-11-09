@@ -836,7 +836,7 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       purgePaths = revalidateForTools(slug);
       break;
     case "catalog":
-      if (MUSIC_CATALOG_CODES.has(slug)) {
+      if (MUSIC_CATALOG_CODES.has(slug) || slug.startsWith("roblox-music-ids/")) {
         purgePaths = [...purgePaths, ...revalidateForMusic(slug)];
       }
       if (slug === DECAL_CATALOG_CODE || slug.startsWith(`${DECAL_CATALOG_CODE}/`)) {
