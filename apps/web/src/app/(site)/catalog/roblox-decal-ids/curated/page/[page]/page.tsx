@@ -42,13 +42,13 @@ export default async function CuratedRobloxDecalIdsPaginatedPage({ params }: Pag
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, { curated: true });
 
-  const catalog = await getCatalogPageContentByCodes(["roblox-decal-ids/curated", "roblox-decal-ids"]);
+  const catalog = await getCatalogPageContentByCodes(["roblox-decal-ids/curated"]);
   const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
   const membershipDate = await getCatalogMembershipDate("roblox-decal-ids/curated", catalog?.code === "roblox-decal-ids/curated" ? contentHtml?.updatedAt : null);
-  const datedContent = contentHtml ? { ...contentHtml, updatedAt: membershipDate ?? contentHtml.updatedAt } : null;
 
   return renderRobloxDecalIdsPage({
-    contentHtml: datedContent,
+    contentHtml,
+    membershipUpdatedAt: membershipDate,
     decals,
     total,
     totalPages,

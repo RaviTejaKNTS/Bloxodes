@@ -571,6 +571,7 @@ export function renderRobloxDecalIdsPage({
   currentPage,
   showHero,
   contentHtml,
+  membershipUpdatedAt,
   section = "all",
   category = null,
   pageTitleOverride,
@@ -582,6 +583,7 @@ export function renderRobloxDecalIdsPage({
   currentPage: number;
   showHero: boolean;
   contentHtml?: CatalogContentHtml | null;
+  membershipUpdatedAt?: string | null;
   section?: "all" | "curated" | "category";
   category?: DecalCategoryRow | null;
   pageTitleOverride?: string;
@@ -602,7 +604,8 @@ export function renderRobloxDecalIdsPage({
   const faqHtml = contentHtml?.faqHtml ?? [];
   const baseTitle = pageTitleOverride ?? (contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox Decal IDs");
   const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
-  const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
+  const updatedAt = membershipUpdatedAt ?? contentHtml?.updatedAt;
+  const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const basePath =
     section === "curated" ? buildDecalCuratedPath() :
       section === "category" && category ? buildDecalCategoryPath(category.slug) :
