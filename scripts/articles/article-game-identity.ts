@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { assertNonProductionArticleTarget } from "./article-queue-env";
 import { StageFailure } from "./article-pipeline";
 import { fetchWithTransientRetries } from "../shared/transient-http";
+import { isPlaceholderGameDetail } from "../universes/universe-identity";
 
 type Identity = { universe_id: number | null; supplied_id: number | null; note: string };
 export async function resolveOfficialArticleGame(id: number, fetcher = fetch, pause?: (ms: number) => Promise<void>) {
@@ -12,7 +13,7 @@ export async function resolveOfficialArticleGame(id: number, fetcher = fetch, pa
         const response = await fetchWithTransientRetries(`https://games.roblox.com/v1/games?universeIds=${universeId}`, {}, { fetchImpl: fetcher, sleep: pause, timeoutMs: 30_000, attempts: 3 });
         const payload = await response.json();
         const game = Array.isArray(payload?.data) ? payload.data.find((item: any) => item && Number(item.id) === universeId) : null;
-        if (game && Number.isSafeInteger(game.rootPlaceId) && game.rootPlaceId > 0 && typeof game.name === "string" && game.name.trim()) return { ...game, id: universeId };
+        if (game && !isPlaceholderGameDetail(game) && Number.isSafeInteger(game.rootPlaceId) && game.rootPlaceId > 0 && typeof game.name === "string" && game.name.trim()) return { ...game, id: universeId };
         notes.push(`Universe ${universeId}: official response had no complete matching game.`);
       } catch (error) { notes.push(error instanceof Error ? error.message : String(error)); if (!(error instanceof SyntaxError)) break; }
       if (attempt < 2) await (pause ?? (ms => new Promise(resolve => setTimeout(resolve, ms))))(1000 * 2 ** attempt);

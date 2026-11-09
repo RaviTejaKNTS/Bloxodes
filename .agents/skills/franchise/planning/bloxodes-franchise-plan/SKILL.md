@@ -16,6 +16,7 @@ If the user already supplied a plan, for example a Notion queue page, follow it 
 - Roblox uses its own separate skills and tables.
 - Research official game, developer, manual and update sources first, then useful game databases and guides. Open every source you use for a decision.
 - Confirm release status, available modes and editions, and which gameplay systems have enough verified information for a page. Keep unreleased or uncertain systems off the creation list.
+- For each collection, name where its item images come from and fetch one image from there with a plain request. Many game wikis (wiki.gg, some Fandom and fan wikis) block bots. When the source blocks, name another image source that works, or say in the plan that the page goes out without images.
 
 ## Single game or franchise
 

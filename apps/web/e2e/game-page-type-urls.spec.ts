@@ -12,6 +12,7 @@ const indexes: Record<string, string> = {
 };
 type Route = {
   path: string; page_type: string; page_id: string | null; target_url: string | null;
+  created_at: string; moved_at: string | null;
 };
 type Coverage = Array<{ path: string; expected: string; status: string }>;
 
@@ -79,7 +80,7 @@ for (const namespace of pilots) {
       async function routes(status: string, namespacePaths = false, pageIds?: string[]) {
         const rows: Route[] = [];
         for (let offset = 0;; offset += 500) {
-          let query = db.from("site_routes").select("path,page_type,page_id,target_url").eq("status", status);
+          let query = db.from("site_routes").select("path,page_type,page_id,target_url,created_at,moved_at").eq("status", status);
           query = namespacePaths ? query.like("path", `/${namespace}/%`)
             : pageIds ? query.eq("source", "game").in("page_id", pageIds)
               : query.eq("source", "game").in("game_id", games!.map(game => game.id));
@@ -109,7 +110,7 @@ for (const namespace of pilots) {
       const aliases = new Map((await routes("old", false, live.map(route => route.page_id!))).map(route => [route.path, route]));
       for (const route of await routes("old", true)) aliases.set(route.path, route);
       const { data: rootAlias, error: rootAliasError } = await db.from("site_routes")
-        .select("path,page_type,page_id,target_url,status").eq("path", `/${namespace}`).single();
+        .select("path,page_type,page_id,target_url,status,created_at,moved_at").eq("path", `/${namespace}`).single();
       expect(rootAliasError).toBeNull();
       expect(rootAlias?.status).toBe("old");
       aliases.set(rootAlias!.path, rootAlias!);
@@ -132,9 +133,16 @@ for (const namespace of pilots) {
       for (const path of [`/${namespace}`, `/${namespace}/wiki`]) expect(destinations.get(path)).toBe(mainPath);
       if (namespace === "risk-of-rain") expect(destinations.get("/risk-of-rain/wiki/risk-of-rain-2")).toBe("/wiki/risk-of-rain-2");
 
+      // Pages published after the move never had an old URL. Only pages that
+      // existed when the namespace moved must keep one. The hour covers a move
+      // that wrote its routes over several transactions.
+      const movedAt = Date.parse(rootAlias!.moved_at ?? rootAlias!.created_at) + 60 * 60 * 1000;
+      expect(Number.isFinite(movedAt), `${namespace} old routes need a move time`).toBe(true);
       for (const route of live) {
         const oldPaths = [...destinations].filter(([, target]) => target === route.path).map(([path]) => path);
-        expect(oldPaths.length, `live page ${route.path} must retain its old URL`).toBeGreaterThan(0);
+        if (Date.parse(route.created_at) <= movedAt) {
+          expect(oldPaths.length, `live page ${route.path} must retain its old URL`).toBeGreaterThan(0);
+        }
         await renders(page, route.path, coverage);
         if (route.page_type === "collection") {
           // Section weights, rather than item counts, control pagination. Use

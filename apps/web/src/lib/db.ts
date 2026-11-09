@@ -823,6 +823,29 @@ export async function listPublishedArticlesPage(
   return cached();
 }
 
+// Other published articles about the same game: the shared game when the article has one,
+// otherwise its Roblox experience, otherwise Roblox platform articles. One query.
+export async function listRelatedPublishedArticles(
+  scope: { gameId?: string | null; universeId?: number | null },
+  excludeSlug: string,
+  limit = 8
+): Promise<ArticleWithRelations[]> {
+  const sb = supabaseAdmin();
+  let query = sb.from("published_articles_view").select(MERGED_ARTICLE_INDEX_FIELDS).eq("is_published", true);
+  query = scope.gameId
+    ? query.eq("game_id", scope.gameId)
+    : scope.universeId != null
+      ? query.eq("universe_id", scope.universeId)
+      : query.is("universe_id", null).is("namespace", null);
+  const { data, error } = await query
+    .neq("slug", excludeSlug)
+    .order("published_at", { ascending: false })
+    .order("id", { ascending: true })
+    .limit(limit);
+  if (error) throw error;
+  return mapArticleIndexRows(data);
+}
+
 export async function listPublishedArticlesByUniverseId(
   universeId: number,
   limit = 3,
