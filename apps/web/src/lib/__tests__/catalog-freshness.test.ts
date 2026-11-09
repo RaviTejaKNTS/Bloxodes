@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { describe, expect, it, vi } from "vitest";
 import { getExistingMusicAssetIds, updateMusicCatalogTimestamp } from "../../../../../scripts/shared/music-catalog-freshness";
+import { touchCatalogPageTimestamp } from "../../../../../scripts/shared/catalog-page-freshness";
 import { preserveCatalogPublicationDates } from "../../../../../scripts/shared/catalog-publication";
 
 const now = new Date("2026-10-22T06:20:00.000Z");
@@ -71,6 +72,25 @@ describe("music catalog freshness", () => {
   it("rejects existence lookup failures instead of counting them as new songs", async () => {
     const client = { from: () => ({ select: () => ({ in: async () => ({ data: null, error: { message: "timeout" } }) }) }) } as unknown as SupabaseClient;
     await expect(getExistingMusicAssetIds(client, [123])).rejects.toThrow("timeout");
+  });
+});
+
+describe("decal catalog freshness", () => {
+  it.each([
+    { updatedAt: "2026-06-26T12:50:20.082Z", expected: true },
+    { updatedAt: cutoff, expected: true },
+    { updatedAt: "2026-10-15T06:20:00.001Z", expected: false }
+  ])("moves the decal page date only when it is at least seven days old: $updatedAt", async ({ updatedAt, expected }) => {
+    const { client, query } = freshnessClient(updatedAt);
+    expect(await touchCatalogPageTimestamp(client, "roblox-decal-ids", now)).toBe(expected);
+    expect(query.update).toHaveBeenCalledWith({ updated_at: now.toISOString() });
+    expect(query.eq).toHaveBeenCalledWith("code", "roblox-decal-ids");
+    expect(query.lte).toHaveBeenCalledWith("updated_at", cutoff);
+  });
+
+  it("does not report success after a failed timestamp write", async () => {
+    const { client } = freshnessClient(cutoff, { message: "timeout" });
+    await expect(touchCatalogPageTimestamp(client, "roblox-decal-ids", now)).rejects.toThrow("roblox-decal-ids");
   });
 });
 

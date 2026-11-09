@@ -35,3 +35,20 @@ export function parseDecalStepCounts(output: string): Record<string, number> {
   if (/Stopped early: .*\(429\)/.test(output)) counts.rate_limited = 1;
   return counts;
 }
+
+const DECAL_DRY_RUN_ENV = [
+  "ROBLOX_DECAL_COLLECT_DRY_RUN",
+  "ROBLOX_DECAL_IMPORT_DRY_RUN",
+  "ROBLOX_DECAL_VERIFY_DRY_RUN",
+  "ROBLOX_DECAL_RERANK_DRY_RUN"
+] as const;
+
+/** New decals actually written this run. Dry runs report would-be inserts, so they count as zero. */
+export function decalCatalogInserts(
+  steps: Array<Record<string, unknown>>,
+  env: Record<string, string | undefined> = process.env
+): number {
+  const dryRun = DECAL_DRY_RUN_ENV.some((name) => ["1", "true", "yes", "y"].includes(env[name]?.trim().toLowerCase() ?? ""));
+  if (dryRun) return 0;
+  return steps.reduce((sum, step) => sum + Number(step.inserted ?? 0), 0);
+}

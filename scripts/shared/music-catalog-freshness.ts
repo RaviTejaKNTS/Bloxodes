@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { touchCatalogPageTimestamp } from "./catalog-page-freshness";
 
 const CATALOG_CODE = "roblox-music-ids";
-const MIN_UPDATE_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
 const LOOKUP_BATCH_SIZE = 200;
 
 type MusicCatalogChanges = {
@@ -33,14 +33,5 @@ export async function updateMusicCatalogTimestamp(
     return false;
   }
 
-  // Apply the age condition in the write so concurrent collectors cannot both bump it.
-  const cutoff = new Date(now.getTime() - MIN_UPDATE_INTERVAL_MS).toISOString();
-  const { data, error } = await client
-    .from("catalog_pages")
-    .update({ updated_at: now.toISOString() })
-    .eq("code", CATALOG_CODE)
-    .lte("updated_at", cutoff)
-    .select("code");
-  if (error) throw new Error(`Failed to update music catalog timestamp: ${error.message}`);
-  return Boolean(data?.length);
+  return touchCatalogPageTimestamp(client, CATALOG_CODE, now);
 }

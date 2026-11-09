@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { defaultDecalQuerySeeds, planMissingDecalBatch, decalDiscoveryHealth, parseDecalStepCounts } from "../decal-discovery";
+import { defaultDecalQuerySeeds, planMissingDecalBatch, decalDiscoveryHealth, parseDecalStepCounts, decalCatalogInserts } from "../decal-discovery";
 
 test("discovery includes a current-year query before the saturated evergreen queries", () => {
   assert.deepEqual(defaultDecalQuerySeeds(["", "meme", "2026"], new Date("2026-10-30T00:00:00Z")), ["2026", "", "meme"]);
@@ -38,4 +38,13 @@ test("the refresh ledger records real step counts including zero inserts", () =>
     { candidates: 14903, inserted: 490, already_known: 14413, configs: 50, rate_limited: 1 }
   );
   assert.deepEqual(parseDecalStepCounts("Done. Reranked 38138 active decal rows (982 curated)."), { reranked: 38138 });
+});
+
+test("only real inserts count toward moving the decal page date", () => {
+  const steps = [{ name: "Collect", inserted: 490 }, { name: "Import", inserted: 3 }, { name: "Verify", verified: 900 }];
+  assert.equal(decalCatalogInserts(steps, {}), 493);
+  assert.equal(decalCatalogInserts([{ name: "Collect", inserted: 0 }, { name: "Rerank", reranked: 38138 }], {}), 0);
+  assert.equal(decalCatalogInserts(steps, { ROBLOX_DECAL_COLLECT_DRY_RUN: "true" }), 0);
+  assert.equal(decalCatalogInserts(steps, { ROBLOX_DECAL_IMPORT_DRY_RUN: "1" }), 0);
+  assert.equal(decalCatalogInserts(steps, { ROBLOX_DECAL_COLLECT_DRY_RUN: "false" }), 493);
 });

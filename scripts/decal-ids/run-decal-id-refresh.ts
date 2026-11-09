@@ -8,7 +8,8 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { startStatsJobRun, finishStatsJobRun } from "../shared/stats-job-run";
-import { decalDiscoveryHealth, parseDecalStepCounts } from "../shared/decal-discovery";
+import { decalCatalogInserts, decalDiscoveryHealth, parseDecalStepCounts } from "../shared/decal-discovery";
+import { touchCatalogPageTimestamp } from "../shared/catalog-page-freshness";
 
 type Step = {
   name: string;
@@ -23,6 +24,7 @@ const SKIP_IMPORT = isTruthy(process.env.ROBLOX_DECAL_REFRESH_SKIP_IMPORT);
 const SKIP_COLLECT = isTruthy(process.env.ROBLOX_DECAL_REFRESH_SKIP_COLLECT);
 const SKIP_VERIFY = isTruthy(process.env.ROBLOX_DECAL_REFRESH_SKIP_VERIFY);
 const SKIP_RERANK = isTruthy(process.env.ROBLOX_DECAL_REFRESH_SKIP_RERANK);
+const CATALOG_CODE = "roblox-decal-ids";
 
 function isTruthy(value: string | undefined) {
   return Boolean(value && ["1", "true", "yes", "y"].includes(value.trim().toLowerCase()));
@@ -117,6 +119,10 @@ async function main() {
         throw error;
       }
     }
+    // Move the page's "Updated on" date only when new decals were written, at most once a week.
+    const inserted = decalCatalogInserts(stepResults);
+    const catalogDateTouched = inserted > 0 && await touchCatalogPageTimestamp(supabaseAdmin(), CATALOG_CODE);
+    console.log(`Catalog page date ${catalogDateTouched ? "updated" : "unchanged"} (${inserted} new decal(s) this run).`);
     const { data, error } = await supabaseAdmin().from("roblox_decal_ids")
       .select("first_seen_at").order("first_seen_at", { ascending: false }).limit(1);
     if (error) throw new Error(`Failed to read decal discovery health: ${error.message}`);
@@ -131,7 +137,7 @@ async function main() {
       rowsClaimed: stepResults.reduce((sum, step) => sum + Number(step.candidates ?? 0), 0),
       rowsSucceeded: stepResults.reduce((sum, step) => sum + Number(step.inserted ?? 0), 0),
       error: partialReason,
-      metadata: { steps: stepResults, latest_first_seen_at: latestSeenAt, discovery_stall_days: 7 }
+      metadata: { steps: stepResults, latest_first_seen_at: latestSeenAt, discovery_stall_days: 7, catalog_date_touched: catalogDateTouched }
     });
     if (healthError) {
       console.error(healthError);
