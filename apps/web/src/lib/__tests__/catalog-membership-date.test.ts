@@ -1,6 +1,7 @@
 import { beforeEach, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
+vi.mock("@/lib/public-content-cache", () => ({ publicContentCache: (fn: unknown) => fn }));
 const mocks = vi.hoisted(() => ({ result: { data: null as unknown, error: null as unknown } }));
 vi.mock("@/lib/supabase", () => ({
   supabaseAdmin: () => ({ from: () => ({ select: () => ({ eq: () => ({ maybeSingle: async () => mocks.result }) }) }) })
