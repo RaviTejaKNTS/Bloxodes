@@ -161,6 +161,8 @@ c.execute("commit")
 t.join(timeout=5)
 assert not t.is_alive() and not race_errors,race_errors
 writer.close()
+# Bring the snapshot up to the committed writer before testing another removal.
+refresh()
 # A page failure rolls back only that page; later pages still commit.
 with psycopg.connect(url,autocommit=True) as blocker:
  blocker.execute("begin")
