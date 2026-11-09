@@ -80,7 +80,7 @@ Approval prompts only appear in the child's own thread. To check a non-Codex chi
 - Stay in the worktree T3 assigned. Don't create branches or worktrees for the same task.
 - Run checks, tests, builds and browser QA on GitHub, not locally.
 - Commit, push or publish only when the task says so. Never push to `production` directly.
-- Never print, log or commit secrets. Env files are edited only on the homelab.
+- Never print, log or commit secrets. Change env values only in Infisical; see [environment](../environment.md#change-a-value).
 - Children don't start sub-agents, commit or publish unless their brief allows it, and they stay in their folder.
 - Work on the machine where the task started. Ask the owner before moving work to another machine.
 - Notion queue rows are never deleted. Set their status instead. See [Notion queues](../automation/notion-queues.md).

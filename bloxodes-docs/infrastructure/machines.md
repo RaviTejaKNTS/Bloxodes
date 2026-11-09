@@ -18,7 +18,7 @@ Rules:
 
 ## Homelab
 
-- **Main checkout and env source:** `/srv/data/projects/Bloxodes` and its `.envs/`. The only place env files are edited.
+- **Main checkout and env files:** `/srv/data/projects/Bloxodes` and its `.envs/`, written from Infisical by `infisical-sync.timer`. See [environment](../environment.md).
 - **T3 worktrees:** `/srv/data/t3code/worktrees/Bloxodes/`.
 - **Article automation:** systemd units running `/srv/data/bloxodes-automation-runtime/current`. See [articles](../content/articles.md) and [schedules](../automation/schedules.md).
 - **T3:** user service `t3code.service` on port 3773, with T3 memory budget, state backup and settled-worktree reaper timers.
