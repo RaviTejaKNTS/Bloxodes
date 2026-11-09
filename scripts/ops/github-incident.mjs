@@ -10,7 +10,7 @@ function gh(args, input) {
     encoding: "utf8",
     input,
     stdio: ["pipe", "pipe", "inherit"],
-    timeout: 20_000
+    timeout: 60_000
   }).trim();
 }
 

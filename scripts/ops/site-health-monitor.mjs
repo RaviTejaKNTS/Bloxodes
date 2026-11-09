@@ -48,7 +48,8 @@ function summary(result) {
 // Requests made-up URLs twice each. Every public page uses the same Cloudflare
 // cache rule, so if these 404s are served from cache, any real page's error
 // would be too. `complete` is false when any request failed or didn't return
-// an error status, so an unreachable site never closes the issue.
+// an error status with a Cloudflare cache header, so an unreachable or
+// unproxied site never closes the issue.
 async function probeErrorPath(probePath) {
   const cached = [];
   let complete = true;
@@ -61,7 +62,8 @@ async function probeErrorPath(probePath) {
       });
       await response.arrayBuffer().catch(() => null);
       const cacheStatus = (response.headers.get("cf-cache-status") || "").toUpperCase();
-      if (response.status < 400) complete = false;
+      // Without a Cloudflare cache header nothing was verified.
+      if (response.status < 400 || !cacheStatus) complete = false;
       else if (FROM_CACHE.has(cacheStatus)) {
         cached.push(`${probePath} returned ${response.status} with cf-cache-status ${cacheStatus} on request ${attempt}`);
       }
@@ -86,46 +88,61 @@ function readFailures() {
   return Number.isInteger(value) && value >= 0 ? value : 0;
 }
 
-const result = await checkHealth();
-if (result.healthy) {
-  fs.writeFileSync(stateFile, "0");
-  const resolved = resolveIncident({ key: KEY, body: `Recovered.\n\n${summary(result)}` });
-  console.log(resolved ? `Healthy; closed issue #${resolved.number}.` : "Healthy.");
-} else {
-  const failures = readFailures() + 1;
-  fs.writeFileSync(stateFile, String(failures));
-  if (failures < FAILURES_TO_OPEN && !findOpenIncident(KEY)) {
-    console.log(`Unhealthy (${failures}/${FAILURES_TO_OPEN}); waiting for the next check.`);
-  } else if (failures === FAILURES_TO_OPEN || !findOpenIncident(KEY)) {
-    const opened = openIncident({ key: KEY, title: "Bloxodes health check is failing", body: `The operational health check failed ${failures} times in a row.\n\n${summary(result)}` });
-    console.log(`Unhealthy; ${opened.created ? "opened" : "updated"} issue #${opened.number}.`);
+// Both checks hit the network first, in parallel, so a slow GitHub call in one
+// incident block can't stop the other from running.
+const [result, errorCache] = await Promise.all([checkHealth(), checkErrorPageCache()]);
+
+function reportHealth() {
+  if (result.healthy) {
+    fs.writeFileSync(stateFile, "0");
+    const resolved = resolveIncident({ key: KEY, body: `Recovered.\n\n${summary(result)}` });
+    console.log(resolved ? `Healthy; closed issue #${resolved.number}.` : "Healthy.");
   } else {
-    // Already reported; don't comment every 5 minutes.
-    console.log(`Unhealthy (${failures} in a row); issue already open.`);
+    const failures = readFailures() + 1;
+    fs.writeFileSync(stateFile, String(failures));
+    if (failures < FAILURES_TO_OPEN && !findOpenIncident(KEY)) {
+      console.log(`Unhealthy (${failures}/${FAILURES_TO_OPEN}); waiting for the next check.`);
+    } else if (failures === FAILURES_TO_OPEN || !findOpenIncident(KEY)) {
+      const opened = openIncident({ key: KEY, title: "Bloxodes health check is failing", body: `The operational health check failed ${failures} times in a row.\n\n${summary(result)}` });
+      console.log(`Unhealthy; ${opened.created ? "opened" : "updated"} issue #${opened.number}.`);
+    } else {
+      // Already reported; don't comment every 5 minutes.
+      console.log(`Unhealthy (${failures} in a row); issue already open.`);
+    }
   }
 }
 
-const errorCache = await checkErrorPageCache();
-if (errorCache.cached.length > 0) {
-  const body = [
-    "Cloudflare served an error page from its cache. Search engines (Bing first) drop pages that return errors, and a cached error keeps being served after the site recovers.",
-    "",
-    "Fix: in Cloudflare → Caching → Cache Rules, every enabled rule needs Edge TTL status code TTLs 400–499 and 500–599 set to \"no store\". See `bloxodes-docs/infrastructure/cloudflare.md`.",
-    "",
-    ...errorCache.cached.map((line) => `- ${line}`),
-    `- Checked: ${new Date().toISOString()}`
-  ].join("\n");
-  const existing = findOpenIncident(ERROR_CACHE_KEY);
-  if (existing) {
-    console.error(`Error pages are cached; issue #${existing.number} already open.`);
+function reportErrorCache() {
+  if (errorCache.cached.length > 0) {
+    const body = [
+      "Cloudflare served an error page from its cache. Search engines (Bing first) drop pages that return errors, and a cached error keeps being served after the site recovers.",
+      "",
+      "Fix: in Cloudflare → Caching → Cache Rules, every enabled rule needs Edge TTL status code TTLs 400–499 and 500–599 set to \"no store\". See `bloxodes-docs/infrastructure/cloudflare.md`.",
+      "",
+      ...errorCache.cached.map((line) => `- ${line}`),
+      `- Checked: ${new Date().toISOString()}`
+    ].join("\n");
+    const existing = findOpenIncident(ERROR_CACHE_KEY);
+    if (existing) {
+      console.error(`Error pages are cached; issue #${existing.number} already open.`);
+    } else {
+      const opened = openIncident({ key: ERROR_CACHE_KEY, title: "Cloudflare is caching error pages", body });
+      console.error(`Error pages are cached; opened issue #${opened.number}.`);
+    }
+    process.exitCode = 1;
+  } else if (!errorCache.complete) {
+    console.log("Error page cache check inconclusive (a probe failed or didn't return an error); leaving any issue as it is.");
   } else {
-    const opened = openIncident({ key: ERROR_CACHE_KEY, title: "Cloudflare is caching error pages", body });
-    console.error(`Error pages are cached; opened issue #${opened.number}.`);
+    const resolved = resolveIncident({ key: ERROR_CACHE_KEY, body: `Cloudflare no longer serves error pages from its cache.\n\n- Checked: ${new Date().toISOString()}` });
+    console.log(resolved ? `Error pages not cached; closed issue #${resolved.number}.` : "Error pages not cached.");
   }
-  process.exitCode = 1;
-} else if (!errorCache.complete) {
-  console.log("Error page cache check inconclusive (a probe failed or didn't return an error); leaving any issue as it is.");
-} else {
-  const resolved = resolveIncident({ key: ERROR_CACHE_KEY, body: `Cloudflare no longer serves error pages from its cache.\n\n- Checked: ${new Date().toISOString()}` });
-  console.log(resolved ? `Error pages not cached; closed issue #${resolved.number}.` : "Error pages not cached.");
+}
+
+for (const [name, report] of [["Health", reportHealth], ["Error page cache", reportErrorCache]]) {
+  try {
+    report();
+  } catch (error) {
+    console.error(`${name} incident update failed: ${error instanceof Error ? error.message : String(error)}`);
+    process.exitCode = 1;
+  }
 }
