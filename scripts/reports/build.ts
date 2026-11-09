@@ -105,7 +105,7 @@ async function main() {
   const priorMonth = priorContext?.month ?? priorManifest?.month;
   if (priorMonth && priorMonth !== month || priorCheck && priorCheck.status !== 'ready') {
     for (const file of await fs.readdir(raw))
-      if (/^(?:daily-\d{4}-\d{2}-\d{2}|hours-\d+|universes|updates)\.json$/.test(file))
+      if (/^(?:daily-\d{4}-\d{2}-\d{2}|hours-[0-9a-f]+|universes|updates)\.json$/.test(file))
         await fs.unlink(path.join(raw, file));
     console.log('Refreshing incomplete or different-month source caches.');
   }
@@ -129,15 +129,26 @@ async function main() {
     }
     const all: Row[] = [];
     for (let offset = 0; ;) {
-      const { data, error } = await query().range(offset, offset + 999);
-      if (error)
-        throw Error(`${name}: ${error.message}`);
+      // Production reads can hit a gateway timeout under load. Retry a page a few times, then fail.
+      let page: Awaited<ReturnType<ReturnType<typeof query>['range']>> | undefined;
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        page = await query().range(offset, offset + 999);
+        if (!page.error)
+          break;
+        if (attempt < 3)
+          await new Promise(resolve => setTimeout(resolve, attempt * 10_000));
+      }
+      if (page!.error)
+        throw Error(`${name}: ${page!.error.message.slice(0, 300)}`);
+      const data = page!.data;
       if (!data?.length)
         break;
       all.push(...data);
       offset += data.length;
     }
-    await fs.writeFile(file, JSON.stringify(all));
+    // Write under a temporary name and rename, so a killed run never leaves a half-written cache.
+    await fs.writeFile(file + '.tmp', JSON.stringify(all));
+    await fs.rename(file + '.tmp', file);
     return all;
   }
   const end = day(dates(month).at(-1)!, 8);
@@ -193,11 +204,12 @@ async function main() {
   let nextBatch = 0;
   await Promise.all(Array
     .from({
-      length: 4
+      length: 2
     }, async () => {
       while (nextBatch < batches.length) {
         const i = batches[nextBatch++], batch = ids.slice(i, i + 50);
-        hourly.push(...await cached(`hours-${i}`, () => db
+        // Key the cache by the batch's game IDs: the ranking can change between builds.
+        hourly.push(...await cached(`hours-${hash(Buffer.from(batch.join(','))).slice(0, 16)}`, () => db
           .from('roblox_universe_stats_hourly')
           .select('universe_id,hour_start,avg_playing,playing')
           .in('universe_id', batch)
