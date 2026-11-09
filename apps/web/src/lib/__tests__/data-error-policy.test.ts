@@ -54,7 +54,9 @@ function emptyReturn(node: ts.Node): boolean {
   const value = node.expression;
   return value.kind === ts.SyntaxKind.NullKeyword
     || ts.isIdentifier(value) && value.text === "undefined"
-    || ts.isArrayLiteralExpression(value) && value.elements.length === 0;
+    || ts.isArrayLiteralExpression(value) && value.elements.length === 0
+    || ts.isObjectLiteralExpression(value) && value.properties.some(property =>
+      ts.isPropertyAssignment(property) && ts.isArrayLiteralExpression(property.initializer) && property.initializer.elements.length === 0);
 }
 
 it("does not swallow data failures in public server readers", () => {

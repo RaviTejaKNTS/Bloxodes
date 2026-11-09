@@ -1155,7 +1155,7 @@ async function fetchFeaturedBucketRows({
   const { data, error } = await query;
   if (error) {
     console.error(`Failed to load avatar featured bucket ${bucket.id}`, error);
-    return [];
+    throw error;
   }
   return (data ?? []) as AvatarCatalogRow[];
 }

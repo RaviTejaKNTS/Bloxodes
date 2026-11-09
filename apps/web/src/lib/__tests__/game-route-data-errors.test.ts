@@ -1,5 +1,6 @@
 import { beforeEach, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 const mocks = vi.hoisted(() => ({ route: vi.fn(), admin: vi.fn() }));
 vi.mock("@/lib/site-route-page", () => ({ getLiveSiteRoute: mocks.route }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: mocks.admin }));

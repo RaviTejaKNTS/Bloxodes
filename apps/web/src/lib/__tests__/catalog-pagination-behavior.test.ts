@@ -216,19 +216,19 @@ describe("mesh failure and pagination behavior", () => {
     await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("unexpectedly empty");
     expect(await loadRobloxMeshIdsPageData(1, { query: "missing" })).toEqual({ meshes: [], total: 0, totalPages: 1 });
   });
-  it("allows an empty mesh catalog only during the production build", async () => {
+  it("rejects an empty main mesh catalog during the production build too", async () => {
     database({ roblox_mesh_ids: [] });
     vi.stubEnv("NEXT_PHASE", "phase-production-build");
-    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("unexpectedly empty");
     vi.stubEnv("NEXT_PHASE", "phase-production-server");
     await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("unexpectedly empty");
   });
-  it("contains mesh database/client failures only during the production build", async () => {
+  it("throws mesh database/client failures during the production build too", async () => {
     vi.stubEnv("NEXT_PHASE", "phase-production-build");
     database({}, new Error("database unavailable"));
-    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("database unavailable");
     mocks.admin.mockImplementation(() => { throw new Error("client unavailable"); });
-    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("client unavailable");
     vi.stubEnv("NEXT_PHASE", "phase-production-server");
     await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("client unavailable");
   });

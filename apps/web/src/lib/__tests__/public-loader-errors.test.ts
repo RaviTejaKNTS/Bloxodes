@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
+vi.mock("react", async original => ({ ...await original<typeof import("react")>(), cache: (fn: unknown) => fn }));
 vi.mock("@/lib/public-content-cache", () => ({ publicContentCache: (fn: unknown) => fn }));
 const mocks = vi.hoisted(() => ({ admin: vi.fn() }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: mocks.admin }));
