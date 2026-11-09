@@ -440,7 +440,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
         {article.namespace ? <GameRelatedLinks namespace={article.namespace} gameId={article.game_id??undefined} canonicalPath={`/articles/${article.slug}`} /> : <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" currentSlug={article.slug} />}
       </PageSidebar>
       </div>
-      {showEndMatter ? <MoreArticles excludeSlug={article.slug} /> : null}
+      {showEndMatter ? <MoreArticles excludeSlug={article.slug} game={{ slug: articleGameSlug, title: articleGameTitle, gameId: article.game_id ?? null, universeId: universeId }} /> : null}
     </div>
   );
 }
