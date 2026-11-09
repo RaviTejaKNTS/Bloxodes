@@ -14,7 +14,7 @@ create table public.roblox_catalog_items (
  free_claimability text, free_verification_source text, free_verified_at timestamptz,
  verified_at timestamptz, thumbnail_url text
 );
-create table public.roblox_music_ids(asset_id bigint primary key, duration_seconds numeric, rank int, verified_at timestamptz);
+create table public.roblox_music_ids(asset_id bigint primary key, duration_seconds numeric, rank int, verified_at timestamptz, source text);
 create table public.roblox_decal_ids(asset_id bigint primary key, status text, thumbnail_state text, thumbnail_url text, texture_id bigint, categories text[], curated_rank int, name text, verified_at timestamptz);
 create table public.roblox_font_ids(asset_id bigint primary key, status text, thumbnail_state text, thumbnail_url text);
 create table public.roblox_mesh_ids(like public.roblox_font_ids including all);
@@ -57,7 +57,7 @@ update public.roblox_catalog_items set is_deleted=true;
 select pg_temp.check_touch('roblox-items-and-bundles',1);
 
 truncate touches;
-insert into public.roblox_music_ids values(10,10,1,null),(20,null,2,null);
+insert into public.roblox_music_ids(asset_id,duration_seconds,rank,verified_at) values(10,10,1,null),(20,null,2,null);
 select pg_temp.check_touch('roblox-music-ids',1);
 select pg_temp.check_touch('roblox-music-ids/games/forsaken',1);
 truncate touches;
@@ -120,3 +120,20 @@ select pg_temp.check_touch('roblox-decal-ids/games/bloxburg',0);
 update public.roblox_decal_ids set status='inactive';
 select pg_temp.check_touch('roblox-decal-ids',1);
 select pg_temp.check_touch('roblox-decal-ids/games/bloxburg',1);
+
+-- Derived charts use their own item sets, not last_seen_at or rank order.
+update public.catalog_membership_snapshots set updated_at='2000-01-01' where code='roblox-music-ids/trending';
+update public.roblox_music_ids set rank=30 where asset_id=10;
+do $$ begin
+ if (select updated_at from public.catalog_membership_snapshots where code='roblox-music-ids/trending') <> '2000-01-01'::timestamptz then raise exception 'Reranking changed chart date'; end if;
+end $$;
+update public.roblox_music_ids set rank=501 where asset_id=10;
+do $$ begin
+ if (select updated_at from public.catalog_membership_snapshots where code='roblox-music-ids/trending') = '2000-01-01'::timestamptz then raise exception 'Chart removal did not change date'; end if;
+end $$;
+insert into public.roblox_emote_commands values('wave',true,1);
+truncate touches;
+update public.roblox_emote_commands set sort_order=2;
+select pg_temp.check_touch('roblox-emote-commands',0);
+update public.roblox_emote_commands set is_published=false;
+select pg_temp.check_touch('roblox-emote-commands',1);

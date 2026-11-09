@@ -1,3 +1,4 @@
+import { getCatalogMembershipDate } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -88,12 +89,13 @@ export async function MusicChartsPage({
     if (!latestDate || candidate > latestDate) return candidate;
     return latestDate;
   }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
+
   const period = periodLabel(range, latest);
   const canonicalPath = pageNumber > 1 ? `${BASE_PATH}/charts/page/${pageNumber}` : `${BASE_PATH}/charts`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}?range=${range}`;
   const pageTitle = catalogIdTitle(pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title);
-  const updatedIso = latest?.toISOString() ?? null;
+  const updatedIso = await getCatalogMembershipDate(`roblox-music-ids/${range}`);
+  const refreshedLabel = updatedIso ? formatDistanceToNow(new Date(updatedIso), { addSuffix: true }) : null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

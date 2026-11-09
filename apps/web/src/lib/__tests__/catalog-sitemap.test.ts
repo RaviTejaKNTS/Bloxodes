@@ -30,7 +30,8 @@ describe("catalog sitemap core paths", () => {
       ["roblox-music-ids", "2026-10-01T00:00:00.000Z"],
       ["roblox-decal-ids", "2026-09-30T00:00:00.000Z"],
       ["free-roblox-items", "2025-01-01T00:00:00.000Z"],
-      ["roblox-decal-ids/curated", "2026-11-09T00:00:00.000Z"]
+      ["roblox-decal-ids/curated", "2026-11-09T00:00:00.000Z"],
+      ["roblox-music-ids/trending", "2026-11-09T00:00:00.000Z"]
     ]) {
       const entries = urls.filter(url => url.includes(`<loc>https://bloxodes.com/catalog/${path}</loc>`));
       expect(entries).toHaveLength(1);

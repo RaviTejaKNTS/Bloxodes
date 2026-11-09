@@ -66,7 +66,8 @@ export async function GET() {
     pageMap.set("/catalog/roblox-music-ids/trending", {
       loc: withSiteUrl("/catalog/roblox-music-ids/trending"),
       changefreq: "daily",
-      priority: "0.9"
+      priority: "0.9",
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-music-ids/trending"))
     });
     pageMap.set("/catalog/roblox-decal-ids/curated", {
       loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
