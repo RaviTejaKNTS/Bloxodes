@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
+import { isPlaceholderGameDetail } from "./universe-identity";
 
 const EXPLORE_BASE = "https://apis.roblox.com/explore-api/v1";
 const DEFAULT_DEVICES = ["computer", "phone", "tablet", "console", "vr"];
@@ -486,7 +487,7 @@ async function collectSortContent(
     games.forEach((game, index) => {
       const universeId = toNumber(game.universeId);
       const rootPlaceId = toNumber(game.rootPlaceId ?? game.placeId);
-      if (!universeId || !rootPlaceId) {
+      if (!universeId || !rootPlaceId || isPlaceholderGameDetail({ id: universeId, rootPlaceId, name: game.displayName ?? game.name })) {
         return;
       }
       const rank = rankOffset + index + 1;
