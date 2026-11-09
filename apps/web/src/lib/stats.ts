@@ -1866,6 +1866,7 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
     .order("playing", { ascending: false })
     .limit(fetchLimit);
 
+  if (error) throw error;
   if (!error) {
     return ((data ?? []) as Array<{
       genre: string | null;
@@ -2636,6 +2637,7 @@ export async function getStatsGenreOptions(): Promise<string[]> {
     .select("genre")
     .order("genre", { ascending: true })
     .limit(500);
+  if (genreIndex.error) throw genreIndex.error;
   if (!genreIndex.error) {
     return ((genreIndex.data ?? []) as Array<{ genre: string | null }>)
       .map((row) => cleanStatsTaxonomyLabel(row.genre))
@@ -2677,7 +2679,7 @@ export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> 
   }
 
   if (rpcResult.error.code !== "42883" && rpcResult.error.code !== "PGRST202") {
-    console.warn("Failed to load stats subgenre options aggregate", rpcResult.error.message);
+    throw rpcResult.error;
   }
 
   const { data, error } = await supabaseAdmin()
@@ -3528,7 +3530,8 @@ async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | Stats
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
-    if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
+    if (indexed.error) throw indexed.error;
+  if (indexed.data) return indexed.data as StatsGameIndexRow;
 
     const { data, error } = await sb
       .from("roblox_universes")
@@ -3550,7 +3553,8 @@ async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | Stats
     .order("universe_id", { ascending: true })
     .limit(1)
     .maybeSingle();
-  if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
+  if (indexed.error) throw indexed.error;
+  if (indexed.data) return indexed.data as StatsGameIndexRow;
 
   const { data, error } = await sb
     .from("roblox_universes")
@@ -3622,7 +3626,8 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
     .eq("universe_id", universeId)
     .limit(1)
     .maybeSingle();
-  if (!indexed.error && indexed.data) return mapIndexedGame(indexed.data as StatsGameIndexRow);
+  if (indexed.error) throw indexed.error;
+  if (indexed.data) return mapIndexedGame(indexed.data as StatsGameIndexRow);
 
   const { data, error } = await sb
     .from("roblox_universes")
@@ -3687,7 +3692,8 @@ export async function loadLatestRank(universeId: number): Promise<number | null>
     .eq("universe_id", universeId)
     .limit(1)
     .maybeSingle();
-  if (!indexed.error && indexed.data) {
+  if (indexed.error) throw indexed.error;
+  if (indexed.data) {
     if (!isPlayingTimestampFresh(indexed.data.last_playing_refreshed_at)) return null;
     return toNumber(indexed.data.global_playing_rank);
   }

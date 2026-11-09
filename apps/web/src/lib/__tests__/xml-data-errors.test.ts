@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => { throw new Error("database unavailable"); } }));

@@ -15,6 +15,8 @@ const tolerant: Record<string, string> = {
   "lib/stats.ts:loadLatestRank": "Optional current rank; never decides existence.",
   "lib/shared-game-reader.ts:listPublishedSharedGameWikiCollectionImageUrls": "Optional image previews on collection links.",
   "lib/site-route-page.ts:getLiveSiteRoute": "Undefined triggers required exact-path readers, not a 404.",
+  "lib/game-top-nav.ts:resolveRouteTarget": "Optional game navigation target; main page uses separate readers.",
+  "lib/game-top-nav.ts:getGameTopNavContext": "Optional game navigation identity.",
   "lib/game-site-data.ts:getGameMenuForPath": "Optional second navigation bar.",
   "lib/mobile-content.ts:readJsonFile": "Optional mobile dataset enrichment.",
   "lib/events-summary.ts:getUniverseEventSummary": "Optional sidebar event summary.",
