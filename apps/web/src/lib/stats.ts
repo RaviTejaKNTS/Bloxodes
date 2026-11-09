@@ -1095,10 +1095,6 @@ function toFiniteNumber(value: unknown): number | null {
   return null;
 }
 
-function isMissingPostgrestRelationError(error: { code?: string; message?: string }) {
-  return error.code === "42P01" || error.code === "PGRST205" || error.message?.includes("Could not find the table");
-}
-
 function toJsonStringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string" && item.length > 0);
@@ -1938,12 +1934,7 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
 async function getStatsPlatformTotals(): Promise<Omit<StatsPlatformTotals, "trackedGames"> | null> {
   const { data, error } = await supabaseAdmin().rpc("get_stats_platform_current_summary");
 
-  if (error) {
-    if (error.code !== "42883" && error.code !== "PGRST202") {
-      throw error;
-    }
-    return null;
-  }
+  if (error) throw error;
 
   const row = ((data ?? []) as Array<{
     live_players: number | string | null;
@@ -1973,12 +1964,7 @@ async function getPlatformTrendFromRpc(sinceIso: string): Promise<StatsChartPoin
     p_since: sinceIso
   });
 
-  if (error) {
-    if (error.code !== "42883") {
-      throw error;
-    }
-    return null;
-  }
+  if (error) throw error;
 
   return ((data ?? []) as PlatformTrendRow[]).map((row) => mapPlatformTrendRow(row));
 }
@@ -3034,12 +3020,7 @@ async function getStoredPlatformChart(
     .lte(timeColumn, endValue)
     .order(timeColumn, { ascending: true });
 
-  if (error) {
-    if (!isMissingPostgrestRelationError(error)) {
-      throw error;
-    }
-    return null;
-  }
+  if (error) throw error;
 
   const points = ((data ?? []) as PlatformAggregateRow[])
     .map((row) => mapPlatformAggregatePoint(row, useHourly ? "hourly" : "daily"))

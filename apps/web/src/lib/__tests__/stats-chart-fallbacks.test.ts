@@ -49,9 +49,10 @@ afterEach(() => {
 const paged = (value: unknown) => ({ range: vi.fn().mockResolvedValue(value) });
 
 describe("platform chart", () => {
-  it("does not fan out to per-game history when the stored summary fails", async () => {
-    mocks.from.mockImplementation(() => query({ data: null, error: timeout }));
-    await expect(getStatsPlatformChart("30d", "daily")).rejects.toEqual(timeout);
+  it.each(["57014", "42P01"])("throws stored summary failure %s without per-game fan-out", async code => {
+    const failure = { ...timeout, code };
+    mocks.from.mockImplementation(() => query({ data: null, error: failure }));
+    await expect(getStatsPlatformChart("30d", "daily")).rejects.toEqual(failure);
     expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_daily"]);
     expect(mocks.rpc).not.toHaveBeenCalled();
   });
