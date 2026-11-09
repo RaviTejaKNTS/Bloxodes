@@ -79,7 +79,7 @@ test("initial RobloxDen baseline queues nothing; a later added slug is pending",
 
 
 test("page names reject emoji and brackets and point writers at the context display name", () => {
-  for (const name of ["[⚽] Become A Striker", "Become A Striker ⚽", "[UPDATE] Example", "Example]"]) {
+  for (const name of ["[⚽] Become A Striker", "Become A Striker ⚽", "[UPDATE] Example", "Example]", "Example 🇺🇸", "Example 1️⃣"]) {
     const result = codePageFinalSchema.safeParse({ ...final, name });
     assert.equal(result.success, false);
     if (!result.success) assert.match(result.error.message, /context.json game.display_name/);
@@ -93,7 +93,7 @@ test("social links require all three nullable fields and exact platform HTTPS ho
     final.social_links
   ]) assert.ok(codePageFinalSchema.safeParse({ ...final, social_links }).success);
   for (const social_links of [undefined, {}, { ...final.social_links, extra: null },
-    ...["not a URL", "https://evil.com/invite/test", "https://discord.com/channels/test", "http://discord.gg/test", "https://discord.gg.evil.com/test"].map(discord => ({ ...final.social_links, discord })),
+    ...["not a URL", "https://evil.com/invite/test", "https://discord.com/channels/test", "http://discord.gg/test", "https://discord.gg.evil.com/test", "https://discord.gg/", "https://discord.gg/a/b"].map(discord => ({ ...final.social_links, discord })),
     { ...final.social_links, twitter: "https://youtube.com/test" },
     { ...final.social_links, youtube: "https://x.com/test" }
   ]) assert.equal(codePageFinalSchema.safeParse({ ...final, social_links }).success, false);

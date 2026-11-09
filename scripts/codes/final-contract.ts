@@ -10,14 +10,14 @@ const socialUrl = (hosts: string[], path?: RegExp) => z.string().url().refine(va
     const url = new URL(value);
     const host = url.hostname.replace(/^www\./, "");
     return url.protocol === "https:" && !url.username && !url.password && !url.port
-      && hosts.includes(host) && (!path || host === "discord.gg" || path.test(url.pathname));
+      && hosts.includes(host) && (!path || (host === "discord.gg" ? /^\/[^/]+\/?$/ : path).test(url.pathname));
   } catch {
     return false;
   }
 }, "Use an HTTPS URL on the matching social platform (Discord links must be invites)").nullable();
 export const codePageFinalSchema = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).refine(value => !/-codes$/.test(value) && !/-\d{5,}$/.test(value), "Use an editorial game slug, without -codes or a universe ID"),
-  name: text.refine(value => !/[\p{Extended_Pictographic}\[\]]/u.test(value), "Use context.json game.display_name for name, without emoji or square brackets"),
+  name: text.refine(value => !/[\p{Extended_Pictographic}\p{Regional_Indicator}\u20E3\[\]]/u.test(value), "Use context.json game.display_name for name, without emoji or square brackets"),
   universe_id: z.number().int().positive().safe(),
   roblox_link: z.string().url().refine(value => /^https:\/\/(?:www\.)?roblox\.com\/games\/\d+(?:\/|$)/.test(value)),
   source_url: source("robloxden.com", "/game-codes/"),
