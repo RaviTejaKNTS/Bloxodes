@@ -66,6 +66,7 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 ## Rules
 
 - Migrations are immutable once committed. CI rejects edits and deletions.
+- A rejected migration that only reached managed development is retired, not deleted: its exact SQL moves to `supabase/migrations_archive/`, `managed_dev_retired_migrations` in `supabase/migration-policy.json` pins its hash and its forward cleanup migration, and the development ledger rows stay as they are. CI checks the archived bytes and that the cleanup removed the objects. Production never runs archived SQL. First used for PR #215's catalog triggers on 2026-11-09.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
 - Collection and quiz data lives only in the database. The repo holds no runtime content JSON.

@@ -67,6 +67,7 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Item stats | tier 01:05; NEW :55 most hours; HOT :32; WARM 01:32/07:32/13:32/19:32; COLD 23:32; resale :17 every 3 hours |
 | Item index, rollup, audit | index :45 hourly; rollup 01:25; audit :55 every 6 hours |
 | Promo rewards | Wednesday 09:40 |
+| Catalog page dates (`catalog-membership-dates`, 120 s limit; see [data refreshes](../content/data-refreshes.md#catalog-page-dates)) | every 10 minutes |
 | Boot recovery | `@reboot` |
 
 The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitHub analytics collector). Leave them alone.

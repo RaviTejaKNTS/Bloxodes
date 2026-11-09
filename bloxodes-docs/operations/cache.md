@@ -37,6 +37,8 @@ Redirects are the other in-process cache (`apps/web/src/lib/site-route-snapshot.
 - Once loaded, requests use the copy and a background refresh runs every 5 minutes (15-second limit). A failed refresh keeps the last copy.
 - `/api/revalidate` doesn't clear it. Route changes show up after the next refresh.
 
+A catalog date change for a descendant page (music or decal game pages, avatar categories, curated, charts) revalidates only that page and the catalog sitemaps: it sends Cloudflare the exact catalog tag and sitemap tags, never the parent family's broad tags. Item writes keep their own cache events for metadata and ordering.
+
 Every non-Roblox page change uses the `game_content` event. One resolver works out the affected pages from stored route ownership (the page, its old URLs, its game's hub, collection pagination and the relevant index pages), the same for every game.
 
 ## Runtime variables
