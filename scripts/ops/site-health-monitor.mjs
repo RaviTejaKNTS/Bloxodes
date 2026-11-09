@@ -1,5 +1,7 @@
 // Every 5 minutes on homelab: check https://bloxodes.com/api/health and keep a
 // GitHub issue open while the site or its stats pipeline is unhealthy.
+// It also checks that Cloudflare never stores an error page (4xx/5xx) and keeps
+// a separate issue open while it does.
 import fs from "node:fs";
 import path from "node:path";
 
@@ -11,6 +13,11 @@ const KEY = "site-health";
 // response doesn't open an issue.
 const FAILURES_TO_OPEN = 2;
 const stateFile = path.join(process.env.STATE_DIRECTORY || "/tmp", "site-health-failures");
+
+const SITE_ORIGIN = process.env.SITE_ORIGIN || "https://bloxodes.com";
+const ERROR_CACHE_KEY = "error-page-cache";
+// Cloudflare statuses that mean the response came out of its cache.
+const FROM_CACHE = new Set(["HIT", "STALE", "UPDATING", "REVALIDATED"]);
 
 async function checkHealth() {
   try {
@@ -38,6 +45,42 @@ function summary(result) {
   ].filter(Boolean).join("\n");
 }
 
+// Requests made-up URLs twice each. Every public page uses the same Cloudflare
+// cache rule, so if these 404s are served from cache, any real page's error
+// would be too. `complete` is false when any request failed or didn't return
+// an error status, so an unreachable site never closes the issue.
+async function probeErrorPath(probePath) {
+  const cached = [];
+  let complete = true;
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    try {
+      const response = await fetch(`${SITE_ORIGIN}${probePath}`, {
+        redirect: "manual",
+        signal: AbortSignal.timeout(15_000),
+        headers: { "user-agent": "BloxodesSiteHealth/1.0" }
+      });
+      await response.arrayBuffer().catch(() => null);
+      const cacheStatus = (response.headers.get("cf-cache-status") || "").toUpperCase();
+      if (response.status < 400) complete = false;
+      else if (FROM_CACHE.has(cacheStatus)) {
+        cached.push(`${probePath} returned ${response.status} with cf-cache-status ${cacheStatus} on request ${attempt}`);
+      }
+    } catch {
+      complete = false;
+    }
+    if (attempt === 1) await new Promise((resolve) => setTimeout(resolve, 2_000));
+  }
+  return { cached, complete };
+}
+
+async function checkErrorPageCache() {
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const results = await Promise.all(
+    [`/zz-error-cache-check-${id}`, `/wiki/zz-error-cache-check-${id}`].map(probeErrorPath)
+  );
+  return { cached: results.flatMap((result) => result.cached), complete: results.every((result) => result.complete) };
+}
+
 function readFailures() {
   const value = Number(fs.existsSync(stateFile) ? fs.readFileSync(stateFile, "utf8") : 0);
   return Number.isInteger(value) && value >= 0 ? value : 0;
@@ -60,4 +103,29 @@ if (result.healthy) {
     // Already reported; don't comment every 5 minutes.
     console.log(`Unhealthy (${failures} in a row); issue already open.`);
   }
+}
+
+const errorCache = await checkErrorPageCache();
+if (errorCache.cached.length > 0) {
+  const body = [
+    "Cloudflare served an error page from its cache. Search engines (Bing first) drop pages that return errors, and a cached error keeps being served after the site recovers.",
+    "",
+    "Fix: in Cloudflare → Caching → Cache Rules, every enabled rule needs Edge TTL status code TTLs 400–499 and 500–599 set to \"no store\". See `bloxodes-docs/infrastructure/cloudflare.md`.",
+    "",
+    ...errorCache.cached.map((line) => `- ${line}`),
+    `- Checked: ${new Date().toISOString()}`
+  ].join("\n");
+  const existing = findOpenIncident(ERROR_CACHE_KEY);
+  if (existing) {
+    console.error(`Error pages are cached; issue #${existing.number} already open.`);
+  } else {
+    const opened = openIncident({ key: ERROR_CACHE_KEY, title: "Cloudflare is caching error pages", body });
+    console.error(`Error pages are cached; opened issue #${opened.number}.`);
+  }
+  process.exitCode = 1;
+} else if (!errorCache.complete) {
+  console.log("Error page cache check inconclusive (a probe failed or didn't return an error); leaving any issue as it is.");
+} else {
+  const resolved = resolveIncident({ key: ERROR_CACHE_KEY, body: `Cloudflare no longer serves error pages from its cache.\n\n- Checked: ${new Date().toISOString()}` });
+  console.log(resolved ? `Error pages not cached; closed issue #${resolved.number}.` : "Error pages not cached.");
 }
