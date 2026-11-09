@@ -38,7 +38,7 @@ The runtime is a separate release from the repo. Merging code doesn't change it.
 
 ## VPS (cron, user `ravitejaknts`)
 
-Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. `JOB_OVERALL_TIMEOUT_SECONDS` bounds the whole invocation (lock wait, image build, smoke checks and the job container; default 15,000 s), and `JOB_TIMEOUT_SECONDS` still bounds the job container on its own. On timeout the wrapper stops its processes, removes its job and smoke containers, records the failure and releases its locks. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
+Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. `JOB_OVERALL_TIMEOUT_SECONDS` bounds the whole invocation (lock wait, image build, smoke checks and the job container; default 15,000 s), and `JOB_TIMEOUT_SECONDS` still bounds the job container on its own. The inner container timeout runs with `--foreground` so it stays in the overall timeout's process group: when the overall deadline hits, the Docker client gets TERM and the wrapper removes its job, smoke, fallback and build containers, records the failure and releases its locks within the 30-second kill grace. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
 
 | Group | Schedule (UTC) |
 | --- | --- |
