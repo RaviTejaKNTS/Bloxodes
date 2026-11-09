@@ -87,6 +87,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Verify public data error handling
         run: npm run test:unit:web
+      - run: npm run typecheck:web
   managed-development:
     needs: scope
     if: needs.scope.outputs.checks == 'true'

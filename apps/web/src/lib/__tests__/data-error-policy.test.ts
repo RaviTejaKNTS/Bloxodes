@@ -8,6 +8,7 @@ const src = join(dirname(fileURLToPath(import.meta.url)), "../..");
 // Only these named helpers may turn a failed read into missing optional content.
 // Adding another failure branch in another helper still fails this guard.
 const tolerant: Record<string, string> = {
+  "lib/cloudflare-cache.ts:purgeCloudflareEverything": "Mutation result explicitly reports ok:false; it does not render public content.",
   "lib/wiki.ts:safeList": "Optional related content does not decide page existence.",
   "lib/wiki.ts:safeValue": "Optional wiki sidebar value.",
   "lib/stats.ts:getUniverseStatsSummary": "Optional sidebar summary; detail readers are separate.",
