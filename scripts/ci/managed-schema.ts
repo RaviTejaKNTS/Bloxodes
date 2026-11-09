@@ -41,6 +41,15 @@ const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 async function main() {
   const ledgerQuery = "select version,name,encode(sha256(convert_to(array_to_string(statements,E'\\n'),'UTF8')),'hex') as sql_hash from supabase_migrations.schema_migrations order by version;";
   const ledger = await query(ledgerQuery);
+  for (const retired of policy.managed_dev_retired_migrations ?? []) {
+    const bytes = fs.readFileSync(path.join(root, retired.file));
+    const hash = createHash("sha256").update(bytes).digest("hex");
+    const row = ledger.find(row => String(row.version) === retired.version);
+    if (hash !== retired.sha256 || (row && row.sql_hash !== hash)) {
+      throw new Error(`Retired development migration byte proof failed: ${retired.version}`);
+    }
+    if (migrations.some(m => m.version === retired.version)) throw new Error("Retired migration is in the deployment chain");
+  }
   // Include legacy pending production versions when present; never attest an
   // unproven pre-convergence baseline merely because its version exists.
   const proofMigrations = migrations.filter(m => m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version) || policy.production_pending_before_convergence.includes(m.version));
@@ -60,6 +69,13 @@ async function main() {
     if (apply) await query(transaction);
   }
   const afterLedger = await query(ledgerQuery);
+  if (apply && policy.managed_dev_retired_migrations?.length) {
+    const [proof] = await query(`select count(*)::int as remaining from pg_trigger t
+      join pg_class c on c.oid=t.tgrelid join pg_namespace n on n.oid=c.relnamespace
+      where n.nspname='public' and t.tgname in
+      ('catalog_membership_insert','catalog_membership_update','catalog_membership_delete','initialize_catalog_membership_snapshot','catalog_data_revalidation');`);
+    if (Number(proof?.remaining) !== 0) throw new Error("Retired catalog writer triggers remain");
+  }
   const verified = verifiedMigrationHashes(proofMigrations,afterLedger,policy);
   const after = new Set(afterLedger.map(row => String(row.version)));
   const missing = migrations.filter(m => (m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version)) && !after.has(m.version));

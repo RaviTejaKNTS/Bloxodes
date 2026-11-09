@@ -43,7 +43,11 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: node scripts/ci/change-scope.mjs
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            export BASE_SHA="$(git merge-base origin/production HEAD)"
+          fi
+          node scripts/ci/change-scope.mjs
       - name: Validate changed GitHub workflow syntax
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
@@ -333,3 +337,32 @@ jobs:
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore
+
+  catalog-reconciler-benchmark:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - run: pip install 'psycopg[binary]==3.2.13'
+      - run: python3 scripts/ci/catalog-reconciler-benchmark.py
+        env:
+          CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-reconciler-benchmark
+          path: tmp/catalog-reconciler-benchmark.json

@@ -2,7 +2,7 @@ import "../shared/load-env";
 import { writeFile } from "node:fs/promises";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { getExistingMusicAssetIds, updateMusicCatalogTimestamp } from "../shared/music-catalog-freshness";
+import { getExistingMusicAssetIds } from "../shared/music-catalog-freshness";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";
 const TOOLBOX_SEARCH_API = "https://apis.roblox.com/toolbox-service/v2/assets:search";
@@ -109,7 +109,6 @@ type AutomationSummary = {
     topSongsIncluded: boolean;
     chartTypes: string[];
     trendingIncluded: boolean;
-    catalogTimestampUpdated: boolean;
   };
 };
 
@@ -472,7 +471,6 @@ async function run() {
   const topSongsCount = await collectTopSongs(seenAssetIds, maxAssets, changes);
   const remaining = maxAssets === null ? null : Math.max(0, maxAssets - topSongsCount);
   const chartCount = await collectCreatorStoreCharts(seenAssetIds, remaining, changes);
-  const catalogTimestampUpdated = await updateMusicCatalogTimestamp(supabaseAdmin(), changes);
 
   console.log(`Done. Top songs: ${topSongsCount}. Creator Store charts: ${chartCount}.`);
   await writeAutomationSummary({
@@ -483,7 +481,6 @@ async function run() {
       topSongsIncluded: INCLUDE_TOP_SONGS,
       chartTypes: TOOLBOX_CHART_TYPES,
       trendingIncluded: TOOLBOX_INCLUDE_TRENDING,
-      catalogTimestampUpdated
     }
   });
 }
