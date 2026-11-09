@@ -127,8 +127,9 @@ begin
                 where to_jsonb(live)->kv.key is distinct from kv.value) then
     raise exception 'Real TypeScript payload was not stored';
   end if;
-  if live.community_link is distinct from 'keep-community' or live.discord_link is distinct from 'clear-discord' then
-    raise exception 'Omitted fields were overwritten';
+  -- The bundle owns Discord, X and YouTube (explicit null clears); the community link is omitted and kept.
+  if live.community_link is distinct from 'keep-community' or live.discord_link is not null then
+    raise exception 'Omitted fields were overwritten or bundle social links were not applied';
   end if;
 end $$;
 
