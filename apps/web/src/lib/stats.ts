@@ -3673,8 +3673,9 @@ export async function loadLatestRank(universeId: number): Promise<number | null>
     .eq("universe_id", universeId)
     .limit(1)
     .maybeSingle();
-  if (indexed.error) throw indexed.error;
-  if (indexed.data) {
+  // Rank is optional on every caller: an index error falls back to the snapshot,
+  // and a snapshot error returns null below.
+  if (!indexed.error && indexed.data) {
     if (!isPlayingTimestampFresh(indexed.data.last_playing_refreshed_at)) return null;
     return toNumber(indexed.data.global_playing_rank);
   }

@@ -1,3 +1,4 @@
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -159,6 +160,9 @@ export async function listPublishedToolsPage(
         .order("id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
 
+      // A page past the end is a valid empty page; the route turns it into a 404.
+      const rangeTotal = catalogRangeTotal(error, offset, count ?? null);
+      if (rangeTotal !== null) return { tools: [], total: rangeTotal };
       if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
 
       if (!error && data) {
@@ -173,6 +177,8 @@ export async function listPublishedToolsPage(
         .order("id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
 
+      const fallbackRangeTotal = catalogRangeTotal(fallbackError, offset, fallbackCount ?? null);
+      if (fallbackRangeTotal !== null) return { tools: [], total: fallbackRangeTotal };
       if (fallbackError) {
         console.error("Error fetching tools index", fallbackError);
         throw fallbackError;

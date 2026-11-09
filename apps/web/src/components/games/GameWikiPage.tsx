@@ -94,7 +94,8 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, dire
   const collectionBlocks = await Promise.all(collections.map(async (collection) => {
     const [copyHtml, imageUrls] = await Promise.all([
       collection.wiki_md ? renderMarkdown(collection.wiki_md, { paragraphizeLineBreaks: true }) : Promise.resolve(""),
-      reader.listPublishedSharedGameWikiCollectionImageUrls(collection, 6)
+      // Preview images are optional; a failed read must not take down the page.
+      reader.listPublishedSharedGameWikiCollectionImageUrls(collection, 6).catch(() => [] as string[])
     ]);
     return { collection, copyHtml, imageUrls };
   }));

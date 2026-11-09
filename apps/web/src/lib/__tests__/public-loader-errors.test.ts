@@ -81,3 +81,8 @@ it("shared game readers throw on database failures and preserve missing rows", a
   await expect(readers.getSharedGameWikiPageBySlug("missing")).resolves.toBeNull();
   await expect(readers.getSharedGameWikiCollectionPageByPath("missing", "items")).resolves.toBeNull();
 });
+
+it("keeps a tools page past the end an empty page so the route can 404", async () => {
+  query({ data: null, error: { code: "PGRST103", details: "An offset of 999980 was requested, but there are only 41 rows." } } as never);
+  await expect(listPublishedToolsPage(50000, 20)).resolves.toEqual({ tools: [], total: 41 });
+});
