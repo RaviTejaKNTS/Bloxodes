@@ -3,7 +3,12 @@ import { runDataApiOperation } from "../shared/data-api-retry";
 
 import { randomUUID } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import {
+  finishStatsJobRun,
+  KNOWN_MISSING_PRIOR_MISSES,
+  startStatsJobRun,
+  statsRefreshRunStatus
+} from "../shared/stats-job-run";
 import {
   assignItemStatsTier,
   chunkArray,
@@ -48,6 +53,10 @@ type ItemResult = {
   error?: unknown;
   errorKind?: string;
   errorCode?: string;
+  // Roblox left the item out of a successful details response.
+  missing?: boolean;
+  // It was already missing on earlier runs, such as an unavailable item on its weekly retry.
+  knownMissing?: boolean;
   nextRunAt: string;
 };
 
@@ -269,7 +278,7 @@ async function insertHistory(rows: Record<string, unknown>[]) {
 
 async function finishQueue(row: QueueRow, result: ItemResult) {
   if (DRY_RUN) return true;
-  const { data, error } = await supabaseAdmin().rpc("finish_roblox_catalog_refresh", {
+  const { data } = await runDataApiOperation(`Finish catalog refresh claim ${row.asset_id}`, () => supabaseAdmin().rpc("finish_roblox_catalog_refresh", {
     p_asset_id: row.asset_id,
     p_worker_id: WORKER_ID,
     p_status: result.success ? "pending" : row.attempts >= 12 ? "dead" : "retry",
@@ -277,8 +286,7 @@ async function finishQueue(row: QueueRow, result: ItemResult) {
     p_error: result.success ? null : errorMessage(result.error),
     p_error_code: result.success ? null : result.errorCode ?? "unknown",
     p_error_kind: result.success ? null : result.errorKind ?? "unknown"
-  });
-  if (error) throw new Error(`Failed to finish catalog refresh claim ${row.asset_id}: ${error.message}`);
+  }));
   return data === true;
 }
 
@@ -379,6 +387,8 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
         thumbnailUpdated: false,
         error: new Error("Item missing from successful Roblox catalog details response"),
         errorCode: "missing_from_details",
+        missing: true,
+        knownMissing: failures - 1 >= KNOWN_MISSING_PRIOR_MISSES,
         errorKind: failures >= 3 ? "unavailable" : "incomplete_response",
         nextRunAt: addHours(nowIso, failures >= 3 ? 168 : retryHours(row.attempts))
       });
@@ -515,6 +525,8 @@ async function main() {
   let claimed = 0;
   let succeeded = 0;
   let failed = 0;
+  let missing = 0;
+  let knownMissing = 0;
   let metadataUpdated = 0;
   let thumbnailsUpdated = 0;
 
@@ -538,14 +550,25 @@ async function main() {
         for (const result of results) {
           const queueRow = batch.find((row) => row.asset_id === result.assetId);
           if (!queueRow) continue;
-          const acknowledged = await finishQueue(queueRow, result);
+          let acknowledged: boolean;
+          try {
+            acknowledged = await finishQueue(queueRow, result);
+          } catch (error) {
+            // One row that cannot be finished must not stop the run and strand every other lease.
+            failed += 1;
+            console.warn(`Unable to finish catalog refresh claim ${result.assetId}: ${errorMessage(error)}`);
+            continue;
+          }
           if (!acknowledged && !DRY_RUN) {
             failed += 1;
             console.warn(`Catalog enrichment lease was lost before acknowledgement for ${result.assetId}.`);
             continue;
           }
           if (result.success) succeeded += 1;
-          else failed += 1;
+          else if (result.missing) {
+            missing += 1;
+            if (result.knownMissing) knownMissing += 1;
+          } else failed += 1;
           if (result.metadataUpdated) metadataUpdated += 1;
           if (result.thumbnailUpdated) thumbnailsUpdated += 1;
         }
@@ -554,18 +577,33 @@ async function main() {
       if (DRY_RUN) break;
     }
 
-    const status = failed === 0 ? "success" : succeeded > 0 || metadataUpdated > 0 ? "partial" : "failed";
+    // Missing items are handled outcomes (retried, then marked unavailable), not failed work.
+    let status = statsRefreshRunStatus(succeeded, failed, missing, knownMissing);
+    if (status === "failed" && metadataUpdated > 0) status = "partial";
     await finishStatsJobRun(run, {
       status,
       rowsClaimed: claimed,
       rowsSucceeded: succeeded,
       rowsFailed: failed,
-      metadata: { dry_run: DRY_RUN, metadata_updated: metadataUpdated, thumbnails_updated: thumbnailsUpdated }
+      metadata: {
+        dry_run: DRY_RUN,
+        metadata_updated: metadataUpdated,
+        thumbnails_updated: thumbnailsUpdated,
+        missing_rows: missing,
+        known_missing_rows: knownMissing
+      }
     });
-    console.log(JSON.stringify({ status, dryRun: DRY_RUN, claimed, succeeded, failed, metadataUpdated, thumbnailsUpdated }, null, 2));
+    console.log(JSON.stringify({ status, dryRun: DRY_RUN, claimed, succeeded, failed, missing, knownMissing, metadataUpdated, thumbnailsUpdated }, null, 2));
     if (status === "failed") process.exitCode = 1;
   } catch (error) {
-    await finishStatsJobRun(run, { status: "failed", rowsClaimed: claimed, rowsSucceeded: succeeded, rowsFailed: failed, error });
+    await finishStatsJobRun(run, {
+      status: "failed",
+      rowsClaimed: claimed,
+      rowsSucceeded: succeeded,
+      rowsFailed: failed,
+      metadata: { missing_rows: missing, known_missing_rows: knownMissing },
+      error
+    });
     throw error;
   }
 }

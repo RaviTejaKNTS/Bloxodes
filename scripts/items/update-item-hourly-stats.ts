@@ -2,7 +2,12 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { enqueueRevalidationEvents } from "../shared/revalidation-events";
-import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../shared/stats-job-run";
+import {
+  finishStatsJobRun,
+  KNOWN_MISSING_PRIOR_MISSES,
+  startStatsJobRun,
+  statsRefreshRunStatus
+} from "../shared/stats-job-run";
 import {
   addHours,
   assignItemStatsTier,
@@ -395,6 +400,7 @@ async function main() {
   let failedBatches = 0;
   let failedRows = 0;
   let missingRowCount = 0;
+  let knownMissingRowCount = 0;
   let handledMissingRows = 0;
   const failedSamples: number[] = [];
 
@@ -443,6 +449,7 @@ async function main() {
           const payload = payloadById.get(targetId) ?? null;
           if (!payload) {
             missingRowCount += 1;
+            if ((row.catalog_status_failure_count ?? 0) >= KNOWN_MISSING_PRIOR_MISSES) knownMissingRowCount += 1;
             missingRows.push(row);
             continue;
           }
@@ -505,7 +512,7 @@ async function main() {
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;
-    const status = statsRefreshRunStatus(succeededRows, failedRows, missingRowCount);
+    const status = statsRefreshRunStatus(succeededRows, failedRows, missingRowCount, knownMissingRowCount);
 
     await finishStatsJobRun(run, {
       status,
@@ -518,6 +525,7 @@ async function main() {
         failed_batches: failedBatches,
         failed_rows: failedRows,
         missing_rows: missingRowCount,
+        known_missing_rows: knownMissingRowCount,
         failed_sample_asset_ids: failedSamples,
         index_result: indexResult
       }
@@ -531,6 +539,7 @@ async function main() {
           refreshed: succeededRows,
           failedRows,
           missingRows: missingRowCount,
+          knownMissingRows: knownMissingRowCount,
           failedBatches,
           failedSamples,
           hourlyRows: hourlyRowCount,
@@ -547,7 +556,7 @@ async function main() {
     await finishStatsJobRun(run, {
       status: "failed", rowsClaimed: claimedRows, rowsSucceeded: succeededRows,
       rowsFailed: Math.max(failedRows, claimedRows - succeededRows - handledMissingRows),
-      metadata: { missing_rows: missingRowCount }, error
+      metadata: { missing_rows: missingRowCount, known_missing_rows: knownMissingRowCount }, error
     });
     throw error;
   }

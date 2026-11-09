@@ -175,11 +175,29 @@ test("item refresh separates missing rows from real failures and keeps missing h
   assert.match(source, /await markMissingResponses\(missingRows, workerId\)/);
   assert.match(source, /missing_rows: missingRowCount/);
   assert.match(source, /rowsClaimed: claimedRows/);
-  assert.match(source, /statsRefreshRunStatus\(succeededRows, failedRows, missingRowCount\)/);
+  assert.match(source, /statsRefreshRunStatus\(succeededRows, failedRows, missingRowCount, knownMissingRowCount\)/);
+  assert.match(source, /catalog_status_failure_count \?\? 0\) >= KNOWN_MISSING_PRIOR_MISSES\) knownMissingRowCount \+= 1/);
   assert.equal(statsRefreshRunStatus(100, 0, 0), "success");
   assert.equal(statsRefreshRunStatus(984, 0, 16), "success", "a few removals are normal");
   assert.equal(statsRefreshRunStatus(100, 2, 0), "partial");
   assert.equal(statsRefreshRunStatus(0, 2, 0), "failed");
   assert.equal(statsRefreshRunStatus(970, 0, 30), "success", "one whole missing batch in a large run stays under the share");
   assert.equal(statsRefreshRunStatus(0, 0, 30), "failed", "a run with only a full batch missing is not a success");
+  assert.equal(statsRefreshRunStatus(0, 0, 30, 30), "success", "items already missing on earlier runs are expected to stay missing");
+});
+
+test("catalog enrichment counts missing items apart from real failures", () => {
+  const source = readFileSync(new URL("../../catalog/enrich-roblox-catalog-items.ts", import.meta.url), "utf8");
+  assert.match(source, /missing: true,\s+knownMissing: failures - 1 >= KNOWN_MISSING_PRIOR_MISSES/);
+  assert.match(source, /else if \(result\.missing\) \{\s+missing \+= 1;\s+if \(result\.knownMissing\) knownMissing \+= 1;\s+\} else failed \+= 1;/);
+  assert.match(source, /statsRefreshRunStatus\(succeeded, failed, missing, knownMissing\)/);
+  assert.match(source, /missing_rows: missing,\s+known_missing_rows: knownMissing/);
+});
+
+test("item audit retries a timed-out health read and enrichment survives one failed acknowledgement", () => {
+  const audit = readFileSync(new URL("../audit-item-stats-workflow.ts", import.meta.url), "utf8");
+  assert.match(audit, /rpc\("get_roblox_item_pipeline_health"\),\s+\{[^}]*retryStatementTimeout: true/);
+  const enrich = readFileSync(new URL("../../catalog/enrich-roblox-catalog-items.ts", import.meta.url), "utf8");
+  assert.match(enrich, /runDataApiOperation\(`Finish catalog refresh claim/);
+  assert.match(enrich, /acknowledged = await finishQueue\(queueRow, result\);\s+\} catch \(error\) \{[\s\S]{0,200}failed \+= 1;[\s\S]{0,200}continue;/);
 });
