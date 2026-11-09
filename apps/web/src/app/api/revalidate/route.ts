@@ -527,6 +527,12 @@ function revalidateForAvatarCatalog(slug: string) {
 }
 
 function revalidateForCatalog(slug: string) {
+  if (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/")) {
+    return applyRevalidation(
+      [`/catalog/${slug}`, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH],
+      [`catalog:${slug}`]
+    );
+  }
   return applyRevalidation(
     ["/catalog", slug ? `/catalog/${slug}` : "", "/", SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH].filter(Boolean) as string[],
     [`catalog:${slug}`, "catalog-index", "home"]
