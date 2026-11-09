@@ -136,7 +136,9 @@ write_state
 RUN_TIMEOUT="${JOB_TIMEOUT_SECONDS:-7200}"
 case "$RUN_TIMEOUT" in ''|*[!0-9]*|0) echo 'invalid JOB_TIMEOUT_SECONDS' >&2; exit 2 ;; esac
 ACTIVE_CONTAINER_IDS="$(docker ps --no-trunc --format '{{.ID}}')"
-if timeout --signal=TERM --kill-after=30 "$RUN_TIMEOUT" docker run --rm \
+# Keep the Docker client in the overall timeout's process group so TERM
+# interrupts this wait and the wrapper can remove containers and finish.
+if timeout --foreground --signal=TERM --kill-after=30 "$RUN_TIMEOUT" docker run --rm \
   --name "$CONTAINER" \
   --network "$DOCKER_NETWORK" \
   --env-file "$ENV_FILE" \

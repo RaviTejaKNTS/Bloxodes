@@ -3,7 +3,10 @@ import test from 'node:test';
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
+import { spawn, execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+
+const execFileAsync = promisify(execFile);
 
 const wrapper = path.resolve(import.meta.dirname, '../vps-run-job.sh');
 async function fixture() {
@@ -74,5 +77,58 @@ test('whole-run deadline covers network, image build and smoke; the next run acq
       assert.equal(await command(env), 0);
       assert.equal(JSON.parse(await readFile(path.join(f.root,'state/canary.json'),'utf8')).state,'success');
     } finally { await f.cleanup(); }
+  }
+});
+
+// Run only on GitHub, where the runner provides a Docker daemon.
+test('overall deadline removes the final Docker container, records failure and releases both locks', {
+  skip: !process.env.CI,
+  timeout: 60000
+}, async () => {
+  const f = await fixture();
+  let container = '';
+  const {stdout: dockerPath} = await execFileAsync('sh', ['-c', 'command -v docker']);
+  const docker = dockerPath.trim();
+  try {
+    await execFileAsync(docker, ['pull', 'alpine:3.21']);
+    await writeFile(path.join(f.root, 'bin/docker'), `#!/bin/sh
+case "$1" in
+  network|image|ps) exit 0 ;;
+  rm) exec "$REAL_DOCKER" "$@" ;;
+  run)
+    case "$*" in *--entrypoint*) sleep 2; exit 0 ;; esac
+    shift
+    while [ "$#" -gt 0 ]; do
+      if [ "$1" = --name ]; then shift; name="$1"; break; fi
+      shift
+    done
+    # A detached container survives a killed Docker client, like a hung job.
+    "$REAL_DOCKER" run -d --rm --name "$name" alpine:3.21 sleep 180 || exit $?
+    echo "$name" > "$STATS_WORKER_BASE/final-container"
+    exec "$REAL_DOCKER" wait "$name"
+    ;;
+esac
+`, {mode: 0o755});
+    const start = Date.now();
+    assert.equal(await command({
+      ...f.env, REAL_DOCKER: docker, JOB_LOCK_GROUP: 'roblox-api',
+      JOB_OVERALL_TIMEOUT_SECONDS: '5', JOB_TIMEOUT_SECONDS: '180'
+    }), 124);
+    assert.ok(Date.now() - start < 15000, 'cleanup must finish before the outer kill grace');
+    container = (await readFile(path.join(f.root, 'final-container'), 'utf8')).trim();
+    assert.ok(container, 'the deadline must expire after the final container starts');
+    await assert.rejects(execFileAsync(docker, ['inspect', container]));
+    const state = JSON.parse(await readFile(path.join(f.root, 'state/canary.json'), 'utf8'));
+    assert.equal(state.state, 'failed');
+    assert.equal(state.exit_code, 143);
+    assert.match(await readFile(path.join(f.root, 'logs/canary.log'), 'utf8'), /state=failed exit=143/);
+    for (const lock of ['canary.lock', 'group-roblox-api.lock']) {
+      await execFileAsync('flock', ['-n', path.join(f.root, lock), 'true']);
+    }
+  } finally {
+    // Also clean up when testing a regression that leaves the container alive.
+    if (!container) container = await readFile(path.join(f.root, 'final-container'), 'utf8').then(s => s.trim(), () => '');
+    if (container) await execFileAsync(docker, ['rm', '-f', container]).catch(() => {});
+    await f.cleanup();
   }
 });

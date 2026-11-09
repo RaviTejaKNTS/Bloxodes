@@ -112,10 +112,16 @@ describe("scoped catalog membership purges", () => {
   it.each(slugs)("%s purges every pagination and query variant", slug => {
     const purge = catalogMembershipPurgeTags(slug)!;
     expect(purge).toContain(`catalog:${slug}`);
+    const period = /^roblox-music-ids\/(weekly|monthly|yearly)$/.exec(slug)?.[1];
+    const routeSlug = period ? "roblox-music-ids/charts" : slug;
     for (const page of ["", "/page/2", "/page/999"]) {
-      for (const query of ["", "?sort=popular", "?period=weekly", "?period=monthly", "?period=yearly"]) {
-        const emitted = cacheTagsForPath(`/catalog/${slug}${page}${query}`);
+      const queries = period ? [`?range=${period}`] : ["", "?sort=popular"];
+      for (const query of queries) {
+        const url = new URL(`/catalog/${routeSlug}${page}${query}`, "https://bloxodes.com");
+        // Match the proxy, which passes only the pathname to tag selection.
+        const emitted = cacheTagsForPath(url.pathname);
         expect(purge.some(tag => emitted.includes(tag))).toBe(true);
+        expect(cacheTagsForPath(url.pathname + url.search)).toEqual(emitted);
       }
     }
     expect(purge).not.toContain(`catalog:${slug.split("/")[0]}`);
