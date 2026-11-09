@@ -79,7 +79,7 @@ jobs:
     needs: [scope, managed-development]
     if: ${{ always() && !cancelled() && needs.scope.outputs.checks == 'true' && (needs.scope.outputs.migrations == 'false' || needs.managed-development.result == 'success') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     concurrency:
       group: pr-checks-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
