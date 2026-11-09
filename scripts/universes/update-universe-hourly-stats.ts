@@ -347,35 +347,40 @@ async function repairPlaceholderIdentities() {
   const rows = (data ?? []) as Array<{ universe_id: number; name: string; slug: string | null }>;
   let repaired = 0;
   const events: RevalidationEvent[] = [];
-  for (let i = 0; i < rows.length; i += 50) {
-    const chunk = rows.slice(i, i + 50);
-    const ids = chunk.map(row => row.universe_id);
-    const params = new URLSearchParams({ universeIds: ids.join(",") });
-    const response = await fetchRobloxJson(`${GAME_DETAILS_API}?${params}`, "placeholder game details", 15_000);
-    const details: RobloxGameDetail[] = Array.isArray(response?.data) ? response.data : [];
-    for (const row of chunk) {
-      const detail = details.find(game => game.id === row.universe_id);
-      const identity = detail && repairedUniverseIdentity(detail, row.universe_id);
-      if (!identity) continue;
-      const { data: changed } = await runDataApiOperation(`Repair universe identity ${row.universe_id}`, () => {
-        const query = sb.from("roblox_universes").update(identity)
-          .eq("universe_id", row.universe_id).eq("name", row.name);
-        // Do not replace an identity another writer repaired after our read.
-        return (row.slug == null ? query.is("slug", null) : query.eq("slug", row.slug)).select("universe_id");
-      });
-      if (!changed?.length) continue;
-      repaired += 1;
-      events.push(
-        { type: "stats", slug: `games/${statsUniverseSlug(row.slug || row.name, row.universe_id)}` },
-        { type: "stats", slug: `games/${statsUniverseSlug(identity.slug, row.universe_id)}` }
-      );
+  // Repaired rows no longer match the query above, so their revalidation must
+  // go out even when a later chunk fails.
+  try {
+    for (let i = 0; i < rows.length; i += 50) {
+      const chunk = rows.slice(i, i + 50);
+      const ids = chunk.map(row => row.universe_id);
+      const params = new URLSearchParams({ universeIds: ids.join(",") });
+      const response = await fetchRobloxJson(`${GAME_DETAILS_API}?${params}`, "placeholder game details", 15_000);
+      const details: RobloxGameDetail[] = Array.isArray(response?.data) ? response.data : [];
+      for (const row of chunk) {
+        const detail = details.find(game => game.id === row.universe_id);
+        const identity = detail && repairedUniverseIdentity(detail, row.universe_id);
+        if (!identity) continue;
+        const { data: changed } = await runDataApiOperation(`Repair universe identity ${row.universe_id}`, () => {
+          const query = sb.from("roblox_universes").update(identity)
+            .eq("universe_id", row.universe_id).eq("name", row.name);
+          // Do not replace an identity another writer repaired after our read.
+          return (row.slug == null ? query.is("slug", null) : query.eq("slug", row.slug)).select("universe_id");
+        });
+        if (!changed?.length) continue;
+        repaired += 1;
+        events.push(
+          { type: "stats", slug: `games/${statsUniverseSlug(row.slug || row.name, row.universe_id)}` },
+          { type: "stats", slug: `games/${statsUniverseSlug(identity.slug, row.universe_id)}` }
+        );
+      }
+      await sleep(REQUEST_DELAY_MS);
     }
-    await sleep(REQUEST_DELAY_MS);
-  }
-  if (repaired) {
-    await enqueueRevalidationEvents([
-      { type: "stats", slug: "stats" }, { type: "stats", slug: "games" }, ...events
-    ], "stats_placeholder_identity_repair");
+  } finally {
+    if (repaired) {
+      await enqueueRevalidationEvents([
+        { type: "stats", slug: "stats" }, { type: "stats", slug: "games" }, ...events
+      ], "stats_placeholder_identity_repair");
+    }
   }
   console.log(`Repaired ${repaired}/${rows.length} placeholder universe identities.`);
   return repaired;
