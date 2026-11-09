@@ -1,22 +1,36 @@
 # Environment
 
-Last verified: 2026-10-20
+Last verified: 2026-11-09
 
-How env files are stored, loaded and protected. Never print env values, commit them or paste them into docs or logs.
+How env values are stored, changed, loaded and protected. Never print env values, commit them or paste them into docs or logs.
+
+## Change a value
+
+Infisical Cloud, project `bloxodes`, environment `prod`, is the one source. Each folder feeds one place. Change values there, with the value on stdin and never in a command line:
+
+```sh
+ssh homelab '~/.local/bin/infisical-env list bloxodes --keys'        # folders, places and key names
+printf %s "$VALUE" | ssh homelab '~/.local/bin/infisical-env set bloxodes /pipelines/articles KEY'
+ssh homelab '~/.local/bin/infisical-env unset bloxodes /pipelines/articles KEY'
+ssh homelab '~/.local/bin/infisical-env apply bloxodes /vps/web-app'  # redeploy so Dokploy uses its new values now
+```
+
+`set` writes the place at once; changes made in the Infisical web app arrive within five minutes. Don't edit the homelab files, GitHub secrets, Dokploy or the VPS env files by hand. A rotated key needs a `set` in every folder that holds it. How the sync works, conflicts and recovery: Cockpit `workflow/infisical.md`.
 
 ## Where values live
 
-| Store | Holds |
-| --- | --- |
-| Homelab `/srv/data/projects/Bloxodes/.envs/` | The only editable copy of workstation env files. Edit here only, mode `0600`. |
-| Mac `.envs/` (Pro and Air) | Read-only mirrors, mode `0400`. Homelab pushes to the Pro every two minutes; the Air pulls. Don't edit, chmod or recreate them. Stray edits are moved to `~/.local/state/env-mirror/local-edits/` and replaced. |
-| `env/examples/` | Committed variable names and safe defaults. Every real variable needs an example. |
-| `env/config.json` | Profile and overlay definitions. |
-| GitHub secrets and environments | CI, deploy, schema and publication credentials. |
-| Dokploy | Production web runtime env. |
-| VPS `/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker` | Stats worker env. |
-| VPS `/home/ravitejaknts/bloxodes-supabase/.env` | Self-hosted Supabase env. Don't copy it into the repo. |
-| Homelab `/etc/bloxodes/article-automation.env` | Article discovery runtime env, mode `0640`. |
+| Store | Holds | Infisical folder |
+| --- | --- | --- |
+| Homelab `/srv/data/projects/Bloxodes/.envs/` | Workstation env files, mode `0600`, written by the sync. | The matching folder, such as `/pipelines/articles` |
+| Mac `.envs/` (Pro and Air) | Read-only mirrors, mode `0400`. Homelab pushes to the Pro every two minutes; the Air pulls. Don't edit, chmod or recreate them. Stray edits are moved to `~/.local/state/env-mirror/local-edits/` and replaced. | None, copies of the homelab files |
+| `env/examples/` | Committed variable names and safe defaults. Every real variable needs an example. | None |
+| `env/config.json` | Profile and overlay definitions. | None |
+| GitHub secrets and variables | CI, deploy, schema and publication credentials. | `/github/secrets`, `/github/variables` |
+| GitHub `production` and `franchise-artwork` environments | Publication and artwork credentials. | `/github/production/secrets`, `/github/franchise-artwork/secrets` |
+| Dokploy | Production web runtime env, and the Umami and Vaultwarden composes. Used from the next deploy. | `/vps/web-app`, `/vps/umami`, `/vps/vaultwarden` |
+| VPS `/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker` | Stats worker env, read by each job. | `/vps/stats-worker` |
+| VPS `/home/ravitejaknts/bloxodes-supabase/.env` | Self-hosted Supabase env, used when the containers are recreated. Don't copy it into the repo. | `/vps/supabase` |
+| Homelab `/etc/bloxodes/article-automation.env` | Article discovery runtime env, mode `0640`. | `/homelab/article-automation` |
 
 Each T3 worktree links `.envs` to its machine's main checkout, so every worktree sees the same files.
 
@@ -35,7 +49,7 @@ Each T3 worktree links `.envs` to its machine's main checkout, so every worktree
 
 - **targets/** hold database and media credentials for one target only.
 - **pipelines/codes.env** holds `NOTION_CODES_QUEUE_TOKEN`, the Notion integration key the homelab codes finder uses for the [Codes Queue](automation/notion-queues.md#codes-queue). The finder's unit reads it and `targets/production.env` straight from the homelab's `.envs`.
-- **infrastructure/devices.env** holds machine hosts, users and sudo passwords, plus the Cockpit dashboard login. Pipe a sudo password to `sudo -S`; never print it.
+- **infrastructure/devices.env** holds machine hosts, users and sudo passwords, plus the Cockpit dashboard login. It's copied from Infisical `cockpit /devices`, not from the `bloxodes` project. Pipe a sudo password to `sudo -S`; never print it.
 - Every real name needs a committed example under `env/examples/` with the same path, or `env:doctor` and `env:check` fail.
 - **infrastructure/vps.env** holds the VPS operator login.
 
