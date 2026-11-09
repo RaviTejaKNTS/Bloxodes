@@ -68,11 +68,11 @@ describe("prepared visit-share results", () => {
     });
   });
 
-  it("throws an unwarmed summary error and preserves a later last-good result", async () => {
+  it("treats an unwarmed summary as unavailable and preserves a later last-good result", async () => {
     const { getStatsVisitShareChart } = await import("@/lib/stats-visit-share");
     const notReady = { code: "55000", message: "Visit-share summary is not ready" };
     mocks.rpc.mockReturnValueOnce(page({ data: null, error: notReady }));
-    await expect(getStatsVisitShareChart("90d")).rejects.toEqual(notReady);
+    await expect(getStatsVisitShareChart("90d")).resolves.toMatchObject({ unavailable: true, points: [] });
     mocks.rpc.mockReturnValueOnce(page({ data: rows, error: null }));
     const good = await getStatsVisitShareChart("90d");
     expect(good.unavailable).toBeUndefined();

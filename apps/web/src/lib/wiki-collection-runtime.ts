@@ -167,7 +167,11 @@ async function loadPublishedRuntimeHeader(
     .eq("collection_page_id", page.id)
     .maybeSingle();
 
-  if (error) throw error;
+  if (error) {
+    // A missing runtime schema is a deploy-order state: optional collections use their local data.
+    if (isMissingRuntimeRelation(error) && !requiresWikiCollectionDatabase(page.code)) return null;
+    throw error;
+  }
   if (!data) {
     if (requiresWikiCollectionDatabase(page.code)) throw requiredRuntimeError(page.code, "published dataset pointer is invalid");
     return null;
@@ -225,6 +229,7 @@ async function loadPublishedRuntime(page: WikiCollectionPageContent): Promise<Pu
       document,
     };
   } catch (runtimeError) {
+    if (isMissingRuntimeRelation(runtimeError) && !requiresWikiCollectionDatabase(page.code)) return null;
     throw runtimeError;
   }
 }

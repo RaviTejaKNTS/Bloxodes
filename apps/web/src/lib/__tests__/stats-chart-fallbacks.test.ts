@@ -49,10 +49,18 @@ afterEach(() => {
 const paged = (value: unknown) => ({ range: vi.fn().mockResolvedValue(value) });
 
 describe("platform chart", () => {
-  it.each(["57014", "42P01"])("throws stored summary failure %s without per-game fan-out", async code => {
-    const failure = { ...timeout, code };
+  it("throws a stored summary failure without per-game fan-out", async () => {
+    const failure = { ...timeout, code: "57014" };
     mocks.from.mockImplementation(() => query({ data: null, error: failure }));
     await expect(getStatsPlatformChart("30d", "daily")).rejects.toEqual(failure);
+    expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_daily"]);
+    expect(mocks.rpc).not.toHaveBeenCalled();
+  });
+
+  it("treats a missing stored summary table as unavailable without per-game fan-out", async () => {
+    mocks.from.mockImplementation(() => query({ data: null, error: { ...timeout, code: "42P01" } }));
+    const chart = await getStatsPlatformChart("30d", "daily");
+    expect(chart).toMatchObject({ range: "30d", points: [], unavailable: true });
     expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_daily"]);
     expect(mocks.rpc).not.toHaveBeenCalled();
   });

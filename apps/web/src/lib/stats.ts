@@ -1095,6 +1095,10 @@ function toFiniteNumber(value: unknown): number | null {
   return null;
 }
 
+function isMissingPostgrestRelationError(error: { code?: string; message?: string }) {
+  return error.code === "42P01" || error.code === "PGRST205" || error.message?.includes("Could not find the table");
+}
+
 function toJsonStringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string" && item.length > 0);
@@ -1414,23 +1418,22 @@ function mapStatsItem(row: StatsItemIndexRow, thumbnailUrl: string | null): Stat
 }
 
 async function isStatsIndexAvailable() {
-  statsIndexAvailability = (async () => {
+  statsIndexAvailability ??= (async () => {
     try {
       const { data, error } = await supabaseAdmin()
         .from("stats_game_current_index")
         .select("universe_id")
         .limit(1);
-      if (error) throw error;
-      return (data?.length ?? 0) > 0;
-    } catch (error) {
-      throw error;
+      return !error && (data?.length ?? 0) > 0;
+    } catch {
+      return false;
     }
   })();
   return statsIndexAvailability;
 }
 
 async function isStatsItemIndexAvailable() {
-  statsItemIndexAvailability = (async () => {
+  statsItemIndexAvailability ??= (async () => {
     try {
       const { data, error } = await supabaseAdmin()
         .from("stats_item_current_index")
@@ -1438,32 +1441,28 @@ async function isStatsItemIndexAvailable() {
         .order("indexed_at", { ascending: false, nullsFirst: false })
         .limit(1)
         .maybeSingle();
-      if (error) throw error;
-      if (!data?.indexed_at) return false;
+      if (error || !data?.indexed_at) return false;
       const indexedAt = Date.parse(data.indexed_at);
       const maxAgeMs = Math.max(15, Number(process.env.STATS_ITEM_INDEX_MAX_AGE_MINUTES ?? "120")) * 60 * 1000;
       return Number.isFinite(indexedAt) && Date.now() - indexedAt <= maxAgeMs;
-    } catch (error) {
-      throw error;
+    } catch {
+      return false;
     }
   })();
   return statsItemIndexAvailability;
 }
 
 async function isStatsItemHistoryAvailable() {
-  statsItemHistoryAvailability = (async () => {
+  statsItemHistoryAvailability ??= (async () => {
     try {
       const [hourly, daily, resale] = await Promise.all([
         supabaseAdmin().from("roblox_catalog_item_stats_hourly").select("asset_id").limit(1),
         supabaseAdmin().from("roblox_catalog_item_stats_daily").select("asset_id").limit(1),
         supabaseAdmin().from("roblox_catalog_item_resale_points").select("asset_id").limit(1)
       ]);
-      if (hourly.error) throw hourly.error;
-      if (daily.error) throw daily.error;
-      if (resale.error) throw resale.error;
-      return true;
-    } catch (error) {
-      throw error;
+      return !hourly.error && !daily.error && !resale.error;
+    } catch {
+      return false;
     }
   })();
   return statsItemHistoryAvailability;
@@ -1699,7 +1698,8 @@ async function listBaseGames(options: {
     }
   }
   if (indexResult.error && indexResult.error.code !== "42P01") {
-    throw indexResult.error;
+    // The base table below still gives a complete list.
+    console.warn("Failed to read stats_game_current_index; falling back to roblox_universes", indexResult.error.message);
   }
 
   const select = `
@@ -1862,7 +1862,6 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
     .order("playing", { ascending: false })
     .limit(fetchLimit);
 
-  if (error) throw error;
   if (!error) {
     return ((data ?? []) as Array<{
       genre: string | null;
@@ -1934,7 +1933,11 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
 async function getStatsPlatformTotals(): Promise<Omit<StatsPlatformTotals, "trackedGames"> | null> {
   const { data, error } = await supabaseAdmin().rpc("get_stats_platform_current_summary");
 
-  if (error) throw error;
+  if (error) {
+    // A missing function (not deployed yet) means no totals; anything else is a real failure.
+    if (error.code === "42883" || error.code === "PGRST202") return null;
+    throw error;
+  }
 
   const row = ((data ?? []) as Array<{
     live_players: number | string | null;
@@ -1964,7 +1967,10 @@ async function getPlatformTrendFromRpc(sinceIso: string): Promise<StatsChartPoin
     p_since: sinceIso
   });
 
-  if (error) throw error;
+  if (error) {
+    if (error.code === "42883" || error.code === "PGRST202") return null;
+    throw error;
+  }
 
   return ((data ?? []) as PlatformTrendRow[]).map((row) => mapPlatformTrendRow(row));
 }
@@ -2304,8 +2310,7 @@ async function loadStatsItemRow(assetId: number): Promise<{ row: StatsItemIndexR
       `)
       .eq("asset_id", assetId)
       .maybeSingle();
-    if (error) throw error;
-    if (data) return { row: data as unknown as StatsItemIndexRow, indexed: true };
+    if (!error && data) return { row: data as unknown as StatsItemIndexRow, indexed: true };
   }
 
   const { data, error } = await supabaseAdmin()
@@ -2592,6 +2597,7 @@ async function getStatsIndexLastModifiedAt(
     .limit(1)
     .maybeSingle();
   if (error) {
+    if (error.code === "42P01") return null;
     throw error;
   }
   return (data as { indexed_at?: string | null } | null)?.indexed_at ?? null;
@@ -2623,7 +2629,6 @@ export async function getStatsGenreOptions(): Promise<string[]> {
     .select("genre")
     .order("genre", { ascending: true })
     .limit(500);
-  if (genreIndex.error) throw genreIndex.error;
   if (!genreIndex.error) {
     return ((genreIndex.data ?? []) as Array<{ genre: string | null }>)
       .map((row) => cleanStatsTaxonomyLabel(row.genre))
@@ -2665,7 +2670,7 @@ export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> 
   }
 
   if (rpcResult.error.code !== "42883" && rpcResult.error.code !== "PGRST202") {
-    throw rpcResult.error;
+    console.warn("Failed to load stats subgenre options aggregate", rpcResult.error.message);
   }
 
   const { data, error } = await supabaseAdmin()
@@ -3020,7 +3025,10 @@ async function getStoredPlatformChart(
     .lte(timeColumn, endValue)
     .order(timeColumn, { ascending: true });
 
-  if (error) throw error;
+  if (error) {
+    if (isMissingPostgrestRelationError(error)) return null;
+    throw error;
+  }
 
   const points = ((data ?? []) as PlatformAggregateRow[])
     .map((row) => mapPlatformAggregatePoint(row, useHourly ? "hourly" : "daily"))
@@ -3511,8 +3519,7 @@ async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | Stats
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
-    if (indexed.error) throw indexed.error;
-  if (indexed.data) return indexed.data as StatsGameIndexRow;
+    if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
     const { data, error } = await sb
       .from("roblox_universes")
@@ -3534,8 +3541,7 @@ async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | Stats
     .order("universe_id", { ascending: true })
     .limit(1)
     .maybeSingle();
-  if (indexed.error) throw indexed.error;
-  if (indexed.data) return indexed.data as StatsGameIndexRow;
+  if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
   const { data, error } = await sb
     .from("roblox_universes")
@@ -3607,8 +3613,7 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
     .eq("universe_id", universeId)
     .limit(1)
     .maybeSingle();
-  if (indexed.error) throw indexed.error;
-  if (indexed.data) return mapIndexedGame(indexed.data as StatsGameIndexRow);
+  if (!indexed.error && indexed.data) return mapIndexedGame(indexed.data as StatsGameIndexRow);
 
   const { data, error } = await sb
     .from("roblox_universes")
