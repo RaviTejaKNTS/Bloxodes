@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
-import { PUBLISHED_STATS_REPORTS } from "@/data/reports/published";
+import { listStatsReports } from "@/lib/stats-reports";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const pageUrl = `${SITE_URL}/stats/reports`;
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   }
 };
 
-const reports = PUBLISHED_STATS_REPORTS;
+export const dynamic = "force-dynamic";
 
 const breadcrumbStructuredData = breadcrumbJsonLd([
   { name: "Home", url: SITE_URL },
@@ -30,7 +30,8 @@ const breadcrumbStructuredData = breadcrumbJsonLd([
   { name: "Monthly reports", url: pageUrl }
 ]);
 
-export default function StatsReportsPage() {
+export default async function StatsReportsPage() {
+  const reports = await listStatsReports();
   return (
     <StatsContentLayout title="Monthly Roblox reports" canonicalPath="/stats/reports">
     <main className="min-w-0">

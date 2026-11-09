@@ -233,7 +233,10 @@
     "codes:discover": "tsx scripts/codes/discover-code-pages.ts",
     "codes:context": "tsx scripts/codes/factory-cli.ts context",
     "codes:publish": "tsx scripts/codes/factory-cli.ts publish",
-    "test:codes-factory": "NODE_ENV=test node --import tsx --test scripts/codes/__tests__/*.test.ts"
+    "test:codes-factory": "NODE_ENV=test node --import tsx --test scripts/codes/__tests__/*.test.ts",
+    "report:build": "node --max-old-space-size=4096 --import tsx scripts/reports/build.ts",
+    "report:chart": "node --max-old-space-size=4096 --import tsx scripts/reports/chart.ts",
+    "report:assemble": "node --import tsx scripts/reports/assemble.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

@@ -232,6 +232,8 @@ export function isGoogleIndexable(pathname: string, gamePaths: ReadonlySet<strin
   const path = normalizePath(pathname);
   if (gamePaths.has(path) || gamePaths.has(path.replace(/\/page\/[1-9]\d*$/, ""))) return true;
   if (indexablePaths.has(path)) return true;
+  if (/^\/stats\/reports\/roblox-[a-z]+-\d{4}$/.test(path)
+    && path !== "/stats/reports/roblox-june-2026" && path !== "/stats/reports/roblox-july-2026") return true;
   if (indexablePathPrefixes.some((prefix) => path.startsWith(`${prefix}/`))) return true;
   // Author profiles allow one slug, without nested routes.
   return path.startsWith(GOOGLE_AUTHOR_PROFILE_PREFIX)

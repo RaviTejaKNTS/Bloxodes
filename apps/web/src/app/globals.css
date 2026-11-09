@@ -12,6 +12,15 @@
   --color-border: 198 202 224;
   --color-accent: 79 70 229;
   --color-accent-dark: 67 56 202;
+  --chart-1: rgb(var(--color-accent));
+  --chart-2: oklch(0.6 0.12 170);
+  --chart-3: oklch(0.6 0.14 65);
+  --chart-4: oklch(0.58 0.18 25);
+  --chart-5: oklch(0.6 0.16 310);
+  --success: var(--chart-2);
+  --destructive: var(--chart-4);
+  --muted-foreground: rgb(var(--color-muted));
+  --border: rgb(var(--color-border));
   --radius-sm: 0.1875rem;
   --radius-md: 0.1875rem;
   --radius-lg: 0.25rem;
@@ -38,6 +47,10 @@
   --color-border: 52 52 52;
   --color-accent: 132 169 255;
   --color-accent-dark: 79 70 229;
+  --chart-2: oklch(0.76 0.12 170);
+  --chart-3: oklch(0.78 0.14 65);
+  --chart-4: oklch(0.75 0.16 25);
+  --chart-5: oklch(0.78 0.14 310);
   --shadow-soft: 0 28px 80px -48px rgba(0, 0, 0, 0.95);
   --sidebar-background: 0 0% 7%;
   --sidebar-foreground: 220 16% 92%;

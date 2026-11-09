@@ -247,6 +247,7 @@ function revalidateForStats(slug: string) {
       "stats-creators",
       "stats-items",
       reportSlug ? "stats-reports" : "",
+      reportSlug ? `stats-report:${reportSlug}` : "",
       detailSlug ? `stats-game:${detailSlug}` : "",
       "home"
     ]

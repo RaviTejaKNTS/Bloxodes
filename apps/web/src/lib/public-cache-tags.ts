@@ -356,6 +356,9 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
       return unique([...base, slugTag("wiki", normalized), "wiki-index", "home", "sitemap", "sitemap:wiki"]);
     case "stats":
       return unique([
+        normalized.startsWith("reports/") ? "feed" : "",
+        normalized.startsWith("reports/") ? "stats-reports" : "",
+        normalized.startsWith("reports/") ? slugTag("stats-report", normalized.slice(8)) : "",
         ...base,
         "stats",
         normalized === "home" || normalized === "stats" ? "stats-home" : "",

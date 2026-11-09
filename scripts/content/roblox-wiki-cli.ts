@@ -16,8 +16,10 @@ npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --ga
 npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
 npm run content:status -- --article <slug> [--target managed-dev|production]
-Supported contracts: roblox-wiki@1, game-wiki@1, article@1 and game-article@1. See contracts/<contract>/v1/.
---update-published permits deliberate updates to published article@1 bundles only. Matching bundles still only verify on production.
+npm run content:status -- --stats-report <slug> [--target managed-dev|production]
+Stats reports support --visibility hidden|public and --update-published.
+Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1 and stats-report@1. See contracts/<contract>/v1/.
+--update-published permits deliberate updates to published article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
 Default target: managed-dev. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
@@ -38,11 +40,12 @@ Without it, a local cover must match the current official thumbnail bytes. All i
     console.log(await deployedContentSha());
     return;
   }
-  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | undefined;
+  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | "stats-report@1" | undefined;
   if (options.command === "publish") {
     const { readWikiContract } = await import("../shared/wiki-publish-contract");
     contract = await readWikiContract(options.bundle!);
     assertUpdatePublishedScope(options, contract);
+    if (options.visibility && contract !== "stats-report@1") throw new Error("--visibility is only supported for stats-report@1");
     if (contract !== "roblox-wiki@1") assertApprovedHubCoverScope(options, contract);
   }
   if (process.env.BLOXODES_ENV_PROFILE !== "process-only") {
@@ -62,7 +65,9 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   if (!process.env.SUPABASE_SERVICE_ROLE) throw new Error("Missing SUPABASE_SERVICE_ROLE for the selected target.");
   const { publishBundle, contentStatus, contentCandidates } = await import("./roblox-wiki-publish");
   if (options.command === "publish") {
-    if (contract === "game-article@1") {
+    if (contract === "stats-report@1") {
+      const { publishStatsReport } = await import("./stats-report-publish"); await publishStatsReport(options);
+    } else if (contract === "game-article@1") {
       process.env.NODE_ENV = options.target === "production" ? "production" : "development";
       const { publishGameArticleBundle } = await import("./game-article-publish");
       await publishGameArticleBundle(options);
@@ -74,6 +79,8 @@ Without it, a local cover must match the current official thumbnail bytes. All i
       const { publishGameBundle } = await import("./game-wiki-publish");
       await publishGameBundle(options);
     } else await publishBundle(options);
+  } else if (options.command === "status" && options.statsReport) {
+    const {statsReportStatus} = await import("./stats-report-publish"); await statsReportStatus(options);
   } else if (options.command === "status" && options.article) {
     const { articleContentStatus } = await import("./article-publish");
     await articleContentStatus(options);
