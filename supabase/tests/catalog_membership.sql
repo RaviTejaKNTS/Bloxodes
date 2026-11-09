@@ -142,3 +142,14 @@ update public.roblox_emote_commands set sort_order=2;
 select pg_temp.check_touch('roblox-emote-commands',0);
 update public.roblox_emote_commands set is_published=false;
 select pg_temp.check_touch('roblox-emote-commands',1);
+
+
+-- A future page with explicit mappings receives a baseline on publication.
+insert into public.roblox_music_id_game_usage values('future-game',900,'untested');
+insert into public.catalog_pages(code) values('roblox-music-ids/games/future-game');
+do $$ begin
+ if (select identities from public.catalog_membership_snapshots where code='roblox-music-ids/games/future-game') <> array['900'] then raise exception 'New page has no membership baseline'; end if;
+end $$;
+truncate touches;
+update public.roblox_music_id_game_usage set compatibility_status='tested' where game_slug='future-game';
+select pg_temp.check_touch('roblox-music-ids/games/future-game',0);

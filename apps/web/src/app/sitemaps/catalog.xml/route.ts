@@ -67,13 +67,13 @@ export async function GET() {
       loc: withSiteUrl("/catalog/roblox-music-ids/trending"),
       changefreq: "daily",
       priority: "0.9",
-      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-music-ids/trending"))
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-music-ids/trending", pageMap.get("/catalog/roblox-music-ids/trending")?.lastmod))
     });
     pageMap.set("/catalog/roblox-decal-ids/curated", {
       loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
       changefreq: "weekly",
       priority: "0.9",
-      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-decal-ids/curated"))
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-decal-ids/curated", pageMap.get("/catalog/roblox-decal-ids/curated")?.lastmod))
     });
 
     const pages = Array.from(pageMap.values()).sort((a, b) => a.loc.localeCompare(b.loc));
