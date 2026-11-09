@@ -1,3 +1,4 @@
+import { getWikiCollectionFallbackImage } from "@/lib/game-collection-images";
 import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -166,7 +167,7 @@ export async function generateWikiCollectionMetadata({
   const databaseImage = databaseRuntime?.document.items.find(
     (item) => item.system.image && !hasWikiCollectionImageCredit(item.item)
   )?.system.image;
-  const image = databaseImage ?? page?.thumb_url ?? `${SITE_URL}/Bloxodes.png`;
+  const image = databaseImage || (page ? await getWikiCollectionFallbackImage(page) : null) || `${SITE_URL}/Bloxodes.png`;
 
   const growGardenConfig = wikiSlug === "grow-a-garden"
     ? getGrowGardenCollectionConfig(collectionSlug)

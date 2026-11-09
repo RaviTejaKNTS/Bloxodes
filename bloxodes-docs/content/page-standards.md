@@ -65,7 +65,7 @@ Every page ships with every image it can get. Never leave out an image that exis
 | Page | Required |
 | --- | --- |
 | Wiki hub (Roblox or franchise root and child game) | A landscape 16:9 cover (cards and social previews) and a square title thumbnail. |
-| Collection | An image on every item that has one in the game. The collection's social image comes from its items. |
+| Collection | An image on every item that has one in the game. The collection's social image comes from its items, or the game's art when no item has an image. |
 | Quiz, checklist, codes, tool, catalog | A cover or thumbnail for cards and the social preview. |
 | Article | A cover plus in-body images from the image pass. |
 
@@ -73,7 +73,7 @@ Every page ships with every image it can get. Never leave out an image that exis
 - **Non-Roblox:** official key art, store art or real gameplay screenshots, stored on the game row (`games.cover_image` 16:9, `games.hero_image` square). Quizzes, checklists, codes, catalogs and maps use their game's art; tools set `thumb_url`. A cover must be truly landscape; don't pad portrait box art. Publishing rejects missing, logo, broken or wrongly shaped images.
 - Use exact images. No unrelated crops, edited art or generic game thumbnails standing in for a missing item. If an item truly has no clean image, record the gap in the dataset.
 - **Missing item images never hold a collection back.** Publish it with the images that exist, even if that's none, and record each gap. A game without its collections is worse than a collection without images. The hub cover and thumbnail are still required.
-- Check the page's `og:image` after publishing. On a hub, the default Bloxodes logo means the cover is missing. A collection with no item images shows the logo, and that's expected.
+- Check the page's `og:image` after publishing. On a hub, the default Bloxodes logo means the cover is missing. A collection with no item images shows the game's cover instead.
 
 ## Before you publish
 

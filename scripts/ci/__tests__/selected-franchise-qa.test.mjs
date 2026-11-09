@@ -15,6 +15,7 @@ test('image exceptions must match every missing row exactly', () => {
   const acceptedGaps = ['missing-one', 'missing-two'].map(systemSlug => ({systemSlug, status: 'text-only/accepted missing', decisionReason: 'Explicitly approved text-only row.'}));
   const evidence = {acceptedGapCount: 2, acceptedGaps};
   assert.deepEqual(imagePolicy(document, evidence), {requireImages: false, acceptedMissing: ['missing-one', 'missing-two']});
+  assert.deepEqual(imagePolicy({items: document.items.slice(1)}, evidence), {requireImages: false, acceptedMissing: ['missing-one', 'missing-two']});
   assert.deepEqual(imagePolicy({items: [document.items[0]]}, null), {requireImages: true, acceptedMissing: []});
   for (const value of [null, {...evidence, acceptedGapCount: 1}, {...evidence, acceptedGaps: [acceptedGaps[0]]}, {...evidence, acceptedGaps: [acceptedGaps[0], acceptedGaps[0]]}, {...evidence, acceptedGaps: [...acceptedGaps.slice(0, 1), {...acceptedGaps[1], systemSlug: 'unapproved'}]}, {...evidence, acceptedGaps: acceptedGaps.map(gap => ({...gap, decisionReason: ''}))}]) assert.throws(() => imagePolicy(document, value));
 });

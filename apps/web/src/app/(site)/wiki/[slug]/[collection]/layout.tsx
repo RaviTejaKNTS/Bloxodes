@@ -2,7 +2,7 @@ import "@/styles/ads-collections.css";
 import { PageSidebar } from "@/components/PageSidebar";
 import { SocialShare } from "@/components/SocialShare";
 import { GameCollectionsRail, orderOtherCollections } from "@/components/game-sidebar/GameCollectionsRail";
-import { listPublishedWikiCollectionRuntimeImages } from "@/lib/wiki-collection-runtime";
+import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { GameDiscoverySidebar, WikiCard } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { getGameSidebarData } from "@/lib/game-sidebar";
 import { getWikiPageBySlug } from "@/lib/wiki";
@@ -36,7 +36,7 @@ export default async function WikiCollectionLayout({ children, params }: { child
   const railCollections = await Promise.all(ordered.map(async (entry, index) => {
     if (index >= 3) return entry;
     const collectionPage = collections.find(collection => collection.code === entry.value);
-    const images = collectionPage ? await listPublishedWikiCollectionRuntimeImages(collectionPage, 1) : null;
+    const images = collectionPage ? await listGameCollectionImageUrls(collectionPage.code, 1) : null;
     return { ...entry, image: images?.[0] ?? null };
   }));
   const universeId = page.universe_id ?? wiki?.universe_id;
