@@ -34,9 +34,17 @@ create index bench_decal_rank on roblox_decal_ids(curated_rank);
 analyze;
 """)
 
+# Install the exact rejected development history, then prove forward cleanup.
+# Existing cache helpers survive #215 in live development; fixture stubs model them.
+for name in ('music_ids','decal_ids','promo_rewards','music_game_usage','decal_game_usage'):
+ c.execute(f"create function public.trg_enqueue_revalidation_{name}() returns trigger language plpgsql as $$ begin return null; end $$")
+for rejected in sorted(Path("supabase/migrations_archive/catalog-dates-rejected").glob("*.sql")):
+ c.execute(rejected.read_text())
 # Exact new migration, with no writer-side membership triggers.
 migration = next(Path("supabase/migrations").glob("*_catalog_membership_reconciler.sql"))
 c.execute(migration.read_text())
+assert c.execute("select count(*) from pg_trigger where not tgisinternal and tgname in ('catalog_membership_insert','catalog_membership_update','catalog_membership_delete','initialize_catalog_membership_snapshot','catalog_data_revalidation')").fetchone()[0] == 0
+assert c.execute("select count(*) from information_schema.columns where table_name='catalog_membership_snapshots' and column_name='identities'").fetchone()[0] == 0
 c.execute("analyze")
 # Real unique queue and row enqueue behavior reproduce the old deadlock's lock order.
 c.execute("""
@@ -73,6 +81,25 @@ assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
 for role in ('anon','authenticated'):
  assert not c.execute("select has_function_privilege(%s,'public.refresh_catalog_membership_dates()','execute')",(role,)).fetchone()[0]
  assert not c.execute("select has_table_privilege(%s,'public.catalog_membership_snapshots','select')",(role,)).fetchone()[0]
+
+# Mapping switches, empty sets and remaining families retain #215's predicates.
+for mutation, expect_change in [
+ ("insert into roblox_music_id_game_usage values('jujutsu-shenanigans',999999,'untested')", True),
+ ("update roblox_music_id_game_usage set compatibility_status='tested' where asset_id=999999", False),
+ ("delete from roblox_music_id_game_usage where asset_id=999999", True),
+ ("update roblox_decal_ids set curated_rank=null where asset_id=38000", True),
+ ("insert into roblox_font_ids values(1,'active','Pending',null)", False),
+ ("update roblox_font_ids set thumbnail_state='Completed',thumbnail_url='image'", True),
+ ("insert into roblox_emote_commands values('wave',false,1)", False),
+ ("update roblox_emote_commands set is_published=true", True),
+ ("insert into roblox_promo_rewards values(1,'verified_claimable','promo_code')", True),
+ ("update roblox_promo_rewards set status='expired'", False),
+ ("update roblox_catalog_items set name=null where asset_id=3", True),
+]:
+ c.execute(mutation)
+ changed=c.execute("select refresh_catalog_membership_dates()").fetchone()[0]
+ assert bool(changed)==expect_change,(mutation,changed)
+ assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
 
 out={"counts":{"items":85000,"music":60000,"decals":38000,"mappings":10000},"refresh_ms":[],"writes_idle_ms":[],"writes_concurrent_ms":[],"blocking_probe":None}
 write_sql="update roblox_catalog_items set price_robux=price_robux+1 where asset_id between 1 and 100"
