@@ -94,6 +94,38 @@ function dependencies(state: ReturnType<typeof fixture>, fail?: "passes" | "badg
   return { deps, requests };
 }
 
+test("placeholder details preserve existing identity even with a known root place", async () => {
+  const state = fixture();
+  const { deps } = dependencies(state);
+  const originals: Row[] = state.tables.roblox_universes.map(row => ({ ...row, name: `Stored ${row.universe_id}`, creator_id: 999 }));
+  state.tables.roblox_universes = originals.map(row => ({ ...row }));
+  deps.fetchGameDetails = async () => [
+    { id: 1, rootPlaceId: 101, name: "[TITLE UNAVAILABLE]" },
+    { id: 2, rootPlaceId: 0, name: "Wrong identity" },
+    { id: 0, rootPlaceId: 0, name: "[TITLE UNAVAILABLE]" }
+  ];
+  await processBatch(state.db, targets, "light", deps);
+  assert.equal(state.earlyUpserts.length, 0);
+  for (const [index, row] of state.tables.roblox_universes.entries()) {
+    for (const key of ["name", "slug", "root_place_id", "creator_id"]) {
+      assert.equal(row[key], originals[index][key]);
+    }
+  }
+});
+
+test("valid enrichment repairs a placeholder slug while preserving ordinary slugs", async () => {
+  const state = fixture();
+  const { deps } = dependencies(state);
+  Object.assign(state.tables.roblox_universes[0], { name: "[TITLE UNAVAILABLE]", slug: "title-unavailable" });
+  Object.assign(state.tables.roblox_universes[1], { name: "Recovered name", slug: "title-unavailable" });
+  state.tables.roblox_universes[2].slug = "stable-game";
+  await processBatch(state.db, targets, "light", deps);
+  assert.equal(state.tables.roblox_universes[0].name, "Game 1");
+  assert.equal(state.tables.roblox_universes[0].slug, "game-1");
+  assert.equal(state.tables.roblox_universes[1].slug, "game-2");
+  assert.equal(state.tables.roblox_universes[2].slug, "stable-game");
+});
+
 test("a pass failure keeps independent work and later batches running, then reports an aggregate failure", async () => {
   const state = fixture();
   const { deps, requests } = dependencies(state, "passes");

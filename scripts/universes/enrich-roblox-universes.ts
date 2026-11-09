@@ -3,8 +3,7 @@ import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { slugify } from "@/lib/slug";
-import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
+import { hasPlaceholderUniverseIdentity, isPlaceholderGameDetail, universeNameFields } from "./universe-identity";
 import { isStatsTier, type StatsTier } from "./stats-tier";
 import { refreshGamePasses } from "./game-passes";
 
@@ -615,7 +614,7 @@ export async function previewRobloxUniverse(
   if (!Number.isSafeInteger(universeId) || universeId <= 0) throw new Error("Universe import requires a positive safe integer ID.");
   const details = await fetchDetails([universeId]);
   const detail = details.find(entry => entry.id === universeId);
-  if (!detail || !Number.isSafeInteger(detail.rootPlaceId) || Number(detail.rootPlaceId) <= 0 || !detail.name?.trim()) {
+  if (!detail || isPlaceholderGameDetail(detail) || !Number.isSafeInteger(detail.rootPlaceId) || Number(detail.rootPlaceId) <= 0 || !detail.name?.trim()) {
     throw new Error(`Roblox returned no complete game details for universe ${universeId}. Retry when its name and root place are available.`);
   }
   const payload = mapGameDetail(detail, null)!;
@@ -769,6 +768,7 @@ function mapGameDetail(
   fallbackRootPlaceId?: number | null,
   metadata?: UniverseMetadata
 ): UniverseUpsertRecord | null {
+  if (isPlaceholderGameDetail(game) || isPlaceholderGameDetail({ name: metadata?.displayName })) return null;
   const votes = game.votes ?? game.pastDayVotes ?? {};
   const playing = typeof game.playing === "number" ? game.playing : null;
   const visits = typeof game.visits === "number" ? game.visits : null;
@@ -907,12 +907,7 @@ function mapGameDetail(
     social_links: metadata?.socialLinks ?? {}
   };
 
-  const displaySource = (payload.name as string | null) ?? `Universe ${game.id}`;
-  const sanitizedDisplay = cleanRobloxUniverseDisplayName(displaySource);
-  payload.display_name = sanitizedDisplay;
-  const slugSource =
-    sanitizedDisplay ?? (payload.name as string | null) ?? `universe-${game.id}`;
-  payload.slug = slugify(slugSource) || `universe-${game.id}`;
+  Object.assign(payload, universeNameFields(game.id, payload.name as string));
 
   return payload as UniverseUpsertRecord;
 }
@@ -922,7 +917,7 @@ function mergeWithExistingValues(
   existing?: UniverseDbRow | null
 ): UniverseUpsertRecord {
   if (!existing) return incoming;
-  const lockedFields = new Set(["slug"]);
+  const lockedFields = new Set(hasPlaceholderUniverseIdentity({ name: existing.name, slug: existing.slug }) ? [] : ["slug"]);
   const merged: Record<string, unknown> = { ...existing };
 
   for (const [key, value] of Object.entries(incoming)) {
@@ -1409,7 +1404,7 @@ export async function processBatch(
     mode === "deep" ? deps.fetchUniverseMetadata(universeIds) : Promise.resolve(new Map<number, UniverseMetadata>()),
     deps.fetchGameDetails(universeIds)
   ]);
-  const validDetails = details.filter((detail) => Number.isSafeInteger(detail.id) && detail.id > 0);
+  const validDetails = details.filter((detail) => Number.isSafeInteger(detail.id) && detail.id > 0 && universeIds.includes(detail.id) && !isPlaceholderGameDetail(detail));
   const returnedIds = new Set(validDetails.map((detail) => detail.id));
   const missingIds = universeIds.filter((universeId) => !returnedIds.has(universeId));
   if (mode === "deep") failures.push(...missingIds.map(universeId => ({ universeId, stage: "details", error: new Error(`Missing game details for ${universeId}`) })));
