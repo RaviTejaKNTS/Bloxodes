@@ -11,12 +11,18 @@ export function reportSlug(month: string) {
     timeZone: 'UTC'
   }).toLowerCase()}-${month.slice(0, 4)}`;
 }
+const LINK_HOSTS = ['roblox.com', 'www.roblox.com', 'devforum.roblox.com', 'about.roblox.com', 'create.roblox.com'];
 export function resolveLinks(md: string, games: Row) {
   if (/<\/?[a-z][^>]*>/i.test(md.replace(/<https:\/\/[^>]+>/g, '')))
     throw Error('Raw HTML is not allowed in report prose');
+  // Only inline links are allowed: reference links, link definitions and HTML entities could hide a destination.
+  if (/\]\s*\[[^\]]*\]|^\s{0,3}\[[^\]]+\]:/m.test(md))
+    throw Error('Reference-style links are not allowed in report prose');
+  if (/&(#\d+|#x[0-9a-f]+|[a-z]+);/i.test(md))
+    throw Error('HTML entities are not allowed in report prose');
   for (const match of md.matchAll(/https?:\/\/[^\s)<>]+/g)) {
     const url = new URL(match[0]);
-    if (url.protocol !== 'https:' || !['roblox.com', 'devforum.roblox.com', 'about.roblox.com', 'create.roblox.com'].includes(url.hostname))
+    if (url.protocol !== 'https:' || !LINK_HOSTS.includes(url.hostname))
       throw Error(`Disallowed report link: ${match[0]}`);
   }
   return md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_whole, label, url) => {
@@ -27,7 +33,7 @@ export function resolveLinks(md: string, games: Row) {
       return `[${label}](/stats/games/${g.slug})`;
     }
     const u = new URL(url);
-    if (u.protocol !== 'https:' || !['roblox.com', 'devforum.roblox.com', 'about.roblox.com', 'create.roblox.com'].includes(u.hostname))
+    if (u.protocol !== 'https:' || !LINK_HOSTS.includes(u.hostname))
       throw Error(`Disallowed report link: ${url}`);
     return `[${label}](${url})`;
   });
@@ -150,6 +156,10 @@ export async function validateReport(root: string) {
       files: manifest.files
     }))
   };
+}
+/** A rerun without --visibility keeps the stored visibility; a new report starts hidden. */
+export function nextVisibility(requested: 'hidden' | 'public' | undefined, existing: Row | null): 'hidden' | 'public' {
+  return requested ?? (existing?.visibility === 'public' ? 'public' : 'hidden');
 }
 export function canReplace(existing: Row | null, sha: string, update = false) {
   if (existing?.visibility === 'public' && existing.data_sha256 !== sha && !update)

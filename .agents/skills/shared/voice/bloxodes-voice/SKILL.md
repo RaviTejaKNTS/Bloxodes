@@ -43,7 +43,7 @@ Most game names, NPCs and numbers in this guide and its examples are made up. Tr
 | AI filler | Additionally, Furthermore, Moreover, It's worth noting, It's important to note, In conclusion, Overall, "not just X but Y", "whether you're a beginner or a pro", "the world of" | Cut it. The sentence almost always works without it. |
 | Fake experience | "When I played...", "In our testing...", "We spent hours..." | Use the facts you have. Never invent a session, test or result. |
 | Forced fun | stacked puns, a quip in every paragraph, emoji, "!!!" | One light line wrapped around a real fact, or none. |
-| Self-reference | "Bloxodes", "this page", "this catalog", "this dataset", "our list", "use the cards below" | Talk about the game. (An article can say "this guide" once if it helps.) |
+| Self-reference | "Bloxodes", "this page", "this catalog", "this dataset", "our list", "use the cards below" | Talk about the game. (An article can say "this guide" once if it helps. A monthly stats report can point at a chart when it helps the reader see something: "follow the dashed line", "look at the weekend bumps".) |
 | Process talk | sources, briefs, research, datasets, manifests, workflows, checks we ran | Keep it in the brief. Readers only see the game. |
 | Em dashes | "the boss — and its loot —" | Use a comma, colon, parentheses or two sentences. This applies to every field, including titles, FAQs and alt text. |
 | Freshness claims on evergreen pages | latest, current, fresh, new, updated daily, "this month" | Codes pages stay timeless. Scripts own the live data. |

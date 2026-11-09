@@ -23,6 +23,12 @@ The prompts live in the T3 scheduler, not the repo. Keep them short: the selecti
 
 Runs can overlap, and they share the root checkout. Each one claims its own queue row and commits only its own content folder.
 
+## T3 schedule (homelab)
+
+| Schedule | Time | Does |
+| --- | --- | --- |
+| Bloxodes monthly stats report (Content Factory) | Daily, about 09:30 IST | `stats-report-main` in the "Bloxodes Content Factory" project on the homelab, root checkout, Claude Opus 5.5 high, full access. `bin/stats-report due` finds the newest finished month with no report; most days that's `none` and the run settles at once. On the 1st (once the month's last daily rollup is in) it builds the data, has Luna gather the month's events and fact-check, has Haiku write, and publishes with `content:publish`. Visibility comes from the factory's `content/stats-reports/VISIBILITY`. A missed day is caught up by the next run, and a crashed run is safe to repeat because nothing is written until the final publish. |
+
 ## Homelab (systemd)
 
 All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env`. Codes discovery reads `.envs/targets/production.env` and `.envs/pipelines/codes.env` from `/srv/data/projects/Bloxodes`.

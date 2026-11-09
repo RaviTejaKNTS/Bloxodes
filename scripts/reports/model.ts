@@ -258,7 +258,7 @@ interface GenreSummary {
   biggest: number | undefined;
   biggestName: string | undefined;
   biggestSlug: string | null | undefined;
-  leaderShare: number;
+  leaderShare: number | null;
   session: number | null;
 }
 export function buildModel(month: string, rows: DailyRow[], universes: Row[], events: Row[], hourly: Row[], now = new Date()) {
@@ -313,8 +313,25 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       total: mean(ds.map(d => dailyTotals[d] ?? 0))
     };
   });
-  const genreRows: GenreSummary[] = [...new Set(current.map(g => games[g.id].genre))].map(name => {
-    const gs = current.filter(g => games[g.id].genre === name), p = sum(gs.map(g => g.players)), before = sum(prior.filter(g => games[g.id].genre === name).map(g => g.players));
+  // Genre totals count every game on full days, not only ranked games, so shares add up to the
+  // platform total. Rankings, leaders and session length still use ranked games only.
+  const genreAverages = (days: string[]) => {
+    const fullDays = new Set(days), totals = new Map<string, number>();
+    if (!fullDays.size)
+      return totals;
+    for (const r of rows) {
+      if (!fullDays.has(r.stat_date))
+        continue;
+      const name = games[String(r.universe_id)]?.genre ?? 'Other';
+      totals.set(name, (totals.get(name) ?? 0) + players(r));
+    }
+    for (const [name, total] of totals)
+      totals.set(name, total / fullDays.size);
+    return totals;
+  };
+  const genreNow = genreAverages(check.full_days), genreBefore = prior.length ? genreAverages(comparison.full_days) : new Map<string, number>();
+  const genreRows: GenreSummary[] = [...genreNow.keys()].map(name => {
+    const gs = current.filter(g => games[g.id].genre === name), p = genreNow.get(name) ?? 0, before = genreBefore.get(name) ?? 0;
     return {
       genre: name,
       players: p,
@@ -325,7 +342,7 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       biggest: gs[0]?.id,
       biggestName: games[gs[0]?.id]?.name,
       biggestSlug: games[gs[0]?.id]?.slug,
-      leaderShare: gs[0]?.players / p * 100,
+      leaderShare: gs.length && p ? gs[0].players / p * 100 : null,
       session: sum(gs.map(g => g.visits)) ? sum(gs.map(g => g.total)) * 1440 / sum(gs.map(g => g.visits)) : null
     };
   }).sort((a, b) => b.players - a.players);
@@ -410,11 +427,12 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       session: null
     });
   put('genre-share', 'hbar', major);
-  put('genre-trends', 'multiples', genreRows.slice(0, 8).map(g => ({
+  const weeklyGenres = weeks.map(w => genreAverages(w.days));
+  put('genre-trends', 'multiples', genreRows.filter(g => g.genre !== 'Other').slice(0, 8).map(g => ({
     genre: g.genre,
-    points: weeks.map(w => ({
+    points: weeks.map((w, i) => ({
       week: w.week,
-      value: sum(w.ranked.filter(r => games[r.id]?.genre === g.genre).map(r => r.players))
+      value: weeklyGenres[i].get(g.genre) ?? 0
     }))
   })));
   put('genre-table', 'table', genreRows);
@@ -447,7 +465,7 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       others: sum(top.slice(1, n).map(g => g.players)),
       throughRank: n
     }, ['top-games'], 'The leader compared with the next games combined.');
-  for (const g of genreRows.filter(g => g.players > 0))
+  for (const g of genreRows.filter(g => g.players > 0 && g.leaderShare !== null))
     add('genre-leader', {
       genre: g.genre,
       leader: g.biggest,

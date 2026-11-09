@@ -1,6 +1,6 @@
 # Stats
 
-Last verified: 2026-10-30
+Last verified: 2026-11-09
 
 Live Roblox game stats at `/stats` (players, visits, ranks, risers, genres, creators) and the monthly Roblox reports. Metric meanings and chart rules are in [stats metrics](stats-metrics.md).
 
@@ -87,10 +87,34 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 
 ## Monthly reports
 
-- **Skill:** `bloxodes-monthly-roblox-report`, run by hand for a month and year.
-- **Output:** a frozen data file `apps/web/src/data/reports/roblox-<month>-2026.ts`, a route under `apps/web/src/app/(site)/stats/reports/`, chart components and a committed feature image. Raw extracts stay in `tmp/`.
-- **Publish:** a code PR and web deploy. Add the report to the reports index, sitemap and feed by hand.
-- Reports aren't `articles` rows and don't regenerate.
+One report a month at `/stats/reports/roblox-<month>-<year>`, from October 2026. The page, every chart and every number come from code; the Content Factory writes only the words around them and publishes with `content:publish`. No code change per month. June to September 2026 are older hand-built pages (`apps/web/src/data/reports/`, `apps/web/src/app/(site)/stats/reports/roblox-*-2026/`) and stay as they are.
+
+```text
+report:build (production, read-only) -> data/ (charts, facts, insights, writer notes)
+Content Factory: context (Luna) -> copy (Haiku) -> report:assemble -> review (Luna)
+content:publish stats-report@1 -> stats_reports -> /stats/reports/[slug]
+```
+
+**Commands** (run from a main checkout; the factory runs them through `bin/stats-report`):
+
+| Command | Does |
+| --- | --- |
+| `npm run report:build -- --month YYYY-MM --out <abs-dir> --allow-prod-read` | Reads the month from production and writes `<dir>/data/`: `data-check.json`, `facts.json`, `charts/<id>.json`, `insights.json` (up to 40 ranked comparisons), `writer-notes.md`, `games.json`, `manifest.json` (hashes). Raw query caches go in `<dir>/raw/`. Never writes a database. Exit 2 when the month isn't `ready`; `data-check.json` says `not-ready` or `invalid` and why. |
+| `npm run report:chart -- --data <dir>/data --kind game-lines\|genre-lines\|top-list\|compare-bars --id extra-N ...` | Adds up to 3 extra charts from the raw cache. Values always come from data. |
+| `npm run report:assemble -- --bundle <dir> --reply <file>` | Turns the writer's reply (format: the factory's `prompts/haiku-stats-report.md`) into `report.json` and runs the publish validation without a database. |
+| `npm run content:publish -- --bundle <dir> [--target production --apply --allow-prod] [--visibility hidden\|public] [--update-published]` | `stats-report@1` (`contracts/stats-report/v1/`). Checks hashes, `ready` status, chart order, links, the copy check and the number check (every number in the copy must match the frozen data), makes the 1200×630 feature image, writes `stats_reports`, reads it back, revalidates and checks the live page. Default visibility is `hidden`. |
+| `npm run content:status -- --stats-report <slug> --target production` | The stored row's state. |
+
+**Data rules:**
+
+- Player value per game-day is `coalesce(avg_playing, playing)`. A full day has at least 90% of the month's median daily row count; other days are gaps, never filled in. A month is `ready` once it has ended, its last day is rolled up and at least 90% of its days are full.
+- Comparisons use the previous month only if it's also valid, and never months before September 2026 (coverage was much smaller before 2026-08-10).
+- A game ranks with data on 80% of full days. Negative `visit_delta` is dropped. Ratings need 100 votes. Trend charts use Monday weeks with 6 full days, from 2026-08-10. Genres `All`, empty and null count as `Other`.
+- Fixed charts: `players-daily`, `busiest-hours`, `top-games`, `top10-weekly`, `concentration`, `movers`, `new-games`, `genre-share`, `genre-trends`, `genre-table`, `rating-vs-size`, `session-length`, `update-effect`, `top100`. A chart whose data fails its check is left out and named in `data-check.json`:
+  - `busiest-hours` needs 80% cell coverage and no adjacent-hour jump over 35% from the top 1,000 games' hourly rows. October 2026 failed (55 of 168 cells under coverage), so it's left out until hourly coverage improves.
+  - `update-effect` uses a top-100 game's first publish after 7 quiet days, with 7 full days on each side, and needs at least 4 of them. Raw `updated` events fire on every publish, so they aren't meaningful on their own.
+
+**Page and storage:** `stats_reports` holds one row per month (text, the frozen chart data, feature image, `visibility`). Anonymous reads see only `public` rows. `apps/web/src/app/(site)/stats/reports/[slug]/page.tsx` renders it with the chart components in `apps/web/src/components/reports/stats-report/`; static report folders win over the dynamic route. A `hidden` report renders at its URL with `noindex` and stays out of the archive, rail, home, sitemap and feed. `apps/web/src/lib/stats-reports.ts` merges public rows with `published.ts` for every list.
 
 ## Known issues
 
@@ -98,4 +122,4 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 - The hourly platform summary adds up only the games sampled in each hour. HOT games land in alternate hours, so the 24-hour player chart zig-zags between about 10K and 13M. Daily views are not affected.
 - `peak_players` in `roblox_platform_stats_hourly` / `_daily` adds up each game's own peak, and games peak at different times, so it overstates the real concurrent peak (33.9M against about 16M real in October 2026). Don't show it as "peak players"; the Players by day calendar uses daily average players.
 - Daily rank snapshots aren't scheduled. `roblox_universe_rank_snapshots_daily` has no rows after 2026-08-09, so no page section should read it until the job is scheduled again.
-- The August 2026 report is live but missing from the stats sitemap and feed.
+- October 2026 daily rollups are missing for Oct 9 and Oct 16 and partial for Oct 18 (the 00:02 job failed or didn't run). Hourly rows still exist until about 2027-01-07, so `stats:rollup-daily -- --date <day> --finalize` through the VPS `run-job.sh` can backfill them. Until then those days are gaps in the October report.

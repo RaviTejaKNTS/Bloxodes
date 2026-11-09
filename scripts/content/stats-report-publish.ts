@@ -4,7 +4,7 @@ import path from 'node:path';
 import { featureImage } from '../reports/feature-image';
 import { createClient } from '@supabase/supabase-js';
 import type { ContentOptions } from './wiki-content-options';
-import { validateReport, canReplace, resolveLinks } from '../reports/validate';
+import { validateReport, canReplace, resolveLinks, nextVisibility } from '../reports/validate';
 import { assertLocalContentPublication } from '../shared/local-content-publication-guard';
 import { revalidatePublishedContent } from '../shared/revalidate-published-content';
 import { hash } from '../reports/build';
@@ -109,7 +109,7 @@ export async function publishStatsReport(options: ContentOptions) {
     content: resolvedContent,
     data: renderData,
     feature_image_url,
-    visibility: options.visibility ?? 'hidden',
+    visibility: nextVisibility(options.visibility, existing),
     contract: report.contract,
     data_sha256: sha,
     published_at: existing?.published_at ?? now,

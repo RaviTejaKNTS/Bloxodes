@@ -70,11 +70,9 @@ async function fetchStatsReports(): Promise<ReportListing[]> {
     const { data, error } = await db.from('stats_reports').select('slug,month,title,dek,feature_image_url,published_at,updated_at').eq('visibility', 'public').order('month', {
       ascending: false
     }).range(offset, offset + 999);
-    if (error) {
-      if (error.code === '42P01' || error.code === 'PGRST205')
-        break;
+    // Throw every error, including a missing table, so a failed read is never cached as a short list.
+    if (error)
       throw error;
-    }
     if (!data?.length)
       break;
     dynamic.push(...data.filter(r => !fixed.some(f => f.href === `/stats/reports/${r.slug}`)).map(r => ({

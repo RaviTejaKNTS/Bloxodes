@@ -17,7 +17,15 @@ export const PUBLISHED_STATS_REPORTS = [
     description: robloxSeptember2026Report.subtitle,
     image: robloxSeptember2026Report.featureImage
   },
-  {href: `/stats/reports/${robloxAugust2026Report.slug}`, month: robloxAugust2026Report.featureImage.month, title: robloxAugust2026Report.title, description: robloxAugust2026Report.subtitle, image: robloxAugust2026Report.featureImage, updatedAt: robloxAugust2026Report.updatedAt, publishedAt: robloxAugust2026Report.publishedAt},
+  {
+    href: `/stats/reports/${robloxAugust2026Report.slug}`,
+    updatedAt: robloxAugust2026Report.updatedAt,
+    publishedAt: robloxAugust2026Report.publishedAt,
+    month: robloxAugust2026Report.featureImage.month,
+    title: robloxAugust2026Report.title,
+    description: robloxAugust2026Report.subtitle,
+    image: robloxAugust2026Report.featureImage
+  },
   {
     href: `/stats/reports/${robloxJuly2026Report.slug}`,
     updatedAt: robloxJuly2026Report.updatedAt,
