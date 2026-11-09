@@ -91,6 +91,10 @@ describe('number check', () => {
     expect(numberFindings('About 15 games joined.', values)).toHaveLength(1);
     expect(numberFindings('It averaged 1.2M players.', values)).toEqual([]);
   });
+  it('still matches a real value stored under a weekday field', () => {
+    const values = numericValues([{ weekend: 14540179, weekday: 9726918 }]);
+    expect(numberFindings('Weekdays averaged 9.73M.', values)).toEqual([]);
+  });
 });
 
 describe('report list fallback', () => {
