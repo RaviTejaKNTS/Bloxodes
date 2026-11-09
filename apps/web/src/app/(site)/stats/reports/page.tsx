@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
-import { listStatsReports } from "@/lib/stats-reports";
+import { listStatsReportsOrStatic } from "@/lib/stats-reports";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const pageUrl = `${SITE_URL}/stats/reports`;
@@ -31,7 +31,7 @@ const breadcrumbStructuredData = breadcrumbJsonLd([
 ]);
 
 export default async function StatsReportsPage() {
-  const reports = await listStatsReports();
+  const reports = await listStatsReportsOrStatic("the reports archive");
   return (
     <StatsContentLayout title="Monthly Roblox reports" canonicalPath="/stats/reports">
     <main className="min-w-0">

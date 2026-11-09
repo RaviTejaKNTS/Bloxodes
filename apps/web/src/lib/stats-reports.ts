@@ -58,12 +58,15 @@ export const getStatsReport = cache((slug: string) => unstable_cache(() => fetch
   revalidate: 3600,
   tags: ['stats', 'stats-reports', `stats-report:${slug}`]
 })());
-async function fetchStatsReports(): Promise<ReportListing[]> {
-  const fixed: ReportListing[] = PUBLISHED_STATS_REPORTS.map(r => ({
+function staticReportListings(): ReportListing[] {
+  return PUBLISHED_STATS_REPORTS.map(r => ({
     ...r,
     updatedAt: r.updatedAt,
     publishedAt: r.publishedAt
   }));
+}
+async function fetchStatsReports(): Promise<ReportListing[]> {
+  const fixed = staticReportListings();
   const db = supabaseAdmin();
   const dynamic: ReportListing[] = [];
   for (let offset = 0; ; offset += 1000) {
@@ -98,3 +101,17 @@ export const listStatsReports = cache(unstable_cache(fetchStatsReports, ['stats-
   revalidate: 3600,
   tags: ['stats', 'stats-reports']
 }));
+
+/**
+ * The report list for pages that must still render when the database read fails (sitemap, feed,
+ * archive, stats rail). It falls back to the static published reports and logs the error. The
+ * failure is never stored in the report-list cache, so the next request reads the database again.
+ */
+export async function listStatsReportsOrStatic(context: string): Promise<ReportListing[]> {
+  try {
+    return await listStatsReports();
+  } catch (error) {
+    console.error(`Stats report list failed for ${context}; using the static list`, error);
+    return staticReportListings();
+  }
+}

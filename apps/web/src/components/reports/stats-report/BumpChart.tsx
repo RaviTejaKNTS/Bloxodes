@@ -26,7 +26,6 @@ export function BumpChart({ chart }: ChartProps) {
   return <svg viewBox={`0 0 360 ${height}`} className="w-full text-[10px]" role="img" aria-label="Weekly ranks, four biggest movers highlighted">
     {chart.data.map(row => {
       const color = highlights.includes(row.id) ? colors[highlights.indexOf(row.id)] : muted;
-      const values = ranks(row);
       let drawing = false;
       const path = row.points.map((point, index) => {
         if (point.rank === null) { drawing = false; return ''; }
@@ -36,8 +35,9 @@ export function BumpChart({ chart }: ChartProps) {
       }).join(' ');
       return <g key={row.id} tabIndex={0} aria-label={`${row.name}: ${row.points.map(point => `${point.week} rank ${point.rank ?? 'missing'}`).join('; ')}`}>
         <path d={path} fill="none" stroke={color} strokeWidth={highlights.includes(row.id) ? 2 : 1} opacity={highlights.includes(row.id) ? 1 : .4} />
-        <text x={90} y={left.get(row.id)} textAnchor="end" fill={color}>{row.name.slice(0, 17)}</text>
-        <text x={255} y={right.get(row.id)} fill={color}>#{values.at(-1)} {row.name.slice(0, 15)}</text>
+        {/* Labels only where the game is ranked in the first or last week, never a stale rank. */}
+        {row.points[0]?.rank != null && <text x={90} y={left.get(row.id)} textAnchor="end" fill={color}>{row.name.slice(0, 17)}</text>}
+        {row.points.at(-1)?.rank != null && <text x={255} y={right.get(row.id)} fill={color}>#{row.points.at(-1)!.rank} {row.name.slice(0, 15)}</text>}
       </g>;
     })}
     <text x={95} y={height - 3} fill={muted}>{chart.data[0]?.points[0]?.week ? shortDate(chart.data[0].points[0].week) : ''}</text>

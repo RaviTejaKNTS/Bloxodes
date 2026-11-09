@@ -119,7 +119,8 @@ export function ranks(rows: DailyRow[], full: string[]): RankedGame[] {
     .filter(game => game.days >= full.length * .8)
     .map(game => ({
       ...game,
-      players: game.total / full.length,
+      // Average over the days the game has data; a missing day is a gap, not zero players.
+      players: game.total / game.days,
       session: game.visits > 0 ? game.total * 1440 / game.visits : null
     }))
     .sort((a, b) => b.players - a.players || a.id - b.id)
@@ -453,11 +454,15 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
     charts: related,
     summary
   });
-  add('loss-vs-gains', {
-    loser: movers.at(-1)?.id,
-    loss: movers.at(-1)?.change ?? 0,
-    gains: sum(movers.filter(g => g.change! > 0).slice(0, 2).map(g => g.change!))
-  }, ['movers'], 'Largest loss compared with the two largest gains.');
+  // Only when a game really lost players and at least two gained.
+  const biggestLoser = movers.filter(g => g.change! < 0).sort((a, b) => a.change! - b.change!)[0];
+  const topGainers = movers.filter(g => g.change! > 0).sort((a, b) => b.change! - a.change!).slice(0, 2);
+  if (biggestLoser && topGainers.length === 2)
+    add('loss-vs-gains', {
+      loser: biggestLoser.id,
+      loss: biggestLoser.change,
+      gains: sum(topGainers.map(g => g.change!))
+    }, ['movers'], 'Largest loss compared with the two largest gains.');
   for (let n = 3; n <= 5; n++)
     add('leader-vs-runners', {
       leaderId: top[0]?.id,

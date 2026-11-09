@@ -38,12 +38,19 @@ export function resolveLinks(md: string, games: Row) {
     return `[${label}](${url})`;
   });
 }
+// Layout and index fields (hour of day, weekday number, positions, universe IDs) aren't facts a
+// writer can quote, so they never count as a match for a number in the copy.
+const STRUCTURAL_KEYS = new Set(['hour', 'weekday', 'index', 'position', 'throughRank', 'id', 'universe_id', 'leaderId', 'loser', 'leader_id', 'biggest']);
 export function numericValues(value: unknown, result: number[] = []): number[] {
   if (typeof value === 'number' && Number.isFinite(value))
     result.push(value, Math.abs(value));
-  else if (value && typeof value === 'object')
-    for (const v of Object.values(value))
+  else if (Array.isArray(value))
+    for (const v of value)
       numericValues(v, result);
+  else if (value && typeof value === 'object')
+    for (const [key, v] of Object.entries(value))
+      if (!STRUCTURAL_KEYS.has(key))
+        numericValues(v, result);
   return result;
 }
 export function numberFindings(text: string, values: number[]) {
