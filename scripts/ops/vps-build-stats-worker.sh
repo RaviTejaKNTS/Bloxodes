@@ -61,6 +61,13 @@ git -C "$REPO" clean -dffx
 SHORT_SHA="$(printf '%s' "$APPROVED_SHA" | cut -c1-12)"
 CANDIDATE_IMAGE="bloxodes-stats-worker:candidate-$SHORT_SHA"
 SMOKE_COMMAND="npm run stats:worker:smoke"
+PREFLIGHT_PREFIX="${STATS_WORKER_PREFLIGHT_PREFIX:-bloxodes-worker-build-$$}"
+cleanup_preflight() {
+  timeout --signal=KILL 10 docker rm -f "$PREFLIGHT_PREFIX-candidate" "$PREFLIGHT_PREFIX-current" >/dev/null 2>&1 || true
+}
+trap cleanup_preflight EXIT
+trap 'exit 143' TERM
+trap 'exit 130' INT
 
 docker build \
   --build-arg "BLOXODES_BUILD_SHA=$APPROVED_SHA" \
@@ -69,7 +76,7 @@ docker build \
   --file "$REPO/Dockerfile.stats-worker" \
   "$REPO"
 
-docker run --rm \
+docker run --rm --name "$PREFLIGHT_PREFIX-candidate" \
   --env BLOXODES_ENV_PROFILE=process-only \
   --entrypoint sh \
   "$CANDIDATE_IMAGE" \
@@ -82,7 +89,7 @@ if [ "$CANDIDATE_SHA" != "$APPROVED_SHA" ]; then
 fi
 
 if docker image inspect "$IMAGE" >/dev/null 2>&1; then
-  if docker run --rm \
+  if docker run --rm --name "$PREFLIGHT_PREFIX-current" \
     --env BLOXODES_ENV_PROFILE=process-only \
     --entrypoint sh \
     "$IMAGE" \

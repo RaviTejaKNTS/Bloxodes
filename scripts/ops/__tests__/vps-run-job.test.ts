@@ -11,12 +11,14 @@ async function fixture() {
   await mkdir(path.join(root, 'bin')); await writeFile(path.join(root, 'env.stats-worker'), '');
   await writeFile(path.join(root, 'bin/docker'), `#!/bin/sh
 case "$1" in
- network|image) exit 0 ;;
+ network) sleep "\${MOCK_NETWORK_DURATION:-0}"; exit 0 ;;
+ image) test "\${MOCK_BUILD:-0}" = 0; exit $? ;;
  ps) exit 0 ;;
  rm) echo removed >> "$STATS_WORKER_BASE/removed"; exit 0 ;;
- run) case "$*" in *--name*) case "$*" in *BLOXODES_ENV_PROFILE=process-only*) ;; *) exit 22 ;; esac; sleep "\${MOCK_DURATION:-0}"; exit "\${MOCK_EXIT:-0}" ;; *) exit 0 ;; esac ;;
+ run) case "$*" in *--entrypoint*) sleep "\${MOCK_SMOKE_DURATION:-0}"; exit 0 ;; *--name*) case "$*" in *BLOXODES_ENV_PROFILE=process-only*) ;; *) exit 22 ;; esac; sleep "\${MOCK_DURATION:-0}"; exit "\${MOCK_EXIT:-0}" ;; *) exit 0 ;; esac ;;
 esac
 `, {mode:0o755});
+  await writeFile(path.join(root, 'bin/build-image.sh'), '#!/bin/sh\nsleep "${MOCK_BUILD_DURATION:-0}"\n', {mode:0o755});
   const env = {...process.env, STATS_WORKER_BASE:root, PATH:path.join(root,'bin')+':'+process.env.PATH};
   return {root, env, cleanup:()=>rm(root,{recursive:true,force:true})};
 }
@@ -51,6 +53,26 @@ test('a failed or timed-out container is removed and never marked successful',as
       assert.notEqual(await command({...f.env,...options}),0);
       assert.equal(JSON.parse(await readFile(path.join(f.root,'state/canary.json'),'utf8')).state,'failed');
       assert.match(await readFile(path.join(f.root,'removed'),'utf8'),/removed/);
+    } finally { await f.cleanup(); }
+  }
+});
+
+test('whole-run deadline covers network, image build and smoke; the next run acquires both locks', async () => {
+  for (const options of [
+    {MOCK_NETWORK_DURATION:'5'},
+    {MOCK_BUILD:'1', MOCK_BUILD_DURATION:'5'},
+    {MOCK_SMOKE_DURATION:'5'}
+  ]) {
+    const f = await fixture();
+    try {
+      const env = {...f.env, JOB_LOCK_GROUP:'roblox-api', JOB_OVERALL_TIMEOUT_SECONDS:'1'};
+      const start = Date.now();
+      assert.equal(await command({...env, ...options}), 124);
+      assert.ok(Date.now()-start < 4000, 'preflight must stop within the deadline');
+      assert.equal(JSON.parse(await readFile(path.join(f.root,'state/canary.json'),'utf8')).state,'failed');
+      assert.match(await readFile(path.join(f.root,'removed'),'utf8'), /removed/);
+      assert.equal(await command(env), 0);
+      assert.equal(JSON.parse(await readFile(path.join(f.root,'state/canary.json'),'utf8')).state,'success');
     } finally { await f.cleanup(); }
   }
 });

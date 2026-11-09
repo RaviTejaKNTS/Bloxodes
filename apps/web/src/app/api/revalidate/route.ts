@@ -2,7 +2,7 @@ import { gameContentRevalidationTargets } from "@/lib/game-content-revalidation"
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
-import { cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
+import { catalogMembershipPurgeTags, cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -810,8 +810,8 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   const slug = normalizeSlug(payload.slug);
   let purgePaths: string[] = [];
   let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
-  if (payload.type === "catalog" && (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/") || slug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`))) {
-    purgeTags = [`catalog:${slug}`, "sitemap", "sitemap:catalog"];
+  if (payload.type === "catalog") {
+    purgeTags = catalogMembershipPurgeTags(slug) ?? purgeTags;
   }
   let impactedWikiSlugs: string[] = [];
   let paginationPrefixes: string[] = [];

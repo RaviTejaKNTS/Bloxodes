@@ -1,5 +1,5 @@
 """Isolated PostgreSQL 17 benchmark. Never connects to a remote database."""
-import os, json, time, statistics, threading
+import os, json, time, statistics, threading, re
 from pathlib import Path
 from urllib.parse import urlparse
 import psycopg
@@ -43,6 +43,10 @@ for rejected in sorted(Path("supabase/migrations_archive/catalog-dates-rejected"
 # Exact new migration, with no writer-side membership triggers.
 migration = next(Path("supabase/migrations").glob("*_catalog_membership_reconciler.sql"))
 c.execute(migration.read_text())
+c.execute(next(Path("supabase/migrations").glob("*_catalog_membership_page_transactions.sql")).read_text())
+def refresh(connection=c):
+ pages = connection.execute("select * from list_catalog_membership_pages()").fetchall()
+ return sum(connection.execute("select refresh_catalog_membership_date(%s)",(code,)).fetchone()[0] for (code,) in pages)
 assert c.execute("select count(*) from pg_trigger where not tgisinternal and tgname in ('catalog_membership_insert','catalog_membership_update','catalog_membership_delete','initialize_catalog_membership_snapshot','catalog_data_revalidation')").fetchone()[0] == 0
 assert c.execute("select count(*) from information_schema.columns where table_name='catalog_membership_snapshots' and column_name='identities'").fetchone()[0] == 0
 c.execute("analyze")
@@ -52,34 +56,41 @@ create table revalidation_events(entity_type text,slug text,source text,created_
 create or replace function public.enqueue_revalidation(p_entity_type text,p_slug text,p_source text) returns void language plpgsql as $$ begin
 insert into public.revalidation_events values(p_entity_type,p_slug,p_source,now())
 on conflict(entity_type,slug) do update set created_at=now(),source=excluded.source; end $$;
-create function bench_item_queue() returns trigger language plpgsql as $$ begin perform public.enqueue_revalidation('catalog','free-roblox-items','item'); return null; end $$;
-create trigger bench_item_queue after update on roblox_catalog_items for each row execute function bench_item_queue();
+
 create function bench_page_queue() returns trigger language plpgsql as $$ begin perform public.enqueue_revalidation('catalog',new.code,'page'); return null; end $$;
 create trigger bench_page_queue after update on catalog_pages for each row execute function bench_page_queue();
 """)
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+# Load the actual production helper bodies and trigger DDL, including ordering.
+schema = Path("supabase/schema.sql").read_text()
+for name in ('revalidation_slugify','avatar_catalog_slugs_for_catalog_item','qualifies_for_free_items_catalog','enqueue_free_items_catalog_scope','trg_enqueue_revalidation_avatar_catalog_items','trg_enqueue_revalidation_free_items_catalog'):
+ match = re.search(r'CREATE FUNCTION public\.'+name+r'\(.*?\n\$\$;', schema, re.S)
+ assert match, name
+ c.execute(match.group(0))
+for name in ('trg_enqueue_revalidation_avatar_catalog_items','trg_enqueue_revalidation_free_items_catalog'):
+ c.execute(re.search(r'CREATE TRIGGER '+name+r' .*?;',schema).group(0))
+assert refresh() == 0
 original = c.execute("select code,updated_at from catalog_pages order by code").fetchall()
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+assert refresh() == 0
 assert c.execute("select code,updated_at from catalog_pages order by code").fetchall() == original
 # Stats, reorder, and verification changes leave membership alone.
 c.execute("update roblox_music_ids set rank=case when rank=1 then 2 when rank=2 then 1 else rank end,verified_at=now()")
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+assert refresh() == 0
 # A rank crossing affects trending but leaves main music membership alone.
 c.execute("update roblox_music_ids set rank=60001 where asset_id=1")
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 1
+assert refresh() == 1
 # Free expiry is detected independently of writes from a collector.
 c.execute("update roblox_catalog_items set free_verified_at=now()-interval '73 hours' where asset_id=100")
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 1
+assert refresh() == 1
 # Paid-price changes do not move membership dates.
 c.execute("update roblox_catalog_items set price_robux=101 where asset_id between 1 and 99")
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+assert refresh() == 0
 # Deletion changes only affected avatar pages, and the second run is harmless.
 c.execute("update roblox_catalog_items set is_deleted=true where asset_id=2")
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] > 0
-assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+assert refresh() > 0
+assert refresh() == 0
 # Permissions: clients cannot execute the definer or read its state.
 for role in ('anon','authenticated'):
- assert not c.execute("select has_function_privilege(%s,'public.refresh_catalog_membership_dates()','execute')",(role,)).fetchone()[0]
+ assert not c.execute("select has_function_privilege(%s,'public.refresh_catalog_membership_date(text)','execute')",(role,)).fetchone()[0]
  assert not c.execute("select has_table_privilege(%s,'public.catalog_membership_snapshots','select')",(role,)).fetchone()[0]
 
 # Mapping switches, empty sets and remaining families retain #215's predicates.
@@ -97,14 +108,14 @@ for mutation, expect_change in [
  ("update roblox_catalog_items set name=null where asset_id=3", True),
 ]:
  c.execute(mutation)
- changed=c.execute("select refresh_catalog_membership_dates()").fetchone()[0]
+ changed=refresh()
  assert bool(changed)==expect_change,(mutation,changed)
- assert c.execute("select refresh_catalog_membership_dates()").fetchone()[0] == 0
+ assert refresh() == 0
 
 out={"counts":{"items":85000,"music":60000,"decals":38000,"mappings":10000},"refresh_ms":[],"writes_idle_ms":[],"writes_concurrent_ms":[],"blocking_probe":None}
 write_sql="update roblox_catalog_items set price_robux=price_robux+1 where asset_id between 1 and 100"
 for _ in range(21):
- t=time.perf_counter(); c.execute("select refresh_catalog_membership_dates()");out['refresh_ms'].append((time.perf_counter()-t)*1000)
+ t=time.perf_counter(); refresh();out['refresh_ms'].append((time.perf_counter()-t)*1000)
 for _ in range(21):
  t=time.perf_counter();c.execute(write_sql);out['writes_idle_ms'].append((time.perf_counter()-t)*1000)
 errors=[]
@@ -112,20 +123,54 @@ def refresh_loop():
  try:
   with psycopg.connect(url,autocommit=True) as d:
    d.execute("set statement_timeout='60s'")
-   for _ in range(30): d.execute("select refresh_catalog_membership_dates()")
+   for _ in range(30): refresh(d)
  except Exception as e: errors.append(str(e))
 th=threading.Thread(target=refresh_loop);th.start()
 for _ in range(21):
  t=time.perf_counter();c.execute(write_sql);out['writes_concurrent_ms'].append((time.perf_counter()-t)*1000)
 th.join();assert not errors,errors
-# Hold the reconciler transaction open after changed-date writes.
-# The source writer must commit within 250ms without a family-lock cycle.
-c.execute("update roblox_catalog_items set is_deleted=false where asset_id=2")
-c.execute("begin");c.execute("select refresh_catalog_membership_dates()")
-with psycopg.connect(url,autocommit=True) as d:
- d.execute("set lock_timeout='250ms'")
- t=time.perf_counter();d.execute(write_sql);out['blocking_probe']={"status":"ok","ms":(time.perf_counter()-t)*1000}
-c.execute("rollback")
+# Coordinate a writer holding avatar then asking for free, exactly as the real
+# avatar/free row triggers do. The reconciler owns only the free queue row.
+c.execute("update roblox_catalog_items set price_robux=0,free_verified_at=now() where asset_id=100")
+refresh()
+c.execute("update roblox_catalog_items set free_verified_at=now()-interval '73 hours' where asset_id=100")
+writer = psycopg.connect(url, autocommit=True)
+writer.execute("set lock_timeout='2s'")
+writer.execute("begin")
+writer.execute("select enqueue_revalidation('catalog','roblox-items-and-bundles','race')")
+c.execute("begin")
+c.execute("select refresh_catalog_membership_date('free-roblox-items')")
+race_errors=[]
+def write_race():
+ try:
+  t=time.perf_counter()
+  writer.execute("update roblox_catalog_items set free_verified_at=now() where asset_id=100")
+  writer.execute("commit")
+  out['real_trigger_race']={'status':'ok','writer_ms':(time.perf_counter()-t)*1000}
+ except Exception as e: race_errors.append(str(e))
+t=threading.Thread(target=write_race);t.start()
+# Observe the wait rather than guessing whether the writer reached the trigger.
+deadline=time.monotonic()+1
+while time.monotonic()<deadline:
+ if c.execute("select wait_event_type from pg_stat_activity where pid=%s",(writer.info.backend_pid,)).fetchone()[0]=='Lock': break
+ time.sleep(.01)
+else: raise AssertionError('writer did not reach queue lock')
+c.execute("commit")
+t.join(timeout=5)
+assert not t.is_alive() and not race_errors,race_errors
+writer.close()
+# A page failure rolls back only that page; later pages still commit.
+with psycopg.connect(url,autocommit=True) as blocker:
+ blocker.execute("begin")
+ blocker.execute("select * from catalog_membership_snapshots where code='free-roblox-items' for update")
+ c.execute("update roblox_catalog_items set free_verified_at=now()-interval '73 hours' where asset_id=100")
+ try: c.execute("select refresh_catalog_membership_date('free-roblox-items')")
+ except psycopg.errors.LockNotAvailable: pass
+ else: raise AssertionError('expected isolated page failure')
+ c.execute("update roblox_catalog_items set is_deleted=true where asset_id=4")
+ assert c.execute("select refresh_catalog_membership_date('roblox-items-and-bundles')").fetchone()[0]==1
+ blocker.execute("rollback")
+out['page_failure_isolation']='ok'
 for key in ('refresh_ms','writes_idle_ms','writes_concurrent_ms'):
  vals=out[key];out[key]={'median':statistics.median(vals),'p95':sorted(vals)[int(.95*(len(vals)-1))],'samples':len(vals)}
 Path('tmp').mkdir(exist_ok=True)

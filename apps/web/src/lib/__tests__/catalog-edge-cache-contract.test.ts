@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { cacheTagsForPath, catalogMembershipPurgeTags } from "../public-cache-tags";
 import { describe, expect, it } from "vitest";
 
 const CACHEABLE_CATALOG_ROUTES = [
@@ -98,5 +99,25 @@ describe("catalog edge-cache contracts", () => {
     );
 
     expect(source).toContain("data-journey-item");
+  });
+});
+
+describe("scoped catalog membership purges", () => {
+  const migration = readFileSync(new URL("../../../../../supabase/migrations/20261109135421_catalog_membership_reconciler.sql", import.meta.url), "utf8");
+  // Include every configured game/derived route and every avatar descendant.
+  const slugs = Array.from(new Set([
+    ...Array.from(migration.matchAll(/'(roblox-(?:music|decal)-ids\/(?:games\/[^']+|trending|weekly|monthly|yearly|curated))'/g), m => m[1]),
+    ...Array.from(migration.matchAll(/'roblox-items-and-bundles' \|\| '(\/[^']+)'/g), m => `roblox-items-and-bundles${m[1]}`)
+  ])).filter(slug => !slug.includes("%"));
+  it.each(slugs)("%s purges every pagination and query variant", slug => {
+    const purge = catalogMembershipPurgeTags(slug)!;
+    expect(purge).toContain(`catalog:${slug}`);
+    for (const page of ["", "/page/2", "/page/999"]) {
+      for (const query of ["", "?sort=popular", "?period=weekly", "?period=monthly", "?period=yearly"]) {
+        const emitted = cacheTagsForPath(`/catalog/${slug}${page}${query}`);
+        expect(purge.some(tag => emitted.includes(tag))).toBe(true);
+      }
+    }
+    expect(purge).not.toContain(`catalog:${slug.split("/")[0]}`);
   });
 });
