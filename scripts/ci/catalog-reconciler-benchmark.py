@@ -112,7 +112,7 @@ for mutation, expect_change in [
  assert bool(changed)==expect_change,(mutation,changed)
  assert refresh() == 0
 
-out={"counts":{"items":85000,"music":60000,"decals":38000,"mappings":10000},"refresh_ms":[],"writes_idle_ms":[],"writes_concurrent_ms":[],"blocking_probe":None}
+out={"counts":{"items":85000,"music":60000,"decals":38000,"mappings":10000},"refresh_ms":[],"writes_idle_ms":[],"writes_concurrent_ms":[]}
 write_sql="update roblox_catalog_items set price_robux=price_robux+1 where asset_id between 1 and 100"
 for _ in range(21):
  t=time.perf_counter(); refresh();out['refresh_ms'].append((time.perf_counter()-t)*1000)
@@ -152,6 +152,7 @@ t=threading.Thread(target=write_race);t.start()
 # Observe the wait rather than guessing whether the writer reached the trigger.
 deadline=time.monotonic()+1
 while time.monotonic()<deadline:
+ c.execute("select pg_stat_clear_snapshot()")
  if c.execute("select wait_event_type from pg_stat_activity where pid=%s",(writer.info.backend_pid,)).fetchone()[0]=='Lock': break
  time.sleep(.01)
 else: raise AssertionError('writer did not reach queue lock')

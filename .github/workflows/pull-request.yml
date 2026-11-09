@@ -141,6 +141,7 @@ jobs:
       - run: npm run test:site-routes
       - run: npm run test:universe-stats-pipeline
       - run: npm run test:items-pipeline
+      - run: node --import tsx --test scripts/ops/__tests__/vps-run-job.test.ts
       - if: needs.scope.outputs.extension == 'true'
         run: npm run typecheck:extension && npm run package:extension
       - if: needs.scope.outputs.admin == 'true'
@@ -404,4 +405,5 @@ jobs:
       - run: node --test scripts/ci/__tests__/*.test.mjs
       - run: npm run test:universe-stats-pipeline
       - run: npm run test:items-pipeline
+      - run: node --import tsx --test scripts/ops/__tests__/vps-run-job.test.ts
       - run: npm run lint && npm run test:unit:web
