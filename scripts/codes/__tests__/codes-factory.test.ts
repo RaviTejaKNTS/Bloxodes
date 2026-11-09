@@ -31,7 +31,7 @@ test("name matching refuses approximate and ambiguous games", () => {
   assert.equal(resolveName("example", [row]), null);
   assert.equal(resolveName("example game", [row, { ...row, universe_id: 3 }]), null);
 });
-const final = { slug: "example-game", name: "Example Game", universe_id: 1, roblox_link: "https://www.roblox.com/games/2", source_url: "https://robloxden.com/game-codes/example-game", source_url_2: null, intro_md: "Intro", redeem_md: "Steps", rewards_md: "Rewards", troubleshoot_md: "Trouble", find_codes_md: "Find", meta_description: "x".repeat(155), game_display_name: "Example Game", interlinking_copy_md: "" };
+const final = { slug: "example-game", name: "Example Game", universe_id: 1, roblox_link: "https://www.roblox.com/games/2", source_url: "https://robloxden.com/game-codes/example-game", source_url_2: null, intro_md: "Intro", redeem_md: "Steps", rewards_md: "Rewards", troubleshoot_md: "Trouble", find_codes_md: "Find", meta_description: "x".repeat(155), social_links: { discord: null, twitter: null, youtube: null }, game_display_name: "Example Game", interlinking_copy_md: "" };
 test("final contract rejects wrong identity, sources, slugs and missing copy", () => {
   assert.ok(codePageFinalSchema.safeParse(final).success);
   for (const patch of [{ slug: "example-codes" }, { universe_id: -1 }, { source_url: null }, { roblox_link: "https://evil.com/games/2" }, { redeem_md: "" }, { meta_description: "short" }, { unknown: "field" }]) assert.equal(codePageFinalSchema.safeParse({ ...final, ...patch }).success, false);
@@ -75,4 +75,26 @@ test("initial RobloxDen baseline queues nothing; a later added slug is pending",
   assert.deepEqual(pendingKeys(["den:old"], state), []);
   assert.equal(initializeRobloxdenBaseline(state, ["old", "new"]), false);
   assert.deepEqual(pendingKeys(["den:old", "den:new"], state), ["den:new"]);
+});
+
+
+test("page names reject emoji and brackets and point writers at the context display name", () => {
+  for (const name of ["[⚽] Become A Striker", "Become A Striker ⚽", "[UPDATE] Example", "Example]"]) {
+    const result = codePageFinalSchema.safeParse({ ...final, name });
+    assert.equal(result.success, false);
+    if (!result.success) assert.match(result.error.message, /context.json game.display_name/);
+  }
+});
+
+test("social links require all three nullable fields and exact platform HTTPS hosts", () => {
+  for (const social_links of [
+    { discord: "https://discord.gg/example", twitter: "https://x.com/example", youtube: "https://youtu.be/example" },
+    { discord: "https://www.discord.com/invite/example", twitter: "https://www.twitter.com/example", youtube: "https://www.youtube.com/@example" },
+    final.social_links
+  ]) assert.ok(codePageFinalSchema.safeParse({ ...final, social_links }).success);
+  for (const social_links of [undefined, {}, { ...final.social_links, extra: null },
+    ...["not a URL", "https://evil.com/invite/test", "https://discord.com/channels/test", "http://discord.gg/test", "https://discord.gg.evil.com/test"].map(discord => ({ ...final.social_links, discord })),
+    { ...final.social_links, twitter: "https://youtube.com/test" },
+    { ...final.social_links, youtube: "https://x.com/test" }
+  ]) assert.equal(codePageFinalSchema.safeParse({ ...final, social_links }).success, false);
 });
