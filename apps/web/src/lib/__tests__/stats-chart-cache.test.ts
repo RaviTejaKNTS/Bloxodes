@@ -24,12 +24,12 @@ describe("cachedStatsChart", () => {
     expect(load).toHaveBeenCalledTimes(1);
   });
 
-  it("returns null when nothing good has loaded yet", async () => {
+  it("throws a first-load failure and preserves a genuinely absent result", async () => {
     const failed = vi.fn(async () => {
       throw new Error("canceling statement due to statement timeout");
     });
     const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
-    await expect(cachedStatsChart("never-good", failed)).resolves.toBeNull();
+    await expect(cachedStatsChart("never-good", failed)).rejects.toThrow("statement timeout");
     await expect(cachedStatsChart("never-null", async () => null)).resolves.toBeNull();
     warn.mockRestore();
   });

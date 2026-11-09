@@ -244,7 +244,7 @@ export async function getWikiCollectionPageByPath(
 
     if (error) {
       console.error("Error fetching wiki collection page", error);
-      return null;
+      throw error;
     }
 
     return normalizePage(data);
@@ -296,7 +296,7 @@ export async function getWikiCollectionPageByCode(code: string): Promise<WikiCol
 
     if (error) {
       console.error("Error fetching wiki collection page by code", error);
-      return null;
+      throw error;
     }
 
     return normalizePage(data);
@@ -376,7 +376,7 @@ export async function listPublishedWikiCollectionPagesByUniverseId(
 
   if (error) {
     console.error("Error fetching wiki collection pages by universe", error);
-    return [];
+    throw error;
   }
 
   return normalizeList(data);
@@ -457,7 +457,7 @@ export async function listPublishedWikiCollectionPagesByWikiSlug(
 
   if (error) {
     console.error("Error fetching wiki collection pages by wiki slug", error);
-    return [];
+    throw error;
   }
 
   return normalizeList(data);

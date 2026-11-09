@@ -167,15 +167,7 @@ async function loadPublishedRuntimeHeader(
     .eq("collection_page_id", page.id)
     .maybeSingle();
 
-  if (error) {
-    if (isMissingRuntimeRelation(error)) {
-      if (requiresWikiCollectionDatabase(page.code)) throw requiredRuntimeError(page.code, "runtime schema is missing");
-      return null;
-    }
-    console.error("Error fetching published wiki collection dataset", error);
-    if (requiresWikiCollectionDatabase(page.code)) throw requiredRuntimeError(page.code, error.message || "dataset query failed");
-    return null;
-  }
+  if (error) throw error;
   if (!data) {
     if (requiresWikiCollectionDatabase(page.code)) throw requiredRuntimeError(page.code, "published dataset pointer is invalid");
     return null;
@@ -233,11 +225,7 @@ async function loadPublishedRuntime(page: WikiCollectionPageContent): Promise<Pu
       document,
     };
   } catch (runtimeError) {
-    if (requiresWikiCollectionDatabase(page.code)) throw runtimeError;
-    if (!isMissingRuntimeRelation(runtimeError)) {
-      console.error("Error loading published wiki collection items", runtimeError);
-    }
-    return null;
+    throw runtimeError;
   }
 }
 

@@ -47,6 +47,8 @@ export async function getToolContent(code: string): Promise<ToolContent | null> 
     .eq("is_published", true)
     .maybeSingle();
 
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
   if (!error && data) {
     return data as ToolContent;
   }
@@ -63,7 +65,7 @@ export async function getToolContent(code: string): Promise<ToolContent | null> 
 
   if (fallbackError) {
     console.error("Error fetching tool content", fallbackError);
-    return null;
+    throw fallbackError;
   }
 
   return (fallback as ToolContent) ?? null;
@@ -86,7 +88,7 @@ export async function getToolContentWithDevFallback(code: string): Promise<ToolC
 
   if (error) {
     console.error("Error fetching tool content with dev fallback", error);
-    return null;
+    throw error;
   }
 
   return (data as ToolContent | null) ?? null;
@@ -107,6 +109,8 @@ const cachedListPublishedTools = publicContentCache(
       .order("content_updated_at", { ascending: false })
       .order("id", { ascending: true });
 
+    if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
     if (!error && data) {
       return (data ?? []) as ToolListEntry[];
     }
@@ -120,7 +124,7 @@ const cachedListPublishedTools = publicContentCache(
 
     if (fallbackError) {
       console.error("Error fetching tools index", fallbackError);
-      return [];
+      throw fallbackError;
     }
 
     return (fallback ?? []) as ToolListEntry[];
@@ -155,6 +159,8 @@ export async function listPublishedToolsPage(
         .order("id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
 
+      if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
       if (!error && data) {
         return { tools: (data ?? []) as ToolListEntry[], total: count ?? data.length };
       }
@@ -169,7 +175,7 @@ export async function listPublishedToolsPage(
 
       if (fallbackError) {
         console.error("Error fetching tools index", fallbackError);
-        return { tools: [], total: 0 };
+        throw fallbackError;
       }
 
       return { tools: (fallback ?? []) as ToolListEntry[], total: fallbackCount ?? (fallback ?? []).length };
@@ -196,6 +202,8 @@ export async function listPublishedToolsByUniverseId(
     .eq("universe_id", universeId)
     .order("content_updated_at", { ascending: false })
     .limit(limit);
+
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
 
   if (!error && data) {
     return (data ?? []) as ToolListEntry[];

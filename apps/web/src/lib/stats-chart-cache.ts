@@ -47,7 +47,8 @@ export async function cachedStatsChart<T>(
       })
       .catch((error: unknown) => {
         console.warn(`Failed to refresh stats chart ${key}`, error instanceof Error ? error.message : error);
-        return null;
+        if (entry) return entry.value as T;
+        throw error;
       })
       .finally(() => {
         pending.delete(key);

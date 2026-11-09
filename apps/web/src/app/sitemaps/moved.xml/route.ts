@@ -13,7 +13,7 @@ export async function GET() {
     });
   } catch {
     return new NextResponse("Moved game sitemap temporarily unavailable", {
-      status: 503, headers: { "Retry-After": "60" }
+      status: 503, headers: { "cache-control": "no-store", "Retry-After": "60" }
     });
   }
 }

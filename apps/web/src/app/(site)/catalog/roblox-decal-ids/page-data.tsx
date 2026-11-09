@@ -270,7 +270,6 @@ export async function loadRobloxDecalIdsPageData(
     return { decals: normalizeBaseDecalRows(data), total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load Roblox decal IDs", error);
-    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -320,7 +319,6 @@ export async function loadGameDecalIdsPageData(
     return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
   } catch (error) {
     reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
-    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -356,7 +354,6 @@ export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
     return rows.filter((row) => row.count > 0);
   } catch (error) {
     reportLoadError("Failed to load Roblox decal categories", error);
-    if (IS_BUILD) return [];
     throw error;
   }
 }

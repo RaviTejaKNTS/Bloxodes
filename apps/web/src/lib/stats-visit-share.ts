@@ -226,7 +226,7 @@ async function getVisitShareChartFromRpc(range: StatsVisitShareRange, window = c
 
     if (error) {
       console.warn("Failed to load visit-share chart RPC", error.message);
-      return null;
+      throw error;
     }
 
     const pageRows = (data ?? []) as VisitShareRpcRow[];
