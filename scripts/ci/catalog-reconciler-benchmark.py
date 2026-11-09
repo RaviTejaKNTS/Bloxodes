@@ -44,6 +44,7 @@ for rejected in sorted(Path("supabase/migrations_archive/catalog-dates-rejected"
 migration = next(Path("supabase/migrations").glob("*_catalog_membership_reconciler.sql"))
 c.execute(migration.read_text())
 c.execute(next(Path("supabase/migrations").glob("*_catalog_membership_page_transactions.sql")).read_text())
+c.execute(next(Path("supabase/migrations").glob("*_catalog_membership_scoped_scans.sql")).read_text())
 def refresh(connection=c):
  pages = connection.execute("select * from list_catalog_membership_pages()").fetchall()
  return sum(connection.execute("select refresh_catalog_membership_date(%s)",(code,)).fetchone()[0] for (code,) in pages)
