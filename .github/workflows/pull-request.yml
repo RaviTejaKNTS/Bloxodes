@@ -71,6 +71,22 @@ jobs:
             echo "Existing migrations cannot be edited or deleted. Add a forward migration."
             exit 1
           fi
+  public-data-errors:
+    needs: scope
+    if: needs.scope.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Verify public data error handling
+        run: npm run test:unit:web
   managed-development:
     needs: scope
     if: needs.scope.outputs.checks == 'true'
@@ -170,7 +186,7 @@ jobs:
           if-no-files-found: ignore
   required:
     name: Required PR checks
-    needs: [scope, managed-development, checks]
+    needs: [scope, managed-development, checks, public-data-errors]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -179,8 +195,11 @@ jobs:
           DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
           MANAGED: ${{ needs.managed-development.result }}
           CHECKS: ${{ needs.checks.result }}
+          DATA_ERRORS: ${{ needs.public-data-errors.result }}
+          WEB: ${{ needs.scope.outputs.web }}
         run: |
           test "$SCOPE" = success
+          if [ "$WEB" = true ]; then test "$DATA_ERRORS" = success; fi
           if [ "$DOCS_ONLY" != true ]; then
             test "$MANAGED" = success
             test "$CHECKS" = success
