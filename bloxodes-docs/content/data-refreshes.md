@@ -30,7 +30,7 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 ## Marketplace items
 
 - **Discovery:** 03:05, 09:05, 15:05, 21:05: `collect:catalog-items` (`run-roblox-catalog-discovery.ts`).
-- **Enrichment:** :42 in hours 02–05, 08–11, 14–17, 20–22: `enrich:catalog-items`. Items missing from Roblox's details response count in `missing_rows`, not `rows_failed`. After 3 misses an item is marked unavailable and retried weekly until its queue row goes `dead` at 12 attempts. A queue row that can't be finished is counted as failed and the run carries on; its lease expires and the next claim takes it again.
+- **Enrichment:** :42 in hours 02–05, 08–11, 14–17, 20–22: `enrich:catalog-items`. Items missing from Roblox's details response count in `missing_rows`, not `rows_failed`. After 3 misses an item is marked unavailable and retried weekly until its queue row goes `dead` at 12 attempts. A queue row that can't be finished is counted as failed and the run carries on; its lease expires and the next claim takes it again. The finish call isn't retried, because a retry after a lost response would find the lease already released.
 - **Data:** `roblox_catalog_items` with images, categories, discovery runs and a refresh queue. 85,304 items.
 
 ## Item stats

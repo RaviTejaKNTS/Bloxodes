@@ -278,7 +278,8 @@ async function insertHistory(rows: Record<string, unknown>[]) {
 
 async function finishQueue(row: QueueRow, result: ItemResult) {
   if (DRY_RUN) return true;
-  const { data } = await runDataApiOperation(`Finish catalog refresh claim ${row.asset_id}`, () => supabaseAdmin().rpc("finish_roblox_catalog_refresh", {
+  // Not retried: a retry after a lost response would find the lease released and misreport it as lost.
+  const { data, error } = await supabaseAdmin().rpc("finish_roblox_catalog_refresh", {
     p_asset_id: row.asset_id,
     p_worker_id: WORKER_ID,
     p_status: result.success ? "pending" : row.attempts >= 12 ? "dead" : "retry",
@@ -286,7 +287,8 @@ async function finishQueue(row: QueueRow, result: ItemResult) {
     p_error: result.success ? null : errorMessage(result.error),
     p_error_code: result.success ? null : result.errorCode ?? "unknown",
     p_error_kind: result.success ? null : result.errorKind ?? "unknown"
-  }));
+  });
+  if (error) throw new Error(`Failed to finish catalog refresh claim ${row.asset_id}: ${error.message}`);
   return data === true;
 }
 

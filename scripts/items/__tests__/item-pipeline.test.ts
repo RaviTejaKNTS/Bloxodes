@@ -198,6 +198,6 @@ test("item audit retries a timed-out health read and enrichment survives one fai
   const audit = readFileSync(new URL("../audit-item-stats-workflow.ts", import.meta.url), "utf8");
   assert.match(audit, /rpc\("get_roblox_item_pipeline_health"\),\s+\{[^}]*retryStatementTimeout: true/);
   const enrich = readFileSync(new URL("../../catalog/enrich-roblox-catalog-items.ts", import.meta.url), "utf8");
-  assert.match(enrich, /runDataApiOperation\(`Finish catalog refresh claim/);
+  assert.doesNotMatch(enrich, /runDataApiOperation\(`Finish catalog refresh claim/, "the finish write is not retried");
   assert.match(enrich, /acknowledged = await finishQueue\(queueRow, result\);\s+\} catch \(error\) \{[\s\S]{0,200}failed \+= 1;[\s\S]{0,200}continue;/);
 });
