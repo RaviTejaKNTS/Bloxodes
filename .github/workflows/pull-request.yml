@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      catalog_reconciler_benchmark:
+        description: 'Run isolated catalog membership benchmark and code checks'
+        required: false
+        default: false
+        type: boolean
       selected_roblox_bundle_hash:
         description: 'Optional immutable Roblox bundle SHA-256; verify already-staged managed development only'
         required: false
@@ -339,7 +344,7 @@ jobs:
           if-no-files-found: ignore
 
   catalog-reconciler-benchmark:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' && inputs.catalog_reconciler_benchmark
     runs-on: ubuntu-latest
     timeout-minutes: 10
     services:
@@ -366,3 +371,37 @@ jobs:
         with:
           name: catalog-reconciler-benchmark
           path: tmp/catalog-reconciler-benchmark.json
+
+  catalog-reconciler-code-checks:
+    if: github.event_name == 'workflow_dispatch' && inputs.catalog_reconciler_benchmark
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+      SUPABASE_URL: https://example.supabase.co
+      SUPABASE_SERVICE_ROLE: ci-only
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - run: npm run supabase:migrations:check
+      - run: node --test scripts/ci/__tests__/*.test.mjs
+      - run: npm run test:universe-stats-pipeline
+      - run: npm run test:items-pipeline
+      - run: npm run lint && npm run test:unit:web
