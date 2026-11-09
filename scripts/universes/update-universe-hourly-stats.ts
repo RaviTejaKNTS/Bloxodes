@@ -10,6 +10,8 @@ import {
 } from "../shared/stats-pipeline-lease";
 import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../shared/stats-job-run";
 import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
+import { statsUniverseSlug } from "@/lib/slug";
+import { isPlaceholderGameDetail, repairedUniverseIdentity } from "./universe-identity";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 const GAME_VOTES_API = "https://games.roblox.com/v1/games/votes";
@@ -32,6 +34,8 @@ const WORKER_ID =
 
 type RobloxGameDetail = {
   id: number;
+  name?: string;
+  rootPlaceId?: number;
   created?: string;
   updated?: string;
   playing?: number;
@@ -179,12 +183,13 @@ function jitter(ms: number) {
 
 export { isTransientDataApiFailure, runDataApiOperation } from "../shared/data-api-retry";
 
-async function fetchRobloxJson(url: string, label: string): Promise<any> {
+async function fetchRobloxJson(url: string, label: string, timeoutMs?: number): Promise<any> {
   for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
     let res: Response;
     try {
       res = await fetch(url, {
-        headers: { "user-agent": "BloxodesBot/1.0" }
+        headers: { "user-agent": "BloxodesBot/1.0" },
+        signal: timeoutMs ? AbortSignal.timeout(timeoutMs) : undefined
       });
     } catch (error) {
       if (attempt >= RETRY_LIMIT) throw error;
@@ -306,7 +311,7 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
   }
   const entries: RobloxGameDetail[] = Array.isArray(data?.data) ? data.data : [];
   for (const entry of entries) {
-    if (typeof entry?.id !== "number") continue;
+    if (typeof entry?.id !== "number" || !universeIds.includes(entry.id) || isPlaceholderGameDetail(entry)) continue;
     const vote = votesByUniverseId.get(entry.id);
     const likes = toNumber(vote?.upVotes ?? entry.likes ?? entry.upVotes ?? entry.votes?.upVotes ?? entry.totalUpVotes ?? null);
     const dislikes = toNumber(vote?.downVotes ?? entry.downVotes ?? entry.votes?.downVotes ?? entry.totalDownVotes ?? null);
@@ -326,6 +331,54 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
     };
   }
   return result;
+}
+
+// COLD runs hourly on the VPS. Repair across all tiers, independently of stats
+// due times and missing-response backoff, without a new schedule or full enrich.
+async function repairPlaceholderIdentities() {
+  const sb = supabaseAdmin();
+  const { data } = await runDataApiOperation("Load placeholder universe identities", () =>
+    sb.from("roblox_universes")
+      .select("universe_id,name,slug")
+      .or("name.eq.[TITLE UNAVAILABLE],slug.eq.title-unavailable")
+      .order("universe_id")
+      .limit(100)
+  );
+  const rows = (data ?? []) as Array<{ universe_id: number; name: string; slug: string | null }>;
+  let repaired = 0;
+  const events: RevalidationEvent[] = [];
+  for (let i = 0; i < rows.length; i += 50) {
+    const chunk = rows.slice(i, i + 50);
+    const ids = chunk.map(row => row.universe_id);
+    const params = new URLSearchParams({ universeIds: ids.join(",") });
+    const response = await fetchRobloxJson(`${GAME_DETAILS_API}?${params}`, "placeholder game details", 15_000);
+    const details: RobloxGameDetail[] = Array.isArray(response?.data) ? response.data : [];
+    for (const row of chunk) {
+      const detail = details.find(game => game.id === row.universe_id);
+      const identity = detail && repairedUniverseIdentity(detail, row.universe_id);
+      if (!identity) continue;
+      const { data: changed } = await runDataApiOperation(`Repair universe identity ${row.universe_id}`, () => {
+        const query = sb.from("roblox_universes").update(identity)
+          .eq("universe_id", row.universe_id).eq("name", row.name);
+        // Do not replace an identity another writer repaired after our read.
+        return (row.slug == null ? query.is("slug", null) : query.eq("slug", row.slug)).select("universe_id");
+      });
+      if (!changed?.length) continue;
+      repaired += 1;
+      events.push(
+        { type: "stats", slug: `games/${statsUniverseSlug(row.slug || row.name, row.universe_id)}` },
+        { type: "stats", slug: `games/${statsUniverseSlug(identity.slug, row.universe_id)}` }
+      );
+    }
+    await sleep(REQUEST_DELAY_MS);
+  }
+  if (repaired) {
+    await enqueueRevalidationEvents([
+      { type: "stats", slug: "stats" }, { type: "stats", slug: "games" }, ...events
+    ], "stats_placeholder_identity_repair");
+  }
+  console.log(`Repaired ${repaired}/${rows.length} placeholder universe identities.`);
+  return repaired;
 }
 
 async function fetchExistingHourly(universeIds: number[], hourStart: string): Promise<Map<number, HourlyRow>> {
@@ -630,6 +683,7 @@ async function main() {
   let hourlyRows = 0;
   let updateEvents = 0;
   let claimBatches = 0;
+  let repairedIdentities = 0;
   const detailEvents: RevalidationEvent[] = [];
   const pipelineLeaseName = statsPipelineLeaseName(["universe-refresh", options.tier]);
   let pipelineLeaseAcquired = false;
@@ -646,6 +700,14 @@ async function main() {
       return;
     }
 
+    if (options.tier === "COLD" && !options.universeIds.length) {
+      // Best effort: a failed repair must never stop the COLD refresh itself.
+      try {
+        repairedIdentities = await repairPlaceholderIdentities();
+      } catch (error) {
+        console.warn("Placeholder identity repair failed; continuing the COLD refresh.", error);
+      }
+    }
     const explicitIds = [...new Set(options.universeIds)];
     let explicitOffset = 0;
     while (true) {
@@ -707,13 +769,14 @@ async function main() {
 
     if (!claimedRows) {
       console.log("No universes found.");
-      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_universes", claim_batches: claimBatches } });
+      if (repairedIdentities && !options.skipIndexRefresh) await refreshStatsIndexes();
+      await finishStatsJobRun(run, { status: repairedIdentities ? "success" : "skipped", metadata: { reason: "no_universes", claim_batches: claimBatches, repaired_identities: repairedIdentities } });
       return;
     }
 
     await rollupTodayIfRequested(options, latestSampledAt);
 
-    const indexResult = updatedRows > 0 && !options.skipIndexRefresh ? await refreshStatsIndexes() : null;
+    const indexResult = (updatedRows > 0 || repairedIdentities > 0) && !options.skipIndexRefresh ? await refreshStatsIndexes() : null;
     const revalidationEvents: RevalidationEvent[] =
       updatedRows > 0
         ? [
@@ -733,6 +796,7 @@ async function main() {
       rowsFailed: failedRows,
       metadata: {
         missing_rows: missingRows,
+        repaired_identities: repairedIdentities,
         hourly_rows: hourlyRows,
         claim_batches: claimBatches,
         update_events: updateEvents,
