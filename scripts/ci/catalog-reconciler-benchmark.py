@@ -119,7 +119,7 @@ for _ in range(21):
  t=time.perf_counter();c.execute(write_sql);out['writes_concurrent_ms'].append((time.perf_counter()-t)*1000)
 th.join();assert not errors,errors
 # Hold all reconciler locks after changed-date writes. A writer taking the
-# same real queue row must still commit within 250ms, without a cycle.
+# source writer must still commit within 250ms, without a family-lock cycle.
 c.execute("update roblox_catalog_items set is_deleted=false where asset_id=2")
 c.execute("begin");c.execute("select refresh_catalog_membership_dates()")
 with psycopg.connect(url,autocommit=True) as d:

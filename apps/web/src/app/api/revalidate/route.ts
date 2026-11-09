@@ -389,11 +389,11 @@ function revalidateForMusic(slug = "roblox-music-ids") {
       : [];
 
   if (section === "games" && valueSlug) {
-    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH]);
+    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
   }
   if (["trending", "weekly", "monthly", "yearly"].includes(section ?? "")) {
     const path = section === "trending" ? `${MUSIC_BASE_PATH}/trending` : `${MUSIC_BASE_PATH}/${section}`;
-    return applyRevalidation([...paginatedIndexPaths(path), ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/charts`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH]);
+    return applyRevalidation([...paginatedIndexPaths(path), ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/charts`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
   }
   return applyRevalidation([
     "/catalog",
@@ -426,10 +426,10 @@ function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
       : [];
 
   if (section === "games" && valueSlug) {
-    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH]);
+    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
   }
   if (section === "curated") {
-    return applyRevalidation([...paginatedIndexPaths(`${DECAL_BASE_PATH}/curated`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH]);
+    return applyRevalidation([...paginatedIndexPaths(`${DECAL_BASE_PATH}/curated`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
   }
   return applyRevalidation([
     "/catalog",
@@ -500,6 +500,12 @@ function revalidateForAvatarCatalog(slug: string) {
   const [prefix] = normalizedSlug.split("/");
   const basePath = buildAvatarCatalogPath(normalizedSlug);
   const legacyBasePath = `/catalog/${normalizedSlug}`;
+  if (normalizedSlug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`)) {
+    return applyRevalidation(
+      [...paginatedIndexPaths(basePath), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH],
+      [`avatar-catalog:${normalizedSlug}`, `catalog:${normalizedSlug}`], false
+    );
+  }
   const routePatterns = [
     `/catalog/${AVATAR_CATALOG_MASTER_CODE}/[[...segments]]`,
     prefix ? `/catalog/${prefix}/[[...segments]]` : ""
@@ -527,10 +533,10 @@ function revalidateForAvatarCatalog(slug: string) {
 }
 
 function revalidateForCatalog(slug: string) {
-  if (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/")) {
+  if (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/") || slug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`)) {
     return applyRevalidation(
       [`/catalog/${slug}`, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH],
-      [`catalog:${slug}`]
+      [`catalog:${slug}`], false
     );
   }
   return applyRevalidation(
@@ -804,6 +810,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   const slug = normalizeSlug(payload.slug);
   let purgePaths: string[] = [];
   let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
+  if (payload.type === "catalog" && (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/") || slug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`))) {
+    purgeTags = [`catalog:${slug}`, "sitemap", "sitemap:catalog"];
+  }
   let impactedWikiSlugs: string[] = [];
   let paginationPrefixes: string[] = [];
 
