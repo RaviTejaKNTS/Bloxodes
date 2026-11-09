@@ -139,6 +139,10 @@ export async function validateReport(root: string) {
       default: return [];
     }
   });
+  // Title, meta description, dek and markers render as plain text, so Markdown links there would show raw.
+  for (const [field, text] of [['title', report.title], ['meta_description', report.meta_description], ['dek', report.dek], ...report.markers.map(m => ['marker', m.label])])
+    if (/\[[^\]]*\]\([^)]*\)/.test(text))
+      throw Error(`Links aren't allowed in the ${field}: ${text}`);
   const prose = [report.title, report.meta_description, report.dek, ...report.short_version, ...bodyCopy];
   const values = numericValues([data.facts, data.insights, data.charts, data.games]);
   const findings = prose.flatMap(t => numberFindings(t, values));
