@@ -2,8 +2,9 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { bundlePath } from "./roblox-wiki-bundle";
 
-export async function readWikiContract(folder: string): Promise<"roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1"> {
+export async function readWikiContract(folder: string): Promise<"roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | "stats-report@1"> {
   const root = await fs.realpath(path.resolve(folder));
+  try { const report = JSON.parse(await fs.readFile(await bundlePath(root, "report.json"), "utf8")); if (report.contract === "stats-report@1") return report.contract; } catch (error: any) { if (error.code !== "ENOENT") throw error; }
   const bundle = JSON.parse(await fs.readFile(await bundlePath(root, "bundle.json"), "utf8"));
   if (bundle?.contract !== "roblox-wiki@1" && bundle?.contract !== "game-wiki@1" && bundle?.contract !== "article@1" && bundle?.contract !== "game-article@1") throw new Error(`Unsupported contract ${JSON.stringify(bundle?.contract)}. Supported versions: roblox-wiki@1, game-wiki@1, article@1, game-article@1. See contracts/roblox-wiki/v1/, contracts/game-wiki/v1/ contracts/article/v1/ and contracts/game-article/v1/.`);
   return bundle.contract;

@@ -80,14 +80,11 @@ describe("July 2026 Roblox report data", () => {
   });
 
   it("publishes the route through the archive, sitemap, and feed", () => {
-    const files = [
-      "src/data/reports/published.ts",
-      "src/app/sitemaps/stats.xml/route.ts",
-      "src/app/feed.xml/route.ts"
-    ];
-    for (const file of files) {
+    const published = readFileSync(path.resolve(process.cwd(), "src/data/reports/published.ts"), "utf8");
+    expect(published).toContain("roblox-july-2026");
+    for (const file of ["src/app/sitemaps/stats.xml/route.ts", "src/app/feed.xml/route.ts"]) {
       const source = readFileSync(path.resolve(process.cwd(), file), "utf8");
-      expect(source).toContain("roblox-july-2026");
+      expect(source).toContain("listStatsReports");
     }
 
     const revalidation = readFileSync(path.resolve(process.cwd(), "src/app/api/revalidate/route.ts"), "utf8");

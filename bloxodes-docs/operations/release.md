@@ -42,7 +42,7 @@ Schema, deploy and content jobs share the `bloxodes-production` concurrency lane
 
 ## Wiki bundles
 
-Roblox and franchise wiki hubs and collections, and articles, publish with `npm run content:publish`, which owns the `roblox-wiki@1`, `game-wiki@1`, `article@1` and `game-article@1` contracts and every check. It runs from an up-to-date checkout with no local changes whose publish code matches what's live, refuses pending production migrations, and needs `--target production --apply --allow-prod` to write production. No PR, build or GitHub run is involved, and new games need no code change. The Content Factory runs it from each device's main checkout. Full detail: [Roblox wiki](../content/roblox-wiki.md#publishing), [franchise](../content/franchise.md#publishing).
+Roblox and franchise wiki hubs and collections, articles and monthly stats reports publish with `npm run content:publish`, which owns the `roblox-wiki@1`, `game-wiki@1`, `article@1`, `game-article@1` and `stats-report@1` contracts and every check. It runs from an up-to-date checkout with no local changes whose publish code matches what's live, refuses pending production migrations, and needs `--target production --apply --allow-prod` to write production. No PR, build or GitHub run is involved, and new games need no code change. The Content Factory runs it from each device's main checkout. Full detail: [Roblox wiki](../content/roblox-wiki.md#publishing), [franchise](../content/franchise.md#publishing), [stats reports](../content/stats.md#monthly-reports).
 
 ## Content publication
 

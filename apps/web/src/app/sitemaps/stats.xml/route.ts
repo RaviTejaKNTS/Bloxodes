@@ -1,3 +1,4 @@
+import { listStatsReports } from "@/lib/stats-reports";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import {
   getStatsGamesSeoTaxonomy,
@@ -5,9 +6,7 @@ import {
   listStatsGamesIndexPaths,
   listStatsSitemapGames
 } from "@/lib/stats";
-import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
-import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -26,27 +25,11 @@ export async function GET() {
       priority: "0.7",
       lastmod: toIsoDate(robloxSeptember2026Report.updatedAt)
     },
-    {
-      loc: withSiteUrl(`/stats/reports/${robloxSeptember2026Report.slug}`),
-      changefreq: "monthly",
-      priority: "0.8",
-      lastmod: toIsoDate(robloxSeptember2026Report.updatedAt)
-    },
-    {
-      loc: withSiteUrl(`/stats/reports/${robloxJuly2026Report.slug}`),
-      changefreq: "monthly",
-      priority: "0.8",
-      lastmod: toIsoDate(robloxJuly2026Report.updatedAt)
-    },
-    {
-      loc: withSiteUrl(`/stats/reports/${robloxJune2026Report.slug}`),
-      changefreq: "monthly",
-      priority: "0.8",
-      lastmod: toIsoDate(robloxJune2026Report.updatedAt)
-    }
+
   ];
 
   try {
+    pages.push(...(await listStatsReports()).map(report => ({ loc: withSiteUrl(report.href), changefreq: "monthly" as const, priority: "0.8", lastmod: toIsoDate(report.updatedAt) })));
     const [taxonomy, lastModified, games] = await Promise.all([
       getStatsGamesSeoTaxonomy(),
       getStatsSitemapLastModifiedTimes(),

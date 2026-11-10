@@ -3,10 +3,10 @@ import { PageSidebar } from "@/components/PageSidebar";
 import { RailLinkList } from "@/components/RailLinkList";
 import { SocialShare } from "@/components/SocialShare";
 import { SITE_URL } from "@/lib/seo";
-import { PUBLISHED_STATS_REPORTS } from "@/data/reports/published";
+import { listStatsReportsOrStatic } from "@/lib/stats-reports";
 import "@/styles/ads-stats.css";
 
-const latestReport = PUBLISHED_STATS_REPORTS[0];
+
 
 const pages = [
   { href: "/stats", title: "Roblox stats", description: "See player counts, rising games, visits and genre trends." },
@@ -15,20 +15,22 @@ const pages = [
   { href: "/stats/creators", title: "Roblox creator stats", description: "Compare creators by players, games, visits and group size." },
   { href: "/stats/roblox-platform", title: "Roblox platform stats", description: "Follow player trends and the most active Roblox genres." },
   { href: "/stats/reports", title: "Monthly Roblox reports", description: "Read about the games and events that shaped each month." },
-  { href: latestReport.href, title: `Roblox in ${latestReport.month}`, description: latestReport.description }
+
 ];
 
-export function StatsContentLayout({ children, title, canonicalPath }: {
+export async function StatsContentLayout({ children, title, canonicalPath }: {
   children: ReactNode;
   title: string;
   canonicalPath: string;
 }) {
+  const latestReport = (await listStatsReportsOrStatic("the stats rail"))[0];
+  const reportPages = [...(latestReport ? [{ href: latestReport.href, title: `Roblox in ${latestReport.month}`, description: latestReport.description }] : []), ...pages];
   return (
     <div className="stats-ad-layout grid gap-8 content-sidebar-grid">
       <div className="stats-ad-main min-w-0">{children}</div>
       <PageSidebar className="stats-ad-sidebar">
         <SocialShare url={`${SITE_URL}${canonicalPath}`} title={title} heading="Share these stats" />
-        <RailLinkList heading="More Roblox stats" links={pages.filter(page => page.href !== canonicalPath).slice(0, 6)} />
+        <RailLinkList heading="More Roblox stats" links={reportPages.filter(page => page.href !== canonicalPath).slice(0, 6)} />
       </PageSidebar>
     </div>
   );

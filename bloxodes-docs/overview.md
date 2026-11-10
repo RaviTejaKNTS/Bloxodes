@@ -48,7 +48,8 @@ See [machines](infrastructure/machines.md) for access and [schedules](automation
 | Franchise wiki and collections | MacBook Pro | Content Factory T3 schedule, every 6 hours, from the Other Games Queue |
 | Universe and item stats, catalog items, music, decals, puzzles, promo rewards, free items | VPS | cron |
 | HOT universe stats | Northflank | hourly cron job |
-| Catalog, quizzes, checklists, tools, monthly reports | Any machine, by hand | owner request |
+| Catalog, quizzes, checklists, tools | Any machine, by hand | owner request |
+| Monthly Roblox stats reports | Homelab (Content Factory) | T3 schedule, daily check; builds on the 1st once the month's data is in |
 | Revalidation and cache warming | VPS | cron every minute |
 | Web deploys, schema, content publication | GitHub Actions | merge to `production` or dispatch |
 

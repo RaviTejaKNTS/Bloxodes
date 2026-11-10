@@ -1,3 +1,4 @@
+import { listStatsReports } from "./stats-reports";
 import { listGameCards } from "@/lib/game-site-data";
 import "server-only";
 import { formatDistanceToNowStrict } from "date-fns";
@@ -241,6 +242,8 @@ export async function loadHomePageData() {
       loadOptional("catalog pages", () => listPublishedTopLevelCatalogPages(), []),
       loadOptional("games", () => listGameCards(), [])
     ]);
+
+  const reports = await loadOptional("stats reports", () => listStatsReports(), []);
 
   // Lookups by Roblox universe, used to join every page type to its game.
   const wikiByUniverse = new Map<number, WikiListEntry>();
@@ -489,7 +492,8 @@ export async function loadHomePageData() {
         { href: "/stats/games", label: "Game rankings" },
         { href: "/stats/items", label: "Item stats" },
         { href: "/stats/creators", label: "Creator stats" },
-        { href: "/stats/reports", label: "Monthly reports" }
+        { href: "/stats/reports", label: "Monthly reports" },
+        ...reports.slice(0, 1).map(report => ({ href: report.href, label: `Roblox in ${report.month}` }))
       ],
       more: { href: "/stats", label: "Live Roblox stats" }
     },

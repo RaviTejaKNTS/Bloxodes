@@ -20,6 +20,7 @@ Roblox URLs put the page type first.
 | Article | `/articles/<slug>` | `articles.slug`, then `game_article_pages.slug` |
 | Catalog | `/catalog/<code>` and its hand-built sections | `catalog_pages.code` |
 | Stats | `/stats/games/<stats-slug>`, `/stats/items/<asset-id>` | `roblox_universes.slug`, asset ID |
+| Stats reports | `/stats/reports/roblox-<month>-<year>` | `stats_reports.slug` (static folders for June to September 2026) |
 
 Lists that paginate use `<url>/page/<n>`. Pagination pages are `noindex`.
 
