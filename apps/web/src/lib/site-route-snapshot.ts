@@ -93,8 +93,9 @@ async function loadRedirectRows(signal: AbortSignal): Promise<RedirectRoute[]> {
   return [...rows.values()];
 }
 // The first request in a fresh process waits for redirects. ~1,600 rows take
-// two parallel rounds; 2 seconds left no margin for database latency.
-export const REDIRECT_INITIAL_TIMEOUT = 5_000;
+// two parallel rounds. A slow database can need more than 5 seconds, and a
+// missed load serves 404 for every moved URL until the next retry.
+export const REDIRECT_INITIAL_TIMEOUT = 10_000;
 const cache = createRedirectSnapshotCache(loadRedirectRows, Date.now, REDIRECT_INITIAL_TIMEOUT);
 export const readRedirectSnapshot = cache.read;
 
