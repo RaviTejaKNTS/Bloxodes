@@ -84,7 +84,7 @@ describe("July 2026 Roblox report data", () => {
     expect(published).toContain("roblox-july-2026");
     for (const file of ["src/app/sitemaps/stats.xml/route.ts", "src/app/feed.xml/route.ts"]) {
       const source = readFileSync(path.resolve(process.cwd(), file), "utf8");
-      expect(source).toContain("listStatsReportsOrStatic");
+      expect(source).toContain("listStatsReports");
     }
 
     const revalidation = readFileSync(path.resolve(process.cwd(), "src/app/api/revalidate/route.ts"), "utf8");

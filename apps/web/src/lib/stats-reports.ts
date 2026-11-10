@@ -1,6 +1,5 @@
 import 'server-only';
 import { unstable_cache } from 'next/cache';
-import { cache } from 'react';
 import type { StatsReport } from '../../../../contracts/stats-report/v1/schema';
 import type { Chart } from '@/components/reports/stats-report/shared';
 import { supabaseAdmin } from './supabase';
@@ -54,10 +53,10 @@ export interface StatsReportRow {
     }>;
   };
 }
-export const getStatsReport = cache((slug: string) => unstable_cache(() => fetchStatsReport(slug), ['stats-report-v1', slug], {
+export const getStatsReport = (slug: string) => unstable_cache(() => fetchStatsReport(slug), ['stats-report-v1', slug], {
   revalidate: 3600,
   tags: ['stats', 'stats-reports', `stats-report:${slug}`]
-})());
+})();
 function staticReportListings(): ReportListing[] {
   return PUBLISHED_STATS_REPORTS.map(r => ({
     ...r,
@@ -97,14 +96,14 @@ async function fetchStatsReports(): Promise<ReportListing[]> {
   }
   return [...fixed, ...dynamic].sort((a, b) => Date.parse(b.month) - Date.parse(a.month));
 }
-export const listStatsReports = cache(unstable_cache(fetchStatsReports, ['stats-reports-v1'], {
+export const listStatsReports = unstable_cache(fetchStatsReports, ['stats-reports-v1'], {
   revalidate: 3600,
   tags: ['stats', 'stats-reports']
-}));
+});
 
 /**
- * The report list for pages that must still render when the database read fails (sitemap, feed,
- * archive, stats rail). It falls back to the static published reports and logs the error. The
+ * The report list for pages that must still render when the database read fails (archive, stats
+ * rail, home). The sitemap and feed use listStatsReports and return a 503 instead. It falls back to the static published reports and logs the error. The
  * failure is never stored in the report-list cache, so the next request reads the database again.
  */
 export async function listStatsReportsOrStatic(context: string): Promise<ReportListing[]> {

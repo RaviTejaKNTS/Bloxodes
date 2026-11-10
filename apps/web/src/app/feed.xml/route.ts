@@ -1,4 +1,4 @@
-import { listStatsReportsOrStatic } from "@/lib/stats-reports";
+import { listStatsReports } from "@/lib/stats-reports";
 import { listSharedGameDiscoveryPages } from "@/lib/game-content-index";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -153,7 +153,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.content_updated_at ?? page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
     if (item) items.push(item);
   }
-  for (const report of await listStatsReportsOrStatic("the feed")) {
+  for (const report of await listStatsReports()) {
     const monthlyReport = toFeedItem({
       title: report.title,
       path: report.href,

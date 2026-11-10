@@ -1,4 +1,4 @@
-import { listStatsReportsOrStatic } from "@/lib/stats-reports";
+import { listStatsReports } from "@/lib/stats-reports";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import {
   getStatsGamesSeoTaxonomy,
@@ -28,9 +28,8 @@ export async function GET() {
 
   ];
 
-  pages.push(...(await listStatsReportsOrStatic("the stats sitemap")).map(report => ({ loc: withSiteUrl(report.href), changefreq: "monthly" as const, priority: "0.8", lastmod: toIsoDate(report.updatedAt) })));
-
   try {
+    pages.push(...(await listStatsReports()).map(report => ({ loc: withSiteUrl(report.href), changefreq: "monthly" as const, priority: "0.8", lastmod: toIsoDate(report.updatedAt) })));
     const [taxonomy, lastModified, games] = await Promise.all([
       getStatsGamesSeoTaxonomy(),
       getStatsSitemapLastModifiedTimes(),
