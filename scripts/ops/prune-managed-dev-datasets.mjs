@@ -8,6 +8,10 @@ const MIN_AGE_DAYS = 2;
 const BATCH = 100;
 const MAX_BATCHES = 200;
 const WARN_MB = 450;
+// Stop starting new batches after this, so the vacuum and size check always
+// run inside the job's 30-minute limit. The next run picks up the rest.
+const DELETE_BUDGET_MS = 12 * 60_000;
+const started = Date.now();
 
 const apply = process.argv.includes("--apply");
 const token = process.env.MANAGED_DEV_SUPABASE_ACCESS_TOKEN;
@@ -62,10 +66,10 @@ async function prune(label, datasets, pages) {
       select count(*)::int datasets, coalesce(sum(d.item_count), 0)::int items
       from public.${datasets} d join s on s.id = d.id;`);
     console.log(`Would remove ${row.datasets} superseded ${label} datasets (${row.items} items).`);
-    return { datasets: row.datasets, items: row.items };
+    return { datasets: row.datasets, items: row.items, done: true };
   }
-  const total = { datasets: 0, items: 0 };
-  for (let batch = 0; batch < MAX_BATCHES; batch++) {
+  const total = { datasets: 0, items: 0, done: false };
+  for (let batch = 0; batch < MAX_BATCHES && Date.now() - started < DELETE_BUDGET_MS; batch++) {
     // Each batch is one statement, so a run killed midway loses nothing.
     const [row] = await query(`set local lock_timeout = '15s'; set local statement_timeout = '150s';
       with doomed as (${superseded(datasets, pages)} order by d.created_at limit ${BATCH}),
@@ -73,14 +77,14 @@ async function prune(label, datasets, pages) {
       select count(*)::int datasets, coalesce(sum(item_count), 0)::int items from gone;`);
     total.datasets += row.datasets;
     total.items += row.items;
-    if (row.datasets < BATCH) return total;
+    if (row.datasets < BATCH) return { ...total, done: true };
   }
-  throw new Error(`${label} cleanup stopped after ${MAX_BATCHES} batches; more superseded datasets remain. Run it again.`);
+  return total;
 }
 
 async function main() {
   const game = await prune("game", "game_collection_datasets", "game_collection_pages");
-  const wiki = await prune("wiki", "wiki_collection_datasets", "wiki_collection_pages");
+  const wiki = game.done ? await prune("wiki", "wiki_collection_datasets", "wiki_collection_pages") : { datasets: 0, items: 0, done: false };
   if (apply) {
     // Plain vacuum makes the freed space reusable without blocking readers.
     await query("vacuum (analyze, skip_locked) public.game_collection_items, public.wiki_collection_items, public.game_collection_datasets, public.wiki_collection_datasets, public.search_index;");
@@ -90,6 +94,9 @@ async function main() {
   console.log(`${verb} ${game.datasets} game and ${wiki.datasets} wiki datasets (${game.items + wiki.items} items). Database is ${size.mb} MB.`);
   if (size.mb > WARN_MB) {
     throw new Error(`Managed-development database is ${size.mb} MB, over the ${WARN_MB} MB warning line (free plan limit 500 MB). Find the largest tables with pg_stat_user_tables.`);
+  }
+  if (!game.done || !wiki.done) {
+    throw new Error("Cleanup hit its time limit with superseded datasets left. Run the workflow again to finish.");
   }
 }
 
