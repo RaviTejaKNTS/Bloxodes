@@ -12,7 +12,7 @@ import { bundlePath, assertCollectionMissingImages } from "../shared/roblox-wiki
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { verifyFranchisePageImage, MAX_FRANCHISE_IMAGE_BYTES, MAX_FRANCHISE_IMAGE_PIXELS } from "../shared/franchise-page-images";
-import { requireFranchiseHubImages, requireFranchiseCollectionImage } from "../ci/franchise-image-contract.mjs";
+import { requireFranchiseHubImages } from "../ci/franchise-image-contract.mjs";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { uploadCollectionImages, verifyCollectionImages } from "../shared/franchise-collection-media";
 import { gameFields, wikiFields, pick, saveFranchiseWikiPage } from "../franchise/publish-franchise-wiki-hubs";
@@ -186,7 +186,6 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     if (final.display_name !== manifest.collection.label) throw new Error("display_name must equal collection.label.");
     assertCollectionTitle(final.title, [bundle.game.name, gameInput.short_title], plan.items.length);
     assertCollectionMissingImages(plan.items, entry.missingImages, manifest.missingImages);
-    requireFranchiseCollectionImage(plan.items, plan.code);
     for (const item of plan.items) checkCopy({ description_json: { name: item.item_name, ...item.fields_json } }, `${slug}/${item.item_slug}`);
     const imageUrls = plan.items.flatMap(item => item.image_key ? [`https://media.bloxodes.com/wiki/${item.image_key}`] : []);
     if (final.thumb_url && !imageUrls.includes(final.thumb_url)) throw new Error("thumb_url must be null or an exact planned item image URL.");

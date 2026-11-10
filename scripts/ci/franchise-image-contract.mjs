@@ -21,10 +21,6 @@ export function requireFranchiseHubImages(game, label = game.slug) {
   return [{ url: cover, role: 'cover', label }, { url: thumbnail, role: 'thumbnail', label }];
 }
 
-export function requireFranchiseCollectionImage(items, label) {
-  if (!items.some(item => typeof item.image_key === 'string' && item.image_key.trim())) throw new Error(`${label}: publishing a collection requires at least one item image for cards and social previews.`);
-}
-
 /** Validate the effective post-upsert state before any publisher writes a row. */
 export async function assertFranchisePageImages({ namespace, payload, storedGames, loadPage, verifyImage }) {
   const games = new Map(storedGames.map(game => [game.id, game]));
