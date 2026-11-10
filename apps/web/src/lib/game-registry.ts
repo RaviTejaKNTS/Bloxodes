@@ -72,7 +72,7 @@ export const getGameDirectoryPages = cache(async (namespace: string, gameId?: st
     const rows = (data ?? []) as unknown as Array<{ id: string; game_id: string; title: string; canonical_path: string; cover_image?: string | null; thumb_url?: string | null }>;
     return Promise.all(rows.map(async page => {
       const artwork = await getGameArtwork(namespace, page.game_id);
-      const itemImage = table === "game_collection_pages_view" ? (await createGameReader(namespace).listPublishedSharedGameWikiCollectionImageUrls(page as unknown as SharedGameWikiCollectionPage, 1))[0] : null;
+      const itemImage = table === "game_collection_pages_view" ? (await createGameReader(namespace).listPublishedSharedGameWikiCollectionImageUrls(page as unknown as SharedGameWikiCollectionPage, 1).catch(() => [] as string[]))[0] : null;
       return { kind: table, href: String(page.canonical_path), title: String(page.title), image: table === "game_collection_pages_view" ? resolveGameCollectionImage({ game_cover_image: artwork?.cover_image, game_hero_image: artwork?.hero_image }, itemImage) : resolveGameCoverImage({ ...page, image: null, game_cover_image: artwork?.cover_image }) };
     }));
   }));

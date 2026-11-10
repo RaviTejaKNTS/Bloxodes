@@ -267,7 +267,6 @@ async function loadOptionPage(
     return { options, total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${view} options`, error);
-    if (IS_BUILD) return { options: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -296,7 +295,6 @@ async function loadOptionBySlug(
     };
   } catch (error) {
     reportLoadError(`Failed to load ${view} option`, error);
-    if (IS_BUILD) return null;
     throw error;
   }
 }
@@ -379,7 +377,6 @@ async function loadMusicIdsPage(
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load Roblox music IDs", error);
-    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -416,7 +413,6 @@ async function loadDailyTop500MusicIdsPage(pageNumber: number): Promise<PageData
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load daily top Roblox music IDs", error);
-    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -447,7 +443,6 @@ async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): 
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
-    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -499,7 +494,6 @@ export async function loadGameMusicIdsPageData(
     return { songs: (data ?? []) as MusicRow[], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
   } catch (error) {
     reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
-    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }

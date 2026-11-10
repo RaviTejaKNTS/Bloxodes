@@ -52,11 +52,11 @@ it.each(["catalog", "checklist"])("supports published %s pages", async kind => {
   expect(filters[kind === "checklist" ? "is_public" : "is_published"]).toBe(true);
   if (kind === "checklist") expect(filters["published_at.lte"]).toBeTruthy();
 });
-it.each(["games", "game_map_pages_view"])("directory failure in %s leaves the index usable", async table => {
+it.each(["games", "game_map_pages_view"])("directory failure in %s fails regeneration", async table => {
   state.failure = table;
   const log = vi.spyOn(console, "error").mockImplementation(() => {});
   try {
-    expect(await OtherGamesSection({ kind: "map" })).toBeNull();
+    await expect(OtherGamesSection({ kind: "map" })).rejects.toThrow("unavailable");
     expect(log).toHaveBeenCalledWith("[game-directories] Published game directory unavailable.");
   } finally { log.mockRestore(); }
 });

@@ -225,8 +225,10 @@ async function getVisitShareChartFromRpc(range: StatsVisitShareRange, window = c
       .range(from, from + RPC_PAGE_SIZE - 1);
 
     if (error) {
+      // 55000: the summary hasn't been warmed yet. That's a normal "not available" state.
+      if (error.code === "55000") return null;
       console.warn("Failed to load visit-share chart RPC", error.message);
-      return null;
+      throw error;
     }
 
     const pageRows = (data ?? []) as VisitShareRpcRow[];

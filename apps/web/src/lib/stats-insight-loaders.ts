@@ -34,7 +34,7 @@ async function insightRead<T>(key: string, load: (signal: AbortSignal) => Promis
       clearTimeout(timer!);
       controller.abort();
     }
-  });
+  }).catch(() => null);
 }
 
 export async function loadWeeklyMovers(): Promise<Mover[]> {

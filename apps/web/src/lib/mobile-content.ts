@@ -1183,7 +1183,7 @@ async function loadMusicCatalogSections(searchParams?: URLSearchParams): Promise
 
   if (error) {
     console.warn("Failed to load mobile music catalog rows", error);
-    return [];
+    throw error;
   }
 
   const rows = ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
@@ -1272,7 +1272,7 @@ async function loadDecalCatalogSections(searchParams?: URLSearchParams): Promise
 
   if (error) {
     console.error("Failed to load mobile decal catalog", error);
-    return [];
+    throw error;
   }
 
   const rows = data ?? [];

@@ -50,10 +50,7 @@ export async function loadRobloxColorCodesPageData(): Promise<ColorCodesDataset>
     };
   } catch (error) {
     console.error("Failed to load Roblox color codes dataset", error);
-    return {
-      meta: {},
-      items: []
-    };
+    throw error;
   }
 }
 

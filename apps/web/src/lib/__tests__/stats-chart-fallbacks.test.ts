@@ -49,8 +49,16 @@ afterEach(() => {
 const paged = (value: unknown) => ({ range: vi.fn().mockResolvedValue(value) });
 
 describe("platform chart", () => {
-  it("does not fan out to per-game history when the stored summary fails", async () => {
-    mocks.from.mockImplementation(() => query({ data: null, error: timeout }));
+  it("throws a stored summary failure without per-game fan-out", async () => {
+    const failure = { ...timeout, code: "57014" };
+    mocks.from.mockImplementation(() => query({ data: null, error: failure }));
+    await expect(getStatsPlatformChart("30d", "daily")).rejects.toEqual(failure);
+    expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_daily"]);
+    expect(mocks.rpc).not.toHaveBeenCalled();
+  });
+
+  it("treats a missing stored summary table as unavailable without per-game fan-out", async () => {
+    mocks.from.mockImplementation(() => query({ data: null, error: { ...timeout, code: "42P01" } }));
     const chart = await getStatsPlatformChart("30d", "daily");
     expect(chart).toMatchObject({ range: "30d", points: [], unavailable: true });
     expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_daily"]);
@@ -60,8 +68,7 @@ describe("platform chart", () => {
   it("makes one live call for the 24-hour chart and nothing else when it times out", async () => {
     mocks.from.mockImplementation(() => query({ data: [], error: null }));
     mocks.rpc.mockResolvedValue({ data: null, error: timeout });
-    const chart = await getStatsPlatformChart("1d", "hourly");
-    expect(chart.unavailable).toBe(true);
+    await expect(getStatsPlatformChart("1d", "hourly")).rejects.toEqual(timeout);
     expect(mocks.from.mock.calls.map(([table]) => table)).toEqual(["roblox_platform_stats_hourly"]);
     expect(mocks.rpc.mock.calls.map(([name]) => name)).toEqual(["get_stats_platform_ccu_trend"]);
   });
@@ -80,8 +87,7 @@ describe("platform chart", () => {
 describe("visit-share chart", () => {
   it("never rebuilds the chart from a smaller set of games", async () => {
     mocks.rpc.mockReturnValue(paged({ data: null, error: timeout }));
-    const chart = await getStatsVisitShareChart("90d");
-    expect(chart).toMatchObject({ range: "90d", points: [], series: [], unavailable: true });
+    await expect(getStatsVisitShareChart("90d")).rejects.toEqual(timeout);
     expect(mocks.rpc).toHaveBeenCalledTimes(1);
     expect(mocks.from).not.toHaveBeenCalled();
   });
