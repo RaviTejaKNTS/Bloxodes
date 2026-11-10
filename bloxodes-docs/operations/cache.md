@@ -31,11 +31,15 @@ The Edge Function forwards event types it doesn't know, so new content types onl
 
 Stats chart APIs are the one origin exception: the platform player and visit-share charts keep each result in the web process for 5 minutes and share one query between concurrent requests (`apps/web/src/lib/stats-chart-cache.ts`). See [stats](../content/stats.md). Don't add `unstable_cache` for other public reads.
 
+**Data errors are never served as pages.** A public page reader throws when a database or required dataset read fails. It never turns the failure into null, an empty main list or `notFound()`, so Next ISR keeps the last good render and a first render returns an uncached 500. Null means a successful read found no published row; valid past-end pagination still returns its 404. Optional navigation, related content and image enrichment may fail on their own when they can't decide whether the page exists. Builds don't fall back to empty lists either: a build that can't read data fails instead of shipping an empty page. Sitemaps and `/feed.xml` return 503 with `cache-control: no-store` and `Retry-After: 60` on a data error. `apps/web/src/lib/__tests__/data-error-policy.test.ts` scans server code for an error turned into null or an empty list; each allowed exception is listed there with its reason. Cloudflare never stores 4xx/5xx either; see [Cloudflare](../infrastructure/cloudflare.md#caching).
+
 Redirects are the other in-process cache (`apps/web/src/lib/site-route-snapshot.ts`). Each server process holds a copy of the `site_route_redirects` rows plus the live and gone paths under a prefix rule:
 
 - The first request in a fresh process waits for one shared load, at most 10 seconds (two parallel rounds: the row count and prefix rules, then every page of rows). If it fails or times out, that request continues without redirects, and the next requests retry after 2, 4, 8, 16, then every 30 seconds.
 - Once loaded, requests use the copy and a background refresh runs every 5 minutes (15-second limit). A failed refresh keeps the last copy.
 - `/api/revalidate` doesn't clear it. Route changes show up after the next refresh.
+
+A catalog date change for a music, decal or avatar descendant page revalidates that page and the catalog sitemaps. Every descendant response, including its pagination and query variants, carries its exact `catalog:<descendant-slug>` tag as well as its parent and scope tags, and a scoped membership event purges only that exact tag and the sitemap tags, never the parent family. Music charts are the exception to "exact": `/catalog/roblox-music-ids/charts` serves every range through one path and the proxy tags by path only, so chart responses and their pagination carry all three weekly, monthly and yearly tags, and any period event purges every chart range. Item writes keep their own cache events for metadata and ordering.
 
 Every non-Roblox page change uses the `game_content` event. One resolver works out the affected pages from stored route ownership (the page, its old URLs, its game's hub, collection pagination and the relevant index pages), the same for every game.
 

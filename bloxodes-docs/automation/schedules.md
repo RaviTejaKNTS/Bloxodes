@@ -37,7 +37,7 @@ All units run from `/srv/data/bloxodes-automation-runtime/current`. Article disc
 | --- | --- | --- |
 | `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the Content Factory article run writes from. Starts nothing else. |
 | `bloxodes-codes-discovery.timer` | 01:15, 07:15, 13:15, 19:15 IST, up to 5 minutes later | `codes:discover`: adds new Beebom and RobloxDen codes games to the [Codes Queue](notion-queues.md#codes-queue). Needs `NOTION_CODES_QUEUE_TOKEN`. State in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/`. Enable once with `sudo systemctl enable --now bloxodes-codes-discovery.timer`. |
-| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
+| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. It also requests two made-up URLs twice each and opens an `[error-page-cache]` issue (and exits 1) if Cloudflare serves a 4xx/5xx from its cache; see [Cloudflare](../infrastructure/cloudflare.md#caching). Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 
 Article writing and publication run in the Content Factory. The homelab writer, publication and audit units were removed on 2026-10-30; the installer removes them if it finds them, and restores the old units if activation fails.
 
@@ -45,7 +45,7 @@ The runtime is a separate release from the repo. Merging code doesn't change it.
 
 ## VPS (cron, user `ravitejaknts`)
 
-Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
+Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. `JOB_OVERALL_TIMEOUT_SECONDS` bounds the whole invocation (lock wait, image build, smoke checks and the job container; default 15,000 s), and `JOB_TIMEOUT_SECONDS` still bounds the job container on its own. The inner container timeout runs with `--foreground` so it stays in the overall timeout's process group: when the overall deadline hits, the Docker client gets TERM and the wrapper removes its job, smoke, fallback and build containers, records the failure and releases its locks within the 30-second kill grace. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
 
 | Group | Schedule (UTC) |
 | --- | --- |
@@ -74,6 +74,7 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Item stats | tier 01:05; NEW :55 most hours; HOT :32; WARM 01:32/07:32/13:32/19:32; COLD 23:32; resale :17 every 3 hours |
 | Item index, rollup, audit | index :45 hourly; rollup 01:25; audit :55 every 6 hours |
 | Promo rewards | Wednesday 09:40 |
+| Catalog page dates (`catalog-membership-dates`, 120 s limit for the whole run; see [data refreshes](../content/data-refreshes.md#catalog-page-dates)) | every 10 minutes |
 | Boot recovery | `@reboot` |
 
 The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitHub analytics collector). Leave them alone.
@@ -88,7 +89,11 @@ It's the only Northflank job. It runs in team `ravitejakntss-team`, the only Nor
 
 ## GitHub Actions
 
-No GitHub workflow runs on a schedule.
+Scheduled:
+
+| Workflow | Schedule (UTC) | Does |
+| --- | --- | --- |
+| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 

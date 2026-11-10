@@ -269,8 +269,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to build RSS feed", error);
-    return new NextResponse(buildRssXml([]), {
-      headers: { "content-type": "application/rss+xml; charset=utf-8" }
+    return new NextResponse("Temporarily unavailable", {
+      status: 503,
+      headers: { "cache-control": "no-store", "Retry-After": "60" }
     });
   }
 }

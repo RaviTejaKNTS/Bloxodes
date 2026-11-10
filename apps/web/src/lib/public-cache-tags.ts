@@ -86,6 +86,11 @@ function musicScopeTags(slug: string) {
   const value = parts[2];
   const tags = ["music-catalog", slugTag("catalog", MUSIC_CATALOG_CODE)];
 
+  // The proxy selects tags by pathname. All chart ranges share /charts,
+  // including pagination, so each response must match every period event.
+  if (section === "charts") {
+    tags.push(...["weekly", "monthly", "yearly"].map(period => slugTag("catalog", `${MUSIC_CATALOG_CODE}/${period}`)));
+  }
   if (section === "genres" && value) tags.push(`music-genre:${value}`);
   if (section === "artists" && value) tags.push(`music-artist:${value}`);
   if (section === "games" && value) tags.push(`music-game:${value}`);
@@ -263,7 +268,7 @@ export function cacheTagsForPath(pathname: string) {
 
     const catalogSlug = segments.slice(1).join("/");
     const catalogSlugForTags = catalogSlug.replace(/\/page(?:\/\d+)?$/i, "");
-    const catalogTags = [...tags, "catalog", slugTag("catalog", second)];
+    const catalogTags = [...tags, "catalog", slugTag("catalog", second), slugTag("catalog", catalogSlugForTags)];
 
     if (second === FREE_ITEMS_CATALOG_CODE || second === LEGACY_FREE_ITEMS_CATALOG_CODE) {
       catalogTags.push(...freeItemScopeTags(catalogSlug));
@@ -440,4 +445,10 @@ export function cacheTagsForEvents(events: PublicCacheEvent[]) {
 
 export function serializeCacheTags(tags: string[]) {
   return unique(tags).join(",");
+}
+
+// Membership events purge one descendant and all of its cached page/query variants.
+export function catalogMembershipPurgeTags(slug: string): string[] | null {
+  if (!["roblox-music-ids/", "roblox-decal-ids/", `${AVATAR_CATALOG_MASTER_CODE}/`].some(prefix => slug.startsWith(prefix))) return null;
+  return [`catalog:${slug}`, "sitemap", "sitemap:catalog"];
 }

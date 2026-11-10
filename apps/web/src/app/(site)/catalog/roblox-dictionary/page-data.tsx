@@ -91,7 +91,7 @@ export async function loadRobloxDictionaryData(): Promise<DictionaryDataset> {
     };
   } catch (error) {
     console.error("Failed to load Roblox dictionary dataset", error);
-    return { meta: {}, items: [] };
+    throw error;
   }
 }
 

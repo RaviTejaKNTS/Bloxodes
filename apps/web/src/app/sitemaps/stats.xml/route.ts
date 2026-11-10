@@ -56,6 +56,7 @@ export async function GET() {
     })));
   } catch (error) {
     console.error("Failed to build stats sitemap", error);
+    return new NextResponse("Temporarily unavailable", { status: 503, headers: { "cache-control": "no-store", "Retry-After": "60" } });
   }
 
   return new NextResponse(buildSitemapUrlSetXml(pages), {

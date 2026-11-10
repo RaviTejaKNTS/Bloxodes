@@ -220,7 +220,7 @@ export async function loadAvatarCatalogPageData(
     return { items, total, totalPages };
   } catch (error) {
     console.error("Failed to load avatar catalog page data", error);
-    return { items: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 

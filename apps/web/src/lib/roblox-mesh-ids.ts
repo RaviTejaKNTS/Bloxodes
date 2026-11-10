@@ -115,10 +115,6 @@ export async function loadRobloxMeshIdsPageData(
       totalPages: Math.max(1, Math.ceil(total / MESH_IDS_PAGE_SIZE))
     };
   } catch (error) {
-    if (process.env.NEXT_PHASE === "phase-production-build") {
-      console.error("Failed to load Roblox mesh IDs during build", error);
-      return { meshes: [], total: 0, totalPages: 1 };
-    }
     throw error;
   }
 }

@@ -37,6 +37,7 @@ Old `.env` backups on the VPS keep the old keys, which no longer work after this
 - A Supabase cloud project at HTTPS `*.supabase.co` (project `bbtcaurrtyoukvjbxbbj`). Credentials in `.envs/targets/managed-dev.env`.
 - All workstation, agent and CI authoring work happens here: previews, imports, article queues, content QA.
 - It's remote but not production. Don't call it "local".
+- Every collection publish adds a new dataset revision (`wiki_collection_datasets`, `game_collection_datasets` and their items) and keeps the old one. `managed-dev-cleanup.yml` runs `scripts/ops/prune-managed-dev-datasets.mjs --apply` weekly in the PR checks lane. It deletes revisions older than 2 days that were created before the revision their page publishes now, then vacuums. Revisions staged after the published one, and every revision of a page with nothing published, are kept. The job fails when the database passes 450 MB; the free plan limit is 500 MB. It needs `MANAGED_DEV_SUPABASE_ACCESS_TOKEN` and never touches production. Without `--apply` it only counts.
 
 ## Moving data between them
 
@@ -66,6 +67,7 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 ## Rules
 
 - Migrations are immutable once committed. CI rejects edits and deletions.
+- A rejected migration that only reached managed development is retired, not deleted: its exact SQL moves to `supabase/migrations_archive/`, `managed_dev_retired_migrations` in `supabase/migration-policy.json` pins its hash and its forward cleanup migration, and the development ledger rows stay as they are. CI checks the archived bytes and that the cleanup removed the objects. Production never runs archived SQL. First used for PR #215's catalog triggers on 2026-11-09.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
 - Collection and quiz data lives only in the database. The repo holds no runtime content JSON.

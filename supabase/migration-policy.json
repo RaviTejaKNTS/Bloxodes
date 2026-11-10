@@ -147,5 +147,28 @@
       "local_sha256": "e32828ca1e686581558fbe8ab6a68c5fbfc29d7fe2afad17e35237ce55e754de",
       "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
     }
+  ],
+  "managed_dev_retired_migrations": [
+    {
+      "version": "20261109123156",
+      "file": "supabase/migrations_archive/catalog-dates-rejected/20261109123156_catalog_dates_follow_membership.sql",
+      "sha256": "6af3c810c8ec6a7bbee73adbc8ae3d81a4aaeabed9f9b57bc7182d3e9069b817",
+      "retired_by": "20261109135421",
+      "reason": "PR 215 was applied only to managed development. Preserve its ledger and exact SQL; the reconciler migration removes its writer triggers and snapshots. Never replay in production."
+    },
+    {
+      "version": "20261109124321",
+      "file": "supabase/migrations_archive/catalog-dates-rejected/20261109124321_catalog_chart_membership_dates.sql",
+      "sha256": "5c429e8527bb9e56b08ba4dd89b5c65b2ccdea344e0118662bdeab3c0fb8de7a",
+      "retired_by": "20261109135421",
+      "reason": "PR 215 was applied only to managed development. Preserve its ledger and exact SQL; the reconciler migration removes its writer triggers and snapshots. Never replay in production."
+    },
+    {
+      "version": "20261109125128",
+      "file": "supabase/migrations_archive/catalog-dates-rejected/20261109125128_catalog_membership_future_page_guards.sql",
+      "sha256": "37e0aadcd4bde14678f759f59b7d9df0665ab95fdf1d113d082199f37cbff283",
+      "retired_by": "20261109135421",
+      "reason": "PR 215 was applied only to managed development. Preserve its ledger and exact SQL; the reconciler migration removes its writer triggers and snapshots. Never replay in production."
+    }
   ]
 }

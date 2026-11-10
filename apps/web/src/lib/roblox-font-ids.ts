@@ -44,7 +44,7 @@ const loadCachedRobloxFontIds = publicContentCache(
 
     if (error) {
       console.error("Failed to load Roblox font IDs", error);
-      return [];
+      throw error;
     }
     return (data ?? []) as RobloxFontId[];
   },

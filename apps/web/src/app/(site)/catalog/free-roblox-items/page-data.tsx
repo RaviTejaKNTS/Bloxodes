@@ -167,7 +167,7 @@ export async function loadFreeItemsPageData(
     return { items, total, totalPages };
   } catch (error) {
     console.error("Failed to load free items page data", error);
-    return { items: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 
@@ -181,7 +181,7 @@ export async function loadFreeItemCategories(): Promise<CategoryOption[]> {
     }));
   } catch (error) {
     console.error("Failed to load free item categories", error);
-    return [];
+    throw error;
   }
 }
 
@@ -201,7 +201,7 @@ export async function loadFreeItemSubcategories(category: string): Promise<Subca
     }));
   } catch (error) {
     console.error("Failed to load free item subcategories", error);
-    return [];
+    throw error;
   }
 }
 

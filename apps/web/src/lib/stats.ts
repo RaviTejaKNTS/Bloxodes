@@ -1698,6 +1698,7 @@ async function listBaseGames(options: {
     }
   }
   if (indexResult.error && indexResult.error.code !== "42P01") {
+    // The base table below still gives a complete list.
     console.warn("Failed to read stats_game_current_index; falling back to roblox_universes", indexResult.error.message);
   }
 
@@ -1793,7 +1794,8 @@ async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
     .select("universe_id, rank_value")
     .order("rank_value", { ascending: true })
     .limit(limit);
-  if (risers.error || !(risers.data?.length)) {
+  if (risers.error) throw risers.error;
+  if (!(risers.data?.length)) {
     return [];
   }
 
@@ -1814,7 +1816,7 @@ async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
       peak_7d, global_playing_rank, indexed_at
     `)
     .in("universe_id", ids);
-  if (indexRows.error) return [];
+  if (indexRows.error) throw indexRows.error;
   return ((indexRows.data ?? []) as StatsGameIndexRow[])
     .map(mapIndexedGame)
     .sort((a, b) => (rankById.get(a.universeId) ?? Infinity) - (rankById.get(b.universeId) ?? Infinity))
@@ -1932,10 +1934,9 @@ async function getStatsPlatformTotals(): Promise<Omit<StatsPlatformTotals, "trac
   const { data, error } = await supabaseAdmin().rpc("get_stats_platform_current_summary");
 
   if (error) {
-    if (error.code !== "42883" && error.code !== "PGRST202") {
-      console.warn("Failed to load platform CCU totals", error.message);
-    }
-    return null;
+    // A missing function (not deployed yet) means no totals; anything else is a real failure.
+    if (error.code === "42883" || error.code === "PGRST202") return null;
+    throw error;
   }
 
   const row = ((data ?? []) as Array<{
@@ -1967,10 +1968,8 @@ async function getPlatformTrendFromRpc(sinceIso: string): Promise<StatsChartPoin
   });
 
   if (error) {
-    if (error.code !== "42883") {
-      console.warn("Failed to load platform CCU trend", error.message);
-    }
-    return null;
+    if (error.code === "42883" || error.code === "PGRST202") return null;
+    throw error;
   }
 
   return ((data ?? []) as PlatformTrendRow[]).map((row) => mapPlatformTrendRow(row));
@@ -2257,6 +2256,7 @@ export async function listStatsItems(input: {
     .range(offset, offset + fetchSize - 1);
 
   if (error) {
+    if (error.code !== "PGRST103" || offset === 0) throw error;
     console.warn(`Failed to load ${tableName} for stats`, error.message);
     return {
       items: [],
@@ -2328,7 +2328,7 @@ async function loadStatsItemRow(assetId: number): Promise<{ row: StatsItemIndexR
     .maybeSingle();
   if (error) {
     console.warn("Failed to load stats item detail", error.message);
-    return { row: null, indexed: false };
+    throw error;
   }
   return { row: (data as StatsItemIndexRow | null) ?? null, indexed: false };
 }
@@ -2382,7 +2382,7 @@ async function loadStatsItemHourlyPoints(assetId: number): Promise<StatsItemChar
     .order("hour_start", { ascending: true });
   if (error) {
     console.warn("Failed to load item hourly points", error.message);
-    return [];
+    throw error;
   }
   return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
     label: statsItemChartLabel(String(row.hour_start)),
@@ -2405,7 +2405,7 @@ async function loadStatsItemDailyPoints(assetId: number): Promise<StatsItemChart
     .order("stat_date", { ascending: true });
   if (error) {
     console.warn("Failed to load item daily points", error.message);
-    return [];
+    throw error;
   }
   return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
     label: statsItemChartLabel(String(row.stat_date)),
@@ -2428,7 +2428,7 @@ async function loadStatsItemResalePoints(assetId: number): Promise<StatsItemChar
     .order("point_date", { ascending: true });
   if (error) {
     console.warn("Failed to load item resale points", error.message);
-    return [];
+    throw error;
   }
   return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
     label: statsItemChartLabel(String(row.point_date)),
@@ -2506,6 +2506,7 @@ export async function listStatsCreators(input: {
     .range(offset, offset + pageSize - 1);
 
   if (error) {
+    if (error.code !== "PGRST103" || offset === 0) throw error;
     console.warn("Failed to load stats_creator_current_index", error.message);
     return {
       creators: [],
@@ -2596,10 +2597,8 @@ async function getStatsIndexLastModifiedAt(
     .limit(1)
     .maybeSingle();
   if (error) {
-    if (error.code !== "42P01") {
-      console.warn(`Failed to load ${label} last-modified time`, error.message);
-    }
-    return null;
+    if (error.code === "42P01") return null;
+    throw error;
   }
   return (data as { indexed_at?: string | null } | null)?.indexed_at ?? null;
 }
@@ -2641,7 +2640,7 @@ export async function getStatsGenreOptions(): Promise<string[]> {
     .select("genre_l1")
     .not("slug", "is", null)
     .limit(1000);
-  if (error) return [];
+  if (error) throw error;
   return Array.from(
     new Set(
       ((data ?? []) as Array<{ genre_l1: string | null }>)
@@ -2683,7 +2682,7 @@ export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> 
 
   if (error) {
     console.warn("Failed to load stats subgenre options", error.message);
-    return [];
+    throw error;
   }
 
   const byKey = new Map<string, StatsSubgenreOption>();
@@ -2896,7 +2895,7 @@ async function getBucketedChart(
       .range(offset, offset + pageSize - 1);
     if (error) {
       console.warn("Failed to load chart stats", error.message);
-      return [];
+      throw error;
     }
     const chunk = (data ?? []) as HourlyRow[];
     rows.push(...chunk);
@@ -3027,10 +3026,8 @@ async function getStoredPlatformChart(
     .order(timeColumn, { ascending: true });
 
   if (error) {
-    if (!isMissingPostgrestRelationError(error)) {
-      console.warn("Failed to load stored platform stats", error.message);
-    }
-    return null;
+    if (isMissingPostgrestRelationError(error)) return null;
+    throw error;
   }
 
   const points = ((data ?? []) as PlatformAggregateRow[])
@@ -3422,7 +3419,7 @@ async function getRankRows(universeId: number, range: StatsTimeRange, window = c
       .range(offset, offset + pageSize - 1);
     if (error) {
       console.warn("Failed to load rank chart stats", error.message);
-      return [];
+      throw error;
     }
     const chunk = (data ?? []) as HourlyRankSnapshotRow[];
     rows.push(
@@ -3681,6 +3678,8 @@ export async function loadLatestRank(universeId: number): Promise<number | null>
     .eq("universe_id", universeId)
     .limit(1)
     .maybeSingle();
+  // Rank is optional on every caller: an index error falls back to the snapshot,
+  // and a snapshot error returns null below.
   if (!indexed.error && indexed.data) {
     if (!isPlayingTimestampFresh(indexed.data.last_playing_refreshed_at)) return null;
     return toNumber(indexed.data.global_playing_rank);
