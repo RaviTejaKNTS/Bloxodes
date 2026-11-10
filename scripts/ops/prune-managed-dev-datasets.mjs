@@ -43,15 +43,17 @@ async function query(sql) {
   }
 }
 
-// A revision is superseded when its page publishes a different revision and it
-// is older than MIN_AGE_DAYS, so a publish still staging its revision is safe.
-// Pages with no published revision keep everything. The pages' foreign keys and
-// the immutability triggers also refuse to delete a published revision.
+// A revision is superseded when it was created before the revision its page
+// publishes now, and is older than MIN_AGE_DAYS. Revisions staged after the
+// published one (awaiting approval) are kept, and so is everything on pages
+// with no published revision. The pages' foreign keys and the immutability
+// triggers also refuse to delete a published revision.
 const superseded = (datasets, pages) => `
   select d.id from public.${datasets} d
   join public.${pages} p on p.id = d.collection_page_id
-  where p.published_dataset_id is not null
-    and p.published_dataset_id <> d.id
+  join public.${datasets} live on live.id = p.published_dataset_id
+  where d.id <> live.id
+    and d.created_at < live.created_at
     and d.created_at < now() - interval '${MIN_AGE_DAYS} days'`;
 
 async function prune(label, datasets, pages) {

@@ -37,7 +37,7 @@ Old `.env` backups on the VPS keep the old keys, which no longer work after this
 - A Supabase cloud project at HTTPS `*.supabase.co` (project `bbtcaurrtyoukvjbxbbj`). Credentials in `.envs/targets/managed-dev.env`.
 - All workstation, agent and CI authoring work happens here: previews, imports, article queues, content QA.
 - It's remote but not production. Don't call it "local".
-- Every collection publish adds a new dataset revision (`wiki_collection_datasets`, `game_collection_datasets` and their items) and keeps the old one. `managed-dev-cleanup.yml` runs `scripts/ops/prune-managed-dev-datasets.mjs --apply` weekly in the PR checks lane. It deletes revisions older than 2 days whose page publishes a different revision, then vacuums. Pages with no published revision keep all of theirs. The job fails when the database passes 450 MB; the free plan limit is 500 MB. It needs `MANAGED_DEV_SUPABASE_ACCESS_TOKEN` and never touches production. Without `--apply` it only counts.
+- Every collection publish adds a new dataset revision (`wiki_collection_datasets`, `game_collection_datasets` and their items) and keeps the old one. `managed-dev-cleanup.yml` runs `scripts/ops/prune-managed-dev-datasets.mjs --apply` weekly in the PR checks lane. It deletes revisions older than 2 days that were created before the revision their page publishes now, then vacuums. Revisions staged after the published one, and every revision of a page with nothing published, are kept. The job fails when the database passes 450 MB; the free plan limit is 500 MB. It needs `MANAGED_DEV_SUPABASE_ACCESS_TOKEN` and never touches production. Without `--apply` it only counts.
 
 ## Moving data between them
 
