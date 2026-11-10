@@ -20,4 +20,4 @@ vi.mock('../supabase', () => ({
   })
 }));
 import { listStatsReports } from '../stats-reports';
-describe('report discovery visibility', () => { it('merges public reports and August for the archive, rail, home, sitemap and feed', async () => { const reports = await listStatsReports(); expect(reports[0].href).toBe('/stats/reports/roblox-october-2026'); expect(reports.some(r => r.href.endsWith('roblox-august-2026'))).toBe(true); expect(reports.some(r => r.href.endsWith('roblox-november-2026'))).toBe(false); }); });
+describe('report discovery visibility', () => { it('merges public reports, never the unlisted August page, for the archive, rail, home, sitemap and feed', async () => { const reports = await listStatsReports(); expect(reports[0].href).toBe('/stats/reports/roblox-october-2026'); expect(reports.some(r => r.href.endsWith('roblox-august-2026'))).toBe(false); expect(reports.some(r => r.href.endsWith('roblox-november-2026'))).toBe(false); }); });

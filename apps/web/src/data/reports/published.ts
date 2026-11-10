@@ -1,4 +1,3 @@
-import { robloxAugust2026Report } from "./roblox-august-2026";
 import { robloxJune2026Report } from "./roblox-june-2026";
 import { robloxJuly2026Report } from "./roblox-july-2026";
 import { robloxSeptember2026Report } from "./roblox-september-2026";
@@ -16,15 +15,6 @@ export const PUBLISHED_STATS_REPORTS = [
     title: robloxSeptember2026Report.title,
     description: robloxSeptember2026Report.subtitle,
     image: robloxSeptember2026Report.featureImage
-  },
-  {
-    href: `/stats/reports/${robloxAugust2026Report.slug}`,
-    updatedAt: robloxAugust2026Report.updatedAt,
-    publishedAt: robloxAugust2026Report.publishedAt,
-    month: robloxAugust2026Report.featureImage.month,
-    title: robloxAugust2026Report.title,
-    description: robloxAugust2026Report.subtitle,
-    image: robloxAugust2026Report.featureImage
   },
   {
     href: `/stats/reports/${robloxJuly2026Report.slug}`,
