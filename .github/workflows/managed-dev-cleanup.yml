@@ -1,0 +1,30 @@
+name: Managed development cleanup
+on:
+  schedule:
+    # Mondays 03:10 IST.
+    - cron: '40 21 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Share the PR checks lane so cleanup never runs while checks read the database.
+    concurrency:
+      group: bloxodes-pr-checks
+      queue: max
+      cancel-in-progress: false
+    env:
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: scripts/ops
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/ops/prune-managed-dev-datasets.mjs --apply
