@@ -79,10 +79,14 @@ jobs:
     needs: [scope, managed-development]
     if: ${{ always() && !cancelled() && needs.scope.outputs.checks == 'true' && (needs.scope.outputs.migrations == 'false' || needs.managed-development.result == 'success') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    # Every run reads the one managed development database. Parallel runs
+    # overloaded it (statement timeouts, cold pages over 45s), so PR checks
+    # take turns instead of failing together.
     concurrency:
-      group: pr-checks-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
+      group: bloxodes-pr-checks
+      queue: max
+      cancel-in-progress: false
     env:
       CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
       BLOXODES_ENV_PROFILE: process-only
