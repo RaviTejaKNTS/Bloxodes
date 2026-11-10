@@ -83,7 +83,11 @@ It's the only Northflank job. It runs in team `ravitejakntss-team`, the only Nor
 
 ## GitHub Actions
 
-No GitHub workflow runs on a schedule.
+Scheduled:
+
+| Workflow | Schedule (UTC) | Does |
+| --- | --- | --- |
+| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
