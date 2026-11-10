@@ -736,19 +736,14 @@ export function renderRobloxMusicIdsPage({
   contentHtml?: CatalogContentHtml | null;
   activeNav?: MusicNavKey;
 }) {
-  const latest = songs.reduce<Date | null>((latestDate, song) => {
-    if (!song.last_seen_at) return latestDate;
-    const candidate = new Date(song.last_seen_at);
-    if (!latestDate || candidate > latestDate) return candidate;
-    return latestDate;
-  }, null);
+
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml?.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const baseTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox music IDs";
   const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
-  const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : latest;
+  const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
   const formattedUpdated = updatedDate
     ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
     : null;

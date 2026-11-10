@@ -6,6 +6,14 @@ if [ "$#" -lt 2 ]; then
   exit 2
 fi
 
+# Bound preflight, shared-lock waiting and the final container together. Existing
+# long jobs retain their two-hour container budget and two-hour lock wait.
+OVERALL_TIMEOUT="${JOB_OVERALL_TIMEOUT_SECONDS:-15000}"
+case "$OVERALL_TIMEOUT" in ''|*[!0-9]*|0) echo 'invalid JOB_OVERALL_TIMEOUT_SECONDS' >&2; exit 2 ;; esac
+if [ "${BLOXODES_JOB_BOUNDED:-}" != 1 ]; then
+  exec timeout --signal=TERM --kill-after=30 "$OVERALL_TIMEOUT" env BLOXODES_JOB_BOUNDED=1 sh "$0" "$@"
+fi
+
 JOB="$1"
 case "$JOB" in ''|*[!A-Za-z0-9._-]*) echo 'invalid job name' >&2; exit 2 ;; esac
 shift
@@ -48,6 +56,14 @@ flock -n 9 || {
   # Leave the running owner's status intact, but expose the missed invocation.
   exit 75
 }
+CONTAINER="bloxodes-stats-$JOB-$$"
+SMOKE_CONTAINER="$CONTAINER-smoke"
+FALLBACK_CONTAINER="$CONTAINER-fallback"
+stop_container() {
+  timeout --signal=KILL 10 docker rm -f "$CONTAINER" "$SMOKE_CONTAINER" "$FALLBACK_CONTAINER" "$CONTAINER-build-candidate" "$CONTAINER-build-current" >/dev/null 2>&1 || true
+}
+trap 'stop_container; exit 143' TERM
+trap 'stop_container; exit 130' INT
 trap finish EXIT
 write_state
 if ! docker network inspect "$DOCKER_NETWORK" >/dev/null 2>&1; then
@@ -91,17 +107,17 @@ if [ -n "${JOB_LOCK_GROUP:-}" ]; then
 fi
 
 if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
-  "$BASE/bin/build-image.sh"
+  STATS_WORKER_PREFLIGHT_PREFIX="$CONTAINER-build" "$BASE/bin/build-image.sh"
 fi
 
-if ! docker run --rm \
+if ! docker run --rm --name "$SMOKE_CONTAINER" \
   --env BLOXODES_ENV_PROFILE=process-only \
   --entrypoint sh \
   "$IMAGE" \
   -lc "$SMOKE_COMMAND" >/dev/null 2>&1; then
   echo "$(date -Is) $JOB production image failed smoke" >> "$LOG_DIR/$JOB.log"
   if docker image inspect "$LAST_GOOD_IMAGE" >/dev/null 2>&1 \
-    && docker run --rm \
+    && docker run --rm --name "$FALLBACK_CONTAINER" \
       --env BLOXODES_ENV_PROFILE=process-only \
       --entrypoint sh \
       "$LAST_GOOD_IMAGE" \
@@ -119,14 +135,10 @@ STATE=running
 write_state
 RUN_TIMEOUT="${JOB_TIMEOUT_SECONDS:-7200}"
 case "$RUN_TIMEOUT" in ''|*[!0-9]*|0) echo 'invalid JOB_TIMEOUT_SECONDS' >&2; exit 2 ;; esac
-CONTAINER="bloxodes-stats-$JOB-$(date +%s)"
 ACTIVE_CONTAINER_IDS="$(docker ps --no-trunc --format '{{.ID}}')"
-# Docker's CLI can exit before its container on a timeout. Remove this exact
-# container before releasing the shared API lock.
-stop_container() { docker rm -f "$CONTAINER" >/dev/null 2>&1 || true; }
-trap 'stop_container; exit 143' TERM
-trap 'stop_container; exit 130' INT
-if timeout --signal=TERM --kill-after=30 "$RUN_TIMEOUT" docker run --rm \
+# Keep the Docker client in the overall timeout's process group so TERM
+# interrupts this wait and the wrapper can remove containers and finish.
+if timeout --foreground --signal=TERM --kill-after=30 "$RUN_TIMEOUT" docker run --rm \
   --name "$CONTAINER" \
   --network "$DOCKER_NETWORK" \
   --env-file "$ENV_FILE" \

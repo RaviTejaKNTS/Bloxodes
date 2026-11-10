@@ -6,6 +6,7 @@ import { loadBloxodesEnv } from "../shared/env-files";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const requiredRuntimeFiles = [
+  "scripts/catalog/refresh-catalog-membership-dates.ts",
   "env/config.json",
   "package.json",
   "scripts/shared/env-files.ts",

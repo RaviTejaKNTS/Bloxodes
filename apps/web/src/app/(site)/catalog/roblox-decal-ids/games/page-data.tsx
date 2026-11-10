@@ -23,14 +23,6 @@ function serializeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 }
 
-function newestDecalDate(decals: DecalRow[], contentHtml: PageContentHtml | null): string | null {
-  if (contentHtml?.updatedAt) return contentHtml.updatedAt;
-  return decals.reduce<string | null>((latest, decal) => {
-    const value = decal.verified_at ?? decal.last_seen_at ?? decal.thumbnail_checked_at;
-    if (!value) return latest;
-    return !latest || Date.parse(value) > Date.parse(latest) ? value : latest;
-  }, null);
-}
 
 export async function buildDecalGameContentHtml(catalog: CatalogPageContent | null) {
   return buildPageContentHtml(catalog);
@@ -106,7 +98,7 @@ export function renderDecalGamePage({
   const basePath = `${DECAL_GAMES_PATH}/${game.slug}`;
   const path = currentPage > 1 ? `${basePath}/page/${currentPage}` : basePath;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${path}`;
-  const updatedAt = newestDecalDate(decals, contentHtml);
+  const updatedAt = contentHtml?.updatedAt ?? null;
   const introNodes = currentPage === 1 && contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, `${game.slug}-decal-intro`)
     : currentPage === 1 ? <p>{game.description}</p> : null;

@@ -29,3 +29,5 @@ Each page's loader combines its copy with live database data or a small committe
 | Admin commands, color codes, error codes, dictionary | `data/Admin commands/*.md`, `data/Color Codes/`, `data/roblox-errors/`, `data/roblox-dictionary/` | By hand, shipped with web deploys. |
 
 Emote commands come from verified sources, never from Marketplace names.
+
+Data-backed pages read their date from `catalog_pages_view.content_updated_at`; curated decals and music charts read their own `catalog_membership_snapshots` date. A scheduled job moves these dates when items are added or removed. See [catalog page dates](data-refreshes.md#catalog-page-dates).
