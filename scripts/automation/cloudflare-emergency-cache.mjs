@@ -153,8 +153,9 @@ function emergencyRule(enabled) {
         status_code_ttl: [
           { status_code_range: { from: 200, to: 299 }, value: edgeTtlSeconds },
           { status_code_range: { from: 300, to: 399 }, value: 0 },
-          { status_code_range: { from: 400, to: 499 }, value: 0 },
-          { status_code_range: { from: 500 }, value: -1 }
+          // Never store error pages: search engines drop pages that return them.
+          { status_code_range: { from: 400, to: 499 }, value: -1 },
+          { status_code_range: { from: 500, to: 599 }, value: -1 }
         ]
       },
       browser_ttl: {
