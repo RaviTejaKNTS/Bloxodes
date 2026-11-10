@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { coverage, dates, day, ranks, genre, trendWeeks, meaningfulUpdates, busiestHours, buildModel } from '../../../../../scripts/reports/model';
 import { numberFindings, resolveLinks, canReplace, reportSlug } from '../../../../../scripts/reports/validate';
 import { reportSchema } from '../../../../../contracts/stats-report/v1/schema';

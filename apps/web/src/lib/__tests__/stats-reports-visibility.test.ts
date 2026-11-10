@@ -7,7 +7,8 @@ vi.mock('../supabase', () => ({
   supabaseAdmin: () => ({
     from: () => {
       let filter = '';
-      const q: any = {
+      type Query = { select: () => Query; eq: (column: string, value: string) => Query; order: () => Query; range: (start: number) => Promise<{ data: typeof rows; error: null }> };
+      const q: Query = {
         select: () => q, eq: (column: string, value: string) => {
           if (column === 'visibility')
             filter = value;
