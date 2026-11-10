@@ -8,7 +8,7 @@ import type { CodePageFinal } from "../final-contract";
 const final: CodePageFinal = { slug: "example", name: "Example", universe_id: 1, roblox_link: "https://www.roblox.com/games/2",
   source_url: "https://robloxden.com/game-codes/example", source_url_2: null, intro_md: "Intro", redeem_md: "Redeem",
   troubleshoot_md: "Trouble", rewards_md: "Rewards", find_codes_md: "Find", meta_description: "x".repeat(155),
-  game_display_name: "Example", interlinking_copy_md: "[Other](/codes/other) [Other again](/codes/other)" };
+  social_links: { discord: null, twitter: null, youtube: null }, game_display_name: "Example", interlinking_copy_md: "[Other](/codes/other) [Other again](/codes/other)" };
 function fixture(live = true) {
   let row: any = live ? { id: "page", ...factoryPublicationPayload(final), is_published: true, intro_md: "Old copy" } : null;
   let readbackFails = false;
@@ -18,7 +18,7 @@ function fixture(live = true) {
   let commits = 0;
   const sb: any = { rpc: async (name: string, args: any) => {
     assert.equal(name, "publish_factory_code_page"); commits++;
-    for (const key of ["meta_description", "game_display_name", "interlinking_copy_md"]) assert.ok(!(key in args.p_payload));
+    for (const key of ["meta_description", "game_display_name", "interlinking_copy_md", "social_links"]) assert.ok(!(key in args.p_payload));
     for (const id of args.p_linked_ids) if (!credited.has(id)) {
       credited.add(id); counts.set(id, (counts.get(id) ?? 0) + 1);
     }
@@ -32,9 +32,9 @@ function fixture(live = true) {
   }) };
   const deps = { context: async () => ({ related_pages: [{ id: "other-id", slug: "other" }] }) as any,
     guard: async () => {}, publicCopyFindings: () => [], ensureIdentity: async () => ({ universeId: 1 }),
-    prepare: async (_game: any, fingerprint: string, linked: string[]) => {
+    prepare: async (_game: any, fingerprint: string, linked: string[], targetFinal: CodePageFinal) => {
       assert.deepEqual(linked, ["other-id"]);
-      await commitFactoryPage(sb, "page", factoryPublicationPayload(final), { universeId: 1, fingerprint, linkedIds: linked }, 1, true, async () => {});
+      await commitFactoryPage(sb, "page", factoryPublicationPayload(targetFinal), { universeId: 1, fingerprint, linkedIds: linked }, 1, true, async () => {});
     }
   };
   return { sb, deps, writes, counts, commits: () => commits, row: () => row, failReadback: () => { readbackFails = true; } };
@@ -148,4 +148,79 @@ test("publication accepts a context recommendation after its link count moves it
   assert.ok(!eligible.related_pages.some(row => ["self", "unrelated"].includes(row.id)));
   await assert.rejects(publishCodesBundle(f.sb, { ...final, interlinking_copy_md: "[Bad](/codes/unrelated)" },
     { ...f.deps, context: options => loadCodesContext(contextSb, 1, options) }), /ineligible/);
+});
+
+
+test("development unlinks ineligible links before preparation, hashing, matching and credit", async () => {
+  const f = fixture();
+  const original = { ...final, interlinking_copy_md: "[Other](/codes/other) and [Missing](/codes/missing)" };
+  const adjusted = { ...original, interlinking_copy_md: "[Other](/codes/other) and Missing" };
+  let preparations = 0;
+  const deps = { ...f.deps, target: "development" as const,
+    prepare: async (game: any, fingerprint: string, linked: string[], targetFinal: CodePageFinal) => {
+      preparations++;
+      assert.deepEqual(targetFinal, adjusted);
+      assert.equal(fingerprint, bundleFingerprint(adjusted));
+      await f.deps.prepare(game, fingerprint, linked, targetFinal);
+    }
+  };
+  await publishCodesBundle(f.sb, original, deps);
+  assert.equal(f.row().interlinking_ai_copy_md, adjusted.interlinking_copy_md);
+  assert.equal(f.counts.get("other-id"), 1);
+  await publishCodesBundle(f.sb, original, deps);
+  assert.equal(preparations, 1);
+  assert.equal(original.interlinking_copy_md, "[Other](/codes/other) and [Missing](/codes/missing)");
+});
+
+test("development allows plain text even with eligible related pages", async () => {
+  const f = fixture();
+  await publishCodesBundle(f.sb, { ...final, interlinking_copy_md: "[Missing](/codes/missing)" }, {
+    ...f.deps, target: "development", prepare: async (_game, fingerprint, linkedIds, targetFinal) => {
+      assert.deepEqual(linkedIds, []);
+      assert.equal(targetFinal.interlinking_copy_md, "Missing");
+      await commitFactoryPage(f.sb, "page", factoryPublicationPayload(targetFinal),
+        { universeId: 1, fingerprint, linkedIds }, 1, true, async () => {});
+    }
+  });
+  assert.equal(f.commits(), 1);
+});
+
+test("production rejects ineligible links and requires an eligible link", async () => {
+  for (const interlinking_copy_md of ["[Missing](/codes/missing)", "Plain text"]) {
+    const f = fixture();
+    await assert.rejects(publishCodesBundle(f.sb, { ...final, interlinking_copy_md }, {
+      ...f.deps, target: "production"
+    }), /ineligible|must link an eligible/);
+    assert.deepEqual(f.writes, []);
+  }
+});
+
+test("bundle social links reach the payload and explicit nulls clear existing links", async () => {
+  const f = fixture();
+  const withSocials = { ...final, social_links: { discord: "https://discord.gg/example", twitter: "https://x.com/example", youtube: "https://youtube.com/@example" } };
+  await publishCodesBundle(f.sb, withSocials, f.deps);
+  assert.equal(f.row().discord_link, withSocials.social_links.discord);
+  assert.equal(f.row().twitter_link, withSocials.social_links.twitter);
+  assert.equal(f.row().youtube_link, withSocials.social_links.youtube);
+  await publishCodesBundle(f.sb, final, f.deps);
+  assert.equal(f.row().discord_link, null);
+  assert.equal(f.row().twitter_link, null);
+  assert.equal(f.row().youtube_link, null);
+  assert.equal(f.commits(), 2);
+});
+
+test("API fallback cleans display names and context exposes the generated social-links schema", async t => {
+  t.mock.method(globalThis, "fetch", async () => new Response(JSON.stringify({ data: [{ id: 1, rootPlaceId: 2, name: "[⚽] Become A Striker" }] })));
+  const sb: any = { from: (table: string) => ({ select: () => ({
+    eq: (field: string) => table === "roblox_universes" ? { maybeSingle: async () => ({ data: null }) }
+      : field === "universe_id" ? Promise.resolve({ data: [] })
+      : { order: () => ({ range: async () => ({ data: [] }) }) }
+  }) }) };
+  const context = await loadCodesContext(sb, 1);
+  assert.equal(context.game.name, "[⚽] Become A Striker");
+  assert.equal(context.game.display_name, "Become A Striker");
+  assert.equal(context.game_identity_source, "roblox_api");
+  const schema = context.final_json_schema as any;
+  assert.ok(schema.required.includes("social_links"));
+  assert.deepEqual(schema.properties.social_links.required, ["discord", "twitter", "youtube"]);
 });

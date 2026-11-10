@@ -13,23 +13,30 @@ function matchesLiveBundle(row: any, final: CodePageFinal) {
     ([field, value]) => row[field] === value);
 }
 export async function publishCodesBundle(sb: SupabaseClient, final: CodePageFinal, deps: {
+  target?: "development" | "production";
   context: (options: { allRelatedPages: true }) => ReturnType<typeof loadCodesContext>;
   guard: () => Promise<unknown>;
   publicCopyFindings: typeof publicCopyFindings;
   ensureIdentity: (link: string) => Promise<{ universeId?: number | null }>;
-  prepare: (game: any, fingerprint: string, linkedIds: string[]) => Promise<void>;
+  prepare: (game: any, fingerprint: string, linkedIds: string[], final: CodePageFinal) => Promise<void>;
 }) {
 
   const { data: retryRows, error: retryError } = await sb.from("code_pages").select("*").or(`universe_id.eq.${final.universe_id},slug.eq.${final.slug}`);
   if (retryError) throw new Error(`Overlap lookup failed: ${retryError.message}`);
   if ((retryRows ?? []).some((row: any) => row.universe_id !== final.universe_id || row.slug !== final.slug) || (retryRows ?? []).length > 1) throw new Error("Slug or universe overlaps a different code page; review it first");
-  const fingerprint = bundleFingerprint(final);
-  if (matchesLiveBundle(retryRows?.[0], final)) return;
+  // Production retries retain the existing no-context fast path.
+  if (deps.target !== "development" && matchesLiveBundle(retryRows?.[0], final)) return;
   const context = await deps.context({ allRelatedPages: true });
   const allowed = new Set(context.related_pages.map(row => `/codes/${row.slug}`));
+  if (deps.target === "development") {
+    final = { ...final, interlinking_copy_md: final.interlinking_copy_md.replace(
+      /\[([^\]]*)\]\(([^)]+)\)/g, (match, label, link) => allowed.has(link) ? match : label) };
+  }
+  const fingerprint = bundleFingerprint(final);
+  if (deps.target === "development" && matchesLiveBundle(retryRows?.[0], final)) return;
   const links = [...final.interlinking_copy_md.matchAll(/\]\(([^)]+)\)/g)].map(match => match[1]);
   if (links.some(link => !allowed.has(link))) throw new Error("Interlink copy contains an ineligible related-page link");
-  if (context.related_pages.length && !links.length) throw new Error("Interlink copy must link an eligible related page");
+  if (deps.target !== "development" && context.related_pages.length && !links.length) throw new Error("Interlink copy must link an eligible related page");
   let game = retryRows?.[0];
   await deps.guard();
   const findings = ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "meta_description", "interlinking_copy_md"].flatMap(field =>
@@ -45,7 +52,7 @@ export async function publishCodesBundle(sb: SupabaseClient, final: CodePageFina
     game = result.data;
   }
   // Preparation sees the new sources, but the live row keeps its old content until commit.
-  await deps.prepare({ ...game, ...identity }, fingerprint, context.related_pages.filter(row => links.includes(`/codes/${row.slug}`)).map(row => row.id));
+  await deps.prepare({ ...game, ...identity }, fingerprint, context.related_pages.filter(row => links.includes(`/codes/${row.slug}`)).map(row => row.id), final);
   const verified = await sb.from("code_pages").select("is_published,universe_id").eq("id", game.id).single();
   if (verified.error || !verified.data?.is_published || verified.data.universe_id !== final.universe_id) throw new Error("Published row readback failed");
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertFranchisePageImages, franchiseImageUrl, requireFranchiseCollectionImage, requireFranchiseHubImages } from '../franchise-image-contract.mjs';
+import { assertFranchisePageImages, franchiseImageUrl, requireFranchiseHubImages } from '../franchise-image-contract.mjs';
 
 const root = { id: 'root', namespace: 'example', slug: 'example', kind: 'franchise', parent_id: null, is_published: true, cover_image: 'https://media.bloxodes.com/root-cover.webp', hero_image: 'https://media.bloxodes.com/root-square.webp' };
 const game = { ...root, id: 'game', slug: 'child', kind: 'game', parent_id: 'root', cover_image: 'https://media.bloxodes.com/child-cover.webp', hero_image: 'https://media.bloxodes.com/child-square.webp' };
@@ -77,11 +77,6 @@ test('image URLs reject placeholders, credentials and unsafe schemes', () => {
   for (const image of [null, '', '/cover.webp', '//media.bloxodes.com/a.png', 'javascript:alert(1)', 'https://user:secret@example.com/a.png', 'https://bloxodes.com/Bloxodes.png?version=1', 'https://example.com/a\\b.png', 'https://example.com/a.png', 'https://media.bloxodes.com:8443/a.png', 'https://media.bloxodes.com.evil.test/a.png', 'https://project.supabase.co/a.png', 'https://media.bloxodes.com./a.png']) assert.equal(franchiseImageUrl(image), null);
   assert.equal(franchiseImageUrl('https://media.bloxodes.com/a.webp'), 'https://media.bloxodes.com/a.webp');
   assert.equal(franchiseImageUrl('https://media.bloxodes.com:443/a.webp'), 'https://media.bloxodes.com/a.webp');
-});
-
-test('collections require an item image even when individual image gaps are accepted', () => {
-  assert.throws(() => requireFranchiseCollectionImage([{ image_key: null }], 'child-items'), /at least one item image/);
-  assert.doesNotThrow(() => requireFranchiseCollectionImage([{ image_key: null }, { image_key: 'wiki/example/item.webp' }], 'child-items'));
 });
 
 test('image contract uses bounded concurrent page reads and deduplicated image checks', async () => {

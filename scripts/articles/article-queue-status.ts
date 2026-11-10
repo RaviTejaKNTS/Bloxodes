@@ -24,9 +24,11 @@ const ALLOWED_TRANSITIONS: Record<ArticleQueueStatus, ArticleQueueStatus[]> = {
   pending: ["processing", "skipped", "failed"],
   processing: ["processing", "blocked", "completed", "skipped", "failed"],
   blocked: ["pending", "blocked", "skipped", "failed"],
-  completed: ["completed", "published", "rejected"],
+  // A publish that fails after the row is completed hands it back for a retry.
+  completed: ["completed", "published", "rejected", "blocked"],
   published: ["published"],
-  rejected: ["rejected"],
+  // A rejected draft that was fixed and re-checked can still publish.
+  rejected: ["rejected", "completed"],
   skipped: ["skipped"],
   failed: ["failed"]
 };

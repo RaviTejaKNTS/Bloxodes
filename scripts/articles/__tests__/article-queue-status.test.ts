@@ -14,6 +14,8 @@ test("allows the writing and release-review lifecycle", () => {
   assert.doesNotThrow(() => assertArticleQueueTransition("blocked", "pending"));
   assert.doesNotThrow(() => assertArticleQueueTransition("completed", "published"));
   assert.doesNotThrow(() => assertArticleQueueTransition("completed", "rejected"));
+  assert.doesNotThrow(() => assertArticleQueueTransition("completed", "blocked"));
+  assert.doesNotThrow(() => assertArticleQueueTransition("rejected", "completed"));
 });
 
 test("keeps production decisions terminal", () => {
