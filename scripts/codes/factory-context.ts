@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { z } from "zod";
 import { codePageFinalSchema } from "./final-contract";
 
@@ -22,7 +23,7 @@ export async function loadCodesContext(sb: SupabaseClient, universeId: number, o
     if (!response.ok) throw new Error(`Roblox game lookup failed (${response.status})`);
     const detail = (await response.json()).data?.[0];
     if (detail?.id !== universeId || !detail.rootPlaceId || !detail.name) throw new Error("Game is absent from both roblox_universes and the Roblox API");
-    game = { universe_id: universeId, name: detail.name, display_name: detail.name, root_place_id: detail.rootPlaceId,
+    game = { universe_id: universeId, name: detail.name, display_name: cleanRobloxUniverseDisplayName(detail.name), root_place_id: detail.rootPlaceId,
       playing: detail.playing ?? null, creator_id: detail.creator?.id ?? null, creator_name: detail.creator?.name ?? null,
       genre_l1: detail.genre ?? null, genre_l2: null };
   }
