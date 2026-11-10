@@ -1,3 +1,4 @@
+import { resolveGameCollectionImage } from "@/lib/game-images";
 import type { Metadata } from "next";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { notFound } from "next/navigation";
@@ -19,7 +20,7 @@ export async function gameCollectionMetadata(page: SharedGameWikiCollectionPage,
   if (!Number.isSafeInteger(currentPage) || currentPage < 1 || currentPage > prepared.totalPages || (page.page_type === "collectible" && currentPage !== 1)) notFound();
   const path = currentPage === 1 ? page.canonical_path : `${page.canonical_path}/page/${currentPage}`;
   const title = `${resolveSeoTitle(page.seo_title) ?? page.title}${currentPage === 1 ? "" : ` - Page ${currentPage}`}`;
-  const image = runtime.document.items.find(item => item.system.image)?.system.image || page.thumb_url || page.game_cover_image || `${SITE_URL}/Bloxodes.png`;
+  const image = resolveGameCollectionImage(page, runtime.document.items.find(item => item.system.image)?.system.image) || `${SITE_URL}/Bloxodes.png`;
   return { twitter: { card: "summary_large_image", images: image ? [image] : [] }, title, description: page.meta_description, alternates: buildAlternates(`${SITE_URL}${path}`), robots: currentPage > 1 ? { index: false, follow: true } : undefined, openGraph: { title, description: page.meta_description, url: `${SITE_URL}${path}`, siteName: SITE_NAME, images: image ? [image] : [] } };
 }
 export async function renderSharedGameCollection({ page, namespaceTitle, currentPage = 1 }: { page: SharedGameWikiCollectionPage; namespaceTitle: string; currentPage?: number }) {

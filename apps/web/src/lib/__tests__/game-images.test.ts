@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { gameImageUrl, resolveGameCoverImage, resolveGameThumbnailImage } from "../game-images";
+import { gameImageUrl, resolveGameCollectionImage, resolveGameCoverImage, resolveGameThumbnailImage } from "../game-images";
 
 describe("franchise artwork roles", () => {
   const artwork = { game_cover_image: "https://media.bloxodes.com/cover.webp", game_hero_image: "https://media.bloxodes.com/square.webp" };
@@ -12,6 +12,13 @@ describe("franchise artwork roles", () => {
   it("prefers page artwork and falls back to the owning game", () => {
     expect(resolveGameCoverImage({ ...artwork, thumb_url: "/images/tools/example.webp" })).toBe("/images/tools/example.webp");
     expect(resolveGameCoverImage({ ...artwork, cover_image: " ", image: "/Bloxodes.png" })).toBe(artwork.game_cover_image);
+  });
+  it("allows collection previews without item images and prefers their own game's artwork", () => {
+    expect(resolveGameCollectionImage(artwork)).toBe(artwork.game_cover_image);
+    expect(resolveGameCollectionImage(artwork, "https://media.bloxodes.com/item.webp")).toBe("https://media.bloxodes.com/item.webp");
+    expect(resolveGameCollectionImage({ game_hero_image: artwork.game_hero_image })).toBe(artwork.game_hero_image);
+    expect(resolveGameCollectionImage({ ...artwork, thumb_url: "/Bloxodes.png" }, "javascript:alert(1)")).toBe(artwork.game_cover_image);
+    expect(resolveGameCollectionImage({})).toBeNull();
   });
   it("never treats the site logo or unsafe input as game artwork", () => {
     for (const image of ["/Bloxodes.png", "https://bloxodes.com/Bloxodes.png?v=1", "//example.com/a.webp", "javascript:alert(1)", "https://user:secret@example.com/a.webp", "unknown.webp", " /\\example.com/a.webp "]) expect(gameImageUrl(image)).toBeNull();

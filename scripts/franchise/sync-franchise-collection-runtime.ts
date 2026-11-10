@@ -1,6 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { mapPublishConcurrent, readPublishQuery } from "../shared/publish-network.mjs";
-import { requireFranchiseCollectionImage } from "../ci/franchise-image-contract.mjs";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 import { realpathSync } from "node:fs";
@@ -485,8 +484,6 @@ export async function runFranchiseCollectionRuntimeCli() {
 
   const plans: Plan[] = [];
   for (const manifestPath of manifestPaths) plans.push(await planManifest(namespaceValue, manifestPath));
-  // Dry plans are also publication preflights in selected-content CI.
-  for (const plan of plans) requireFranchiseCollectionImage(plan.items, plan.code);
   console.table(plans.map((plan) => ({ namespace: plan.namespace, code: plan.code, pageType: plan.pageType, items: plan.items.length, images: plan.items.filter((item) => item.image_key).length, contentHash: plan.contentHash })));
   if (!apply) return;
 

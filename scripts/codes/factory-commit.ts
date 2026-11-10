@@ -6,6 +6,7 @@ export function factoryPublicationPayload(final: Omit<CodePageFinal, "game_displ
   return {
     name: final.name, slug: final.slug, universe_id: final.universe_id,
     roblox_link: final.roblox_link, source_url: final.source_url, source_url_2: final.source_url_2,
+    discord_link: final.social_links.discord, twitter_link: final.social_links.twitter, youtube_link: final.social_links.youtube,
     intro_md: final.intro_md, redeem_md: final.redeem_md, troubleshoot_md: final.troubleshoot_md,
     rewards_md: final.rewards_md, find_codes_md: final.find_codes_md,
     seo_description: final.meta_description, interlinking_ai_copy_md: final.interlinking_copy_md
