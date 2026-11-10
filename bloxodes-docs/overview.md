@@ -42,7 +42,7 @@ See [machines](infrastructure/machines.md) for access and [schedules](automation
 | Work | Runs on | Trigger |
 | --- | --- | --- |
 | Articles | MacBook Pro (Content Factory); topics from homelab | T3 schedule every 6 hours; homelab discovery 4 times a day |
-| New codes pages | GitHub Actions | `discover-beebom-codes.yml` and `generate-queue.yml` schedules |
+| New codes pages | MacBook Pro (Content Factory); games found on homelab | T3 schedule every 12 hours; homelab finder 4 times a day |
 | Codes updates | VPS | cron, 4 times a day |
 | Roblox wiki and collections | MacBook Pro | Content Factory T3 schedule, every 2 days |
 | Franchise wiki and collections | MacBook Pro | Content Factory T3 schedule, every 6 hours, from the Other Games Queue |

@@ -31,7 +31,7 @@ The factory calls these from the MacBook Pro's Bloxodes main checkout through it
 
 ### Old GitHub workflows
 
-`discover-beebom-codes.yml` and `generate-queue.yml` (Draft Code Page Generation) still run until the factory has published its first pages, then they're switched off. They found nothing after 2026-10-29 because most Beebom articles stopped linking the Roblox game. `npm run generate` still uses the shared pipeline with its own Claude Code CLI call.
+`discover-beebom-codes.yml` and `generate-queue.yml` (Draft Code Page Generation) have no schedule. They're manual only, and the factory run replaces them. `npm run generate` still uses the shared pipeline with its own Claude Code CLI call.
 
 ## Code updates (VPS)
 

@@ -82,13 +82,8 @@ It's the only Northflank job. It runs in team `ravitejakntss-team`, the only Nor
 
 ## GitHub Actions
 
-Scheduled:
-
-| Workflow | Schedule (UTC) | Does |
-| --- | --- | --- |
-| `discover-beebom-codes.yml` | :17 every 6 hours | Old Beebom codes discovery. Switched off once the Content Factory codes run publishes. |
-| `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. Switched off with the one above. |
+No GitHub workflow runs on a schedule.
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
-Manual only: `automation-runtime.yml` (packages the homelab runtime) and `manual-web-audit.yml`.
+Manual only: `automation-runtime.yml` (packages the homelab runtime), `manual-web-audit.yml`, and the old codes workflows `discover-beebom-codes.yml` and `generate-queue.yml`.

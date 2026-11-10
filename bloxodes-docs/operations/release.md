@@ -81,5 +81,5 @@ These don't change when code merges:
 - All CI runs with `BLOXODES_ENV_PROFILE=process-only`.
 - PR jobs use `MANAGED_DEV_SUPABASE_URL`, `_ANON_KEY`, `_SERVICE_ROLE` and `_ACCESS_TOKEN`.
 - The `production` GitHub environment (only the `production` branch can use it) holds Studio credentials and the four `WIKI_R2_*` keys. Database, media, revalidation, Dokploy and GHCR secrets are repository secrets.
-- `codex-review.yml` gets `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` only in its review job, with no database or deploy credentials. `generate-queue.yml` and `discover-beebom-codes.yml` use the same secret for page copy.
+- `codex-review.yml` gets `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` only in its review job, with no database or deploy credentials. The manual `generate-queue.yml` and `discover-beebom-codes.yml` use the same secret for page copy.
 - `env/examples/ci.env.example` lists CI-only names.
