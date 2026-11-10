@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { manifest, json } from './build';
-import { ranks, dates, players, type Row, type DailyRow } from './model';
+import { ranks, dates, lastOf, players, type Row, type DailyRow } from './model';
 const argv = process.argv.slice(2), arg = (s: string) => {
   const i = argv.indexOf(s);
   if (i < 0 || !argv[i + 1] || argv[i + 1].startsWith('--'))
@@ -72,7 +72,7 @@ async function main() {
       for (const week of weeks) {
         const ds = Array.from({
           length: 7
-        }, (_, i) => new Date(Date.parse(week) + i * 86400000).toISOString().slice(0, 10)).filter(d => d <= dates(m.month).at(-1)!);
+        }, (_, i) => new Date(Date.parse(week) + i * 86400000).toISOString().slice(0, 10)).filter(d => d <= lastOf(dates(m.month))!);
         const rows = await rawRows(ds);
         const counts = Object.fromEntries(ds.map(d => [d, rows.filter(r => r.stat_date === d).length]));
         const monthCounts: Row = {};

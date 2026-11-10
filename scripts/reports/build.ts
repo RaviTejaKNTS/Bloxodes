@@ -4,7 +4,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 import { loadBloxodesEnv } from '../shared/env-files';
-import { buildModel, dates, day, ranks, coverage, players, type Row, type DailyRow } from './model';
+import { buildModel, dates, day, lastOf, ranks, coverage, players, type Row, type DailyRow } from './model';
 export const hash = (v: Buffer | string) => createHash('sha256').update(v).digest('hex');
 export const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 export function dataFileHash(file: string, bytes: Buffer) {
@@ -151,8 +151,8 @@ async function main() {
     await fs.rename(file + '.tmp', file);
     return all;
   }
-  const end = day(dates(month).at(-1)!, 8);
-  let start = day(dates(month).at(-1)!, -97);
+  const end = day(lastOf(dates(month))!, 8);
+  let start = day(lastOf(dates(month))!, -97);
   if (start < '2026-08-10')
     start = '2026-08-10';
   const previousFirst = day(month + '-01', -1).slice(0, 7) + '-01';
@@ -214,7 +214,7 @@ async function main() {
           .select('universe_id,hour_start,avg_playing,playing')
           .in('universe_id', batch)
           .gte('hour_start', month + '-01')
-          .lt('hour_start', day(dates(month).at(-1)!, 1))
+          .lt('hour_start', day(lastOf(dates(month))!, 1))
           .order('universe_id')
           .order('hour_start')));
         console.log(`Hourly games ${i + batch.length}/${ids.length}`);
@@ -241,9 +241,9 @@ async function main() {
     if (/^[a-z0-9-]+\.json$/.test(file))
       await fs.unlink(path.join(root, 'charts', file));
   const source_max_dates = {
-    daily: daily.at(-1)?.stat_date ?? null,
-    hourly: hourly.map(r => r.hour_start).sort().at(-1) ?? null,
-    updates: updates.at(-1)?.updated_at_api ?? null
+    daily: lastOf(daily)?.stat_date ?? null,
+    hourly: lastOf(hourly.map(r => r.hour_start).sort()) ?? null,
+    updates: lastOf(updates)?.updated_at_api ?? null
   };
   for (const [file, value] of Object.entries({
     'data-check': {

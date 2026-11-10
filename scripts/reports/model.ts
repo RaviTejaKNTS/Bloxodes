@@ -1,5 +1,10 @@
 import { insightSentence } from './writer-notes';
 import { cleanRobloxUniverseDisplayName } from '../../apps/web/src/lib/roblox/display-name';
+
+/** The last item of a list. The web app type-checks this file against ES2021, which has no Array.prototype.at. */
+export function lastOf<T>(items: readonly T[]): T | undefined {
+  return items[items.length - 1];
+}
 export const CHARTS = ['players-daily', 'busiest-hours', 'top-games', 'top10-weekly', 'concentration', 'movers', 'new-games', 'genre-share', 'genre-trends', 'genre-table', 'rating-vs-size', 'session-length', 'update-effect', 'top100'] as const;
 export type Row = Record<string, any>;
 export const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
@@ -27,7 +32,7 @@ export function coverage(month: string, counts: Record<string, number>, now = ne
   const median = sorted.length === 0 ? 0 : sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
   const full_days = monthDays.filter(date => median > 0 && (counts[date] ?? 0) >= median * .9);
   const gap_days = monthDays.filter(date => !full_days.includes(date));
-  const lastDay = monthDays.at(-1)!;
+  const lastDay = lastOf(monthDays)!;
   const ended = today > lastDay;
   let status = 'ready';
   let reason: string | null = null;
@@ -137,7 +142,7 @@ export function ranks(rows: DailyRow[], full: string[]): RankedGame[] {
   return ranked;
 }
 export function trendWeeks(counts: Row, month: string) {
-  const end = dates(month).at(-1)!;
+  const end = lastOf(dates(month))!;
   const start = day(end, -97);
   const full = new Set<string>();
   for (const m of [...new Set(Array.from({
@@ -360,7 +365,7 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
     omitted['update-effect'] = 'Fewer than 4 qualifying updates';
   if (!prior.length)
     omitted.movers = 'Previous month is not valid';
-  const newGames = top.filter(g => g.created && g.created.slice(0, 10) >= day(dates(month).at(-1)!, -90) && g.created.slice(0, 10) <= dates(month).at(-1)!);
+  const newGames = top.filter(g => g.created && g.created.slice(0, 10) >= day(lastOf(dates(month))!, -90) && g.created.slice(0, 10) <= lastOf(dates(month))!);
   const facts = {
     trackedGames: current.length,
     avgPlayers: avg,
@@ -483,16 +488,16 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       add('genre-direction', {
         genre: g.genre,
         first: ps[0],
-        last: ps.at(-1)
+        last: lastOf(ps)
       }, ['genre-trends'], 'Genre changed in the same direction every trend week.');
   }
   const rated = top.filter(g => g.rating !== null).sort((a, b) => b.rating! - a.rating!);
   add('newest-vs-rating', {
     newest: top.slice(0, 20).filter(g => g.created).sort((a, b) => (b.created ?? '').localeCompare(a.created ?? ''))[0]?.id ?? null,
     best: rated[0]?.id ?? null,
-    worst: rated.at(-1)?.id ?? null,
+    worst: lastOf(rated)?.id ?? null,
     bestRating: rated[0]?.rating ?? null,
-    worstRating: rated.at(-1)?.rating ?? null
+    worstRating: lastOf(rated)?.rating ?? null
   }, ['rating-vs-size'], 'Newest top twenty game and the rating extremes.');
   for (const u of updates.slice(0, 12))
     add('update-direction', {
@@ -538,8 +543,8 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
   const cs = charts.concentration.data;
   add('concentration-change', {
     first: cs[0]?.top10 ?? null,
-    last: cs.at(-1)?.top10 ?? null,
-    points: cs.length ? cs.at(-1).top10 - cs[0].top10 : null
+    last: lastOf(cs)?.top10 ?? null,
+    points: cs.length ? lastOf(cs)!.top10 - cs[0].top10 : null
   }, ['concentration'], 'Change in the top ten share across trend weeks.');
   add('visits-vs-players', {
     playersChange: facts.playersChange,
@@ -553,8 +558,8 @@ export function buildModel(month: string, rows: DailyRow[], universes: Row[], ev
       add('weekly-rank', {
         id: g.id,
         first: ps[0].rank,
-        last: ps.at(-1).rank,
-        change: ps[0].rank - ps.at(-1).rank
+        last: lastOf(ps)!.rank,
+        change: ps[0].rank - lastOf(ps)!.rank
       }, ['top10-weekly'], 'Weekly rank climb or fall.');
   }
   for (const sub of [...new Set(top.map(g => g.subgenre).filter(Boolean))])
