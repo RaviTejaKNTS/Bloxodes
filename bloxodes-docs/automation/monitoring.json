@@ -34,8 +34,6 @@
     {"key": "bloxodes-vps/decal-ids-refresh", "group": "Catalog and free items", "name": "Decal ID library", "about": "Collects popular Roblox decal IDs for the decal ID pages."},
     {"key": "bloxodes-vps/events-refresh", "group": "Catalog and free items", "name": "Roblox events", "about": "Collects upcoming Roblox virtual events and their details for the events pages. Meant to be switched off; see known issues in the Bloxodes docs."},
     {"key": "bloxodes-vps/codes-refresh", "group": "Codes", "name": "Codes refresh", "about": "Re-checks every codes page for new and expired codes four times a day.", "impact": "Codes pages show expired codes or miss new ones."},
-    {"key": "github/RaviTejaKNTS/Bloxodes/discover-beebom-codes.yml", "group": "Codes", "name": "Find new codes pages", "about": "Looks for games that got a codes page on Beebom and adds them to the queue."},
-    {"key": "github/RaviTejaKNTS/Bloxodes/generate-queue.yml", "group": "Codes", "name": "Write draft codes pages", "about": "Writes and publishes new codes pages from the queue, ten times a day.", "impact": "No new codes pages. Note: a green run can still write nothing if the AI credits are out."},
     {"key": "bloxodes-vps/google-indexing", "group": "Codes", "name": "Google indexing (VPS)", "about": "Sends updated pages to the Google Indexing API. Switched off."},
     {"key": "bloxodes-vps/puzzles-early-nyt", "group": "Puzzles", "name": "Early NYT puzzles", "about": "Fetches the first NYT puzzle answers of the day (Wordle, Connections and others)."},
     {"key": "bloxodes-vps/puzzles-beebom-with-early", "group": "Puzzles", "name": "Beebom puzzle answers", "about": "Fetches puzzle answers from Beebom, three tries each morning."},
