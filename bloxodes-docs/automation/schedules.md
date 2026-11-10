@@ -1,6 +1,6 @@
 # Schedules
 
-Last verified: 2026-11-06
+Last verified: 2026-11-10
 
 Every recurring job, by where it runs. If you add, move or remove a schedule, update this file and [monitoring.json](monitoring.json) in the same change. Build it the way Cockpit's `workflow/runners.md` says, so it survives restarts, crashes and overloads. `monitoring.json` gives each job its name and description in the automation dashboard at `https://monitor.ravitejaknts.com`.
 
@@ -87,6 +87,7 @@ Scheduled:
 | --- | --- | --- |
 | `discover-beebom-codes.yml` | :17 every 6 hours | Old Beebom codes discovery. Switched off once the Content Factory codes run publishes. |
 | `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. Switched off with the one above. |
+| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
