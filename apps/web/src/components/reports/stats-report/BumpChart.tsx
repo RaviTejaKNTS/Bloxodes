@@ -1,9 +1,9 @@
-import { colors, muted, shortDate, type ChartProps, type ChartRow } from './shared';
+import { colors, fromEnd, muted, shortDate, type ChartProps, type ChartRow } from './shared';
 export function BumpChart({ chart }: ChartProps) {
   const ranks = (row: ChartRow) => row.points.flatMap(point => point.rank === null ? [] : [point.rank]);
   const movement = (row: ChartRow) => {
     const values = ranks(row);
-    return Math.abs((values[0] ?? 0) - (values.at(-1) ?? 0));
+    return Math.abs((values[0] ?? 0) - (fromEnd(values) ?? 0));
   };
   const highlights = [...chart.data].sort((a, b) => movement(b) - movement(a)).slice(0, 4).map(row => row.id);
   const maximum = Math.max(10, ...chart.data.flatMap(ranks));
@@ -11,12 +11,12 @@ export function BumpChart({ chart }: ChartProps) {
   function labelPositions(last: boolean) {
     const sorted = [...chart.data].sort((a, b) => {
       const ar = ranks(a), br = ranks(b);
-      return (last ? ar.at(-1)! - br.at(-1)! : ar[0] - br[0]);
+      return (last ? fromEnd(ar)! - fromEnd(br)! : ar[0] - br[0]);
     });
     let previous = 4;
     return new Map(sorted.map(row => {
       const values = ranks(row);
-      const position = Math.max(previous + 14, y((last ? values.at(-1) : values[0]) ?? 1));
+      const position = Math.max(previous + 14, y((last ? fromEnd(values) : values[0]) ?? 1));
       previous = position;
       return [row.id, position];
     }));
@@ -37,10 +37,10 @@ export function BumpChart({ chart }: ChartProps) {
         <path d={path} fill="none" stroke={color} strokeWidth={highlights.includes(row.id) ? 2 : 1} opacity={highlights.includes(row.id) ? 1 : .4} />
         {/* Labels only where the game is ranked in the first or last week, never a stale rank. */}
         {row.points[0]?.rank != null && <text x={90} y={left.get(row.id)} textAnchor="end" fill={color}>{row.name.slice(0, 17)}</text>}
-        {row.points.at(-1)?.rank != null && <text x={255} y={right.get(row.id)} fill={color}>#{row.points.at(-1)!.rank} {row.name.slice(0, 15)}</text>}
+        {fromEnd(row.points)?.rank != null && <text x={255} y={right.get(row.id)} fill={color}>#{fromEnd(row.points)!.rank} {row.name.slice(0, 15)}</text>}
       </g>;
     })}
     <text x={95} y={height - 3} fill={muted}>{chart.data[0]?.points[0]?.week ? shortDate(chart.data[0].points[0].week) : ''}</text>
-    <text x={250} y={height - 3} textAnchor="end" fill={muted}>{chart.data[0]?.points.at(-1)?.week ? shortDate(chart.data[0].points.at(-1)!.week) : ''}</text>
+    <text x={250} y={height - 3} textAnchor="end" fill={muted}>{(chart.data[0] && fromEnd(chart.data[0].points)?.week) ? shortDate(fromEnd(chart.data[0].points)!.week) : ''}</text>
   </svg>;
 }

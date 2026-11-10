@@ -77,3 +77,8 @@ export function pathFor(values: (number | null)[], width: number, height: number
     return command;
   }).join(' ');
 }
+
+/** The item `n` places from the end (1 is the last). ES2021 has no Array.prototype.at. */
+export function fromEnd<T>(items: readonly T[], n = 1): T | undefined {
+  return items[items.length - n];
+}

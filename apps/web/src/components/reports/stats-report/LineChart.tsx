@@ -24,7 +24,7 @@ export function LineChart({ chart, markers = [] }: ChartProps & {
     </g>)}
     {(['previous', 'value'] as const).map(key => {
       const values = rows.map(row => row[key]);
-      const last = values.findLastIndex(value => value !== null);
+      const last = values.reduce<number>((found, value, index) => value !== null ? index : found, -1);
       const color = key === 'value' ? colors[0] : muted;
       return last < 0 ? null : <g key={key}>
         <path d={pathFor(values, 244, 168, 0, maximum)} transform="translate(36 24)" fill="none" stroke={color} strokeWidth={2} strokeDasharray={key === 'previous' ? '5 4' : undefined} />

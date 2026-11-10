@@ -1,10 +1,10 @@
-import { compact, colors, pathFor, Tip, type ChartProps } from './shared';
+import { compact, colors, fromEnd, pathFor, Tip, type ChartProps } from './shared';
 export function MultiplesChart({ chart }: ChartProps) {
   return <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
     {chart.data.map(row => {
       const values = row.points.map(point => point.value);
-      const latest = values.at(-1) ?? 0;
-      const color = latest >= (values.at(-2) ?? latest) ? colors[0] : colors[3];
+      const latest = fromEnd(values) ?? 0;
+      const color = latest >= (fromEnd(values, 2) ?? latest) ? colors[0] : colors[3];
       return <Tip key={row.genre} label={`${row.genre}: ${row.points.map(point => `${point.week}: ${compact(point.value ?? 0)}`).join('; ')}`}>
         <b className="block text-xs">
           {row.genre}
