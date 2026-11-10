@@ -136,11 +136,15 @@ async function verifyCompletedOutput(options: Options): Promise<{ resultPath: st
   return { resultPath: path.relative(process.cwd(), absolutePath), resultSlug };
 }
 
-function assertTransition(row: QueueRow, status: TargetStatus) {
+function assertTransition(row: QueueRow, status: TargetStatus, reason: string | null) {
   if (row.workflow_mode !== "agent_runner") {
     throw new Error(`Queue item ${row.id} belongs to ${row.workflow_mode}, not the article runner.`);
   }
   assertArticleQueueTransition(row.status, status);
+  // Reopening a rejected draft is a deliberate decision; record why on the row.
+  if (row.status === "rejected" && status === "completed" && !reason?.trim()) {
+    throw new Error("Reopening a rejected item requires --reason saying what was fixed and re-verified.");
+  }
 }
 
 function verifyProductionUrl(value: string, resultSlug: string | null): string {
@@ -171,7 +175,7 @@ async function main() {
   if (error || !data) throw new Error(`Could not load queue item ${options.queueId}: ${error?.message ?? "not found"}`);
 
   const row = data as QueueRow;
-  assertTransition(row, options.status);
+  assertTransition(row, options.status, options.reason);
   const replacesCompletedOutput = row.status === "completed" && options.status === "completed" && completedOutput &&
     (row.result_path !== completedOutput.resultPath || row.result_slug !== completedOutput.resultSlug);
   if (replacesCompletedOutput && row.result_slug && row.result_slug !== completedOutput.resultSlug) {

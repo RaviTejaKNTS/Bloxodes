@@ -25,3 +25,8 @@ export function resolveGameCoverImage(page: GameImageFields): string | null {
 export function resolveGameThumbnailImage(page: GameImageFields): string | null {
   return gameImageUrl(page.game_hero_image);
 }
+
+/** Collection previews prefer an item, then artwork from their owning game. */
+export function resolveGameCollectionImage(page: GameImageFields, itemImage?: string | null): string | null {
+  return gameImageUrl(itemImage) || resolveGameCoverImage(page) || resolveGameThumbnailImage(page);
+}

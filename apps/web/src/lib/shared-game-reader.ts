@@ -5,7 +5,7 @@ import { cache } from "react";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { resolveWikiMediaUrl } from "@/lib/wiki-media";
 import { supabaseAdmin } from "@/lib/supabase";
-import { resolveGameCoverImage, resolveGameThumbnailImage } from "./game-images";
+import { resolveGameCoverImage, resolveGameThumbnailImage, resolveGameCollectionImage } from "./game-images";
 import { gameDatabase } from "./game-content-db";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 
@@ -325,7 +325,7 @@ async function listPublishedSharedGameWikiCollectionImageUrls(
 ): Promise<string[]> {
   if (!page.published_dataset_id) return [];
   const safeLimit = Math.max(1, Math.min(12, Math.floor(limit)));
-  return withCache(
+  const images = await withCache(
     [namespace, "game-wiki-collection-images-v1", page.code, page.published_dataset_id, String(safeLimit)],
     [namespace, "game-wiki-collection-index", `game-${namespace}:wiki:${page.wiki_slug}`, `game-${namespace}:wiki-collection:${page.wiki_slug}/${page.collection_slug}`],
     async () => {
@@ -346,6 +346,8 @@ async function listPublishedSharedGameWikiCollectionImageUrls(
         .filter((url): url is string => Boolean(url));
     }
   );
+  const fallback = resolveGameCollectionImage(page);
+  return images.length ? images : fallback ? [fallback] : [];
 }
 
 async function loadPublishedSharedGameWikiCollectionRuntime(

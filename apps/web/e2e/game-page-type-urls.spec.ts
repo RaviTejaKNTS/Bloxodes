@@ -243,6 +243,8 @@ test("batch namespaces use page-type URLs and one-hop aliases", async ({ page, r
 
 test("GTA, Red Dead and Minecraft move while Roblox retains its URL", async ({ page, request }, info) => {
   test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
+  // Five cold page renders and seven redirects against managed development.
+  test.setTimeout(240_000);
   const coverage: Coverage = [];
   try {
     const db = database();

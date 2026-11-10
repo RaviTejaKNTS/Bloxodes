@@ -1,7 +1,10 @@
 import "server-only";
 
 import { publicContentCache } from "@/lib/public-content-cache";
-import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
+import { getWikiPageBySlug } from "@/lib/wiki";
+import { resolveWikiMetadataImage } from "@/lib/wiki-images";
+import { gameImageUrl } from "@/lib/game-images";
+import { getWikiCollectionPageByCode, type WikiCollectionPageContent } from "@/lib/wiki-collections";
 import { listPublishedWikiCollectionRuntimeImages } from "@/lib/wiki-collection-runtime";
 
 const COLLECTION_IMAGES_REVALIDATE_SECONDS = 86400;
@@ -24,7 +27,9 @@ async function readCollectionImageUrls(code: string, limit: number): Promise<str
   if (runtimeImages === null) {
     throw new Error(`Required database runtime images for ${code} did not load. Local fallback is disabled.`);
   }
-  return runtimeImages;
+  if (runtimeImages.length) return runtimeImages;
+  const fallback = await getWikiCollectionFallbackImage(page);
+  return fallback ? [fallback] : [];
 }
 
 export async function listGameCollectionImageUrls(code: string, limit = 6): Promise<string[]> {
@@ -43,4 +48,11 @@ export async function listGameCollectionImageUrls(code: string, limit = 6): Prom
   );
 
   return cached();
+}
+
+export async function getWikiCollectionFallbackImage(page: Pick<WikiCollectionPageContent, "wiki_slug" | "thumb_url">): Promise<string | null> {
+  const thumbnail = gameImageUrl(page.thumb_url);
+  if (thumbnail) return thumbnail;
+  const wiki = await getWikiPageBySlug(page.wiki_slug);
+  return wiki ? gameImageUrl(resolveWikiMetadataImage(wiki)) || gameImageUrl(wiki.cover_image) || gameImageUrl(wiki.icon_url) : null;
 }
