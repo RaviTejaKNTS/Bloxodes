@@ -84,7 +84,9 @@ test("canonical Manifest game titles, objectives and prerequisites pass", () => 
     { description_json: { name: "Courier Manifest" } },
     { description_json: { acquisition: "Extract the Courier Manifest from workshop #2 in the Factory raid or its variants" } },
     { description_json: { prerequisites: ["Cargo Manifest"] } },
-    { intro_md: "Complete Cargo Manifest and extract the Courier Manifest." }
+    { intro_md: "Complete Cargo Manifest and extract the Courier Manifest." },
+    { description_json: { name: "Departure Manifest" } },
+    { intro_md: "Departure Manifest gives non-banner units Deployable." }
   ]) {
     const result = checkCopy({ title: "Active Matter", ...copy });
     assert.equal(result.status, 0, result.stderr);
