@@ -122,6 +122,7 @@ async function fetchCatalogContent(
 
   const { data, error } = await viewQuery;
 
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
   if (!error && data?.length) {
     return pickFirstByCodeOrder(data as CatalogPageContent[], codes);
   }
@@ -139,7 +140,7 @@ async function fetchCatalogContent(
 
   if (fallbackError) {
     console.error("Error fetching catalog page content", fallbackError);
-    return null;
+    throw fallbackError;
   }
 
   if (!fallback?.length) return null;
@@ -254,6 +255,8 @@ export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexE
         .order("content_updated_at", { ascending: false })
         .order("id", { ascending: true });
 
+      if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
       if (!error && data) {
         const rows = sortCatalogIndexEntries(
           ((data ?? [])
@@ -274,7 +277,7 @@ export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexE
 
       if (fallbackError) {
         console.error("Error fetching top-level catalog pages", fallbackError);
-        return [];
+        throw fallbackError;
       }
 
       const rows = sortCatalogIndexEntries(
@@ -317,6 +320,8 @@ export async function listPublishedCatalogPagesByUniverseId(
 
   const { data, error } = await viewQuery;
 
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
   if (!error && data) {
     return (data ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
   }
@@ -337,7 +342,7 @@ export async function listPublishedCatalogPagesByUniverseId(
 
   if (fallbackError) {
     console.error("Error fetching catalog pages by universe", fallbackError);
-    return [];
+    throw fallbackError;
   }
 
   return (fallback ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
@@ -368,6 +373,8 @@ export async function listPublishedCatalogPagesByCodePrefix(
 
   const { data, error } = await viewQuery;
 
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
   if (!error && data) {
     return (data ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
   }
@@ -388,8 +395,22 @@ export async function listPublishedCatalogPagesByCodePrefix(
 
   if (fallbackError) {
     console.error("Error fetching catalog pages by code prefix", fallbackError);
-    return [];
+    throw fallbackError;
   }
 
   return (fallback ?? []).filter((row) => !isRetiredMusicGameCatalogCode(row.code)) as CatalogListEntry[];
+}
+
+export async function getCatalogMembershipDate(code: string, editorialDate?: string | null): Promise<string | null> {
+  const { data, error } = await supabaseAdmin().from("catalog_membership_snapshots")
+    .select("updated_at").eq("code", code).maybeSingle();
+  if (error) {
+    // The membership date is optional on top of the editorial date; a failed read
+    // must not fail the page or the sitemap.
+    console.error("Failed to load catalog membership date", code, error.message);
+    return editorialDate ?? null;
+  }
+  const membershipDate = data?.updated_at ?? null;
+  return editorialDate && (!membershipDate || Date.parse(editorialDate) > Date.parse(membershipDate))
+    ? editorialDate : membershipDate;
 }

@@ -12,6 +12,11 @@ async function main() {
   const target = args.includes("--target") ? get("--target") : publish ? "development" : "production";
   if (!["production", "development"].includes(target)) throw new Error("--target must be production or development");
   process.env.BLOXODES_ENV_PROFILE = target === "production" ? "production-preview" : "managed-dev";
+  if (target === "production") {
+    const overlays = new Set((process.env.BLOXODES_ENV_OVERLAYS ?? "").split(",").filter(Boolean));
+    overlays.add("vps");
+    process.env.BLOXODES_ENV_OVERLAYS = [...overlays].join(",");
+  }
   loadBloxodesEnv();
   // Explicit target selection must win over inherited credentials.
   const targetEnv = readBloxodesEnvFile(`targets/${target === "production" ? "production" : "managed-dev"}.env`);
@@ -32,6 +37,7 @@ async function main() {
   const { publishCodesBundle } = await import("./factory-publication");
   const { publicCopyFindings } = await import("../content/check-public-copy");
   await publishCodesBundle(sb, final, {
+    target: target as "production" | "development",
     context: options => loadCodesContext(sb, final.universe_id, options),
     guard: async () => {
       if (target === "production") {
@@ -44,9 +50,9 @@ async function main() {
       const { ensureUniverseForRobloxLink } = await import("@/lib/roblox/universe");
       return ensureUniverseForRobloxLink(sb, link);
     },
-    prepare: async (game, fingerprint, linkedIds) => {
+    prepare: async (game, fingerprint, linkedIds, targetFinal) => {
       const { publishFactoryCopy } = await import("../shared/code-page-pipeline");
-      await publishFactoryCopy(game, final, final.universe_id, final.interlinking_copy_md, fingerprint, linkedIds);
+      await publishFactoryCopy(game, targetFinal, targetFinal.universe_id, targetFinal.interlinking_copy_md, fingerprint, linkedIds);
     }
   });
   console.log(`https://bloxodes.com/codes/${final.slug}`);

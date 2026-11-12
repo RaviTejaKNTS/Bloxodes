@@ -42,7 +42,7 @@ describe("retired music game", () => {
       then: (resolve: (value: unknown) => unknown) => resolve(result)
     };
     mocks.admin.mockReturnValue({ from: (table: string) => fallback && table.endsWith("_view")
-      ? { ...query, then: (resolve: (value: unknown) => unknown) => resolve({ data: null, error: { message: "view unavailable" } }) }
+      ? { ...query, then: (resolve: (value: unknown) => unknown) => resolve({ data: null, error: { code: "42P01", message: "view unavailable" } }) }
       : query });
     expect(await listPublishedCatalogCodes()).toEqual(["roblox-music-ids"]);
     expect(await listPublishedCatalogPagesByUniverseId(47545)).toEqual([{ code: "roblox-music-ids" }]);

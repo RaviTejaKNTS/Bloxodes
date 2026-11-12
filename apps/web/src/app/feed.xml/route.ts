@@ -1,11 +1,9 @@
+import { listStatsReports } from "@/lib/stats-reports";
 import { listSharedGameDiscoveryPages } from "@/lib/game-content-index";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { resolveContentDates } from "@/lib/content-dates";
-import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
-import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
-import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -155,11 +153,11 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.content_updated_at ?? page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
     if (item) items.push(item);
   }
-  for (const report of [robloxSeptember2026Report, robloxJuly2026Report, robloxJune2026Report]) {
+  for (const report of await listStatsReports()) {
     const monthlyReport = toFeedItem({
       title: report.title,
-      path: `/stats/reports/${report.slug}`,
-      description: report.subtitle,
+      path: report.href,
+      description: report.description,
       updatedAt: report.updatedAt,
       publishedAt: report.publishedAt,
       createdAt: report.publishedAt
@@ -271,8 +269,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to build RSS feed", error);
-    return new NextResponse(buildRssXml([]), {
-      headers: { "content-type": "application/rss+xml; charset=utf-8" }
+    return new NextResponse("Temporarily unavailable", {
+      status: 503,
+      headers: { "cache-control": "no-store", "Retry-After": "60" }
     });
   }
 }

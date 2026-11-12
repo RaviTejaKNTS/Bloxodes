@@ -1,3 +1,4 @@
+import type { CodePageFinal } from "../codes/final-contract";
 import { commitFactoryPage, factoryPublicationPayload } from "../codes/factory-commit";
 import { loadCodesContext } from "../codes/factory-context";
 import { publicCopyFindings } from "../content/check-public-copy";
@@ -798,7 +799,7 @@ export async function finalizeCodePage(
   parsed: ArticleResponse,
   socialLinks: PlaceholderLinks,
   metadata: { communityLink: string | null },
-  factory?: { universeId: number; interlinkCopy: string; fingerprint: string; linkedIds: string[] }
+  factory?: { universeId: number; interlinkCopy: string; fingerprint: string; linkedIds: string[]; socialLinks: CodePageFinal["social_links"] }
 ): Promise<void> {
   const displayName = sanitizeGameDisplayName(parsed.game_display_name, game.name);
   const robloxExperienceLink = socialLinks.roblox_link?.url ?? game.roblox_link ?? undefined;
@@ -837,12 +838,21 @@ export async function finalizeCodePage(
     return undefined;
   };
 
+  const resolveSocialLink = (platform: "discord" | "twitter" | "youtube"): LinkInfo | undefined => {
+    const field = `${platform}_link` as const;
+    if (factory) {
+      const url = factory.socialLinks[platform];
+      return url ? { url, label: defaultLabels[field] } : undefined;
+    }
+    return buildLink(socialLinks[field], game[field], defaultLabels[field]);
+  };
+
   const resolvedLinks: PlaceholderLinks = {
     roblox_link: buildLink(socialLinks.roblox_link, game.roblox_link, defaultLabels.roblox_link),
     community_link: buildLink(socialLinks.community_link, game.community_link, defaultLabels.community_link),
-    discord_link: buildLink(socialLinks.discord_link, game.discord_link, defaultLabels.discord_link),
-    twitter_link: buildLink(socialLinks.twitter_link, game.twitter_link, defaultLabels.twitter_link),
-    youtube_link: buildLink(socialLinks.youtube_link, game.youtube_link, defaultLabels.youtube_link),
+    discord_link: resolveSocialLink("discord"),
+    twitter_link: resolveSocialLink("twitter"),
+    youtube_link: resolveSocialLink("youtube"),
   };
 
   if (!resolvedLinks.community_link && metadata.communityLink) {
@@ -866,6 +876,12 @@ export async function finalizeCodePage(
   if (resolvedLinks.discord_link?.url) updatePayload.discord_link = resolvedLinks.discord_link.url;
   if (resolvedLinks.twitter_link?.url) updatePayload.twitter_link = resolvedLinks.twitter_link.url;
   if (resolvedLinks.youtube_link?.url) updatePayload.youtube_link = resolvedLinks.youtube_link.url;
+
+  if (factory) {
+    updatePayload.discord_link = factory.socialLinks.discord;
+    updatePayload.twitter_link = factory.socialLinks.twitter;
+    updatePayload.youtube_link = factory.socialLinks.youtube;
+  }
 
   let resolvedUniverseId = factory ? null : game.universe_id ?? null;
   if (resolvedLinks.roblox_link?.url) {
@@ -909,7 +925,7 @@ export async function finalizeCodePage(
   if (factory) {
     await commitFactoryPage(supabase, game.id, {
       ...factoryPublicationPayload({ ...game, ...article, universe_id: factory.universeId,
-        roblox_link: game.roblox_link ?? "", interlinking_copy_md: factory.interlinkCopy }),
+        roblox_link: game.roblox_link ?? "", social_links: factory.socialLinks, interlinking_copy_md: factory.interlinkCopy }),
       ...updatePayload
     }, factory, resolvedUniverseId, codesSynced, () => maybeAttachCoverImage({
       slug: game.slug, name: game.name, id: game.id, robloxLink: resolvedLinks.roblox_link?.url ?? null
@@ -1399,10 +1415,9 @@ async function downloadResizeAndUploadImage(params: {
   return toMediaPublicUrl(publicUrl.data.publicUrl);
 }
 
-export async function publishFactoryCopy(game: ExistingCodePageRecord, article: ArticleResponse, universeId: number, interlinkCopy: string, fingerprint: string, linkedIds: string[]) {
-  const social = await collectSocialLinksFromExistingSources(game);
-  // The reviewed bundle owns game identity; source social links cannot replace it.
-  social.roblox_link = game.roblox_link ? { url: game.roblox_link } : undefined;
+export async function publishFactoryCopy(game: ExistingCodePageRecord, article: CodePageFinal, universeId: number, interlinkCopy: string, fingerprint: string, linkedIds: string[]) {
+  // Factory social links come only from the reviewed bundle, never code sources.
+  const social: PlaceholderLinks = { roblox_link: game.roblox_link ? { url: game.roblox_link } : undefined };
   const metadata = await collectRobloxMetadata(game.roblox_link);
-  return finalizeCodePage(game, article, social, metadata, { universeId, interlinkCopy, fingerprint, linkedIds });
+  return finalizeCodePage(game, article, social, metadata, { universeId, interlinkCopy, fingerprint, linkedIds, socialLinks: article.social_links });
 }

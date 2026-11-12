@@ -43,7 +43,7 @@ import * as decalMain from "@/app/(site)/catalog/roblox-decal-ids/page";
 
 vi.mock("server-only", () => ({}));
 const mocks = vi.hoisted(() => ({ catalog: vi.fn(), admin: vi.fn(), total: 50 }));
-vi.mock("@/lib/catalog", () => ({ getCatalogPageContentByCodes: mocks.catalog }));
+vi.mock("@/lib/catalog", () => ({ getCatalogPageContentByCodes: mocks.catalog, getCatalogMembershipDate: async () => "2025-02-03T04:05:06Z" }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: mocks.admin }));
 vi.mock("@/lib/catalog-game-source", () => ({ hasCatalogGameMappings: async () => true }));
 vi.mock("next/navigation", () => ({

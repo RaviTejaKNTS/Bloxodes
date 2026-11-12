@@ -9,6 +9,8 @@ export type ContentOptions = {
   bundle?: string;
   game?: string;
   article?: string;
+  statsReport?: string;
+  visibility?: "hidden" | "public";
   namespace?: string;
   kind?: "game" | "franchise";
   only?: string[];
@@ -39,7 +41,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
       else options.updatePublished = true;
       continue;
     }
-    if (!["--target", "--bundle", "--game", "--article", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+    if (!["--target", "--bundle", "--game", "--article", "--stats-report", "--visibility", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
     const value = inline ?? argv[++index];
     if (!value || value.startsWith("--")) throw new Error(`${flag} needs a value.`);
     if (flag === "--only") {
@@ -52,7 +54,9 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     else if (flag === "--bundle") {
       if (options.bundle) throw new Error("Supply one bundle folder.");
       options.bundle = value;
-    } else if (flag === "--article") options.article = value;
+    } else if (flag === "--stats-report") options.statsReport = value;
+    else if (flag === "--visibility") { if (value !== "hidden" && value !== "public") throw new Error("Invalid visibility"); options.visibility = value; }
+    else if (flag === "--article") options.article = value;
     else if (flag === "--namespace") options.namespace = value;
     else if (flag === "--kind") {
       if (value !== "game" && value !== "franchise") throw new Error("--kind must be game or franchise.");
@@ -60,12 +64,14 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     } else options.game = value;
   }
   if (options.updatePublished && command !== "publish") throw new Error("--update-published is only valid for publish.");
+  if (options.statsReport && (command !== "status" || options.game || options.article || options.namespace || !/^[a-z0-9-]+$/.test(options.statsReport))) throw new Error("--stats-report requires status and one report slug");
+  if (options.visibility && command !== "publish") throw new Error("--visibility requires publish");
   assertApprovedHubCoverOption(options);
   if (command === "publish" && !options.bundle) throw new Error("Supply a bundle folder, for example: npm run content:publish -- /path/to/game-bundle");
   if (command !== "publish" && (options.bundle || options.apply || options.allowProd || options.only)) throw new Error(`${command} is read-only; bundle, --only and apply flags are invalid.`);
   if (command === "deployed-sha" && seen.size) throw new Error("deployed-sha takes no options.");
   if (options.article && (command !== "status" || options.game || options.namespace || options.kind || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.article))) throw new Error("--article requires status with an article slug and no game options.");
-  if (command === "status" && !options.article && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.game ?? "")) throw new Error("status requires --game <editorial-slug>.");
+  if (command === "status" && !options.article && !options.statsReport && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.game ?? "")) throw new Error("status requires --game <editorial-slug>.");
   if (command !== "status" && options.game) throw new Error("--game is only valid for status. Publish identity belongs in bundle.json.");
   if (options.namespace && (command !== "status" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.namespace))) throw new Error("--namespace requires status and a valid non-Roblox namespace.");
   if (options.kind && (command !== "status" || !options.namespace)) throw new Error("--kind requires franchise status with --namespace.");
@@ -92,5 +98,5 @@ export function assertApprovedHubCoverScope(options: ContentOptions, contract: s
 
 // Resolve bundle type before loading credentials or running publication checks.
 export function assertUpdatePublishedScope(options: ContentOptions, contract: string) {
-  if (options.updatePublished && contract !== "article@1") throw new Error("--update-published is only valid for article@1 bundles.");
+  if (options.updatePublished && contract !== "article@1" && contract !== "stats-report@1") throw new Error("--update-published is only valid for article@1 and stats-report@1 bundles.");
 }

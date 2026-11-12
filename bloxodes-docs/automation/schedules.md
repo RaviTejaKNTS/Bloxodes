@@ -8,7 +8,7 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-All run with full access in the "Bloxodes Content Factory" project on the MacBook Pro, in its root checkout, except the game article run, which gets its own worktree. The article run uses Codex `gpt-6.1-sol` high; the game article, other games and Roblox wiki runs use Claude Opus 5.5 high. They have standing permission to publish (wikis and articles with `content:publish`) and to commit and push the factory repo. None opens code PRs.
+All run with full access in the "Bloxodes Content Factory" project on the MacBook Pro, in its root checkout, except the game article run, which gets its own worktree. The article run uses Codex `gpt-6.1-sol` high; the game article, other games, Roblox wiki and codes runs use Claude Opus 5.5 high. They have standing permission to publish (wikis and articles with `content:publish`, codes pages with `codes:publish`) and to commit and push the factory repo. None opens code PRs.
 
 
 | Schedule | Time | Does |
@@ -17,10 +17,17 @@ All run with full access in the "Bloxodes Content Factory" project on the MacBoo
 | Bloxodes Roblox wiki every 2 days (Content Factory) | Every 2 days, about 00:34 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds and publishes its hub and collections. |
 | Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue` (or finds its own when fewer than 3 are good), has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (`content:publish` from the MacBook Pro's Bloxodes checkout). |
 | Bloxodes game articles every 6 hours (Content Factory) | Every 6 hours | `game-article-main`: writes up to 3 articles about non-Roblox games from `content/game-articles/topics.md` (requested topics, then priority games) or topics it finds. |
+| Bloxodes codes pages every 12 hours (Content Factory) | Every 12 hours, about 09:04 and 21:04 IST | `codes-main`: builds and publishes a codes page for every `New` row in the [Codes Queue](notion-queues.md#codes-queue), plus `Claimed` rows older than 12 hours. Luna researches, Haiku writes through `bin/haiku-write`, and `bin/codes publish` publishes. |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A new T3 schedule copies its model, effort, runtime and workspace from the thread that creates it, and an agent can't change those afterward. So create it from a Full access thread, then have the owner set the rest in T3's schedule settings. These runs need the root checkout and full access: in a sandbox `content:publish` can't reach the database.
 
 Runs can overlap, and they share the root checkout. Each one claims its own queue row and commits only its own content folder.
+
+## T3 schedule (homelab)
+
+| Schedule | Time | Does |
+| --- | --- | --- |
+| Bloxodes monthly stats report (Content Factory) | Daily, about 09:30 IST | `stats-report-main` in the "Bloxodes Content Factory" project on the homelab, root checkout, Claude Opus 5.5 high, full access. `bin/stats-report due` finds the newest finished month with no report; most days that's `none` and the run settles at once. On the 1st (once the month's last daily rollup is in) it builds the data, has Luna gather the month's events and fact-check, has Haiku write, and publishes with `content:publish`. Visibility comes from the factory's `content/stats-reports/VISIBILITY`. A missed day is caught up by the next run, and a crashed run is safe to repeat because nothing is written until the final publish. |
 
 ## Homelab (systemd)
 
@@ -30,7 +37,7 @@ All units run from `/srv/data/bloxodes-automation-runtime/current`. Article disc
 | --- | --- | --- |
 | `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the Content Factory article run writes from. Starts nothing else. |
 | `bloxodes-codes-discovery.timer` | 01:15, 07:15, 13:15, 19:15 IST, up to 5 minutes later | `codes:discover`: adds new Beebom and RobloxDen codes games to the [Codes Queue](notion-queues.md#codes-queue). Needs `NOTION_CODES_QUEUE_TOKEN`. State in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/`. Enable once with `sudo systemctl enable --now bloxodes-codes-discovery.timer`. |
-| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
+| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. It also requests two made-up URLs twice each and opens an `[error-page-cache]` issue (and exits 1) if Cloudflare serves a 4xx/5xx from its cache; see [Cloudflare](../infrastructure/cloudflare.md#caching). Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 
 Article writing and publication run in the Content Factory. The homelab writer, publication and audit units were removed on 2026-10-30; the installer removes them if it finds them, and restores the old units if activation fails.
 
@@ -38,7 +45,7 @@ The runtime is a separate release from the repo. Merging code doesn't change it.
 
 ## VPS (cron, user `ravitejaknts`)
 
-Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
+Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. `JOB_OVERALL_TIMEOUT_SECONDS` bounds the whole invocation (lock wait, image build, smoke checks and the job container; default 15,000 s), and `JOB_TIMEOUT_SECONDS` still bounds the job container on its own. The inner container timeout runs with `--foreground` so it stays in the overall timeout's process group: when the overall deadline hits, the Docker client gets TERM and the wrapper removes its job, smoke, fallback and build containers, records the failure and releases its locks within the 30-second kill grace. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
 
 | Group | Schedule (UTC) |
 | --- | --- |
@@ -67,6 +74,7 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Item stats | tier 01:05; NEW :55 most hours; HOT :32; WARM 01:32/07:32/13:32/19:32; COLD 23:32; resale :17 every 3 hours |
 | Item index, rollup, audit | index :45 hourly; rollup 01:25; audit :55 every 6 hours |
 | Promo rewards | Wednesday 09:40 |
+| Catalog page dates (`catalog-membership-dates`, 120 s limit for the whole run; see [data refreshes](../content/data-refreshes.md#catalog-page-dates)) | every 10 minutes |
 | Boot recovery | `@reboot` |
 
 The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitHub analytics collector). Leave them alone.
@@ -85,9 +93,8 @@ Scheduled:
 
 | Workflow | Schedule (UTC) | Does |
 | --- | --- | --- |
-| `discover-beebom-codes.yml` | :17 every 6 hours | Old Beebom codes discovery. Switched off once the Content Factory codes run publishes. |
-| `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. Switched off with the one above. |
+| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
-Manual only: `automation-runtime.yml` (packages the homelab runtime) and `manual-web-audit.yml`.
+Manual only: `automation-runtime.yml` (packages the homelab runtime), `manual-web-audit.yml`, and the old codes workflows `discover-beebom-codes.yml` and `generate-queue.yml`.

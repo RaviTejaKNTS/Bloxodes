@@ -2,7 +2,7 @@ import { gameContentRevalidationTargets } from "@/lib/game-content-revalidation"
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
-import { cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
+import { catalogMembershipPurgeTags, cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -247,6 +247,7 @@ function revalidateForStats(slug: string) {
       "stats-creators",
       "stats-items",
       reportSlug ? "stats-reports" : "",
+      reportSlug ? `stats-report:${reportSlug}` : "",
       detailSlug ? `stats-game:${detailSlug}` : "",
       "home"
     ]
@@ -388,6 +389,13 @@ function revalidateForMusic(slug = "roblox-music-ids") {
       ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/games/${valueSlug}`)
       : [];
 
+  if (section === "games" && valueSlug) {
+    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
+  }
+  if (["trending", "weekly", "monthly", "yearly"].includes(section ?? "")) {
+    const path = section === "trending" ? `${MUSIC_BASE_PATH}/trending` : `${MUSIC_BASE_PATH}/${section}`;
+    return applyRevalidation([...paginatedIndexPaths(path), ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/charts`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
+  }
   return applyRevalidation([
     "/catalog",
     ...paginatedIndexPaths(MUSIC_BASE_PATH),
@@ -418,6 +426,12 @@ function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
       ? paginatedIndexPaths(`${DECAL_BASE_PATH}/games/${valueSlug}`)
       : [];
 
+  if (section === "games" && valueSlug) {
+    return applyRevalidation([...scopedPaths, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
+  }
+  if (section === "curated") {
+    return applyRevalidation([...paginatedIndexPaths(`${DECAL_BASE_PATH}/curated`), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH], [], false);
+  }
   return applyRevalidation([
     "/catalog",
     ...paginatedIndexPaths(DECAL_BASE_PATH),
@@ -487,6 +501,12 @@ function revalidateForAvatarCatalog(slug: string) {
   const [prefix] = normalizedSlug.split("/");
   const basePath = buildAvatarCatalogPath(normalizedSlug);
   const legacyBasePath = `/catalog/${normalizedSlug}`;
+  if (normalizedSlug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`)) {
+    return applyRevalidation(
+      [...paginatedIndexPaths(basePath), SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH],
+      [`avatar-catalog:${normalizedSlug}`, `catalog:${normalizedSlug}`], false
+    );
+  }
   const routePatterns = [
     `/catalog/${AVATAR_CATALOG_MASTER_CODE}/[[...segments]]`,
     prefix ? `/catalog/${prefix}/[[...segments]]` : ""
@@ -514,6 +534,12 @@ function revalidateForAvatarCatalog(slug: string) {
 }
 
 function revalidateForCatalog(slug: string) {
+  if (slug.startsWith("roblox-music-ids/") || slug.startsWith("roblox-decal-ids/") || slug.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`)) {
+    return applyRevalidation(
+      [`/catalog/${slug}`, SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH],
+      [`catalog:${slug}`], false
+    );
+  }
   return applyRevalidation(
     ["/catalog", slug ? `/catalog/${slug}` : "", "/", SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH].filter(Boolean) as string[],
     [`catalog:${slug}`, "catalog-index", "home"]
@@ -785,6 +811,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   const slug = normalizeSlug(payload.slug);
   let purgePaths: string[] = [];
   let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
+  if (payload.type === "catalog") {
+    purgeTags = catalogMembershipPurgeTags(slug) ?? purgeTags;
+  }
   let impactedWikiSlugs: string[] = [];
   let paginationPrefixes: string[] = [];
 
@@ -836,7 +865,7 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       purgePaths = revalidateForTools(slug);
       break;
     case "catalog":
-      if (MUSIC_CATALOG_CODES.has(slug)) {
+      if (MUSIC_CATALOG_CODES.has(slug) || slug.startsWith("roblox-music-ids/")) {
         purgePaths = [...purgePaths, ...revalidateForMusic(slug)];
       }
       if (slug === DECAL_CATALOG_CODE || slug.startsWith(`${DECAL_CATALOG_CODE}/`)) {

@@ -22,6 +22,7 @@ test("factory code-page RPC accepts production payloads and commits atomically",
     "00000000-0000-0000-0000-000000000001", factoryPublicationPayload({
       name: "Example", slug: "example", universe_id: 1, roblox_link: "https://www.roblox.com/games/2",
       source_url: "https://robloxden.com/game-codes/example", source_url_2: null,
+      social_links: { discord: null, twitter: null, youtube: null },
       intro_md: "Intro", redeem_md: "Redeem", troubleshoot_md: "Trouble", rewards_md: "Rewards",
       find_codes_md: "Find", meta_description: "x".repeat(155), interlinking_copy_md: "[Other](/codes/other)"
     }), { universeId: 1, fingerprint: "a".repeat(64), linkedIds: [] }, 1, true, async () => "new-cover");

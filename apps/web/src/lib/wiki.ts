@@ -221,7 +221,7 @@ async function fetchWikiPage(slug: string): Promise<WikiPageContent | null> {
 
   if (error) {
     console.error("Error fetching wiki page", error);
-    return null;
+    throw error;
   }
 
   return (data as WikiPageContent) ?? null;
@@ -250,6 +250,8 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
       .order("content_updated_at", { ascending: false })
       .order("id", { ascending: true });
 
+    if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
     if (!error && data) {
       return (data ?? []) as WikiListEntry[];
     }
@@ -263,7 +265,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 
     if (fallbackError) {
       console.error("Error fetching wiki index", fallbackError);
-      return [];
+      throw fallbackError;
     }
 
     return (fallback ?? []) as WikiListEntry[];
@@ -365,6 +367,8 @@ async function listWikiQuizzesByUniverseId(universeId: number, limit = 4): Promi
         .eq("universe_id", universeId)
         .order("content_updated_at", { ascending: false })
         .limit(safeLimit);
+
+      if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
 
       if (!error && data) {
         return (data ?? []) as QuizListEntry[];

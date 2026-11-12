@@ -106,10 +106,7 @@ export async function loadRobloxErrorsPageData(): Promise<RobloxErrorsDataset> {
     };
   } catch (error) {
     console.error("Failed to load Roblox errors dataset", error);
-    return {
-      meta: {},
-      items: []
-    };
+    throw error;
   }
 }
 

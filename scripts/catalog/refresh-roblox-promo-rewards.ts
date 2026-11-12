@@ -16,7 +16,6 @@ import { finishStatsJobRun, startStatsJobRun, type StatsJobRun } from "../shared
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const JOB_NAME = "catalog_roblox_promo_rewards_refresh";
-const CATALOG_PAGE_CODE = "roblox-promo-codes";
 const USER_AGENT = "BloxodesPromoRewardsBot/1.0";
 const ASSET_DETAILS_API = "https://economy.roblox.com/v2/assets";
 const ASSET_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/assets";
@@ -526,13 +525,12 @@ async function applyRefreshTransaction(
   seenRows: Record<string, unknown>[],
   checkedAt: string,
   retireAfterMisses: number,
-  touchCatalog: boolean,
 ): Promise<{ seenCount: number; missingUpdated: number; retired: number; catalogTouched: number }> {
   const { data, error } = await supabaseAdmin().rpc("refresh_roblox_promo_rewards", {
     p_seen_rows: seenRows,
     p_checked_at: checkedAt,
     p_retire_after_misses: retireAfterMisses,
-    p_touch_catalog: touchCatalog,
+    p_touch_catalog: false,
   });
   if (error) throw new Error(`Failed to apply the atomic promo reward refresh: ${error.message}`);
   const result = data as Record<string, unknown> | null;
@@ -618,15 +616,11 @@ async function runRefresh(options: CliOptions): Promise<RefreshSummary> {
       seenRows,
       checkedAt,
       options.retireAfterMisses,
-      materialChanges > 0,
     );
     retired = applied.retired;
     firstMisses = applied.missingUpdated - applied.retired;
     if (applied.seenCount !== seenRows.length) {
       throw new Error(`Atomic refresh reported ${applied.seenCount} seen rows; expected ${seenRows.length}`);
-    }
-    if (materialChanges > 0 && applied.catalogTouched === 0) {
-      console.warn(`Catalog page ${CATALOG_PAGE_CODE} was not found; its timestamp was not updated.`);
     }
   }
 

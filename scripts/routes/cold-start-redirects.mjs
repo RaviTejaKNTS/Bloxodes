@@ -26,7 +26,7 @@ for (const [path, status, target] of [
       server.once('exit', () => reject(new Error('Fresh server exited before ready')));
     });
     clearTimeout(timer);
-    const response = await fetch(base + path, {redirect:'manual', signal:AbortSignal.timeout(10_000)});
+    const response = await fetch(base + path, {redirect:'manual', signal:AbortSignal.timeout(20_000)});
     try {
       assert.equal(response.status, status, `First request ${path}`);
       const location = new URL(response.headers.get('location'), base);

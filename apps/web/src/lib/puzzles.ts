@@ -73,7 +73,7 @@ async function loadPublishedPuzzlePagesRaw(): Promise<PuzzlePage[]> {
 
   if (error) {
     console.error("Error fetching puzzle pages", error);
-    return [];
+    throw error;
   }
 
   return (data ?? []) as PuzzlePage[];
@@ -106,7 +106,7 @@ export async function getPuzzlePageBySlug(slug: string): Promise<PuzzlePage | nu
 
       if (error) {
         console.error("Error fetching puzzle page", error);
-        return null;
+        throw error;
       }
 
       return (data as PuzzlePage | null) ?? null;
@@ -134,7 +134,7 @@ export async function getPuzzleAnswers(slug: string, limit = 40): Promise<Puzzle
 
       if (error) {
         console.error("Error fetching puzzle answers", error);
-        return [];
+        throw error;
       }
 
       return (data ?? []) as PuzzleAnswer[];
@@ -163,7 +163,7 @@ export async function getPuzzleAnswerByDate(slug: string, date: string): Promise
 
       if (error) {
         console.error("Error fetching puzzle answer", error);
-        return null;
+        throw error;
       }
 
       return (data as PuzzleAnswer | null) ?? null;

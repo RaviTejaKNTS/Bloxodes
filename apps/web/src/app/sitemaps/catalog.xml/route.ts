@@ -1,3 +1,4 @@
+import { getCatalogMembershipDate } from "@/lib/catalog";
 import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import { buildAvatarCatalogPath, isAvatarCatalogCode } from "@/lib/roblox-avatar-catalog";
@@ -65,12 +66,14 @@ export async function GET() {
     pageMap.set("/catalog/roblox-music-ids/trending", {
       loc: withSiteUrl("/catalog/roblox-music-ids/trending"),
       changefreq: "daily",
-      priority: "0.9"
+      priority: "0.9",
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-music-ids/trending", pageMap.get("/catalog/roblox-music-ids/trending")?.lastmod))
     });
     pageMap.set("/catalog/roblox-decal-ids/curated", {
       loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
       changefreq: "weekly",
-      priority: "0.9"
+      priority: "0.9",
+      lastmod: toIsoDate(await getCatalogMembershipDate("roblox-decal-ids/curated", pageMap.get("/catalog/roblox-decal-ids/curated")?.lastmod))
     });
 
     const pages = Array.from(pageMap.values()).sort((a, b) => a.loc.localeCompare(b.loc));
@@ -80,8 +83,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to build catalog sitemap", error);
-    return new NextResponse(buildSitemapUrlSetXml([]), {
-      headers: { "content-type": "application/xml" }
+    return new NextResponse("Temporarily unavailable", {
+      status: 503,
+      headers: { "cache-control": "no-store", "Retry-After": "60" }
     });
   }
 }

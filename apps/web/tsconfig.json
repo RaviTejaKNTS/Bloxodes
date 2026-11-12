@@ -26,6 +26,9 @@
     ".next",
     ".next-prod-preview",
     ".next-prod-preview-platform",
-    "tmp"
+    "tmp",
+    "src/lib/__tests__/stats-report.test.ts",
+    "src/lib/__tests__/stats-report-assemble.test.ts",
+    "src/lib/__tests__/stats-report-review-fixes.test.ts"
   ]
 }

@@ -1,7 +1,7 @@
 import "../shared/load-env";
 import { writeFile } from "node:fs/promises";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { getExistingMusicAssetIds, updateMusicCatalogTimestamp } from "../shared/music-catalog-freshness";
+import { getExistingMusicAssetIds } from "../shared/music-catalog-freshness";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";
 const PRODUCTINFO_API = (assetId: number) => `https://api.roblox.com/marketplace/productinfo?assetId=${assetId}`;
@@ -63,7 +63,6 @@ type AutomationSummary = {
         topSongsUpserted: number;
         enriched: number;
         ranksCleared: boolean;
-        catalogTimestampUpdated: boolean;
     };
 };
 
@@ -489,7 +488,7 @@ async function run() {
     const existingAssetIds = await getExistingMusicAssetIds(supabaseAdmin(), rows.map(row => row.asset_id));
 
     // Step 3: Upsert songs (keeping existing data for old IDs, updating ranks)
-    const addedSongs = await upsertTopSongs(rows, existingAssetIds);
+    await upsertTopSongs(rows, existingAssetIds);
 
     // Step 4: Clear old ranks after the new list is written, so the trending list is never empty mid-run.
     await clearStaleRanks(rows.map(row => row.asset_id));
@@ -499,9 +498,6 @@ async function run() {
     const ranks = new Map(rows.map(row => [row.asset_id, row.rank]));
     const enrichedCount = await enrichTopSongs(assetIds, ranks);
 
-    // Step 6: Update freshness only for roster changes at least seven days apart.
-    const catalogTimestampUpdated = await updateMusicCatalogTimestamp(supabaseAdmin(), { addedSongs });
-
     await writeAutomationSummary({
         type: "music-ids",
         stats: {
@@ -510,7 +506,6 @@ async function run() {
             topSongsUpserted: rows.length,
             enriched: enrichedCount,
             ranksCleared: true,
-            catalogTimestampUpdated
         }
     });
 
@@ -519,7 +514,6 @@ async function run() {
     console.log(`   - New songs: Inserted with full data and rank`);
     console.log(`   - All songs: Enriched with metadata, thumbnails, and scores`);
     console.log(`   - All other songs: Rank cleared (set to NULL)`);
-    console.log(`   - Catalog page timestamp updated: ${catalogTimestampUpdated}`);
 }
 
 run().catch((error) => {

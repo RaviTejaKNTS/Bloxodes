@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      catalog_reconciler_benchmark:
+        description: 'Run isolated catalog membership benchmark and code checks'
+        required: false
+        default: false
+        type: boolean
       selected_roblox_bundle_hash:
         description: 'Optional immutable Roblox bundle SHA-256; verify already-staged managed development only'
         required: false
@@ -43,7 +48,11 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: node scripts/ci/change-scope.mjs
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            export BASE_SHA="$(git merge-base origin/production HEAD)"
+          fi
+          node scripts/ci/change-scope.mjs
       - name: Validate changed GitHub workflow syntax
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
@@ -67,6 +76,23 @@ jobs:
             echo "Existing migrations cannot be edited or deleted. Add a forward migration."
             exit 1
           fi
+  public-data-errors:
+    needs: scope
+    if: needs.scope.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Verify public data error handling
+        run: npm run test:unit:web
+      - run: npm run typecheck:web
   managed-development:
     needs: scope
     if: needs.scope.outputs.checks == 'true'
@@ -79,10 +105,14 @@ jobs:
     needs: [scope, managed-development]
     if: ${{ always() && !cancelled() && needs.scope.outputs.checks == 'true' && (needs.scope.outputs.migrations == 'false' || needs.managed-development.result == 'success') }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
+    # Every run reads the one managed development database. Parallel runs
+    # overloaded it (statement timeouts, cold pages over 45s), so PR checks
+    # take turns instead of failing together.
     concurrency:
-      group: pr-checks-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
+      group: bloxodes-pr-checks
+      queue: max
+      cancel-in-progress: false
     env:
       CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
       BLOXODES_ENV_PROFILE: process-only
@@ -132,6 +162,7 @@ jobs:
       - run: npm run test:site-routes
       - run: npm run test:universe-stats-pipeline
       - run: npm run test:items-pipeline
+      - run: node --import tsx --test scripts/ops/__tests__/vps-run-job.test.ts
       - if: needs.scope.outputs.extension == 'true'
         run: npm run typecheck:extension && npm run package:extension
       - if: needs.scope.outputs.admin == 'true'
@@ -166,7 +197,7 @@ jobs:
           if-no-files-found: ignore
   required:
     name: Required PR checks
-    needs: [scope, managed-development, checks]
+    needs: [scope, managed-development, checks, public-data-errors]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -175,8 +206,11 @@ jobs:
           DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
           MANAGED: ${{ needs.managed-development.result }}
           CHECKS: ${{ needs.checks.result }}
+          DATA_ERRORS: ${{ needs.public-data-errors.result }}
+          WEB: ${{ needs.scope.outputs.web }}
         run: |
           test "$SCOPE" = success
+          if [ "$WEB" = true ]; then test "$DATA_ERRORS" = success; fi
           if [ "$DOCS_ONLY" != true ]; then
             test "$MANAGED" = success
             test "$CHECKS" = success
@@ -333,3 +367,67 @@ jobs:
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore
+
+  catalog-reconciler-benchmark:
+    if: github.event_name == 'workflow_dispatch' && inputs.catalog_reconciler_benchmark
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - run: pip install 'psycopg[binary]==3.2.13'
+      - run: python3 scripts/ci/catalog-reconciler-benchmark.py
+        env:
+          CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-reconciler-benchmark
+          path: tmp/catalog-reconciler-benchmark.json
+
+  catalog-reconciler-code-checks:
+    if: github.event_name == 'workflow_dispatch' && inputs.catalog_reconciler_benchmark
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+      SUPABASE_URL: https://example.supabase.co
+      SUPABASE_SERVICE_ROLE: ci-only
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - run: npm run supabase:migrations:check
+      - run: node --test scripts/ci/__tests__/*.test.mjs
+      - run: npm run test:universe-stats-pipeline
+      - run: npm run test:items-pipeline
+      - run: node --import tsx --test scripts/ops/__tests__/vps-run-job.test.ts
+      - run: npm run lint && npm run test:unit:web

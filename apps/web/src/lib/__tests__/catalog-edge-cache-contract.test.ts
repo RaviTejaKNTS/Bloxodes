@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { cacheTagsForPath, catalogMembershipPurgeTags } from "../public-cache-tags";
 import { describe, expect, it } from "vitest";
 
 const CACHEABLE_CATALOG_ROUTES = [
@@ -74,7 +75,7 @@ describe("catalog edge-cache contracts", () => {
     }
   });
 
-  it("keeps the seeder and both collectors wired to their guarded date helpers", () => {
+  it("keeps publication dates stable and leaves roster dates to the database", () => {
     const scripts = new URL("../../../../../scripts/", import.meta.url);
     const seeder = readFileSync(new URL("catalog/seed-catalog-pages.ts", scripts), "utf8");
     expect(seeder).toContain("await preserveCatalogPublicationDates(sb, rows)");
@@ -83,7 +84,8 @@ describe("catalog edge-cache contracts", () => {
     for (const file of ["music/collect-top-100-songs.ts", "music/collect-curated-roblox-music-ids.ts"]) {
       const source = readFileSync(new URL(file, scripts), "utf8");
       expect(source).toContain("await getExistingMusicAssetIds(");
-      expect(source).toContain("await updateMusicCatalogTimestamp(");
+      expect(source).not.toContain("updateMusicCatalogTimestamp");
+      expect(source).not.toContain('from("catalog_pages")');
     }
     const reranker = readFileSync(new URL("music/rerank-roblox-music-ids.ts", scripts), "utf8");
     expect(reranker).not.toContain('from("catalog_pages")');
@@ -97,5 +99,31 @@ describe("catalog edge-cache contracts", () => {
     );
 
     expect(source).toContain("data-journey-item");
+  });
+});
+
+describe("scoped catalog membership purges", () => {
+  const migration = readFileSync(new URL("../../../../../supabase/migrations/20261109135421_catalog_membership_reconciler.sql", import.meta.url), "utf8");
+  // Include every configured game/derived route and every avatar descendant.
+  const slugs = Array.from(new Set([
+    ...Array.from(migration.matchAll(/'(roblox-(?:music|decal)-ids\/(?:games\/[^']+|trending|weekly|monthly|yearly|curated))'/g), m => m[1]),
+    ...Array.from(migration.matchAll(/'roblox-items-and-bundles' \|\| '(\/[^']+)'/g), m => `roblox-items-and-bundles${m[1]}`)
+  ])).filter(slug => !slug.includes("%"));
+  it.each(slugs)("%s purges every pagination and query variant", slug => {
+    const purge = catalogMembershipPurgeTags(slug)!;
+    expect(purge).toContain(`catalog:${slug}`);
+    const period = /^roblox-music-ids\/(weekly|monthly|yearly)$/.exec(slug)?.[1];
+    const routeSlug = period ? "roblox-music-ids/charts" : slug;
+    for (const page of ["", "/page/2", "/page/999"]) {
+      const queries = period ? [`?range=${period}`] : ["", "?sort=popular"];
+      for (const query of queries) {
+        const url = new URL(`/catalog/${routeSlug}${page}${query}`, "https://bloxodes.com");
+        // Match the proxy, which passes only the pathname to tag selection.
+        const emitted = cacheTagsForPath(url.pathname);
+        expect(purge.some(tag => emitted.includes(tag))).toBe(true);
+        expect(cacheTagsForPath(url.pathname + url.search)).toEqual(emitted);
+      }
+    }
+    expect(purge).not.toContain(`catalog:${slug.split("/")[0]}`);
   });
 });

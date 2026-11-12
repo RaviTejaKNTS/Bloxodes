@@ -1,3 +1,4 @@
+import { getCatalogMembershipDate } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
@@ -47,17 +48,11 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
     notFound();
   }
 
-  const latest = songs.reduce<Date | null>((latestDate, song) => {
-    if (!song.last_seen_at) return latestDate;
-    const candidate = new Date(song.last_seen_at);
-    if (!latestDate || candidate > latestDate) return candidate;
-    return latestDate;
-  }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
   const canonicalPath = pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = catalogIdTitle(pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title);
-  const updatedIso = latest?.toISOString() ?? null;
+  const updatedIso = await getCatalogMembershipDate(`roblox-music-ids/${chart}`);
+  const refreshedLabel = updatedIso ? formatDistanceToNow(new Date(updatedIso), { addSuffix: true }) : null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

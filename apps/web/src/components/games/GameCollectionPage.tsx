@@ -1,3 +1,4 @@
+import { resolveGameCollectionImage } from "@/lib/game-images";
 import type { Metadata } from "next";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { notFound } from "next/navigation";
@@ -19,7 +20,7 @@ export async function gameCollectionMetadata(page: SharedGameWikiCollectionPage,
   if (!Number.isSafeInteger(currentPage) || currentPage < 1 || currentPage > prepared.totalPages || (page.page_type === "collectible" && currentPage !== 1)) notFound();
   const path = currentPage === 1 ? page.canonical_path : `${page.canonical_path}/page/${currentPage}`;
   const title = `${resolveSeoTitle(page.seo_title) ?? page.title}${currentPage === 1 ? "" : ` - Page ${currentPage}`}`;
-  const image = runtime.document.items.find(item => item.system.image)?.system.image || page.thumb_url || page.game_cover_image || `${SITE_URL}/Bloxodes.png`;
+  const image = resolveGameCollectionImage(page, runtime.document.items.find(item => item.system.image)?.system.image) || `${SITE_URL}/Bloxodes.png`;
   return { twitter: { card: "summary_large_image", images: image ? [image] : [] }, title, description: page.meta_description, alternates: buildAlternates(`${SITE_URL}${path}`), robots: currentPage > 1 ? { index: false, follow: true } : undefined, openGraph: { title, description: page.meta_description, url: `${SITE_URL}${path}`, siteName: SITE_NAME, images: image ? [image] : [] } };
 }
 export async function renderSharedGameCollection({ page, namespaceTitle, currentPage = 1 }: { page: SharedGameWikiCollectionPage; namespaceTitle: string; currentPage?: number }) {
@@ -37,7 +38,7 @@ export async function renderSharedGameCollection({ page, namespaceTitle, current
     : renderGameCollectionPage({ config: runtime.config, dataset: prepared.dataset, contentHtml, currentPage, prepared, collectionBasePath: page.canonical_path, routeBase: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? landing.path : "/wiki") : `/${page.namespace}/wiki`, wikiHomePath: wiki.data.canonical_path, wikiLabel: page.canonical_path.startsWith("/wiki/") ? (landing.path.startsWith("/games/") ? namespaceTitle : "Wiki") : `${namespaceTitle} Wiki`, collectionOptions, commentsEntityType: "game_collection", enableItemFinder: true, stream: true });
   const gameName = page.game_short_title || page.game_title;
   const ordered = orderOtherCollections(collections.map(p => ({ value: p.code, label: p.display_name?.trim() || p.title, href: p.canonical_path, count: p.item_count, page: p })), page.code);
-  const railCollections = await Promise.all(ordered.map(async (entry, index) => ({ ...entry, image: index < 3 ? (await reader.listPublishedSharedGameWikiCollectionImageUrls(entry.page, 1))[0] ?? null : null })));
+  const railCollections = await Promise.all(ordered.map(async (entry, index) => ({ ...entry, image: index < 3 ? (await reader.listPublishedSharedGameWikiCollectionImageUrls(entry.page, 1).catch(() => []))[0] ?? null : null })));
   // Skip collections entirely: the directory normally looks up an image for every collection.
   const otherPages = await getGameDirectoryPages(page.namespace, page.game_id, false);
   return <GameCollectionSidebarLayout canonicalPath={page.canonical_path} title={page.title} code={page.code} gameName={gameName} wikiPath={wiki.data.canonical_path} wikiImage={wiki.data.cover_image || wiki.data.game_cover_image || null} collectionOptions={railCollections} otherPages={<GameCollectionOtherPages pages={otherPages} gameName={gameName} />}>{rendered}</GameCollectionSidebarLayout>;

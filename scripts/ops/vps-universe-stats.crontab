@@ -17,4 +17,6 @@
 # Each has a 400-request cap, 1 request start/second and an eight-minute deadline.
 18 3 * * * JOB_LOCK_GROUP=roblox-universe-discovery JOB_TIMEOUT_SECONDS=600 JOB_LOCK_WAIT_SECONDS=300 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh wiki-game-passes-refresh "npm run refresh:wiki-game-passes -- --allow-live --include-hot"
 38 3 * * * JOB_LOCK_GROUP=roblox-universe-discovery JOB_TIMEOUT_SECONDS=600 JOB_LOCK_WAIT_SECONDS=300 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-badges-refresh "npm run refresh:stats-badges -- --allow-live"
+# Reconcile complete visible sets; the next run catches up after missed runs.
+*/10 * * * * HOME=/home/ravitejaknts PATH=/usr/local/bin:/usr/bin:/bin JOB_TIMEOUT_SECONDS=120 JOB_OVERALL_TIMEOUT_SECONDS=120 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh catalog-membership-dates "node --max-old-space-size=128 --import tsx scripts/catalog/refresh-catalog-membership-dates.ts"
 # BLOXODES_STATS_WORKER_END

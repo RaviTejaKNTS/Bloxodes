@@ -5,7 +5,7 @@ import { cache } from "react";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { resolveWikiMediaUrl } from "@/lib/wiki-media";
 import { supabaseAdmin } from "@/lib/supabase";
-import { resolveGameCoverImage, resolveGameThumbnailImage } from "./game-images";
+import { resolveGameCoverImage, resolveGameThumbnailImage, resolveGameCollectionImage } from "./game-images";
 import { gameDatabase } from "./game-content-db";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 
@@ -190,7 +190,7 @@ async function listPublishedSharedGameGames(): Promise<SharedGameGame[]> {
       .order("title", { ascending: true });
     if (error) {
       console.error("Error fetching Game games", error);
-      return [];
+      throw error;
     }
     return (data ?? []) as SharedGameGame[];
   });
@@ -208,7 +208,7 @@ async function getSharedGameGameBySlug(slug: string): Promise<SharedGameGame | n
       .maybeSingle();
     if (error) {
       console.error("Error fetching Game game", error);
-      return null;
+      throw error;
     }
     return (data as SharedGameGame | null) ?? null;
   });
@@ -224,7 +224,7 @@ async function listPublishedSharedGameWikiPages(): Promise<SharedGameWikiListEnt
       .order("content_updated_at", { ascending: false });
     if (error) {
       console.error("Error fetching Game wiki index", error);
-      return [];
+      throw error;
     }
     return (data ?? []) as SharedGameWikiListEntry[];
   });
@@ -242,7 +242,7 @@ async function getSharedGameWikiPageBySlug(slug: string): Promise<SharedGameWiki
       .maybeSingle();
     if (error) {
       console.error("Error fetching Game wiki page", error);
-      return null;
+      throw error;
     }
     return (data as SharedGameWikiPage | null) ?? null;
   });
@@ -269,7 +269,7 @@ async function getSharedGameWikiCollectionPageByPath(
         .maybeSingle();
       if (error) {
         console.error("Error fetching Game wiki collection", error);
-        return null;
+        throw error;
       }
       return data ? { ...data, page_type: normalizeCollectionPageType(data.page_type) } as SharedGameWikiCollectionPage : null;
     }
@@ -296,7 +296,7 @@ async function listPublishedSharedGameWikiCollectionsByWikiSlug(
         .order("title", { ascending: true });
       if (error) {
         console.error("Error fetching Game wiki collections", error);
-        return [];
+        throw error;
       }
       return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as SharedGameWikiCollectionPage[];
     }
@@ -313,7 +313,7 @@ async function listPublishedSharedGameWikiCollections(): Promise<SharedGameWikiC
       .order("content_updated_at", { ascending: false });
     if (error) {
       console.error("Error fetching Game wiki collections index", error);
-      return [];
+      throw error;
     }
     return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as SharedGameWikiCollectionPage[];
   });
@@ -325,7 +325,7 @@ async function listPublishedSharedGameWikiCollectionImageUrls(
 ): Promise<string[]> {
   if (!page.published_dataset_id) return [];
   const safeLimit = Math.max(1, Math.min(12, Math.floor(limit)));
-  return withCache(
+  const images = await withCache(
     [namespace, "game-wiki-collection-images-v1", page.code, page.published_dataset_id, String(safeLimit)],
     [namespace, "game-wiki-collection-index", `game-${namespace}:wiki:${page.wiki_slug}`, `game-${namespace}:wiki-collection:${page.wiki_slug}/${page.collection_slug}`],
     async () => {
@@ -339,13 +339,15 @@ async function listPublishedSharedGameWikiCollectionImageUrls(
         .limit(safeLimit);
       if (error) {
         console.error("Error fetching Game collection images", error);
-        return [];
+        throw error;
       }
       return (data ?? [])
         .map((row) => resolveWikiMediaUrl(row.image_key))
         .filter((url): url is string => Boolean(url));
     }
   );
+  const fallback = resolveGameCollectionImage(page);
+  return images.length ? images : fallback ? [fallback] : [];
 }
 
 async function loadPublishedSharedGameWikiCollectionRuntime(
@@ -359,10 +361,8 @@ async function loadPublishedSharedGameWikiCollectionRuntime(
     .eq("id", page.published_dataset_id)
     .eq("collection_page_id", page.id)
     .maybeSingle();
-  if (datasetError || !datasetData) {
-    if (datasetError) console.error("Error fetching Game collection dataset", datasetError);
-    return null;
-  }
+  if (datasetError) throw datasetError;
+  if (!datasetData) throw new Error(`Published collection ${page.code} has no dataset`);
 
   const rows: Array<{
     item_slug: string;
@@ -382,7 +382,7 @@ async function loadPublishedSharedGameWikiCollectionRuntime(
       .range(from, from + 999);
     if (error) {
       console.error("Error fetching Game collection items", error);
-      return null;
+      throw error;
     }
     const chunk = (data ?? []) as typeof rows;
     rows.push(...chunk);

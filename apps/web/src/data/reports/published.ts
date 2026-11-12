@@ -9,6 +9,8 @@ import { robloxSeptember2026Report } from "./roblox-september-2026";
 export const PUBLISHED_STATS_REPORTS = [
   {
     href: `/stats/reports/${robloxSeptember2026Report.slug}`,
+    updatedAt: robloxSeptember2026Report.updatedAt,
+    publishedAt: robloxSeptember2026Report.publishedAt,
     month: robloxSeptember2026Report.featureImage.month,
     title: robloxSeptember2026Report.title,
     description: robloxSeptember2026Report.subtitle,
@@ -16,6 +18,8 @@ export const PUBLISHED_STATS_REPORTS = [
   },
   {
     href: `/stats/reports/${robloxJuly2026Report.slug}`,
+    updatedAt: robloxJuly2026Report.updatedAt,
+    publishedAt: robloxJuly2026Report.publishedAt,
     month: robloxJuly2026Report.featureImage.month,
     title: robloxJuly2026Report.title,
     description: robloxJuly2026Report.subtitle,
@@ -23,6 +27,8 @@ export const PUBLISHED_STATS_REPORTS = [
   },
   {
     href: `/stats/reports/${robloxJune2026Report.slug}`,
+    updatedAt: robloxJune2026Report.updatedAt,
+    publishedAt: robloxJune2026Report.publishedAt,
     month: robloxJune2026Report.featureImage.month,
     title: robloxJune2026Report.title,
     description: robloxJune2026Report.subtitle,

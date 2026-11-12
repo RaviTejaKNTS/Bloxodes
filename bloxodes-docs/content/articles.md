@@ -58,7 +58,7 @@ It doesn't publish. Publish the matching bundle with `content:publish` afterward
 
 ### Direct publishing
 
-`content:publish` takes an article bundle (`contracts/article/v1/`). The Content Factory's `bin/article publish` uses it for new articles, and `bin/article update` for published ones.
+`content:publish` takes an article bundle (`contracts/article/v1/`). The Content Factory's `bin/article publish` uses it for new articles, and `bin/article update` for published ones. Monthly stats reports use the same command with their own `stats-report@1` contract; they aren't article rows. See [stats](stats.md#monthly-reports).
 
 | Command | Does |
 | --- | --- |

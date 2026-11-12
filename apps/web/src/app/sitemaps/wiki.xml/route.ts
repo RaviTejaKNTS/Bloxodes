@@ -34,8 +34,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Failed to build wiki sitemap", error);
-    return new NextResponse(buildSitemapUrlSetXml([]), {
-      headers: { "content-type": "application/xml" }
+    return new NextResponse("Temporarily unavailable", {
+      status: 503,
+      headers: { "cache-control": "no-store", "Retry-After": "60" }
     });
   }
 }

@@ -83,6 +83,8 @@ export async function getQuizPageByCode(code: string): Promise<QuizPage | null> 
     .eq("is_published", true)
     .maybeSingle();
 
+  if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
   if (!error && data) {
     return data as QuizPage;
   }
@@ -96,7 +98,7 @@ export async function getQuizPageByCode(code: string): Promise<QuizPage | null> 
 
   if (fallbackError) {
     console.error("Error fetching quiz page", fallbackError);
-    return null;
+    throw fallbackError;
   }
 
   return (fallback as QuizPage) ?? null;
@@ -112,6 +114,8 @@ const cachedListPublishedQuizzes = publicContentCache(
       .order("content_updated_at", { ascending: false })
       .order("id", { ascending: true });
 
+    if (error && !["42P01", "42703", "PGRST204", "PGRST205"].includes(error.code)) throw error;
+
     if (!error && data) {
       return (data ?? []) as QuizListEntry[];
     }
@@ -125,7 +129,7 @@ const cachedListPublishedQuizzes = publicContentCache(
 
     if (fallbackError) {
       console.error("Error fetching quiz pages", fallbackError);
-      return [];
+      throw fallbackError;
     }
 
     return (fallback ?? []) as QuizListEntry[];
