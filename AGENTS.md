@@ -28,31 +28,24 @@ This file holds only what every agent needs on every task. Everything else lives
 
 `CLAUDE.md` is a symlink to this file. **If you were started as a delegated sub-agent or child task, skip this section:** do the task in your brief and follow the rules below.
 
-The main agent is Claude, the owner's always-available agent in T3. It plans and hands out work, reviews and fixes what comes back, and reports to the owner. Other models do the large work:
+Follow the agent system in your global instructions (the "Agent system" section, managed in the Cockpit repo). It says which model each role is and how work is handed over, checked and reported. This guide only says which role does which work here. If that section is missing, for example in GitHub Actions, do the work yourself and say so.
 
-- **Claude (main agent):** planning, agents, skills, docs, review, git and releases.
-- **Haiku 5.5:** writes every public page, and reviews research and images.
-- **Luna:** data-heavy work: research, data collection, scraping, images, fact and editorial review.
-- **Codex Sol:** code, technical research, code reviews and audits. Full detail: [how agents work](bloxodes-docs/agents/how-agents-work.md).
+The main agent is the `lead`: the agent the owner talks to in T3. Full detail: [how agents work](bloxodes-docs/agents/how-agents-work.md).
+
+| Work | Role |
+| --- | --- |
+| Planning, agents, skills, docs, content and SEO review, git and releases | `lead` |
+| Coding, bug fixes, code-heavy pipelines, technical research | `coder` |
+| Code reviews and audits | `reviewer` |
+| Every public page; reviews of research, data and images | `writer` |
+| Research, data collection, scraping, images, fact and editorial review | `researcher`, always at its higher effort |
 
 **Do it yourself:** quick reads, status checks, lookups, one-file fixes and questions; content and SEO review of every page agents make, including fixing their prose; `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`; git, PRs, PR watching, merges and releases. If a skill keeps producing weak output, propose a specific change to the owner instead of rewriting it quietly.
 
-**Delegate the rest** with T3 `delegate_task` (check `orchestrator_capabilities` if a model ID stops resolving):
-
-| Work | Provider / model | Options |
-| --- | --- | --- |
-| Coding, bug fixes, code-heavy pipelines, code reviews | `codex` / `gpt-6.1-sol` | `reasoningEffort: high` |
-| Content runner stages (research, data, images, review, writing) | Luna (`codex` / `gpt-6-luna`) and Haiku 5.5 (`claudeAgent` / `claude-haiku-5-5`), per `bloxodes-model-routing` | `max` / `xhigh` |
-| Data collection and scraping | `codex` / `gpt-6-luna` | `reasoningEffort: max` |
-| Small read-only lookups | `opencode` / `opencode/muse-spark-1.3-contributor-free` | none |
-| Small self-contained tasks | `antigravity` / newest Gemini Flash, or `grok` / `grok-4.7` | `high` for Grok |
-
-- In T3, run content runners stage by stage yourself and give each stage to its routed model. Never write public copy with Codex Sol.
-- Every brief says it's for a sub-agent, and gives the goal, skills (`bloxodes-voice` for writing), game slug and queue row, file boundaries, what "done" means and what to report. Tell agents to run checks on GitHub and not to commit, push or publish unless the brief says so.
-- Review the real output (diff, files, data, screenshots, sources), not the summary. Corrections go in a new `delegate_task` round with its own `clientRequestId`.
-- Parallel agents never edit the same files or the same game. If a model hits a usage limit, move the task to Codex.
-- Non-Codex agents can wait on approval prompts only visible in their own thread. Check with `t3_thread_read` and tell the owner if one is waiting.
-- End every reply to the owner with one line, `Status: done.` or `Status: not done.`, naming what's still running or blocking.
+- In T3, run content runners stage by stage yourself and give each stage to its role, per `bloxodes-model-routing`. Public copy only ever comes from the `writer`.
+- Briefs also name the skills (`bloxodes-voice` for writing), the game slug and queue row. Tell agents to run checks on GitHub.
+- Parallel agents never work on the same game.
+- Agents that aren't on Codex can wait on approval prompts only visible in their own thread. Check with `t3_thread_read` and tell the owner if one is waiting.
 
 ## Rules for every task
 
@@ -67,7 +60,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 - Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing. One exception: the publish command, `content:publish`, checks and publishes Roblox and franchise wiki bundles and article bundles from an up-to-date main checkout ([doc](bloxodes-docs/content/roblox-wiki.md#publishing)).
 - Commit, push or publish only when your task says so. Commit only your task's files.
-- Before a code PR, have an independent Codex agent review the diff.
+- Before a code PR, have a `reviewer` review the diff.
 - Open PRs against `production` and link them to T3. Merge only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly or bypass protection.
 - Use `bloxodes-release-e2e` only when a release is explicitly requested.
 
@@ -92,7 +85,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 **Docs**
 
-- Only the main agent (Claude) edits `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`. Any other agent that sees a doc or skill that's wrong or needs changing reports the exact change it proposes; it doesn't make it.
+- Only the main agent edits `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`. Any other agent that sees a doc or skill that's wrong or needs changing reports the exact change it proposes; it doesn't make it.
 - `bloxodes-docs/` is the source of truth. When a change touches architecture, env, infrastructure, schedules, deployment, data flow or a pipeline, the owning doc is updated in the same PR (the agent doing the work reports what changed; Claude writes it). Replace what's no longer true; don't append history.
 - Keep this file lean: only rules every agent needs every time, plus links. Detail belongs in `bloxodes-docs/` or a skill.
 - Don't commit plans, audits, reports or logs. Keep them in `tmp/` or Notion.

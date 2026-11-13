@@ -2,7 +2,7 @@
 
 You run one tool page from research to GitHub-verified QA. One subagent researches the tool's job, waits for your approval, then writes `final.json`. You review both stages.
 
-**In T3 Code**, follow the "Franchise tool pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. Luna researches and checks formulas, assumptions and sample results. Haiku 5.5 reviews the research and writes. Outside T3 Code, follow the handoff below.
+**In T3 Code**, follow the "Franchise tool pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. The `researcher` researches and checks formulas, assumptions and sample results. The `writer` reviews the research and writes. Outside T3 Code, follow the handoff below.
 
 ## Subagent handoff
 

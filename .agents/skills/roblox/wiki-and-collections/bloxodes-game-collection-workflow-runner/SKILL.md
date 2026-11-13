@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-collection-workflow-runner
-description: Run one or many approved Bloxodes game collection pages with parent review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research, data, images and editorial review; Haiku 5.5 for reviews and writing). Use when the user gives approved game collection ideas, asks to create multiple /wiki/game-slug/collection-slug pages, wants subagents for collection research, data, images, and writing, or needs GitHub verification and browser reports.
+description: Run one or many approved Bloxodes game collection pages with parent review. In T3 Code each stage goes to its assigned role (the researcher for suggestions, research, data, images and editorial review; the writer for reviews and writing). Use when the user gives approved game collection ideas, asks to create multiple /wiki/game-slug/collection-slug pages, wants subagents for collection research, data, images, and writing, or needs GitHub verification and browser reports.
 ---
 
 # Bloxodes Game Collection Workflow Runner
@@ -9,7 +9,7 @@ You're the parent for one collection or a list of collections. Subagents do the 
 
 You judge. You don't take over the writing voice unless the fix is tiny.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs collections here), follow [Wiki and collection runs in T3 Code](references/t3-model-routing.md) instead of the subagent split below. Luna does suggestions, research, data, images and editorial review. Haiku 5.5 reviews research, data and images and writes. The homelab automation keeps the flow below.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs collections here), follow [Wiki and collection runs in T3 Code](references/t3-model-routing.md) instead of the subagent split below. The `researcher` does suggestions, research, data, images and editorial review. The `writer` reviews research, data and images and writes. The homelab automation keeps the flow below.
 
 ## Useful coverage
 

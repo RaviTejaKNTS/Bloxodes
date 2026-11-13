@@ -1,6 +1,6 @@
 ---
 name: bloxodes-franchise-wiki-workflow-runner
-description: Run one or many approved non-Roblox franchise wiki hubs through research, parent review, writing, managed-development verification, and Browser review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research and editorial review; Haiku 5.5 for research review and writing). Never publish production.
+description: Run one or many approved non-Roblox franchise wiki hubs through research, parent review, writing, managed-development verification, and Browser review. In T3 Code each stage goes to its assigned role (the researcher for suggestions, research and editorial review; the writer for research review and writing). Never publish production.
 ---
 
 # Bloxodes Franchise Wiki Workflow Runner
@@ -9,7 +9,7 @@ You're the parent for one wiki hub. One subagent researches the game, waits for 
 
 You own the judgment: approve the research, review the copy, and review GitHub verification and rendered screenshots.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Franchise wiki hubs" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, follow the handoff below.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Franchise wiki hubs" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. The `researcher` researches and does the editorial review. The `writer` reviews the research and writes. Outside T3 Code, follow the handoff below.
 
 **Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 
