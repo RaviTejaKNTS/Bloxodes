@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { assertPublicationCheckout, assertProductionAncestor, PUBLICATION_RELEVANT_PATHS } from "../local-content-publication-guard";
+import { assertPublicationCheckout, assertProductionAncestor, batchSshCommand, PUBLICATION_RELEVANT_PATHS } from "../local-content-publication-guard";
 
 const head = "a".repeat(40);
 const deployed = "b".repeat(40);
@@ -183,4 +183,13 @@ test("ledger-only schema checks allow untracked files while schema release keeps
 test("fetch and ledger timeouts fail publication with bounded noninteractive subprocess options", () => {
   assert.match(runLocalGuard({ timeoutStage: "fetch" }).error!, /git fetch failed/);
   assert.match(runLocalGuard({ timeoutStage: "ledger" }).error!, /Production migration ledger is not ready/);
+});
+
+test("the git SSH command keeps the checkout's deploy key and adds batch mode", () => {
+  assert.equal(batchSshCommand(undefined), "ssh -o BatchMode=yes -o ConnectTimeout=15");
+  assert.equal(batchSshCommand("  "), "ssh -o BatchMode=yes -o ConnectTimeout=15");
+  assert.equal(
+    batchSshCommand("ssh -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes"),
+    "ssh -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=15"
+  );
 });

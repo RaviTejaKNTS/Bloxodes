@@ -25,9 +25,28 @@ function isPublicationRelevant(file: string) {
 }
 
 export const PUBLICATION_SUBPROCESS_TIMEOUT_MS = 60_000;
+/**
+ * The SSH command for git, with batch mode and a connect timeout added. It keeps the command this
+ * checkout already uses (GIT_SSH_COMMAND, then core.sshCommand), because GIT_SSH_COMMAND replaces
+ * core.sshCommand: a checkout that reaches GitHub with a deploy key named there would otherwise
+ * fall back to the default key and get "Permission denied (publickey)".
+ */
+export function batchSshCommand(configured: string | undefined) {
+  return `${configured?.trim() || "ssh"} -o BatchMode=yes -o ConnectTimeout=15`;
+}
+
+function configuredSshCommand() {
+  if (process.env.GIT_SSH_COMMAND?.trim()) return process.env.GIT_SSH_COMMAND;
+  try {
+    return execFileSync("git", ["config", "--get", "core.sshCommand"], { cwd: repoRoot, encoding: "utf8", timeout: PUBLICATION_SUBPROCESS_TIMEOUT_MS, stdio: ["ignore", "pipe", "ignore"] }).trim();
+  } catch {
+    return undefined; // Not set.
+  }
+}
+
 const subprocessOptions = () => ({
   cwd: repoRoot, timeout: PUBLICATION_SUBPROCESS_TIMEOUT_MS, killSignal: "SIGKILL" as const,
-  env: { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_SSH_COMMAND: "ssh -o BatchMode=yes -o ConnectTimeout=15" },
+  env: { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_SSH_COMMAND: batchSshCommand(configuredSshCommand()) },
   stdio: ["ignore", "pipe", "pipe"] as ["ignore", "pipe", "pipe"]
 });
 
