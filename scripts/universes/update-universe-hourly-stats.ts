@@ -8,7 +8,12 @@ import {
   releaseStatsPipelineLease,
   statsPipelineLeaseName
 } from "../shared/stats-pipeline-lease";
-import { finishStatsJobRun, startStatsJobRun, statsRefreshRunStatus } from "../shared/stats-job-run";
+import {
+  finishStatsJobRun,
+  KNOWN_MISSING_PRIOR_MISSES,
+  startStatsJobRun,
+  statsRefreshRunStatus
+} from "../shared/stats-job-run";
 import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
 import { statsUniverseSlug } from "@/lib/slug";
 import { isPlaceholderGameDetail, repairedUniverseIdentity } from "./universe-identity";
@@ -271,6 +276,11 @@ async function markFailures(rows: UniverseRow[], error: unknown, retryAfterHours
   }
 }
 
+// The claim already counted this attempt, so earlier attempts are one less.
+function isKnownMissingUniverse(row: UniverseRow) {
+  return (row.stats_refresh_attempt_count ?? 1) - 1 >= KNOWN_MISSING_PRIOR_MISSES;
+}
+
 async function markMissingResponses(rows: UniverseRow[]) {
   if (!rows.length) return;
   const nowIso = new Date().toISOString();
@@ -453,6 +463,7 @@ type ChunkWriteResult = {
   attempted: number;
   updated: number;
   missing: number;
+  knownMissing: number;
   failed: number;
   hourlyRows: number;
   updateEvents: number;
@@ -574,6 +585,7 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
     attempted: chunk.length,
     updated,
     missing: missingRows.length,
+    knownMissing: missingRows.filter(isKnownMissingUniverse).length,
     failed: emptyRows.length,
     hourlyRows: hourlyPayloads.length,
     updateEvents: updateEventPayloads.length,
@@ -685,6 +697,7 @@ async function main() {
   let updatedRows = 0;
   let failedRows = 0;
   let missingRows = 0;
+  let knownMissingRows = 0;
   let hourlyRows = 0;
   let updateEvents = 0;
   let claimBatches = 0;
@@ -750,6 +763,7 @@ async function main() {
             const result = await writeChunk(chunk, statsMap, latestSampledAt);
             updatedRows += result.updated;
             missingRows += result.missing;
+            knownMissingRows += result.knownMissing;
             failedRows += result.failed;
             hourlyRows += result.hourlyRows;
             updateEvents += result.updateEvents;
@@ -795,12 +809,13 @@ async function main() {
       : { queued: 0, events: [] as string[] };
 
     await finishStatsJobRun(run, {
-      status: statsRefreshRunStatus(updatedRows, failedRows, missingRows),
+      status: statsRefreshRunStatus(updatedRows, failedRows, missingRows, knownMissingRows),
       rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
       metadata: {
         missing_rows: missingRows,
+        known_missing_rows: knownMissingRows,
         repaired_identities: repairedIdentities,
         hourly_rows: hourlyRows,
         claim_batches: claimBatches,
@@ -820,7 +835,7 @@ async function main() {
       rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
-      metadata: { missing_rows: missingRows },
+      metadata: { missing_rows: missingRows, known_missing_rows: knownMissingRows },
       error
     });
     throw error;

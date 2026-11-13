@@ -41,7 +41,7 @@ Every data-backed catalog page's date (`catalog_pages.updated_at`, shown as "Upd
 ## Marketplace items
 
 - **Discovery:** 03:05, 09:05, 15:05, 21:05: `collect:catalog-items` (`run-roblox-catalog-discovery.ts`).
-- **Enrichment:** :42 in hours 02–05, 08–11, 14–17, 20–22: `enrich:catalog-items`.
+- **Enrichment:** :42 in hours 02–05, 08–11, 14–17, 20–22: `enrich:catalog-items`. Items missing from Roblox's details response count in `missing_rows`, not `rows_failed`. After 3 misses an item is marked unavailable and retried weekly until its queue row goes `dead` at 12 attempts. A queue row that can't be finished is counted as failed and the run carries on; its lease expires and the next claim takes it again. The finish call isn't retried, because a retry after a lost response would find the lease already released.
 - **Data:** `roblox_catalog_items` with images, categories, discovery runs and a refresh queue. 85,304 items.
 
 ## Item stats
@@ -50,6 +50,7 @@ Every data-backed catalog page's date (`catalog_pages.updated_at`, shown as "Upd
 - **Commands:** `stats:items:*` in `scripts/items/`.
 - **Claims:** the Data API returns at most 1,000 rows (`max_rows` in `supabase/config.toml`), so `update-item-hourly-stats.ts` claims at most 1,000 rows at a time, and processes and writes each batch before claiming the next, until it reaches `--limit`. A WARM run has `--limit 1500`, about 55 minutes of request pacing, and overlaps NEW at :55, which waits on the `roblox-api` lock.
 - **Run status:** items Roblox no longer returns count in `missing_rows`, not `rows_failed`. See [stats](stats.md).
+- **Audit:** `stats:items:audit -- --strict` reads `get_roblox_item_pipeline_health`. That read can hit a statement timeout while heavier jobs run, so it retries up to 3 times, 20 to 60 seconds apart, before the run fails.
 - **Data:** `roblox_catalog_item_stats_hourly` / `_daily`, resale points, `stats_item_current_index`, price-mover index.
 - **Bundle identity:** new bundles get a negative canonical `asset_id`. About 5,000 older bundles still live at their positive ID with no canonical row, and writes keep going to that row: the `set_roblox_catalog_item_identity` trigger keeps a positive bundle ID when a live row holds it, and writers that build negative IDs (catalog discovery and both free-item importers) switch to the stored positive row before writing the item, hits, queue rows or thumbnails. Only one live row may hold a `catalog_item_key` (`idx_roblox_catalog_live_canonical_key`).
 
@@ -68,4 +69,3 @@ A wrapper "success" can hide a skipped or partial job. Check `stats_job_runs` fo
 ## Known issues (2026-10-19)
 
 - **Music:** Roblox Creator Store returns HTTP 500, so the job fails before reranking. Last full success 2026-10-14.
-- **Item stats backlog:** until 2026-10-24, WARM, HOT, discovery and enrichment batches failed whenever they held an older positive-ID bundle (23505 on the live canonical key). About 70% of active items were overdue. Until the claim fix of 2026-11-04 reaches the VPS worker, each WARM run asked for 1,500 rows but received 1,000, leaving about 500 leased and unprocessed. That's 4,000 rows a day against about 3,800 coming due (about 80,000 WARM items every 21 days), so the backlog barely moved: 32% overdue on 2026-11-04. With 6,000 rows a day it should drop under 5% in about 10 days. The item audit stays partial until then.
