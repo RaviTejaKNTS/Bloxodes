@@ -1,6 +1,6 @@
 ---
 name: bloxodes-franchise-reference-pages
-description: Create or update an approved non-Roblox map, standalone checklist, quiz or catalog using shared tables, plain templates and managed-development verification. In T3 Code each stage goes to its assigned model (Luna for research, map and catalog data and a fact check of every question, task and value; Haiku 5.5 for reviews and writing).
+description: Create or update an approved non-Roblox map, standalone checklist, quiz or catalog using shared tables, plain templates and managed-development verification. In T3 Code each stage goes to its assigned role (the researcher for research, map and catalog data and a fact check of every question, task and value; the writer for reviews and writing).
 ---
 
 # Bloxodes Franchise Reference Pages
@@ -16,7 +16,7 @@ For these page types in particular:
 - Quizzes, checklists, catalogs and maps use the owning game's cover (`games.cover_image`) and square art (`games.hero_image`) for cards and social previews, so confirm the game row has both. Maps also need credited map artwork. Publishing fails if a required image is missing.
 - Keep late-story answers out of titles, meta descriptions, intros and quiz openings.
 
-**In T3 Code**, follow the "Franchise reference pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. Luna researches, builds map/catalog data and fact-checks every question, task and value. Haiku 5.5 reviews research/data and writes. Outside T3 Code, follow the handoff below.
+**In T3 Code**, follow the "Franchise reference pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. The `researcher` researches, builds map/catalog data and fact-checks every question, task and value. The `writer` reviews research/data and writes. Outside T3 Code, follow the handoff below.
 
 ## Subagent handoff
 
