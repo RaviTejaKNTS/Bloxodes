@@ -7,7 +7,7 @@ description: Maintain an existing non-Roblox franchise collection by checking ve
 
 You're running a quick maintenance pass on collections that already exist: check for real changes, apply only those, and stop. The normal good result is `unchanged`. Don't make edits just because you checked a source or someone asked for a refresh.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs a refresh here), follow the "Franchise collection refresh" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of running every pass yourself. Luna runs the quick check, applies any data delta and finds images. Haiku 5.5 reviews the delta and the images. Outside T3 Code, the flow below applies.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs a refresh here), follow the "Franchise collection refresh" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of running every pass yourself. The `researcher` runs the quick check, applies any data delta and finds images. The `writer` reviews the delta and the images. Outside T3 Code, the flow below applies.
 
 **Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 

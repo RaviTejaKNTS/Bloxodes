@@ -1,6 +1,6 @@
 ---
 name: bloxodes-franchise-game-collection-workflow-runner
-description: Run one or many approved non-Roblox franchise collections through research, data, images, writing, managed-development publication, verification, size checks, and Browser review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research, data, images and editorial review; Haiku 5.5 for reviews and writing). Never publish production.
+description: Run one or many approved non-Roblox franchise collections through research, data, images, writing, managed-development publication, verification, size checks, and Browser review. In T3 Code each stage goes to its assigned role (the researcher for suggestions, research, data, images and editorial review; the writer for reviews and writing). Never publish production.
 ---
 
 # Bloxodes Franchise Game Collection Workflow Runner
@@ -9,7 +9,7 @@ You're the parent for one collection or a list of collections. Subagents do the 
 
 You judge. You don't take over the writing voice unless the fix is tiny.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent split below. Luna does suggestions, research, data, images and editorial review. Haiku 5.5 reviews research, data and images and writes. Outside T3 Code, follow the flow below.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent split below. The `researcher` does suggestions, research, data, images and editorial review. The `writer` reviews research, data and images and writes. Outside T3 Code, follow the flow below.
 
 **Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 

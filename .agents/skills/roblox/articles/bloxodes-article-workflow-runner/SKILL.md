@@ -1,6 +1,6 @@
 ---
 name: bloxodes-article-workflow-runner
-description: Run one or many Bloxodes articles through the research, image, writing, review and verification stages. In T3 Code, the orchestrator hands each stage to its assigned model (Luna for research, images and editorial review; Haiku 5.5 for research review, image review and writing). Elsewhere, the code-controlled pipeline owns scheduling, recovery and completion for explicit topics or curated queue rows.
+description: Run one or many Bloxodes articles through the research, image, writing, review and verification stages. In T3 Code, the orchestrator hands each stage to its assigned role (the researcher for research, images and editorial review; the writer for research review, image review and writing). Elsewhere, the code-controlled pipeline owns scheduling, recovery and completion for explicit topics or curated queue rows.
 ---
 
 # Bloxodes Article Workflow Runner
@@ -15,7 +15,7 @@ Don't act as a model supervisor, and don't spawn research, image or writing suba
 | --- | --- |
 | `ARTICLE_PIPELINE_STAGE` is set, or the prompt assigns a code-controlled stage | Read [stage ownership](references/code-controlled-stages.md), follow the assigned research, images, writing or review instructions, and return only that stage's result. Don't start another runner. |
 | `ARTICLE_WRITER_BATCH_CONTEXT=1` but no stage is assigned | An older batch already owns the work. Don't recursively launch the replacement. Continue its [retained interactive workflow](references/interactive-workflow.md) so the in-flight job can drain without changing ownership. New automated batches never launch this model-supervisor path. |
-| You're in T3 Code with the `delegate_task` tool and the owner runs articles here | Follow [Article runs in T3 Code](references/t3-model-routing.md): Luna researches and finds images, Haiku 5.5 reviews research and images and writes, Luna does the editorial review. Don't call the code-controlled commands below. |
+| You're in T3 Code with the `delegate_task` tool and the owner runs articles here | Follow [Article runs in T3 Code](references/t3-model-routing.md): the `researcher` researches and finds images, the `writer` reviews research and images and writes, the `researcher` does the editorial review. Don't call the code-controlled commands below. |
 | The user supplied article topics | Follow [Explicit article topics](#explicit-article-topics). |
 | No topics supplied | Follow [Curated queue batches](#curated-queue-batches). |
 

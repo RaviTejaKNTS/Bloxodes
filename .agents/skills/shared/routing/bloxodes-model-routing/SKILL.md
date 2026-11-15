@@ -1,22 +1,24 @@
 ---
 name: bloxodes-model-routing
-description: How the T3 Code orchestrator splits a Bloxodes content run between two models. Luna builds evidence, data and facts and does the editorial and fact review. Haiku 5.5 reviews Luna's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, tools, catalog, franchise wiki hubs and collections, franchise reference, codes and tool pages, and the Roblox and franchise collection refreshes.
+description: How the T3 Code orchestrator splits a Bloxodes content run between two roles. The researcher builds evidence, data and facts and does the editorial and fact review. The writer reviews the researcher's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, tools, catalog, franchise wiki hubs and collections, franchise reference, codes and tool pages, and the Roblox and franchise collection refreshes.
 ---
 
 # Bloxodes Model Routing
 
-Read this when the owner runs a content runner inside T3 Code and you have the T3 `delegate_task` tool. You're the orchestrator. Each stage goes to a fresh child agent on its assigned model, and you review every handoff. You're done when each page has an approved final file in its run folder, or a clear blocker, and you've reported back to the owner.
+Read this when the owner runs a content runner inside T3 Code and you have the T3 `delegate_task` tool. You're the orchestrator. Each stage goes to a fresh child agent in its assigned role, and you review every handoff. You're done when each page has an approved final file in its run folder, or a clear blocker, and you've reported back to the owner.
 
 Outside T3 Code, runners keep their own flow. That includes the homelab and scheduled automation and the code-controlled article pipeline, which keep their own model settings.
 
 ## The split
 
-Luna builds anything that's evidence, data or facts. Haiku 5.5 checks Luna's work and writes. Luna checks Haiku's writing. No model reviews its own work.
+The `researcher` builds anything that's evidence, data or facts. The `writer` checks the `researcher`'s work and writes. The `researcher` checks the `writer`'s writing. No role reviews its own work.
 
-| Model | Provider instance | Model ID | Options | Does |
-| --- | --- | --- | --- | --- |
-| Luna | `codex` | `gpt-6-luna` | `reasoningEffort: max` | Suggestions, research, source checks, data, data deltas, images, editorial and fact review |
-| Haiku 5.5 | `claudeAgent` | `claude-haiku-5-5` | `effort: xhigh` | Research, data and image reviews, writing, the one revision |
+| Role | Does |
+| --- | --- |
+| `researcher` | Suggestions, research, source checks, data, data deltas, images, editorial and fact review |
+| `writer` | Research, data and image reviews, writing, the one revision |
+
+The "Agent system" section of your global instructions says which model each role is, and how to hand work over. Here the `researcher` always runs at its higher effort.
 
 ## Which page has your stage table
 
@@ -44,7 +46,6 @@ Articles and Roblox wiki and collections follow their own reference pages. The r
 - Every stage is a new `delegate_task` call with its own `clientRequestId`, like `<run-id>-<page-slug>-writing-r1`. Keep it stable across retries of that call, and keep each `taskId`.
 - Don't run a stage yourself, and don't hand two stages to one child. Each stage reads the previous stage's files.
 - Children never start sub-agents.
-- If a model ID stops resolving, check `orchestrator_capabilities`. Never swap in another model on your own. Ask the owner.
 - Pages can run in parallel, one stage at a time per page. Two runs never work on the same game at once.
 
 ## When a child looks stuck
@@ -58,8 +59,8 @@ A child can finish its report and still leave a background command running. T3 t
 ## Reviews and corrections
 
 - Every review returns `completed`, `needs_revision` or `blocked`, with concrete, quoted findings. Reviews never edit artifacts.
-- On `needs_revision`, send the findings to a new task on the stage's own model: research, data and images go to Luna, writing goes to Haiku. One correction per stage, then one more review. If it still fails, fix small prose yourself or report the open findings to the owner.
-- A data, image or fact gap found in editorial review goes back to the Luna stage that owns it, then its Haiku review, then writing.
+- On `needs_revision`, send the findings to a new task for the stage's own role: research, data and images go to the `researcher`, writing goes to the `writer`. One correction per stage, then one more review. If it still fails, fix small prose yourself or report the open findings to the owner.
+- A data, image or fact gap found in editorial review goes back to the `researcher` stage that owns it, then its `writer` review, then writing.
 - The writer's draft stays unchanged after review. The revision writes the final file.
 - `blocked` stops only that page. Report the stage and the exact blocker. Don't pad around a missing central fact.
 - Editorial reviews use the six checks in `.agents/skills/bloxodes-article-writing/references/editorial-review.md` as their format, plus the runner's own checks named in its table below.
@@ -77,7 +78,7 @@ Create one run folder per page inside the checkout before the first stage, at `t
 
 - **Conflicting sources.** Keep the better-supported value, or a range for numbers. Record every competing value with its source in the brief. Leave a field empty only when no reliable source gives a value. The full rule is "Conflicting sources" in `.agents/skills/bloxodes-game-collection-data/SKILL.md`.
 - **Required images block a page.** Every hub and page needs its cover and thumbnail, and every collection item that has an image in the game needs its exact image (`bloxodes-docs/content/page-standards.md#images`). Image reviews accept a miss only when a reasonable search found no clean exact image, recorded with the item and the reason. Extra in-body article images stay best effort.
-- If a child's shell can't reach an image host, Luna records the exact image URL and page with `download: blocked` and moves on. You download those files from the main shell before image review.
+- If a child's shell can't reach an image host, the `researcher` records the exact image URL and page with `download: blocked` and moves on. You download those files from the main shell before image review.
 
 ## What every child brief says
 
@@ -103,29 +104,29 @@ Report per page: status, the stage reached, each review's main findings, what yo
 
 Most runners use these five stages. The tables below name the skills, the folder and what each review checks.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Research | Luna | `brief.md` |
-| 2 | Research review | Haiku | `research-review.md` |
-| 3 | Writing | Haiku | `draft-final.json` |
-| 4 | Editorial review | Luna | `editorial-review.md` |
-| 5 | Revision | Haiku | `final.json` |
+| 1 | Research | `researcher` | `brief.md` |
+| 2 | Research review | `writer` | `research-review.md` |
+| 3 | Writing | `writer` | `draft-final.json` |
+| 4 | Editorial review | `researcher` | `editorial-review.md` |
+| 5 | Revision | `writer` | `final.json` |
 
 ## Codes
 
 `bloxodes-code-workflow-runner`. Folder: `tmp/codes-runs/<run-id>/<game-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Source check | Luna | `brief.md` |
-| 2 | Payload writing | Haiku | `draft-payload.json` |
-| 3 | Source and evergreen review | Luna | `payload-review.md` |
-| 4 | Revision | Haiku | `payload.json` |
+| 1 | Source check | `researcher` | `brief.md` |
+| 2 | Payload writing | `writer` | `draft-payload.json` |
+| 3 | Source and evergreen review | `researcher` | `payload-review.md` |
+| 4 | Revision | `writer` | `payload.json` |
 
-1. **Source check** (Luna). Follow steps 1 to 5 of the Workflow in `.agents/skills/bloxodes-code-writing/SKILL.md`: the existing `code_pages` row and live page, the exact experience and Roblox link, whether the game has a real codes system, and the RobloxDen and Beebom pages. Add the verified redeem steps with real button and menu names, the kinds of rewards, and where the game announces codes, each with its source. No real codes system means `blocked`.
-2. **Payload writing** (Haiku). Follow the code-writing skill's copy rules, field jobs and output shape, plus the "Codes pages" voice examples. First check the brief gives an exact game, a real codes system and verified redeem steps. If it doesn't, return `blocked` with what's missing instead of guessing.
-3. **Source and evergreen review** (Luna). Re-open the source pages. Check the code-writing skill's hard rules (slug, `roblox_link`, source order, `seoTitle`, no `codes` array), the evergreen rules (no code names, counts, dates, or words like "latest" and "updated daily"), redeem steps that match the verified UI, and the copy checks in step 3 of the runner's Workflow.
-4. **Revision** (Haiku). Writes `payload.json` from the draft and findings.
+1. **Source check** (`researcher`). Follow steps 1 to 5 of the Workflow in `.agents/skills/bloxodes-code-writing/SKILL.md`: the existing `code_pages` row and live page, the exact experience and Roblox link, whether the game has a real codes system, and the RobloxDen and Beebom pages. Add the verified redeem steps with real button and menu names, the kinds of rewards, and where the game announces codes, each with its source. No real codes system means `blocked`.
+2. **Payload writing** (`writer`). Follow the code-writing skill's copy rules, field jobs and output shape, plus the "Codes pages" voice examples. First check the brief gives an exact game, a real codes system and verified redeem steps. If it doesn't, return `blocked` with what's missing instead of guessing.
+3. **Source and evergreen review** (`researcher`). Re-open the source pages. Check the code-writing skill's hard rules (slug, `roblox_link`, source order, `seoTitle`, no `codes` array), the evergreen rules (no code names, counts, dates, or words like "latest" and "updated daily"), redeem steps that match the verified UI, and the copy checks in step 3 of the runner's Workflow.
+4. **Revision** (`writer`). Writes `payload.json` from the draft and findings.
 
 Never write code rows. Children never run `upsert:code-page` or `refresh:codes`. Code rows come from the scheduled `Daily Codes Refresh` job.
 
@@ -171,14 +172,14 @@ Never write code rows. Children never run `upsert:code-page` or `refresh:codes`.
 
 Before the first stage, resolve the runner's "Required context" record yourself.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 0 | Suggestions, only without an approved title list | Luna | `suggestions.md` |
-| 1 | Research | Luna | `brief.md` |
-| 2 | Research review | Haiku | `research-review.md` |
-| 3 | Writing | Haiku | `draft-game.json`, `draft-final.json` |
-| 4 | Editorial review | Luna | `editorial-review.md` |
-| 5 | Revision | Haiku | `game.json`, `final.json` |
+| 0 | Suggestions, only without an approved title list | `researcher` | `suggestions.md` |
+| 1 | Research | `researcher` | `brief.md` |
+| 2 | Research review | `writer` | `research-review.md` |
+| 3 | Writing | `writer` | `draft-game.json`, `draft-final.json` |
+| 4 | Editorial review | `researcher` | `editorial-review.md` |
+| 5 | Revision | `writer` | `game.json`, `final.json` |
 
 - **Suggestions** follow `.agents/skills/bloxodes-franchise-wiki-suggestions/SKILL.md`. The owner approves the title allowlist before research.
 - **Research** follows `.agents/skills/bloxodes-franchise-wiki-research/SKILL.md`. The brief also records the identity values `game.json` needs (developer, publisher, official URL, release dates, platforms, status) and source artwork for its image roles, each with a source.
@@ -191,18 +192,18 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 
 `bloxodes-franchise-game-collection-workflow-runner`. Folder: `tmp/franchise-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 0 | Suggestions, only without an approved collection list | Luna | `suggestions.md` |
-| 1 | Research | Luna | `brief.md` |
-| 2 | Research review | Haiku | `research-review.md` |
-| 3 | Data | Luna | `dataset.json`, `runtime-manifest.json`, data readiness in `brief.md` |
-| 4 | Data review | Haiku | `data-review.md` |
-| 5 | Images | Luna | `media/`, `images.json`, image readiness in `brief.md` |
-| 6 | Image review | Haiku | `image-review.md` |
-| 7 | Writing | Haiku | `draft-final.json` |
-| 8 | Editorial review | Luna | `editorial-review.md` |
-| 9 | Revision | Haiku | `final.json` |
+| 0 | Suggestions, only without an approved collection list | `researcher` | `suggestions.md` |
+| 1 | Research | `researcher` | `brief.md` |
+| 2 | Research review | `writer` | `research-review.md` |
+| 3 | Data | `researcher` | `dataset.json`, `runtime-manifest.json`, data readiness in `brief.md` |
+| 4 | Data review | `writer` | `data-review.md` |
+| 5 | Images | `researcher` | `media/`, `images.json`, image readiness in `brief.md` |
+| 6 | Image review | `writer` | `image-review.md` |
+| 7 | Writing | `writer` | `draft-final.json` |
+| 8 | Editorial review | `researcher` | `editorial-review.md` |
+| 9 | Revision | `writer` | `final.json` |
 
 - Use the franchise skills (`bloxodes-franchise-game-collection-suggestions`, `-research`, `-data`, `-images`, `-writing`). Writing adds the "Game collections" voice examples.
 - **Suggestions** stop for the owner's approved collection allowlist before research.
@@ -214,15 +215,15 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 
 `bloxodes-franchise-reference-pages`, for non-Roblox maps, standalone checklists, quizzes and catalogs. Folder: `tmp/reference-runs/<run-id>/<namespace>/<page-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Research | Luna | `brief.md` |
-| 2 | Research review | Haiku | `research-review.md` |
-| 3 | Data, maps and catalogs only | Luna | `data.json` |
-| 4 | Data review, maps and catalogs only | Haiku | `data-review.md` |
-| 5 | Writing | Haiku | `draft-payload.json` |
-| 6 | Editorial review | Luna | `editorial-review.md` |
-| 7 | Revision | Haiku | `payload.json` |
+| 1 | Research | `researcher` | `brief.md` |
+| 2 | Research review | `writer` | `research-review.md` |
+| 3 | Data, maps and catalogs only | `researcher` | `data.json` |
+| 4 | Data review, maps and catalogs only | `writer` | `data-review.md` |
+| 5 | Writing | `writer` | `draft-payload.json` |
+| 6 | Editorial review | `researcher` | `editorial-review.md` |
+| 7 | Revision | `writer` | `payload.json` |
 
 - **Research** follows the skill and `bloxodes-docs/content/franchise.md`: source proof, the roster, verified map coordinates and artwork attribution, sourced quiz facts, or the full completion scope for a checklist.
 - **Data** builds `map_data` or `catalog_data` from the brief, following `references/payloads.md`. Coordinates come from verified map sources, never from prose. Keep stable IDs on updates.
@@ -234,12 +235,12 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 
 `bloxodes-game-collection-refresh`. Folder: `tmp/refresh-runs/<run-id>/<game-slug>/collections/<collection-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Quick check and data delta | Luna | `quick-check.md`; on a data or page-type update, the edited `dataset.json` and `runtime-manifest.json` plus the maintenance note |
-| 2 | Delta review, only after a data or page-type update | Haiku | `delta-review.md` |
-| 3 | Images, only for new or changed rows or image gaps | Luna | `media/`, wired image fields |
-| 4 | Image review | Haiku | `image-review.md` |
+| 1 | Quick check and data delta | `researcher` | `quick-check.md`; on a data or page-type update, the edited `dataset.json` and `runtime-manifest.json` plus the maintenance note |
+| 2 | Delta review, only after a data or page-type update | `writer` | `delta-review.md` |
+| 3 | Images, only for new or changed rows or image gaps | `researcher` | `media/`, wired image fields |
+| 4 | Image review | `writer` | `image-review.md` |
 
 - **Quick check** follows the refresh skill's "Quick-check gate" and returns one result: Unchanged, Data update, Image update, Page-type update or Blocked. Export with `--output-root tmp/refresh-runs/<run-id>/<game-slug>/collections`. If the child can't reach the database, it logs that and you run the export from the main shell.
 - **Unchanged** stops the collection after stage 1. Read the quick-check evidence yourself.
@@ -251,34 +252,34 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 
 `bloxodes-franchise-game-collection-refresh`. Folder: `tmp/refresh-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
 
-Same four stages as the Roblox collection refresh: quick check and data delta (Luna), delta review only after a data or page-type update (Haiku), images only for new or changed rows or image gaps (Luna), image review (Haiku). Each stage follows the franchise refresh skill's own gates and the context's export command. Unchanged stops after stage 1.
+Same four stages as the Roblox collection refresh: quick check and data delta (`researcher`), delta review only after a data or page-type update (`writer`), images only for new or changed rows or image gaps (`researcher`), image review (`writer`). Each stage follows the franchise refresh skill's own gates and the context's export command. Unchanged stops after stage 1.
 
 ## Franchise codes pages
 
 `bloxodes-franchise-codes`. Folder: `tmp/codes-runs/<run-id>/<namespace>/<game-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Source check: redemption steps, announcements and code rows | Luna | `brief.md`, `code-rows.json` |
-| 2 | Page copy writing | Haiku | `draft-payload.json` |
-| 3 | Source and evergreen review | Luna | `payload-review.md` |
-| 4 | Revision | Haiku | `payload.json` |
+| 1 | Source check: redemption steps, announcements and code rows | `researcher` | `brief.md`, `code-rows.json` |
+| 2 | Page copy writing | `writer` | `draft-payload.json` |
+| 3 | Source and evergreen review | `researcher` | `payload-review.md` |
+| 4 | Revision | `writer` | `payload.json` |
 
-- Code rows are Luna's data. Haiku writes only the long-lived page fields and never edits code rows.
+- Code rows are the `researcher`'s data. The `writer` writes only the long-lived page fields and never edits code rows.
 - The review checks evergreen copy (no code names or counts in prose), the status rules (missing from a source doesn't mean expired) and every source link.
 
 ## Franchise tool pages
 
 `bloxodes-franchise-tools`. Folder: `tmp/tool-runs/<run-id>/<namespace>/<tool-slug>/`.
 
-| # | Stage | Model | Output |
+| # | Stage | Role | Output |
 | --- | --- | --- | --- |
-| 1 | Research and verified rules | Luna | `brief.md`, `rules.json` |
-| 2 | Research review | Haiku | `research-review.md` |
-| 3 | Writing | Haiku | `draft-payload.json` |
-| 4 | Editorial review | Luna | `editorial-review.md` |
-| 5 | Revision | Haiku | `payload.json` |
+| 1 | Research and verified rules | `researcher` | `brief.md`, `rules.json` |
+| 2 | Research review | `writer` | `research-review.md` |
+| 3 | Writing | `writer` | `draft-payload.json` |
+| 4 | Editorial review | `researcher` | `editorial-review.md` |
+| 5 | Revision | `writer` | `payload.json` |
 
-- `rules_json` values are Luna's data. Haiku never changes them.
+- `rules_json` values are the `researcher`'s data. The `writer` never changes them.
 - The editorial review works ordinary, zero, invalid and large inputs by hand against the rules, and checks the copy explains the math plainly.
 

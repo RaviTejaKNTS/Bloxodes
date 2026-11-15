@@ -9,7 +9,7 @@ Skills are step-by-step playbooks agents load for a job. They live in `.agents/s
 | Folder | Skills |
 | --- | --- |
 | `shared/voice` | `bloxodes-voice`: the house voice for every public word. Every writing skill builds on it. |
-| `shared/routing` | `bloxodes-model-routing`: which stage goes to Luna and which to Haiku 5.5 in T3. |
+| `shared/routing` | `bloxodes-model-routing`: which stage goes to the `researcher` and which to the `writer` in T3. |
 | `shared/release-and-review` | `bloxodes-release-e2e` (publishing), `bloxodes-article-release-review`, `bloxodes-wiki-release-review`, `bloxodes-simplify-journey-dom` (ad-friendly page layout). |
 | `roblox/articles` | Article suggestions, research, images, writing, runner; tech article writing; tier list writing; best-games research and writing. Monthly Roblox stats reports are built in the Content Factory (`stats-report-main`). |
 | `roblox/wiki-and-collections` | Wiki hub and collection suggestions, research, data, images, writing, refresh and runners. |
