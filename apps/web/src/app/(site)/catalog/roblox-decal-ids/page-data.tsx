@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyDecalSort } from "@/lib/catalog-id-sorts";
@@ -40,7 +40,7 @@ const BASE_SELECT_FIELDS =
 
 export const BASE_PATH = "/catalog/roblox-decal-ids";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
-export const DECAL_SEO_TITLE = "Roblox Decal IDs [Image Codes]";
+export const DECAL_SEO_TITLE = "Roblox Decal IDs [24K+ Image Codes]";
 export const DECAL_PAGE_HEADING = "Roblox Decal IDs / Image IDs";
 
 export function buildDecalCuratedPath(): string {
@@ -201,7 +201,7 @@ function normalizeBaseDecalRows(rows: unknown[] | null): DecalRow[] {
   }));
 }
 
-export const loadRobloxDecalIdsPageData = cache(async function loadRobloxDecalIdsPageData(
+export const loadRobloxDecalIdsPageData = requestCache(async function loadRobloxDecalIdsPageData(
   page: number,
   search: DecalResolvedSearch = { search: "", sort: DEFAULT_SORT },
   options: DecalListOptions = {}
@@ -277,7 +277,7 @@ export const loadRobloxDecalIdsPageData = cache(async function loadRobloxDecalId
   }
 });
 
-export const loadGameDecalIdsPageData = cache(async function loadGameDecalIdsPageData(
+export const loadGameDecalIdsPageData = requestCache(async function loadGameDecalIdsPageData(
   page: number,
   gameSlug: string,
   preset: DecalGameDatasetPreset,

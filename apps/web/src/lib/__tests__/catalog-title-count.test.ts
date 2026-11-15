@@ -8,7 +8,7 @@ describe("catalog title counts", () => {
     ["Music [58K+ songs]", 60550, "Music [60K+ songs]"],
     ["IDs [1,000 3D Mesh Assets]", 1000, "IDs [1K+ 3D Mesh Assets]"],
     ["500+ Roblox Adonis Admin Commands List", 999, "999 Roblox Adonis Admin Commands List"],
-    ["IDs [1K+ images]", 1999, "IDs [1K+ images]"],
+    ["IDs [1K+ images]", 2500, "IDs [2K+ images]"],
     ["IDs [85]", 86, "IDs [86]"],
     ["Fonts [85 FontFamily Assets]", 12, "Fonts [12 FontFamily Assets]"],
     ["Items (150 items)", 999, "Items (999 items)"],
@@ -20,6 +20,21 @@ describe("catalog title counts", () => {
     ["Roblox Color Codes (BrickColor & Color3)", 100, "Roblox Color Codes (BrickColor & Color3)"],
     ["Music IDs (November 2026) - Page 2 | Bloxodes", 90, "Music IDs (November 2026) - Page 2 | Bloxodes"]
   ])("updates %s", (title, count, expected) => expect(catalogTitleCount(title, count)).toBe(expected));
+
+  it.each([
+    "image", "images", "picture", "pictures", "texture", "textures", "poster", "posters",
+    "decal", "decals", "mesh", "meshes", "font", "fonts", "emote", "emotes", "bundle", "bundles"
+  ])("updates bracketed %s counts", noun => {
+    expect(catalogTitleCount(`IDs [1K+ ${noun}]`, 2500)).toBe(`IDs [2K+ ${noun}]`);
+  });
+
+  it("preserves unrecognized count wording", () => {
+    expect(catalogTitleCount("IDs [1K+ widgets]", 2500)).toBe("IDs [1K+ widgets]");
+  });
+
+  it("preserves an image count when the total is unknown", () => {
+    expect(catalogTitleCount("IDs [1K+ images]", undefined)).toBe("IDs [1K+ images]");
+  });
 
   it.each([null, undefined, 0, -1, NaN, Infinity])("preserves unknown totals %s", count => {
     expect(catalogTitleCount("IDs [24K+ images]", count)).toBe("IDs [24K+ images]");

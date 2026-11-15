@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { getMusicGameIdPage, getDecalGameIdPage } from "@/lib/game-specific-id-pages";
 import { resolveAvatarCatalogConfig, resolveAvatarCatalogTopLevelConfig, listAvatarCatalogItems } from "@/lib/roblox-avatar-catalog";
 
@@ -7,7 +7,7 @@ const thumbnails = (items: { thumbnail_url?: string | null }[]) =>
   items.slice(0, 6).flatMap(item => item.thumbnail_url ? [item.thumbnail_url] : []);
 
 /** Reuse the page readers, including their eligibility rules and failure behavior. */
-export const loadCatalogPreviewData = cache(async (code: string, page = 1, withImages = false): Promise<CatalogPreviewData> => {
+export const loadCatalogPreviewData = requestCache(async (code: string, page = 1, withImages = false): Promise<CatalogPreviewData> => {
   if (code === "roblox-decal-ids" || code === "roblox-decal-ids/curated" || code.startsWith("roblox-decal-ids/games/")) {
     const { loadRobloxDecalIdsPageData, loadGameDecalIdsPageData, CURATED_DECAL_OPTIONS } = await import("@/app/(site)/catalog/roblox-decal-ids/page-data");
     const game = getDecalGameIdPage(code.split("/")[2] ?? "");

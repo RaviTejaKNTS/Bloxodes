@@ -1,6 +1,6 @@
 import { catalogCodeCandidates } from "@/lib/catalog-code-candidates";
 import { catalogTitleCount } from "@/lib/catalog-title-count";
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
@@ -159,7 +159,7 @@ export async function buildFreeItemsCatalogContentHtml(
   return buildPageContentHtml(catalog);
 }
 
-export const loadFreeItemsPageData = cache(async function loadFreeItemsPageData(
+export const loadFreeItemsPageData = requestCache(async function loadFreeItemsPageData(
   page: number,
   filters: FreeItemsPageFilters = {}
 ): Promise<PageData> {

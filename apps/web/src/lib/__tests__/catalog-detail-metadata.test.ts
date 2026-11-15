@@ -22,3 +22,25 @@ it("the genre caller honors a saved cover on its real route", async () => {
   expect(result.openGraph?.images).toEqual(["https://media.bloxodes.com/pop.png"]);
   expect(result.twitter?.images).toEqual(result.openGraph?.images);
 });
+
+it.each(["a#b", "a?b", "a%b"])("the artist caller looks up the complete decoded segment %s", async artist => {
+  const code = `roblox-music-ids/artists/${artist}`;
+  mocks.catalog.mockImplementation(async (codes: string[]) => codes.includes(code)
+    ? { code, thumb_url: "https://media.bloxodes.com/artist.png" }
+    : null);
+  const result = await artistMetadata({ params: Promise.resolve({ artist }) });
+  expect(mocks.catalog).toHaveBeenCalledWith([code]);
+  expect(result.openGraph?.images).toEqual(["https://media.bloxodes.com/artist.png"]);
+  expect(result.twitter?.images).toEqual(result.openGraph?.images);
+});
+
+it.each(["a#b", "a?b", "a%b"])("the genre caller looks up the complete decoded segment %s", async genre => {
+  const code = `roblox-music-ids/genres/${genre}`;
+  mocks.catalog.mockImplementation(async (codes: string[]) => codes.includes(code)
+    ? { code, thumb_url: "https://media.bloxodes.com/genre.png" }
+    : null);
+  const result = await genreMetadata({ params: Promise.resolve({ genre }) });
+  expect(mocks.catalog).toHaveBeenCalledWith([code]);
+  expect(result.openGraph?.images).toEqual(["https://media.bloxodes.com/genre.png"]);
+  expect(result.twitter?.images).toEqual(result.openGraph?.images);
+});

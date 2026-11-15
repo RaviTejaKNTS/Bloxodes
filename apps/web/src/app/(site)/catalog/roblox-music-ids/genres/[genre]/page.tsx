@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: catalogIdTitle(`Genre Music IDs | ${SITE_NAME}`),
     description: "Roblox music IDs filtered by genre.",
     robots: { index: false, follow: true }
-  }, { path: `${BASE_PATH}/genres/${genre}` });
+  }, { path: `${BASE_PATH}/genres/${encodeURIComponent(genre)}` });
 }
 
 type PageProps = {

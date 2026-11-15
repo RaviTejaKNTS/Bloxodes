@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -1319,7 +1319,7 @@ export async function listAvatarCatalogItems(
   return cached();
 }
 
-export const getAvatarCatalogCount = cache(async function getAvatarCatalogCount(
+export const getAvatarCatalogCount = requestCache(async function getAvatarCatalogCount(
   config: Pick<AvatarCatalogConfig, "code" | "scope">,
   filters: AvatarCatalogResolvedSearch = { search: "", sort: "featured", sale: "all", creator: "all" }
 ): Promise<number> {

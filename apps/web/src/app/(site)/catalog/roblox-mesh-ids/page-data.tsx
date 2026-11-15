@@ -13,7 +13,7 @@ export const CATALOG_CODE = "roblox-mesh-ids";
 export const BASE_PATH = `/catalog/${CATALOG_CODE}`;
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
 export const FALLBACK_TITLE = "Roblox Mesh IDs";
-export const FALLBACK_SEO_TITLE = "Roblox Mesh IDs [3D Mesh Assets]";
+export const FALLBACK_SEO_TITLE = "Roblox Mesh IDs [1,000 3D Mesh Assets]";
 export const FALLBACK_DESCRIPTION =
   "Browse 1,000 public Roblox mesh IDs, compare official 3D previews, and copy the exact Mesh ID you need for Roblox Studio.";
 

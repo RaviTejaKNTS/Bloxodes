@@ -8,7 +8,7 @@ export function catalogTitleCount(title: string, count: number | null | undefine
   const number = "\\d+(?:,\\d{3})*(?:K\\+?|\\+)?";
   // Counts start a bracketed list description or a leading list phrase.
   // Bare bracket numbers remain supported; bare parentheses may be years.
-  const bracket = new RegExp(`(?:\\[|\\()(${number})(?=\\s+[^\\]\\)]*\\b(?:items?|codes?|ids?|commands?|terms?|assets?|songs?|sounds?|slang|acronyms?|entries)\\b[^\\]\\)]*[\\]\\)]|\\])`, "gi");
+  const bracket = new RegExp(`(?:\\[|\\()(${number})(?=\\s+[^\\]\\)]*\\b(?:items?|codes?|ids?|commands?|terms?|assets?|images?|pictures?|textures?|posters?|decals?|meshes|mesh|fonts?|emotes?|bundles?|songs?|sounds?|slang|acronyms?|entries)\\b[^\\]\\)]*[\\]\\)]|\\])`, "gi");
   const leading = new RegExp(`^(${number})(?=\\s+(?:Roblox\\b|Music IDs\\b|songs\\b|sounds\\b|items\\b))`, "i");
   for (const match of [...title.matchAll(bracket), ...title.matchAll(new RegExp(leading, "gi"))].sort((a, b) => a.index! - b.index!)) {
     const token = match[1];

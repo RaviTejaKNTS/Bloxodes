@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -149,7 +149,7 @@ async function fetchCatalogContentUncached(
 }
 
 // React cache shares reads only within this render, never across requests.
-const fetchCatalogContentForKey = cache((key: string, includeUnpublished: boolean) =>
+const fetchCatalogContentForKey = requestCache((key: string, includeUnpublished: boolean) =>
   fetchCatalogContentUncached(key.split("\n"), { includeUnpublished }));
 function fetchCatalogContent(codes: string[], options?: { includeUnpublished?: boolean }) {
   return fetchCatalogContentForKey(codes.join("\n"), options?.includeUnpublished === true);

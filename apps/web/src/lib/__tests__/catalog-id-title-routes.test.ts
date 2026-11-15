@@ -39,6 +39,7 @@ import * as decalGamesGamePaginated from "@/app/(site)/catalog/roblox-decal-ids/
 import * as decalGamesGame from "@/app/(site)/catalog/roblox-decal-ids/games/[game]/page";
 import * as decalGames from "@/app/(site)/catalog/roblox-decal-ids/games/page";
 import * as decalPaginated from "@/app/(site)/catalog/roblox-decal-ids/page/[page]/page";
+import * as meshPaginated from "@/app/(site)/catalog/roblox-mesh-ids/page/[page]/page";
 import * as decalMain from "@/app/(site)/catalog/roblox-decal-ids/page";
 
 vi.mock("server-only", () => ({}));
@@ -61,6 +62,8 @@ vi.mock("@/lib/page-content", () => ({
 }));
 vi.mock("@/app/(site)/catalog/roblox-music-ids/MusicIdsBrowser", () => ({ MusicIdsBrowser: () => null }));
 vi.mock("@/app/(site)/catalog/roblox-decal-ids/DecalIdsBrowser", () => ({ DecalIdsBrowser: () => null }));
+
+vi.mock("@/app/(site)/catalog/roblox-mesh-ids/MeshIdsBrowser", () => ({ MeshIdsBrowser: () => null }));
 
 type RouteProps = {
   params: Promise<{ page: string; game: string; artist: string; genre: string; category: string }>;
@@ -266,4 +269,15 @@ describe("legacy music redirects", () => {
   it("preserves roblox-music-ids/yearly/page.tsx", async () => {
     await expect((async () => musicYearly.default())()).rejects.toThrow("REDIRECT /catalog/roblox-music-ids/charts?range=yearly");
   });
+});
+
+it.each([
+  { name: "decals", generateMetadata: decalPaginated.generateMetadata, total: 38657, title: "Roblox Decal IDs [38K+ Image Codes] (October 2026) - Page 2" },
+  { name: "meshes", generateMetadata: meshPaginated.generateMetadata, total: 2500, title: "Roblox Mesh IDs [2K+ 3D Mesh Assets] - Page 2" }
+])("uses the live count in the real $name pagination metadata", async ({ generateMetadata, total, title }) => {
+  mocks.total = total;
+  const result = await generateMetadata({ params: Promise.resolve({ page: "2" }) });
+  expect(result.title).toBe(`${title} | Bloxodes`);
+  expect(result.openGraph?.title).toBe(title);
+  expect(result.twitter?.title).toBe(title);
 });

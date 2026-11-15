@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { repoPath } from "@/lib/paths";
@@ -280,7 +280,7 @@ export function getAdminCommandSystems(): AdminCommandSystemConfig[] {
   return ADMIN_COMMAND_SYSTEMS;
 }
 
-export const loadAdminCommandDataset = cache(async function loadAdminCommandDataset(slug: string): Promise<AdminCommandDataset | null> {
+export const loadAdminCommandDataset = requestCache(async function loadAdminCommandDataset(slug: string): Promise<AdminCommandDataset | null> {
   const system = ADMIN_COMMAND_SYSTEMS.find((entry) => entry.slug === slug);
   if (!system) return null;
   const markdown = await readAdminCommandsFile(system.dataFile);

@@ -13,7 +13,9 @@ export async function finalizeCatalogMetadata(metadata: Metadata, options: { cat
   if (typeof canonical !== "string" && !(canonical instanceof URL)) return metadata;
   const path = new URL(String(canonical), SITE_URL).pathname;
   if (!path.startsWith("/catalog/")) return metadata;
-  const code = path.slice("/catalog/".length).replace(/\/page\/\d+\/?$/, "");
+  const code = path.slice("/catalog/".length)
+    .replace(/\/page\/\d+\/?$/, "")
+    .split("/").map(decodeURIComponent).join("/");
   const page = Number(path.match(/\/page\/(\d+)\/?$/)?.[1] ?? 1);
   const catalog = options.catalog !== undefined ? options.catalog : await getCatalogPageContentByCodes(catalogCodeCandidates(code));
   const count = options.count ?? (await loadCatalogPreviewData(code, page, false)).count;
