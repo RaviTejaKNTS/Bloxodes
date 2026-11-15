@@ -2,7 +2,7 @@
 
 You set up one codes page with parent review. Page copy stays evergreen; verified code rows are separate from it.
 
-**In T3 Code**, follow the "Franchise codes pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. Luna checks sources and code evidence and reviews the payload. Haiku 5.5 writes the payload and the one revision. Outside T3 Code, follow the handoff below.
+**In T3 Code**, follow the "Franchise codes pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`. The `researcher` checks sources and code evidence and reviews the payload. The `writer` writes the payload and the one revision. Outside T3 Code, follow the handoff below.
 
 ## Verified code rows
 

@@ -1,6 +1,6 @@
 ---
 name: bloxodes-wiki-workflow-runner
-description: Run one approved Bloxodes wiki hub with parent review. In T3 Code each stage goes to its assigned model (Luna for research and editorial review; Haiku 5.5 for research review and writing). Use when the user asks to create or update a /wiki/<game-slug> page with subagent research, wiki writing, GitHub verification and browser reports.
+description: Run one approved Bloxodes wiki hub with parent review. In T3 Code each stage goes to its assigned role (the researcher for research and editorial review; the writer for research review and writing). Use when the user asks to create or update a /wiki/<game-slug> page with subagent research, wiki writing, GitHub verification and browser reports.
 ---
 
 # Bloxodes Wiki Workflow Runner
@@ -9,7 +9,7 @@ You're the parent for one wiki hub. One subagent researches the game, waits for 
 
 You own the judgment: approve the research, review the copy, and review GitHub verification and rendered screenshots.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Wiki hub flow" in `.agents/skills/bloxodes-game-collection-workflow-runner/references/t3-model-routing.md` instead of the subagent handoff below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, follow the handoff below.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Wiki hub flow" in `.agents/skills/bloxodes-game-collection-workflow-runner/references/t3-model-routing.md` instead of the subagent handoff below. The `researcher` researches and does the editorial review. The `writer` reviews the research and writes. Outside T3 Code, follow the handoff below.
 
 ## Subagent handoff
 

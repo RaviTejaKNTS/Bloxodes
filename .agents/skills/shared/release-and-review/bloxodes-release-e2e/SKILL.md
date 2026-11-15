@@ -24,7 +24,7 @@ You take completed, user-approved work to production: a PR into `production`, Gi
 1. Inspect HEAD, the branch, status and the exact task diff. Preserve unrelated changes. Never create a second task checkout.
 2. Stage only the explicit allowlist. Keep ignored env files, credentials, reports and build output out of git. Commit and push the task branch without force.
 3. Open a PR targeting `production`. Link it to T3 immediately. Don't push directly to production or bypass protection.
-   - Use an independent internal Codex review before opening a code PR.
+   - Have a `reviewer` review the diff before opening a code PR.
    - Ready code PRs also get the selective GitHub review. Docs and skills-only PRs skip the paid action.
    - After fixes, request a fresh review with `gh workflow run codex-review.yml --ref production -f pull_request=<number>` and inspect its exact-head feedback. Don't expect every push to start a review.
 4. Let `Pull request checks` run. Fix failures through task commits. GitHub owns dependency installs, managed-development schema verification, tests, builds and browser screenshots. Guidance-only PRs skip heavy work.
