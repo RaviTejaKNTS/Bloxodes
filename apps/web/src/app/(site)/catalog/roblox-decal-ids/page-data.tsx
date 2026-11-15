@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyDecalSort } from "@/lib/catalog-id-sorts";
@@ -39,7 +40,7 @@ const BASE_SELECT_FIELDS =
 
 export const BASE_PATH = "/catalog/roblox-decal-ids";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
-export const DECAL_SEO_TITLE = "Roblox Decal IDs [24K+ Image Codes]";
+export const DECAL_SEO_TITLE = "Roblox Decal IDs [Image Codes]";
 export const DECAL_PAGE_HEADING = "Roblox Decal IDs / Image IDs";
 
 export function buildDecalCuratedPath(): string {
@@ -124,6 +125,8 @@ type DecalNavItem = {
 
 export type BreadcrumbItem = PageBreadcrumbItem;
 
+export const CURATED_DECAL_OPTIONS = { curated: true };
+
 type DecalListOptions = {
   category?: string | null;
   curated?: boolean;
@@ -198,7 +201,7 @@ function normalizeBaseDecalRows(rows: unknown[] | null): DecalRow[] {
   }));
 }
 
-export async function loadRobloxDecalIdsPageData(
+export const loadRobloxDecalIdsPageData = cache(async function loadRobloxDecalIdsPageData(
   page: number,
   search: DecalResolvedSearch = { search: "", sort: DEFAULT_SORT },
   options: DecalListOptions = {}
@@ -272,9 +275,9 @@ export async function loadRobloxDecalIdsPageData(
     reportLoadError("Failed to load Roblox decal IDs", error);
     throw error;
   }
-}
+});
 
-export async function loadGameDecalIdsPageData(
+export const loadGameDecalIdsPageData = cache(async function loadGameDecalIdsPageData(
   page: number,
   gameSlug: string,
   preset: DecalGameDatasetPreset,
@@ -321,7 +324,7 @@ export async function loadGameDecalIdsPageData(
     reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
     throw error;
   }
-}
+});
 
 export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
   try {

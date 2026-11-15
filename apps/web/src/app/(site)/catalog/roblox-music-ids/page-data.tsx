@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyMusicSort } from "@/lib/catalog-id-sorts";
@@ -447,14 +448,14 @@ async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): 
   }
 }
 
-export async function loadRobloxMusicIdsPageData(
+export const loadRobloxMusicIdsPageData = cache(async function loadRobloxMusicIdsPageData(
   page: number,
   options?: { search?: string; sort?: MusicSortKey }
 ): Promise<PageData> {
   return loadMusicIdsPage(page, { search: options?.search, sort: options?.sort });
-}
+});
 
-export async function loadGameMusicIdsPageData(
+export const loadGameMusicIdsPageData = cache(async function loadGameMusicIdsPageData(
   page: number,
   gameSlug: string,
   preset: MusicGameDatasetPreset,
@@ -496,23 +497,23 @@ export async function loadGameMusicIdsPageData(
     reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
     throw error;
   }
-}
+});
 
-export async function loadTrendingMusicIdsPageData(page: number): Promise<PageData> {
+export const loadTrendingMusicIdsPageData = cache(async function loadTrendingMusicIdsPageData(page: number): Promise<PageData> {
   return loadDailyTop500MusicIdsPage(page);
-}
+});
 
 export function getMusicChartConfig(key: MusicChartKey) {
   return MUSIC_CHARTS[key];
 }
 
-export async function loadMusicChartPageData(key: MusicChartKey, page: number): Promise<PageData> {
+export const loadMusicChartPageData = cache(async function loadMusicChartPageData(key: MusicChartKey, page: number): Promise<PageData> {
   const config = getMusicChartConfig(key);
   if (!config.source) {
     return loadDailyTop500MusicIdsPage(page);
   }
   return loadSourceChartMusicIdsPage(page, config.source);
-}
+});
 
 export async function loadGenreMusicIdsPageData(page: number, genre: string): Promise<PageData> {
   return loadMusicIdsPage(page, { genre });

@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -24,14 +25,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { page } = await params;
   const pageNumber = Number(page);
-  if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
+  if (!Number.isFinite(pageNumber) || pageNumber < 1) return finalizeCatalogMetadata({});
   const title = catalogIdTitle(pageNumber > 1 ? `Roblox Music IDs - Page ${pageNumber}` : "Roblox Music IDs");
-  return {
+  return finalizeCatalogMetadata({
     title,
     description: CATALOG_DESCRIPTION,
     robots: { index: false, follow: true },
     alternates: buildAlternates(pageNumber === 1 ? "/catalog/roblox-music-ids" : `/catalog/roblox-music-ids/page/${pageNumber}`)
-  };
+  });
 }
 
 export default async function RobloxMusicIdsPaginatedPage({ params }: PageProps) {

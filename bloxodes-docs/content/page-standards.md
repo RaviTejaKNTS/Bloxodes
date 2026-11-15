@@ -66,7 +66,8 @@ Every page ships with every image it can get. Never leave out an image that exis
 | --- | --- |
 | Wiki hub (Roblox or franchise root and child game) | A landscape 16:9 cover (cards and social previews) and a square title thumbnail. |
 | Collection | An image on every item that has one in the game. The collection's social image comes from its items, or the game's art when no item has an image. |
-| Quiz, checklist, codes, tool, catalog | A cover or thumbnail for cards and the social preview. |
+| Quiz, checklist, codes, tool | A cover or thumbnail for cards and the social preview. |
+| Catalog | Generated automatically from the page's data (game art, its own item thumbnails, or a title card); a saved `thumb_url` overrides it. See [catalog](catalog.md). |
 | Article | A cover plus in-body images from the image pass. |
 
 - **Roblox:** the first official 768x432 universe thumbnail for the cover and the official 512x512 icon for the square.

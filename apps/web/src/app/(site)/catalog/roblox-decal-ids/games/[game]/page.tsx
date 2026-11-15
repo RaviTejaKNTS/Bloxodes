@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -17,18 +18,18 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = getDecalGameIdPage((await params).game);
-  if (!game) return {};
+  if (!game) return finalizeCatalogMetadata({});
   const catalog = await getCatalogPageContentByCodes([decalGameCatalogCode(game.slug)]);
   const title = catalogIdTitle((catalog?.seo_title?.trim() || null) ?? catalog?.title ?? `${game.title} | ${SITE_NAME}`);
   const description = catalog?.meta_description ?? game.description;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${DECAL_GAMES_PATH}/${game.slug}`;
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(canonical),
     openGraph: { type: "website", url: canonical, title, description, siteName: SITE_NAME },
     twitter: { card: "summary_large_image", title, description }
-  };
+  }, { catalog });
 }
 
 export default async function DecalGamePage({ params }: Props) {

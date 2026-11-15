@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
@@ -15,7 +16,6 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const PAGE_DESCRIPTION = "Browse free Roblox items and bundles with searchable categories and easy-to-copy asset IDs.";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,11 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
   ]);
   if (!catalog) {
     const title = appendItemCountToSeoTitle("Roblox Free Items and Bundles", total);
-    return {
+    return finalizeCatalogMetadata({
       title: `${title} | ${SITE_NAME}`,
       description: PAGE_DESCRIPTION,
       alternates: buildAlternates(CANONICAL)
-    };
+    }, { catalog });
   }
 
   const baseTitle = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? "Roblox Free Items";
@@ -37,9 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
     ? catalog.meta_description.trim()
     : PAGE_DESCRIPTION;
-  const image = catalog.thumb_url || FALLBACK_IMAGE;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -49,15 +48,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxFreeItemsPage() {

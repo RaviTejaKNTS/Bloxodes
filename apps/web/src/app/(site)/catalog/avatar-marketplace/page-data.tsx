@@ -1,3 +1,5 @@
+import { catalogTitleCount } from "@/lib/catalog-title-count";
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -567,25 +569,24 @@ export async function generateAvatarCatalogMetadata({
 }): Promise<Metadata> {
   const route = resolveAvatarCatalogRoute(prefix, segments ?? []);
   if (!route) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox Catalog | ${SITE_NAME}`
-    };
+    });
   }
 
   const [catalog, count, filters] = await Promise.all([
     getCatalogPageContentByCodes([route.config.code]),
-    getAvatarCatalogCount(route.config).catch(() => 0),
+    getAvatarCatalogCount(route.config),
     resolveAvatarCatalogSearch(searchParams)
   ]);
   const shouldNoIndex = route.page > 1 || hasActiveAvatarFilters(filters);
   const canonicalPath = route.page > 1 ? `${route.config.basePath}/page/${route.page}` : route.config.basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const baseTitle = resolveSeoTitle(getAvatarCatalogSeoTitle(route.config, count)) ?? route.config.title;
+  const baseTitle = catalogTitleCount(resolveSeoTitle(getAvatarCatalogSeoTitle(route.config, count)) ?? route.config.title, count);
   const title = route.page > 1 ? `${baseTitle} - Page ${route.page}` : baseTitle;
   const description = getAvatarCatalogSeoDescription(route.config);
-  const image = catalog?.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(canonicalUrl),
@@ -596,15 +597,13 @@ export async function generateAvatarCatalogMetadata({
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog, count });
 }
 
 export async function renderAvatarCatalogPage({

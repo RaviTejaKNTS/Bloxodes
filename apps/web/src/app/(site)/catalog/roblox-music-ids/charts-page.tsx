@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { getCatalogMembershipDate } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import Link from "next/link";
@@ -50,18 +51,18 @@ function chartPath(range: ChartRange, pageNumber = 1) {
   return `${pagePath}?range=${range}`;
 }
 
-export function buildMusicChartsMetadata(pageNumber?: number): Metadata {
+export async function buildMusicChartsMetadata(pageNumber?: number): Promise<Metadata> {
   const title = pageNumber && pageNumber > 1
     ? `Roblox music ID charts - Page ${pageNumber} | ${SITE_NAME}`
     : `Roblox music ID charts | ${SITE_NAME}`;
   const path = pageNumber && pageNumber > 1 ? `${BASE_PATH}/charts/page/${pageNumber}` : `${BASE_PATH}/charts`;
 
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(title),
     description: "Switch between weekly, monthly, and yearly Roblox Creator Store music charts.",
     robots: { index: false, follow: true },
     alternates: buildAlternates(path)
-  };
+  });
 }
 
 export async function MusicChartsPage({

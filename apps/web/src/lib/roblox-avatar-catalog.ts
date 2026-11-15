@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -1318,7 +1319,7 @@ export async function listAvatarCatalogItems(
   return cached();
 }
 
-export async function getAvatarCatalogCount(
+export const getAvatarCatalogCount = cache(async function getAvatarCatalogCount(
   config: Pick<AvatarCatalogConfig, "code" | "scope">,
   filters: AvatarCatalogResolvedSearch = { search: "", sort: "featured", sale: "all", creator: "all" }
 ): Promise<number> {
@@ -1346,7 +1347,7 @@ export async function getAvatarCatalogCount(
     }
   );
   return cached();
-}
+});
 
 export function prettyAvatarCatalogLabel(value: string | null | undefined): string {
   if (!value) return "Other";

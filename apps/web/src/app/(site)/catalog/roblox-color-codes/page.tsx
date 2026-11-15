@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { renderMarkdown } from "@/lib/markdown";
@@ -13,7 +14,6 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-color-codes"];
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
   return Object.entries(description ?? {}).sort((a, b) => {
@@ -68,18 +68,17 @@ async function buildCatalogContent(): Promise<{ contentHtml: CatalogContentHtml 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
   if (!catalog) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox Color Codes | ${SITE_NAME}`,
       description: "Browse every official Roblox BrickColor with copyable names, numbers, RGB values, and hex codes.",
       alternates: buildAlternates(CANONICAL)
-    };
+    }, { catalog });
   }
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Color Codes | ${SITE_NAME}`;
   const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
-  const image = catalog.thumb_url || FALLBACK_IMAGE;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -89,15 +88,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxColorCodesPage() {

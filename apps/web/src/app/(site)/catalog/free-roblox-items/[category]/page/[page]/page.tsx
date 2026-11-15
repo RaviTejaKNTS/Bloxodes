@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
@@ -34,10 +35,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category: categorySlug, page } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox free items | ${SITE_NAME}`,
       description: CATALOG_DESCRIPTION
-    };
+    });
   }
 
   const pageNumber = Number.parseInt(page, 10);
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   );
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildFreeItemCategoryPath(category.slug)}/page/${safePageNumber}`;
 
-  return {
+  return finalizeCatalogMetadata({
     title: `${title} | ${SITE_NAME}`,
     description,
     robots: {
@@ -76,7 +77,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: PageProps) {

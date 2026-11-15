@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
@@ -16,9 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes([CATALOG_CODE]);
   const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? FALLBACK_TITLE;
   const description = catalog?.meta_description ?? FALLBACK_DESCRIPTION;
-  const image = catalog?.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -28,10 +28,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
-    twitter: { card: "summary_large_image", title, description, images: [image] }
-  };
+    twitter: { card: "summary_large_image", title, description }
+  }, { catalog });
 }
 
 export default async function RobloxPromoCodesPage() {

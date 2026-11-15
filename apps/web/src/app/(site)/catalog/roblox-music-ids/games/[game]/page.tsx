@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -17,23 +18,23 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = getMusicGameIdPage((await params).game);
-  if (!game) return {};
+  if (!game) return finalizeCatalogMetadata({});
   const [catalog, pageData] = await Promise.all([
     getCatalogPageContentByCodes([musicGameCatalogCode(game.slug)]),
     loadGameMusicIdsPageData(1, game.slug, game.datasetPreset)
   ]);
-  const title = catalogIdTitle(pageData.total > 0
+  const title = catalogIdTitle(catalog?.seo_title?.trim() || (pageData.total > 0
     ? `${game.title} [${pageData.total.toLocaleString("en-US")} ${game.seoCountLabel}]`
-    : game.title);
+    : game.title));
   const description = catalog?.meta_description ?? game.description;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}/${game.slug}`;
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(canonical),
     openGraph: { type: "website", url: canonical, title, description, siteName: SITE_NAME },
     twitter: { card: "summary_large_image", title, description }
-  };
+  }, { catalog });
 }
 
 export default async function MusicGamePage({ params }: Props) {

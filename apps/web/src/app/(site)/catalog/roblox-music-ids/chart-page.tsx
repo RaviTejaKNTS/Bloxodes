@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { getCatalogMembershipDate } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
@@ -20,7 +21,7 @@ import {
 
 const PAGE_SIZE = 24;
 
-export function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: number): Metadata {
+export async function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: number): Promise<Metadata> {
   const config = getMusicChartConfig(key);
   const isIndexableTrendingPage = key === "trending" && (!pageNumber || pageNumber === 1);
   const title = pageNumber && pageNumber > 1
@@ -28,12 +29,12 @@ export function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: number)
     : `${config.title} | ${SITE_NAME}`;
   const path = pageNumber && pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
 
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(title),
     description: config.description,
     robots: { index: isIndexableTrendingPage, follow: true },
     alternates: buildAlternates(path)
-  };
+  });
 }
 
 export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicChartKey; pageNumber?: number }) {

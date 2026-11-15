@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -15,7 +16,6 @@ import {
 
 export const revalidate = 21600;
 
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type PageProps = {
     params: Promise<{ page: string }>;
@@ -33,10 +33,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const title = catalogIdTitle(`${DECAL_SEO_TITLE} - Page ${safePageNumber}`);
     const description = CATALOG_DESCRIPTION;
-    const image = FALLBACK_IMAGE;
+
     const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/page/${safePageNumber}`;
 
-    return {
+    return finalizeCatalogMetadata({
         title: catalogIdTitle(`${title} | ${SITE_NAME}`),
         description,
         // Paginated pages: noindex, follow
@@ -56,15 +56,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title,
             description,
             siteName: SITE_NAME,
-            images: [image]
         },
         twitter: {
             card: "summary_large_image",
             title,
             description,
-            images: [image]
         }
-    };
+    });
 }
 
 export default async function RobloxDecalIdsPaginatedPage({ params }: PageProps) {

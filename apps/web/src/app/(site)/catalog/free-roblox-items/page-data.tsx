@@ -1,3 +1,6 @@
+import { catalogCodeCandidates } from "@/lib/catalog-code-candidates";
+import { catalogTitleCount } from "@/lib/catalog-title-count";
+import { cache } from "react";
 import Link from "next/link";
 import { Suspense } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
@@ -33,9 +36,7 @@ export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
 
 export function buildFreeItemCatalogCodeCandidates(...segments: string[]): string[] {
   const normalizedSegments = segments.map((segment) => segment.trim()).filter(Boolean);
-  return FREE_ITEMS_CATALOG_CODES.map((code) =>
-    normalizedSegments.length ? `${code}/${normalizedSegments.join("/")}` : code
-  );
+  return catalogCodeCandidates([FREE_ITEMS_CATALOG_CODE, ...normalizedSegments].join("/"));
 }
 
 export function buildFreeItemCategoryPath(categorySlug: string, subcategorySlug?: string): string {
@@ -132,7 +133,8 @@ function formatTaxonomyLabel(value: string): string {
 }
 
 export function appendItemCountToSeoTitle(title: string, count: number): string {
-  return `${title} (${formatCount(count)} items)`;
+  if (count <= 0) return title;
+  return catalogTitleCount(/\d/.test(title) ? title : `${title} (${count} items)`, count);
 }
 
 export function resolveFreeItemsDescription(
@@ -157,7 +159,7 @@ export async function buildFreeItemsCatalogContentHtml(
   return buildPageContentHtml(catalog);
 }
 
-export async function loadFreeItemsPageData(
+export const loadFreeItemsPageData = cache(async function loadFreeItemsPageData(
   page: number,
   filters: FreeItemsPageFilters = {}
 ): Promise<PageData> {
@@ -169,7 +171,7 @@ export async function loadFreeItemsPageData(
     console.error("Failed to load free items page data", error);
     throw error;
   }
-}
+});
 
 export async function loadFreeItemCategories(): Promise<CategoryOption[]> {
   try {
