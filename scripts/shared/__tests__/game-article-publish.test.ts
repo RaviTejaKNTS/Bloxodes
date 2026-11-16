@@ -84,7 +84,7 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
     const apply=["apply","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","body-cover","game-cover"].includes(scenario);
     const mediaOrigin=scenario==='body-cover'?"https://media.example.com":dev;
     for(let attempt=0;attempt<(scenario==='body-cover'||scenario==='game-cover'||scenario==='author-absent'?2:1);attempt++) {
-    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
+    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,"--target","managed-dev",...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
     assert.equal(result.status,(apply&&scenario!=="bad-readback")||scenario==="dry-run"?0:1,result.stderr);
     if(scenario==='no-authors') assert.match(result.stderr,/No eligible article authors/);
     if(scenario==='missing-cover') assert.match(result.stderr,/provide cover_image, a body image, or the owning game cover_image/);

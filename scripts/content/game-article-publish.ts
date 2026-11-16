@@ -9,11 +9,10 @@ import { bundlePath } from "../shared/roblox-wiki-bundle";
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
 import { readPublishQuery } from "../shared/publish-network.mjs";
 import { publicCopyFindings } from "./check-public-copy";
-import { assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages } from "./article-image-readiness";
+import { assertProductionArticleMediaUrls, assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages } from "./article-image-readiness";
 import { assertNoArticleMediaErrors, checkArticleMedia } from "./check-article-media";
 import { verifyArticleAssets, verifyArticleLive } from "./article-publish";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
-import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 import { fetchImageBytes } from "../shared/fetch-image-bytes";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { parseArticleContentPages } from "@/lib/article-blocks";
@@ -97,14 +96,14 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   const findings=publicCopyFindings(final,finalFile);
   if(findings.length) throw new Error(findings.map(f=>`${f.field}: ${f.rule}: ${f.excerpt}`).join("\n"));
   const manifest=await readArticleImageManifest(mediaFile);
-  // Source manifest may reference managed-development media during promotion.
-  const dev=options.target==="managed-dev" ? {url:process.env.SUPABASE_URL!} : resolveArticleDevCredentials({envFile:process.env.ARTICLE_DEV_ENV_FILE||path.resolve(".envs/targets/managed-dev.env")});
-  const sourceEnv={...process.env,SUPABASE_URL:dev.url};
+  if(options.target==="production") assertProductionArticleMediaUrls(final);
+  const sourceEnv=process.env;
   assertArticleImageReadiness(checkArticleImageReadiness({manifest,finalJson:final,env:sourceEnv}),mediaFile);
   assertNoArticleMediaErrors(await checkArticleMedia({...final,env:sourceEnv,requireLocalFiles:true}));
   if(final.cover_image && findArticleImages(final.content_md).some(image=>image.src===final.cover_image)) throw new Error("Article cover must not repeat a body image.");
   const coverSource=final.cover_image || findArticleImages(final.content_md)[0]?.src || game.cover_image;
   if(!coverSource) throw new Error("Article cover is missing: provide cover_image, a body image, or the owning game cover_image.");
+  if(options.target==="production") assertProductionArticleMediaUrls({...final,cover_image:coverSource});
   await verifyArticleAssets(final,coverSource);
   // Derive from the source bundle before promotion rewrites body URLs to target Storage.
   // Decode and prepare cover before any writes, including body image uploads.

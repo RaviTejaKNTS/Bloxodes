@@ -2,6 +2,7 @@ import { isDeepStrictEqual } from 'node:util';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { featureImage } from '../reports/feature-image';
+import { toMediaPublicUrl } from '../shared/storage-public-url';
 import { createClient } from '@supabase/supabase-js';
 import type { ContentOptions } from './wiki-content-options';
 import { validateReport, canReplace, resolveLinks, nextVisibility } from '../reports/validate';
@@ -56,8 +57,8 @@ export async function publishStatsReport(options: ContentOptions) {
   });
   if (upload.error)
     throw upload.error;
-  const mediaOrigin = process.env.SUPABASE_MEDIA_PUBLIC_URL || process.env.SUPABASE_URL!;
-  const feature_image_url = `${mediaOrigin.replace(/\/$/, '')}/storage/v1/object/public/${bucket}/${mediaPath}`;
+  const feature_image_url = toMediaPublicUrl(db.storage.from(bucket).getPublicUrl(mediaPath).data.publicUrl);
+  if (!feature_image_url) throw Error('Storage returned no feature image URL');
   const media = await fetch(feature_image_url, {
     signal: AbortSignal.timeout(30000)
   });
