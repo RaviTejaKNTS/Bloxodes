@@ -1,3 +1,4 @@
+import { requestCache } from "@/lib/request-cache";
 import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -104,7 +105,7 @@ function pickFirstByCodeOrder<T extends { code: string }>(rows: T[], codes: stri
   return rows[0] ?? null;
 }
 
-async function fetchCatalogContent(
+async function fetchCatalogContentUncached(
   codes: string[],
   options?: { includeUnpublished?: boolean }
 ): Promise<CatalogPageContent | null> {
@@ -145,6 +146,13 @@ async function fetchCatalogContent(
 
   if (!fallback?.length) return null;
   return pickFirstByCodeOrder(fallback as CatalogPageContent[], codes);
+}
+
+// React cache shares reads only within this render, never across requests.
+const fetchCatalogContentForKey = requestCache((key: string, includeUnpublished: boolean) =>
+  fetchCatalogContentUncached(key.split("\n"), { includeUnpublished }));
+function fetchCatalogContent(codes: string[], options?: { includeUnpublished?: boolean }) {
+  return fetchCatalogContentForKey(codes.join("\n"), options?.includeUnpublished === true);
 }
 
 export async function getCatalogPageContentByCodes(codes: string[]): Promise<CatalogPageContent | null> {

@@ -1,3 +1,4 @@
+import { requestCache } from "@/lib/request-cache";
 import fs from "node:fs/promises";
 import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
@@ -80,7 +81,7 @@ export type CatalogContentHtml = {
   updatedAt?: string | null;
 };
 
-export async function loadRobloxDictionaryData(): Promise<DictionaryDataset> {
+export const loadRobloxDictionaryData = requestCache(async function loadRobloxDictionaryData(): Promise<DictionaryDataset> {
   try {
     const file = await fs.readFile(DICTIONARY_DATA_FILE, "utf8");
     const parsed = JSON.parse(file) as DictionaryDataset;
@@ -93,7 +94,7 @@ export async function loadRobloxDictionaryData(): Promise<DictionaryDataset> {
     console.error("Failed to load Roblox dictionary dataset", error);
     throw error;
   }
-}
+});
 
 function buildDictionaryItemListSchema({
   title,

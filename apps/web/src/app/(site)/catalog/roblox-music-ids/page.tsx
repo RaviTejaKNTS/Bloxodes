@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
@@ -13,27 +14,25 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const FALLBACK_DESCRIPTION =
   "Browse searchable Roblox music IDs for songs, artists, genres, radio games, and boombox experiences.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
   if (!catalog) {
-    return {
+    return finalizeCatalogMetadata({
       title: catalogIdTitle(`Roblox Music IDs | ${SITE_NAME}`),
       description: FALLBACK_DESCRIPTION,
       alternates: buildAlternates(CANONICAL)
-    };
+    }, { catalog });
   }
 
   const title = catalogIdTitle((catalog.seo_title?.trim() || null) ?? catalog.title ?? `Roblox Music IDs | ${SITE_NAME}`);
   const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
     ? catalog.meta_description.trim()
     : FALLBACK_DESCRIPTION;
-  const image = catalog.thumb_url || FALLBACK_IMAGE;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -43,15 +42,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxMusicIdsPage() {

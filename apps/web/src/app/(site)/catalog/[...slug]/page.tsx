@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -85,9 +86,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Catalogs | ${SITE_NAME}`;
   const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
-  const image = catalog.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(canonical),
@@ -97,15 +97,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function CatalogFallbackPage({ params }: PageProps) {

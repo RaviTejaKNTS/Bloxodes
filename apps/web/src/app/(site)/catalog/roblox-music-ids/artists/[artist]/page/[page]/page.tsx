@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
@@ -28,12 +29,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { artist, page } = await params;
   const pageNumber = Number(page);
-  if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
-  return {
+  if (!Number.isFinite(pageNumber) || pageNumber < 1) return finalizeCatalogMetadata({});
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`Artist Music IDs - Page ${pageNumber} | ${SITE_NAME}`),
     robots: { index: false, follow: true },
     alternates: buildAlternates(`${BASE_PATH}/artists/${artist}/page/${pageNumber}`)
-  };
+  });
 }
 
 export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps) {

@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import { MusicChartsPage, buildMusicChartsMetadata } from "../../../charts-page";
 
@@ -12,7 +13,7 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { page } = await params;
   const pageNumber = Number(page);
-  if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
+  if (!Number.isFinite(pageNumber) || pageNumber < 1) return finalizeCatalogMetadata({});
   return buildMusicChartsMetadata(pageNumber);
 }
 

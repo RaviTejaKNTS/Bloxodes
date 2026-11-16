@@ -1,3 +1,4 @@
+import { requestCache } from "@/lib/request-cache";
 import fs from "node:fs/promises";
 import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
@@ -96,7 +97,7 @@ export type CatalogContentHtml = {
 
 export type BreadcrumbItem = PageBreadcrumbItem;
 
-export async function loadRobloxErrorsPageData(): Promise<RobloxErrorsDataset> {
+export const loadRobloxErrorsPageData = requestCache(async function loadRobloxErrorsPageData(): Promise<RobloxErrorsDataset> {
   try {
     const file = await fs.readFile(ERRORS_DATA_FILE, "utf8");
     const parsed = JSON.parse(file) as RobloxErrorsDataset;
@@ -108,7 +109,7 @@ export async function loadRobloxErrorsPageData(): Promise<RobloxErrorsDataset> {
     console.error("Failed to load Roblox errors dataset", error);
     throw error;
   }
-}
+});
 
 function buildErrorItemListSchema({
   title,

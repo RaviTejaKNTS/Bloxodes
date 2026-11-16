@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
@@ -14,7 +15,6 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type PageProps = {
   params: Promise<{ page: string }>;
@@ -36,10 +36,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseTitle = catalog?.title ?? "Roblox free items";
   const title = `${appendItemCountToSeoTitle(resolveSeoTitle(catalog?.seo_title) ?? baseTitle, total)} - Page ${safePageNumber}`;
   const description = catalog?.meta_description ?? CATALOG_DESCRIPTION;
-  const image = catalog?.thumb_url || FALLBACK_IMAGE;
+
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/page/${safePageNumber}`;
 
-  return {
+  return finalizeCatalogMetadata({
     title: `${title} | ${SITE_NAME}`,
     description,
     robots: {
@@ -58,15 +58,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps) {

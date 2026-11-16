@@ -1,3 +1,4 @@
+import { requestCache } from "@/lib/request-cache";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -55,6 +56,6 @@ const loadCachedRobloxFontIds = publicContentCache(
   }
 );
 
-export async function listRobloxFontIds(): Promise<RobloxFontId[]> {
+export const listRobloxFontIds = requestCache(async function listRobloxFontIds(): Promise<RobloxFontId[]> {
   return loadCachedRobloxFontIds();
-}
+});
