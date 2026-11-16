@@ -53,3 +53,11 @@ test("fixture discovery routes return populated sitemaps and feeds", async ({ re
   expect(feed.status()).toBe(200);
   expect(await feed.text()).toContain("<item>");
 });
+
+
+test("GTA map loads collection markers instead of its outage snapshot", async ({ request }) => {
+  test.skip(process.env.BLOXODES_CI_DATA !== "1", "Only isolated code checks use the fixture");
+  const response = await request.get("/maps/gta5");
+  expect(response.status()).toBe(200);
+  expect(await response.text()).toContain("/wiki/gta-5/letter-scraps#item-letter-scraps-1");
+});

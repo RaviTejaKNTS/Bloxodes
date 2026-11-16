@@ -46,7 +46,7 @@ export function seedTables() {
     add(shared ? "game_collection_pages_view" : "wiki_collection_pages", page);
     add(shared ? "game_collection_datasets" : "wiki_collection_datasets", { id: page.published_dataset_id, namespace: page.namespace, collection_page_id: page.id, schema_version: 2, content_hash: "a".repeat(64), item_count: page.item_count,
       meta_json: { itemFields: ["name", "description"], display: { descriptionField: "description", tableFields: ["description"] } }, created_at: timestamp, updated_at: timestamp, validation_json: {}, source_manifest_json: {} });
-    for (let index = 1; index <= page.item_count; index++) add(shared ? "game_collection_items" : "wiki_collection_items", { namespace: page.namespace, dataset_id: page.published_dataset_id, item_slug: `item-${index}`, item_name: `Trail supply ${index}`, section: index <= page.item_count / 2 ? "Supplies" : "Equipment", sort_order: index, image_key: null,
+    for (let index = 1; index <= page.item_count; index++) add(shared ? "game_collection_items" : "wiki_collection_items", { namespace: page.namespace, dataset_id: page.published_dataset_id, item_slug: shared && entry.namespace === "gta" ? `${entry.slug}-${index}` : `item-${index}`, item_name: `Trail supply ${index}`, section: index <= page.item_count / 2 ? "Supplies" : "Equipment", sort_order: index, image_key: null,
       fields_json: { ...entry.fields, description: entry.paginated ? "Carry supplies to recover health and reach the next climb. ".repeat(15) : "A supply found near the trail." } });
     route(page, shared ? "game" : "roblox", "collection");
     if (shared) alias(`/${page.namespace}/${page.namespace === "minecraft" ? game.slug + "/wiki" : "wiki/" + game.slug}/${entry.slug}`, page, "collection");
@@ -75,6 +75,8 @@ export function seedTables() {
   route(tool,"game","tool");alias("/minecraft/tools/nether-coordinate-converter",tool,"tool");
   const gta = tables.games.find(game => game.slug === "gta-5");
   const map = add("game_map_pages_view", { ...common,id:id(),game_id:gta.id,namespace:"gta",slug:"gta5",title:"GTA 5 map",game_title:gta.title,canonical_path:"/maps/gta5",renderer_key:"gta5",map_data:{points:{},places:[],markerSnapshot:[{id:"camp",number:1,layer:"spaceship-parts",name:"Supply stop",area:"San Andreas",description:"Near the trail",facts:[],image:null,x:50,y:50,guideUrl:"/wiki/gta-5/spaceship-parts",collectionCode:null,walkthroughUrl:null}]} });
+  map.map_data.points = Object.fromEntries(tables.game_collection_pages_view.filter(page => page.namespace === "gta").map(page => [page.collection_slug, Array.from({ length: page.item_count }, (_, index) => ({ number: index + 1, x: 30 + index * 5, y: 40 }))]));
+  map.map_data.places = [{ id: "lookout", group: "landmarks", name: "Trail lookout, San Andreas", x: 60, y: 60 }];
   route(map,"game","map");alias("/gta/maps/gta5",map,"map");
   const checklist = add("game_checklist_pages_view", {...common,id:id(),game_id:gta.id,namespace:"gta",slug:"gta-5",title:"GTA 5 checklist",game_title:gta.title,canonical_path:"/checklists/gta-5",sections_json:[{code:"1",title:"Story"}]});
   add("game_checklist_items", {id:id(),namespace:"gta",page_id:checklist.id,section_code:"1.1.1",title:"Finish the first mission",description:"Complete the prologue.",is_required:true});
@@ -107,7 +109,7 @@ export function seedTables() {
   add("roblox_font_ids",{asset_id:12187365977,name:"Roboto",native_styles:["Regular"],faces:[{name:"Regular",weight:400,style:"Normal",assetId:12187365977}],designer:"Christian Robertson",creator_name:"Roblox",creator_store_url:"https://create.roblox.com/store/asset/12187365977",status:"active",thumbnail_state:"Completed",thumbnail_url:"/Bloxodes.png",vote_count:10});
   tables.roblox_music_genres_view = [{slug:"fixture-genre",label:"Fixture genre",item_count:98}];
   tables.roblox_music_artists_view = [{slug:"fixture-artist",label:"Fixture artist",item_count:98}];
-  addPublicSamples(tables, { add, id, route, common, timestamp, author, article, peak, universe });
+  addPublicSamples(tables, { add, id, route, alias, common, timestamp, author, article, peak, universe });
   addStatsSamples(tables, { add, timestamp, universe });
   // Views preserve their base-row relationships for embedded Supabase selects.
   for (const [view,base] of Object.entries({wiki_pages_view:"wiki_pages",wiki_collection_pages_view:"wiki_collection_pages",code_pages_index_view:"code_pages",quiz_pages_view:"quiz_pages",checklist_pages_view:"checklist_pages",events_pages_view:"events_pages",tools_view:"tools",catalog_pages_view:"catalog_pages"})) tables[view]=tables[base];

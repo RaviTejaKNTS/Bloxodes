@@ -1,7 +1,8 @@
 // Supplemental samples for public page, index and sitemap readers.
-export function addPublicSamples(tables, { add, id, route, common, timestamp, author, article, peak, universe }) {
+export function addPublicSamples(tables, { add, id, route, alias, common, timestamp, author, article, peak, universe }) {
   const sharedArticle = add("game_article_pages_view", { ...article, id: id(), universe_id: null, universe: null, namespace: "peak", game_id: peak.id, game_slug: "peak", game_title: "PEAK", slug: "peak-first-climb", canonical_path: "/articles/peak-first-climb", title: "PEAK first climb guide", source: "game", author });
   route(sharedArticle, "game", "article");
+  alias("/peak/articles/peak-first-climb", sharedArticle, "article");
   add("game_article_game_summary", { game_id: peak.id, namespace: "peak", game_slug: "peak", title: "PEAK", icon_url: "/Bloxodes.png", article_count: 1, latest_updated_at: timestamp });
   add("game_codes", { id: id(), code_page_id: tables.game_code_pages_view[0].id, code: "TRAIL2026", rewards_text: "Trail supplies", status: "active", verified_at: timestamp });
   const user = add("app_users", { id: id(), display_name: "Trail player", roblox_avatar_url: "/Bloxodes.png", roblox_display_name: null, roblox_username: null, role: "user" });

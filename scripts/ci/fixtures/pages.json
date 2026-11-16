@@ -136,6 +136,76 @@
       "game": "java",
       "slug": "mobs",
       "title": "Minecraft Java mobs"
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "letter-scraps",
+      "title": "GTA 5 letter scraps",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "nuclear-waste",
+      "title": "GTA 5 nuclear waste",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "submarine-pieces",
+      "title": "GTA 5 submarine pieces",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "monkey-mosaics",
+      "title": "GTA 5 monkey mosaics",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "peyote-plants",
+      "title": "GTA 5 peyote plants",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "epsilon-tracts",
+      "title": "GTA 5 Epsilon tracts",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "hidden-packages",
+      "title": "GTA 5 hidden packages",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "stunt-jumps",
+      "title": "GTA 5 stunt jumps",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "under-the-bridge",
+      "title": "GTA 5 Under the Bridge flights",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "knife-flights",
+      "title": "GTA 5 knife flights",
+      "count": 1
     }
   ],
   "robloxWikis": [
