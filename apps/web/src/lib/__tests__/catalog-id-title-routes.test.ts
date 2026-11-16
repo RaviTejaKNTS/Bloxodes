@@ -221,6 +221,13 @@ it("keeps the count in game music metadata and handles the zero-count title bran
   expect(String(withoutCount.title)).not.toContain("[50");
 });
 
+it("builds game music titles from the live total even when a saved seo_title has no count", async () => {
+  mocks.catalog.mockResolvedValue({ seo_title: "Saved Sound IDs [Hit Sounds]", title: "Saved Sound IDs" });
+  const metadata = await musicGamesGame.generateMetadata(props("roblox-music-ids/games/[game]/page.tsx"));
+  expect(String(metadata.title)).toMatch(/\[50 .+\] \(October 2026\)$/);
+  expect(String(metadata.title)).not.toContain("Saved");
+});
+
 it("dates both unknown decal-category metadata fallbacks", async () => {
   const args = props("roblox-decal-ids/categories/[category]/page.tsx");
   args.params = Promise.resolve({ ...(await args.params), category: "missing-category" });
