@@ -6,8 +6,7 @@ import type { GameCodePage as CodePage } from "@/lib/game-registry";
 
 vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("server-only", () => ({}));
-vi.mock("@/lib/game-code-seo", async (importOriginal) => ({
-  ...await importOriginal<typeof import("@/lib/game-code-seo")>(),
+vi.mock("@/lib/game-code-seo", () => ({
   loadGameCodeSeoData: async () => ({ name: "Child", codes: [{ code: "ACTIVE", status: "active", rewards_text: "A reward" }, { code: "EXPIRED", status: "expired", rewards_text: null }] })
 }));
 vi.mock("./GameRelatedLinks", () => ({ GameRelatedLinks: () => <a href="/example/wiki/child">Child wiki</a> }));

@@ -1,5 +1,5 @@
 import "server-only";
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { publicContentCache } from "@/lib/public-content-cache";
 import {
   getEventsPageByUniverseId,
@@ -228,7 +228,7 @@ async function fetchWikiPage(slug: string): Promise<WikiPageContent | null> {
   return (data as WikiPageContent) ?? null;
 }
 
-export const getWikiPageBySlug = cache(async (slug: string): Promise<WikiPageContent | null> => {
+export const getWikiPageBySlug = requestCache(async (slug: string): Promise<WikiPageContent | null> => {
   const normalized = normalizeSlug(slug);
   if (!normalized) return null;
   if (BYPASS_WIKI_CACHE) return fetchWikiPage(normalized);
@@ -615,11 +615,11 @@ function mergeCatalogPages(left: WikiCollectionListEntry[], right: WikiCollectio
 }
 
 /** Shared request-scoped collection read for hub metadata and rendering. */
-export const loadWikiHubCollections = cache(async (slug: string, universeId: number | null) => {
+export const loadWikiHubCollections = requestCache(async (slug: string, universeId: number | null) => {
   const normalized = slug.trim().toLowerCase();
   const [byUniverse, bySlug] = await Promise.all([
-    universeId ? safeList("wiki collection pages", () => listPublishedWikiCollectionPagesByUniverseId(universeId)) : Promise.resolve([]),
-    normalized ? safeList("wiki collection pages by slug", () => listPublishedWikiCollectionPagesByWikiSlug(normalized)) : Promise.resolve([])
+    universeId ? listPublishedWikiCollectionPagesByUniverseId(universeId) : Promise.resolve([]),
+    normalized ? listPublishedWikiCollectionPagesByWikiSlug(normalized) : Promise.resolve([])
   ]);
   return universeId ? mergeCatalogPages(byUniverse, bySlug) : bySlug;
 });

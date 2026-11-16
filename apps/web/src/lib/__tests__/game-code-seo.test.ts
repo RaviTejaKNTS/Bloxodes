@@ -1,6 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
-vi.mock("server-only", () => ({}));
-import { gameCodeDescription } from "../game-code-seo";
+import { describe, expect, it } from "vitest";
+import { gameCodeDescription } from "../code-page-seo";
 import type { GameCodePage } from "../game-registry";
 
 describe("non-Roblox codes metadata", () => {

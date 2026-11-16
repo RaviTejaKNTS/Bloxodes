@@ -65,3 +65,10 @@ export function codePageDescription({ name, codes, lastChecked, legacyExpiredCod
 export function robloxCodePageDescription(game: { name: string; updated_at: string; expired_codes?: string[] | null; redeem_md?: string | null; troubleshoot_md?: string | null }, codes: SeoCode[]): string {
   return codePageDescription({ name: game.name, codes, lastChecked: codePageLastChecked(codes), legacyExpiredCodes: game.expired_codes ?? [], hasRedeemHelp: Boolean(game.redeem_md?.trim() && game.troubleshoot_md?.trim()) });
 }
+
+export function gameCodeDescription(
+  page: { redeem_md?: string | null; troubleshoot_md?: string | null },
+  data: { name: string; codes: SeoCode[] }
+) {
+  return codePageDescription({ name: data.name, codes: data.codes, lastChecked: codePageLastChecked(data.codes), hasRedeemHelp: Boolean(page.redeem_md?.trim() && page.troubleshoot_md?.trim()) });
+}

@@ -1,10 +1,9 @@
 import "server-only";
-import { cache } from "react";
+import { requestCache } from "@/lib/request-cache";
 import { supabaseAdmin } from "./supabase";
-import type { GameCodePage } from "./game-registry";
-import { codePageDescription, codePageLastChecked, type SeoCode } from "./code-page-seo";
+import type { SeoCode } from "./code-page-seo";
 
-export const loadGameCodeSeoData = cache(async (pageId: string, namespace: string, gameId: string) => {
+export const loadGameCodeSeoData = requestCache(async (pageId: string, namespace: string, gameId: string) => {
   const client = supabaseAdmin();
   const [codeResult, gameResult] = await Promise.all([
     client.from("game_codes").select("code,rewards_text,status,first_seen_at,last_seen_at,verified_at").eq("code_page_id", pageId).order("verified_at", { ascending: false, nullsFirst: false }),
@@ -14,7 +13,3 @@ export const loadGameCodeSeoData = cache(async (pageId: string, namespace: strin
   if (gameResult.error) throw new Error(`Game codes identity read failed: ${gameResult.error.message}`);
   return { codes: (codeResult.data ?? []) as SeoCode[], name: gameResult.data.title as string };
 });
-
-export function gameCodeDescription(page: GameCodePage, data: Awaited<ReturnType<typeof loadGameCodeSeoData>>) {
-  return codePageDescription({ name: data.name, codes: data.codes, lastChecked: codePageLastChecked(data.codes), hasRedeemHelp: Boolean(page.redeem_md?.trim() && page.troubleshoot_md?.trim()) });
-}

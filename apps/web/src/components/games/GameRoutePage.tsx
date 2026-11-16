@@ -1,5 +1,5 @@
-import { gameCodeDescription, loadGameCodeSeoData } from "@/lib/game-code-seo";
-import { normalizeActiveCodeTitle } from "@/lib/code-page-seo";
+import { loadGameCodeSeoData } from "@/lib/game-code-seo";
+import { gameCodeDescription, normalizeActiveCodeTitle } from "@/lib/code-page-seo";
 import { GameMenuBridge } from "@/components/games/GameMenuBridge";
 import { getGameMenuForPath } from "@/lib/game-site-data";
 import { specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
