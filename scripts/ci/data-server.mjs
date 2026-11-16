@@ -1,7 +1,7 @@
 import http from "node:http";
 import fs from "node:fs";
 import { pathToFileURL } from "node:url";
-import { seedTables, seedRpcs } from "./data-seed.mjs";
+import { seedTables, seedRpcs, seedContracts } from "./data-seed.mjs";
 import { queryRows } from "./data-query.mjs";
 
 export function assertFixtureEnvironment(env = process.env) {
@@ -10,7 +10,7 @@ export function assertFixtureEnvironment(env = process.env) {
 }
 export function createDataServer() {
   assertFixtureEnvironment();
-  const tables = seedTables(), rpcs = seedRpcs();
+  const tables = seedTables(), rpcs = seedRpcs(), contracts = seedContracts(tables);
   const audit = { requests: 0, tables: {}, rpcs: {}, unexpected: [] };
   const image = fs.readFileSync("apps/web/public/Bloxodes.png");
   return http.createServer(async (req, res) => {
@@ -37,7 +37,7 @@ export function createDataServer() {
       audit.tables[table] = (audit.tables[table] ?? 0) + 1;
       const range = req.headers.range?.match(/^(\d+)-(\d+)$/)?.slice(1).map(Number);
       const counted = /count=(exact|planned|estimated)/.test(req.headers.prefer ?? "");
-      const result = queryRows(tables[table], url.searchParams, { range, count: counted });
+      const result = queryRows(tables[table], url.searchParams, { range, count: counted, contract: contracts[table] });
       if (result.error) { send(416, result.error, { "Content-Range": "*/0" }); return; }
       const offset = Number(url.searchParams.get("offset") ?? range?.[0] ?? 0);
       const total = counted ? result.count : "*";

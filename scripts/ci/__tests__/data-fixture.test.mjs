@@ -2,8 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { once } from "node:events";
 import { assertFixtureEnvironment, createDataServer } from "../data-server.mjs";
-import { queryRows } from "../data-query.mjs";
-import { seedTables } from "../data-seed.mjs";
+import fs from "node:fs";
+import { queryRows, rowContract } from "../data-query.mjs";
+import { seedTables, seedContracts } from "../data-seed.mjs";
 
 const query = (rows, search) => queryRows(rows, new URLSearchParams(search));
 test("fixture refuses workstation or implicit CI use", () => {
@@ -23,7 +24,9 @@ test("queries implement nested logic, quoted lists, JSON filters and date compar
 });
 test("count happens before range and projection includes embedded relations", () => {
   const rows = [{id:2,author:{name:"Alex",private:"hidden"}},{id:1,author:null}];
-  const result=queryRows(rows,new URLSearchParams('select=id,author:authors(name)&order=id.asc'),{range:[1,1],count:true});
+  const contract = rowContract(rows);
+  contract.relations.authors = { key: "author", contract: rowContract([{name:"Alex",private:"hidden"}]) };
+  const result=queryRows(rows,new URLSearchParams('select=id,author:authors(name)&order=id.asc'),{range:[1,1],count:true,contract});
   assert.deepEqual(result,{data:[{id:2,author:{name:"Alex"}}],count:2,error:null});
   assert.equal(queryRows(rows,new URLSearchParams('offset=9'),{count:true}).error.code,"PGRST103");
   assert.deepEqual(query(rows,'offset=9').data,[]);
@@ -69,4 +72,63 @@ test("the fixture covers moved batch namespaces, every game page family and calc
   assert.ok(roots.length>=2);
   for(const kind of ["wiki","collection","code","tool","map","quiz","catalog","checklist"]) assert.ok(tables[`game_${kind}_pages_view`].length>0,kind);
   for(const code of ["grow-a-garden-crops","grow-a-garden-2-seeds","grow-a-garden-2-mutations","the-forge-ores","the-forge-weapons","the-forge-armors","wizard-alchemy-potions","wizard-alchemy-materials","wizard-alchemy-races"]) assert.ok(tables.wiki_collection_pages_view.some(page=>page.code===code),code);
+});
+
+
+test("query validation rejects unsupported clauses before evaluating any rows", () => {
+  const tables = seedTables(), contracts = seedContracts(tables);
+  const contract = contracts.puzzle_pages_view;
+  const invalid = [
+    "title=unsupported.Wordle", "title=eq.missing&slug=unsupported.wordle",
+    "select=unknown", "order=unknown.asc", "unknown=eq.value",
+    "or=(title.eq.Wordle,slug.unsupported.wordle)",
+    "or=(title.eq.Wordle,unknown.eq.value)",
+    "and=(title.eq.missing,or(slug.eq.wordle,slug.unsupported.wordle))",
+    "or=(title.eq.Wordle,)", "or=title.eq.Wordle", "title=in.wordle",
+    "title=in.(wordle", 'title=in.("wordle)', "order=title.sideways",
+    "select=id,", "select=missing(*)", "limit=nope", "offset=-1"
+  ];
+  for (const rows of [[], tables.puzzle_pages_view]) for (const search of invalid) {
+    assert.throws(() => queryRows(rows, new URLSearchParams(search), { contract }), undefined, search);
+  }
+  const articleContract = contracts.articles;
+  for (const search of ["select=author:authors(unknown)", "select=author:missing(name)", "select=author:authors(name", "select=author:authors!inner(name)"]) {
+    assert.throws(() => queryRows([], new URLSearchParams(search), { contract: articleContract }), undefined, search);
+  }
+  assert.deepEqual(queryRows([], new URLSearchParams("title=eq.Wordle&select=id,title&order=title.desc"), { contract }).data, []);
+  // Even a genuinely empty table retains a declared, finite set of columns.
+  assert.ok(contracts.app_sessions.columns.has("id"));
+  assert.throws(() => queryRows(tables.app_sessions, new URLSearchParams("id=unsupported.x"), { contract: contracts.app_sessions }), /Unimplemented/);
+  assert.throws(() => queryRows(tables.app_sessions, new URLSearchParams("select=unknown"), { contract: contracts.app_sessions }), /Unknown/);
+});
+
+test("every fixture table has sample rows or an explicit unused-route reason", () => {
+  const tables = seedTables();
+  const exemptions = JSON.parse(fs.readFileSync(new URL("../fixtures/empty-table-contracts.json", import.meta.url)));
+  for (const [table, rows] of Object.entries(tables)) {
+    if (rows.length) { assert.equal(exemptions[table], undefined, `${table} no longer needs an empty-table exemption`); continue; }
+    assert.ok(exemptions[table]?.reason, `${table} needs public samples or an unused-route reason`);
+    assert.ok(exemptions[table]?.columns.length, `${table} needs a schema even when empty`);
+  }
+  for (const table of Object.keys(exemptions)) assert.equal(tables[table]?.length, 0, table);
+  assert.equal(tables.puzzle_pages_view.length, 1);
+  assert.equal(tables.puzzle_answers.length, 3);
+  assert.ok(tables.site_routes.some(row => row.page_type === "puzzle" && row.status === "live"));
+  console.log(`Fixture sweep: ${Object.entries(tables).map(([table, rows]) => `${table}=${rows.length}`).join(", ")}`);
+});
+
+test("HTTP records invalid queries in the audit even when no rows match", {skip:process.env.BLOXODES_CI_DATA !== "1"}, async () => {
+  const server = createDataServer();
+  server.listen(0, "127.0.0.1"); await once(server, "listening");
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const requests = ["app_sessions?id=unsupported.x", "puzzle_pages_view?title=eq.missing&slug=unsupported.wordle", "puzzle_pages_view?select=unknown", "puzzle_pages_view?order=unknown.asc", "app_sessions?or=(id.eq.missing,id.unsupported.x)", "articles?select=author:authors(unknown)"];
+  try {
+    for (const path of requests) {
+      const response = await fetch(`${base}/rest/v1/${path}`);
+      assert.equal(response.status, 500, path);
+      assert.equal((await response.json()).code, "CI_FIXTURE_UNSUPPORTED");
+    }
+    const audit = await (await fetch(`${base}/__audit`)).json();
+    assert.equal(audit.unexpected.length, requests.length);
+  } finally { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
 });

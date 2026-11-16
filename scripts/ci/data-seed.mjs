@@ -1,8 +1,10 @@
 import fs from "node:fs";
+import { addPublicSamples, addStatsSamples } from "./data-samples.mjs";
+import { rowContract } from "./data-query.mjs";
 import { defaultCatalogTables } from "./catalog-query-fixture.mjs";
 const read = file => JSON.parse(fs.readFileSync(new URL(`./fixtures/${file}`, import.meta.url), "utf8"));
 const timestamp = "2026-11-01T12:00:00Z";
-const common = { is_published: true, is_public: true, published_at: timestamp, created_at: timestamp, updated_at: timestamp, content_updated_at: timestamp,
+const common = { seo_title: null, is_published: true, is_public: true, published_at: timestamp, created_at: timestamp, updated_at: timestamp, content_updated_at: timestamp,
   description_md: "Explore the map, collect useful items and plan the next route.", intro_md: "Find the items and routes for your next game.", meta_description: "Browse game items, locations and controls.", seo_description: "Browse game items, locations and controls.",
   faq_json: [], controls_json: [], description_json: {}, sources_json: [], tips_md: "Check your supplies before you leave.", cover_image: "/Bloxodes.png", hero_image: "/Bloxodes.png", thumb_url: "/Bloxodes.png", image: "/Bloxodes.png" };
 const quizData = Object.fromEntries(["easy", "medium", "hard"].map(level => [level, [{ id: `${level}-1`, question: "Which supply restores health?", options: [{id:"a",text:"Medkit"},{id:"b",text:"Rope"},{id:"c",text:"Compass"},{id:"d",text:"Lantern"}], correctOptionId: "a" }]]));
@@ -51,7 +53,7 @@ export function seedTables() {
   }
   for (const entry of config.robloxWikis) {
     add("roblox_universes", { universe_id: entry.universe_id, name: entry.title.replace(/ wiki$/, ""), display_name: entry.title.replace(/ wiki$/, ""), slug: entry.slug, icon_url: "/Bloxodes.png", thumbnail_urls: [], genre_l1: "Adventure", playing: 1200, visits: 500000, root_place_id: 2753915549 });
-    const page = add("wiki_pages", { ...common, ...entry, id: id(), canonical_path: `/wiki/${entry.slug}`, universe_name: entry.title.replace(/ wiki$/, ""), icon_url: "/Bloxodes.png", thumbnail_urls: [], social_links: [], playing: 1200, visits: 500000, universe_root_place_id: 2753915549 });
+    const page = add("wiki_pages", { ...common, ...entry, id: id(), canonical_path: `/wiki/${entry.slug}`, universe_name: entry.title.replace(/ wiki$/, ""), icon_url: "/Bloxodes.png", thumbnail_urls: [], social_links: [], universe_genre_l1:"Adventure", last_playing_refreshed_at:new Date().toISOString(), playing: 1200, visits: 500000, universe_root_place_id: 2753915549 });
     route(page, "roblox", "wiki");
   }
   config.collections.forEach(entry => collection(entry, true));
@@ -80,11 +82,11 @@ export function seedTables() {
   for (const [old,target] of [["/gta/checklists/page/2","/games/gta"],["/gta/maps","/games/gta"],["/minecraft/tools","/games/minecraft"],["/minecraft/wiki/legacy-minecraft","/games/minecraft"],["/minecraft/wiki/achievements","/wiki/minecraft-bedrock/achievements"],["/minecraft/wiki/enchantments","/wiki/minecraft-java/enchantments"],["/minecraft/wiki/mobs","/wiki/minecraft-java/mobs"]]) {
     const live=routes.find(row=>row.path===target && row.status==="live");alias(old,{id:live.page_id,game_id:live.game_id,canonical_path:target},live.page_type);
   }
-  const author = add("authors", {...common,id:id(),name:"Alex Rivers",slug:"alex-rivers",bio_md:"Game guides and item routes.",avatar_url:"/Bloxodes.png"});
+  const author = add("authors", {...common,gravatar_email:null,twitter:null,youtube:null,website:null,facebook:null,linkedin:null,instagram:null,roblox:null,discord:null,id:id(),name:"Alex Rivers",slug:"alex-rivers",bio_md:"Game guides and item routes.",avatar_url:"/Bloxodes.png"});
   const universe=tables.roblox_universes[0];
-  const article=add("articles", {...common,id:id(),slug:"blox-fruits-first-island",title:"Blox Fruits first island guide",content_md:"## Start at the docks\nTalk to the quest giver and defeat the nearby enemies.\n\n## Prepare for the next island\nBuy a boat after finishing the first quests.",author_id:author.id,author,universe_id:universe.universe_id,universe,tags:["Blox Fruits"],sources:[],word_count:38,canonical_path:"/articles/blox-fruits-first-island",source:"roblox",game_slug:"blox-fruits",game_title:"Blox Fruits"});
+  const article=add("articles", {...common,id:id(),slug:"blox-fruits-first-island",title:"Blox Fruits first island guide",content_md:"## Start at the docks\nTalk to the quest giver and defeat the nearby enemies.\n\n## Prepare for the next island\nBuy a boat after finishing the first quests.",author_id:author.id,author,universe_id:universe.universe_id,universe,tags:["Blox Fruits"],sources:[],word_count:38,canonical_path:"/articles/blox-fruits-first-island",namespace:null,game_id:null,source:"roblox",game_slug:"blox-fruits",game_title:"Blox Fruits"});
   route(article,"roblox","article");
-  const codes=add("code_pages", {...common,id:id(),slug:"blox-fruits",name:"Blox Fruits",universe_id:universe.universe_id,universe,expired_codes:[],active_code_count:1,latest_code_first_seen_at:timestamp,roblox_link:"https://www.roblox.com/games/2753915549",canonical_path:"/codes/blox-fruits"});
+  const codes=add("code_pages", {...common,id:id(),slug:"blox-fruits",name:"Blox Fruits",universe_id:universe.universe_id,universe,genre_l1:"Adventure",genre_l2:"Exploration",expired_codes:[],active_code_count:1,latest_code_first_seen_at:timestamp,roblox_link:"https://www.roblox.com/games/2753915549",canonical_path:"/codes/blox-fruits"});
   route(codes,"roblox","code");add("codes", {id:id(),code_page_id:codes.id,code:"TRAIL2026",reward:"20 minutes of double XP",status:"active",first_seen_at:timestamp,created_at:timestamp,updated_at:timestamp});
   const quiz=add("quiz_pages", {...common,id:id(),code:"blox-fruits",title:"Blox Fruits quiz",quiz_data:quizData,universe_id:universe.universe_id,universe,canonical_path:"/quizzes/blox-fruits"});route(quiz,"roblox","quiz");
   const event=add("events_pages",{...common,id:id(),slug:"blox-fruits",title:"Blox Fruits events",universe_id:universe.universe_id,universe,canonical_path:"/events/blox-fruits"});route(event,"roblox","event");
@@ -105,16 +107,20 @@ export function seedTables() {
   add("roblox_font_ids",{asset_id:12187365977,name:"Roboto",native_styles:["Regular"],faces:[{name:"Regular",weight:400,style:"Normal",assetId:12187365977}],designer:"Christian Robertson",creator_name:"Roblox",creator_store_url:"https://create.roblox.com/store/asset/12187365977",status:"active",thumbnail_state:"Completed",thumbnail_url:"/Bloxodes.png",vote_count:10});
   tables.roblox_music_genres_view = [{slug:"fixture-genre",label:"Fixture genre",item_count:98}];
   tables.roblox_music_artists_view = [{slug:"fixture-artist",label:"Fixture artist",item_count:98}];
+  addPublicSamples(tables, { add, id, route, common, timestamp, author, article, peak, universe });
+  addStatsSamples(tables, { add, timestamp, universe });
   // Views preserve their base-row relationships for embedded Supabase selects.
-  for (const [view,base] of Object.entries({wiki_pages_view:"wiki_pages",wiki_collection_pages_view:"wiki_collection_pages",code_pages_index_view:"code_pages",published_articles_view:"articles",quiz_pages_view:"quiz_pages",checklist_pages_view:"checklist_pages",events_pages_view:"events_pages",tools_view:"tools",catalog_pages_view:"catalog_pages"})) tables[view]=tables[base];
+  for (const [view,base] of Object.entries({wiki_pages_view:"wiki_pages",wiki_collection_pages_view:"wiki_collection_pages",code_pages_index_view:"code_pages",quiz_pages_view:"quiz_pages",checklist_pages_view:"checklist_pages",events_pages_view:"events_pages",tools_view:"tools",catalog_pages_view:"catalog_pages"})) tables[view]=tables[base];
   for (const kind of ["wiki","collection","tool","map","quiz","checklist","catalog","code"]) tables[`game_${kind}_pages`]=tables[`game_${kind}_pages_view`]??=[];
   // Frozen migration backfill rows, independent of the browser expectations.
   const redirects = read("redirects.json").map(([path,target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self]) => ({ path,target_url,resolved_target:target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self,
     page_id:null,game_id:null,source:"roblox",status:"old",created_at:timestamp,moved_at:timestamp }));
   tables.site_routes=[...redirects,...routes];
   tables.site_route_redirects=tables.site_routes.filter(row=>row.status==="old");
-  // Dynamic readers use these explicit empty aggregate tables.
-  for (const table of ["game_article_game_summary","game_article_pages_view","stats_platform_current","stats_platform_daily","stats_platform_hourly","stats_game_current_index","stats_item_current_index","stats_risers_current_index","stats_creator_current_index","stats_genre_current_index","stats_game_daily_index","stats_game_hourly_index"]) tables[table]??=[];
+  const defaults = read("column-defaults.json");
+  for (const [table, columns] of Object.entries(defaults)) {
+    for (const row of tables[table] ?? []) for (const column of columns) if (!Object.hasOwn(row, column)) row[column] = null;
+  }
   return tables;
 }
 export function seedRpcs() {
@@ -123,4 +129,22 @@ export function seedRpcs() {
     get_stats_platform_ccu_trend: [], get_stats_subgenre_options: [],
     get_stats_visit_share_chart: [], search_site: [], get_roblox_universe_pipeline_health_v4: []
   };
+}
+
+// Contracts come from the complete seed inventory, never the filtered rows.
+// Tables intentionally left empty declare their columns in the fixture schema.
+export function seedContracts(tables) {
+  const empty = read("empty-table-contracts.json"), defaults = read("column-defaults.json");
+  const contracts = Object.fromEntries(Object.entries(tables).map(([table, rows]) => [table, rowContract(rows, [...(empty[table]?.columns ?? []), ...(defaults[table] ?? [])])]));
+  const relations = { author: "authors", universe: "roblox_universes", thumbnails: "roblox_virtual_event_thumbnails", categories: "roblox_virtual_event_categories" };
+  for (const [table, contract] of Object.entries(contracts)) {
+    for (const [key, target] of Object.entries(relations)) {
+      if (contract.columns.has(key)) contract.relations[target] = { key, contract: contracts[table === "comments" && key === "author" ? "app_users" : target] };
+    }
+    if (table === "comments") {
+      delete contract.relations.authors;
+      contract.relations.app_users = { key: "author", contract: contracts.app_users };
+    }
+  }
+  return contracts;
 }
