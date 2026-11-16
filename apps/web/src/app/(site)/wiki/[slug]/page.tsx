@@ -1,10 +1,11 @@
+import { wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
 import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { markdownToPlainText } from "@/lib/markdown";
-import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
-import { getWikiPageBySlug, listPublishedWikiSlugs } from "@/lib/wiki";
+import { buildAlternates, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
+import { getWikiPageBySlug, loadWikiHubCollections } from "@/lib/wiki";
 import { resolveWikiMetadataImage } from "@/lib/wiki-images";
 import { loadWikiDetailPageData, renderWikiDetailPage } from "../page-data";
 
@@ -50,7 +51,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     notFound();
   }
 
-  const title = resolveSeoTitle(page.seo_title) ?? page.title ?? `Roblox Wiki | ${SITE_NAME}`;
+  const collections = await loadWikiHubCollections(page.slug, page.universe_id ?? null);
+  const gameName = / Wiki$/i.test(page.title)
+    ? page.title.replace(/(?: Roblox)? Wiki$/i, "").trim()
+    : page.universe_display_name || page.universe_name;
+  const title = wikiHubSeoTitle({
+    gameName: gameName || page.universe_display_name || page.universe_name || "Roblox",
+    gameNameAliases: [page.universe_display_name, page.universe_name].filter((name): name is string => Boolean(name)),
+    seoTitle: page.seo_title,
+    // The hub renders collection blocks only when they have wiki copy.
+    collections: collections.filter(collection => collection.wiki_md?.trim())
+  });
   const description =
     normalizeDescription(page.meta_description) ??
     normalizeDescription(page.description_md) ??

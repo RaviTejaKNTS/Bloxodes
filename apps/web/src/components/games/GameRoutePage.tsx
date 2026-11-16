@@ -15,6 +15,7 @@ import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGameRoot, getGameWikiByPath, getGameWikiById, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath, getGameCollectionById, getGameCodeById, getGameToolById } from "@/lib/game-registry";
+import { loadGameWikiHubCollections } from "@/lib/game-wiki-hub-data";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 import { gameRootWikiPage } from "@/lib/game-root-page";
@@ -67,7 +68,11 @@ async function context(params: Props["params"]) {
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ctx = await context(params);
-  if (ctx.wiki) return gameWikiMetadata(ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki);
+  if (ctx.wiki) {
+    const page = ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki;
+    const collections = await loadGameWikiHubCollections(ctx.root.namespace, page.slug, page.game_kind);
+    return gameWikiMetadata(page, collections);
+  }
   if (ctx.collection) {
     return gameCollectionMetadata(ctx.collection, ctx.currentPage);
   }

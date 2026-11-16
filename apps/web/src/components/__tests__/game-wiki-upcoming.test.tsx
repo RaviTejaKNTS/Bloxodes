@@ -8,6 +8,7 @@ const reader = vi.hoisted(() => ({
   resolveSharedGameWikiCoverImage: () => "/cover.webp",
   resolveSharedGameWikiThumbnailImage: () => "/hero.webp"
 }));
+vi.mock("server-only", () => ({}));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => reader }));
 vi.mock("@/lib/markdown", () => ({ markdownToPlainText: (value: string) => value, renderMarkdown: async (value: string) => value }));
 vi.mock("@/lib/page-content", () => ({ renderPageContentNodes: (html: string) => html }));
@@ -64,6 +65,18 @@ describe("upcoming game wiki rendering", () => {
     expect(html).toContain('href="/gta/wiki/gta-6/characters"');
     expect(html).toContain("pre-launch notes");
     expect(html).not.toContain("gameplay tips");
+  });
+
+  it("uses short collection labels for non-Roblox metadata without changing the H1", async () => {
+    const collections = [
+      { display_name: "Characters", collection_slug: "characters", page_type: "database", title: "All Characters in GTA VI" },
+      { display_name: "Vehicles", collection_slug: "vehicles", page_type: "database", title: "All Vehicles in GTA VI" }
+    ] as SharedGameWikiCollectionPage[];
+    const metadata = gameWikiMetadata(page, collections);
+    expect(metadata.title).toBe("GTA VI Wiki: Characters, Vehicles and Tips");
+    expect(metadata.openGraph).toMatchObject({ title: metadata.title });
+    expect(metadata.twitter).toMatchObject({ title: metadata.title });
+    expect(await render()).toMatch(/<h1[^>]*>GTA VI Wiki<\/h1>/);
   });
 
   it("keeps page publication dates separate from the game release in metadata and JSON-LD", async () => {

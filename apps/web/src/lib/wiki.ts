@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { publicContentCache } from "@/lib/public-content-cache";
 import {
   getEventsPageByUniverseId,
@@ -227,7 +228,7 @@ async function fetchWikiPage(slug: string): Promise<WikiPageContent | null> {
   return (data as WikiPageContent) ?? null;
 }
 
-export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent | null> {
+export const getWikiPageBySlug = cache(async (slug: string): Promise<WikiPageContent | null> => {
   const normalized = normalizeSlug(slug);
   if (!normalized) return null;
   if (BYPASS_WIKI_CACHE) return fetchWikiPage(normalized);
@@ -238,7 +239,7 @@ export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent |
   });
 
   return cached();
-}
+});
 
 export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
   const fetchPages = async () => {
@@ -530,15 +531,12 @@ async function listOtherWikiDeveloperGames(
 
 export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRelatedData> {
   const universeId = page.universe_id ?? null;
-  const slug = page.slug?.trim().toLowerCase() ?? "";
-  const catalogPagesBySlugPromise = slug
-    ? safeList("wiki collection pages by slug", () => listPublishedWikiCollectionPagesByWikiSlug(slug))
-    : Promise.resolve([]);
+  const catalogPagesPromise = loadWikiHubCollections(page.slug, universeId);
 
   if (!universeId) {
     return {
       ...EMPTY_WIKI_RELATED_DATA,
-      catalogPages: await catalogPagesBySlugPromise
+      catalogPages: await catalogPagesPromise
     };
   }
 
@@ -548,7 +546,6 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     articles,
     checklists,
     catalogPages,
-    catalogPagesBySlug,
     quizzes,
     eventsPage,
     eventSummary,
@@ -563,8 +560,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("tools", () => listPublishedToolsByUniverseId(universeId, 6)),
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
-    safeList("wiki collection pages", () => listPublishedWikiCollectionPagesByUniverseId(universeId)),
-    catalogPagesBySlugPromise,
+    catalogPagesPromise,
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),
@@ -589,7 +585,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     tools,
     articles,
     checklists,
-    catalogPages: mergeCatalogPages(catalogPages, catalogPagesBySlug),
+    catalogPages,
     quizzes,
     eventsPage,
     eventSummary,
@@ -617,3 +613,13 @@ function mergeCatalogPages(left: WikiCollectionListEntry[], right: WikiCollectio
     return a.title.localeCompare(b.title);
   });
 }
+
+/** Shared request-scoped collection read for hub metadata and rendering. */
+export const loadWikiHubCollections = cache(async (slug: string, universeId: number | null) => {
+  const normalized = slug.trim().toLowerCase();
+  const [byUniverse, bySlug] = await Promise.all([
+    universeId ? safeList("wiki collection pages", () => listPublishedWikiCollectionPagesByUniverseId(universeId)) : Promise.resolve([]),
+    normalized ? safeList("wiki collection pages by slug", () => listPublishedWikiCollectionPagesByWikiSlug(normalized)) : Promise.resolve([])
+  ]);
+  return universeId ? mergeCatalogPages(byUniverse, bySlug) : bySlug;
+});

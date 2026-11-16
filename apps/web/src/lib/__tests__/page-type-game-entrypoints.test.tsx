@@ -12,6 +12,7 @@ vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NEXT_NOT_
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({
   getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: { items: [{ system: { image: "https://media.bloxodes.com/item.webp" } }] } }),
   listPublishedSharedGameWikiCollectionImageUrls: async () => [],
+  listPublishedSharedGameWikiCollectionsByWikiSlug: async () => [],
 }) }));
 // Metadata adapters remain real; only collection document preparation is outside this route test.
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: 3 }) }));
@@ -89,7 +90,7 @@ function robloxPage() {
 vi.mock("@/lib/wiki-collection-runtime", () => ({ getPublishedWikiCollectionRuntime: async () => ({ config: {}, document: { items: [{ system: { image: "https://media.bloxodes.com/item.webp" }, item: {} }] } }), hasWikiCollectionImageCredit: () => false }));
 // Keep Roblox loaders separate: registry dispatch must never claim their rows.
 vi.mock("@/lib/db", async original => ({ ...await original<typeof import("@/lib/db")>(), getCodePageBySlug: async () => robloxPage(), getChecklistPageBySlug: async () => state.robloxContent ? { page: robloxPage(), items: [] } : null }));
-vi.mock("@/lib/wiki", async original => ({ ...await original<typeof import("@/lib/wiki")>(), getWikiPageBySlug: async () => robloxPage() }));
+vi.mock("@/lib/wiki", async original => ({ ...await original<typeof import("@/lib/wiki")>(), getWikiPageBySlug: async () => robloxPage(), loadWikiHubCollections: async () => [] }));
 vi.mock("@/lib/wiki-collections", async original => ({ ...await original<typeof import("@/lib/wiki-collections")>(), getWikiCollectionPageByPath: async () => robloxPage() }));
 vi.mock("@/lib/tools", async original => ({ ...await original<typeof import("@/lib/tools")>(), getToolContentWithDevFallback: async () => robloxPage() }));
 vi.mock("@/lib/catalog", async original => ({ ...await original<typeof import("@/lib/catalog")>(), getCatalogPageContentByCodes: async () => robloxPage() }));
