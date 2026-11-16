@@ -126,7 +126,8 @@ rm -rf "$WRITER_DROPIN"
 if [[ -L "$ROOT/state" || -f "$ROOT/state-relocation.json" && ( ! -L "$LEGACY/state" || -d "$LEGACY/state.before-hdd" ) ]]; then
   python3 "$RELEASE/scripts/ops/relocate-automation-state.py" "$LEGACY" "$ROOT"
 fi
-install -d -m 0700 -o teja -g teja "$ROOT/state/articles"
+# Article discovery keeps its state here. It takes the owner of the state folder (the service user).
+install -d -m 0700 -o "$(stat -c %u "$ROOT/state")" -g "$(stat -c %g "$ROOT/state")" "$ROOT/state/articles"
 [[ "$(readlink -f "$RELEASE/tmp/article-writer")" == "$(readlink -f "$SOURCE/tmp/article-writer")" ]]
 # Wiki scheduling belongs to T3 on the MacBook Pro. Never recreate its retired
 # homelab units, model permissions, artifact aliases or correction state.
