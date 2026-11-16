@@ -38,7 +38,7 @@ export function createDataServer() {
       const rpc = url.pathname.match(/^\/rest\/v1\/rpc\/([a-z_0-9]+)$/)?.[1];
       if (rpc && ["GET", "HEAD", "POST"].includes(req.method) && Object.hasOwn(rpcs, rpc)) {
         audit.rpcs[rpc] = (audit.rpcs[rpc] ?? 0) + 1;
-        const params = new URLSearchParams(url.searchParams), args = {};
+        const params = new URLSearchParams(url.searchParams), args = Object.create(null);
         if (req.method === "POST") {
           let body = "";
           for await (const chunk of req) {

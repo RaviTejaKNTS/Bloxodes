@@ -116,7 +116,7 @@ describe.each(families)("$name dataset and range semantics", family => {
   const request = (query: string) => new Request(`https://bloxodes.com/api/roblox-${family.name}-ids?${query}`);
   it.each([24, 25, 48, 49])("preserves eligible totals and stable membership at boundary %s", async count => {
     // Reverse the source so passing requires applying the unique tie-breaker.
-    const rows = catalogRows("music", count).reverse();
+    const rows = catalogRows(family.name, count).reverse();
     const excluded = family.name === "music"
       ? [{ ...rows[0], asset_id: 9999, duration_seconds: null }, { ...rows[0], asset_id: 9998, duration_seconds: 0 }]
       : [{ ...rows[0], asset_id: 9999, status: "inactive" }, { ...rows[0], asset_id: 9998, thumbnail_url: "https://example.com/UnknownImage/1.png" }];
@@ -136,7 +136,7 @@ describe.each(families)("$name dataset and range semantics", family => {
   });
 
   it("uses the same multi-page fallback before search and offsets, including texture eligibility", async () => {
-    const rows = catalogRows("music", 49).reverse();
+    const rows = catalogRows(family.name, 49).reverse();
     const queries = database({ [family.table]: [...rows, { ...rows[0], asset_id: 9999, texture_id: null }], [family.mapped]: [] });
     for (const sort of ["recommended", "popular"] as const) {
       const server = await family.gameLoad(2, "Fixture", sort);
@@ -150,7 +150,7 @@ describe.each(families)("$name dataset and range semantics", family => {
   });
 
   it("keeps a short mapping authoritative after exhaustion and a zero-hit search", async () => {
-    const rows = catalogRows("music", 49);
+    const rows = catalogRows(family.name, 49);
     const queries = database({ [family.table]: rows, [family.mapped]: [{ ...rows[0], game_slug: family.game }] });
     expect(await family.gameLoad(2)).toMatchObject({ [family.key]: [], total: 1, totalPages: 1 });
     expect(await family.gameLoad(1, "missing")).toMatchObject({ [family.key]: [], total: 0 });
@@ -163,7 +163,7 @@ describe.each(families)("$name dataset and range semantics", family => {
   });
 
   it.each(["recommended", "popular"] as const)("aligns mapped server/API sorting for %s with ties", async sort => {
-    const rows = catalogRows("music", 49).reverse().map(row => ({ ...row, game_slug: family.game }));
+    const rows = catalogRows(family.name, 49).reverse().map(row => ({ ...row, game_slug: family.game }));
     database({ [family.mapped]: rows });
     const server = await family.gameLoad(2, "Fixture", sort);
     const response = await family.get(request(`game=${family.game}&page=2&q=Fixture&sort=${sort}`));
@@ -173,14 +173,14 @@ describe.each(families)("$name dataset and range semantics", family => {
 
   it("does not broaden a texture-required mapping with no eligible textures", async () => {
     if (family.name !== "decal") return;
-    const rows = catalogRows("music", 49);
+    const rows = catalogRows(family.name, 49);
     database({ [family.table]: rows, [family.mapped]: [{ ...rows[0], game_slug: family.game, texture_id: null }] });
     expect(await family.gameLoad(1)).toMatchObject({ decals: [], total: 0 });
     expect(await (await family.get(request(`game=${family.game}`))).json()).toMatchObject({ decals: [], total: 0 });
   });
 
   it.each([false, true])("fails closed on source/query failure (after probe: %s)", async afterProbe => {
-    const rows = catalogRows("music", 49).map(row => ({ ...row, game_slug: family.game }));
+    const rows = catalogRows(family.name, 49).map(row => ({ ...row, game_slug: family.game }));
     for (const failure of [{ code: "PGRST003" }, { code: "57014" }, new Error("transport")]) {
       database({ [family.mapped]: rows }, failure, afterProbe);
       await expect(family.gameLoad(2)).rejects.toEqual(failure);

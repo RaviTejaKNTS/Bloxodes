@@ -5,7 +5,7 @@ import { assertFixtureEnvironment, createDataServer } from "../data-server.mjs";
 import fs from "node:fs";
 import { queryRows, rowContract } from "../data-query.mjs";
 import { seedTables, seedContracts } from "../data-seed.mjs";
-import { schemaManifest, validateSeedRows } from "../data-schema.mjs";
+import { schemaManifest } from "../data-schema.mjs";
 
 const types = { id:{type:"integer"},name:{type:"text"},date:{type:"date"},meta:{type:"jsonb"} };
 const query = (rows, search) => queryRows(rows, new URLSearchParams(search), {contract:rowContract(types)});

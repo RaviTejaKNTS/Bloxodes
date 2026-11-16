@@ -6,8 +6,8 @@ export function addPublicSamples(tables, { add, page, id, route, alias, timestam
   alias("/peak/articles/peak-first-climb", sharedArticle, "article");
   add("game_article_game_summary", { game_id: peak.id, namespace: "peak", game_slug: "peak", title: "PEAK", icon_url: "/Bloxodes.png", article_count: 1, latest_updated_at: timestamp });
   add("game_codes", { id: id(), code_page_id: tables.game_code_pages_view[0].id, code: "TRAIL2026", rewards_text: "Trail supplies", status: "active", verified_at: timestamp });
-  const user = add("app_users", { id: id(), display_name: "Trail player", roblox_avatar_url: "/Bloxodes.png", roblox_display_name: null, roblox_username: null, role: "user" });
-  for (const page of [article, sharedArticle]) add("comments", { id: id(), parent_id: null, entity_type: page.namespace ? "game_article" : "article", entity_id: page.id, body_md: "The dock quest is a useful starting point.", status: "approved", created_at: timestamp, author_id: user.id, guest_name: null }, {app_users: user});
+  const user = add("app_users", { user_id: id(), display_name: "Trail player", roblox_avatar_url: "/Bloxodes.png", roblox_display_name: null, roblox_username: null, role: "user" });
+  for (const page of [article, sharedArticle]) add("comments", { id: id(), parent_id: null, entity_type: page.namespace ? "game_article" : "article", entity_id: page.id, body_md: "The dock quest is a useful starting point.", status: "approved", created_at: timestamp, author_id: user.user_id, guest_name: null }, {app_users: user});
 
   // Today's date matches the public loader's America/New_York clock. Yesterday
   // and an older answer exercise the archive without aging out on later CI runs.
