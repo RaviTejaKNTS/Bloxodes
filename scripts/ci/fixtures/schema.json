@@ -1267,6 +1267,110 @@
       },
       "foreignKeys": []
     },
+    "game_article_pages": {
+      "columns": {
+        "id": {
+          "type": "uuid",
+          "nullable": false
+        },
+        "namespace": {
+          "type": "text",
+          "nullable": false
+        },
+        "game_id": {
+          "type": "uuid",
+          "nullable": false
+        },
+        "slug": {
+          "type": "text",
+          "nullable": false
+        },
+        "title": {
+          "type": "text",
+          "nullable": false
+        },
+        "seo_title": {
+          "type": "text",
+          "nullable": true
+        },
+        "meta_description": {
+          "type": "text",
+          "nullable": true
+        },
+        "content_md": {
+          "type": "text",
+          "nullable": false
+        },
+        "cover_image": {
+          "type": "text",
+          "nullable": true
+        },
+        "author_id": {
+          "type": "uuid",
+          "nullable": true
+        },
+        "tags": {
+          "type": "text[]",
+          "nullable": false
+        },
+        "sources_json": {
+          "type": "jsonb",
+          "nullable": false
+        },
+        "faq_json": {
+          "type": "jsonb",
+          "nullable": false
+        },
+        "word_count": {
+          "type": "integer",
+          "nullable": true
+        },
+        "canonical_path": {
+          "type": "text",
+          "nullable": false
+        },
+        "is_published": {
+          "type": "boolean",
+          "nullable": false
+        },
+        "published_at": {
+          "type": "timestamp with time zone",
+          "nullable": true
+        },
+        "created_at": {
+          "type": "timestamp with time zone",
+          "nullable": false
+        },
+        "updated_at": {
+          "type": "timestamp with time zone",
+          "nullable": false
+        }
+      },
+      "foreignKeys": [
+        {
+          "name": "game_article_pages_author_id_fkey",
+          "target": "authors",
+          "columns": [
+            "author_id"
+          ],
+          "targetColumns": [
+            "id"
+          ]
+        },
+        {
+          "name": "game_article_pages_game_id_namespace_fkey",
+          "target": "games",
+          "columns": [
+            "game_id",
+            "namespace"
+          ],
+          "targetColumns": [
+            "id",
+            "namespace"
+          ]
+        }
+      ]
+    },
     "game_article_pages_view": {
       "columns": {
         "id": {

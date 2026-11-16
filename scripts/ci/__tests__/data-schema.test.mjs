@@ -67,6 +67,15 @@ test("foreign key direction determines object and array embeds, including view j
   assert.throws(() => queryRows([], new URLSearchParams("select=codes(code)"), {contract}), /Unknown CI data relation/);
 });
 
+test("view embeds detect additional base-table foreign keys instead of hiding ambiguity", () => {
+  const tables = seedTables(), manifest = structuredClone(schemaManifest);
+  manifest.tables.code_pages.foreignKeys.push({...manifest.tables.code_pages.foreignKeys[0],name:"alternate_universe_fkey"});
+  const contract = seedContracts(tables,manifest).code_pages_view;
+  assert.throws(() => queryRows([],new URLSearchParams("select=roblox_universes(name)"),{contract}), /Ambiguous CI data relation/);
+  assert.deepEqual(queryRows(tables.code_pages_view,new URLSearchParams("select=roblox_universes!alternate_universe_fkey(name)"),{contract}).data,
+    [{roblox_universes:{name:"Blox Fruits"}}]);
+});
+
 test("every handwritten view relationship names an existing base-table foreign key", () => {
   const views = JSON.parse(fs.readFileSync(new URL("../fixtures/view-relations.json", import.meta.url), "utf8"));
   const tables = seedTables(), contracts = seedContracts(tables);
