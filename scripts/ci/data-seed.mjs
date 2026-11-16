@@ -132,8 +132,10 @@ export function seedTables() {
   for (const kind of ["wiki","collection","tool","map","quiz","checklist","catalog","code"]) copy(`game_${kind}_pages`,tables[`game_${kind}_pages_view`]);
   const redirects = read("redirects.json").map(([path,target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self]) => ({ path,target_url,resolved_target:target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self,
     page_id:null,game_id:null,source:"roblox",status:"old",created_at:timestamp,moved_at:timestamp }));
-  tables.site_routes=[...redirects,...routes];
-  tables.site_route_redirects=tables.site_routes.filter(row=>row.status==="old");
+  const routeRows = [...redirects,...routes];
+  tables.site_route_redirects=routeRows.filter(row=>row.status==="old");
+  // resolved_target is computed by the redirect view, not stored on site_routes.
+  tables.site_routes=routeRows.map(({resolved_target, ...row}) => row);
   // Missing seeded values are SQL NULL; they do not define the column contract.
   for (const [table, rows] of Object.entries(tables)) for (const row of rows) {
     for (const column of Object.keys(schemaManifest.tables[table]?.columns ?? {})) if (!Object.hasOwn(row,column)) row[column] = null;

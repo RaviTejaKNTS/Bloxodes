@@ -21,6 +21,7 @@ export function copyColumns(table, source) {
   return Object.fromEntries(Object.keys(schemaManifest.tables[table].columns).filter(key => Object.hasOwn(source, key)).map(key => [key, source[key]]));
 }
 export function validateSeedRows(tables) {
+  const errors = [];
   for (const [table, rows] of Object.entries(tables)) {
     if (schemaManifest.absentTables.includes(table)) {
       if (rows.length) throw new Error(`CI fixture seeds absent table ${table}`);
@@ -28,9 +29,13 @@ export function validateSeedRows(tables) {
     }
     const contract = tableContract(table);
     for (const [index, row] of rows.entries()) for (const key of Object.keys(row)) {
-      if (!contract.columns.has(key)) throw new Error(`Unknown CI seed column ${table}.${key} at row ${index}`);
+      if (!contract.columns.has(key)) {
+        const message = `Unknown CI seed column ${table}.${key}`;
+        if (!errors.includes(message)) errors.push(message);
+      }
     }
   }
+  if (errors.length) throw new Error(errors.join("; "));
 }
 export function rpcContract(name, args) {
   const definitions = schemaManifest.rpcs[name];
