@@ -41,7 +41,7 @@ export function seedTables() {
     const wiki = shared ? tables.game_wiki_pages_view.find(page => page.game_id === game.id) : tables.wiki_pages.find(page => page.slug === entry.wiki);
     const slug = shared ? (game.wikiSlug ?? game.slug) : entry.wiki;
     const page = { ...common, id: id(), namespace: entry.namespace, game_id: game?.id, universe_id: wiki.universe_id, wiki_page_id: wiki.id, wiki_slug: slug, collection_slug: entry.slug, slug: entry.slug,
-      canonical_path: `/wiki/${slug}/${entry.slug}`, code: `${slug}-${entry.slug}`, title: entry.title, display_name: entry.title, page_type: entry.page_type ?? "database", item_count: entry.paginated ? 90 : (entry.count ?? 3),
+      canonical_path: `/wiki/${slug}/${entry.slug}`, code: `${slug}-${entry.slug}`, title: entry.title, display_name: entry.title, page_type: entry.page_type ?? "database", wiki_sort_order: 1, item_count: entry.paginated ? 90 : (entry.count ?? 3),
       how_it_works_md: "", game_title: game?.title, game_short_title: game?.title, game_cover_image: "/Bloxodes.png", game_hero_image: "/Bloxodes.png", published_dataset_id: id() };
     add(shared ? "game_collection_pages_view" : "wiki_collection_pages", page);
     add(shared ? "game_collection_datasets" : "wiki_collection_datasets", { id: page.published_dataset_id, namespace: page.namespace, collection_page_id: page.id, schema_version: 2, content_hash: "a".repeat(64), item_count: page.item_count,
@@ -52,7 +52,7 @@ export function seedTables() {
     if (shared) alias(`/${page.namespace}/${page.namespace === "minecraft" ? game.slug + "/wiki" : "wiki/" + game.slug}/${entry.slug}`, page, "collection");
   }
   for (const entry of config.robloxWikis) {
-    add("roblox_universes", { universe_id: entry.universe_id, name: entry.title.replace(/ wiki$/, ""), display_name: entry.title.replace(/ wiki$/, ""), slug: entry.slug, icon_url: "/Bloxodes.png", thumbnail_urls: [], genre_l1: "Adventure", playing: 1200, visits: 500000, root_place_id: 2753915549 });
+    add("roblox_universes", { universe_id: entry.universe_id, name: entry.title.replace(/ wiki$/, ""), display_name: entry.title.replace(/ wiki$/, ""), slug: entry.slug, icon_url: "/Bloxodes.png", thumbnail_urls: [], genre_l1: "Adventure", playing: 1200, visits: 500000, root_place_id: 2753915549, updated_at: timestamp, game_description_md: "Explore the island and collect trail supplies." });
     const page = add("wiki_pages", { ...common, ...entry, id: id(), canonical_path: `/wiki/${entry.slug}`, universe_name: entry.title.replace(/ wiki$/, ""), icon_url: "/Bloxodes.png", thumbnail_urls: [], social_links: [], universe_genre_l1:"Adventure", last_playing_refreshed_at:new Date().toISOString(), playing: 1200, visits: 500000, universe_root_place_id: 2753915549 });
     route(page, "roblox", "wiki");
   }
@@ -87,7 +87,7 @@ export function seedTables() {
   const article=add("articles", {...common,id:id(),slug:"blox-fruits-first-island",title:"Blox Fruits first island guide",content_md:"## Start at the docks\nTalk to the quest giver and defeat the nearby enemies.\n\n## Prepare for the next island\nBuy a boat after finishing the first quests.",author_id:author.id,author,universe_id:universe.universe_id,universe,tags:["Blox Fruits"],sources:[],word_count:38,canonical_path:"/articles/blox-fruits-first-island",namespace:null,game_id:null,source:"roblox",game_slug:"blox-fruits",game_title:"Blox Fruits"});
   route(article,"roblox","article");
   const codes=add("code_pages", {...common,id:id(),slug:"blox-fruits",name:"Blox Fruits",universe_id:universe.universe_id,universe,genre_l1:"Adventure",genre_l2:"Exploration",expired_codes:[],active_code_count:1,latest_code_first_seen_at:timestamp,roblox_link:"https://www.roblox.com/games/2753915549",canonical_path:"/codes/blox-fruits"});
-  route(codes,"roblox","code");add("codes", {id:id(),code_page_id:codes.id,code:"TRAIL2026",reward:"20 minutes of double XP",status:"active",first_seen_at:timestamp,created_at:timestamp,updated_at:timestamp});
+  route(codes,"roblox","code");add("codes", {id:id(),code_page_id:codes.id,code:"TRAIL2026",reward:"20 minutes of double XP",rewards_text:"20 minutes of double XP",level_requirement:0,is_new:true,posted_online:true,last_seen_at:timestamp,status:"active",first_seen_at:timestamp,created_at:timestamp,updated_at:timestamp});
   const quiz=add("quiz_pages", {...common,id:id(),code:"blox-fruits",title:"Blox Fruits quiz",quiz_data:quizData,universe_id:universe.universe_id,universe,canonical_path:"/quizzes/blox-fruits"});route(quiz,"roblox","quiz");
   const event=add("events_pages",{...common,id:id(),slug:"blox-fruits",title:"Blox Fruits events",content_md:"## Island supply hunt\nCollect supplies around the island and start at the docks.",universe_id:universe.universe_id,universe,canonical_path:"/events/blox-fruits"});route(event,"roblox","event");
   add("roblox_universe_event_summary", {universe_id:universe.universe_id,current_event_count:0,upcoming_event_count:1,next_event_start_at:"2099-01-01T00:00:00Z"});

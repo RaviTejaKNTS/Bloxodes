@@ -111,6 +111,10 @@ test("every fixture table has sample rows or an explicit unused-route reason", (
     assert.ok(exemptions[table]?.columns.length, `${table} needs a schema even when empty`);
   }
   for (const table of Object.keys(exemptions)) assert.equal(tables[table]?.length, 0, table);
+  const contract = seedContracts(tables).code_pages;
+  const codes = queryRows(tables.code_pages, new URLSearchParams("select=universe:roblox_universes(updated_at,game_description_md),codes(code,rewards_text)"), { contract }).data;
+  assert.deepEqual(codes[0].codes, [{ code: "TRAIL2026", rewards_text: "20 minutes of double XP" }]);
+  assert.ok(codes[0].universe.updated_at);
   assert.equal(tables.puzzle_pages_view.length, 1);
   assert.equal(tables.puzzle_answers.length, 3);
   assert.ok(tables.site_routes.some(row => row.page_type === "puzzle" && row.status === "live"));

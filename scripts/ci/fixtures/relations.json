@@ -12,13 +12,15 @@
     "roblox_universes": "universe"
   },
   "code_pages": {
-    "roblox_universes": "universe"
+    "roblox_universes": "universe",
+    "codes": "codes"
   },
   "code_pages_index_view": {
     "roblox_universes": "universe"
   },
   "code_pages_view": {
-    "roblox_universes": "universe"
+    "roblox_universes": "universe",
+    "codes": "codes"
   },
   "quiz_pages": {
     "roblox_universes": "universe"

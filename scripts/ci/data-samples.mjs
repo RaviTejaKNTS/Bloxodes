@@ -32,13 +32,14 @@ export function addPublicSamples(tables, { add, id, route, common, timestamp, au
   add("roblox_emote_commands", { code: "wave", name: "Wave", command: "/e wave", asset_id: 507770239, kind: "default", description: "Wave to nearby players.", requirements: "Use a compatible avatar.", source_urls: ["https://en.help.roblox.com/"], verification_method: "fixture", verified_at: timestamp, sort_order: 1, is_published: true });
   add("stats_reports", { ...common, id: id(), slug: "roblox-october-2026", month: "2026-10-01", title: "Roblox October 2026 stats", dek: "Players and visits across tracked games.", visibility: "public", feature_image_url: "/Bloxodes.png", content: { month: "2026-10", short_version: ["The island games reached 1,200 players."], body: [{ type: "h2", id: "players", text: "Players" }, { type: "p", md: "Tracked games reached 1,200 players." }] }, data: { facts: { avgPlayers: 1200, busiestPlayers: 1500, busiestDay: "2026-10-15", visits: 500000, playersChange: 10, visitsChange: 5, top10Share: 20, newGames: 1, trackedGames: 7 }, charts: {}, games: {} } });
   tables.published_articles_view = [...tables.articles, sharedArticle];
-  tables.code_pages_view = tables.code_pages.map(page => ({ ...page, codes: tables.codes.filter(code => code.code_page_id === page.id) }));
+  for (const page of tables.code_pages) page.codes = tables.codes.filter(code => code.code_page_id === page.id);
+  tables.code_pages_view = tables.code_pages;
 }
 
 export function addStatsSamples(tables, { add, timestamp, universe }) {
   const now = new Date(), recent = now.toISOString(), day = recent.slice(0, 10), hour = recent.slice(0, 13) + ":00:00Z";
   for (const row of tables.stats_game_current_index) Object.assign(row, { playing: 6000, last_playing_refreshed_at: recent, baseline_playing_24h: 4500, baseline_playing_7d: 4000, growth_24h: 1500, growth_24h_percent: 33, growth_7d: 2000, growth_7d_percent: 50, genre_playing_rank: 1 });
-  Object.assign(tables.stats_genre_current_index[0], { genre: "Adventure", genre_slug: "adventure", games: 7, top_name: universe.name, top_slug: universe.slug, top_icon_url: "/Bloxodes.png", top_playing: 6000 });
+  Object.assign(tables.stats_genre_current_index[0], { indexed_at: recent, genre: "Adventure", genre_slug: "adventure", games: 7, top_name: universe.name, top_slug: universe.slug, top_icon_url: "/Bloxodes.png", top_playing: 6000 });
   add("stats_risers_current_index", { universe_id: universe.universe_id, rank_value: 1 });
   const item = tables.roblox_catalog_items[0];
   add("stats_item_current_index", { ...item, indexed_at: recent, item_stats_tier: "HOT", thumbnail_state: "Completed", roblox_url: "https://www.roblox.com/catalog/7000", units_available_for_consumption: 100, quantity_limit_per_user: 1, collectible_item_id: null, last_item_stats_refreshed_at: recent, last_resale_data_fetched_at: recent, price_change_24h: 5, resale_change_24h: 5, favorite_change_24h: 10, price_change_7d: 10, resale_change_7d: 10, favorite_change_7d: 20, global_favorites_rank: 1, global_resale_rank: 1, first_seen_at: timestamp });

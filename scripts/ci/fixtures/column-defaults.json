@@ -73,7 +73,9 @@
     "tablet_enabled",
     "console_enabled",
     "vr_enabled",
-    "social_links"
+    "social_links",
+    "updated_at",
+    "game_description_md"
   ],
   "wiki_pages": [
     "id",
