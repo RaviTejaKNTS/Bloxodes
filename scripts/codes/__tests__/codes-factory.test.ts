@@ -5,8 +5,8 @@ import { codePageFinalSchema } from "../final-contract";
 import { CodesQueue, FatalDiscoveryError, makeRequest } from "../discovery-io";
 
 test("sitemap accepts only exact game paths and deduplicates", () => {
-  const urls = ["https://robloxden.com/game-codes/test-game", "https://robloxden.com/game-codes/test-game/", "https://robloxden.com/game-codes/genres", "https://robloxden.com/game-codes/categories", "https://robloxden.com/game-codes/genres/action", "https://other.com/game-codes/foo"];
-  assert.deepEqual(sitemapSlugs(`<urlset>${urls.map(url => `<url><loc>${url}</loc></url>`).join("")}</urlset>`), ["test-game"]);
+  const urls = ["https://robloxden.com/game-codes/test-game", "https://robloxden.com/game-codes/test-game/", "https://robloxden.com/game-codes/genres", "https://robloxden.com/game-codes/categories", "https://robloxden.com/game-codes/genres/action", "https://other.com/game-codes/foo", "https://robloxden.com/game-codes/2", "https://robloxden.com/game-codes/51/", "https://robloxden.com/game-codes/99-nights"];
+  assert.deepEqual(sitemapSlugs(`<urlset>${urls.map(url => `<url><loc>${url}</loc></url>`).join("")}</urlset>`), ["test-game", "99-nights"]);
 });
 test("source titles drop date suffixes without damaging the name", () => {
   assert.equal(titleToName("Example Game Codes (November 2026) | Roblox Den"), "Example Game");

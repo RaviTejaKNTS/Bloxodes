@@ -10,7 +10,8 @@ export function sitemapSlugs(xml: string): string[] {
     try {
       const url = new URL($(node).text());
       const match = /^\/game-codes\/([a-z0-9-]+)\/?$/.exec(url.pathname);
-      if (url.hostname === "robloxden.com" && match && !["genres", "categories"].includes(match[1])) slugs.add(match[1]);
+      // All-number slugs are RobloxDen's list pages (/game-codes/2, /game-codes/51), not games.
+      if (url.hostname === "robloxden.com" && match && !["genres", "categories"].includes(match[1]) && !/^\d+$/.test(match[1])) slugs.add(match[1]);
     } catch { /* Invalid sitemap entry. */ }
   });
   return [...slugs];
