@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { assertPublicationCheckout, assertProductionAncestor, PUBLICATION_RELEVANT_PATHS } from "../local-content-publication-guard";
+import { assertPublicationCheckout, assertProductionAncestor, batchSshCommand, PUBLICATION_RELEVANT_PATHS } from "../local-content-publication-guard";
 
 const head = "a".repeat(40);
 const deployed = "b".repeat(40);
@@ -76,7 +76,7 @@ test("merged histories with harmless differences pass, while relevant difference
 });
 
 // These subprocess fixtures replace all command and network access. GitHub runs them without credentials.
-function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: string; ledgerFails?: boolean; behind?: boolean; headOffProduction?: boolean; deployedOffProduction?: boolean; timeoutStage?: string } = {}) {
+function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: string; ledgerFails?: boolean; behind?: boolean; headOffProduction?: boolean; deployedOffProduction?: boolean; timeoutStage?: string; sshConfig?: string } = {}) {
   const fixture = { head, deployed, production, ...options };
   const script = `
     import childProcess from "node:child_process";
@@ -86,9 +86,17 @@ function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: strin
     const assertLocalContentPublication = guard.assertLocalContentPublication ?? guard.default?.assertLocalContentPublication;
     const fixture = ${JSON.stringify(fixture)};
     const calls = [];
+    let fetchSsh;
     childProcess.execFileSync = (command, args, options) => {
+      if (command === "git" && args[0] === "config") {
+        if (options.timeout !== 60000 || options.killSignal !== "SIGKILL" || JSON.stringify(args) !== JSON.stringify(["config", "--get", "core.sshCommand"])) throw new Error("Bad git config call");
+        if (fixture.timeoutStage === "config") throw Object.assign(new Error("Timed out"), { code: "ETIMEDOUT", signal: "SIGKILL", status: null });
+        if (fixture.sshConfig) return fixture.sshConfig + "\\n";
+        throw Object.assign(new Error("not set"), { status: 1 });
+      }
       if (options.timeout !== 60000 || options.killSignal !== "SIGKILL" || options.env.GIT_TERMINAL_PROMPT !== "0" || !options.env.GIT_SSH_COMMAND.includes("BatchMode=yes")) throw new Error("Missing subprocess timeout/noninteractive options");
       calls.push([command === process.execPath ? "node" : command, ...args]);
+      if (command === "git" && args[0] === "fetch") fetchSsh = options.env.GIT_SSH_COMMAND;
       if ((fixture.timeoutStage === "fetch" && command === "git" && args[0] === "fetch") || (fixture.timeoutStage === "ledger" && command === process.execPath)) throw Object.assign(new Error("Timed out"), { code: "ETIMEDOUT" });
       if (command === "git") {
         if (args[0] === "fetch") return "";
@@ -112,10 +120,10 @@ function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: strin
     };
     syncBuiltinESMExports();
     globalThis.fetch = async () => new Response(JSON.stringify({ ok: true, build: { sha: fixture.deployed } }));
-    try { console.log(JSON.stringify({ head: await assertLocalContentPublication(), calls })); }
-    catch (error) { console.log(JSON.stringify({ error: error.message, calls })); }
+    try { console.log(JSON.stringify({ head: await assertLocalContentPublication(), calls, fetchSsh })); }
+    catch (error) { console.log(JSON.stringify({ error: error.message, calls, fetchSsh })); }
   `;
-  return JSON.parse(execFileSync(process.execPath, ["--import", "tsx", "--input-type=module", "--eval", script], { encoding: "utf8" })) as { head?: string; error?: string; calls: string[][] };
+  return JSON.parse(execFileSync(process.execPath, ["--import", "tsx", "--input-type=module", "--eval", script], { encoding: "utf8", env: { ...process.env, GIT_SSH_COMMAND: "" } })) as { head?: string; error?: string; calls: string[][]; fetchSsh?: string };
 }
 
 test("local guard ignores untracked files, fetches production, checks both ancestors and runs the read-only ledger", () => {
@@ -183,4 +191,28 @@ test("ledger-only schema checks allow untracked files while schema release keeps
 test("fetch and ledger timeouts fail publication with bounded noninteractive subprocess options", () => {
   assert.match(runLocalGuard({ timeoutStage: "fetch" }).error!, /git fetch failed/);
   assert.match(runLocalGuard({ timeoutStage: "ledger" }).error!, /Production migration ledger is not ready/);
+});
+
+test("the git SSH command keeps the checkout's command and puts batch options first", () => {
+  assert.equal(batchSshCommand(undefined), "ssh -o BatchMode=yes -o ConnectTimeout=15");
+  assert.equal(batchSshCommand("  "), "ssh -o BatchMode=yes -o ConnectTimeout=15");
+  assert.equal(
+    batchSshCommand("ssh -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=no"),
+    "ssh -o BatchMode=yes -o ConnectTimeout=15 -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes -o BatchMode=no"
+  );
+  assert.equal(
+    batchSshCommand("\"/opt/my ssh/bin/ssh\" -i '/home/example/my keys/id'"),
+    "\"/opt/my ssh/bin/ssh\" -o BatchMode=yes -o ConnectTimeout=15 -i '/home/example/my keys/id'"
+  );
+});
+
+test("local guard uses core.sshCommand, falls back to ssh when unset, and stops when git config fails", () => {
+  const configured = runLocalGuard({ changedFiles: ["README.md"], sshConfig: "ssh -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes" });
+  assert.equal(configured.error, undefined);
+  assert.equal(configured.fetchSsh, "ssh -o BatchMode=yes -o ConnectTimeout=15 -i /home/example/.ssh/deploy_ed25519 -o IdentitiesOnly=yes");
+  const unset = runLocalGuard({ changedFiles: ["README.md"] });
+  assert.equal(unset.fetchSsh, "ssh -o BatchMode=yes -o ConnectTimeout=15");
+  const failed = runLocalGuard({ timeoutStage: "config" });
+  assert.match(failed.error ?? "", /git config failed/);
+  assert.equal(failed.calls.length, 0);
 });
