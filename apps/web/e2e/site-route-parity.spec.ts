@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { createClient } from '@supabase/supabase-js';
+import { previewDatabase } from './preview-database';
 import fixture from '../../../scripts/routes/fixtures/phase-2-redirects.json';
 
-// Real production build, real middleware, managed-development route rows.
-// The frozen baseline includes reviewed final Minecraft move destinations.
-// No injected snapshot, catalog fetch fixture, content write, or production access.
-test('all frozen redirects preserve status and Location against managed development', async ({request, baseURL}) => {
+// Real production build and middleware against the configured preview data.
+test('all frozen redirects preserve status and Location against preview data', async ({request, baseURL}) => {
   test.setTimeout(240_000);
   const origin = baseURL!;
   for (const entry of fixture.cases) {
@@ -23,20 +21,22 @@ test('all frozen redirects preserve status and Location against managed developm
 test('live pages never redirect, across every registered page type', async ({request}) => {
   test.setTimeout(240_000);
   if(process.env.GITHUB_ACTIONS!=='true') throw new Error('Managed route parity must run on GitHub');
-  const url=process.env.SUPABASE_URL!;
-  expect(new URL(url).hostname).toBe('bbtcaurrtyoukvjbxbbj.supabase.co');
-  const client=createClient(url,process.env.SUPABASE_SERVICE_ROLE!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const client=previewDatabase();
   const types=[...['code','article','wiki','collection','quiz','checklist','tool','event','catalog','puzzle'].map(type=>['roblox',type]),
-    ...['hub','wiki','collection','code','tool','map','quiz','checklist','catalog'].map(type=>['game',type])];
+    ...['article','hub','wiki','collection','code','tool','map','quiz','checklist','catalog'].map(type=>['game',type])];
   const covered:string[]=[];
   for(const [source,type] of types) {
-    // Live rows include drafts, so a sampled page may 404. It must never redirect.
-    const {data:routes,error}=await client.from('site_routes').select('path').eq('status','live').eq('match_type','exact').eq('source',source).eq('page_type',type).order('path').limit(20);
+    const fixtureMode = process.env.BLOXODES_CI_DATA === '1';
+    // Namespace hubs now use root wiki rows at /games/<namespace>.
+    let query=client.from('site_routes').select('path').eq('status','live').eq('match_type','exact').eq('source',source).eq('page_type',type === 'hub' ? 'wiki' : type);
+    if (type === 'hub') query=query.like('path','/games/%');
+    const {data:routes,error}=await query.order('path').limit(20);
     expect(error,`${source}/${type}`).toBeNull();
+    if (fixtureMode) expect(routes?.length, `CI route type needs a sample: ${source}/${type}`).toBeGreaterThan(0);
     let sampled=0;
     for(const route of routes??[]) {
       const response=await request.get(route.path,{maxRedirects:0});
-      expect([200,404],`${source}/${type} ${route.path}`).toContain(response.status());
+      expect(fixtureMode ? [200] : [200,404],`${source}/${type} ${route.path}`).toContain(response.status());
       if(++sampled===3) break;
     }
     covered.push(`${source}/${type}: ${sampled}`);
