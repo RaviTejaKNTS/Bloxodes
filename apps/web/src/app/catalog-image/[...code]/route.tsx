@@ -29,10 +29,11 @@ async function renderCover(_request: Request, { params }: { params: Promise<{ co
   const title = catalogTitleCount(page.title, data.count);
   const artwork = images.filter((src): src is string => Boolean(src));
   const section = /music/.test(code) ? "Music IDs" : /decal/.test(code) ? "Decal IDs" : /items|bundles/.test(code) ? "Items & bundles" : "Roblox reference";
-  // Conservative character widths keep even unbroken titles inside three lines.
-  const fontSize = Math.min(64, Math.max(12, Math.floor(1000 * 3 / Math.max(title.length, 1))));
+  // Inter bold averages about 0.56em per character; 0.6em leaves room for wide
+  // letters. Three lines at these sizes fit every current catalog title.
+  const fontSize = title.length <= 40 ? 64 : title.length <= 75 ? 56 : 48;
   const lines: string[] = [];
-  const capacity = Math.floor(1000 / fontSize);
+  const capacity = Math.floor(1104 / (fontSize * 0.6));
   let remaining = title;
   while (remaining.length > capacity && lines.length < 2) {
     const space = remaining.lastIndexOf(" ", capacity);
