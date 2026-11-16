@@ -174,7 +174,8 @@ describe("pending-publication IndexNow drain", () => {
   });
   it.each([
     ["googlebot: noindex, follow", true], ["bingbot: noindex, follow", false],
-    ["noindex, follow", false], ["googlebot: noindex, bingbot: none", false]
+    ["noindex, follow", false], ["googlebot: noindex, bingbot: none", false],
+    ["max-snippet:-1, noindex", false], ["max-image-preview:large, follow", true]
   ])("handles bot-scoped robots headers: %s", async (header, ok) => {
     mocks.fetch.mockResolvedValueOnce(new Response('<link rel="canonical" href="https://bloxodes.com/wiki/new-game">', { headers: { "content-type": "text/html", "x-robots-tag": header } }));
     expect((await checkPublicIndexNowPage("/wiki/new-game")).ok).toBe(ok);

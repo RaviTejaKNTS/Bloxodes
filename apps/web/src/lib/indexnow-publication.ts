@@ -19,7 +19,9 @@ function blocksBing(header: string): boolean {
   let bot = "";
   return header.split(",").some(part => {
     const directive = part.trim().toLowerCase();
-    const scoped = directive.match(/^([a-z][a-z0-9_-]*):\s*(.*)$/);
+    // "max-snippet:50" and similar are directives with a value, not a bot prefix.
+    const match = directive.match(/^([a-z][a-z0-9_-]*):\s*(.*)$/);
+    const scoped = match && !/^(?:max-snippet|max-image-preview|max-video-preview|unavailable_after)$/.test(match[1]) ? match : null;
     if (scoped) bot = scoped[1];
     return (!bot || bot === "bingbot" || bot === "indexnow") && /\b(noindex|none)\b/.test(scoped?.[2] ?? directive);
   });
@@ -90,7 +92,8 @@ export async function drainIndexNowPublications(): Promise<IndexNowSubmitResult>
     if (!claimed.length) return { ...empty, reason: "already-claimed-or-expired" };
     let result: IndexNowSubmitResult;
     try {
-      result = await submitIndexNowPaths(claimed, signal);
+      // The claim is spent, so the send gets its own timeout, not the drain budget.
+      result = await submitIndexNowPaths(claimed);
     } catch {
       result = { ...empty, attempted: claimed.length, failedBatches: 1, reason: "submission-threw" };
     }

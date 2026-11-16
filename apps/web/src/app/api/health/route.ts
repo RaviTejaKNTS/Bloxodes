@@ -122,9 +122,12 @@ export async function GET(request: Request) {
   // Reuse the operational endpoint and its existing incident monitor. Deployment
   // readiness above stays cheap and independent of IndexNow publication health.
   const indexNowEnabled = isIndexNowEnabled();
+  const indexNowCutoff = new Date(Date.now() - 24 * 60 * 60 * 1_000).toISOString();
+  // A claim still "attempted" after 5 minutes never recorded its result; count it as failed.
+  const indexNowStuckBefore = new Date(Date.now() - 5 * 60 * 1_000).toISOString();
   const [indexNowFailed, indexNowOldPending] = indexNowEnabled ? await Promise.all([
-    supabase.from("indexnow_urls").select("path", { head: true, count: "exact" }).eq("state", "failed").gte("attempted_at", playingCutoff).abortSignal(AbortSignal.timeout(1_000)),
-    supabase.from("indexnow_urls").select("path", { head: true, count: "exact" }).eq("state", "pending").lt("created_at", playingCutoff).abortSignal(AbortSignal.timeout(1_000))
+    supabase.from("indexnow_urls").select("path", { head: true, count: "exact" }).or(`state.eq.failed,and(state.eq.attempted,attempted_at.lt.${indexNowStuckBefore})`).gte("attempted_at", indexNowCutoff).abortSignal(AbortSignal.timeout(1_000)),
+    supabase.from("indexnow_urls").select("path", { head: true, count: "exact" }).eq("state", "pending").lt("created_at", indexNowCutoff).abortSignal(AbortSignal.timeout(1_000))
   ]) : [{ count: 0, error: null }, { count: 0, error: null }];
   const indexNowError = indexNowFailed.error?.message ?? indexNowOldPending.error?.message ?? null;
   // Only a send that failed in the last 24 hours is an incident. Old pending rows are

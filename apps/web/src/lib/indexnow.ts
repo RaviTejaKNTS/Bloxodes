@@ -65,7 +65,8 @@ function resolveSiteOrigin(): string {
 export function isIndexNowEnabled(): boolean {
   return process.env.NODE_ENV === "production"
     && isSearchIndexingEnabledForHost(new URL(resolveSiteOrigin()).hostname)
-    && parseBoolean(process.env.INDEXNOW_ENABLED, true);
+    // Off unless explicitly switched on: a submission cannot be taken back.
+    && parseBoolean(process.env.INDEXNOW_ENABLED, false);
 }
 
 function resolveIndexNowConfig(): IndexNowConfig | null {

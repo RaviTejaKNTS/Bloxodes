@@ -69,7 +69,8 @@ test("IndexNow first publication: real route/publication chain, seed, drain, exp
   assert.match(fixture, /rollback;\s*$/);
   assert.equal(fixture.split("-- APPLY INDEXNOW MIGRATION HERE").length, 2);
   const transactionalFixture = fixture.replace(/\bbegin;/, "savepoint fixture;").replace(/rollback;\s*$/, "rollback to savepoint fixture;")
-    .replace("-- APPLY INDEXNOW MIGRATION HERE", migrationBody(migration("20261116170832_indexnow_first_publication")));
+    // A function replacement keeps "$$" literal; a string would turn it into "$".
+    .replace("-- APPLY INDEXNOW MIGRATION HERE", () => migrationBody(migration("20261116170832_indexnow_first_publication")));
   execFileSync("psql", [databaseUrl, "-X", "-q", "-v", "ON_ERROR_STOP=1"], {
     input: `begin;
       do $$ begin
