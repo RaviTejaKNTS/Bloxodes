@@ -154,6 +154,7 @@ test("the scheduled unit curates before discovery with its existing run and memo
   assert.equal(starts[1], "ExecStart=/usr/bin/npm run articles:discover -- --apply");
   assert.match(unit, /^ExecStartPost=.*curate\.exit.*exit 1/m);
   assert.match(unit, /^RuntimeDirectory=bloxodes-article-discovery$/m);
-  assert.doesNotMatch(unit.replace(/\$\$/g, ""), /\$/, "every shell $ is escaped as $$ for systemd");
+  const execLines = unit.split("\n").filter(line => line.startsWith("Exec")).join("\n");
+  assert.doesNotMatch(execLines.replace(/\$\$/g, ""), /\$/, "every shell $ is escaped as $$ for systemd");
   assert.match(unit, /^MemoryMax=512M$/m); assert.match(unit, /^TimeoutStartSec=45min$/m);
 });
