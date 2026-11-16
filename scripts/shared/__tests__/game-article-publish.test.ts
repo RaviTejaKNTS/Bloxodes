@@ -56,6 +56,10 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
       globalThis.fetch=async(input,init)=>{
         const url=new URL(typeof input==='string'?input:input.url??input.href),method=init?.method??'GET';calls.push({path:url.pathname,method,url:url.href});
         const json=data=>new Response(JSON.stringify(data),{headers:{'content-type':'application/json'}});
+        // Recollect managed-dev images from their original source when the target URL changes.
+        if(scenario==='body-cover'&&method==='GET'&&url.origin==='https://example.com'&&['/first.webp','/second.webp'].includes(url.pathname)) {
+          return new Response(fs.readFileSync(root+(url.pathname==='/first.webp'?'/body.webp':'/game.webp')),{headers:{'content-type':'image/webp'}});
+        }
         if(url.pathname.includes('/storage/')) {
           if(method!=='GET') { uploads.push(url.pathname.replace('/storage/v1/object/','/storage/v1/object/public/')); return json({Key:'image'}); }
           const source=url.origin===${JSON.stringify(dev)};
@@ -101,8 +105,10 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
       assert.equal(report.stored.cover_image,`${mediaOrigin}/storage/v1/object/public/media/articles/${bundle.slug}/cover-${expectedHash}.webp`);
       if(scenario==='body-cover') {
         assert.ok(report.stored.content_md.includes(`${mediaOrigin}/storage/v1/object/public/media/${bodyPath}`));
+        assert.ok(report.stored.content_md.includes(`${mediaOrigin}/storage/v1/object/public/media/${bodyPath.replace('first.webp','second.webp')}`));
         assert.ok(!report.stored.content_md.includes(dev));
         assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===bodyUrl));
+        for(const name of ['first','second']) assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===`https://example.com/${name}.webp`));
       }
     }
     if(scenario==='apply') {assert.equal(report.stored.game_id,id);assert.equal(report.stored.namespace,'example');assert.equal(report.stored.canonical_path,'/articles/example-guide');assert.match(report.stored.cover_image,new RegExp(`^${dev}/storage/v1/object/public/media/articles/example-guide/cover-[0-9a-f]+\\.webp$`));}
