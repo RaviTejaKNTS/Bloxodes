@@ -66,6 +66,31 @@ test("non-transient Data API failures are not retried", async () => {
   assert.equal(calls, 1);
 });
 
+test("statement timeouts retry only when the read opts in", async () => {
+  const timeout = { data: null, error: { code: "57014", message: "canceling statement due to statement timeout" }, status: 500 };
+  let calls = 0;
+  const result = await runDataApiOperation(
+    "health read",
+    async () => {
+      calls += 1;
+      return calls < 2 ? timeout : { data: "ok", error: null, status: 200 };
+    },
+    { ...immediateRetry, retryLimit: 3, retryStatementTimeout: true }
+  );
+  assert.equal(calls, 2);
+  assert.equal(result.data, "ok");
+
+  calls = 0;
+  await assert.rejects(
+    runDataApiOperation("write", async () => {
+      calls += 1;
+      return timeout;
+    }, { ...immediateRetry, retryLimit: 3 }),
+    /statement timeout/
+  );
+  assert.equal(calls, 1);
+});
+
 test("transient Data API retry exhaustion returns the final failure", async () => {
   let calls = 0;
   await assert.rejects(
@@ -395,7 +420,8 @@ test("universe refresh records missing rows separately and still fails unusable 
   assert.match(source, /await markMissingResponses\(missingRows\)/);
   assert.match(source, /await markFailures\(emptyRows,/);
   assert.match(source, /missing_rows: missingRows/);
-  assert.match(source, /statsRefreshRunStatus\(updatedRows, failedRows, missingRows\)/);
+  assert.match(source, /statsRefreshRunStatus\(updatedRows, failedRows, missingRows, knownMissingRows\)/);
+  assert.match(source, /stats_refresh_attempt_count \?\? 1\) - 1 >= KNOWN_MISSING_PRIOR_MISSES/);
   assert.equal(statsRefreshRunStatus(10, 0, 0), "success");
   assert.equal(statsRefreshRunStatus(848, 0, 4), "success", "a few removals are normal");
   assert.equal(statsRefreshRunStatus(0, 0, 17), "success", "a small all-missing COLD run is normal");
@@ -404,4 +430,8 @@ test("universe refresh records missing rows separately and still fails unusable 
   assert.equal(statsRefreshRunStatus(450, 0, 50), "success", "exactly 10% missing stays normal");
   assert.equal(statsRefreshRunStatus(440, 0, 60), "partial", "a large missing share is suspect");
   assert.equal(statsRefreshRunStatus(0, 0, 50), "failed", "a whole batch missing is not a success");
+  assert.equal(statsRefreshRunStatus(0, 0, 202, 202), "success", "quarantined games on their weekly retry are expected to stay missing");
+  assert.equal(statsRefreshRunStatus(5717, 0, 311, 300), "success", "known missing rows do not count toward the share");
+  assert.equal(statsRefreshRunStatus(0, 0, 250, 200), "failed", "new missing rows still raise the alarm next to known ones");
+  assert.equal(statsRefreshRunStatus(440, 0, 60, 0), "partial", "known missing defaults to none");
 });

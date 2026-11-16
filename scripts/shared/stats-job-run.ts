@@ -6,17 +6,23 @@ type StatsJobStatus = "running" | "success" | "failed" | "partial" | "skipped";
 
 // Roblox removes a few rows per run, and those are handled outcomes, not failed work.
 // Many missing at once looks like a bad Roblox response, so it must not read as success.
+// Rows Roblox already left out on earlier runs (knownMissingRows) are expected to stay
+// missing, such as quarantined games on their weekly retry, so they never count as suspect.
 const SUSPECT_MISSING_MIN_ROWS = 30;
 const SUSPECT_MISSING_SHARE = 0.1;
+// A row with this many failed or missing earlier attempts since its last success is known missing.
+export const KNOWN_MISSING_PRIOR_MISSES = 2;
 
 export function statsRefreshRunStatus(
   succeededRows: number,
   failedRows: number,
-  missingRows: number
+  missingRows: number,
+  knownMissingRows = 0
 ): "success" | "partial" | "failed" {
+  const unexpectedMissing = Math.max(0, missingRows - knownMissingRows);
   const suspectMissing =
-    missingRows >= SUSPECT_MISSING_MIN_ROWS &&
-    missingRows / (succeededRows + failedRows + missingRows) > SUSPECT_MISSING_SHARE;
+    unexpectedMissing >= SUSPECT_MISSING_MIN_ROWS &&
+    unexpectedMissing / (succeededRows + failedRows + unexpectedMissing) > SUSPECT_MISSING_SHARE;
   if (failedRows === 0 && !suspectMissing) return "success";
   return succeededRows > 0 ? "partial" : "failed";
 }
