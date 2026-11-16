@@ -2,13 +2,13 @@ import { isDeepStrictEqual } from 'node:util';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { featureImage } from '../reports/feature-image';
-import { toMediaPublicUrl } from '../shared/storage-public-url';
 import { createClient } from '@supabase/supabase-js';
 import type { ContentOptions } from './wiki-content-options';
 import { validateReport, canReplace, resolveLinks, nextVisibility } from '../reports/validate';
 import { assertLocalContentPublication } from '../shared/local-content-publication-guard';
 import { revalidatePublishedContent } from '../shared/revalidate-published-content';
 import { hash } from '../reports/build';
+import { toMediaPublicUrl } from '../shared/storage-public-url';
 const client = () => createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {
   auth: {
     persistSession: false,
@@ -57,8 +57,11 @@ export async function publishStatsReport(options: ContentOptions) {
   });
   if (upload.error)
     throw upload.error;
+  // Same public URL rule as article covers: managed dev's media setting already holds the storage
+  // path, and production maps to media.bloxodes.com.
   const feature_image_url = toMediaPublicUrl(db.storage.from(bucket).getPublicUrl(mediaPath).data.publicUrl);
-  if (!feature_image_url) throw Error('Storage returned no feature image URL');
+  if (!feature_image_url)
+    throw Error('Storage returned no public feature image URL');
   const media = await fetch(feature_image_url, {
     signal: AbortSignal.timeout(30000)
   });

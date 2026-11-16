@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { runDataApiOperation } from "../shared/data-api-retry";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 type HealthSnapshot = {
@@ -91,8 +92,12 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
 async function main() {
   const run = await startStatsJobRun({ jobName: "stats_items_audit", metadata: { strict: STRICT } });
   try {
-    const { data, error } = await supabaseAdmin().rpc("get_roblox_item_pipeline_health");
-    if (error) throw new Error(`Failed to load item pipeline health: ${error.message}`);
+    // The health read can time out while heavier jobs run (06:55 UTC overlaps several), so wait and retry.
+    const { data } = await runDataApiOperation(
+      "Load item pipeline health",
+      () => supabaseAdmin().rpc("get_roblox_item_pipeline_health"),
+      { retryLimit: 3, baseDelayMs: 20_000, maxDelayMs: 60_000, retryStatementTimeout: true }
+    );
     const snapshot = data as HealthSnapshot;
     const staleCutoff = new Date(Date.now() - 120 * 60_000).toISOString();
     const { count: staleDiscoveryRuns, error: staleDiscoveryError } = await supabaseAdmin()
