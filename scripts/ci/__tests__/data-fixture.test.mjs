@@ -55,3 +55,10 @@ test("HTTP supports CORS, HEAD counts, singular rows, read RPCs and rejects writ
     assert.equal(row.headers.get("access-control-allow-origin"),"*");
   } finally {server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
 });
+
+test("quoted PostgREST LIKE patterns retain commas, brackets and escaped wildcards", () => {
+  const rows=[{name:"Rock, [paper] 50%_"},{name:"Rock paper 500x"}];
+  const params=new URLSearchParams();
+  params.set("or",'('+`name.ilike.${JSON.stringify("%Rock, [paper] 50\\%\\_%")}`+')');
+  assert.deepEqual(queryRows(rows,params).data,[rows[0]]);
+});

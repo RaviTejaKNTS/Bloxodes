@@ -33,11 +33,7 @@ const cspMode =
       ? "enforce"
       : "off";
 
-// Only the explicit GitHub fixture preview may call the runner's HTTP data API.
-// Production image builds never set BLOXODES_CI_DATA and keep the HTTPS policy.
-const isolatedCiData = process.env.GITHUB_ACTIONS === "true" && process.env.BLOXODES_CI_DATA === "1";
-const publicCsp = (isProduction ? publicProductionDirectives : developmentDirectives)
-  .map(directive => isolatedCiData && directive.startsWith("connect-src ") ? `${directive} http://127.0.0.1:54321` : directive).join("; ");
+const publicCsp = (isProduction ? publicProductionDirectives : developmentDirectives).join("; ");
 const secureCsp = (isProduction ? secureProductionDirectives : developmentDirectives).join("; ");
 if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
   throw new Error("CSP directives must not be empty.");

@@ -34,10 +34,11 @@ function matches(row, column, expression) {
     case "in": return actual != null && splitTerms(value.slice(1, -1)).map(unquote).includes(String(actual));
     case "like":
     case "ilike": {
+      const patternValue = unquote(value);
       let pattern = "";
-      for (let index = 0; index < value.length; index++) {
-        const char = value[index];
-        if (char === "\\" && index + 1 < value.length) pattern += value[++index].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      for (let index = 0; index < patternValue.length; index++) {
+        const char = patternValue[index];
+        if (char === "\\" && index + 1 < patternValue.length) pattern += patternValue[++index].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         else if (char === "%" || char === "*") pattern += ".*";
         else if (char === "_") pattern += ".";
         else pattern += char.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

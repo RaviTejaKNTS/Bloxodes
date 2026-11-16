@@ -56,15 +56,17 @@ export function seedTables() {
   }
   config.collections.forEach(entry => collection(entry, true));
   config.robloxCollections.forEach(entry => collection(entry, false));
+  for (const wiki of tables.wiki_pages) add("roblox_wiki_registry", { game_slug:wiki.slug,game_name:wiki.universe_name,universe_id:wiki.universe_id,universe_names:[wiki.universe_name],sort_order:1,
+    collections:tables.wiki_collection_pages.filter(page=>page.wiki_slug===wiki.slug).map(page=>({slug:page.collection_slug,label:page.display_name,sortOrder:1,pageType:page.page_type})) });
   const peak = tables.games.find(game => game.namespace === "peak");
   for (const kind of ["code", "tool", "map", "quiz", "checklist", "catalog"]) {
     const path = `/${{code:"codes",tool:"tools",map:"maps",quiz:"quizzes",checklist:"checklists",catalog:"catalog"}[kind]}/peak-${kind}`;
     const page = add(`game_${kind}_pages_view`, { ...common, id: id(), game_id: peak.id, namespace: "peak", slug: `peak-${kind}`, code: `peak-${kind}`, title: `PEAK ${kind}`, canonical_path: path, game_title: "PEAK", renderer_key: "image-pins",
-      tool_key: "nether-coordinate-converter", rules_json: { revision: "ci-1", editions: ["java","bedrock"], versions: {java:"1.21",bedrock:"1.21"} },
+      tool_key: "resource-cost", rules_json: { unitCost: 10, resourceLabel: "coins" },
       map_data: { image: "/Bloxodes.png", width: 1024, height: 1024, attribution: "Game map", markers: [{id:"camp",title:"Camp",x:50,y:50}] }, quiz_data: quizData, catalog_data: { columns: [{key:"name",label:"Name"}], items: [{id:"rope",name:"Rope"}] }, sections_json: [{code:"1",title:"Trail"}], faq_json: [], render_config_json: {} });
     route(page, "game", kind);
     alias(`/peak/${{code:"codes",tool:"tools",map:"maps",quiz:"quizzes",checklist:"checklists",catalog:"catalog"}[kind]}`, page, kind);
-    if (kind === "checklist") add("game_checklist_items", {id:id(),namespace:"peak",page_id:page.id,section_code:"1.1",title:"Reach the camp",description:"Follow the trail.",is_required:true});
+    if (kind === "checklist") add("game_checklist_items", {id:id(),namespace:"peak",page_id:page.id,section_code:"1.1.1",title:"Reach the camp",description:"Follow the trail.",is_required:true});
   }
   const minecraft = tables.games.find(game => game.namespace === "minecraft" && !game.parent_id);
   const tool = add("game_tool_pages_view", { ...common, id:id(),game_id:minecraft.id,namespace:"minecraft",slug:"nether-coordinate-converter",code:"nether-coordinate-converter",title:"Minecraft Nether coordinate converter",canonical_path:"/tools/minecraft-nether-coordinate-converter",game_title:"Minecraft",tool_key:"nether-coordinate-converter",rules_json:{revision:"ci-1",editions:["java","bedrock"],versions:{java:"1.21",bedrock:"1.21"}} });
@@ -73,7 +75,7 @@ export function seedTables() {
   const map = add("game_map_pages_view", { ...common,id:id(),game_id:gta.id,namespace:"gta",slug:"gta5",title:"GTA 5 map",game_title:gta.title,canonical_path:"/maps/gta5",renderer_key:"gta5",map_data:{points:{},places:[],markerSnapshot:[{id:"camp",number:1,layer:"spaceship-parts",name:"Supply stop",area:"San Andreas",description:"Near the trail",facts:[],image:null,x:50,y:50,guideUrl:"/wiki/gta-5/spaceship-parts",collectionCode:null,walkthroughUrl:null}]} });
   route(map,"game","map");alias("/gta/maps/gta5",map,"map");
   const checklist = add("game_checklist_pages_view", {...common,id:id(),game_id:gta.id,namespace:"gta",slug:"gta-5",title:"GTA 5 checklist",game_title:gta.title,canonical_path:"/checklists/gta-5",sections_json:[{code:"1",title:"Story"}]});
-  add("game_checklist_items", {id:id(),namespace:"gta",page_id:checklist.id,section_code:"1.1",title:"Finish the first mission",description:"Complete the prologue.",is_required:true});
+  add("game_checklist_items", {id:id(),namespace:"gta",page_id:checklist.id,section_code:"1.1.1",title:"Finish the first mission",description:"Complete the prologue.",is_required:true});
   route(checklist,"game","checklist");alias("/gta/checklists/gta-5",checklist,"checklist");
   for (const [old,target] of [["/gta/checklists/page/2","/games/gta"],["/gta/maps","/games/gta"],["/minecraft/tools","/games/minecraft"],["/minecraft/wiki/legacy-minecraft","/games/minecraft"],["/minecraft/wiki/achievements","/wiki/minecraft-bedrock/achievements"],["/minecraft/wiki/enchantments","/wiki/minecraft-java/enchantments"]]) {
     const live=routes.find(row=>row.path===target && row.status==="live");alias(old,{id:live.page_id,game_id:live.game_id,canonical_path:target},live.page_type);
@@ -88,15 +90,26 @@ export function seedTables() {
   const event=add("events_pages",{...common,id:id(),slug:"blox-fruits",title:"Blox Fruits events",universe_id:universe.universe_id,universe,canonical_path:"/events/blox-fruits"});route(event,"roblox","event");
   add("roblox_universe_event_summary", {universe_id:universe.universe_id,current_event_count:0,upcoming_event_count:1,next_event_start_at:"2099-01-01T00:00:00Z"});
   const board=add("checklist_pages",{...common,id:id(),slug:"blox-fruits",title:"Blox Fruits checklist",universe_id:universe.universe_id,universe,sections_json:[{code:"1",title:"First island"}],canonical_path:"/checklists/blox-fruits",item_count:1,leaf_item_count:1});route(board,"roblox","checklist");
-  add("checklist_items",{id:id(),page_id:board.id,section_code:"1.1",title:"Complete a quest",description:"Talk to the quest giver.",is_required:true});
+  add("checklist_items",{id:id(),page_id:board.id,section_code:"1.1.1",title:"Complete a quest",description:"Talk to the quest giver.",is_required:true});
   const robloxTool=add("tools",{...common,id:id(),code:"roblox-gamepass-calculator",title:"Roblox gamepass calculator",tool_key:"roblox-gamepass-calculator",canonical_path:"/tools/roblox-gamepass-calculator",universe_id:null});route(robloxTool,"roblox","tool");
   for (const [code,title] of [["roblox-music-ids","Roblox music IDs"],["roblox-decal-ids","Roblox decal IDs"],["roblox-mesh-ids","Roblox mesh IDs"],["roblox-items-and-bundles","Roblox Items and Bundles"],["admin-commands","Admin commands"],["roblox-music-ids/games/driving-empire","Driving Empire music IDs"]]) {
     const page=add("catalog_pages",{...common,id:id(),code,title,canonical_path:`/catalog/${code}`});route(page,"roblox","catalog");
   }
+  tables.stats_game_current_index = tables.roblox_universes.map((game,index)=>({...game,global_playing_rank:index+1,rating_percent:95,likes:190,dislikes:10,favorites:12000,stats_tier:"HOT",last_playing_refreshed_at:timestamp,last_stats_refreshed_at:timestamp,indexed_at:timestamp,genre_l2:"Exploration",thumbnail_urls:[],desktop_enabled:true,mobile_enabled:true}));
+  tables.stats_genre_current_index = [{genre_l1:"Adventure",game_count:3,playing:3600,visits:1500000}];
+  for (const [index,category] of ["Accessories","Clothing","Body","AvatarAnimations","Makeup"].entries()) {
+    const asset_id=7000+index;
+    add("roblox_catalog_items",{asset_id,item_type:"Asset",asset_type_id:8,name:`Trail ${category}`,description:"A trail outfit item.",category,subcategory:"Hat",creator_name:"Roblox",creator_id:1,creator_target_id:1,creator_type:"User",creator_has_verified_badge:true,favorite_count:100,price_robux:index===0?0:50,price_status:"OnSale",lowest_price_robux:50,lowest_resale_price_robux:null,is_for_sale:true,is_limited:false,is_limited_unique:false,has_resellers:false,total_quantity:null,remaining:null,last_seen_at:timestamp,created_at:timestamp,raw_catalog_json:{},thumbnail_url:"/Bloxodes.png"});
+    add("roblox_catalog_item_images",{asset_id,size:"420x420",format:"Png",state:"Completed",image_url:"/Bloxodes.png"});
+  }
+  add("roblox_font_ids",{asset_id:12187365977,name:"Roboto",native_styles:["Regular"],faces:[{name:"Regular",weight:400,style:"Normal",assetId:12187365977}],designer:"Christian Robertson",creator_name:"Roblox",creator_store_url:"https://create.roblox.com/store/asset/12187365977",status:"active",thumbnail_state:"Completed",thumbnail_url:"/Bloxodes.png",vote_count:10});
   // Views preserve their base-row relationships for embedded Supabase selects.
   for (const [view,base] of Object.entries({wiki_pages_view:"wiki_pages",wiki_collection_pages_view:"wiki_collection_pages",code_pages_index_view:"code_pages",published_articles_view:"articles",quiz_pages_view:"quiz_pages",checklist_pages_view:"checklist_pages",events_pages_view:"events_pages",tools_view:"tools",catalog_pages_view:"catalog_pages"})) tables[view]=tables[base];
   for (const kind of ["wiki","collection","tool","map","quiz","checklist","catalog","code"]) tables[`game_${kind}_pages`]=tables[`game_${kind}_pages_view`]??=[];
-  tables.site_routes=[...read("redirects.json"),...routes];
+  // Frozen migration backfill rows, independent of the browser expectations.
+  const redirects = read("redirects.json").map(([path,target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self]) => ({ path,target_url,resolved_target:target_url,origin,page_type,match_type,redirect_code,tail_mode,match_self,
+    page_id:null,game_id:null,source:"roblox",status:"old",created_at:timestamp,moved_at:timestamp }));
+  tables.site_routes=[...redirects,...routes];
   tables.site_route_redirects=tables.site_routes.filter(row=>row.status==="old");
   // Dynamic readers use these explicit empty aggregate tables.
   for (const table of ["game_article_game_summary","game_article_pages_view","stats_platform_current","stats_platform_daily","stats_platform_hourly","stats_game_current_index","stats_item_current_index","stats_risers_current_index","stats_creator_current_index","stats_genre_current_index","stats_game_daily_index","stats_game_hourly_index"]) tables[table]??=[];
