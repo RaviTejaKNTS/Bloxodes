@@ -28,15 +28,14 @@ export async function publishCodesBundle(sb: SupabaseClient, final: CodePageFina
   if (deps.target !== "development" && matchesLiveBundle(retryRows?.[0], final)) return;
   const context = await deps.context({ allRelatedPages: true });
   const allowed = new Set(context.related_pages.map(row => `/codes/${row.slug}`));
-  if (deps.target === "development") {
-    final = { ...final, interlinking_copy_md: final.interlinking_copy_md.replace(
-      /\[([^\]]*)\]\(([^)]+)\)/g, (match, label, link) => allowed.has(link) ? match : label) };
-  }
+  // Both targets use their own published related pages. Preserve the link label
+  // when an eligible page has disappeared or a draft used an unrelated link.
+  final = { ...final, interlinking_copy_md: final.interlinking_copy_md.replace(
+    /\[([^\]]*)\]\(([^)]+)\)/g, (match, label, link) => allowed.has(link) ? match : label) };
   const fingerprint = bundleFingerprint(final);
-  if (deps.target === "development" && matchesLiveBundle(retryRows?.[0], final)) return;
+  if (matchesLiveBundle(retryRows?.[0], final)) return;
   const links = [...final.interlinking_copy_md.matchAll(/\]\(([^)]+)\)/g)].map(match => match[1]);
   if (links.some(link => !allowed.has(link))) throw new Error("Interlink copy contains an ineligible related-page link");
-  if (deps.target !== "development" && context.related_pages.length && !links.length) throw new Error("Interlink copy must link an eligible related page");
   let game = retryRows?.[0];
   await deps.guard();
   const findings = ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "meta_description", "interlinking_copy_md"].flatMap(field =>

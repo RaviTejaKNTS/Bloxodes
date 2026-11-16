@@ -1,11 +1,9 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-import { createClient } from "@supabase/supabase-js";
-
-import { resolveArticleDevCredentials } from "./article-queue-env";
+import { createNotionArticleQueue } from "./notion-article-queue";
 import { assertArticleQueueTransition, parseArticleQueueStatus, type ArticleQueueStatus } from "./article-queue-status";
 
 type TargetStatus = Exclude<ArticleQueueStatus, "pending">;
@@ -161,20 +159,11 @@ function verifyProductionUrl(value: string, resultSlug: string | null): string {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const queue = resolveArticleDevCredentials({ envFile: options.devEnvFile });
+  const queue = createNotionArticleQueue({ envFile: options.devEnvFile });
+  await queue.validate();
 
   const completedOutput = options.status === "completed" ? await verifyCompletedOutput(options) : null;
-  const supabase = createClient(queue.url, queue.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .select("id, article_title, workflow_mode, status, attempts, source_url, result_path, result_slug, production_url")
-    .eq("id", options.queueId)
-    .single();
-  if (error || !data) throw new Error(`Could not load queue item ${options.queueId}: ${error?.message ?? "not found"}`);
-
-  const row = data as QueueRow;
+  const row = await queue.get(options.queueId);
   assertTransition(row, options.status, options.reason);
   const replacesCompletedOutput = row.status === "completed" && options.status === "completed" && completedOutput &&
     (row.result_path !== completedOutput.resultPath || row.result_slug !== completedOutput.resultSlug);
@@ -271,16 +260,10 @@ async function main() {
     });
   }
 
-  let updateQuery = supabase
-    .from("article_generation_queue")
-    .update(update)
-    .eq("id", row.id)
-    .eq("status", row.status)
-    .select("id");
-  if (replacesCompletedOutput) updateQuery = row.result_path === null ? updateQuery.is("result_path", null) : updateQuery.eq("result_path", row.result_path);
-  const { data: updatedRows, error: updateError } = await updateQuery;
-  if (updateError) throw new Error(`Could not update queue item ${row.id}: ${updateError.message}`);
-  if (!updatedRows?.length) throw new Error(`Queue item ${row.id} changed while this update was running; retry from fresh state.`);
+  await queue.update(row.id, update, {
+    status: row.status, updated_at: row.updated_at,
+    ...(replacesCompletedOutput ? { result_path: row.result_path } : {})
+  });
   console.log(`${row.article_title ?? row.id}: ${row.status} -> ${options.status}`);
 }
 

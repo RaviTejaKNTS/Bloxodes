@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import type { NotionArticleQueue } from "../notion-article-queue";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { addArticleQueueItem, buildQueueRow, parseArgs } from "../add-article-queue-item";
@@ -174,120 +175,60 @@ test("queue similarity scan preserves the status scope and 1,000-row cap", async
   assert.deepEqual(db.calls.find(call => call.method === "limit")?.args, [1000]);
 });
 
-test("dry-run returns the payload and dedupe result with exit 0 and no insert", async () => {
+function notionStub(rows: Record<string, any>[] = [], raced = false) {
+  const calls: string[] = [];
+  const queue = {
+    async list() { calls.push("list"); return rows; },
+    async put(row: Record<string, any>) { calls.push("put"); return { created: !raced, row: { id: raced ? "winner" : "new-id", ...row } }; }
+  } as unknown as NotionArticleQueue;
+  return { queue, calls };
+}
+
+test("dry-run returns the payload and duplicate result without writing Notion", async () => {
   for (const existing of [null, { id: "existing", article_title: args[1], status: "processing" }]) {
-    const db = queueStub(existing ? [response(existing)] : [response(null), response(null), response([])]);
-    const result = await addArticleQueueItem(db.client, parseArgs(args), [], now);
+    const f = notionStub(existing ? [existing] : []);
+    const result = await addArticleQueueItem(f.queue, parseArgs(args), [], now);
     assert.equal(result.kind, "dry_run");
     assert.equal(result.exitCode, 0);
     if (result.kind === "dry_run") {
       assert.deepEqual(result.row, buildQueueRow(parseArgs(args), now));
       assert.equal(result.duplicate?.kind ?? null, existing ? "queue" : null);
     }
-    assert.equal(db.calls.some(call => call.method === "insert"), false);
-    assert.equal(db.remaining.length, 0);
+    assert.deepEqual(f.calls, ["list"]);
   }
 });
 
-test("apply duplicates return exit 3 without modifying queue or production rows", async () => {
-  const db = queueStub([response({ id: "existing", article_title: args[1], status: "completed" })]);
-  const result = await addArticleQueueItem(db.client, parseArgs([...args, "--apply"]), [], now);
-  assert.deepEqual(result, { kind: "duplicate", exitCode: 3, duplicate: { kind: "queue", id: "existing", article_title: args[1], status: "completed" } });
-  assert.equal(db.calls.some(call => call.method === "insert"), false);
-
+test("queue and production duplicates return exit 3 without creating a page", async () => {
+  for (const status of ARTICLE_TOPIC_DEDUPE_STATUSES) {
+    const f = notionStub([{ id: "existing", article_title: args[1], status }]);
+    const result = await addArticleQueueItem(f.queue, parseArgs([...args, "--apply"]), [], now);
+    assert.equal(result.kind, "duplicate"); assert.equal(result.exitCode, 3);
+    assert.deepEqual(f.calls, ["list"]);
+  }
   for (const apply of [false, true]) {
-    const productionDb = queueStub([response(null), response(null), response([])]);
-    const productionResult = await addArticleQueueItem(productionDb.client, parseArgs([...args, ...(apply ? ["--apply"] : [])]), [
+    const f = notionStub();
+    const result = await addArticleQueueItem(f.queue, parseArgs([...args, ...(apply ? ["--apply"] : [])]), [
       { family: "article", title: args[1], key: "existing-article", universe_id: null }
     ], now);
-    assert.equal(productionResult.exitCode, apply ? 3 : 0);
-    assert.ok("duplicate" in productionResult);
-    assert.deepEqual(productionResult.duplicate, { kind: "production", key: "existing-article", title: args[1] });
-    assert.equal(productionDb.calls.some(call => call.method === "insert"), false);
+    assert.equal(result.exitCode, apply ? 3 : 0);
+    assert.deepEqual(f.calls, ["list"]);
   }
 });
 
-test("apply inserts once and returns the selected success fields", async () => {
-  const inserted = { id: "new-id", status: "processing", article_title: args[1], topic_key: "fisch-kraken-boss-guide" };
-  const db = queueStub([response(null), response(null), response([]), response(inserted)]);
-  const options = parseArgs([...args, "--claim", "--apply"]);
-  assert.deepEqual(await addArticleQueueItem(db.client, options, [], now), { kind: "inserted", exitCode: 0, row: inserted });
-  assert.deepEqual(db.calls.filter(call => call.method === "insert").map(call => call.args[0]), [buildQueueRow(options, now)]);
-  assert.equal(db.remaining.length, 0);
-});
-
-test("unique insert conflicts re-read the winning queue row and return duplicate", async () => {
-  const existing = { id: "raced-id", article_title: args[1], status: "pending", workflow_mode: "agent_runner" };
-  const db = queueStub([
-    response(null), response(null), response([]),
-    { data: null, error: { code: "23505", message: "duplicate key" } }, response(existing)
-  ]);
-  const result = await addArticleQueueItem(db.client, parseArgs([...args, "--apply"]), [], now);
-  assert.deepEqual(result, { kind: "duplicate", exitCode: 3, duplicate: { kind: "queue", ...existing } });
-  assert.equal(db.calls.filter(call => call.method === "insert").length, 1);
-});
-
-test("unique topic conflicts return legacy workflow duplicates within the index status scope", async () => {
-  const statuses = ["pending", "processing", "blocked", "completed", "published", "rejected"];
-  for (const status of statuses) {
-    const existing = { id: "legacy-id", article_title: args[1], status, workflow_mode: "legacy_generator" };
-    const db = queueStub([
-      response(null), response(null), response([]),
-      { data: null, error: { code: "23505", message: "duplicate topic key" } }, response(existing)
-    ]);
-    const result = await addArticleQueueItem(db.client, parseArgs([...args, "--apply"]), [], now);
-    assert.deepEqual(result, { kind: "duplicate", exitCode: 3, duplicate: { kind: "queue", ...existing } });
-    const conflictCalls = db.calls.slice(db.calls.findIndex(call => call.method === "insert") + 1);
-    assert.deepEqual(conflictCalls.filter(call => call.method === "eq"), [
-      { method: "eq", args: ["topic_key", "fisch-kraken-boss-guide"] }
-    ]);
-    assert.deepEqual(conflictCalls.find(call => call.method === "in")?.args, ["status", statuses]);
-    assert.ok(conflictCalls.some(call => call.method === "select" && String(call.args[0]).includes("workflow_mode")));
-    assert.equal(db.remaining.length, 0);
+test("apply returns the Notion page UUID and resolves a concurrent insertion", async () => {
+  for (const raced of [false, true]) {
+    const f = notionStub([], raced);
+    const result = await addArticleQueueItem(f.queue, parseArgs([...args, "--claim", "--apply"]), [], now);
+    assert.equal(result.kind, raced ? "duplicate" : "inserted");
+    assert.equal(result.exitCode, raced ? 3 : 0);
+    if (result.kind === "inserted") { assert.equal(result.row.id, "new-id"); assert.equal(result.row.status, "processing"); }
+    assert.deepEqual(f.calls, ["list", "put"]);
   }
 });
 
-test("unique idempotency conflicts check active non-event rows across workflows", async () => {
-  for (const status of ["pending", "processing"]) {
-    const existing = { id: "legacy-id", article_title: "Legacy title", status, workflow_mode: "legacy_generator" };
-    const db = queueStub([
-      response(null), response(null), response([]),
-      { data: null, error: { code: "23505", message: "duplicate idempotency key" } },
-      response(null), response(existing)
-    ]);
-    const result = await addArticleQueueItem(db.client, parseArgs([...args, "--universe-id", "5750914919", "--apply"]), [], now);
-    assert.deepEqual(result, { kind: "duplicate", exitCode: 3, duplicate: { kind: "queue", ...existing } });
-    const conflictCalls = db.calls.slice(db.calls.findIndex(call => call.method === "insert") + 1);
-    assert.deepEqual(conflictCalls.filter(call => call.method === "eq"), [
-      { method: "eq", args: ["topic_key", "fisch-kraken-boss-guide"] },
-      { method: "eq", args: ["idempotency_key", "5750914919:fisch-kraken-boss-guide"] }
-    ]);
-    assert.deepEqual(conflictCalls.filter(call => call.method === "in").map(call => call.args), [
-      ["status", ["pending", "processing", "blocked", "completed", "published", "rejected"]],
-      ["status", ["pending", "processing"]]
-    ]);
-    assert.deepEqual(conflictCalls.filter(call => call.method === "is"), [{ method: "is", args: ["event_id", null] }]);
-    assert.equal(db.calls.filter(call => call.method === "insert").length, 1);
-    assert.equal(db.remaining.length, 0);
-  }
-});
-
-test("unique insert conflicts still throw when neither index lookup finds a row", async () => {
-  const db = queueStub([
-    response(null), response(null), response([]),
-    { data: null, error: { code: "23505", message: "unmatched unique constraint" } },
-    response(null), response(null)
-  ]);
-  await assert.rejects(addArticleQueueItem(db.client, parseArgs([...args, "--apply"]), [], now), /Could not add article queue item: unmatched unique constraint/);
-  assert.equal(db.calls.filter(call => call.method === "insert").length, 1);
-  assert.equal(db.calls.filter(call => call.method === "limit").length, 1);
-  assert.equal(db.remaining.length, 0);
-});
-
-test("lookup and insert failures surface as errors instead of successful dedupe", async () => {
-  const lookupDb = queueStub([{ data: null, error: { message: "read failed" } }]);
-  await assert.rejects(addArticleQueueItem(lookupDb.client, parseArgs([...args, "--apply"]), []), /read failed/);
-  assert.equal(lookupDb.calls.some(call => call.method === "insert"), false);
-  const insertDb = queueStub([response(null), response(null), response([]), { data: null, error: { message: "insert failed" } }]);
-  await assert.rejects(addArticleQueueItem(insertDb.client, parseArgs([...args, "--apply"]), []), /insert failed/);
+test("Notion lookup and create failures stop queue:add", async () => {
+  const lookup = { list: async () => { throw new Error("Notion read failed"); } } as unknown as NotionArticleQueue;
+  await assert.rejects(addArticleQueueItem(lookup, parseArgs(args), []), /Notion read failed/);
+  const create = { list: async () => [], put: async () => { throw new Error("Create uncertain"); } } as unknown as NotionArticleQueue;
+  await assert.rejects(addArticleQueueItem(create, parseArgs([...args, "--apply"]), []), /Create uncertain/);
 });

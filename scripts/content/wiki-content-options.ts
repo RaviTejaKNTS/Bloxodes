@@ -22,7 +22,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
   if (command !== "publish" && command !== "status" && command !== "candidates" && command !== "deployed-sha") {
     throw new Error("Expected publish, status, candidates or deployed-sha.");
   }
-  const options: ContentOptions = { command, target: "managed-dev", apply: false, allowProd: false };
+  const options: ContentOptions = { command, target: "production", apply: false, allowProd: false };
   const seen = new Set<string>();
   for (let index = 1; index < argv.length; index += 1) {
     const raw = argv[index];

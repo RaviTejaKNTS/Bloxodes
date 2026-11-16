@@ -1,8 +1,8 @@
 # Notion queues
 
-Last verified: 2026-11-06
+Last verified: 2026-11-16
 
-Three Notion databases coordinate the scheduled content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
+Four Notion databases coordinate the scheduled content runs. Agents read and update them through the Notion connector or the Notion API, neither of which deletes rows. So agents never delete rows; they set a status instead.
 
 ## Roblox Wiki Queue
 
@@ -65,3 +65,27 @@ One row per Roblox universe (`Universe ID`). Columns: Game, Universe ID, Place I
 | `Published` | Codes run | Live. Live page holds the URL. |
 | `Skipped` | Codes run | Not worth a page (for example a duplicate game or no working codes source). Run report says why. |
 | `Failed` | Codes run | Couldn't publish. Run report says what. |
+
+## Article Queue
+
+- Database: https://app.notion.com/p/4197bc97c44381f9acb8e00d51ed7a12
+- Data source: `collection://4197bc97-c443-8125-977a-000b7ede5751`
+- Filled by: the homelab topic discovery (`bloxodes-article-discovery.timer`, `articles:curate`), and by the article run's own topics (`articles:queue:add`). Both use the Notion API with `NOTION_ARTICLE_QUEUE_TOKEN`. See [articles](../content/articles.md#topic-discovery-homelab).
+- Used by: the Content Factory's article run, only through `articles:queue:list`, `articles:queue:add`, `articles:queue:update` and `content:publish` (the factory's `bin/article`). Don't edit rows by hand while a run holds them.
+
+One row per topic. The CLI shows statuses in lowercase (`pending`) and row IDs as Notion page IDs. Columns: Title, Status, Type, Topic key, Idempotency key, Universe ID, Event ID, Source name, Source URL, Source URLs, Source published, Discovered, Curation model, Curation reason, Curation confidence, Curated, Attempts, Worker, Claimed, Retry after, Run report, Result slug, Result path, Live page, Completed, Published, Dev queue ID. The page body holds the full source evidence as JSON. Dev queue ID is set on rows copied from the old managed-development `article_generation_queue` table.
+
+Duplicates are refused by topic key, idempotency key or a title similarity of 0.8 or more, against the queue and production articles. Notion can't enforce a unique key, so after each add, and at every curation run, duplicate groups are resolved: a `Completed` or `Published` row and an active `Processing` claim are always kept, and only unfinished duplicates become `Skipped` with Run report `duplicate`. If two finished rows in a group disagree, nothing changes and their IDs are logged for a person to check.
+
+Curation never edits a `Completed` or `Published` row. Publishing checks that the row's Result path, Result slug and file hashes match the bundle before writing and again after marking it `Published`; a mismatch fails loudly and leaves the live page up. The `Snapshot` property names the committed evidence snapshot in the page body; older snapshots go to the trash (`in_trash`, Notion API `2026-03-11`). Queue pages themselves are never trashed.
+
+| Status | Set by | Meaning |
+| --- | --- | --- |
+| `Pending` | Curation or run | Waiting to be written. |
+| `Processing` | Article run | Being written. A claim older than 6 hours goes back to `Pending` at the next curation. |
+| `Blocked` | Article run | Stopped for now; Retry after says when it goes back to `Pending`. |
+| `Completed` | Article run | Written and checked; Result path holds the exact `final.json`. Publishing needs this. |
+| `Published` | Publisher | Live, set only after the live check. Live page holds the URL. |
+| `Skipped` | Run or curation | Dropped for good (overlap, no real angle, duplicate). Run report says why. |
+| `Rejected`, `Failed` | Legacy | Kept for copied rows. |
+

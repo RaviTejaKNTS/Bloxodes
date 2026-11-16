@@ -1,8 +1,10 @@
-import "../shared/load-env";
+import "../articles/load-notion-article-env";
 
-import { createClient } from "@supabase/supabase-js";
+import { access } from "node:fs/promises";
+import { constants } from "node:fs";
 
-import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
+import { createNotionArticleQueue } from "../articles/notion-article-queue";
+import { articleStateDirectory, readArticleState } from "../articles/article-local-state";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
 
 type Component = "all" | "discovery";
@@ -25,22 +27,19 @@ function parseComponent(argv: string[]): Component {
   return component;
 }
 
-async function checkDevDatabase() {
-  const dev = resolveArticleDevCredentials();
-  const supabase = createClient(dev.url, dev.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  const tables = ["article_generation_queue", "articles", "article_discovery_candidates", "article_curation_runs"];
-  for (const table of tables) {
-    const { error } = await supabase.from(table).select("*", { head: true, count: "exact" }).limit(1);
-    if (error) throw new Error(`Managed dev table ${table} is not ready: ${error.message}`);
-  }
-  console.log(`Managed dev Supabase: ${supabaseTarget(dev.url)} (${tables.length} tables ready)`);
+async function checkArticleQueue() {
+  const queue = createNotionArticleQueue();
+  await queue.validate();
+  const rows = await queue.list();
+  const directory = articleStateDirectory();
+  await access(directory, constants.R_OK | constants.W_OK);
+  const state = await readArticleState(directory);
+  console.log(`Notion Article Queue: ${rows.length} row(s). State: ${directory}, ${state.candidates.length} candidate(s), ${state.runs.length} run(s).`);
 }
 
 async function main() {
   const component = parseComponent(process.argv.slice(2));
-  await checkDevDatabase();
+  await checkArticleQueue();
 
   const inventory = await fetchProductionEditorialInventory();
   if (!inventory.items.length) throw new Error("Production editorial inventory is empty.");

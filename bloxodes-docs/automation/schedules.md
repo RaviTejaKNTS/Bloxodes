@@ -15,7 +15,7 @@ All run with full access in the "Bloxodes Content Factory" project on the MacBoo
 | --- | --- | --- |
 | Bloxodes other games every 6 hours (Content Factory) | Every 6 hours, about 00:34, 06:34, 12:34, 18:34 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and builds and publishes its wiki hubs and collections. One game per run. |
 | Bloxodes Roblox wiki every 2 days (Content Factory) | Every 2 days, about 00:34 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds and publishes its hub and collections. |
-| Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue` (or finds its own when fewer than 3 are good), has the builder (the `researcher` role) research them and Haiku write them, and publishes them through the factory's `bin/article publish` (`content:publish` from the MacBook Pro's Bloxodes checkout). |
+| Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from the Notion [Article Queue](notion-queues.md#article-queue) (or finds its own when fewer than 3 are good), has the builder (the `researcher` role) research them and Haiku write them, and publishes them through the factory's `bin/article publish` (`content:publish` from the MacBook Pro's Bloxodes checkout). |
 | Bloxodes game articles every 6 hours (Content Factory) | Every 6 hours | `game-article-main`: writes up to 3 articles about non-Roblox games from `content/game-articles/topics.md` (requested topics, then priority games) or topics it finds. |
 | Bloxodes codes pages every 12 hours (Content Factory) | Every 12 hours, about 09:04 and 21:04 IST | `codes-main`: builds and publishes a codes page for every `New` row in the [Codes Queue](notion-queues.md#codes-queue), plus `Claimed` rows older than 12 hours. The builder (the `researcher` role) researches, Haiku writes through `bin/haiku-write`, and `bin/codes publish` publishes. |
 
@@ -31,11 +31,11 @@ Runs can overlap, and they share the root checkout. Each one claims its own queu
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env`. Codes discovery reads `.envs/targets/production.env` and `.envs/pipelines/codes.env` from `/srv/data/projects/Bloxodes`.
+All units run from `/srv/data/bloxodes-automation-runtime/current`. Article discovery reads `/etc/bloxodes/article-automation.env` (it needs `NOTION_ARTICLE_QUEUE_TOKEN` and the Groq key, no managed-development credentials). Codes discovery reads `.envs/targets/production.env` and `.envs/pipelines/codes.env` from `/srv/data/projects/Bloxodes`.
 
 | Unit | When | Does |
 | --- | --- | --- |
-| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the Content Factory article run writes from. Starts nothing else. |
+| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:curate`, then `articles:discover`, sharing a kernel lock (needs Python 3). Curation adds `Pending` rows to the [Article Queue](notion-queues.md#article-queue) the Content Factory article run writes from. State in `/srv/data/bloxodes-automation-runtime/state/articles/state.json`. 45-minute limit, 512 MB memory. Starts nothing else. |
 | `bloxodes-codes-discovery.timer` | 01:15, 07:15, 13:15, 19:15 IST, up to 5 minutes later | `codes:discover`: adds new Beebom and RobloxDen codes games to the [Codes Queue](notion-queues.md#codes-queue). Needs `NOTION_CODES_QUEUE_TOKEN`. State in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/`. Enable once with `sudo systemctl enable --now bloxodes-codes-discovery.timer`. |
 | `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. It also requests two made-up URLs twice each and opens an `[error-page-cache]` issue (and exits 1) if Cloudflare serves a 4xx/5xx from its cache; see [Cloudflare](../infrastructure/cloudflare.md#caching). Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 

@@ -146,8 +146,12 @@ test("publication accepts a context recommendation after its link count moves it
   const eligible = await loadCodesContext(contextSb, 1, { allRelatedPages: true });
   assert.equal(eligible.related_pages.length, 5);
   assert.ok(!eligible.related_pages.some(row => ["self", "unrelated"].includes(row.id)));
-  await assert.rejects(publishCodesBundle(f.sb, { ...final, interlinking_copy_md: "[Bad](/codes/unrelated)" },
-    { ...f.deps, context: options => loadCodesContext(contextSb, 1, options) }), /ineligible/);
+  await publishCodesBundle(f.sb, { ...final, interlinking_copy_md: "[Bad](/codes/unrelated)" },
+    { ...f.deps, context: options => loadCodesContext(contextSb, 1, options), prepare: async (_game, fingerprint, linkedIds, targetFinal) => {
+      assert.equal(targetFinal.interlinking_copy_md, "Bad");
+      assert.deepEqual(linkedIds, []);
+      await commitFactoryPage(f.sb, "page", factoryPublicationPayload(targetFinal), { universeId: 1, fingerprint, linkedIds }, 1, true, async () => {});
+    } });
 });
 
 
@@ -185,13 +189,25 @@ test("development allows plain text even with eligible related pages", async () 
   assert.equal(f.commits(), 1);
 });
 
-test("production rejects ineligible links and requires an eligible link", async () => {
-  for (const interlinking_copy_md of ["[Missing](/codes/missing)", "Plain text"]) {
+test("production unlinks ineligible related pages and retries without duplicate credit", async () => {
+  for (const text of ["[Missing](/codes/missing)", "Plain text", "[Other](/codes/other) and [Missing](/codes/missing)"]) {
     const f = fixture();
-    await assert.rejects(publishCodesBundle(f.sb, { ...final, interlinking_copy_md }, {
-      ...f.deps, target: "production"
-    }), /ineligible|must link an eligible/);
-    assert.deepEqual(f.writes, []);
+    let preparations = 0;
+    const original = { ...final, interlinking_copy_md: text };
+    const deps = { ...f.deps, target: "production" as const,
+      prepare: async (_game: any, fingerprint: string, linkedIds: string[], targetFinal: CodePageFinal) => {
+        preparations++;
+        assert.equal(targetFinal.interlinking_copy_md, text.replace("[Missing](/codes/missing)", "Missing"));
+        assert.deepEqual(linkedIds, text.includes("/codes/other") ? ["other-id"] : []);
+        assert.equal(fingerprint, bundleFingerprint(targetFinal));
+        await commitFactoryPage(f.sb, "page", factoryPublicationPayload(targetFinal), { universeId: 1, fingerprint, linkedIds }, 1, true, async () => {});
+      }
+    };
+    await publishCodesBundle(f.sb, original, deps);
+    await publishCodesBundle(f.sb, original, deps);
+    assert.equal(preparations, 1);
+    assert.equal(original.interlinking_copy_md, text);
+    assert.equal(f.counts.get("other-id") ?? 0, text.includes("/codes/other") ? 1 : 0);
   }
 });
 
