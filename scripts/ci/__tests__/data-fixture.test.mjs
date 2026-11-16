@@ -38,7 +38,7 @@ test("seed has linked page inventories, both collection types and paginated game
     assert.ok(tables.site_routes.some(route=>route.page_id===page.id && route.path===page.canonical_path && route.status==="live"));
   }
 });
-test("HTTP supports CORS, HEAD counts, singular rows, read RPCs and rejects writes or unknown data", async () => {
+test("HTTP supports CORS, HEAD counts, singular rows, read RPCs and rejects writes or unknown data", {skip:process.env.BLOXODES_CI_DATA !== "1"}, async () => {
   const server=createDataServer();
   server.listen(0,"127.0.0.1"); await once(server,"listening");
   const base=`http://127.0.0.1:${server.address().port}`;

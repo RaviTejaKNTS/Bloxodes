@@ -39,13 +39,13 @@ export function seedTables() {
     const wiki = shared ? tables.game_wiki_pages_view.find(page => page.game_id === game.id) : tables.wiki_pages.find(page => page.slug === entry.wiki);
     const slug = shared ? (game.wikiSlug ?? game.slug) : entry.wiki;
     const page = { ...common, id: id(), namespace: entry.namespace, game_id: game?.id, universe_id: wiki.universe_id, wiki_page_id: wiki.id, wiki_slug: slug, collection_slug: entry.slug, slug: entry.slug,
-      canonical_path: `/wiki/${slug}/${entry.slug}`, code: `${slug}-${entry.slug}`, title: entry.title, display_name: entry.title, page_type: entry.page_type ?? "database", item_count: entry.paginated ? 90 : 3,
+      canonical_path: `/wiki/${slug}/${entry.slug}`, code: `${slug}-${entry.slug}`, title: entry.title, display_name: entry.title, page_type: entry.page_type ?? "database", item_count: entry.paginated ? 90 : (entry.count ?? 3),
       how_it_works_md: "", game_title: game?.title, game_short_title: game?.title, game_cover_image: "/Bloxodes.png", game_hero_image: "/Bloxodes.png", published_dataset_id: id() };
     add(shared ? "game_collection_pages_view" : "wiki_collection_pages", page);
     add(shared ? "game_collection_datasets" : "wiki_collection_datasets", { id: page.published_dataset_id, namespace: page.namespace, collection_page_id: page.id, schema_version: 2, content_hash: "a".repeat(64), item_count: page.item_count,
       meta_json: { itemFields: ["name", "description"], display: { fields: [{ key: "description", label: "Description" }] } }, created_at: timestamp, updated_at: timestamp, validation_json: {}, source_manifest_json: {} });
     for (let index = 1; index <= page.item_count; index++) add(shared ? "game_collection_items" : "wiki_collection_items", { namespace: page.namespace, dataset_id: page.published_dataset_id, item_slug: `item-${index}`, item_name: `Trail supply ${index}`, section: index <= page.item_count / 2 ? "Supplies" : "Equipment", sort_order: index, image_key: null,
-      fields_json: { description: entry.paginated ? "Carry supplies to recover health and reach the next climb. ".repeat(35) : "A supply found near the trail." } });
+      fields_json: { ...entry.fields, description: entry.paginated ? "Carry supplies to recover health and reach the next climb. ".repeat(35) : "A supply found near the trail." } });
     route(page, shared ? "game" : "roblox", "collection");
     if (shared) alias(`/${page.namespace}/${page.namespace === "minecraft" ? game.slug + "/wiki" : "wiki/" + game.slug}/${entry.slug}`, page, "collection");
   }
@@ -103,6 +103,8 @@ export function seedTables() {
     add("roblox_catalog_item_images",{asset_id,size:"420x420",format:"Png",state:"Completed",image_url:"/Bloxodes.png"});
   }
   add("roblox_font_ids",{asset_id:12187365977,name:"Roboto",native_styles:["Regular"],faces:[{name:"Regular",weight:400,style:"Normal",assetId:12187365977}],designer:"Christian Robertson",creator_name:"Roblox",creator_store_url:"https://create.roblox.com/store/asset/12187365977",status:"active",thumbnail_state:"Completed",thumbnail_url:"/Bloxodes.png",vote_count:10});
+  tables.roblox_music_genres_view = [{slug:"fixture-genre",label:"Fixture genre",item_count:98}];
+  tables.roblox_music_artists_view = [{slug:"fixture-artist",label:"Fixture artist",item_count:98}];
   // Views preserve their base-row relationships for embedded Supabase selects.
   for (const [view,base] of Object.entries({wiki_pages_view:"wiki_pages",wiki_collection_pages_view:"wiki_collection_pages",code_pages_index_view:"code_pages",published_articles_view:"articles",quiz_pages_view:"quiz_pages",checklist_pages_view:"checklist_pages",events_pages_view:"events_pages",tools_view:"tools",catalog_pages_view:"catalog_pages"})) tables[view]=tables[base];
   for (const kind of ["wiki","collection","tool","map","quiz","checklist","catalog","code"]) tables[`game_${kind}_pages`]=tables[`game_${kind}_pages_view`]??=[];

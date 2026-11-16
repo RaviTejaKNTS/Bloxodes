@@ -12,7 +12,7 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    # Share the PR checks lane so cleanup never runs while checks read the database.
+    # Wait for managed content QA before pruning the shared development database.
     concurrency:
       group: bloxodes-managed-content-qa
       queue: max

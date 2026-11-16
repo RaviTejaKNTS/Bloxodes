@@ -9,6 +9,7 @@ export function assertFixtureEnvironment(env = process.env) {
   for (const key of ["SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_MEDIA_PUBLIC_URL"]) if (env[key] !== "http://127.0.0.1:54321") throw new Error(`${key} must use the CI-only loopback data server.`);
 }
 export function createDataServer() {
+  assertFixtureEnvironment();
   const tables = seedTables(), rpcs = seedRpcs();
   const audit = { requests: 0, tables: {}, rpcs: {}, unexpected: [] };
   const image = fs.readFileSync("apps/web/public/Bloxodes.png");
