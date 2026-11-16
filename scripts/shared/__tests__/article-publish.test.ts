@@ -41,7 +41,7 @@ async function fixture(scenario: string) {
   await fs.writeFile(path.join(root, "image.png"), await sharp({ create: { width: 256, height: 256, channels: 3, background: "red" } }).png().toBuffer());
   const propertyTypes = {
     Title: "title", Status: "select", Type: "select",
-    ...Object.fromEntries(["Topic key", "Idempotency key", "Event ID", "Source name", "Source URLs", "Curation model", "Curation reason", "Worker", "Run report", "Result slug", "Result path", "Dev queue ID"].map(name => [name, "rich_text"])),
+    ...Object.fromEntries(["Topic key", "Idempotency key", "Event ID", "Source name", "Source URLs", "Curation model", "Curation reason", "Worker", "Run report", "Result slug", "Result path", "Dev queue ID", "Snapshot"].map(name => [name, "rich_text"])),
     ...Object.fromEntries(["Universe ID", "Curation confidence", "Attempts"].map(name => [name, "number"])),
     ...Object.fromEntries(["Source URL", "Live page"].map(name => [name, "url"])),
     ...Object.fromEntries(["Source published", "Discovered", "Curated", "Claimed", "Retry after", "Completed", "Published"].map(name => [name, "date"]))
