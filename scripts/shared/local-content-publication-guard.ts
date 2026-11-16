@@ -25,14 +25,45 @@ function isPublicationRelevant(file: string) {
 }
 
 export const PUBLICATION_SUBPROCESS_TIMEOUT_MS = 60_000;
+/**
+ * The SSH command for git, with batch mode and a connect timeout. It keeps the command this
+ * checkout already uses (GIT_SSH_COMMAND, then core.sshCommand, as git itself does), because
+ * GIT_SSH_COMMAND replaces core.sshCommand: a checkout that reaches GitHub with a deploy key named
+ * there would otherwise fall back to the default key and get "Permission denied (publickey)".
+ * The options go straight after the program, because OpenSSH keeps the first value it sees.
+ */
+export function batchSshCommand(configured: string | undefined) {
+  const [, program, rest] = /^("[^"]*"|'[^']*'|\S+)([\s\S]*)$/.exec(configured?.trim() || "ssh")!;
+  return `${program} -o BatchMode=yes -o ConnectTimeout=15${rest}`;
+}
+
+let sshCommand: string | undefined;
+function gitSshCommand() {
+  if (sshCommand) return sshCommand;
+  let configured = process.env.GIT_SSH_COMMAND?.trim() || undefined;
+  if (!configured) {
+    try {
+      configured = execFileSync("git", ["config", "--get", "core.sshCommand"], {
+        cwd: repoRoot, encoding: "utf8", timeout: PUBLICATION_SUBPROCESS_TIMEOUT_MS, killSignal: "SIGKILL",
+        env: { ...process.env, GIT_TERMINAL_PROMPT: "0" }, stdio: ["ignore", "pipe", "pipe"]
+      }).trim() || undefined;
+    } catch (error) {
+      // git config exits 1 when the key isn't set. Anything else (a timeout, a broken config) stops here.
+      if ((error as { status?: number }).status !== 1) throw new Error("git config failed. Check the checkout's git configuration before retrying publication.");
+    }
+  }
+  return (sshCommand = batchSshCommand(configured));
+}
+
 const subprocessOptions = () => ({
   cwd: repoRoot, timeout: PUBLICATION_SUBPROCESS_TIMEOUT_MS, killSignal: "SIGKILL" as const,
-  env: { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_SSH_COMMAND: "ssh -o BatchMode=yes -o ConnectTimeout=15" },
+  env: { ...process.env, GIT_TERMINAL_PROMPT: "0", GIT_SSH_COMMAND: gitSshCommand() },
   stdio: ["ignore", "pipe", "pipe"] as ["ignore", "pipe", "pipe"]
 });
 
 function git(...args: string[]) {
-  try { return execFileSync("git", args, { ...subprocessOptions(), encoding: "utf8" }).trim(); }
+  const options = { ...subprocessOptions(), encoding: "utf8" as const }; // Outside the try, so a git config failure keeps its own message.
+  try { return execFileSync("git", args, options).trim(); }
   catch { throw new Error(`git ${args[0]} failed. Check repository access and the origin remote before retrying publication.`); }
 }
 
