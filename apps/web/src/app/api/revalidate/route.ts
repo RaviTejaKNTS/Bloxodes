@@ -1,5 +1,7 @@
+import { drainIndexNowPublications } from "@/lib/indexnow-publication";
+import { isIndexNowEnabled } from "@/lib/indexnow";
 import { gameContentRevalidationTargets } from "@/lib/game-content-revalidation";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
 import { catalogMembershipPurgeTags, cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
@@ -985,14 +987,19 @@ export async function POST(request: Request) {
         skipped: 0,
         reason: cloudflare.enabled ? "purge-failed" : cloudflare.reason ?? "cloudflare-disabled"
       };
-  const indexNow = {
-    enabled: false,
-    attempted: 0,
-    submitted: 0,
-    successfulBatches: 0,
-    failedBatches: 0,
-    reason: "site-disabled"
-  };
+  const indexNow = { scheduled: false, reason: "disabled-or-non-production" };
+  if (isIndexNowEnabled()) {
+    try {
+      // after() starts on response completion on our Next Node server. The purge
+      // above has already settled. No IndexNow DB or network I/O is on this path.
+      after(async () => { await drainIndexNowPublications(); });
+      indexNow.scheduled = true;
+      indexNow.reason = "scheduled";
+    } catch {
+      indexNow.reason = "scheduling-failed";
+      console.warn("IndexNow drain scheduling failed");
+    }
+  }
 
   if (cloudflare.enabled && !cloudflare.ok) {
     return NextResponse.json(
