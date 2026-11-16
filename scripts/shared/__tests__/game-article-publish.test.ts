@@ -56,6 +56,10 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
       globalThis.fetch=async(input,init)=>{
         const url=new URL(typeof input==='string'?input:input.url??input.href),method=init?.method??'GET';calls.push({path:url.pathname,method,url:url.href});
         const json=data=>new Response(JSON.stringify(data),{headers:{'content-type':'application/json'}});
+        // Recollect managed-dev images from their original source when the target URL changes.
+        if(scenario==='body-cover'&&method==='GET'&&url.origin==='https://example.com'&&['/first.webp','/second.webp'].includes(url.pathname)) {
+          return new Response(fs.readFileSync(root+(url.pathname==='/first.webp'?'/body.webp':'/game.webp')),{headers:{'content-type':'image/webp'}});
+        }
         if(url.pathname.includes('/storage/')) {
           if(method!=='GET') { uploads.push(url.pathname.replace('/storage/v1/object/','/storage/v1/object/public/')); return json({Key:'image'}); }
           const source=url.origin===${JSON.stringify(dev)};
@@ -84,7 +88,7 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
     const apply=["apply","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","body-cover","game-cover"].includes(scenario);
     const mediaOrigin=scenario==='body-cover'?"https://media.example.com":dev;
     for(let attempt=0;attempt<(scenario==='body-cover'||scenario==='game-cover'||scenario==='author-absent'?2:1);attempt++) {
-    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
+    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,"--target","managed-dev",...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
     assert.equal(result.status,(apply&&scenario!=="bad-readback")||scenario==="dry-run"?0:1,result.stderr);
     if(scenario==='no-authors') assert.match(result.stderr,/No eligible article authors/);
     if(scenario==='missing-cover') assert.match(result.stderr,/provide cover_image, a body image, or the owning game cover_image/);
@@ -101,8 +105,10 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
       assert.equal(report.stored.cover_image,`${mediaOrigin}/storage/v1/object/public/media/articles/${bundle.slug}/cover-${expectedHash}.webp`);
       if(scenario==='body-cover') {
         assert.ok(report.stored.content_md.includes(`${mediaOrigin}/storage/v1/object/public/media/${bodyPath}`));
+        assert.ok(report.stored.content_md.includes(`${mediaOrigin}/storage/v1/object/public/media/${bodyPath.replace('first.webp','second.webp')}`));
         assert.ok(!report.stored.content_md.includes(dev));
         assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===bodyUrl));
+        for(const name of ['first','second']) assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===`https://example.com/${name}.webp`));
       }
     }
     if(scenario==='apply') {assert.equal(report.stored.game_id,id);assert.equal(report.stored.namespace,'example');assert.equal(report.stored.canonical_path,'/articles/example-guide');assert.match(report.stored.cover_image,new RegExp(`^${dev}/storage/v1/object/public/media/articles/example-guide/cover-[0-9a-f]+\\.webp$`));}

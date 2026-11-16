@@ -331,7 +331,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
   if (options.env.BLOXODES_CI_QA === '1' && ['import_verify','browser_verify'].includes(stage)) {
     return {...done(`${stage} delegated to GitHub. Authoring is ready; technical QA is pending.`),delegatedToCi:true};
   }
-  if (stage === "image_upload") await command("collect:article-images", ["--manifest", file("media.json"), "--apply"]);
+  if (stage === "image_upload") await command("collect:article-images", ["--manifest", file("media.json"), "--target", "managed-dev", "--apply"]);
   if (stage === "copy_check") await command("content:check-copy", [file("final.json")], "writing");
   if (stage === "import_verify") {
     const inputFinal = await json(file("final.json"));

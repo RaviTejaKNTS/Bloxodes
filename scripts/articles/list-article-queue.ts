@@ -1,8 +1,6 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
-import { createClient } from "@supabase/supabase-js";
-
-import { resolveArticleDevCredentials } from "./article-queue-env";
+import { createNotionArticleQueue } from "./notion-article-queue";
 import { parseArticleQueueStatus, type ArticleQueueStatus } from "./article-queue-status";
 
 type Options = {
@@ -49,23 +47,14 @@ const parseStatus = parseArticleQueueStatus;
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const queue = resolveArticleDevCredentials();
-
-  const supabase = createClient(queue.url, queue.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .select(
-      "id, article_title, article_type, status, source_name, source_url, source_published_at, source_discovered_at, source_urls, source_items, topic_key, curation_model, curation_reason, curation_confidence, curated_at, source_metadata, attempts, created_at, completed_at, result_path, result_slug, published_at, rejected_at, production_url, outcome_reason"
-    )
-    .eq("workflow_mode", "agent_runner")
-    .not("curated_at", "is", null)
-    .eq("status", options.status)
-    .order("source_published_at", { ascending: false, nullsFirst: false })
-    .order("created_at", { ascending: true })
-    .limit(options.limit);
-  if (error) throw new Error(`Could not load article runner queue: ${error.message}`);
+  const queue = createNotionArticleQueue();
+  await queue.validate();
+  const rows = (await queue.list({ property: "Status", select: { equals: options.status[0].toUpperCase() + options.status.slice(1) } }))
+    .filter(row => row.workflow_mode === "agent_runner" && row.curated_at)
+    .sort((a, b) => String(b.source_published_at ?? "").localeCompare(String(a.source_published_at ?? "")) || a.created_at.localeCompare(b.created_at))
+    .slice(0, options.limit);
+  const data = [];
+  for (const row of rows) data.push(await queue.get(row.id));
 
   if (options.json) {
     console.log(JSON.stringify(data ?? [], null, 2));

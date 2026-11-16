@@ -1,3 +1,4 @@
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { load } from "cheerio";
@@ -338,4 +339,11 @@ export function assertArticleImageReadiness(result: ArticleImageReadinessResult,
   throw new Error(
     `${label} image readiness failed:\n${result.errors.map((error) => `- ${error}`).join("\n")}`
   );
+}
+
+// A production preflight must not download legacy development images, even
+// when process-only CI credentials still mention a development public origin.
+export function assertProductionArticleMediaUrls(final: { slug: string; content_md: string; cover_image?: string | null }) {
+  const urls = [...findArticleImages(final.content_md).map(image => image.src), ...(final.cover_image ? [final.cover_image] : [])];
+  if (urls.some(isManagedDevelopmentSupabaseUrl)) throw new Error("Production articles cannot use managed-development media. Run collect:article-images --target production --file final.json --apply --allow-prod for body images, and use a production cover_image or null.");
 }

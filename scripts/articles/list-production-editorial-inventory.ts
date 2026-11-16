@@ -1,4 +1,4 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
 import { fetchProductionEditorialInventory, inventoryPublicPath, inventoryMatchesSearch } from "./production-editorial-inventory";
 

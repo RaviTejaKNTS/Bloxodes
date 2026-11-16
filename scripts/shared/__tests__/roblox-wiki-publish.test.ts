@@ -11,16 +11,15 @@ import { bundleSchema, runtimeManifestSchema, runtimeManifestJsonSchema, hubFina
 
 const sha = "a".repeat(40);
 
-test("publication defaults to managed-development dry run and gates production apply", () => {
+test("publication defaults to production dry run and gates production apply", () => {
   assert.deepEqual(parseContentOptions(["publish", "/bundle"]), {
-    command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: "/bundle"
+    command: "publish", target: "production", apply: false, allowProd: false, bundle: "/bundle"
   });
   assert.equal(parseContentOptions(["publish", "--bundle=/bundle", "--target=production"]).apply, false);
   assert.equal(parseContentOptions(["publish", "/bundle", "--target", "production", "--apply", "--allow-prod"]).allowProd, true);
   for (const argv of [
     ["publish", "/bundle", "--target", "production", "--apply"],
     ["publish", "/bundle", "--allow-prod"],
-    ["publish", "/bundle", "--apply", "--allow-prod"],
     ["publish", "/bundle", "--target", "local"],
     ["publish", "/bundle", "--apply=true"],
     ["publish", "/bundle", "--target", "managed-dev", "--target=production"],
@@ -47,7 +46,7 @@ test("deployed SHA lookup needs only healthy public deploy metadata", async () =
 });
 
 test("--only repeats for dry runs and applies and belongs only to publish", () => {
-  for (const flags of [[], ["--apply"], ["--target=production", "--apply", "--allow-prod"]]) {
+  for (const flags of [[], ["--target=managed-dev", "--apply"], ["--target=production", "--apply", "--allow-prod"]]) {
     assert.deepEqual(parseContentOptions(["publish", "/bundle", "--only", "hub", "--only=pets", ...flags]).only, ["hub", "pets"]);
   }
   for (const argv of [["publish", "/bundle", "--only"], ["publish", "/bundle", "--only=../pets"], ["status", "--game", "example", "--only=hub"], ["candidates", "--only=pets"]]) {
@@ -359,7 +358,7 @@ async function runCollectionMediaFixture(root: string, apply: boolean, scenario 
       return new Response(JSON.stringify(accept.includes('vnd.pgrst.object') ? result[0] : result), { headers });
     };
   `;
-  const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : []), ...extraArgs], {
+  const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, "--target", "managed-dev", ...(apply ? ["--apply"] : []), ...extraArgs], {
     encoding: "utf8", timeout: 30_000,
     env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" }
   });

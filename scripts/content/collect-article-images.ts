@@ -1,5 +1,5 @@
 import { fetchImageBytes } from "../shared/fetch-image-bytes";
-import "../shared/load-env";
+import { selectContentTarget, type ContentTarget } from "../shared/content-target-env";
 
 import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
@@ -11,15 +11,18 @@ import sharp from "sharp";
 
 import { classifyArticleImageSrc } from "@/lib/article-media";
 import { markArticleImageUnavailable, uploadArticleImageWithRetries } from "./article-image-transfer";
+import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import {
   type ArticleImageEntry,
   type ArticleImageManifest,
   readArticleImageManifest,
+  canonicalArticleMediaUrl,
   usedVerifiedArticleImages,
 } from "./article-image-readiness";
 
 type CliOptions = {
+  target?: ContentTarget;
   manifest: string;
   finalFile: string;
   apply: boolean;
@@ -34,15 +37,16 @@ type ArticleFinal = {
 
 function printUsage() {
   console.log(`Usage:
-  npm run collect:article-images -- --manifest <media.json> [--file <final.json>] [--apply]
+  npm run collect:article-images -- --manifest <media.json> [--file <final.json>] [--target production|managed-dev] [--apply --allow-prod]
 
 The default is a read-only dry run. --apply downloads exact-match verified images,
 converts them to WebP, uploads them to Supabase Storage, verifies readback, and
 updates media.json with uploaded_path, public_url, width, and height.
 
-During an approved production release, pass the reviewed final.json too. The
-collector copies the approved managed-dev bytes to the same production object
-path and rewrites the managed-dev image URLs in final.json to production URLs.
+Production is the default target. Production uploads require --apply --allow-prod.
+Existing production objects are read back and reused. For older managed-dev
+assets, pass --file <final.json> to collect their original source images again
+and rewrite their URLs. Production collection never downloads managed-dev bytes.
 `);
 }
 
@@ -53,6 +57,10 @@ function parseArgs(argv: string[]): CliOptions {
     if (arg === "--manifest") {
       options.manifest = String(argv[index + 1] ?? "").trim();
       index += 1;
+    } else if (arg === "--target" || arg.startsWith("--target=")) {
+      const value = arg.includes("=") ? arg.slice(arg.indexOf("=") + 1) : argv[++index];
+      if (value !== "production" && value !== "managed-dev") throw new Error("--target must be production or managed-dev");
+      options.target = value;
     } else if (arg === "--file") {
       options.finalFile = String(argv[index + 1] ?? "").trim();
       index += 1;
@@ -96,9 +104,9 @@ function assertTargetAllowed(options: CliOptions): void {
   }
 
   const host = new URL(raw).hostname.toLowerCase();
-  const production = host === "database.bloxodes.com";
+  const production = ["database.bloxodes.com", "bloxodesdb.ravitejaknts.com"].includes(host);
   if (production && !(options.allowProd && process.env.NODE_ENV === "production")) {
-    throw new Error("Production Storage writes require NODE_ENV=production and --allow-prod");
+    throw new Error("Production Storage writes require --target production --apply --allow-prod");
   }
 }
 
@@ -118,6 +126,7 @@ async function downloadImage(url: string, referer: string) {
 
 async function prepareImage(entry: ArticleImageEntry, useApprovedHostedBytes: boolean) {
   const sourceUrl = useApprovedHostedBytes ? entry.public_url! : entry.original_image_url!;
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && isManagedDevelopmentSupabaseUrl(sourceUrl)) throw new Error(`${entry.label}: production collection needs the original source image, not a managed-development URL`);
   const input = await downloadImage(sourceUrl, entry.source_page_url!);
   const image = sharp(input).rotate();
   const metadata = await image.metadata();
@@ -214,8 +223,14 @@ export async function collectArticleImages(options: CliOptions) {
       const targetPublicUrl = toMediaPublicUrl(storage.getPublicUrl(objectPath).data.publicUrl);
       if (!targetPublicUrl) throw new Error(`${entry.label}: Storage returned no target public URL`);
 
-      if (entry.public_url === targetPublicUrl && entry.uploaded_path === objectPath) {
-        await verifyPublicReadback(entry.public_url);
+      if (entry.public_url && canonicalArticleMediaUrl(entry.public_url) === targetPublicUrl && entry.uploaded_path === objectPath) {
+        await verifyPublicReadback(targetPublicUrl);
+        const previous = entry.public_url;
+        if (previous !== targetPublicUrl) {
+          entry.public_url = targetPublicUrl;
+          await saveManifest(manifestPath, manifest);
+          if (finalJson) { finalJson.content_md = finalJson.content_md.split(previous).join(targetPublicUrl); await saveFinal(finalPath, finalJson); }
+        }
         continue;
       }
       if (entry.public_url && entry.public_url !== targetPublicUrl && !finalJson && process.env.ARTICLE_PIPELINE_STAGE !== "image_upload") {
@@ -227,10 +242,13 @@ export async function collectArticleImages(options: CliOptions) {
       const previousPublicUrl = entry.public_url ?? null;
       if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
         if (!usedVerifiedArticleImages(manifest, finalJson.content_md).includes(entry)) {
-          throw new Error(`${entry.label}: final.json does not contain the managed-dev public URL`);
+          throw new Error(`${entry.label}: final.json does not contain the previous hosted URL`);
         }
       }
-      const converted = await prepareImage(entry, Boolean(previousPublicUrl));
+      // Development storage must never be a production dependency, including
+      // when converting an older manifest during cutover.
+      const reuseHostedBytes = Boolean(previousPublicUrl && !isManagedDevelopmentSupabaseUrl(previousPublicUrl));
+      const converted = await prepareImage(entry, reuseHostedBytes);
       await uploadArticleImageWithRetries(() => storage.upload(objectPath, converted.bytes, {
         contentType: "image/webp",
         upsert: true,
@@ -263,7 +281,9 @@ export async function collectArticleImages(options: CliOptions) {
 }
 
 async function main() {
-  await collectArticleImages(parseArgs(process.argv.slice(2)));
+  const options = parseArgs(process.argv.slice(2));
+  selectContentTarget(options.target);
+  await collectArticleImages(options);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

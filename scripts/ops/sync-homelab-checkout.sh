@@ -82,7 +82,7 @@ done
 
 (
   cd "$repo_root"
-  NODE_ENV=development node --env-file="$env_path" --import tsx \
+  NODE_ENV=production BLOXODES_ENV_PROFILE=process-only node --env-file="$env_path" --import tsx \
     scripts/ops/check-homelab-article-automation.ts --component discovery
 )
 echo "Homelab synchronized to $expected_sha; timer state was not changed."
