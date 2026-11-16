@@ -75,7 +75,9 @@ One row per Roblox universe (`Universe ID`). Columns: Game, Universe ID, Place I
 
 One row per topic. The CLI shows statuses in lowercase (`pending`) and row IDs as Notion page IDs. Columns: Title, Status, Type, Topic key, Idempotency key, Universe ID, Event ID, Source name, Source URL, Source URLs, Source published, Discovered, Curation model, Curation reason, Curation confidence, Curated, Attempts, Worker, Claimed, Retry after, Run report, Result slug, Result path, Live page, Completed, Published, Dev queue ID. The page body holds the full source evidence as JSON. Dev queue ID is set on rows copied from the old managed-development `article_generation_queue` table.
 
-Duplicates are refused by topic key, idempotency key or a title similarity of 0.8 or more, against the queue and production articles. Notion can't enforce a unique key, so after each add the queue is read again: the earliest row wins and later copies become `Skipped` with Run report `duplicate`.
+Duplicates are refused by topic key, idempotency key or a title similarity of 0.8 or more, against the queue and production articles. Notion can't enforce a unique key, so after each add, and at every curation run, duplicate groups are resolved: a `Completed` or `Published` row and an active `Processing` claim are always kept, and only unfinished duplicates become `Skipped` with Run report `duplicate`. If two finished rows in a group disagree, nothing changes and their IDs are logged for a person to check.
+
+Curation never edits a `Completed` or `Published` row. Publishing checks that the row's Result path, Result slug and file hashes match the bundle before writing and again after marking it `Published`; a mismatch fails loudly and leaves the live page up. The `Snapshot` property names the committed evidence snapshot in the page body; older snapshots go to the trash (`in_trash`, Notion API `2026-03-11`). Queue pages themselves are never trashed.
 
 | Status | Set by | Meaning |
 | --- | --- | --- |

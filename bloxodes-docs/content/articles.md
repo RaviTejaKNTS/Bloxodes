@@ -18,13 +18,13 @@ The factory's article content lives in its `content/articles/<slug>/`.
 
 ## Topic discovery (homelab)
 
-Four times a day (00:00, 06:00, 12:00, 18:00 IST) the homelab runs:
+Four times a day (00:00, 06:00, 12:00, 18:00 IST) the homelab runs curation first, so a full backlog always drains, then discovery:
 
 1. **Discover:** `articles:discover` (`scripts/articles/discover-article-topics.ts`) collects dated Roblox editorial leads.
-2. **Curate:** `articles:curate` (`curate-article-topics.ts`) uses Groq to accept `guide`, `tier_list` and `explainer` topics and reject overlaps with production pages and the queue. Accepted topics become `Pending` rows in the Notion Article Queue. Curation also puts due `Blocked` rows and `Processing` claims older than 6 hours back to `Pending`, and marks later duplicate rows `Skipped` (`duplicate`).
+2. **Curate:** `articles:curate` (`curate-article-topics.ts`) uses Groq to accept `guide`, `tier_list` and `explainer` topics and reject overlaps with production pages and the queue. Accepted topics become `Pending` rows in the Notion Article Queue. Curation also puts due `Blocked` rows and `Processing` claims older than 6 hours back to `Pending`, and marks unfinished duplicate rows `Skipped` (`duplicate`). It never edits a `Completed` or `Published` row.
 That's all the homelab does for articles. The Content Factory writes and publishes them (above), with `content:publish` from the MacBook Pro checkout. The homelab writer, publication and audit units were removed on 2026-10-30. `articles:automation:audit` still works by hand.
 
-The queue is the Notion Article Queue. Discovery candidates and curation runs are in one local state file, `/srv/data/bloxodes-automation-runtime/state/articles/state.json` (`ARTICLE_DISCOVERY_STATE_DIR`), outside the runtime's `current` release so it survives runtime updates. Writes are atomic, and it keeps 90 days, at most 5,000 candidates and 200 runs. Nothing here uses managed development.
+The queue is the Notion Article Queue. Discovery candidates and curation runs are in one local state file, `/srv/data/bloxodes-automation-runtime/state/articles/state.json` (`ARTICLE_DISCOVERY_STATE_DIR`), outside the runtime's `current` release so it survives runtime updates. Discovery and curation share a kernel `flock` on `.writer.lock` in that folder (needs Python 3 with `fcntl` on PATH), released when the process dies. Writes are atomic, and it keeps 90 days and 200 runs. At 5,000 candidates it keeps the newest and logs how many older undecided ones it dropped; candidates in an unfinished curation plan are always kept. Nothing here uses managed development.
 
 The old managed-development tables (`article_generation_queue`, `article_discovery_candidates`, `article_curation_runs`) are kept but no longer written by the factory path. `articles:queue:migrate-to-notion` (dry run by default, `--apply` to write, `--include-published` for published history) copied the open rows on 2026-11-16; it's idempotent through the `Dev queue ID` property and prints an `id_map` from old to new IDs.
 
