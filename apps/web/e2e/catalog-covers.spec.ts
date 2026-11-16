@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test";
 for (const [name, code] of [
   ["game", "roblox-music-ids/games/driving-empire"],
   ["items", "roblox-items-and-bundles"],
-  ["title", "roblox-music-ids"]
+  ["title", "admin-commands"]
 ]) {
   test(`catalog cover: ${name}`, async ({ request }, info) => {
     test.setTimeout(120_000);
