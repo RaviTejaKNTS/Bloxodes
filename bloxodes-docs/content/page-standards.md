@@ -29,6 +29,11 @@ A non-Roblox page is the same page as its Roblox counterpart, minus the Roblox-o
 
 The meta description is 140 to 160 characters: what the page answers, plus the reason to click.
 
+Two things are built by code, not stored:
+
+- **Codes page descriptions** come from live code data (see [codes](codes.md#rules)). They can be shorter than 140 characters when another full sentence won't fit in 160. They're never padded or cut mid-sentence.
+- **Wiki hub titles.** A hub whose stored SEO title is empty or just `<Game> Wiki` gets `<Game> Wiki: A, B, C and Tips` from its first three collections in hub order (`wikiHubSeoTitle`, `apps/web/src/lib/wiki-hub-seo.ts`), for Roblox and non-Roblox hubs alike. It drops to two collections, then the bare title, to stay within 60 characters. A stored fuller title wins. The H1 doesn't change.
+
 ## Headings
 
 Someone who reads only the headings should come away knowing what each section covers. So every heading:
