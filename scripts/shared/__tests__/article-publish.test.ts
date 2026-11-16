@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { bundleSchema, articleFinalSchema } from "../../../contracts/article/v1/schema";
 import { productionArticleDecision, publishedArticleAction, publishedArticlePayload } from "../../content/article-published-update";
@@ -86,27 +86,67 @@ for (const scenario of ["dry-run", "corrupt-image", "video-resolves", "video-mis
   } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
 
-for (const scenario of ["queue-success", "queue-race", "already-published", "failed-verification"]) test(`article acknowledgement ${scenario}`, async () => {
+for (const scenario of ["queue-success", "queue-race", "already-published", "failed-verification", "path-race-during-patch", "path-race-after-patch", "slug-race-after-patch", "hash-race-after-patch", "bundle-race-after-patch", "hash-race-before-ack"]) test(`article acknowledgement ${scenario}`, async () => {
   const { completeArticlePublication } = await import("../../content/article-publish");
+  const root = path.resolve("tmp", `article-ack-${randomUUID()}`);
+  await fs.mkdir(root, { recursive: true });
+  const bytes = Buffer.from(JSON.stringify({ slug, title: "Guide", content_md: "Verified body" }));
+  const binding = { slug, resultPath: path.join(root, "approved.json"), finalPath: path.join(root, "final.json"), sha256: createHash("sha256").update(bytes).digest("hex") };
+  await fs.writeFile(binding.finalPath, bytes); await fs.writeFile(binding.resultPath, bytes);
   const row = { id, workflow_mode: "agent_runner", status: scenario === "already-published" ? "published" : "completed",
-    result_slug: slug, result_path: "tmp/final.json", production_url: scenario === "already-published" ? `https://bloxodes.com/articles/${slug}` : null };
+    result_slug: slug, result_path: binding.resultPath, production_url: scenario === "already-published" ? `https://bloxodes.com/articles/${slug}` : null,
+    updated_at: "2026-11-16T00:00:00.000Z" };
+  let current = { ...row };
   let verified = false, updates = 0;
   const queue = { async update(pageId: string, patch: Record<string, any>, expected: Record<string, any>) {
     assert.equal(pageId, id); assert.equal(verified, true); updates++;
-    assert.deepEqual(expected, { status: "completed", workflow_mode: "agent_runner", result_slug: slug, result_path: "tmp/final.json" });
+    assert.deepEqual(expected, { status: "completed", workflow_mode: "agent_runner", result_slug: slug, result_path: binding.resultPath, updated_at: row.updated_at });
     if (scenario === "queue-race") throw new Error("Article queue changed before update");
     assert.equal(patch.status, "published");
     assert.equal(patch.production_url, `https://bloxodes.com/articles/${slug}`);
     assert.ok(patch.published_at);
-    return { ...row, ...patch };
-  } } as unknown as NotionArticleQueue;
-  const work = () => completeArticlePublication(queue, row, slug, async () => {
+    current = { ...current, ...patch };
+    if (scenario === "path-race-during-patch") current.result_path = path.join(root, "different.json");
+    const saved = { ...current };
+    // Simulate another machine changing unpatched fields after update readback.
+    if (scenario === "path-race-after-patch") current.result_path = path.join(root, "different.json");
+    if (scenario === "slug-race-after-patch") current.result_slug = "other-guide";
+    if (scenario === "hash-race-after-patch") await fs.writeFile(binding.resultPath, JSON.stringify({ slug, title: "Unverified revision" }));
+    if (scenario === "bundle-race-after-patch") await fs.writeFile(binding.finalPath, JSON.stringify({ slug, title: "Unverified revision" }));
+    return saved;
+  }, async get(pageId: string) { assert.equal(pageId, id); return current; } } as unknown as NotionArticleQueue;
+  const work = () => completeArticlePublication(queue, row, binding, async () => {
     if (scenario === "failed-verification") throw new Error("Live check failed");
     verified = true;
+    if (scenario === "hash-race-before-ack") await fs.writeFile(binding.resultPath, JSON.stringify({ slug, title: "Unverified revision" }));
   });
-  if (["queue-race", "failed-verification"].includes(scenario)) await assert.rejects(work);
-  else await work();
-  assert.equal(updates, ["queue-success", "queue-race"].includes(scenario) ? 1 : 0);
+  try {
+    if (scenario === "failed-verification") await assert.rejects(work, /Live check failed/);
+    else if (!["queue-success", "already-published"].includes(scenario)) await assert.rejects(work, /Article publication acknowledgement failed:.*live page is left as published/);
+    else await work();
+    assert.equal(updates, ["already-published", "failed-verification", "hash-race-before-ack"].includes(scenario) ? 0 : 1);
+    assert.equal(verified, scenario !== "failed-verification");
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+for (const status of ["completed", "published"]) test(`article ${status} result must match the bundle before writes`, async () => {
+  const { assertArticleResultBinding } = await import("../../content/article-publish");
+  const root = path.resolve("tmp", `article-binding-${randomUUID()}`);
+  await fs.mkdir(root, { recursive: true });
+  const bytes = Buffer.from(JSON.stringify({ slug, content_md: "Approved body" }));
+  const binding = { slug, resultPath: path.join(root, "approved.json"), finalPath: path.join(root, "final.json"), sha256: createHash("sha256").update(bytes).digest("hex") };
+  const row = { id, status, workflow_mode: "agent_runner", result_slug: slug, result_path: binding.resultPath, production_url: status === "published" ? `https://bloxodes.com/articles/${slug}` : null };
+  try {
+    await fs.writeFile(binding.finalPath, bytes); await fs.writeFile(binding.resultPath, bytes);
+    await assertArticleResultBinding(row, binding);
+    await assert.rejects(assertArticleResultBinding({ ...row, result_path: "tmp/other.json" }, binding), /Result path changed/);
+    await fs.writeFile(binding.resultPath, JSON.stringify({ slug, content_md: "Unapproved body" }));
+    await assert.rejects(assertArticleResultBinding(row, binding), /hash\/slug differs/);
+    // Equal bytes are insufficient if both files identify another article.
+    const wrongSlug = Buffer.from(JSON.stringify({ slug: "other-guide" }));
+    await fs.writeFile(binding.finalPath, wrongSlug); await fs.writeFile(binding.resultPath, wrongSlug);
+    await assert.rejects(assertArticleResultBinding(row, { ...binding, sha256: createHash("sha256").update(wrongSlug).digest("hex") }), /hash\/slug differs/);
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
 
 test("article readback compares bodies after normalizing and still catches real differences", async () => {

@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { resolveArticleDevCredentials } from "./article-queue-env";
-import { createNotionArticleQueue, queueRowOrder, articleQueueBody, articleQueueProperties, type NotionArticleQueue } from "./notion-article-queue";
+import { createNotionArticleQueue, queueWinnerOrder, articleQueueBody, articleQueueProperties, type NotionArticleQueue } from "./notion-article-queue";
 
 export function openArticleQueueRow(row: Record<string, any>) {
   return ["pending", "processing", "blocked"].includes(row.status) || row.status === "completed" && !row.published_at && !row.production_url;
@@ -15,7 +15,7 @@ export async function migrateArticleQueue(rows: Record<string, any>[], queue: No
   const counts = { open: rows.filter(openArticleQueueRow).length, selected: selected.length, already_copied: 0, would_copy: 0, copied: 0, id_map: {} as Record<string, string>, by_status: {} as Record<string, number> };
   for (const row of selected) {
     counts.by_status[row.status] = (counts.by_status[row.status] ?? 0) + 1;
-    const copied = existing.filter(page => page.dev_queue_id === row.id).sort(queueRowOrder)[0];
+    const copied = existing.filter(page => page.dev_queue_id === row.id).sort(queueWinnerOrder)[0];
     if (copied) { counts.already_copied++; counts.id_map[row.id] = copied.id; continue; }
     articleQueueProperties(row);
     articleQueueBody({ ...row, dev_queue_id: row.id });
@@ -24,11 +24,9 @@ export async function migrateArticleQueue(rows: Record<string, any>[], queue: No
     // Preserve every source field, including workflow, dates, paths and evidence.
     // Dev queue ID is independent of editorial dedupe so no open row is lost.
     const created = await queue.create({ ...row, dev_queue_id: row.id, id: undefined });
-    const copies = (await queue.list({ property: "Dev queue ID", rich_text: { equals: row.id } })).sort(queueRowOrder);
-    const winner = copies[0] ?? created;
-    for (const later of copies.filter(page => page.id !== winner.id)) {
-      await queue.update(later.id, { status: "skipped", outcome_reason: "duplicate" });
-    }
+    const copies = await queue.list({ property: "Dev queue ID", rich_text: { equals: row.id } });
+    await queue.reconcileDuplicates(copies);
+    const winner = copies.filter(page => page.status !== "skipped").sort(queueWinnerOrder)[0] ?? created;
     counts.id_map[row.id] = winner.id;
     existing.push(winner);
     counts.copied++;

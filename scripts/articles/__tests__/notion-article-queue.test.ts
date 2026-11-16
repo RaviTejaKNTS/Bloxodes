@@ -1,22 +1,43 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { randomUUID } from "node:crypto";
-import { NotionArticleQueue, ARTICLE_QUEUE_SOURCE, articleQueueProperties, articleQueueBody, articleQueueBodyData, articleQueueFromPage, duplicateQueueRow, notionRichText, type ArticleQueueRow } from "../notion-article-queue";
+import { NotionArticleQueue, ARTICLE_QUEUE_SOURCE, ARTICLE_QUEUE_DATABASE, articleQueueProperties, articleQueueBody, articleQueueBodyData, articleQueueFromPage, duplicateQueueRow, notionRichText, type ArticleQueueRow } from "../notion-article-queue";
+import { CodesQueue } from "../../codes/discovery-io";
 import { migrateArticleQueue } from "../migrate-article-queue-to-notion";
 
 const row = (extra: Record<string, any> = {}) => ({ article_title: "Fisch Kraken Boss Guide", article_type: "guide", status: "pending", topic_key: "fisch-kraken-boss",
   source_urls: ["https://example.com/guide"], source_items: [{ evidence: "evidence ".repeat(500) }], source_metadata: { count: 1 }, workflow_mode: "agent_runner", ...extra });
 function page(payload: Record<string, any>, id = randomUUID(), created = "2026-11-01T00:00:00Z") {
-  return { id, created_time: created, last_edited_time: created, parent: { data_source_id: ARTICLE_QUEUE_SOURCE }, properties: articleQueueProperties(payload), blocks: articleQueueBody(payload) };
+  return { id, created_time: created, last_edited_time: created, in_trash: false, parent: { type: "data_source_id", data_source_id: ARTICLE_QUEUE_SOURCE }, properties: articleQueueProperties(payload), blocks: articleQueueBody(payload).map(block => ({ id: randomUUID(), in_trash: false, ...block })) };
 }
 function fixture() {
   const pages = new Map<string, any>();
   const mutations: string[] = [];
+  const requests: Array<{ route: string; method: string; body: any }> = [];
   let beforeCreate: (() => void) | undefined;
   let uncertain = false;
+  function validatePayload(body: any) {
+    // These fields were removed in Notion-Version 2026-03-11.
+    if (body && ("archived" in body || "after" in body)) throw new Error("Notion 2026-03-11 rejects archived/after");
+    for (const property of Object.values(body?.properties ?? {}) as any[]) {
+      assert.equal(Object.keys(property).length, 1);
+      for (const text of property.rich_text ?? property.title ?? []) {
+        assert.equal(text.type, "text"); assert.ok(text.text.content.length <= 2000);
+      }
+    }
+    for (const block of body?.children ?? []) {
+      assert.equal(block.type, "code"); assert.equal(block.code.language, "json");
+      assert.ok(block.code.caption.length <= 100); assert.ok(block.code.rich_text.length <= 100);
+      for (const part of [...block.code.caption, ...block.code.rich_text]) assert.ok(part.text.content.length <= 2000);
+    }
+    assert.ok((body?.children?.length ?? 0) <= 100);
+  }
   const api = {
     async call(route: string, method = "GET", body?: any): Promise<any> {
+      validatePayload(body);
+      requests.push({ route, method, body });
       if (route.startsWith("data_sources/") && route.endsWith("/query")) {
+        assert.equal(route, `data_sources/${ARTICLE_QUEUE_SOURCE}/query`); assert.equal(method, "POST");
         let found = [...pages.values()];
         if (body.filter?.property === "Dev queue ID") found = found.filter(p => articleQueueFromPage(p).dev_queue_id === body.filter.rich_text.equals);
         return { results: found, has_more: false };
@@ -31,16 +52,19 @@ function fixture() {
       if (route.startsWith("blocks/") && route.includes("/children")) {
         const p = pages.get(id);
         if (method === "PATCH") { mutations.push(route); p.blocks.push(...body.children.map((block: any) => ({ id: randomUUID(), ...block }))); }
-        return { results: p.blocks.filter((block: any) => !block.archived), has_more: false };
+        return { results: p.blocks.filter((block: any) => !block.in_trash), has_more: false };
       }
       if (route.startsWith("blocks/") && method === "PATCH") {
         mutations.push(route);
-        for (const p of pages.values()) for (const block of p.blocks) if (block.id === id) block.archived = body.archived;
+        assert.equal(body.in_trash, true);
+        for (const p of pages.values()) for (const block of p.blocks) if (block.id === id) block.in_trash = body.in_trash;
         return {};
       }
       throw new Error(`Unexpected ${method} ${route}`);
     },
     async callCreate(body: any) {
+      validatePayload(body);
+      assert.deepEqual(body.parent, { type: "data_source_id", data_source_id: ARTICLE_QUEUE_SOURCE });
       beforeCreate?.();
       mutations.push("create");
       const p = { ...page({}), properties: body.properties, blocks: body.children.map((block: any) => ({ id: randomUUID(), ...block })) };
@@ -49,8 +73,40 @@ function fixture() {
       return p;
     }
   };
-  return { queue: new NotionArticleQueue(api), pages, mutations, race: (fn: () => void) => { beforeCreate = fn; }, uncertain: () => { uncertain = true; } };
+  return { queue: new NotionArticleQueue(api), api, pages, mutations, requests,
+    race: (fn: () => void) => { beforeCreate = fn; }, uncertain: () => { uncertain = true; } };
 }
+
+test("the Notion transport pins 2026-03-11 and uses data-source page parents", async () => {
+  const calls: Array<{ url: string; init: RequestInit }> = [];
+  const request = async (url: string, init: RequestInit = {}) => { calls.push({ url, init }); return JSON.stringify({ results: [], has_more: false }); };
+  const transport = new CodesQueue(request, "test-token", ARTICLE_QUEUE_SOURCE, ARTICLE_QUEUE_DATABASE, (async (input, init) => {
+    calls.push({ url: String(input), init: init! }); return new Response(JSON.stringify({ id: randomUUID() }));
+  }) as typeof fetch);
+  await transport.call(`data_sources/${ARTICLE_QUEUE_SOURCE}/query`, "POST", { page_size: 100 });
+  await transport.callCreate({ parent: { type: "data_source_id", data_source_id: ARTICLE_QUEUE_SOURCE }, properties: articleQueueProperties(row()), children: articleQueueBody(row()) });
+  assert.deepEqual(calls.map(call => call.url), [`https://api.notion.com/v1/data_sources/${ARTICLE_QUEUE_SOURCE}/query`, "https://api.notion.com/v1/pages"]);
+  assert.ok(calls.every(call => new Headers(call.init.headers).get("Notion-Version") === "2026-03-11"));
+});
+
+test("claim/completion snapshot cleanup uses in_trash and keeps the queue page", async () => {
+  const f = fixture();
+  const saved = await f.queue.create(row());
+  await assert.rejects(f.api.call(`blocks/${randomUUID()}`, "PATCH", { archived: true }), /2026-03-11 rejects/);
+  await f.queue.update(saved.id, { status: "processing", last_attempted_at: "2026-11-16", last_error: null }, { status: "pending" });
+  await f.queue.update(saved.id, { status: "completed", result_slug: "guide", result_path: "tmp/final.json", rejected_at: null }, { status: "processing" });
+  const p = f.pages.get(saved.id);
+  assert.equal(p.in_trash, false);
+  assert.equal((await f.queue.get(saved.id)).status, "completed");
+  assert.equal(p.blocks.filter((block: any) => !block.in_trash).length, 1);
+  assert.equal(p.blocks.filter((block: any) => block.in_trash).length, 2);
+  assert.ok(f.requests.filter(request => request.route.startsWith("blocks/") && !request.route.includes("/children") && request.method === "PATCH").every(request => request.body.in_trash === true));
+});
+
+test("trashed 2026-03-11 pages are rejected without an archived field", async () => {
+  const f = fixture(); const p = page(row()); p.in_trash = true; f.pages.set(p.id, p);
+  await assert.rejects(f.queue.get(p.id), /not an active Article Queue row/);
+});
 
 test("Notion properties split long text without losing Unicode or URLs", () => {
   const text = "🙂".repeat(2200) + "tail";
@@ -186,4 +242,85 @@ test("a later scheduled run reconciles duplicate pages left by an interrupted cr
   assert.equal((await f.queue.get(first.id)).status, "pending");
   assert.equal((await f.queue.get(second.id)).status, "skipped");
   assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 0);
+});
+
+for (const status of ["completed", "published"]) test(`duplicate cleanup preserves a later ${status} row and active claims`, async () => {
+  const f = fixture();
+  const now = Date.parse("2026-11-16T12:00:00Z");
+  const extras = [
+    { status: "pending" }, { status: "blocked" },
+    { status: "processing", locked_at: "2026-11-16T00:00:00Z" },
+    { status: "processing", locked_at: "2026-11-16T11:00:00Z" },
+    { status, result_path: "tmp/approved/final.json", result_slug: "guide" },
+  ];
+  for (const [index, extra] of extras.entries()) {
+    const p = page(row(extra), randomUUID(), `2026-11-0${index + 1}T00:00:00Z`); f.pages.set(p.id, p);
+  }
+  const rows = await f.queue.list();
+  assert.equal(await f.queue.reconcileDuplicates(rows, now), 3);
+  const saved = await f.queue.list();
+  assert.equal(saved.filter(item => item.status === status).length, 1);
+  assert.equal(saved.filter(item => item.status === "processing").length, 1);
+  assert.equal(saved.filter(item => item.status === "skipped").length, 3);
+  assert.equal((await f.queue.put(row())).row.status, status);
+});
+
+test("conflicting finished duplicates leave the entire group unchanged and log IDs", async t => {
+  const f = fixture();
+  for (const extra of [{ status: "pending" }, { status: "completed", result_path: "tmp/a/final.json", result_slug: "guide" }, { status: "published", result_path: "tmp/b/final.json", result_slug: "guide" }]) {
+    const p = page(row(extra)); f.pages.set(p.id, p);
+  }
+  const messages: string[] = [];
+  t.mock.method(console, "error", (message: string) => messages.push(message));
+  assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 0);
+  assert.deepEqual(f.mutations, []);
+  assert.match(messages[0], /conflicting finished duplicates.*No rows.*inspect/i);
+  for (const item of [...f.pages.values()].filter(p => p.properties.Status.select.name !== "Pending")) assert.ok(messages[0].includes(item.id));
+});
+
+test("duplicate cleanup keeps distinct topics linked only through a skipped similar title", async () => {
+  const f = fixture();
+  for (const [index, title] of ["Alpha Bravo Charlie Delta", "Alpha Bravo Charlie Delta Echo", "Bravo Charlie Delta Echo"].entries()) {
+    const p = page(row({ article_title: title, topic_key: `topic-${index}` }), randomUUID(), `2026-11-0${index + 1}T00:00:00Z`); f.pages.set(p.id, p);
+  }
+  assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 1);
+  assert.deepEqual((await f.queue.list()).map(item => item.status), ["pending", "skipped", "pending"]);
+});
+
+test("a duplicate completed after the scheduler snapshot is never skipped", async () => {
+  const f = fixture();
+  const first = page(row(), randomUUID(), "2026-11-01T00:00:00Z");
+  const second = page(row(), randomUUID(), "2026-11-02T00:00:00Z");
+  f.pages.set(first.id, first); f.pages.set(second.id, second);
+  const snapshot = await f.queue.list();
+  Object.assign(second.properties, articleQueueProperties({ status: "completed", result_path: "tmp/final.json", result_slug: "guide" }));
+  await assert.rejects(f.queue.reconcileDuplicates(snapshot), /changed before update/);
+  assert.deepEqual(f.mutations, []);
+  assert.equal((await f.queue.get(second.id)).status, "completed");
+});
+
+test("finished duplicate rows with the same result are retained", async () => {
+  const f = fixture();
+  for (const status of ["pending", "completed", "published"]) { const p = page(row({ status, result_path: "tmp/final.json", result_slug: "guide" })); f.pages.set(p.id, p); }
+  assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 1);
+  assert.deepEqual((await f.queue.list()).map(item => item.status).sort(), ["completed", "published", "skipped"]);
+});
+
+test("claim recovery rechecks a row completed on another machine before changing it", async () => {
+  const f = fixture();
+  const saved = await f.queue.create(row({ status: "processing", locked_at: "2026-11-16T00:00:00Z" }));
+  const snapshot = await f.queue.list();
+  Object.assign(f.pages.get(saved.id).properties, articleQueueProperties({ status: "completed" }));
+  const before = f.mutations.length;
+  assert.equal(await f.queue.recoverClaims(snapshot, Date.parse("2026-11-16T12:00:00Z")), 0);
+  assert.equal(f.mutations.length, before);
+});
+
+test("migration duplicate reconciliation retains a newly completed copy", async () => {
+  const f = fixture(); const devId = randomUUID();
+  let olderId = "";
+  f.race(() => { const p = page(row({ dev_queue_id: devId }), randomUUID(), "2026-10-01T00:00:00Z"); olderId = p.id; f.pages.set(p.id, p); });
+  const result = await migrateArticleQueue([row({ id: devId, status: "completed", result_path: "tmp/final.json", result_slug: "guide" })], f.queue, true);
+  assert.equal((await f.queue.get(result.id_map[devId])).status, "completed");
+  assert.equal((await f.queue.get(olderId)).status, "skipped");
 });

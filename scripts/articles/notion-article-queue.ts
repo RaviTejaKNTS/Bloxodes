@@ -139,6 +139,9 @@ export function duplicateQueueRow(rows: ArticleQueueRow[], incoming: Record<stri
 }
 export const queueRowOrder = (a: ArticleQueueRow, b: ArticleQueueRow) =>
   String(a.notion_created_at ?? a.created_at).localeCompare(String(b.notion_created_at ?? b.created_at)) || a.id.localeCompare(b.id);
+export const articleQueueFinished = (row: ArticleQueueRow) => ["completed", "published"].includes(row.status);
+export const queueWinnerOrder = (a: ArticleQueueRow, b: ArticleQueueRow) =>
+  Number(articleQueueFinished(b)) - Number(articleQueueFinished(a)) || queueRowOrder(a, b);
 
 export const ARTICLE_QUEUE_CLAIM_TTL_MS = 6 * 3600_000;
 export function articleQueueClaimExpired(row: ArticleQueueRow, now = Date.now()) {
@@ -161,7 +164,7 @@ export class NotionArticleQueue {
     for (const name of ["guide", "tier_list", "explainer", "how_to", "listicle", "news", "opinion"]) if (!schema.properties.Type.select.options.some((option: any) => option.name === name)) throw new Error(`Article Queue is missing type ${name}.`);
   }
   private assertPage(page: any) {
-    if (page.archived || page.in_trash || page.parent?.data_source_id?.replaceAll("-", "") !== this.source.replaceAll("-", "")) throw new Error("Page is not an active Article Queue row.");
+    if (page.in_trash || page.parent?.data_source_id?.replaceAll("-", "") !== this.source.replaceAll("-", "")) throw new Error("Page is not an active Article Queue row.");
   }
   async list(filter?: unknown): Promise<ArticleQueueRow[]> {
     const rows: ArticleQueueRow[] = [];
@@ -212,7 +215,7 @@ export class NotionArticleQueue {
       const snapshots = blocks.filter(block => plain(block.code?.caption).startsWith(`${BODY_MARKER}/`));
       const newest = plain(snapshots.at(-1)?.code?.caption).split("/")[1];
       for (const block of snapshots) if (plain(block.code.caption).split("/")[1] !== newest) {
-        await this.api.call(`blocks/${block.id}`, "PATCH", { archived: true });
+        await this.api.call(`blocks/${block.id}`, "PATCH", { in_trash: true });
       }
     }
     return saved;
@@ -224,17 +227,36 @@ export class NotionArticleQueue {
     // Never retry an uncertain create. A subsequent invocation re-queries first.
     return this.get(page.id);
   }
-  async reconcileDuplicates(rows: ArticleQueueRow[]) {
-    const winners: ArticleQueueRow[] = [];
-    let skipped = 0;
+  async reconcileDuplicates(rows: ArticleQueueRow[], now = Date.now()) {
+    // Build whole duplicate groups before writing. A later finished row may
+    // supersede an older pending row, or reveal conflicting finished work.
+    const groups: ArticleQueueRow[][] = [];
     for (const row of [...rows].sort(queueRowOrder)) {
       if (!ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status)) continue;
-      const earlier = winners.find(candidate => candidate.id !== row.id && duplicateQueueRow([candidate], row));
-      if (!earlier) { winners.push(row); continue; }
-      const saved = await this.update(row.id, { status: "skipped", outcome_reason: "duplicate", locked_at: null, locked_by: null },
-        { status: row.status, updated_at: row.updated_at });
-      Object.assign(row, saved);
-      skipped++;
+      const matches = groups.filter(group => group.some(candidate => duplicateQueueRow([candidate], row)));
+      const group = [row, ...matches.flat()];
+      for (const match of matches) groups.splice(groups.indexOf(match), 1);
+      groups.push(group);
+    }
+    let skipped = 0;
+    for (const group of groups) {
+      const finished = group.filter(articleQueueFinished).sort(queueRowOrder);
+      if (finished.length > 1 && finished.some(row => !row.result_path || !row.result_slug || row.result_path !== finished[0].result_path || row.result_slug !== finished[0].result_slug)) {
+        console.error(`Article queue has conflicting finished duplicates: ${finished.map(row => row.id).join(", ")}. No rows in this group changed; inspect the results manually.`);
+        continue;
+      }
+      const active = group.filter(row => row.status === "processing" && !articleQueueClaimExpired(row, now)).sort(queueRowOrder);
+      const winners = [...finished, ...active, ...group.filter(row => row.status === "rejected")];
+      for (const row of group.sort(queueRowOrder)) {
+        if (winners.some(winner => winner.id === row.id)) continue;
+        // Similarity is not transitive. Keep a row unless a retained row
+        // directly matches it, even if both belong to one duplicate group.
+        if (!duplicateQueueRow(winners, row)) { winners.push(row); continue; }
+        const saved = await this.update(row.id, { status: "skipped", outcome_reason: "duplicate", locked_at: null, locked_by: null },
+          { status: row.status, updated_at: row.updated_at, result_path: row.result_path, result_slug: row.result_slug });
+        Object.assign(row, saved);
+        skipped++;
+      }
     }
     return skipped;
   }
@@ -254,13 +276,13 @@ export class NotionArticleQueue {
     const payload = { ...row, idempotency_key: row.idempotency_key ?? articleQueueIdempotencyKey(row.article_title, row.universe_id ?? null) };
     const before = await this.list();
     await this.reconcileDuplicates(before);
-    const existing = duplicateQueueRow(before, payload);
+    const existing = duplicateQueueRow(before.sort(queueWinnerOrder), payload);
     if (existing) return { row: await this.get(existing.id), created: false };
     const created = await this.create(payload);
     const all = await this.list();
     await this.reconcileDuplicates(all);
     const matches = all.filter(candidate => duplicateQueueRow([candidate], payload));
-    const winner = matches.sort(queueRowOrder)[0] ?? created;
+    const winner = matches.sort(queueWinnerOrder)[0] ?? created;
     return { row: await this.get(winner.id), created: winner.id === created.id };
   }
 }

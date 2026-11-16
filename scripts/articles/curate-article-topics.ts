@@ -438,18 +438,7 @@ function queueSourceItem(candidate: CandidateRow): QueueSourceItem {
   };
 }
 
-function mergeJsonRows<T extends object>(existing: unknown, incoming: T[], key: keyof T): Record<string, unknown>[] {
-  const rows = Array.isArray(existing) ? existing.filter((row): row is Record<string, unknown> => Boolean(row && typeof row === "object")) : [];
-  const merged = new Map<string, Record<string, unknown>>();
-  for (const inputRow of [...rows, ...incoming]) {
-    const row = inputRow as Record<string, unknown>;
-    const value = typeof row[key as string] === "string" ? row[key as string] : JSON.stringify(row);
-    merged.set(String(value), row);
-  }
-  return [...merged.values()];
-}
-
-async function createOrMergeQueueItem(
+export async function createOrFindQueueItem(
   queue: NotionArticleQueue, decision: CurationDecision, candidates: CandidateRow[], runId: string, model: string
 ): Promise<string> {
   const primary = candidates[Number(decision.primary_candidate_id!.slice(1))];
@@ -465,15 +454,8 @@ async function createOrMergeQueueItem(
     curated_at: new Date().toISOString(),
     source_metadata: { candidate_ids: sourceItems.map(item => item.candidate_id), grouped_source_count: sourceItems.length, primary_candidate_id: primary.id }
   });
-  if (!result.created) {
-    const existing = result.row;
-    const mergedItems = mergeJsonRows(existing.source_items, sourceItems, "source_url");
-    const mergedUrls = [...new Set([...existing.source_urls, ...sourceUrls])];
-    if (JSON.stringify(mergedItems) !== JSON.stringify(existing.source_items) || JSON.stringify(mergedUrls) !== JSON.stringify(existing.source_urls)) {
-      await queue.update(existing.id, { source_items: mergedItems, source_urls: mergedUrls, sources: mergedUrls.join("\n"),
-        source_metadata: { ...existing.source_metadata, candidate_ids: mergedItems.map(item => item.candidate_id).filter(Boolean), grouped_source_count: mergedItems.length } });
-    }
-  }
+  // Curation only creates new topics. Existing results and their evidence
+  // belong to the article run, which may be publishing on another machine.
   return result.row.id;
 }
 
@@ -571,7 +553,7 @@ async function main() {
       if (!options.apply) { console.log("Dry run: no Notion pages or state files changed."); return; }
       const idsByAlias = new Map<string, Array<{ queueId: string; decision: CurationDecision }>>();
       for (const decision of decisions.filter(decision => decision.decision === "approve")) {
-        const queueId = await createOrMergeQueueItem(queue, decision, candidates, run.id, run.model);
+        const queueId = await createOrFindQueueItem(queue, decision, candidates, run.id, run.model);
         for (const alias of decision.candidate_ids) idsByAlias.set(alias, [...(idsByAlias.get(alias) ?? []), { queueId, decision }]);
       }
       let approved = 0, rejected = 0;

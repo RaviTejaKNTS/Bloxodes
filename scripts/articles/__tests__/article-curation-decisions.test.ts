@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { validateDecisions } from "../curate-article-topics";
+import { createOrFindQueueItem, validateDecisions } from "../curate-article-topics";
+import type { NotionArticleQueue } from "../notion-article-queue";
 
 const candidates = [{
   id: "candidate-1",
@@ -15,6 +16,18 @@ const candidates = [{
   source_categories: ["Roblox"],
   discovered_from: "https://example.com/roblox"
 }];
+
+for (const status of ["completed", "published", "processing", "pending", "blocked"]) test(`curation reuses a ${status} topic without modifying its evidence`, async () => {
+  const queue = {
+    put: async () => ({ created: false, row: { id: "existing-topic", status, source_items: [], source_urls: [] } }),
+    update: async () => { assert.fail("Curation must not merge evidence into an existing article result"); },
+  } as unknown as NotionArticleQueue;
+  const id = await createOrFindQueueItem(queue, {
+    candidate_ids: ["C0"], primary_candidate_id: "C0", decision: "approve", canonical_title: "Game Name New Boss Guide", article_type: "guide",
+    topic_key: "new-boss", reason_code: "approved", reason: "Supports the boss task.", confidence: 0.9,
+  }, candidates, "run", "test-model");
+  assert.equal(id, "existing-topic");
+});
 
 test("allows one source lead to support multiple distinct approved angles", () => {
   const decisions = validateDecisions({ decisions: [

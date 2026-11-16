@@ -17,8 +17,8 @@ Environment=HOME=/home/teja
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
 Environment=BLOXODES_AUTOMATION_RUNTIME=1
 Environment=BLOXODES_CI_QA=1
-ExecStart=/usr/bin/npm run articles:discover -- --apply
 ExecStart=/usr/bin/npm run articles:curate -- --apply
+ExecStart=/usr/bin/npm run articles:discover -- --apply
 UMask=0077
 MemoryMax=512M
 Nice=10
