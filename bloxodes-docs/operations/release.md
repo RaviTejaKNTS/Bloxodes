@@ -12,10 +12,19 @@ How code and content reach production. GitHub does the checking, building and de
 4. **`pull-request.yml`** sorts the diff. Docs and skills skip the heavy jobs. Code runs migration integrity, env contracts, script tests and the affected app checks. Web changes get a production build, cold/warm catalog pagination and filter/failure regression, and desktop and mobile browser smoke tests with screenshots. The PR build uses a GitHub-only read fixture for music, decal and mesh REST queries; other content still reads managed development. Catalog regression writes no database rows and saves its SHA-bound report under `tmp/test-reports/`. Production image builds do not load this fixture. The `checks` job runs one PR at a time (`bloxodes-pr-checks` lane, `queue: max`), because parallel runs overloaded managed development and timed out together; expect to wait for runs ahead of yours. Its `public-data-errors` job runs the web unit tests (including the data-error guard and the loader, route and sitemap failure tests) on its own, before the managed schema checks, and `Required PR checks` needs it for web changes. Manual runs compare the branch against `origin/production`.
 5. **`Required PR checks`** is the single required check. Branch protection enforces it, including for admins, and blocks force pushes. No human approval is required by GitHub; release permission comes from the owner.
 6. **`codex-review.yml`** (Selective Claude review) runs a read-only Claude Haiku 5.5 code review through the Claude Code CLI when a ready, same-repo code PR opens. It may only read files and run `git diff/show/log`. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
-7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly.
+7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly. Follow [merge order](#merge-order) when other PRs are open.
 8. **Sync.** GitHub deletes the remote branch. Fast-forward the clean main checkouts (homelab and Mac) to the released SHA. Agents don't delete worktrees. `t3-worktree-reaper` runs on the homelab and the MacBook Pro and removes a clean worktree after its thread has been settled for 3 days. It keeps the local branch and refuses a worktree with uncommitted changes.
 
 Use `bloxodes-release-e2e` for the full release flow.
+
+### Merge order
+
+Branch protection is strict: a PR merges only when its branch is up to date with `production` and its checks passed on that exact head. Every merge makes all other open PRs fall behind, and each catch-up costs a full check run (about 30 to 55 minutes including the wait for the one-at-a-time lane). When threads update their branches at the same time, they keep pushing each other behind and never merge. Keep strict mode on: it is the only full test of each PR as it will land, because the deploy only rebuilds and smoke-tests a few pages.
+
+1. **Merge one PR at a time.** Merge as soon as the checks pass on an up-to-date head.
+2. **Check before you update.** Before `gh pr update-branch <n>`, list the open PRs (`gh pr list --base production`) and the running and queued `Pull request checks` runs (`gh run list --workflow pull-request.yml --status in_progress` and `--status queued`). If another PR's checks are running or waiting, don't update yours. Wait until that PR merges or its checks fail, then update once.
+3. **Cancel stale runs.** A queued run that will be behind once the PR ahead merges is wasted time in the lane. Cancel it with `gh run cancel <run-id>`.
+4. **The lead sets the order.** When more than one PR is ready, the lead thread picks the order (usually the one whose checks are furthest along goes first) and tells the other threads to wait. Threads that own a PR follow that order.
 
 ## Deploy
 
