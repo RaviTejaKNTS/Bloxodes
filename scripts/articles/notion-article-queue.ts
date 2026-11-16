@@ -33,7 +33,9 @@ const textFields: Record<string, string> = {
   topic_key: "Topic key", idempotency_key: "Idempotency key", event_id: "Event ID",
   source_name: "Source name", source_urls: "Source URLs", curation_model: "Curation model",
   curation_reason: "Curation reason", locked_by: "Worker", outcome_reason: "Run report",
-  result_slug: "Result slug", result_path: "Result path", dev_queue_id: "Dev queue ID"
+  result_slug: "Result slug", result_path: "Result path", dev_queue_id: "Dev queue ID",
+  // Generation id of the committed body snapshot. A snapshot counts only once this property names it.
+  body_generation: "Snapshot"
 };
 const numberFields: Record<string, string> = { universe_id: "Universe ID", curation_confidence: "Curation confidence", attempts: "Attempts" };
 const dateFields: Record<string, string> = {
@@ -78,7 +80,8 @@ export function articleQueueProperties(row: Record<string, any>) {
 // Full snapshots keep source evidence and legacy fields out of 2,000-char properties.
 // Each snapshot is one API request. Incomplete snapshots are ignored on readback.
 export function articleQueueBody(row: Record<string, any>, generation = randomUUID()) {
-  const serialized = JSON.stringify(row);
+  const { body_generation: _ignored, ...evidence } = row;
+  const serialized = JSON.stringify(evidence);
   if (Buffer.byteLength(serialized) > 200_000) throw new Error("Article queue evidence exceeds the 200 KB page snapshot limit.");
   const chunks: string[] = [];
   let chunk = "";
@@ -93,7 +96,9 @@ export function articleQueueBody(row: Record<string, any>, generation = randomUU
   } }));
 }
 
-export function articleQueueBodyData(blocks: any[]): Record<string, any> {
+// With a committed generation, only that snapshot is read, so a snapshot appended
+// before a failed property write never shows. Rows without one use the newest complete snapshot.
+export function articleQueueBodyData(blocks: any[], committed: string | null = null): Record<string, any> {
   const groups = new Map<string, { total: number; parts: Map<number, string> }>();
   for (const block of blocks) {
     const caption = plain(block.code?.caption);
@@ -104,10 +109,12 @@ export function articleQueueBodyData(blocks: any[]): Record<string, any> {
     groups.set(generation, group);
   }
   let result = {};
-  for (const group of groups.values()) if (group.parts.size === group.total) {
+  for (const [generation, group] of groups) if (group.parts.size === group.total) {
+    if (committed && generation !== committed) continue;
     const parts = Array.from({ length: group.total }, (_, index) => group.parts.get(index));
     if (parts.every(part => typeof part === "string")) result = JSON.parse(parts.join(""));
   }
+  if (committed && !Object.keys(result).length) throw new Error(`Article Queue snapshot ${committed} is missing or incomplete.`);
   return result;
 }
 
@@ -183,7 +190,8 @@ export class NotionArticleQueue {
     if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error("Article Queue ID must be a Notion page UUID.");
     const page = await this.api.call(`pages/${id}`);
     this.assertPage(page);
-    return { ...articleQueueFromPage(page, withBody ? articleQueueBodyData(await this.blocks(id)) : {}), notion_created_at: page.created_time };
+    const committed = plain(page.properties?.Snapshot?.rich_text) || null;
+    return { ...articleQueueFromPage(page, withBody ? articleQueueBodyData(await this.blocks(id), committed) : {}), notion_created_at: page.created_time };
   }
   private async blocks(id: string) {
     const blocks: any[] = [];
@@ -200,9 +208,11 @@ export class NotionArticleQueue {
     if (expected && Object.entries(expected).some(([key, value]) => current[key] !== value)) throw new Error("Article queue changed before update; inspect and rerun.");
     const propertyFields = new Set(["article_title", "article_type", "status", ...Object.keys(textFields), ...Object.keys(numberFields), ...Object.keys(dateFields), ...Object.keys(urlFields), "updated_at"]);
     const bodyChanged = Object.keys(patch).some(field => !propertyFields.has(field));
+    const generation = randomUUID();
     if (bodyChanged) {
-      // Append one complete evidence snapshot before changing any visible status.
-      await this.api.call(`blocks/${id}/children`, "PATCH", { children: articleQueueBody({ ...current, ...patch }) });
+      // Append the snapshot first. It only counts once the property write below names it.
+      await this.api.call(`blocks/${id}/children`, "PATCH", { children: articleQueueBody({ ...current, ...patch }, generation) });
+      patch = { ...patch, body_generation: generation };
     }
     await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties(patch) });
     const saved = await this.get(id);
@@ -213,8 +223,7 @@ export class NotionArticleQueue {
     if (bodyChanged) {
       const blocks = await this.blocks(id);
       const snapshots = blocks.filter(block => plain(block.code?.caption).startsWith(`${BODY_MARKER}/`));
-      const newest = plain(snapshots.at(-1)?.code?.caption).split("/")[1];
-      for (const block of snapshots) if (plain(block.code.caption).split("/")[1] !== newest) {
+      for (const block of snapshots) if (plain(block.code.caption).split("/")[1] !== generation) {
         await this.api.call(`blocks/${block.id}`, "PATCH", { in_trash: true });
       }
     }
@@ -223,7 +232,8 @@ export class NotionArticleQueue {
   async create(row: Record<string, any>) {
     const payload = { workflow_mode: "agent_runner", ...row,
       idempotency_key: "idempotency_key" in row ? row.idempotency_key : articleQueueIdempotencyKey(String(row.article_title ?? ""), row.universe_id ?? null) };
-    const page = await this.api.callCreate({ parent: { type: "data_source_id", data_source_id: this.source }, properties: articleQueueProperties(payload), children: articleQueueBody(payload) });
+    const generation = randomUUID();
+    const page = await this.api.callCreate({ parent: { type: "data_source_id", data_source_id: this.source }, properties: articleQueueProperties({ ...payload, body_generation: generation }), children: articleQueueBody(payload, generation) });
     // Never retry an uncertain create. A subsequent invocation re-queries first.
     return this.get(page.id);
   }

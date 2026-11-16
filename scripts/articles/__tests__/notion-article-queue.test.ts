@@ -130,6 +130,33 @@ test("body snapshots retain full evidence and ignore an interrupted newer snapsh
   assert.throws(() => articleQueueBody(row({ source_items: ["x".repeat(210000)] })), /200 KB/);
 });
 
+test("a snapshot appended before a failed property write never shows", async () => {
+  const f = fixture();
+  const saved = await f.queue.create(row({ last_error: "first" }));
+  const call = f.api.call.bind(f.api);
+  f.api.call = async (route: string, method = "GET", body?: any) => {
+    if (route === `pages/${saved.id}` && method === "PATCH") throw new Error("property write failed");
+    return call(route, method, body);
+  };
+  await assert.rejects(f.queue.update(saved.id, { status: "blocked", last_error: "never committed", rejected_at: "2026-11-16" }, { status: "pending" }), /property write failed/);
+  f.api.call = call;
+  const after = await f.queue.get(saved.id);
+  assert.equal(after.status, "pending");
+  assert.equal(after.last_error, "first");
+  assert.equal(after.rejected_at ?? null, null);
+  await f.queue.update(saved.id, { status: "blocked", last_error: "committed" }, { status: "pending" });
+  assert.equal((await f.queue.get(saved.id)).last_error, "committed");
+  assert.equal(f.pages.get(saved.id).blocks.filter((block: any) => !block.in_trash).length, 1);
+});
+
+test("a committed snapshot generation wins over a complete uncommitted one", () => {
+  const committed = row({ event_id: "kept" });
+  const blocks = [...articleQueueBody(committed, "a"), ...articleQueueBody(row({ event_id: "uncommitted" }), "b")];
+  assert.equal(articleQueueBodyData(blocks, "a").event_id, "kept");
+  assert.equal(articleQueueBodyData(blocks).event_id, "uncommitted");
+  assert.throws(() => articleQueueBodyData(blocks, "missing"), /missing or incomplete/);
+});
+
 test("queue title dedupe keeps the 0.8 boundary and includes blocked and rejected topics", () => {
   for (const status of ["pending", "processing", "blocked", "completed", "published", "rejected"]) {
     const existing = { ...row({ status, article_title: "Alpha Bravo Charlie Delta", topic_key: "another" }), id: "id" } as ArticleQueueRow;
