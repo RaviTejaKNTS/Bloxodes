@@ -30,7 +30,7 @@ function blocksBing(header: string): boolean {
 // The rendered page owns visibility, parent/dataset rules and canonical identity.
 // Namespace roots can have a single segment. Redirects never count as publication.
 export async function checkPublicIndexNowPage(path: string, signal?: AbortSignal): Promise<GateResult> {
-  if (!/^\/(?:[^/?#]+\/)*[^/?#]+$/.test(path) || /\/(?:page|api|sitemaps)(?:\/|$)/.test(path)) {
+  if (!/^\/(?:[^/?#]+\/)*[^/?#]+$/.test(path) || /^\/(?:api|sitemaps)\//.test(path) || /\/page\/\d+$/.test(path)) {
     return { ok: false, reason: "invalid-page-path" };
   }
   const url = new URL(path, SITE_URL).href;

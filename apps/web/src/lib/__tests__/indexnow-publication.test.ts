@@ -170,6 +170,9 @@ describe("pending-publication IndexNow drain", () => {
     mocks.fetch.mockResolvedValueOnce(new Response("{}", { headers: { "content-type": "application/json" } }));
     expect((await checkPublicIndexNowPage("/wiki/new-game")).reason).toBe("not-html");
     expect((await checkPublicIndexNowPage("/wiki/new-game/page/2")).ok).toBe(false);
+    expect((await checkPublicIndexNowPage("/api/health")).ok).toBe(false);
+    mocks.fetch.mockResolvedValueOnce(new Response('<link rel="canonical" href="https://bloxodes.com/wiki/new-game/page">', { headers: { "content-type": "text/html" } }));
+    expect((await checkPublicIndexNowPage("/wiki/new-game/page")).ok).toBe(true);
     expect((await checkPublicIndexNowPage("/new-namespace")).ok).toBe(true);
   });
   it.each([
