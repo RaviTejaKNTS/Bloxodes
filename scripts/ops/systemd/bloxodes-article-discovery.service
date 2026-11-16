@@ -17,8 +17,13 @@ Environment=HOME=/home/teja
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
 Environment=BLOXODES_AUTOMATION_RUNTIME=1
 Environment=BLOXODES_CI_QA=1
-ExecStart=/usr/bin/npm run articles:curate -- --apply
+# Curation runs first so a full backlog drains. Its "-" prefix lets discovery
+# run even when curation fails; ExecStartPost then reports that failure.
+# "$$" passes a literal "$" to the shell.
+ExecStart=-/bin/sh -c '/usr/bin/npm run articles:curate -- --apply; echo $$? > /run/bloxodes-article-discovery/curate.exit'
 ExecStart=/usr/bin/npm run articles:discover -- --apply
+ExecStartPost=/bin/sh -c 'code=$$(cat /run/bloxodes-article-discovery/curate.exit 2>/dev/null || echo 1); [ "$$code" = 0 ] || { echo "articles:curate failed with exit $$code" >&2; exit 1; }'
+RuntimeDirectory=bloxodes-article-discovery
 UMask=0077
 MemoryMax=512M
 Nice=10

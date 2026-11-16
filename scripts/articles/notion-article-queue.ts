@@ -118,6 +118,22 @@ export function articleQueueBodyData(blocks: any[], committed: string | null = n
   return result;
 }
 
+/** The newest complete snapshot generation in a page body, or null. */
+export function articleQueueNewestGeneration(blocks: any[]): string | null {
+  const groups = new Map<string, { total: number; parts: Set<number> }>();
+  for (const block of blocks) {
+    const caption = plain(block.code?.caption);
+    if (!caption.startsWith(`${BODY_MARKER}/`)) continue;
+    const [, generation, index, total] = caption.split("/");
+    const group = groups.get(generation) ?? { total: Number(total), parts: new Set() };
+    group.parts.add(Number(index));
+    groups.set(generation, group);
+  }
+  let newest: string | null = null;
+  for (const [generation, group] of groups) if (group.parts.size === group.total) newest = generation;
+  return newest;
+}
+
 export function articleQueueFromPage(page: any, body: Record<string, any> = {}): ArticleQueueRow {
   const p = page.properties;
   const row: Record<string, any> = { ...body, id: page.id, workflow_mode: body.workflow_mode ?? "agent_runner",
@@ -209,6 +225,16 @@ export class NotionArticleQueue {
     const propertyFields = new Set(["article_title", "article_type", "status", ...Object.keys(textFields), ...Object.keys(numberFields), ...Object.keys(dateFields), ...Object.keys(urlFields), "updated_at"]);
     const bodyChanged = Object.keys(patch).some(field => !propertyFields.has(field));
     const generation = randomUUID();
+    if (bodyChanged && !current.body_generation) {
+      // A row without a committed pointer reads its newest complete snapshot. Pin the
+      // current one first, so a snapshot appended below can't show if the update fails.
+      const existing = articleQueueNewestGeneration(await this.blocks(id));
+      if (existing) {
+        await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties({ body_generation: existing }) });
+        const pinned = await this.api.call(`pages/${id}`);
+        if (plain(pinned.properties?.Snapshot?.rich_text) !== existing) throw new Error("Article Queue snapshot pointer did not save; inspect and rerun.");
+      }
+    }
     if (bodyChanged) {
       // Append the snapshot first. It only counts once the property write below names it.
       await this.api.call(`blocks/${id}/children`, "PATCH", { children: articleQueueBody({ ...current, ...patch }, generation) });

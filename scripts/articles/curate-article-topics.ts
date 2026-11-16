@@ -459,9 +459,10 @@ export async function createOrFindQueueItem(
   return result.row.id;
 }
 
-function markRepeatedZeroApprovalDegraded(state: ArticleLocalState, run: Record<string, any>) {
-  if (run.approved_group_count > 0) return false;
-  const recent = state.runs.filter(row => row.prompt_version === ARTICLE_CURATION_PROMPT_VERSION && row.status === "completed").slice(-ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS);
+export function markRepeatedZeroApprovalDegraded(state: Pick<ArticleLocalState, "runs">, run: Record<string, any>) {
+  // A run with no candidates says nothing about curation quality, so it never counts.
+  if (run.approved_group_count > 0 || !(run.candidate_count > 0)) return false;
+  const recent = state.runs.filter(row => row.prompt_version === ARTICLE_CURATION_PROMPT_VERSION && row.status === "completed" && row.candidate_count > 0).slice(-ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS);
   if (recent.length < ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS || recent.some(row => row.approved_group_count > 0)) return false;
   run.degraded = true;
   run.degraded_reason = `${ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS} consecutive ${ARTICLE_CURATION_PROMPT_VERSION} runs approved zero topics.`;

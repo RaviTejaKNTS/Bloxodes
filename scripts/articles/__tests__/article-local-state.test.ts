@@ -147,8 +147,13 @@ test("the cap preserves an interrupted curation plan and its old processing cand
 
 test("the scheduled unit curates before discovery with its existing run and memory limits", async () => {
   const unit = await fs.readFile("scripts/ops/systemd/bloxodes-article-discovery.service", "utf8");
-  assert.deepEqual(unit.split("\n").filter(line => line.startsWith("ExecStart=")), [
-    "ExecStart=/usr/bin/npm run articles:curate -- --apply", "ExecStart=/usr/bin/npm run articles:discover -- --apply",
-  ]);
+  const starts = unit.split("\n").filter(line => line.startsWith("ExecStart="));
+  assert.equal(starts.length, 2);
+  // Curation may fail without stopping discovery; ExecStartPost still reports its failure.
+  assert.match(starts[0], /^ExecStart=-\/bin\/sh -c '\/usr\/bin\/npm run articles:curate -- --apply; echo \$\$\? > \/run\/bloxodes-article-discovery\/curate\.exit'$/);
+  assert.equal(starts[1], "ExecStart=/usr/bin/npm run articles:discover -- --apply");
+  assert.match(unit, /^ExecStartPost=.*curate\.exit.*exit 1/m);
+  assert.match(unit, /^RuntimeDirectory=bloxodes-article-discovery$/m);
+  assert.doesNotMatch(unit.replace(/\$\$/g, ""), /\$/, "every shell $ is escaped as $$ for systemd");
   assert.match(unit, /^MemoryMax=512M$/m); assert.match(unit, /^TimeoutStartSec=45min$/m);
 });

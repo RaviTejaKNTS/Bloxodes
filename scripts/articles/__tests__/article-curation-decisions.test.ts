@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { createOrFindQueueItem, validateDecisions } from "../curate-article-topics";
+import { createOrFindQueueItem, markRepeatedZeroApprovalDegraded, validateDecisions } from "../curate-article-topics";
+import { ARTICLE_CURATION_PROMPT_VERSION } from "../article-curation-config";
 import type { NotionArticleQueue } from "../notion-article-queue";
 
 const candidates = [{
@@ -77,4 +78,15 @@ test("rejects a candidate that is both approved and rejected", () => {
       reason_code: "thin_topic" as const, reason: "Not supported.", confidence: 0.7
     }
   ] }, candidates), /both approved and rejected/);
+});
+
+test("runs with no candidates never count toward the zero-approval warning", () => {
+  const done = (candidate_count: number) => ({ prompt_version: ARTICLE_CURATION_PROMPT_VERSION, status: "completed", approved_group_count: 0, candidate_count });
+  const empty = { runs: [done(0), done(0), done(0)] };
+  assert.equal(markRepeatedZeroApprovalDegraded(empty, done(0)), false);
+  assert.equal(markRepeatedZeroApprovalDegraded(empty, done(5)), false);
+  const real = { runs: [done(4), done(0), done(3), done(2)] };
+  const run = done(2);
+  assert.equal(markRepeatedZeroApprovalDegraded(real, run), true);
+  assert.equal((run as any).degraded, true);
 });

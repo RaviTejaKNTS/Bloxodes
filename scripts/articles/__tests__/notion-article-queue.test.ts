@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { randomUUID } from "node:crypto";
-import { NotionArticleQueue, ARTICLE_QUEUE_SOURCE, ARTICLE_QUEUE_DATABASE, articleQueueProperties, articleQueueBody, articleQueueBodyData, articleQueueFromPage, duplicateQueueRow, notionRichText, type ArticleQueueRow } from "../notion-article-queue";
+import { NotionArticleQueue, ARTICLE_QUEUE_SOURCE, articleQueueNewestGeneration, ARTICLE_QUEUE_DATABASE, articleQueueProperties, articleQueueBody, articleQueueBodyData, articleQueueFromPage, duplicateQueueRow, notionRichText, type ArticleQueueRow } from "../notion-article-queue";
 import { CodesQueue } from "../../codes/discovery-io";
 import { migrateArticleQueue } from "../migrate-article-queue-to-notion";
 
@@ -147,6 +147,27 @@ test("a snapshot appended before a failed property write never shows", async () 
   await f.queue.update(saved.id, { status: "blocked", last_error: "committed" }, { status: "pending" });
   assert.equal((await f.queue.get(saved.id)).last_error, "committed");
   assert.equal(f.pages.get(saved.id).blocks.filter((block: any) => !block.in_trash).length, 1);
+});
+
+test("a legacy row without a Snapshot pointer never shows a failed update's snapshot", async () => {
+  const f = fixture();
+  const legacy = page(row({ last_error: "first" }));
+  assert.equal(legacy.properties.Snapshot, undefined);
+  f.pages.set(legacy.id, legacy);
+  const original = articleQueueNewestGeneration(legacy.blocks);
+  const call = f.api.call.bind(f.api);
+  let patches = 0;
+  f.api.call = async (route: string, method = "GET", body?: any) => {
+    // Let the pointer write through, then fail the real property write.
+    if (route === `pages/${legacy.id}` && method === "PATCH" && ++patches === 2) throw new Error("property write failed");
+    return call(route, method, body);
+  };
+  await assert.rejects(f.queue.update(legacy.id, { status: "blocked", last_error: "never committed" }, { status: "pending" }), /property write failed/);
+  f.api.call = call;
+  const after = await f.queue.get(legacy.id);
+  assert.equal(after.body_generation, original);
+  assert.equal(after.status, "pending");
+  assert.equal(after.last_error, "first");
 });
 
 test("a committed snapshot generation wins over a complete uncommitted one", () => {
