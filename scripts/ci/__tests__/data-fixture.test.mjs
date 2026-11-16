@@ -117,11 +117,11 @@ test("every fixture table has sample rows or an explicit unused-route reason", (
   console.log(`Fixture sweep: ${Object.entries(tables).map(([table, rows]) => `${table}=${rows.length}`).join(", ")}`);
 });
 
-test("HTTP records invalid queries in the audit even when no rows match", {skip:process.env.BLOXODES_CI_DATA !== "1"}, async () => {
+test("HTTP audits invalid queries and any read of an unseeded table", {skip:process.env.BLOXODES_CI_DATA !== "1"}, async () => {
   const server = createDataServer();
   server.listen(0, "127.0.0.1"); await once(server, "listening");
   const base = `http://127.0.0.1:${server.address().port}`;
-  const requests = ["app_sessions?id=unsupported.x", "puzzle_pages_view?title=eq.missing&slug=unsupported.wordle", "puzzle_pages_view?select=unknown", "puzzle_pages_view?order=unknown.asc", "app_sessions?or=(id.eq.missing,id.unsupported.x)", "articles?select=author:authors(unknown)"];
+  const requests = ["app_sessions?select=id&id=eq.missing", "app_sessions?id=unsupported.x", "puzzle_pages_view?title=eq.missing&slug=unsupported.wordle", "puzzle_pages_view?select=unknown", "puzzle_pages_view?order=unknown.asc", "app_sessions?or=(id.eq.missing,id.unsupported.x)", "articles?select=author:authors(unknown)"];
   try {
     for (const path of requests) {
       const response = await fetch(`${base}/rest/v1/${path}`);

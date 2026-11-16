@@ -38,6 +38,7 @@ export function createDataServer() {
       const range = req.headers.range?.match(/^(\d+)-(\d+)$/)?.slice(1).map(Number);
       const counted = /count=(exact|planned|estimated)/.test(req.headers.prefer ?? "");
       const result = queryRows(tables[table], url.searchParams, { range, count: counted, contract: contracts[table] });
+      if (!tables[table].length) throw new Error(`CI data table ${table} has no representative rows; seed it before a public reader uses it.`);
       if (result.error) { send(416, result.error, { "Content-Range": "*/0" }); return; }
       const offset = Number(url.searchParams.get("offset") ?? range?.[0] ?? 0);
       const total = counted ? result.count : "*";
