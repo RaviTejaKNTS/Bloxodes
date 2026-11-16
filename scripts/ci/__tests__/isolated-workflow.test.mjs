@@ -30,3 +30,7 @@ test("PR content verification imports only the static contract and never invokes
   assert.match(verifier,/verifyStaticBatch\(batch\)/);
   assert.doesNotMatch(verifier,/publish-content|--managed|createClient|supabaseAdmin/);
 });
+
+test("non-web app checks do not require web fixture reads",()=>{
+  assert.match(checks,/name: Prove all data requests stayed in CI\n        if: always\(\) && needs\.scope\.outputs\.web == 'true'/);
+});

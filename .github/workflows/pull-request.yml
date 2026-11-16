@@ -211,7 +211,7 @@ jobs:
           BROWSER_SPECS: ${{ needs.scope.outputs.browser_specs }}
         run: npx playwright test $BROWSER_SPECS
       - name: Prove all data requests stayed in CI
-        if: always()
+        if: always() && needs.scope.outputs.web == 'true'
         run: node scripts/ci/assert-isolated-data.mjs --audit
       - name: Stop CI data server
         if: always()
