@@ -5,6 +5,9 @@ export const allBrowserSpecs = ["release-smoke", "ci-data-source", "catalog-cove
 const smokeSpecs = allBrowserSpecs.slice(0, 2);
 const gameSpecs = allBrowserSpecs.slice(3);
 
+const rootWebDependency = /^(?:[^/]*config\.[^/]+|(?:middleware|proxy)\.[jt]s|\.(?:browserslistrc|npmrc|nvmrc|node-version))$/;
+const isWebDependency = file => rootWebDependency.test(file) || /^(apps\/web\/|data\/|scripts\/|supabase\/|env\/|\.github\/|package(-lock)?\.json$|Dockerfile$)/.test(file);
+
 // Unknown web paths and shared dependencies receive every spec. Narrow only
 // route families whose callers are covered by the named suites.
 export function browserScope(files, web) {
@@ -20,7 +23,7 @@ export function browserScope(files, web) {
       for (const spec of gameSpecs) specs.add(spec);
     } else if (["articles", "authors", "events", "puzzles", "stats"].includes(route)) {
       specs.add("site-route-parity");
-    } else if (/^(apps\/web\/|data\/|scripts\/|supabase\/|env\/|\.github\/|package(-lock)?\.json$|Dockerfile$|playwright\.config\.|next\.config\.)/.test(file)) {
+    } else if (isWebDependency(file)) {
       return { browser_specs: allBrowserSpecs.map(spec => `apps/web/e2e/${spec}.spec.ts`).join(" "), catalog_regression: true };
     }
   }
@@ -32,10 +35,10 @@ export function classify(files) {
   const scope = {
     checks: code.length > 0,
     migrations: code.some(file => file.startsWith("supabase/migrations/") || file === "supabase/migration-policy.json"),
-    web: code.some(file => /^(apps\/web\/|data\/|scripts\/|supabase\/|env\/|\.github\/|package(-lock)?\.json$|Dockerfile$|playwright\.config\.|next\.config\.)/.test(file)),
-    extension: code.some(file => /^(apps\/extension\/|package(-lock)?\.json$|\.github\/)/.test(file)),
-    admin: code.some(file => /^(apps\/admin-extension\/|package(-lock)?\.json$|\.github\/)/.test(file)),
-    mobile: code.some(file => /^(apps\/mobile\/|package(-lock)?\.json$|\.github\/)/.test(file)),
+    web: code.some(isWebDependency),
+    extension: code.some(file => /^(apps\/extension\/|tsconfig\.json$|package(-lock)?\.json$|\.github\/)/.test(file)),
+    admin: code.some(file => /^(apps\/admin-extension\/|tsconfig\.json$|package(-lock)?\.json$|\.github\/)/.test(file)),
+    mobile: code.some(file => /^(apps\/mobile\/|tsconfig\.json$|package(-lock)?\.json$|\.github\/)/.test(file)),
     schema: code.some(file => /^(supabase\/migrations\/|supabase\/migration-policy\.json$|scripts\/ci\/|scripts\/ops\/release-production-schema\.ts$|scripts\/ops\/studio-container-psql\.mjs$|\.github\/workflows\/)/.test(file))
   };
   return { ...scope, ...browserScope(code, scope.web) };

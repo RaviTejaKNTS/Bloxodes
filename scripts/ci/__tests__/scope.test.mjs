@@ -43,7 +43,7 @@ test("catalog changes include covers, routes and the catalog regression", () => 
 test("shared dependencies and unknown web paths fail safe to all specs", () => {
   const full = specs([".github/workflows/pull-request.yml"]);
   assert.equal(full.length, 7);
-  for (const file of ["apps/web/src/app/(site)/layout.tsx", "apps/web/src/app/layout.tsx", "apps/web/src/lib/wiki.ts", "apps/web/src/components/Card.tsx", "apps/web/src/app/(site)/unclassified/page.tsx", "apps/web/src/app/api/new/route.ts", "apps/web/next.config.js", "playwright.config.ts", "package.json", "package-lock.json", "scripts/ci/data-query.mjs", "scripts/ci/fixtures/pages.json", "data/local.json", "env/config.json", "Dockerfile"]) {
+  for (const file of ["apps/web/src/app/(site)/layout.tsx", "apps/web/src/app/layout.tsx", "apps/web/src/lib/wiki.ts", "apps/web/src/components/Card.tsx", "apps/web/src/app/(site)/unclassified/page.tsx", "apps/web/src/app/api/new/route.ts", "apps/web/next.config.js", "playwright.config.ts", "tsconfig.json", "eslint.config.mjs", ".browserslistrc", ".npmrc", ".node-version", "middleware.ts", "proxy.ts", "package.json", "package-lock.json", "scripts/ci/data-query.mjs", "scripts/ci/fixtures/pages.json", "data/local.json", "env/config.json", "Dockerfile"]) {
     assert.deepEqual(specs([file]), full, file);
     assert.equal(classify([file]).catalog_regression, true, file);
   }
@@ -52,4 +52,9 @@ test("mixed changes take the union and docs or other apps select no browser work
   assert.equal(classify(["AGENTS.md"]).browser_specs, "");
   assert.equal(classify(["apps/mobile/app/index.tsx"]).browser_specs, "");
   assert.equal(classify(["apps/web/src/app/(site)/articles/page.tsx", "scripts/ci/data-query.mjs"]).browser_specs, classify(["scripts/ci/data-query.mjs"]).browser_specs);
+});
+
+test("root TypeScript configuration verifies every affected app", () => {
+  const scope = classify(["tsconfig.json"]);
+  for (const app of ["web", "extension", "admin", "mobile"]) assert.equal(scope[app], true, app);
 });
