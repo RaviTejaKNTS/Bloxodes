@@ -15,13 +15,6 @@
     ],
     "reason": "Cache-warming workers only; no public route reads it."
   },
-  "catalog_membership_snapshots": {
-    "columns": [
-      "id",
-      "created_at"
-    ],
-    "reason": "Catalog ingestion workers only; the public catalog reads item views."
-  },
   "game_collection_progress": {
     "columns": [
       "id",

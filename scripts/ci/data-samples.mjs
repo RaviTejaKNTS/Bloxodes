@@ -9,7 +9,8 @@ export function addPublicSamples(tables, { add, id, route, common, timestamp, au
 
   // Today's date matches the public loader's America/New_York clock. Yesterday
   // and an older answer exercise the archive without aging out on later CI runs.
-  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  const dateParts = new Intl.DateTimeFormat("en", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+  const today = ["year", "month", "day"].map(type => dateParts.find(part => part.type === type).value).join("-");
   const puzzle = add("puzzle_pages_view", { ...common, id: id(), slug: "wordle", provider: "nyt", title: "Wordle answer", seo_title: "Wordle answer", answer_intro_md: "Check the answer after your last guess.", how_to_play_md: "Guess the five-letter word in six tries.", source_url: "https://www.nytimes.com/games/wordle/index.html", icon_url: "/Bloxodes.png", sort_order: 1, latest_answer_date: today, latest_fetched_at: timestamp, canonical_path: "/puzzles/wordle" });
   route(puzzle, "roblox", "puzzle");
   for (const [index, word] of ["TRAIL", "CLIMB", "ROPES"].entries()) {
@@ -27,6 +28,7 @@ export function addPublicSamples(tables, { add, id, route, common, timestamp, au
     add("roblox_universe_place_servers", { id: id(), universe_id, server_id: `ci-${universe_id}`, region: "US", ping_ms: 40, fps: 60, player_count: 4, max_players: 12, fetched_at: timestamp });
   }
   add("roblox_promo_rewards", { id: id(), asset_id: 7000, reward_name: "Trail hat", official_name: "Trail hat", claim_type: "experience_code", promo_code: "TRAIL2026", event_name: "Trail hunt", requirement_text: "Redeem at camp.", destination_url: "https://www.roblox.com/games/2753915549", roblox_item_url: "https://www.roblox.com/catalog/7000", thumbnail_url: "/Bloxodes.png", status: "verified_claimable", sort_order: 1 });
+  for (const code of ["roblox-music-ids/trending", "roblox-music-ids/weekly", "roblox-music-ids/monthly", "roblox-music-ids/yearly", "roblox-decal-ids/curated"]) add("catalog_membership_snapshots", { code, updated_at: timestamp });
   add("roblox_emote_commands", { code: "wave", name: "Wave", command: "/e wave", asset_id: 507770239, kind: "default", description: "Wave to nearby players.", requirements: "Use a compatible avatar.", source_urls: ["https://en.help.roblox.com/"], verification_method: "fixture", verified_at: timestamp, sort_order: 1, is_published: true });
   add("stats_reports", { ...common, id: id(), slug: "roblox-october-2026", month: "2026-10-01", title: "Roblox October 2026 stats", dek: "Players and visits across tracked games.", visibility: "public", feature_image_url: "/Bloxodes.png", content: { month: "2026-10", short_version: ["The island games reached 1,200 players."], body: [{ type: "h2", id: "players", text: "Players" }, { type: "p", md: "Tracked games reached 1,200 players." }] }, data: { facts: { avgPlayers: 1200, busiestPlayers: 1500, busiestDay: "2026-10-15", visits: 500000, playersChange: 10, visitsChange: 5, top10Share: 20, newGames: 1, trackedGames: 7 }, charts: {}, games: {} } });
   tables.published_articles_view = [...tables.articles, sharedArticle];

@@ -26,7 +26,7 @@ export function defaultCatalogTables() {
     const label = `Fixture ${index < subsetCount ? "Subset" : "Other"} ${String(count - index).padStart(3, "0")}`;
     return { ...row, title: `${label} song ${row.asset_id}`, name: `${label} crosshair ${row.asset_id}` };
   });
-  const music = browserRows("music", 49, 1000, 32);
+  const music = browserRows("music", 49, 1000, 32).map((row, index) => ({ ...row, source: ["creator_store_top_week", "creator_store_top_month", "creator_store_top_year"][index % 3] }));
   const decals = browserRows("decal", 49, 3000, 32);
   return {
     roblox_music_ids_ranked_view: [...music, ...browserRows("short", 49, 2000, 0)],
