@@ -1,9 +1,9 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { randomUUID } from "node:crypto";
 import { parse as parseDotenv } from "dotenv";
 import { z } from "zod";
 
@@ -14,10 +14,12 @@ import {
   ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS
 } from "./article-curation-config";
 import { groupingSimilarity, sameSearchIntent } from "./article-curation-intent";
-import { resolveArticleDevCredentials } from "./article-queue-env";
+import { withArticleState, type ArticleLocalState } from "./article-local-state";
+import { createNotionArticleQueue, type NotionArticleQueue } from "./notion-article-queue";
 import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
 
-import { findExistingQueueRow } from "./article-queue-dedupe";
+import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
+import { findProductionArticleDuplicate } from "./article-queue-dedupe";
 
 type Options = {
   apply: boolean;
@@ -448,450 +450,165 @@ function mergeJsonRows<T extends object>(existing: unknown, incoming: T[], key: 
 }
 
 async function createOrMergeQueueItem(
-  supabase: SupabaseClient,
-  decision: CurationDecision,
-  candidates: CandidateRow[],
-  runId: string,
-  model: string
+  queue: NotionArticleQueue, decision: CurationDecision, candidates: CandidateRow[], runId: string, model: string
 ): Promise<string> {
-  const primaryAlias = decision.primary_candidate_id!;
-  const primary = candidates[Number(primaryAlias.slice(1))];
-  const sourceItems = decision.candidate_ids.map((id) => queueSourceItem(candidates[Number(id.slice(1))]));
-  const sourceUrls = sourceItems.map((item) => item.source_url);
-  const existing = await findExistingQueueRow(supabase, decision.topic_key!, decision.canonical_title!);
-  if (existing) {
+  const primary = candidates[Number(decision.primary_candidate_id!.slice(1))];
+  const sourceItems = decision.candidate_ids.map(id => queueSourceItem(candidates[Number(id.slice(1))]));
+  const sourceUrls = sourceItems.map(item => item.source_url);
+  const result = await queue.put({
+    article_title: decision.canonical_title, article_type: decision.article_type, status: "pending",
+    workflow_mode: "agent_runner", source_name: primary.source_name, source_url: primary.source_url,
+    source_published_at: primary.source_published_at, source_discovered_at: primary.source_discovered_at,
+    source_urls: sourceUrls, source_items: sourceItems, topic_key: decision.topic_key,
+    curation_model: model, curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
+    curation_reason: decision.reason, curation_confidence: decision.confidence, curation_run_id: runId,
+    curated_at: new Date().toISOString(),
+    source_metadata: { candidate_ids: sourceItems.map(item => item.candidate_id), grouped_source_count: sourceItems.length, primary_candidate_id: primary.id }
+  });
+  if (!result.created) {
+    const existing = result.row;
     const mergedItems = mergeJsonRows(existing.source_items, sourceItems, "source_url");
-    const mergedUrls = [...new Set([...(Array.isArray(existing.source_urls) ? existing.source_urls.filter((url): url is string => typeof url === "string") : []), ...sourceUrls])];
-    const existingMetadata = existing.source_metadata && typeof existing.source_metadata === "object"
-      ? existing.source_metadata as Record<string, unknown>
-      : {};
-    const mergedCandidateIds = mergedItems.flatMap((item) => typeof item.candidate_id === "string" ? [item.candidate_id] : []);
-    const { error } = await supabase
-      .from("article_generation_queue")
-      .update({
-        source_items: mergedItems,
-        source_urls: mergedUrls,
-        sources: mergedUrls.join("\n"),
-        topic_key: decision.topic_key,
-        curation_model: model,
-        curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
-        curation_reason: decision.reason,
-        curation_confidence: decision.confidence,
-        curation_run_id: runId,
-        curated_at: new Date().toISOString(),
-        source_metadata: {
-          ...existingMetadata,
-          candidate_ids: mergedCandidateIds,
-          grouped_source_count: mergedItems.length,
-          primary_candidate_id: existingMetadata.primary_candidate_id ?? primary.id
-        }
-      })
-      .eq("id", existing.id as string);
-    if (error) throw new Error(`Could not merge curated sources into queue item: ${error.message}`);
-    return existing.id as string;
-  }
-
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .insert({
-      article_title: decision.canonical_title,
-      article_type: decision.article_type,
-      status: "pending",
-      workflow_mode: "agent_runner",
-      sources: sourceUrls.join("\n"),
-      source_name: primary.source_name,
-      source_url: primary.source_url,
-      source_published_at: primary.source_published_at,
-      source_discovered_at: primary.source_discovered_at,
-      source_urls: sourceUrls,
-      source_items: sourceItems,
-      topic_key: decision.topic_key,
-      curation_model: model,
-      curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
-      curation_reason: decision.reason,
-      curation_confidence: decision.confidence,
-      curation_run_id: runId,
-      curated_at: new Date().toISOString(),
-      source_metadata: {
-        candidate_ids: sourceItems.map((item) => item.candidate_id),
-        grouped_source_count: sourceItems.length,
-        primary_candidate_id: primary.id
-      }
-    })
-    .select("id")
-    .single();
-  if (!error && data) return data.id;
-  if (error?.code === "23505") {
-    const raced = await findExistingQueueRow(supabase, decision.topic_key!, decision.canonical_title!);
-    if (raced?.id) return raced.id as string;
-  }
-  throw new Error(`Could not create curated queue item: ${error?.message ?? "unknown insert failure"}`);
-}
-
-async function updateCandidateDecision(
-  supabase: SupabaseClient,
-  candidateIds: string[],
-  runId: string,
-  update: Record<string, unknown>
-) {
-  const { data, error } = await supabase
-    .from("article_discovery_candidates")
-    .update(update)
-    .in("id", candidateIds)
-    .eq("curation_status", "processing")
-    .eq("curation_run_id", runId)
-    .select("id");
-  if (error) throw new Error(`Could not save candidate curation decision: ${error.message}`);
-  if ((data?.length ?? 0) !== candidateIds.length) {
-    throw new Error(`Only ${data?.length ?? 0}/${candidateIds.length} candidate decisions were saved.`);
-  }
-}
-
-async function recoverStaleCurationClaims(supabase: SupabaseClient) {
-  const cutoff = new Date(Date.now() - 30 * 60 * 1000).toISOString();
-  const { data: staleRows, error: staleError } = await supabase
-    .from("article_discovery_candidates")
-    .select("id, curation_run_id")
-    .eq("curation_status", "processing")
-    .lt("updated_at", cutoff);
-  if (staleError) throw new Error(`Could not find stale curation candidates: ${staleError.message}`);
-  if (!staleRows?.length) return;
-  const { data: recoveredRows, error: recoverError } = await supabase
-    .from("article_discovery_candidates")
-    .update({ curation_status: "pending", curation_run_id: null })
-    .in("id", staleRows.map((row) => row.id))
-    .eq("curation_status", "processing")
-    .select("id");
-  if (recoverError) throw new Error(`Could not recover stale curation candidates: ${recoverError.message}`);
-  const staleRunIds = [...new Set(staleRows.flatMap((row) => typeof row.curation_run_id === "string" ? [row.curation_run_id] : []))];
-  if (!staleRunIds.length) return;
-  const { error: runError } = await supabase
-    .from("article_curation_runs")
-    .update({
-      status: "failed",
-      error: "Recovered after a curation worker left candidates processing for more than 30 minutes.",
-      completed_at: new Date().toISOString()
-    })
-    .in("id", staleRunIds)
-    .eq("status", "running");
-  if (runError) throw new Error(`Could not close stale curation runs: ${runError.message}`);
-  console.log(`Recovered ${recoveredRows?.length ?? 0} stale curation candidate(s).`);
-}
-
-async function requeueCandidatesForCurrentPrompt(supabase: SupabaseClient): Promise<number> {
-  const { data, error } = await supabase
-    .from("article_discovery_candidates")
-    .select("id, curation_status, curation_reason_code, curation_prompt_version, queue_id, queue_ids, recuration_count")
-    .in("curation_status", ["approved", "rejected"])
-    .limit(1000);
-  if (error) throw new Error(`Could not inspect candidates for prompt re-curation: ${error.message}`);
-  const stale = (data ?? []).filter((row) => row.curation_prompt_version !== ARTICLE_CURATION_PROMPT_VERSION);
-  if (!stale.length) return 0;
-
-  const queueIdsForRow = (row: { queue_id?: unknown; queue_ids?: unknown }): string[] => [...new Set([
-    ...(typeof row.queue_id === "string" ? [row.queue_id] : []),
-    ...(Array.isArray(row.queue_ids) ? row.queue_ids.filter((value): value is string => typeof value === "string") : [])
-  ])];
-  const approvedQueueIds = stale.flatMap((row) => row.curation_status === "approved" ? queueIdsForRow(row) : []);
-  const retryableQueueIds = new Set<string>();
-  if (approvedQueueIds.length) {
-    const { data: queueRows, error: queueError } = await supabase
-      .from("article_generation_queue")
-      .select("id, status")
-      .in("id", approvedQueueIds);
-    if (queueError) throw new Error(`Could not inspect prior queue outcomes for re-curation: ${queueError.message}`);
-    for (const row of queueRows ?? []) {
-      if (["skipped", "failed"].includes(row.status)) retryableQueueIds.add(row.id);
+    const mergedUrls = [...new Set([...existing.source_urls, ...sourceUrls])];
+    if (JSON.stringify(mergedItems) !== JSON.stringify(existing.source_items) || JSON.stringify(mergedUrls) !== JSON.stringify(existing.source_urls)) {
+      await queue.update(existing.id, { source_items: mergedItems, source_urls: mergedUrls, sources: mergedUrls.join("\n"),
+        source_metadata: { ...existing.source_metadata, candidate_ids: mergedItems.map(item => item.candidate_id).filter(Boolean), grouped_source_count: mergedItems.length } });
     }
   }
-
-  const revisitReasons = new Set<string>(ARTICLE_CURATION_REVISIT_REASON_CODES);
-  const candidates = stale.filter((row) =>
-    (row.curation_status === "rejected" && revisitReasons.has(row.curation_reason_code ?? "")) ||
-    (row.curation_status === "approved" && queueIdsForRow(row).some((queueId) => retryableQueueIds.has(queueId)))
-  );
-  for (const row of candidates) {
-    const { error: updateError } = await supabase
-      .from("article_discovery_candidates")
-      .update({
-        curation_status: "pending",
-        curation_reason_code: null,
-        curation_reason: null,
-        curation_model: null,
-        curation_confidence: null,
-        curation_run_id: null,
-        curation_prompt_version: null,
-        queue_id: null,
-        queue_ids: [],
-        topic_key: null,
-        curated_at: null,
-        recuration_count: Number(row.recuration_count ?? 0) + 1
-      })
-      .eq("id", row.id)
-      .eq("curation_status", row.curation_status);
-    if (updateError) throw new Error(`Could not requeue candidate ${row.id}: ${updateError.message}`);
-  }
-  if (candidates.length) {
-    console.log(`Requeued ${candidates.length} candidate(s) decided by an older curation prompt.`);
-  }
-  return candidates.length;
+  return result.row.id;
 }
 
-async function markRepeatedZeroApprovalDegraded(
-  supabase: SupabaseClient,
-  runId: string,
-  approvedGroups: number
-): Promise<boolean> {
-  if (approvedGroups > 0) return false;
-  const { data, error } = await supabase
-    .from("article_curation_runs")
-    .select("id, approved_group_count")
-    .eq("prompt_version", ARTICLE_CURATION_PROMPT_VERSION)
-    .eq("status", "completed")
-    .order("created_at", { ascending: false })
-    .limit(ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS);
-  if (error) throw new Error(`Could not evaluate curation health: ${error.message}`);
-  const repeated = (data?.length ?? 0) >= ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS &&
-    (data ?? []).every((row) => Number(row.approved_group_count ?? 0) === 0);
-  if (!repeated) return false;
-  const reason = `${ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS} consecutive ${ARTICLE_CURATION_PROMPT_VERSION} runs approved zero topics.`;
-  const { error: updateError } = await supabase
-    .from("article_curation_runs")
-    .update({ degraded: true, degraded_reason: reason })
-    .eq("id", runId);
-  if (updateError) throw new Error(`Could not mark degraded curation health: ${updateError.message}`);
-  console.error(`DEGRADED ARTICLE CURATION: ${reason}`);
+function markRepeatedZeroApprovalDegraded(state: ArticleLocalState, run: Record<string, any>) {
+  if (run.approved_group_count > 0) return false;
+  const recent = state.runs.filter(row => row.prompt_version === ARTICLE_CURATION_PROMPT_VERSION && row.status === "completed").slice(-ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS);
+  if (recent.length < ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS || recent.some(row => row.approved_group_count > 0)) return false;
+  run.degraded = true;
+  run.degraded_reason = `${ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS} consecutive ${ARTICLE_CURATION_PROMPT_VERSION} runs approved zero topics.`;
+  console.error(`DEGRADED ARTICLE CURATION: ${run.degraded_reason}`);
   return true;
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const dev = resolveArticleDevCredentials();
+  const queue = createNotionArticleQueue();
+  await queue.validate();
   const apiKey = loadGroqApiKey();
-  const supabase = createClient(dev.url, dev.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  if (options.apply) {
-    await recoverStaleCurationClaims(supabase);
-    await requeueCandidatesForCurrentPrompt(supabase);
-  }
-
-  const { data: pendingData, error: pendingError } = await supabase
-    .from("article_discovery_candidates")
-    .select(
-      "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_evidence, source_categories, discovered_from"
-    )
-    .eq("curation_status", "pending")
-    .order("source_published_at", { ascending: false })
-    .order("created_at", { ascending: true })
-    .limit(options.limit);
-  if (pendingError) throw new Error(`Could not load pending discovery candidates: ${pendingError.message}`);
-  let candidates = (pendingData ?? []) as CandidateRow[];
-  if (!candidates.length) {
-    console.log("No pending article discovery candidates to curate.");
-    if (options.apply) {
-      const { data: emptyRun, error: emptyRunError } = await supabase
-        .from("article_curation_runs")
-        .insert({
-          status: "completed",
-          model: options.model,
-          prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
-          candidate_count: 0,
-          approved_group_count: 0,
-          approved_candidate_count: 0,
-          rejected_candidate_count: 0,
-          raw_response: { reason: "no_pending_candidates" },
-          completed_at: new Date().toISOString()
-        })
-        .select("id")
-        .single();
-      if (emptyRunError || !emptyRun) {
-        throw new Error(`Could not record empty curation run: ${emptyRunError?.message ?? "missing run"}`);
-      }
-      if (await markRepeatedZeroApprovalDegraded(supabase, emptyRun.id, 0)) process.exitCode = 2;
+  await withArticleState(options.apply, async (state, save) => {
+    // A saved plan resumes with exactly the same aliases and decisions. An
+    // interrupted model call has made no queue writes and can start again.
+    const resumable = state.runs.find(run => run.status === "running" && Array.isArray(run.decisions));
+    for (const run of state.runs.filter(run => run.status === "running" && run !== resumable)) {
+      run.status = "failed"; run.error = "Recovered interrupted curation before a decision plan was saved.";
+      run.completed_at = new Date().toISOString();
     }
-    return;
-  }
-
-  let runId: string | null = null;
-  try {
-    if (options.apply) {
-      const { data: run, error: runError } = await supabase
-        .from("article_curation_runs")
-        .insert({ model: options.model, prompt_version: ARTICLE_CURATION_PROMPT_VERSION, candidate_count: candidates.length })
-        .select("id")
-        .single();
-      if (runError || !run) throw new Error(`Could not create curation run: ${runError?.message ?? "missing run"}`);
-      runId = run.id;
-      const { data: claimed, error: claimError } = await supabase
-        .from("article_discovery_candidates")
-        .update({ curation_status: "processing", curation_run_id: runId })
-        .in("id", candidates.map((candidate) => candidate.id))
-        .eq("curation_status", "pending")
-        .select(
-          "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_evidence, source_categories, discovered_from"
-        );
-      if (claimError) throw new Error(`Could not claim discovery candidates: ${claimError.message}`);
-      candidates = (claimed ?? []) as CandidateRow[];
-      if (!candidates.length) throw new Error("Every selected discovery candidate was claimed by another curator.");
-    }
-
-    const deterministic = candidates.flatMap((candidate, index) => {
-      const rejected = deterministicRejection(candidate);
-      return rejected
-        ? [{
-            candidate_ids: [`C${index}`],
-            decision: "reject" as const,
-            canonical_title: null,
-            article_type: null,
-            topic_key: null,
-            primary_candidate_id: null,
-            reason_code: rejected.code,
-            reason: rejected.reason,
-            confidence: 1
-          }]
-        : [];
-    });
-    const deterministicIds = new Set(deterministic.flatMap((decision) => decision.candidate_ids));
-    const groqOriginalIndexes = candidates
-      .map((_candidate, index) => index)
-      .filter((index) => !deterministicIds.has(`C${index}`));
-    const groqCandidates = groqOriginalIndexes.map((index) => candidates[index]);
-    const productionInventory = groqCandidates.length
-      ? (await fetchProductionEditorialInventory()).items
-      : [];
-    const inventory = loadRelevantInventory(productionInventory, groqCandidates);
-    console.table([
-      { stage: "selected pending candidates", count: candidates.length },
-      { stage: "deterministic rejects", count: deterministicIds.size },
-      { stage: "sent to Groq", count: groqCandidates.length },
-      { stage: "intent-matched inventory rows", count: inventory.length }
-    ]);
-    const groqResult = groqCandidates.length
-      ? await curateWithGroq(apiKey, options.model, groqCandidates, inventory)
-      : { decisions: [] as CurationDecision[], raw: { response: { decisions: [] } } };
-    const remappedGroq = groqResult.decisions.map((decision) => ({
-      ...decision,
-      candidate_ids: decision.candidate_ids.map((id) => `C${groqOriginalIndexes[Number(id.slice(1))]}`),
-      primary_candidate_id: decision.primary_candidate_id
-        ? `C${groqOriginalIndexes[Number(decision.primary_candidate_id.slice(1))]}`
-        : null
-    }));
-    const decisions = [...deterministic, ...remappedGroq].sort(
-      (a, b) => Number(a.candidate_ids[0].slice(1)) - Number(b.candidate_ids[0].slice(1))
-    );
-    validateDecisions({ decisions }, candidates);
-
-    console.table(
-      decisions.map((decision) => ({
-        decision: decision.decision,
-        type: decision.article_type,
-        topic: decision.canonical_title ?? candidates[Number(decision.candidate_ids[0].slice(1))].source_title,
-        sources: decision.candidate_ids.length,
-        reason: decision.reason_code,
-        confidence: decision.confidence
-      }))
-    );
-    const reasonCounts = new Map<string, number>();
-    for (const decision of decisions) {
-      reasonCounts.set(decision.reason_code, (reasonCounts.get(decision.reason_code) ?? 0) + decision.candidate_ids.length);
-    }
-    console.table(
-      [...reasonCounts].map(([reason, count]) => ({ reason, candidates: count }))
-    );
-    if (!options.apply) {
-      console.log(`Dry run: ${decisions.filter((decision) => decision.decision === "approve").length} approved topic group(s); no database rows changed.`);
-      return;
-    }
-
-    const approvals = decisions.filter((decision) => decision.decision === "approve");
-    const queueIdsByAlias = new Map<string, Array<{ queueId: string; decision: CurationDecision }>>();
-    for (const decision of approvals) {
-      const queueId = await createOrMergeQueueItem(supabase, decision, candidates, runId!, options.model);
-      for (const alias of decision.candidate_ids) {
-        const entries = queueIdsByAlias.get(alias) ?? [];
-        entries.push({ queueId, decision });
-        queueIdsByAlias.set(alias, entries);
+    for (const candidate of state.candidates) {
+      if (candidate.curation_status === "processing" && candidate.curation_run_id !== resumable?.id) {
+        candidate.curation_status = "pending"; candidate.curation_run_id = null;
       }
     }
-
-    let approvedCandidates = 0;
-    let rejectedCandidates = 0;
-    for (let index = 0; index < candidates.length; index += 1) {
-      const alias = `C${index}`;
-      const candidate = candidates[index];
-      const candidateApprovals = queueIdsByAlias.get(alias) ?? [];
-      if (candidateApprovals.length) {
-        const queueIds = [...new Set(candidateApprovals.map((entry) => entry.queueId))];
-        const topicKeys = [...new Set(candidateApprovals.flatMap((entry) => entry.decision.topic_key ? [entry.decision.topic_key] : []))];
-        await updateCandidateDecision(supabase, [candidate.id], runId!, {
-          curation_status: "approved",
-          curation_reason_code: "approved",
-          curation_reason: candidateApprovals.map((entry) => entry.decision.reason).join(" | ").slice(0, 2000),
-          curation_model: options.model,
-          curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
-          curation_confidence: Math.max(...candidateApprovals.map((entry) => entry.decision.confidence)),
-          queue_id: queueIds[0],
-          queue_ids: queueIds,
-          topic_key: topicKeys.length === 1 ? topicKeys[0] : null,
-          curated_at: new Date().toISOString()
+    const queued = await queue.list();
+    if (options.apply) {
+      const duplicates = await queue.reconcileDuplicates(queued);
+      if (duplicates) console.log(`Skipped ${duplicates} duplicate article queue row(s).`);
+      const recovered = await queue.recoverClaims(queued);
+      if (recovered) console.log(`Recovered ${recovered} expired article queue claim(s) or due blocked item(s).`);
+    }
+    const statuses = new Map(queued.map(row => [row.id, row.status]));
+    const revisit = new Set<string>(ARTICLE_CURATION_REVISIT_REASON_CODES);
+    for (const candidate of state.candidates) {
+      if (candidate.curation_prompt_version === ARTICLE_CURATION_PROMPT_VERSION) continue;
+      const ids = [...new Set([candidate.queue_id, ...(candidate.queue_ids ?? [])].filter(Boolean))];
+      if (candidate.curation_status === "rejected" && revisit.has(candidate.curation_reason_code) ||
+          candidate.curation_status === "approved" && ids.some(id => ["skipped", "failed"].includes(statuses.get(id) ?? ""))) {
+        Object.assign(candidate, { curation_status: "pending", curation_run_id: null, queue_id: null, queue_ids: [],
+          curation_prompt_version: null, recuration_count: Number(candidate.recuration_count ?? 0) + 1 });
+      }
+    }
+    const selected = resumable ? resumable.candidate_ids.map((id: string) => {
+      const candidate = state.candidates.find(row => row.id === id);
+      if (!candidate) throw new Error(`Curation recovery is missing candidate ${id}.`);
+      return candidate;
+    }) : state.candidates.filter(row => row.curation_status === "pending")
+      .sort((a, b) => String(b.source_published_at ?? "").localeCompare(String(a.source_published_at ?? "")) || a.created_at.localeCompare(b.created_at)).slice(0, options.limit);
+    const candidates = selected as CandidateRow[];
+    const run: Record<string, any> = resumable ?? { id: randomUUID(), status: "running", model: options.model,
+      prompt_version: ARTICLE_CURATION_PROMPT_VERSION, candidate_count: candidates.length,
+      candidate_ids: candidates.map(candidate => candidate.id), created_at: new Date().toISOString() };
+    if (options.apply) {
+      if (!resumable) state.runs.push(run);
+      for (const candidate of selected) Object.assign(candidate, { curation_status: "processing", curation_run_id: run.id, updated_at: new Date().toISOString() });
+      await save();
+    }
+    try {
+      let decisions = run.decisions as CurationDecision[] | undefined;
+      if (!decisions) {
+        const deterministic: CurationDecision[] = candidates.flatMap((candidate, index) => {
+          const rejected = deterministicRejection(candidate);
+          return rejected ? [{ candidate_ids: [`C${index}`], decision: "reject" as const,
+            canonical_title: null, article_type: null, topic_key: null, primary_candidate_id: null,
+            reason_code: rejected.code, reason: rejected.reason, confidence: 1 }] : [];
         });
-        approvedCandidates += 1;
-        continue;
+        const deterministicIds = new Set(deterministic.flatMap(decision => decision.candidate_ids));
+        const indexes = candidates.map((_candidate, index) => index).filter(index => !deterministicIds.has(`C${index}`));
+        const groqCandidates = indexes.map(index => candidates[index]);
+        const production = groqCandidates.length ? (await fetchProductionEditorialInventory()).items : [];
+        const inventory = loadRelevantInventory([...production, ...queued.filter(row => ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status)).map(row => ({ family: "queue", title: row.article_title, key: row.topic_key || row.id }))], groqCandidates);
+        const result = groqCandidates.length ? await curateWithGroq(apiKey, options.model, groqCandidates, inventory)
+          : { decisions: [] as CurationDecision[], raw: {} };
+        decisions = [...deterministic, ...result.decisions.map(decision => ({ ...decision,
+          candidate_ids: decision.candidate_ids.map(id => `C${indexes[Number(id.slice(1))]}`),
+          primary_candidate_id: decision.primary_candidate_id ? `C${indexes[Number(decision.primary_candidate_id.slice(1))]}` : null
+        }))].sort((a, b) => Number(a.candidate_ids[0].slice(1)) - Number(b.candidate_ids[0].slice(1)));
+        validateDecisions({ decisions }, candidates);
+        Object.assign(run, { decisions, raw_response: result.raw });
+        await save();
       }
-      const rejection = decisions.find((decision) => decision.decision === "reject" && decision.candidate_ids.includes(alias));
-      if (!rejection) throw new Error(`Candidate ${alias} has no persisted curation outcome.`);
-      await updateCandidateDecision(supabase, [candidate.id], runId!, {
-        curation_status: "rejected",
-        curation_reason_code: rejection.reason_code,
-        curation_reason: rejection.reason,
-        curation_model: deterministicIds.has(alias) ? "deterministic" : options.model,
-        curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
-        curation_confidence: rejection.confidence,
-        queue_id: null,
-        queue_ids: [],
-        topic_key: null,
-        curated_at: new Date().toISOString()
-      });
-      rejectedCandidates += 1;
+      // Recheck current production before any queue creation, including resumes.
+      const production = decisions.some(decision => decision.decision === "approve") ? (await fetchProductionEditorialInventory()).items : [];
+      decisions = decisions.map(decision => decision.decision === "approve" && findProductionArticleDuplicate(decision.canonical_title!, production)
+        ? { ...decision, decision: "reject" as const, canonical_title: null, article_type: null, topic_key: null, primary_candidate_id: null,
+            reason_code: "existing_coverage" as const, reason: "The article is already published in production." } : decision);
+      console.table(decisions.map(decision => ({ decision: decision.decision, title: decision.canonical_title, reason: decision.reason_code })));
+      if (!options.apply) { console.log("Dry run: no Notion pages or state files changed."); return; }
+      const idsByAlias = new Map<string, Array<{ queueId: string; decision: CurationDecision }>>();
+      for (const decision of decisions.filter(decision => decision.decision === "approve")) {
+        const queueId = await createOrMergeQueueItem(queue, decision, candidates, run.id, run.model);
+        for (const alias of decision.candidate_ids) idsByAlias.set(alias, [...(idsByAlias.get(alias) ?? []), { queueId, decision }]);
+      }
+      let approved = 0, rejected = 0;
+      for (const [index, candidate] of selected.entries()) {
+        const alias = `C${index}`, approvals = idsByAlias.get(alias) ?? [];
+        if (approvals.length) {
+          const ids = [...new Set(approvals.map(entry => entry.queueId))];
+          const keys = [...new Set(approvals.map(entry => entry.decision.topic_key))];
+          Object.assign(candidate, { curation_status: "approved", curation_reason_code: "approved",
+            curation_reason: approvals.map(entry => entry.decision.reason).join(" | ").slice(0, 2000),
+            curation_confidence: Math.max(...approvals.map(entry => entry.decision.confidence)),
+            queue_id: ids[0], queue_ids: ids, topic_key: keys.length === 1 ? keys[0] : null });
+          approved++;
+        } else {
+          const rejection = decisions.find(decision => decision.decision === "reject" && decision.candidate_ids.includes(alias));
+          if (!rejection) throw new Error(`Candidate ${alias} has no curation outcome.`);
+          Object.assign(candidate, { curation_status: "rejected", curation_reason_code: rejection.reason_code,
+            curation_reason: rejection.reason, curation_confidence: rejection.confidence, queue_id: null, queue_ids: [], topic_key: null });
+          rejected++;
+        }
+        Object.assign(candidate, { curation_model: run.model, curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
+          curated_at: new Date().toISOString(), updated_at: new Date().toISOString() });
+      }
+      Object.assign(run, { status: "completed", approved_group_count: decisions.filter(decision => decision.decision === "approve").length,
+        approved_candidate_count: approved, rejected_candidate_count: rejected, completed_at: new Date().toISOString(), decisions });
+      if (markRepeatedZeroApprovalDegraded(state, run)) process.exitCode = 2;
+      await save();
+      console.log(`Curation completed: ${run.approved_group_count} queue topic(s), ${rejected} rejected source candidate(s).`);
+    } catch (error) {
+      // Retain the plan and processing rows. The OS/PID lock makes the next
+      // invocation the sole owner and it resumes the same Notion idempotency keys.
+      if (options.apply) { run.error = error instanceof Error ? error.message : String(error); await save(); }
+      throw error;
     }
-
-    const approvedGroups = decisions.filter((decision) => decision.decision === "approve").length;
-    const { error: finishError } = await supabase
-      .from("article_curation_runs")
-      .update({
-        status: "completed",
-        candidate_count: candidates.length,
-        approved_group_count: approvedGroups,
-        approved_candidate_count: approvedCandidates,
-        rejected_candidate_count: rejectedCandidates,
-        raw_response: { groq: groqResult.raw, decisions },
-        completed_at: new Date().toISOString()
-      })
-      .eq("id", runId!);
-    if (finishError) throw new Error(`Could not complete curation run: ${finishError.message}`);
-    console.log(`Curation completed: ${approvedGroups} queue topic(s), ${rejectedCandidates} rejected source candidate(s).`);
-    if (await markRepeatedZeroApprovalDegraded(supabase, runId!, approvedGroups)) process.exitCode = 2;
-  } catch (error) {
-    if (options.apply && runId) {
-      const message = error instanceof Error ? error.message : String(error);
-      await supabase
-        .from("article_discovery_candidates")
-        .update({ curation_status: "pending", curation_run_id: null })
-        .eq("curation_status", "processing")
-        .eq("curation_run_id", runId);
-      await supabase
-        .from("article_curation_runs")
-        .update({ status: "failed", error: message.slice(0, 2000), completed_at: new Date().toISOString() })
-        .eq("id", runId);
-    }
-    throw error;
-  }
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main().catch((error) => {
-    console.error(error instanceof Error ? error.message : error);
-    process.exit(1);
-  });
+  main().catch(error => { console.error(error instanceof Error ? error.message : error); process.exitCode = 1; });
 }

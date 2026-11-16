@@ -102,13 +102,15 @@ if (!localOnly) {
     homelabTarget,
     `printf '%s|' "$(git -C ${homelabRoot} rev-parse HEAD)"; ` +
       `printf '%s|' "$(git -C ${homelabRoot} status --porcelain | wc -l | tr -d ' ')"; ` +
-      `systemctl is-active bloxodes-article-discovery.timer`
+      `systemctl is-active bloxodes-article-discovery.timer; ` +
+      `if systemctl cat bloxodes-article-discovery.service | rg -q '^Environment=ARTICLE_DISCOVERY_STATE_DIR=/srv/data/bloxodes-automation-runtime/state/articles$'; then printf '|notion-local-state'; else printf '|legacy-dev-queue'; fi`
   ]);
-  const [homelabSha, homelabDirty, discoveryTimer] = homelabRaw.split("|");
+  const [homelabSha, homelabDirty, discoveryTimerRaw, articleBackend] = homelabRaw.split("|");
+  const discoveryTimer = discoveryTimerRaw.trim();
   add(
     "homelab",
-    homelabSha === originProduction && homelabDirty === "0" && discoveryTimer === "active",
-    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} discovery_timer=${discoveryTimer}`
+    homelabSha === originProduction && homelabDirty === "0" && discoveryTimer === "active" && articleBackend === "notion-local-state",
+    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} discovery_timer=${discoveryTimer} article_backend=${articleBackend}`
   );
 
   const vpsTarget = safeSshTarget(

@@ -9,12 +9,12 @@ import type { ContentOptions } from "./wiki-content-options";
 import { bundlePath } from "../shared/roblox-wiki-bundle";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { publicCopyFindings } from "./check-public-copy";
-import { assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages, usedVerifiedArticleImages, type ArticleImageManifest } from "./article-image-readiness";
+import { assertProductionArticleMediaUrls, assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages, usedVerifiedArticleImages, type ArticleImageManifest } from "./article-image-readiness";
 import { assertNoArticleMediaErrors, checkArticleMedia } from "./check-article-media";
 import { assertArticleUniverseReadback } from "./article-final-readback";
 import { findYouTubeDirectives } from "@/lib/article-media";
 import { resolveOfficialArticleGame } from "../articles/article-game-identity";
-import { resolveArticleDevCredentials } from "../articles/article-queue-env";
+import { createNotionArticleQueue, type NotionArticleQueue } from "../articles/notion-article-queue";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
 import { retryPublishNetwork, requirePublishResponse } from "../shared/publish-network.mjs";
@@ -41,24 +41,21 @@ export function assertArticleQueue(row: QueueRow | null, slug: string) {
 }
 
 // Same fields as articles:queue:update published; preserve result and completion evidence.
-export async function acknowledgeArticleQueue(db: SupabaseClient, row: QueueRow, slug: string) {
+export async function acknowledgeArticleQueue(queue: NotionArticleQueue, row: QueueRow, slug: string) {
   assertArticleQueue(row, slug);
   if (row.status === "published") return;
   const now = new Date().toISOString();
-  const result = await db.from("article_generation_queue").update({
-    status: "published", updated_at: now, published_at: now, rejected_at: null,
+  const saved = await queue.update(row.id, {
+    status: "published", published_at: now, rejected_at: null,
     production_url: `https://bloxodes.com/articles/${slug}`, outcome_reason: null, last_error: null,
     locked_at: null, locked_by: null, next_attempt_at: null,
-  }).eq("id", row.id).eq("workflow_mode", "agent_runner").eq("status", row.status)
-    .eq("result_slug", slug).eq("result_path", row.result_path!).select("id");
-  if (result.error || result.data?.length !== 1) throw new Error("Article queue changed before acknowledgement; inspect and rerun the same bundle.");
-  const saved = await read(() => db.from("article_generation_queue").select("*").eq("id", row.id).single());
+  }, { status: row.status, workflow_mode: "agent_runner", result_slug: slug, result_path: row.result_path });
   assertArticleQueue(saved, slug);
   if (saved.status !== "published") throw new Error("Article queue acknowledgement readback failed.");
 }
 
 // Verification must finish before acknowledgement. An exception leaves the row retryable.
-export async function completeArticlePublication(db: SupabaseClient, row: QueueRow, slug: string, verify: () => Promise<void>) {
+export async function completeArticlePublication(db: NotionArticleQueue, row: QueueRow, slug: string, verify: () => Promise<void>) {
   await verify();
   await acknowledgeArticleQueue(db, row, slug);
 }
@@ -166,9 +163,9 @@ export async function publishArticleBundle(options: ContentOptions) {
   if (options.apply && !process.env.SUPABASE_MEDIA_BUCKET?.trim()) throw new Error("Article apply requires SUPABASE_MEDIA_BUCKET.");
   if (options.target === "production" && new URL(process.env.SUPABASE_MEDIA_PUBLIC_URL || "https://invalid.example").origin !== "https://media.bloxodes.com") throw new Error("Production requires SUPABASE_MEDIA_PUBLIC_URL=https://media.bloxodes.com.");
   const db = client(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!);
-  const dev = options.target === "managed-dev" ? { url: process.env.SUPABASE_URL!, serviceRole: process.env.SUPABASE_SERVICE_ROLE! } : resolveArticleDevCredentials({ envFile: process.env.ARTICLE_DEV_ENV_FILE || path.resolve(".envs/targets/managed-dev.env") });
-  const queueDb = options.target === "managed-dev" ? db : client(dev.url, dev.serviceRole);
-  const queue = await read(() => queueDb.from("article_generation_queue").select("*").eq("id", bundle.queueId).single()) as QueueRow;
+  const queueDb = createNotionArticleQueue();
+  await queueDb.validate();
+  const queue = await queueDb.get(bundle.queueId);
   assertArticleQueue(queue, final.slug);
   // Do not claim completion of a different file than the queue approved.
   if (queue.status !== "published") {
@@ -186,7 +183,8 @@ export async function publishArticleBundle(options: ContentOptions) {
   const findings = publicCopyFindings(final, finalPath);
   if (findings.length) throw new Error(findings.map(f => `${f.field}: ${f.rule}: ${f.excerpt}`).join("\n"));
   const manifest = await readArticleImageManifest(mediaPath);
-  const imageEnv = { ...process.env, SUPABASE_URL: dev.url };
+  if (options.target === "production") assertProductionArticleMediaUrls(final);
+  const imageEnv = process.env;
   assertArticleImageReadiness(checkArticleImageReadiness({ manifest, finalJson: final, env: imageEnv }), mediaPath);
   // Keep source media validation separate from target credentials until promotion.
   assertNoArticleMediaErrors(await checkArticleMedia({ ...final, env: imageEnv, requireLocalFiles: true }));
@@ -220,7 +218,7 @@ export async function publishArticleBundle(options: ContentOptions) {
   if (!unlock) throw new Error("Article publication is busy; retry after it finishes.");
   let staging: string | undefined;
   try {
-    const currentQueue = await read(() => queueDb.from("article_generation_queue").select("*").eq("id", bundle.queueId).single()) as QueueRow;
+    const currentQueue = await queueDb.get(bundle.queueId);
     if (stable(currentQueue) !== stable(queue)) throw new Error("Queue row changed during preflight; rerun the bundle.");
     if (options.target === "production") {
       if (!process.env.REVALIDATE_SECRET) throw new Error("Production requires REVALIDATE_SECRET.");
@@ -269,7 +267,7 @@ export async function publishArticleBundle(options: ContentOptions) {
     // A development cover can't pass the target's media checks. Its bytes become the cover source instead.
     let cover: string | null = null;
     if (publishedUpdate?.preserveCover) promoted.cover_image = null;
-    if (isDevelopmentCover(promoted.cover_image, dev.url)) {
+    if (promoted.cover_image && /^https:\/\/[^/]+\.supabase\.co\//.test(promoted.cover_image)) {
       cover = path.join(staging, "cover-source.webp");
       await fs.writeFile(cover, await fetchImageBytes(promoted.cover_image!));
       promoted.cover_image = null;

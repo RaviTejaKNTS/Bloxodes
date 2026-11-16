@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { bundleSchema, articleFinalSchema } from "../../../contracts/article/v1/schema";
 import { productionArticleDecision, publishedArticleAction, publishedArticlePayload } from "../../content/article-published-update";
 import { assertUpdatePublishedScope, parseContentOptions } from "../../content/wiki-content-options";
+import { articleQueueProperties, ARTICLE_QUEUE_SOURCE, ARTICLE_QUEUE_DATABASE, type NotionArticleQueue } from "../../articles/notion-article-queue";
 import { readWikiContract } from "../wiki-publish-contract";
 
 const id = "11111111-1111-4111-8111-111111111111";
@@ -38,6 +39,17 @@ async function fixture(scenario: string) {
   await fs.writeFile(path.join(root, "final.json"), JSON.stringify(final));
   await fs.writeFile(path.join(root, "media.json"), JSON.stringify({ schema: 1, article_slug: slug, required: true, visual_type: "steps", expected_count: 1, entries: [{ id: "step", label: "First task", required: true, placement_heading: "First task", status: "verified", source_page_url: "https://example.com/guide", original_image_url: "https://example.com/step.webp", match_evidence: "The first objective menu for this game", rights_note: "Gameplay screenshot credit", alt: "The task menu shows the first objective", public_url: src, uploaded_path: `articles/${slug}/sources/step.webp`, width: 256, height: 256 }] }));
   await fs.writeFile(path.join(root, "image.png"), await sharp({ create: { width: 256, height: 256, channels: 3, background: "red" } }).png().toBuffer());
+  const propertyTypes = {
+    Title: "title", Status: "select", Type: "select",
+    ...Object.fromEntries(["Topic key", "Idempotency key", "Event ID", "Source name", "Source URLs", "Curation model", "Curation reason", "Worker", "Run report", "Result slug", "Result path", "Dev queue ID"].map(name => [name, "rich_text"])),
+    ...Object.fromEntries(["Universe ID", "Curation confidence", "Attempts"].map(name => [name, "number"])),
+    ...Object.fromEntries(["Source URL", "Live page"].map(name => [name, "url"])),
+    ...Object.fromEntries(["Source published", "Discovered", "Curated", "Claimed", "Retry after", "Completed", "Published"].map(name => [name, "date"]))
+  };
+  const schema = { parent: { database_id: ARTICLE_QUEUE_DATABASE }, properties: Object.fromEntries(Object.entries(propertyTypes).map(([name, type]) => [name, { type }])) } as any;
+  schema.properties.Status.select = { options: ["Pending", "Processing", "Blocked", "Completed", "Published", "Skipped", "Rejected", "Failed"].map(name => ({ name })) };
+  schema.properties.Type.select = { options: ["guide", "tier_list", "explainer", "how_to", "listicle", "news", "opinion"].map(name => ({ name })) };
+  const queueProperties = articleQueueProperties({ article_title: "Example Guide", status: "completed", article_type: "guide", result_slug: slug, result_path: root + "/final.json", attempts: 2 });
   const preload = `
     import fs from 'node:fs';
     const root=${JSON.stringify(root)}, scenario=${JSON.stringify(scenario)};
@@ -48,17 +60,13 @@ async function fixture(scenario: string) {
       const url=new URL(typeof input==='string'?input:input.url??input.href);
       const method=init?.method??'GET'; calls.push({url:url.href,method});
       const json=data=>new Response(JSON.stringify(data),{headers:{'content-type':'application/json'}});
+      if(url.hostname==='api.notion.com') {
+        if (url.pathname.includes('/data_sources/')) return json(${JSON.stringify(schema)});
+        if (url.pathname.includes('/blocks/')) return json({results:[],has_more:false});
+        if (url.pathname.includes('/pages/')) return json({id:${JSON.stringify(id)}, parent:{data_source_id:${JSON.stringify(ARTICLE_QUEUE_SOURCE)}}, created_time:'2026-10-01T00:00:00Z',last_edited_time:'2026-10-01T00:00:00Z',properties:${JSON.stringify(queueProperties)}});
+      }
       if(url.hostname==='www.youtube.com') return scenario==='video-missing'?new Response(null,{status:404}):json({type:'video',html:'<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>'});
       if(url.pathname.includes('/storage/')) return new Response(scenario==='corrupt-image'?'broken':fs.readFileSync(root+'/image.png'),{headers:{'content-type':'image/png'}});
-      if(url.pathname.endsWith('/article_generation_queue')) {
-        if(method==='PATCH') {
-          if(scenario==='queue-race') row.status='blocked';
-          const matches=[...url.searchParams].filter(([key])=>key!=='select').every(([key,value])=>String(row[key])===value.replace(/^eq\./,''));
-          if(!matches) return json([]);
-          Object.assign(row,JSON.parse(init.body));return json([{id:row.id}]);
-        }
-        return json(row);
-      }
       if(url.pathname.endsWith('/roblox_universes')) return json({universe_id:12345});
       throw new Error('Unexpected request '+method+' '+url.href);
     };
@@ -69,7 +77,7 @@ async function fixture(scenario: string) {
 for (const scenario of ["dry-run", "corrupt-image", "video-resolves", "video-missing"]) test(`article ${scenario} makes no writes`, async () => {
   const { root, preload } = await fixture(scenario);
   try {
-    const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root], { encoding: "utf8", timeout: 30_000, env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: dev, SUPABASE_SERVICE_ROLE: "test-only-role" } });
+    const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, "--target", "managed-dev"], { encoding: "utf8", timeout: 30_000, env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: dev, SUPABASE_SERVICE_ROLE: "test-only-role", NOTION_ARTICLE_QUEUE_TOKEN: "test-notion-token" } });
     const report = JSON.parse(await fs.readFile(path.join(root, "report.json"), "utf8"));
     assert.ok(report.calls.every((call: { method: string }) => call.method === "GET"));
     assert.equal(report.row.status, "completed");
@@ -79,37 +87,26 @@ for (const scenario of ["dry-run", "corrupt-image", "video-resolves", "video-mis
 });
 
 for (const scenario of ["queue-success", "queue-race", "already-published", "failed-verification"]) test(`article acknowledgement ${scenario}`, async () => {
-  const { root, preload } = await fixture(scenario);
-  try {
-    const runner = path.join(root, "runner.mts");
-    await fs.writeFile(runner, `
-      import {createClient} from '@supabase/supabase-js';
-      import {completeArticlePublication} from '../../scripts/content/article-publish';
-      const db=createClient('${dev}','test-only-role',{auth:{persistSession:false}});
-      const {data:row}=await db.from('article_generation_queue').select('*').eq('id','${id}').single();
-      try {
-        await completeArticlePublication(db,row,'${slug}',async()=>{
-          if (${JSON.stringify(scenario)}==='failed-verification') throw new Error('Live check failed');
-        });
-      } catch(error) { console.error(error.message);process.exitCode=1; }
-    `);
-    const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, runner], { encoding: "utf8", timeout: 30_000, env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only" } });
-    const report = JSON.parse(await fs.readFile(path.join(root, "report.json"), "utf8"));
-    assert.equal(result.status, ["queue-race", "failed-verification"].includes(scenario) ? 1 : 0, result.stderr);
-    assert.equal(report.row.status, ["queue-success", "already-published"].includes(scenario) ? "published" : scenario === "queue-race" ? "blocked" : "completed");
-    assert.equal(report.row.completed_at, "retained"); assert.equal(report.row.attempts, 2);
-    if (scenario === "queue-success") {
-      assert.equal(report.row.production_url, `https://bloxodes.com/articles/${slug}`);
-      const patch = new URL(report.calls.find((call: { method: string }) => call.method === "PATCH").url).searchParams;
-      for (const [field, value] of [["id", id], ["workflow_mode", "agent_runner"], ["status", "completed"], ["result_slug", slug], ["result_path", path.join(root, "final.json")]]) assert.equal(patch.get(field), `eq.${value}`);
-      for (const field of ["last_error", "outcome_reason", "locked_at", "locked_by", "next_attempt_at", "rejected_at"]) assert.equal(report.row[field], null);
-    }
-    if (["already-published", "failed-verification"].includes(scenario)) {
-      assert.ok(report.calls.every((call: { method: string }) => call.method === "GET"));
-      assert.equal(report.row.published_at, "original-publication-date");
-      assert.equal(report.row.updated_at, "original-update-date");
-    }
-  } finally { await fs.rm(root, { recursive: true, force: true }); }
+  const { completeArticlePublication } = await import("../../content/article-publish");
+  const row = { id, workflow_mode: "agent_runner", status: scenario === "already-published" ? "published" : "completed",
+    result_slug: slug, result_path: "tmp/final.json", production_url: scenario === "already-published" ? `https://bloxodes.com/articles/${slug}` : null };
+  let verified = false, updates = 0;
+  const queue = { async update(pageId: string, patch: Record<string, any>, expected: Record<string, any>) {
+    assert.equal(pageId, id); assert.equal(verified, true); updates++;
+    assert.deepEqual(expected, { status: "completed", workflow_mode: "agent_runner", result_slug: slug, result_path: "tmp/final.json" });
+    if (scenario === "queue-race") throw new Error("Article queue changed before update");
+    assert.equal(patch.status, "published");
+    assert.equal(patch.production_url, `https://bloxodes.com/articles/${slug}`);
+    assert.ok(patch.published_at);
+    return { ...row, ...patch };
+  } } as unknown as NotionArticleQueue;
+  const work = () => completeArticlePublication(queue, row, slug, async () => {
+    if (scenario === "failed-verification") throw new Error("Live check failed");
+    verified = true;
+  });
+  if (["queue-race", "failed-verification"].includes(scenario)) await assert.rejects(work);
+  else await work();
+  assert.equal(updates, ["queue-success", "queue-race"].includes(scenario) ? 1 : 0);
 });
 
 test("article readback compares bodies after normalizing and still catches real differences", async () => {

@@ -71,6 +71,7 @@
     "articles:inventory:production": "tsx scripts/articles/list-production-editorial-inventory.ts",
     "articles:queue:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-queue.ts",
     "articles:queue:add": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/add-article-queue-item.ts",
+    "articles:queue:migrate-to-notion": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/migrate-article-queue-to-notion.ts",
     "articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/update-article-queue-item.ts",
     "articles:review:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-release-review.ts",
     "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts",

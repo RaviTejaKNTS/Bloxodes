@@ -1,9 +1,8 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 
-import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 
 import {
@@ -13,7 +12,8 @@ import {
   validateDiscoveryMaxAgeHours
 } from "./article-discovery-filter";
 import { ARTICLE_CURATION_PROMPT_VERSION, ARTICLE_CURATION_REVISIT_REASON_CODES } from "./article-curation-config";
-import { resolveArticleDevCredentials } from "./article-queue-env";
+import { withArticleState } from "./article-local-state";
+import { createNotionArticleQueue } from "./notion-article-queue";
 
 type SourceName =
   | "pro-game-guides"
@@ -117,6 +117,7 @@ function parseArgs(argv: string[]): Options {
     }
   }
 
+  options.perSource = Math.min(options.perSource, 100);
   if (selected.length) options.sources = new Set(selected);
   options.maxAgeHours = validateDiscoveryMaxAgeHours(options.maxAgeHours);
   return options;
@@ -512,101 +513,55 @@ async function collectSource(sourceName: SourceName, maxAgeHours: number): Promi
 }
 
 async function insertCandidates(candidates: Candidate[]) {
-  const dev = resolveArticleDevCredentials();
-  const supabase = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
-  let inserted = 0;
-  let refreshed = 0;
-  let requeued = 0;
-  let unchanged = 0;
-  const bySource = new Map<SourceName, { inserted: number; refreshed: number; requeued: number; unchanged: number }>();
-
-  for (const candidate of candidates) {
-    const contentHash = candidateContentHash(candidate);
-    const payload = {
-      source_name: SOURCE_LABELS[candidate.sourceName],
-      source_url: candidate.sourceUrl,
-      source_title: candidate.title,
-      source_published_at: candidate.publishedAt,
-      source_discovered_at: new Date().toISOString(),
-      source_description: candidate.description?.slice(0, 1200) ?? null,
-      source_categories: candidate.categories ?? [],
-      discovered_from: candidate.discoveredFrom,
-      source_evidence: candidate.evidence ?? { headings: [], excerpt: "" },
-      source_content_hash: contentHash,
-      last_seen_at: new Date().toISOString()
-    };
-    const { data: existing, error: lookupError } = await supabase
-      .from("article_discovery_candidates")
-      .select("id, curation_status, curation_reason_code, curation_prompt_version, source_content_hash, queue_id, recuration_count")
-      .eq("source_url", candidate.sourceUrl)
-      .maybeSingle();
-    if (lookupError) throw new Error(`Could not inspect ${candidate.sourceUrl}: ${lookupError.message}`);
-    const source = bySource.get(candidate.sourceName) ?? { inserted: 0, refreshed: 0, requeued: 0, unchanged: 0 };
-    if (!existing) {
-      const { error } = await supabase.from("article_discovery_candidates").insert({
-        ...payload,
-        curation_status: "pending"
-      });
-      if (error) throw new Error(`Could not stage ${candidate.sourceUrl}: ${error.message}`);
-      inserted += 1;
-      source.inserted += 1;
-    } else {
-      let queueStatus: string | undefined;
-      if (existing.queue_id) {
-        const { data: queueRow, error: queueError } = await supabase
-          .from("article_generation_queue")
-          .select("status")
-          .eq("id", existing.queue_id)
-          .maybeSingle();
-        if (queueError) throw new Error(`Could not inspect prior queue outcome for ${candidate.sourceUrl}: ${queueError.message}`);
-        queueStatus = queueRow?.status;
-      }
-      const stalePrompt = existing.curation_prompt_version !== ARTICLE_CURATION_PROMPT_VERSION;
-      const contentChanged = existing.source_content_hash !== contentHash;
-      const retryableOutcome = (existing.curation_status === "rejected" &&
-        REVISIT_REASON_CODES.has(existing.curation_reason_code ?? "")) ||
-        (existing.curation_status === "approved" && ["skipped", "failed"].includes(queueStatus ?? ""));
-      const shouldRequeue = retryableOutcome && (stalePrompt || contentChanged);
-      const { error } = await supabase
-        .from("article_discovery_candidates")
-        .update({
-          ...payload,
-          ...(shouldRequeue ? {
-            curation_status: "pending",
-            curation_reason_code: null,
-            curation_reason: null,
-            curation_model: null,
-            curation_confidence: null,
-            curation_run_id: null,
-            curation_prompt_version: null,
-            queue_id: null,
-            queue_ids: [],
-            topic_key: null,
-            curated_at: null,
-            recuration_count: Number(existing.recuration_count ?? 0) + 1
-          } : {})
-        })
-        .eq("id", existing.id);
-      if (error) throw new Error(`Could not refresh ${candidate.sourceUrl}: ${error.message}`);
-      if (shouldRequeue) {
-        requeued += 1;
-        source.requeued += 1;
-      } else if (contentChanged) {
-        refreshed += 1;
-        source.refreshed += 1;
-      } else {
-        unchanged += 1;
-        source.unchanged += 1;
-      }
+  return withArticleState(true, async (state, save) => {
+    let inserted = 0, refreshed = 0, requeued = 0, unchanged = 0;
+    const bySource = new Map<SourceName, { inserted: number; refreshed: number; requeued: number; unchanged: number }>();
+    const queueStatuses = new Map<string, string>();
+    if (state.candidates.some(row => row.queue_id)) {
+      const queue = createNotionArticleQueue();
+      for (const row of await queue.list()) queueStatuses.set(row.id, row.status);
     }
-    bySource.set(candidate.sourceName, source);
-  }
-  return { inserted, refreshed, requeued, unchanged, bySource };
+    for (const candidate of candidates) {
+      const now = new Date().toISOString();
+      const contentHash = candidateContentHash(candidate);
+      const payload = {
+        source_name: SOURCE_LABELS[candidate.sourceName], source_url: candidate.sourceUrl,
+        source_title: candidate.title, source_published_at: candidate.publishedAt,
+        source_discovered_at: now, source_description: candidate.description?.slice(0, 1200) ?? null,
+        source_categories: candidate.categories ?? [], discovered_from: candidate.discoveredFrom,
+        source_evidence: candidate.evidence ?? { headings: [], excerpt: "" },
+        source_content_hash: contentHash, last_seen_at: now, updated_at: now
+      };
+      const existing = state.candidates.find(row => row.source_url === candidate.sourceUrl);
+      const source = bySource.get(candidate.sourceName) ?? { inserted: 0, refreshed: 0, requeued: 0, unchanged: 0 };
+      if (!existing) {
+        state.candidates.push({ ...payload, id: randomUUID(), created_at: now, curation_status: "pending" });
+        inserted++; source.inserted++;
+      } else {
+        const stalePrompt = existing.curation_prompt_version !== ARTICLE_CURATION_PROMPT_VERSION;
+        const contentChanged = existing.source_content_hash !== contentHash;
+        const retryableOutcome = (existing.curation_status === "rejected" && REVISIT_REASON_CODES.has(existing.curation_reason_code ?? "")) ||
+          (existing.curation_status === "approved" && ["skipped", "failed"].includes(queueStatuses.get(existing.queue_id) ?? ""));
+        const shouldRequeue = retryableOutcome && (stalePrompt || contentChanged);
+        Object.assign(existing, payload, shouldRequeue ? {
+          curation_status: "pending", curation_reason_code: null, curation_reason: null,
+          curation_model: null, curation_confidence: null, curation_run_id: null,
+          curation_prompt_version: null, queue_id: null, queue_ids: [], topic_key: null,
+          curated_at: null, recuration_count: Number(existing.recuration_count ?? 0) + 1
+        } : {});
+        if (shouldRequeue) { requeued++; source.requeued++; }
+        else if (contentChanged) { refreshed++; source.refreshed++; }
+        else { unchanged++; source.unchanged++; }
+      }
+      bySource.set(candidate.sourceName, source);
+    }
+    await save();
+    return { inserted, refreshed, requeued, unchanged, bySource };
+  });
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.apply) resolveArticleDevCredentials();
 
   console.log(`Discovery window: ${options.maxAgeHours} hours; per-source cap: ${options.perSource}.`);
   const sourceNames = [...options.sources];

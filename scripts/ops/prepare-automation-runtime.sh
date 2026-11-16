@@ -14,6 +14,8 @@ mkdir -p "$ROOT/releases"
 # Activation relocates this state while idle, retaining the legacy path as an alias.
 if [[ ! -e "$ROOT/state" ]]; then ln -s "$LEGACY/state" "$ROOT/state"; fi
 [[ -d "$ROOT/state" ]]
+# Article discovery uses ROOT/state/articles, independent of release/current.
+# The installer creates it after any state relocation; preparation leaves active state alone.
 [[ -d "$RELEASE" ]] || git -C "$SOURCE" worktree add --detach "$RELEASE" "$SHA"
 [[ "$(git -C "$RELEASE" rev-parse HEAD)" == "$SHA" ]]
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
