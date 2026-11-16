@@ -336,10 +336,11 @@ test("duplicate cleanup keeps distinct topics linked only through subject contai
   assert.deepEqual((await f.queue.list()).map(item => item.status), ["pending", "pending", "pending"]);
 });
 
-test("reconciliation keeps Dual Katana and Cursed Dual Katana, even with reused keys", async () => {
+test("reconciliation keeps Dual Katana and Cursed Dual Katana when their keys differ", async () => {
   const f = fixture();
   for (const title of ["How to Get Dual Katana in Blox Fruits", "How to Get Cursed Dual Katana in Blox Fruits"]) {
-    const p = page(row({ article_title:title, game:"Blox Fruits", universe_id:1, topic_key:"reused", idempotency_key:"reused" }));f.pages.set(p.id,p);
+    const key = title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    const p = page(row({ article_title:title, game:"Blox Fruits", universe_id:1, topic_key:key, idempotency_key:`1:${key}` }));f.pages.set(p.id,p);
   }
   const rows=await f.queue.list();
   assert.equal(duplicateQueueRow([rows[0]],rows[1]),null);

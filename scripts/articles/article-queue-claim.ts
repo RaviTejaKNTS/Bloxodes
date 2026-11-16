@@ -32,7 +32,14 @@ export function assertArticleClaimToken(row: { locked_by?: string | null; locked
 
 export async function confirmArticleQueueClaim(queue: NotionArticleQueue, id: string, token: string, claimedAt: string, settle = () => delay(2_000)) {
   await settle();
-  const row = await queue.get(id);
+  let row: Awaited<ReturnType<NotionArticleQueue["get"]>> | undefined;
+  for (let attempt = 1; !row; attempt++) {
+    try { row = await queue.get(id); } catch (error) {
+      // A failed read doesn't mean the claim was lost. Retry, then hand back the token so the run can block the row.
+      if (attempt >= 3) throw new Error(`Couldn't read back the claim on ${id} (claim_token ${token}): ${error instanceof Error ? error.message : String(error)} Block the row with this token, or wait for the claim to expire.`);
+      await settle();
+    }
+  }
   assertArticleClaimToken(row, token);
   // Notion date properties have minute precision.
   if (row.status !== "processing" || row.locked_at!.slice(0, 16) !== claimedAt.slice(0, 16)) throw new Error("Claim was replaced during confirmation; do not start this article.");

@@ -194,13 +194,16 @@ export function articleQueueFromPage(page: any, body: Record<string, any> = {}, 
 }
 
 export function duplicateQueueRow(rows: ArticleQueueRow[], incoming: Record<string, any>) {
-  const eligible = rows.filter(row => ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status) &&
+  // A matching topic or idempotency key is a duplicate on its own; the meaning check only adds matches.
+  const active = rows.filter(row => ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status));
+  const keyMatch = active.find(row => incoming.topic_key && row.topic_key === incoming.topic_key)
+    ?? active.find(row => incoming.idempotency_key && row.idempotency_key === incoming.idempotency_key);
+  if (keyMatch) return keyMatch;
+  const eligible = active.filter(row =>
     (incoming.namespace ? (row.namespace === incoming.namespace && row.game_slug === incoming.game_slug || !row.namespace && row.game?.toLowerCase() === incoming.game?.toLowerCase()) && (!row.game_kind || !incoming.game_kind || row.game_kind === incoming.game_kind) :
       !row.namespace && (!incoming.universe_id || !row.universe_id || incoming.universe_id === row.universe_id)))
     .filter(row => compareArticleTopics(incoming.article_title, row.article_title, incoming.game ?? incoming.game_slug?.replaceAll("-", " ") ?? "").duplicate);
-  return eligible.find(row => incoming.topic_key && row.topic_key === incoming.topic_key)
-    ?? eligible.find(row => incoming.idempotency_key && row.idempotency_key === incoming.idempotency_key)
-    ?? eligible[0] ?? null;
+  return eligible[0] ?? null;
 }
 export const queueRowOrder = (a: ArticleQueueRow, b: ArticleQueueRow) =>
   String(a.notion_created_at ?? a.created_at).localeCompare(String(b.notion_created_at ?? b.created_at)) || a.id.localeCompare(b.id);

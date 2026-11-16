@@ -10,7 +10,8 @@ export async function articlesMissingLinks(sinceRoblox="2026-11-01",sinceGame="2
     productionRows(db,"games","id,namespace,slug,kind"),
   ]);
   const owners=new Map(games.map(g=>[g.id,g]));
-  const zero=(r:any)=>!articleLinkTexts(r).flatMap(internalArticleLinks).length;
+  // A link the checker rejects (relative, HTML, http) means the article needs repair too; one bad article must not stop the audit.
+  const zero=(r:any)=>{try{return !articleLinkTexts(r).flatMap(internalArticleLinks).length;}catch{return true;}};
   return [...articles.filter(zero).map(r=>({kind:"roblox",slug:r.slug,universe_id:r.universe_id,url:`https://bloxodes.com/articles/${r.slug}`})),
     ...gameArticles.filter(zero).map(r=>({kind:"game",slug:r.slug,namespace:r.namespace,game_slug:owners.get(r.game_id)?.slug,game_kind:owners.get(r.game_id)?.kind,url:`https://bloxodes.com/articles/${r.slug}`}))];
 }
