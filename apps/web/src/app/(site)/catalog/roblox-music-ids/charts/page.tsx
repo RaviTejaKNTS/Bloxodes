@@ -7,7 +7,7 @@ type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
   return buildMusicChartsMetadata();
 }
 

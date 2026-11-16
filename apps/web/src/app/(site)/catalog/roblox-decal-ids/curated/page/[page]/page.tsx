@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { getCatalogMembershipDate, getCatalogPageContentByCodes } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
@@ -7,6 +8,7 @@ import {
   buildDecalCuratedPath,
   buildRobloxDecalCatalogContentHtml,
   loadRobloxDecalIdsPageData,
+  CURATED_DECAL_OPTIONS,
   renderRobloxDecalIdsPage
 } from "../../../page-data";
 
@@ -28,19 +30,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCuratedPath()}/page/${safePageNumber}`;
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`${TITLE} - Page ${safePageNumber} | ${SITE_NAME}`),
     description: DESCRIPTION,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical)
-  };
+  });
 }
 
 export default async function CuratedRobloxDecalIdsPaginatedPage({ params }: PageProps) {
   const { page } = await params;
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, { curated: true });
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, CURATED_DECAL_OPTIONS);
 
   const catalog = await getCatalogPageContentByCodes(["roblox-decal-ids/curated"]);
   const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);

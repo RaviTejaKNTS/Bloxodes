@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -24,18 +25,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category: categorySlug, page } = await params;
   const category = await loadDecalCategoryBySlug(categorySlug);
   if (!category) {
-    return { title: catalogIdTitle(`Roblox Decal IDs | ${SITE_NAME}`) };
+    return finalizeCatalogMetadata({ title: catalogIdTitle(`Roblox Decal IDs | ${SITE_NAME}`) });
   }
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const title = catalogIdTitle(`${category.label} Roblox Decal IDs - Page ${safePageNumber}`);
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCategoryPath(category.slug)}/page/${safePageNumber}`;
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`${title} | ${SITE_NAME}`),
     description: category.description,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical)
-  };
+  });
 }
 
 export default async function RobloxDecalCategoryPaginatedPage({ params }: PageProps) {

@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
@@ -17,7 +18,7 @@ const DESCRIPTION =
 
 export async function generateMetadata(): Promise<Metadata> {
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCategoriesPath()}`;
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`${SEO_TITLE} | ${SITE_NAME}`),
     description: DESCRIPTION,
     robots: { index: false, follow: true },
@@ -28,9 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: catalogIdTitle(SEO_TITLE),
       description: DESCRIPTION,
       siteName: SITE_NAME,
-      images: [`${SITE_URL}/Bloxodes.png`]
     }
-  };
+  });
 }
 
 export default async function RobloxDecalCategoriesPage() {

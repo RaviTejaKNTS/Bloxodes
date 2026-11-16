@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -20,15 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const values = await params;
   const game = getMusicGameIdPage(values.game);
   const page = Number.parseInt(values.page, 10);
-  if (!game || !Number.isFinite(page) || page < 2) return {};
+  if (!game || !Number.isFinite(page) || page < 2) return finalizeCatalogMetadata({});
   const title = catalogIdTitle(`${game.title} - Page ${page}`);
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}/${game.slug}/page/${page}`;
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`${title} | ${SITE_NAME}`),
     description: game.description,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical)
-  };
+  });
 }
 
 export default async function PaginatedMusicGamePage({ params }: Props) {

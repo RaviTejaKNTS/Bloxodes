@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
@@ -32,18 +33,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category: categorySlug, subcategory: subcategorySlug, page } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox free items | ${SITE_NAME}`,
       description: CATALOG_DESCRIPTION
-    };
+    });
   }
 
   const subcategory = await loadFreeItemSubcategoryBySlug(category.label, subcategorySlug);
   if (!subcategory) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox free items | ${SITE_NAME}`,
       description: CATALOG_DESCRIPTION
-    };
+    });
   }
 
   const pageNumber = Number.parseInt(page, 10);
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical =
     `${SITE_URL.replace(/\/$/, "")}${buildFreeItemCategoryPath(category.slug, subcategory.slug)}/page/${safePageNumber}`;
 
-  return {
+  return finalizeCatalogMetadata({
     title: `${title} | ${SITE_NAME}`,
     description,
     robots: {
@@ -79,7 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description
     }
-  };
+  });
 }
 
 export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params }: PageProps) {

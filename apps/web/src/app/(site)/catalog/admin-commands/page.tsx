@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "@/styles/article-content.css";
@@ -31,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     `Roblox Admin Commands | ${SITE_NAME}`;
   const description = catalog?.meta_description ?? ADMIN_COMMANDS_DESCRIPTION;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -47,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description
     }
-  };
+  }, { catalog });
 }
 
 export default async function AdminCommandsHubPage() {

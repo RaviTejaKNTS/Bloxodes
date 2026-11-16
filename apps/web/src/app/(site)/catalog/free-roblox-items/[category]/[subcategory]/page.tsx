@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
@@ -27,25 +28,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category: categorySlug, subcategory: subcategorySlug } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox free items | ${SITE_NAME}`,
       description: CATALOG_DESCRIPTION
-    };
+    });
   }
 
   const subcategory = await loadFreeItemSubcategoryBySlug(category.label, subcategorySlug);
   if (!subcategory) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox free items | ${SITE_NAME}`,
       description: CATALOG_DESCRIPTION
-    };
+    });
   }
 
   const title = appendItemCountToSeoTitle(`Free Roblox ${subcategory.label} items`, subcategory.count);
   const description = `Browse free Roblox ${subcategory.label} items in the ${category.label} category.`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildFreeItemCategoryPath(category.slug, subcategory.slug)}`;
 
-  return {
+  return finalizeCatalogMetadata({
     title: `${title} | ${SITE_NAME}`,
     description,
     robots: {
@@ -70,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description
     }
-  };
+  });
 }
 
 export default async function RobloxFreeItemsSubcategoryPage({ params }: PageProps) {

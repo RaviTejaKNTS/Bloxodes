@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { IndexPageStats } from "@/components/IndexPageStats";
@@ -14,13 +15,13 @@ import {
 
 export const revalidate = 21600;
 
-export function generateMetadata(): Metadata {
-  return {
+export async function generateMetadata(): Promise<Metadata> {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`Music ID Artists | ${SITE_NAME}`),
     description: "Browse Roblox music IDs organized by artist.",
     robots: { index: false, follow: true },
     alternates: buildAlternates("/catalog/roblox-music-ids/artists")
-  };
+  });
 }
 
 export default async function MusicIdArtistsPage() {

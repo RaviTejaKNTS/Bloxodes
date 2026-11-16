@@ -1,3 +1,4 @@
+import { requestCache } from "@/lib/request-cache";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { supabaseAdmin } from "@/lib/supabase";
 import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
@@ -65,7 +66,7 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: MeshSortKey): T 
   return query.order("source_rank", { ascending: true }).order("asset_id", { ascending: true });
 }
 
-export async function loadRobloxMeshIdsPageData(
+export const loadRobloxMeshIdsPageData = requestCache(async function loadRobloxMeshIdsPageData(
   page: number,
   { query = "", sort = DEFAULT_MESH_SORT }: { query?: string; sort?: MeshSortKey } = {}
 ): Promise<MeshIdsPageData> {
@@ -117,4 +118,4 @@ export async function loadRobloxMeshIdsPageData(
   } catch (error) {
     throw error;
   }
-}
+});

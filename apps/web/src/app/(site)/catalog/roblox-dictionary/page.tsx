@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
@@ -13,7 +14,6 @@ import {
 export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-dictionary"];
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type DictionarySearchParams = {
   q?: string | string[];
@@ -74,9 +74,8 @@ export async function generateMetadata(): Promise<Metadata> {
     (catalog
       ? CATALOG_DESCRIPTION
       : "Look up Roblox slang, acronyms, and platform terms with definitions, expansions, examples, and current or legacy labels.");
-  const image = catalog?.thumb_url || FALLBACK_IMAGE;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -86,15 +85,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxDictionaryPage({ searchParams }: DictionaryPageProps) {

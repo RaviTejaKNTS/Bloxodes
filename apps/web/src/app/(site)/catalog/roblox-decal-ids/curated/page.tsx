@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { getCatalogMembershipDate, getCatalogPageContentByCodes } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
@@ -7,6 +8,7 @@ import {
   buildDecalCuratedPath,
   buildRobloxDecalCatalogContentHtml,
   loadRobloxDecalIdsPageData,
+  CURATED_DECAL_OPTIONS,
   renderRobloxDecalIdsPage
 } from "../page-data";
 
@@ -19,7 +21,7 @@ const DESCRIPTION =
 
 export async function generateMetadata(): Promise<Metadata> {
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCuratedPath()}`;
-  return {
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`${SEO_TITLE} | ${SITE_NAME}`),
     description: DESCRIPTION,
     alternates: buildAlternates(canonical),
@@ -29,13 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
       title: catalogIdTitle(SEO_TITLE),
       description: DESCRIPTION,
       siteName: SITE_NAME,
-      images: [`${SITE_URL}/Bloxodes.png`]
     }
-  };
+  });
 }
 
 export default async function CuratedRobloxDecalIdsPage() {
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, undefined, { curated: true });
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, undefined, CURATED_DECAL_OPTIONS);
 
   const catalog = await getCatalogPageContentByCodes(["roblox-decal-ids/curated"]);
   const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);

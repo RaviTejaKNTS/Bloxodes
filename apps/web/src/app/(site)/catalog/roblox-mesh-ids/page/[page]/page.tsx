@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
@@ -27,14 +28,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const safePage = Number.isFinite(page) && page > 1 ? page : 2;
   const title = `${FALLBACK_SEO_TITLE} - Page ${safePage}`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/page/${safePage}`;
-  return {
+  return finalizeCatalogMetadata({
     title: `${title} | ${SITE_NAME}`,
     description: FALLBACK_DESCRIPTION,
     robots: { index: false, follow: true, googleBot: { index: false, follow: true } },
     alternates: buildAlternates(canonical),
     openGraph: { type: "website", url: canonical, title, description: FALLBACK_DESCRIPTION, siteName: SITE_NAME },
     twitter: { card: "summary_large_image", title, description: FALLBACK_DESCRIPTION }
-  };
+  });
 }
 
 export default async function RobloxMeshIdsPaginatedPage({ params }: PageProps) {

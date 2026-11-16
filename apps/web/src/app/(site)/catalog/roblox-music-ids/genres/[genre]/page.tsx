@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
@@ -17,12 +18,13 @@ import {
 
 export const revalidate = 21600;
 
-export function generateMetadata(): Metadata {
-  return {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { genre } = await params;
+  return finalizeCatalogMetadata({
     title: catalogIdTitle(`Genre Music IDs | ${SITE_NAME}`),
     description: "Roblox music IDs filtered by genre.",
     robots: { index: false, follow: true }
-  };
+  }, { path: `${BASE_PATH}/genres/${encodeURIComponent(genre)}` });
 }
 
 type PageProps = {

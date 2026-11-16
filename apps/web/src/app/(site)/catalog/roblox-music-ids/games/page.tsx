@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
@@ -15,14 +16,14 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = catalogIdTitle((catalog?.seo_title?.trim() || null) ?? catalog?.title ?? `${FALLBACK_TITLE} | ${SITE_NAME}`);
   const description = catalog?.meta_description ?? FALLBACK_DESCRIPTION;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}`;
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical),
     openGraph: { type: "website", url: canonical, title, description, siteName: SITE_NAME },
     twitter: { card: "summary_large_image", title, description }
-  };
+  }, { catalog });
 }
 
 export default async function MusicGamesPage() {

@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { renderMarkdown } from "@/lib/markdown";
@@ -13,7 +14,6 @@ import {
 export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-errors-and-fixes"];
-const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
   return Object.entries(description ?? {}).sort((a, b) => {
@@ -76,9 +76,8 @@ export async function generateMetadata(): Promise<Metadata> {
     (catalog
       ? CATALOG_DESCRIPTION
       : "Browse every common Roblox error in one place with what it means, why it happens, and the fastest way to fix it.");
-  const image = catalog?.thumb_url || FALLBACK_IMAGE;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(CANONICAL),
@@ -88,15 +87,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: SITE_NAME,
-      images: [image]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image]
     }
-  };
+  }, { catalog });
 }
 
 export default async function RobloxErrorsAndFixesPage() {

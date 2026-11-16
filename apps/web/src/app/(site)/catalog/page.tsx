@@ -1,3 +1,4 @@
+import { resolveCatalogImage } from "@/lib/catalog-image";
 import { OtherGamesSection } from "@/components/games/OtherGamesSection";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
@@ -149,7 +150,7 @@ async function buildCatalogCards() {
       count: meta.count,
       unit: meta.unit,
       iconKey: meta.icon,
-      coverImage: entry.thumb_url ?? null,
+      coverImage: resolveCatalogImage(entry),
       tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length],
       updatedLabel: formatUpdatedLabel(updatedAt),
       updatedAt,

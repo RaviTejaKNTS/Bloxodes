@@ -1,6 +1,6 @@
 # Catalog
 
-Last verified: 2026-10-30
+Last verified: 2026-11-16
 
 Global Roblox reference pages at `/catalog/<slug>`: item IDs, music IDs, decals, emotes, admin commands, color codes, error codes, the Roblox dictionary and more. Game-specific item lists are wiki collections, not catalog pages.
 
@@ -18,6 +18,8 @@ Each page's loader combines its copy with live database data or a small committe
 - **Retired game music page.** `/catalog/roblox-music-ids/games/work-at-a-pizza-place` had only 1 song tied to the game, so it 308-redirects (with sub-paths) to `/catalog/roblox-music-ids`. Its `catalog_pages` row is still published, so `isRetiredMusicGameCatalogCode` and `isRetiredMusicGameCatalogUrl` in `game-specific-id-pages.ts` hide it from the sitemap, catalog listings, stats links, editorial inventory, site search and the homepage catalog count (`RETIRED_MUSIC_GAME_CATALOG_CODES`).
 - **Publication dates stay put.** `seed:catalog-pages` keeps the existing `published_at` for rows that are already published, so a copy fix doesn't move `datePublished`.
 - The catalog sitemap keeps the database `lastmod` for the core catalog paths.
+- **Title counts are live.** `catalogTitleCount` (`apps/web/src/lib/catalog-title-count.ts`) replaces the count in a saved title with the page reader's live total: exact below 1,000, otherwise rounded down to thousands with `K+` (38,657 becomes `38K+`). It only touches a count inside `[...]` or `(...)` with list wording, or a leading `N`/`N+` before "Roblox ...". Years, dates, `Page N` and numbers in names (`3008`, `Murder Mystery 2`, `Color3`) stay. An unknown or zero total keeps the saved title. So write titles with a count, and don't edit them just to refresh the number.
+- **Every catalog page has an image.** `resolveCatalogImage` (`apps/web/src/lib/catalog-image.ts`) gives the social preview and the `/catalog` card one image: a saved `thumb_url` wins, otherwise a generated 1200x630 PNG at `/catalog-image/<code>.png`. Game pages (`roblox-music-ids/games/*`, `roblox-decal-ids/games/*`) use the game's official universe thumbnail; item pages (items and bundles, decals, free items) show up to 6 of the page's own first item thumbnails; the rest get a title card. Database failures make the route return an uncached 500; a missing row or malformed code is an uncached 404. Only Roblox CDN thumbnails are fetched (HTTPS, no redirects, size-capped), and a failed thumbnail just leaves it out.
 
 ## Data behind the pages
 

@@ -1,3 +1,4 @@
+import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -321,11 +322,11 @@ export async function generateMetadata({ params }: { params: Promise<{ system: s
   const { system } = await params;
   const dataset = await loadAdminCommandDataset(system);
   if (!dataset) {
-    return {
+    return finalizeCatalogMetadata({
       title: `Roblox Admin Commands | ${SITE_NAME}`,
       description: ADMIN_COMMANDS_DESCRIPTION,
       alternates: buildAlternates(CANONICAL_BASE)
-    };
+    });
   }
 
   const catalog = await getCatalogPageContentByCodes(getCatalogCodeCandidates(system));
@@ -339,7 +340,7 @@ export async function generateMetadata({ params }: { params: Promise<{ system: s
     ADMIN_COMMANDS_DESCRIPTION;
   const canonical = `${CANONICAL_BASE}/${dataset.system.slug}`;
 
-  return {
+  return finalizeCatalogMetadata({
     title,
     description,
     alternates: buildAlternates(canonical),
@@ -355,7 +356,7 @@ export async function generateMetadata({ params }: { params: Promise<{ system: s
       title,
       description
     }
-  };
+  }, { catalog });
 }
 
 export default async function AdminCommandSystemPage({ params }: { params: Promise<{ system: string }> }) {
