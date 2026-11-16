@@ -101,7 +101,7 @@ export function seedTables() {
   tables.stats_genre_current_index = [{genre_l1:"Adventure",game_count:3,playing:3600,visits:1500000}];
   for (const [index,category] of ["Accessories","Clothing","Body","AvatarAnimations","Makeup"].entries()) {
     const asset_id=7000+index;
-    add("roblox_catalog_items",{asset_id,item_type:"Asset",asset_type_id:8,name:`Trail ${category}`,description:"A trail outfit item.",category,subcategory:"Hat",creator_name:"Roblox",creator_id:1,creator_target_id:1,creator_type:"User",creator_has_verified_badge:true,favorite_count:100,price_robux:index===0?0:50,price_status:"OnSale",lowest_price_robux:50,lowest_resale_price_robux:null,is_for_sale:true,is_limited:false,is_limited_unique:false,has_resellers:false,total_quantity:null,remaining:null,last_seen_at:timestamp,created_at:timestamp,raw_catalog_json:{},thumbnail_url:"/Bloxodes.png"});
+    add("roblox_catalog_items",{asset_id,item_type:"Asset",asset_type_id:8,name:`Trail ${category}`,description:"A trail outfit item.",category,subcategory:"Hat",creator_name:"Roblox",creator_id:1,creator_target_id:1,creator_type:"User",creator_has_verified_badge:true,favorite_count:100,price_robux:index===0?0:50,price_status:"OnSale",lowest_price_robux:50,lowest_resale_price_robux:index===0?0:null,free_claimability:"direct",free_verification_source:"roblox",free_verified_at:new Date().toISOString(),is_deleted:false,is_for_sale:true,is_limited:false,is_limited_unique:false,has_resellers:false,total_quantity:null,remaining:null,last_seen_at:timestamp,created_at:timestamp,raw_catalog_json:{},thumbnail_url:"/Bloxodes.png"});
     add("roblox_catalog_item_images",{asset_id,size:"420x420",format:"Png",state:"Completed",image_url:"/Bloxodes.png"});
   }
   add("roblox_font_ids",{asset_id:12187365977,name:"Roboto",native_styles:["Regular"],faces:[{name:"Regular",weight:400,style:"Normal",assetId:12187365977}],designer:"Christian Robertson",creator_name:"Roblox",creator_store_url:"https://create.roblox.com/store/asset/12187365977",status:"active",thumbnail_state:"Completed",thumbnail_url:"/Bloxodes.png",vote_count:10});
@@ -136,14 +136,9 @@ export function seedRpcs() {
 export function seedContracts(tables) {
   const empty = read("empty-table-contracts.json"), defaults = read("column-defaults.json");
   const contracts = Object.fromEntries(Object.entries(tables).map(([table, rows]) => [table, rowContract(rows, [...(empty[table]?.columns ?? []), ...(defaults[table] ?? [])])]));
-  const relations = { author: "authors", universe: "roblox_universes", thumbnails: "roblox_virtual_event_thumbnails", categories: "roblox_virtual_event_categories" };
-  for (const [table, contract] of Object.entries(contracts)) {
-    for (const [key, target] of Object.entries(relations)) {
-      if (contract.columns.has(key)) contract.relations[target] = { key, contract: contracts[table === "comments" && key === "author" ? "app_users" : target] };
-    }
-    if (table === "comments") {
-      delete contract.relations.authors;
-      contract.relations.app_users = { key: "author", contract: contracts.app_users };
+  for (const [table, relations] of Object.entries(read("relations.json"))) {
+    for (const [target, key] of Object.entries(relations)) {
+      contracts[table].relations[target] = { key, contract: contracts[target] };
     }
   }
   return contracts;

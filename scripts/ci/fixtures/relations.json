@@ -1,0 +1,54 @@
+{
+  "articles": {
+    "authors": "author",
+    "roblox_universes": "universe"
+  },
+  "published_articles_view": {
+    "authors": "author",
+    "roblox_universes": "universe"
+  },
+  "game_article_pages_view": {
+    "authors": "author",
+    "roblox_universes": "universe"
+  },
+  "code_pages": {
+    "roblox_universes": "universe"
+  },
+  "code_pages_index_view": {
+    "roblox_universes": "universe"
+  },
+  "code_pages_view": {
+    "roblox_universes": "universe"
+  },
+  "quiz_pages": {
+    "roblox_universes": "universe"
+  },
+  "quiz_pages_view": {
+    "roblox_universes": "universe"
+  },
+  "checklist_pages": {
+    "roblox_universes": "universe"
+  },
+  "checklist_pages_view": {
+    "roblox_universes": "universe"
+  },
+  "events_pages": {
+    "roblox_universes": "universe"
+  },
+  "events_pages_view": {
+    "roblox_universes": "universe"
+  },
+  "tools": {
+    "roblox_universes": "universe"
+  },
+  "tools_view": {
+    "roblox_universes": "universe"
+  },
+  "comments": {
+    "app_users": "author"
+  },
+  "roblox_virtual_events": {
+    "roblox_virtual_event_categories": "categories",
+    "roblox_virtual_event_thumbnails": "thumbnails"
+  }
+}

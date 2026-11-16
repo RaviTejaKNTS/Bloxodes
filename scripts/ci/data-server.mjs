@@ -47,8 +47,9 @@ export function createDataServer() {
         send(200, result.data[0], { "Content-Range": contentRange });
       } else send(200, result.data, { "Content-Range": contentRange });
     } catch (error) {
-      audit.unexpected.push(error.message);
-      console.error(error.message);
+      const detail = `${error.message} (${req.method} ${url.pathname}${url.search})`;
+      audit.unexpected.push(detail);
+      console.error(detail);
       send(500, { code: "CI_FIXTURE_UNSUPPORTED", message: error.message, hint: "Add an explicit sample or query contract to scripts/ci/fixtures.", details: null });
     }
   });

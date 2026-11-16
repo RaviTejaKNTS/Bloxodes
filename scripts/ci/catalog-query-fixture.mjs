@@ -1,8 +1,10 @@
-import { queryRows } from "./data-query.mjs";
+import { queryRows, rowContract } from "./data-query.mjs";
 // CI-only PostgREST fixture shared by unit tests and the built-route harness.
 // It evaluates filters, ordering and ranges, rather than returning canned pages.
 export function catalogRows(kind, count, start = 1000) {
   return Array.from({ length: count }, (_, index) => ({
+    creator_id: 1, creator_type: "User", creator_verified: true, verified_at: "2026-01-01T00:00:00Z",
+    is_public_domain: true, is_for_sale: true, price_in_robux: 0, sales: 10, purchasable: true, upvote_percent: 95, thumbnail_checked_at: "2026-01-01T00:00:00Z", source: "fixture", first_seen_at: "2026-01-01T00:00:00Z", primary_category: "faces", curated_tier: "A", curated_reason: "Clear image", album_art_asset_id: null,
     asset_id: start + index, texture_id: start + 10000 + index,
     mesh_id: start + 20000 + index, title: `Fixture song ${start + index}`,
     name: `Fixture crosshair ${start + index}`, artist: "Fixture artist", album: "Fixture album",
@@ -41,5 +43,6 @@ export function defaultCatalogTables() {
 
 // Preserve the catalog harness's counted out-of-range contract.
 export function queryCatalog(tableRows, params) {
-  return queryRows(tableRows, params, { count: true });
+  const contract = rowContract([...catalogRows("music", 1), ...tableRows], ["game_slug"]);
+  return queryRows(tableRows, params, { count: true, contract });
 }

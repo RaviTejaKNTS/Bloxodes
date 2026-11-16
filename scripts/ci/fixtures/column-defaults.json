@@ -137,6 +137,38 @@
     "updated_at"
   ],
   "roblox_catalog_items": [
-    "is_deleted"
+    "is_deleted",
+    "raw_economy_json",
+    "free_claimability",
+    "free_verification_source",
+    "free_verified_at"
+  ],
+  "roblox_font_ids": [
+    "font_version",
+    "license_name",
+    "license_url",
+    "creator_verified",
+    "upvote_percent",
+    "roblox_updated_at",
+    "verified_at"
+  ],
+  "catalog_pages": [
+    "universe_id",
+    "how_it_works_md",
+    "schema_ld_json",
+    "wiki_md",
+    "wiki_sort_order"
+  ],
+  "tools": [
+    "how_it_works_md",
+    "cta_label",
+    "cta_url",
+    "schema_ld_json",
+    "universe"
+  ],
+  "wiki_collection_pages": [
+    "schema_ld_json",
+    "wiki_md",
+    "wiki_sort_order"
   ]
 }
