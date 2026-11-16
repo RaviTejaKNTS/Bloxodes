@@ -10,7 +10,7 @@ import { CommentsSection } from "@/components/comments/CommentsSection";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
-import { supabaseAdmin } from "@/lib/supabase";
+import { gameCodeDescription, loadGameCodeSeoData } from "@/lib/game-code-seo";
 import type { GameCodePage as CodePage } from "@/lib/game-registry";
 import { renderMarkdown } from "@/lib/markdown";
 import { renderPageContentNodes } from "@/lib/page-content";
@@ -21,8 +21,8 @@ export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; n
   const landing = await getGameLandingForLinks(page.namespace);
   const codesIndex = page.canonical_path.startsWith("/codes/") ? "/codes" : `/${page.namespace}/codes`;
   const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: namespaceTitle, href: landing.path }, { label: "Codes", href: codesIndex }, { label: page.title }], page.canonical_path);
-  const { data: codes, error } = await supabaseAdmin().from("game_codes").select("code,rewards_text,status").eq("code_page_id", page.id).order("verified_at", { ascending: false, nullsFirst: false });
-  if (error) throw new Error(`Game codes read failed: ${error.message}`);
+  const codeData = await loadGameCodeSeoData(page.id, page.namespace, page.game_id);
+  const { codes } = codeData;
   const sections = [["", page.intro_md], ["How to redeem", page.redeem_md], ["Rewards", page.rewards_md], ["Troubleshooting", page.troubleshoot_md], ["Where to find codes", page.find_codes_md]] as const;
   const copy = await Promise.all(sections.map(async ([heading, md], i) => ({ heading, nodes: md ? renderPageContentNodes(await renderMarkdown(md), `${page.id}-copy-${i}`) : [] })));
   const validFaqs = Array.isArray(page.faq_json) ? page.faq_json.filter(faq => faq && typeof faq.q === "string" && faq.q.trim() && typeof faq.a === "string" && faq.a.trim()) : [];
@@ -45,7 +45,7 @@ export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; n
     </Fragment> : null;
   }
   return <div className="grid gap-8 content-sidebar-grid"><div className="min-w-0 space-y-8">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": [webPageJsonLd({ siteUrl: SITE_URL, slug: page.canonical_path.slice(1), title: page.title, description: page.meta_description ?? "", image: page.image, author: null, publishedAt: page.published_at, updatedAt: page.updated_at }), ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])] }) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": [webPageJsonLd({ siteUrl: SITE_URL, slug: page.canonical_path.slice(1), title: page.title, description: gameCodeDescription(page, codeData), image: page.image, author: null, publishedAt: page.published_at, updatedAt: page.updated_at }), ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])] }) }} />
     <header className="space-y-4"><PageBreadcrumb items={breadcrumbs} /><h1 className="text-4xl font-semibold md:text-5xl">{page.title}</h1><UpdatedTimestamp value={page.updated_at} /></header>
     <article id="article-body" className="journey-content-stream journey-content-stream--prose space-y-8">
       <ContentCopyNodes nodes={copy[0].nodes} group="game-codes-intro" className="" />

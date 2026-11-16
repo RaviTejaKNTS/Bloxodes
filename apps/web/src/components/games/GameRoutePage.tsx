@@ -1,3 +1,5 @@
+import { gameCodeDescription, loadGameCodeSeoData } from "@/lib/game-code-seo";
+import { normalizeActiveCodeTitle } from "@/lib/code-page-seo";
 import { GameMenuBridge } from "@/components/games/GameMenuBridge";
 import { getGameMenuForPath } from "@/lib/game-site-data";
 import { specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
@@ -80,8 +82,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   if (ctx.catalog) return gameContentMetadata(ctx.catalog);
   if (ctx.checklist) return checklistMetadata(ctx.checklist,gameChecklistConfig(ctx.root.namespace, ctx.checklist.canonical_path));
-  const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
-  return { openGraph: { title: ctx.codes?.title || ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
+  if (ctx.codes) {
+    const data = await loadGameCodeSeoData(ctx.codes.id, ctx.codes.namespace, ctx.codes.game_id);
+    const title = normalizeActiveCodeTitle(ctx.codes.seo_title || ctx.codes.title);
+    const description = gameCodeDescription(ctx.codes, data);
+    return {
+      title, description, alternates: buildAlternates(`${SITE_URL}${ctx.path}`),
+      openGraph: { title, description, url: SITE_URL + ctx.path, images: ctx.codes.image ? [ctx.codes.image] : [] },
+      twitter: { card: "summary_large_image", title, description, images: ctx.codes.image ? [ctx.codes.image] : [] }
+    };
+  }
+  return {};
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);

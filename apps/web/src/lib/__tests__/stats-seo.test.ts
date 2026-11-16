@@ -8,6 +8,8 @@ import {
   listStatsGamesIndexPaths,
   parseStatsSearchParams,
   STATS_GAMES_COUNT_MODE,
+  statsGamesSeoTitle,
+  statsGamesSeoDescription,
   statsGameSeoDescription,
   statsGameSeoTitle,
   type StatsGamesSeoTaxonomy
@@ -135,5 +137,14 @@ describe("individual stats game metadata", () => {
     expect(statsUniverseSlug("Chameleon", 10397566868)).toBe("chameleon-10397566868");
     expect(statsUniverseSlug("chameleon-10397566868", 10397566868)).toBe("chameleon-10397566868");
     expect(statsUniverseSlug("Chameleon", 42)).not.toBe(statsUniverseSlug("Chameleon", 43));
+  });
+});
+
+describe("popular games search wording", () => {
+  it("uses popularity for player counts and preserves other sort meanings", () => {
+    expect(statsGamesSeoTitle("playing")).toBe("Most Popular Roblox Games Right Now (Live Player Counts)");
+    expect(statsGamesSeoTitle("playing", "Action")).toBe("Most Popular Action Roblox Games Right Now");
+    expect(statsGamesSeoDescription("playing")).toMatch(/^Most Popular Roblox Games Right Now/);
+    expect(statsGamesSeoTitle("visits")).toBe("Most Visited Roblox Games");
   });
 });
