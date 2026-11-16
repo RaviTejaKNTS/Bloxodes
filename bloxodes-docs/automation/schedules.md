@@ -1,6 +1,6 @@
 # Schedules
 
-Last verified: 2026-11-06
+Last verified: 2026-11-16
 
 Every recurring job, by where it runs. If you add, move or remove a schedule, update this file and [monitoring.json](monitoring.json) in the same change. Build it the way Cockpit's `workflow/runners.md` says, so it survives restarts, crashes and overloads. `monitoring.json` gives each job its name and description in the automation dashboard at `https://monitor.ravitejaknts.com`.
 
@@ -13,11 +13,11 @@ All run with full access in the "Bloxodes Content Factory" project on the MacBoo
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes other games every 6 hours (Content Factory) | Every 6 hours, about 00:34, 06:34, 12:34, 18:34 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and builds and publishes its wiki hubs and collections. One game per run. |
-| Bloxodes Roblox wiki every 2 days (Content Factory) | Every 2 days, about 00:34 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds and publishes its hub and collections. |
-| Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from the Notion [Article Queue](notion-queues.md#article-queue) (or finds its own when fewer than 3 are good), has the builder (the `researcher` role) research them and Haiku write them, and publishes them through the factory's `bin/article publish` (`content:publish` from the MacBook Pro's Bloxodes checkout). |
-| Bloxodes game articles every 6 hours (Content Factory) | Every 6 hours | `game-article-main`: writes up to 3 articles about non-Roblox games from `content/game-articles/topics.md` (requested topics, then priority games) or topics it finds. |
-| Bloxodes codes pages every 12 hours (Content Factory) | Every 12 hours, about 09:04 and 21:04 IST | `codes-main`: builds and publishes a codes page for every `New` row in the [Codes Queue](notion-queues.md#codes-queue), plus `Claimed` rows older than 12 hours. The builder (the `researcher` role) researches, Haiku writes through `bin/haiku-write`, and `bin/codes publish` publishes. |
+| Bloxodes other games every 6 hours (Content Factory) | Every 6 hours, about 01:19, 07:19, 13:19, 19:19 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md#other-games-queue) and builds and publishes its wiki hubs and collections. With no `Ready` row it finds one worthy uncovered game, plans it in a new row (Added by `Agent`) and builds it. One game per run. |
+| Bloxodes Roblox wiki every 2 days (Content Factory) | Every 2 days, about 13:19 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds and publishes its hub and collections. |
+| Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 01:19, 07:19, 13:19, 19:19 IST | `article-main`: takes 3 curated topics from the Notion [Article Queue](notion-queues.md#article-queue) (or finds its own when fewer than 3 are good), has the builder (the `researcher` role) research them and Haiku write them, and publishes them through the factory's `bin/article publish` (`content:publish` from the MacBook Pro's Bloxodes checkout). |
+| Bloxodes game articles every 6 hours (Content Factory) | Every 6 hours, about 01:19, 07:19, 13:19, 19:19 IST | `game-article-main`: writes up to 3 articles about non-Roblox games from the Notion [Game Article Queue](notion-queues.md#game-article-queue), the owner's rows first. When fewer than 3 good rows wait it finds its own topics, adds them to the queue (Added by `Agent`) and writes them in the same run. Publishes through `bin/article game-publish`. |
+| Bloxodes codes pages every 12 hours (Content Factory) | Every 12 hours, about 01:19 and 13:19 IST | `codes-main`: builds and publishes a codes page for every `New` row in the [Codes Queue](notion-queues.md#codes-queue), plus `Claimed` rows older than 12 hours. The builder (the `researcher` role) researches, Haiku writes through `bin/haiku-write`, and `bin/codes publish` publishes. |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A new T3 schedule copies its model, effort, runtime and workspace from the thread that creates it, and an agent can't change those afterward. So create it from a Full access thread, then have the owner set the rest in T3's schedule settings. These runs need the root checkout and full access: in a sandbox `content:publish` can't reach the database.
 

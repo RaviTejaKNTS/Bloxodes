@@ -16,9 +16,10 @@ import {
 import { groupingSimilarity, sameSearchIntent } from "./article-curation-intent";
 import { withArticleState, type ArticleLocalState } from "./article-local-state";
 import { createNotionArticleQueue, type NotionArticleQueue } from "./notion-article-queue";
-import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
+import { fetchProductionEditorialInventory, type ProductionInventoryItem } from "./production-editorial-inventory";
 
 import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
+import { compareArticleTopics, inferArticleScope, similarArticleTopics } from "./article-topic-similarity";
 import { findProductionArticleDuplicate } from "./article-queue-dedupe";
 
 type Options = {
@@ -171,7 +172,7 @@ function deterministicRejection(candidate: CandidateRow): { code: "codes" | "lin
   return null;
 }
 
-function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRow[]): InventoryItem[] {
+export function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRow[]): InventoryItem[] {
   return allRows
     .map((item) => ({
       item,
@@ -179,9 +180,10 @@ function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRo
         ...candidates.map((candidate) => {
           const inventoryTitle = `${item.title} ${item.key.replace(/-/g, " ")}`;
           return Math.max(...candidateIntentSurfaces(candidate).map((sourceIntent) => {
-            if (!sameSearchIntent(sourceIntent, inventoryTitle)) return 0;
+            const nearMatchScore = compareArticleTopics(sourceIntent, item.title).score * 10;
+            if (!sameSearchIntent(sourceIntent, inventoryTitle)) return nearMatchScore;
             const similarity = groupingSimilarity(sourceIntent, inventoryTitle);
-            return similarity.shared * 10 + similarity.jaccard;
+            return Math.max(nearMatchScore, similarity.shared * 10 + similarity.jaccard);
           }));
         })
       )
@@ -439,12 +441,14 @@ function queueSourceItem(candidate: CandidateRow): QueueSourceItem {
 }
 
 export async function createOrFindQueueItem(
-  queue: NotionArticleQueue, decision: CurationDecision, candidates: CandidateRow[], runId: string, model: string
+  queue: NotionArticleQueue, decision: CurationDecision, candidates: CandidateRow[], runId: string, model: string, inventory: ProductionInventoryItem[] = []
 ): Promise<string> {
   const primary = candidates[Number(decision.primary_candidate_id!.slice(1))];
   const sourceItems = decision.candidate_ids.map(id => queueSourceItem(candidates[Number(id.slice(1))]));
   const sourceUrls = sourceItems.map(item => item.source_url);
+  const scope = inferArticleScope(decision.canonical_title!,inventory);
   const result = await queue.put({
+    ...(scope ? {universe_id:scope.universeId,game:scope.game} : {}),
     article_title: decision.canonical_title, article_type: decision.article_type, status: "pending",
     workflow_mode: "agent_runner", source_name: primary.source_name, source_url: primary.source_url,
     source_published_at: primary.source_published_at, source_discovered_at: primary.source_discovered_at,
@@ -547,14 +551,15 @@ async function main() {
       }
       // Recheck current production before any queue creation, including resumes.
       const production = decisions.some(decision => decision.decision === "approve") ? (await fetchProductionEditorialInventory()).items : [];
-      decisions = decisions.map(decision => decision.decision === "approve" && findProductionArticleDuplicate(decision.canonical_title!, production)
+      decisions = decisions.map(decision => decision.decision === "approve" && (findProductionArticleDuplicate(decision.canonical_title!, production) ||
+        (()=>{const scope=inferArticleScope(decision.canonical_title!,production);return scope && similarArticleTopics(decision.canonical_title!,scope,production,queued).some(m=>m.duplicate);})())
         ? { ...decision, decision: "reject" as const, canonical_title: null, article_type: null, topic_key: null, primary_candidate_id: null,
             reason_code: "existing_coverage" as const, reason: "The article is already published in production." } : decision);
       console.table(decisions.map(decision => ({ decision: decision.decision, title: decision.canonical_title, reason: decision.reason_code })));
       if (!options.apply) { console.log("Dry run: no Notion pages or state files changed."); return; }
       const idsByAlias = new Map<string, Array<{ queueId: string; decision: CurationDecision }>>();
       for (const decision of decisions.filter(decision => decision.decision === "approve")) {
-        const queueId = await createOrFindQueueItem(queue, decision, candidates, run.id, run.model);
+        const queueId = await createOrFindQueueItem(queue, decision, candidates, run.id, run.model, production);
         for (const alias of decision.candidate_ids) idsByAlias.set(alias, [...(idsByAlias.get(alias) ?? []), { queueId, decision }]);
       }
       let approved = 0, rejected = 0;

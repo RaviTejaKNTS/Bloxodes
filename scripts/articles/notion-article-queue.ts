@@ -2,7 +2,8 @@ import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { parse as parseDotenv } from "dotenv";
 import { CodesQueue, makeRequest } from "../codes/discovery-io";
-import { articleQueueIdempotencyKey, nearDuplicateArticleTitle } from "./article-queue-dedupe";
+import { articleQueueIdempotencyKey } from "./article-queue-dedupe";
+import { compareArticleTopics } from "./article-topic-similarity";
 import { ARTICLE_QUEUE_STATUSES, ARTICLE_TOPIC_DEDUPE_STATUSES, type ArticleQueueStatus } from "./article-queue-status";
 
 export const ARTICLE_QUEUE_DATABASE = "4197bc97c44381f9acb8e00d51ed7a12";
@@ -43,7 +44,28 @@ const dateFields: Record<string, string> = {
   locked_at: "Claimed", next_attempt_at: "Retry after", completed_at: "Completed", published_at: "Published"
 };
 const urlFields: Record<string, string> = { source_url: "Source URL", production_url: "Live page" };
-const BODY_MARKER = "bloxodes-article-queue@1";
+export type ArticleQueueConfig = {
+  source: string; database: string; name: string; bodyMarker: string;
+  textFields: Record<string, string>; numberFields: Record<string, string>;
+  dateFields: Record<string, string>; urlFields: Record<string, string>; selectFields: Record<string, string>;
+  statuses: readonly string[]; types: readonly string[]; ownerRows?: boolean;
+};
+export const ROBLOX_ARTICLE_QUEUE: ArticleQueueConfig = {
+  source: ARTICLE_QUEUE_SOURCE, database: ARTICLE_QUEUE_DATABASE, name: "Article Queue",
+  bodyMarker: "bloxodes-article-queue@1", textFields, numberFields, dateFields, urlFields, selectFields: {},
+  statuses: ARTICLE_QUEUE_STATUSES, types: ["guide", "tier_list", "explainer", "how_to", "listicle", "news", "opinion"],
+};
+const { event_id: _event, dev_queue_id: _dev, ...gameTextFields } = textFields;
+const { source_published_at: _published, source_discovered_at: _discovered, ...gameDateFields } = dateFields;
+export const GAME_ARTICLE_QUEUE: ArticleQueueConfig = {
+  source: "41a7bc97-c443-81fa-9567-000b9788bcfc", database: "41a7bc97c443814ea0c8d2a90c611f76",
+  name: "Game Article Queue", bodyMarker: "bloxodes-game-article-queue@1", ownerRows: true,
+  textFields: { ...gameTextFields, game: "Game", namespace: "Namespace", game_slug: "Game slug" },
+  numberFields: { attempts: "Attempts" }, dateFields: gameDateFields, urlFields,
+  selectFields: { added_by: "Added by", game_kind: "Game kind" },
+  statuses: ["pending", "processing", "blocked", "completed", "published", "skipped"],
+  types: ["guide", "tier_list", "explainer", "news"],
+};
 const statusName = (value: string) => value[0].toUpperCase() + value.slice(1);
 const plain = (value: any) => (value ?? []).map((part: any) => part.plain_text ?? part.text?.content ?? "").join("");
 
@@ -61,7 +83,16 @@ export function notionRichText(value: string) {
   return parts;
 }
 
-export function articleQueueProperties(row: Record<string, any>) {
+// Notion stores date properties to the minute, even when the API accepts seconds.
+export function notionQueueDate(value: string) {
+  const date=new Date(value);if(!Number.isFinite(date.getTime()))throw new Error("Invalid queue date.");
+  date.setUTCSeconds(0,0);return date.toISOString();
+}
+
+export function articleQueueProperties(row: Record<string, any>, config = ROBLOX_ARTICLE_QUEUE) {
+  const { textFields, numberFields, dateFields, urlFields } = config;
+  if (row.status != null && !config.statuses.includes(row.status))throw new Error(`Unsupported ${config.name} status: ${row.status}`);
+  if (row.article_type != null && !config.types.includes(row.article_type))throw new Error(`Unsupported ${config.name} type: ${row.article_type}`);
   const properties: Record<string, any> = {};
   if ("article_title" in row) properties.Title = { title: notionRichText(row.article_title ?? "") };
   if ("status" in row) properties.Status = { select: { name: statusName(row.status) } };
@@ -73,13 +104,16 @@ export function articleQueueProperties(row: Record<string, any>) {
   if (!("outcome_reason" in row) && "last_error" in row) properties["Run report"] = { rich_text: notionRichText(row.last_error ?? "") };
   for (const [field, name] of Object.entries(numberFields)) if (field in row) properties[name] = { number: row[field] ?? null };
   for (const [field, name] of Object.entries(urlFields)) if (field in row) properties[name] = { url: row[field] || null };
-  for (const [field, name] of Object.entries(dateFields)) if (field in row) properties[name] = { date: row[field] ? { start: row[field] } : null };
+  for (const [field, name] of Object.entries(dateFields)) if (field in row) properties[name] = { date: row[field] ? { start: notionQueueDate(row[field]) } : null };
+  for (const [field, name] of Object.entries(config.selectFields)) if (field in row) {
+    properties[name] = { select: row[field] ? { name: field === "added_by" ? statusName(row[field]) : row[field] } : null };
+  }
   return properties;
 }
 
 // Full snapshots keep source evidence and legacy fields out of 2,000-char properties.
 // Each snapshot is one API request. Incomplete snapshots are ignored on readback.
-export function articleQueueBody(row: Record<string, any>, generation = randomUUID()) {
+export function articleQueueBody(row: Record<string, any>, generation = randomUUID(), config = ROBLOX_ARTICLE_QUEUE) {
   const { body_generation: _ignored, ...evidence } = row;
   const serialized = JSON.stringify(evidence);
   if (Buffer.byteLength(serialized) > 200_000) throw new Error("Article queue evidence exceeds the 200 KB page snapshot limit.");
@@ -92,17 +126,18 @@ export function articleQueueBody(row: Record<string, any>, generation = randomUU
   chunks.push(chunk);
   return chunks.map((content, index) => ({ object: "block", type: "code", code: {
     language: "json", rich_text: notionRichText(content),
-    caption: notionRichText(`${BODY_MARKER}/${generation}/${index}/${chunks.length}`)
+    caption: notionRichText(`${config.bodyMarker}/${generation}/${index}/${chunks.length}`)
   } }));
 }
 
 // With a committed generation, only that snapshot is read, so a snapshot appended
 // before a failed property write never shows. Rows without one use the newest complete snapshot.
-export function articleQueueBodyData(blocks: any[], committed: string | null = null): Record<string, any> {
+export function articleQueueBodyData(blocks: any[], committed: string | null = null, config = ROBLOX_ARTICLE_QUEUE): Record<string, any> {
+  if (committed === "empty") return {};
   const groups = new Map<string, { total: number; parts: Map<number, string> }>();
   for (const block of blocks) {
     const caption = plain(block.code?.caption);
-    if (!caption.startsWith(`${BODY_MARKER}/`)) continue;
+    if (!caption.startsWith(`${config.bodyMarker}/`)) continue;
     const [, generation, index, total] = caption.split("/");
     const group = groups.get(generation) ?? { total: Number(total), parts: new Map() };
     group.parts.set(Number(index), plain(block.code.rich_text));
@@ -119,11 +154,11 @@ export function articleQueueBodyData(blocks: any[], committed: string | null = n
 }
 
 /** The newest complete snapshot generation in a page body, or null. */
-export function articleQueueNewestGeneration(blocks: any[]): string | null {
+export function articleQueueNewestGeneration(blocks: any[], config = ROBLOX_ARTICLE_QUEUE): string | null {
   const groups = new Map<string, { total: number; parts: Set<number> }>();
   for (const block of blocks) {
     const caption = plain(block.code?.caption);
-    if (!caption.startsWith(`${BODY_MARKER}/`)) continue;
+    if (!caption.startsWith(`${config.bodyMarker}/`)) continue;
     const [, generation, index, total] = caption.split("/");
     const group = groups.get(generation) ?? { total: Number(total), parts: new Set() };
     group.parts.add(Number(index));
@@ -134,13 +169,14 @@ export function articleQueueNewestGeneration(blocks: any[]): string | null {
   return newest;
 }
 
-export function articleQueueFromPage(page: any, body: Record<string, any> = {}): ArticleQueueRow {
+export function articleQueueFromPage(page: any, body: Record<string, any> = {}, config = ROBLOX_ARTICLE_QUEUE): ArticleQueueRow {
+  const { textFields, numberFields, dateFields, urlFields } = config;
   const p = page.properties;
   const row: Record<string, any> = { ...body, id: page.id, workflow_mode: body.workflow_mode ?? "agent_runner",
     article_title: plain(p.Title?.title), article_type: p.Type?.select?.name ?? null,
-    status: (p.Status?.select?.name ?? "").toLowerCase(), created_at: body.created_at ?? page.created_time,
+    status: (p.Status?.select?.name ?? (config.ownerRows ? "Pending" : "")).toLowerCase(), created_at: body.created_at ?? page.created_time,
     updated_at: page.last_edited_time, source_items: body.source_items ?? [], source_metadata: body.source_metadata ?? {} };
-  if (!ARTICLE_QUEUE_STATUSES.includes(row.status)) throw new Error(`Article Queue has an invalid status on ${page.id}.`);
+  if (!config.statuses.includes(row.status)) throw new Error(`Article Queue has an invalid status on ${page.id}.`);
   for (const [field, name] of Object.entries(textFields)) row[field] = plain(p[name]?.rich_text) || null;
   const urls = row.source_urls ?? "";
   try { row.source_urls = JSON.parse(urls || "[]"); } catch { row.source_urls = urls.split(/\n/).map((s: string) => s.trim()).filter(Boolean); }
@@ -148,17 +184,23 @@ export function articleQueueFromPage(page: any, body: Record<string, any> = {}):
   for (const [field, name] of Object.entries(numberFields)) row[field] = p[name]?.number ?? null;
   for (const [field, name] of Object.entries(urlFields)) row[field] = p[name]?.url ?? null;
   for (const [field, name] of Object.entries(dateFields)) row[field] = (p[name]?.date?.start ? new Date(p[name].date.start).toISOString() : null);
+  for (const [field, name] of Object.entries(config.selectFields)) row[field] = p[name]?.select?.name?.toLowerCase() ?? (field === "added_by" ? "owner" : null);
+  if(config.ownerRows && row.source_url && !row.source_urls.includes(row.source_url))row.source_urls.push(row.source_url);
   row.sources = body.sources ?? row.source_urls.join("\n");
+  if(config.ownerRows)row.type=row.article_type;
   row.attempts ??= 0;
   row.last_error = body.last_error ?? (row.status === "blocked" || row.status === "failed" ? row.outcome_reason : null);
   return row as ArticleQueueRow;
 }
 
 export function duplicateQueueRow(rows: ArticleQueueRow[], incoming: Record<string, any>) {
-  const eligible = rows.filter(row => ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status));
+  const eligible = rows.filter(row => ARTICLE_TOPIC_DEDUPE_STATUSES.includes(row.status) &&
+    (incoming.namespace ? (row.namespace === incoming.namespace && row.game_slug === incoming.game_slug || !row.namespace && row.game?.toLowerCase() === incoming.game?.toLowerCase()) && (!row.game_kind || !incoming.game_kind || row.game_kind === incoming.game_kind) :
+      !row.namespace && (!incoming.universe_id || !row.universe_id || incoming.universe_id === row.universe_id)))
+    .filter(row => compareArticleTopics(incoming.article_title, row.article_title, incoming.game ?? incoming.game_slug?.replaceAll("-", " ") ?? "").duplicate);
   return eligible.find(row => incoming.topic_key && row.topic_key === incoming.topic_key)
     ?? eligible.find(row => incoming.idempotency_key && row.idempotency_key === incoming.idempotency_key)
-    ?? eligible.find(row => nearDuplicateArticleTitle(incoming.article_title, row.article_title)) ?? null;
+    ?? eligible[0] ?? null;
 }
 export const queueRowOrder = (a: ArticleQueueRow, b: ArticleQueueRow) =>
   String(a.notion_created_at ?? a.created_at).localeCompare(String(b.notion_created_at ?? b.created_at)) || a.id.localeCompare(b.id);
@@ -173,18 +215,21 @@ export function articleQueueClaimExpired(row: ArticleQueueRow, now = Date.now())
 }
 
 export class NotionArticleQueue {
-  constructor(readonly api: Pick<CodesQueue, "call" | "callCreate">, readonly source = ARTICLE_QUEUE_SOURCE, readonly database = ARTICLE_QUEUE_DATABASE) {}
+  constructor(readonly api: Pick<CodesQueue, "call" | "callCreate">, readonly source = ARTICLE_QUEUE_SOURCE, readonly database = ARTICLE_QUEUE_DATABASE,
+    readonly config = ROBLOX_ARTICLE_QUEUE) {}
   async validate() {
+    const { textFields, numberFields, dateFields, urlFields } = this.config;
     const schema = await this.api.call(`data_sources/${this.source}`);
     if (schema.parent?.database_id?.replaceAll("-", "") !== this.database.replaceAll("-", "")) throw new Error("Article Queue belongs to a different database.");
     const expected = { Title: "title", Status: "select", Type: "select",
+      ...Object.fromEntries(Object.values(this.config.selectFields).map(name => [name, "select"])),
       ...Object.fromEntries(Object.values(textFields).map(name => [name, "rich_text"])),
       ...Object.fromEntries(Object.values(numberFields).map(name => [name, "number"])),
       ...Object.fromEntries(Object.values(dateFields).map(name => [name, "date"])),
       ...Object.fromEntries(Object.values(urlFields).map(name => [name, "url"])) };
     for (const [name, type] of Object.entries(expected)) if (schema.properties?.[name]?.type !== type) throw new Error(`Article Queue schema mismatch: ${name} must be ${type}.`);
-    for (const status of ARTICLE_QUEUE_STATUSES) if (!schema.properties.Status.select.options.some((option: any) => option.name === statusName(status))) throw new Error(`Article Queue is missing ${statusName(status)}.`);
-    for (const name of ["guide", "tier_list", "explainer", "how_to", "listicle", "news", "opinion"]) if (!schema.properties.Type.select.options.some((option: any) => option.name === name)) throw new Error(`Article Queue is missing type ${name}.`);
+    for (const status of this.config.statuses) if (!schema.properties.Status.select.options.some((option: any) => option.name === statusName(status))) throw new Error(`Article Queue is missing ${statusName(status)}.`);
+    for (const name of this.config.types) if (!schema.properties.Type.select.options.some((option: any) => option.name === name)) throw new Error(`Article Queue is missing type ${name}.`);
   }
   private assertPage(page: any) {
     if (page.in_trash || page.parent?.data_source_id?.replaceAll("-", "") !== this.source.replaceAll("-", "")) throw new Error("Page is not an active Article Queue row.");
@@ -196,7 +241,7 @@ export class NotionArticleQueue {
       const response = await this.api.call(`data_sources/${this.source}/query`, "POST", { page_size: 100, sorts: [{ timestamp: "created_time", direction: "ascending" }], ...(filter ? { filter } : {}), ...(cursor ? { start_cursor: cursor } : {}) });
       for (const page of response.results) {
         this.assertPage(page);
-        rows.push({ ...articleQueueFromPage(page), notion_created_at: page.created_time });
+        rows.push({ ...articleQueueFromPage(page, {}, this.config), notion_created_at: page.created_time });
       }
       cursor = response.has_more ? response.next_cursor : undefined;
     } while (cursor);
@@ -207,48 +252,55 @@ export class NotionArticleQueue {
     const page = await this.api.call(`pages/${id}`);
     this.assertPage(page);
     const committed = plain(page.properties?.Snapshot?.rich_text) || null;
-    return { ...articleQueueFromPage(page, withBody ? articleQueueBodyData(await this.blocks(id), committed) : {}), notion_created_at: page.created_time };
+    const blocks = withBody ? await this.blocks(id) : [];
+    const body = withBody ? articleQueueBodyData(blocks, committed, this.config) : {};
+    return { ...articleQueueFromPage(page, body, this.config), ...(this.config.ownerRows ? { notes: queueBodyNotes(blocks, this.config) } : {}), notion_created_at: page.created_time };
   }
   private async blocks(id: string) {
     const blocks: any[] = [];
     let cursor: string | undefined;
     do {
       const result = await this.api.call(`blocks/${id}/children?page_size=100${cursor ? `&start_cursor=${encodeURIComponent(cursor)}` : ""}`);
-      blocks.push(...result.results);
+      for(const block of result.results) {
+        blocks.push(block);
+        if(this.config.ownerRows && block.has_children && !plain(block.code?.caption).startsWith(`${this.config.bodyMarker}/`))blocks.push(...await this.blocks(block.id));
+      }
       cursor = result.has_more ? result.next_cursor : undefined;
     } while (cursor);
     return blocks;
   }
   async update(id: string, patch: Record<string, any>, expected?: Record<string, any>) {
+    const config = this.config;
+    const { textFields, numberFields, dateFields, urlFields, selectFields } = config;
     const current = await this.get(id);
     if (expected && Object.entries(expected).some(([key, value]) => current[key] !== value)) throw new Error("Article queue changed before update; inspect and rerun.");
-    const propertyFields = new Set(["article_title", "article_type", "status", ...Object.keys(textFields), ...Object.keys(numberFields), ...Object.keys(dateFields), ...Object.keys(urlFields), "updated_at"]);
+    const propertyFields = new Set(["article_title", "article_type", "status", ...Object.keys(textFields), ...Object.keys(numberFields), ...Object.keys(dateFields), ...Object.keys(urlFields), ...Object.keys(selectFields), "updated_at"]);
     const bodyChanged = Object.keys(patch).some(field => !propertyFields.has(field));
     const generation = randomUUID();
     if (bodyChanged && !current.body_generation) {
       // A row without a committed pointer reads its newest complete snapshot. Pin the
       // current one first, so a snapshot appended below can't show if the update fails.
-      const existing = articleQueueNewestGeneration(await this.blocks(id));
+      const existing = articleQueueNewestGeneration(await this.blocks(id), config) ?? "empty";
       if (existing) {
-        await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties({ body_generation: existing }) });
+        await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties({ body_generation: existing }, config) });
         const pinned = await this.api.call(`pages/${id}`);
         if (plain(pinned.properties?.Snapshot?.rich_text) !== existing) throw new Error("Article Queue snapshot pointer did not save; inspect and rerun.");
       }
     }
     if (bodyChanged) {
       // Append the snapshot first. It only counts once the property write below names it.
-      await this.api.call(`blocks/${id}/children`, "PATCH", { children: articleQueueBody({ ...current, ...patch }, generation) });
+      await this.api.call(`blocks/${id}/children`, "PATCH", { children: articleQueueBody({ ...current, ...patch }, generation, config) });
       patch = { ...patch, body_generation: generation };
     }
-    await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties(patch) });
+    await this.api.call(`pages/${id}`, "PATCH", { properties: articleQueueProperties(patch, config) });
     const saved = await this.get(id);
-    for (const [key, value] of Object.entries(articleQueueProperties(patch))) {
+    for (const [key, value] of Object.entries(articleQueueProperties(patch, config))) {
       // Read the actual API representation through the same serializer.
-      if (JSON.stringify(articleQueueProperties(saved)[key]) !== JSON.stringify(value)) throw new Error(`Article Queue update readback differs for ${key}.`);
+      if (JSON.stringify(articleQueueProperties(saved, config)[key]) !== JSON.stringify(value)) throw new Error(`Article Queue update readback differs for ${key}.`);
     }
     if (bodyChanged) {
       const blocks = await this.blocks(id);
-      const snapshots = blocks.filter(block => plain(block.code?.caption).startsWith(`${BODY_MARKER}/`));
+      const snapshots = blocks.filter(block => plain(block.code?.caption).startsWith(`${config.bodyMarker}/`));
       for (const block of snapshots) if (plain(block.code.caption).split("/")[1] !== generation) {
         await this.api.call(`blocks/${block.id}`, "PATCH", { in_trash: true });
       }
@@ -259,7 +311,7 @@ export class NotionArticleQueue {
     const payload = { workflow_mode: "agent_runner", ...row,
       idempotency_key: "idempotency_key" in row ? row.idempotency_key : articleQueueIdempotencyKey(String(row.article_title ?? ""), row.universe_id ?? null) };
     const generation = randomUUID();
-    const page = await this.api.callCreate({ parent: { type: "data_source_id", data_source_id: this.source }, properties: articleQueueProperties({ ...payload, body_generation: generation }), children: articleQueueBody(payload, generation) });
+    const page = await this.api.callCreate({ parent: { type: "data_source_id", data_source_id: this.source }, properties: articleQueueProperties({ ...payload, body_generation: generation }, this.config), children: articleQueueBody(payload, generation, this.config) });
     // Never retry an uncertain create. A subsequent invocation re-queries first.
     return this.get(page.id);
   }
@@ -323,14 +375,25 @@ export class NotionArticleQueue {
   }
 }
 
-export function createNotionArticleQueue(options: { envFile?: string | null } = {}) {
+export function createNotionArticleQueue(options: { envFile?: string | null; config?: ArticleQueueConfig } = {}) {
+  const config = options.config ?? ROBLOX_ARTICLE_QUEUE;
   // Keep --dev-env-file as a deprecated file flag without using database creds.
   const configured = options.envFile ? parseDotenv(readFileSync(options.envFile, "utf8")) : {};
   const token = configured.NOTION_ARTICLE_QUEUE_TOKEN || process.env.NOTION_ARTICLE_QUEUE_TOKEN;
   if (!token?.trim()) throw new Error("NOTION_ARTICLE_QUEUE_TOKEN is required. Load BLOXODES_ENV_OVERLAYS=articles.");
   return new NotionArticleQueue(new CodesQueue(makeRequest(AbortSignal.timeout(20 * 60_000)), token.trim(),
-    process.env.NOTION_ARTICLE_QUEUE_DATA_SOURCE_ID || ARTICLE_QUEUE_SOURCE,
-    process.env.NOTION_ARTICLE_QUEUE_DATABASE_ID || ARTICLE_QUEUE_DATABASE),
-    process.env.NOTION_ARTICLE_QUEUE_DATA_SOURCE_ID || ARTICLE_QUEUE_SOURCE,
-    process.env.NOTION_ARTICLE_QUEUE_DATABASE_ID || ARTICLE_QUEUE_DATABASE);
+    (config === ROBLOX_ARTICLE_QUEUE && process.env.NOTION_ARTICLE_QUEUE_DATA_SOURCE_ID) || config.source,
+    (config === ROBLOX_ARTICLE_QUEUE && process.env.NOTION_ARTICLE_QUEUE_DATABASE_ID) || config.database),
+    (config === ROBLOX_ARTICLE_QUEUE && process.env.NOTION_ARTICLE_QUEUE_DATA_SOURCE_ID) || config.source,
+    (config === ROBLOX_ARTICLE_QUEUE && process.env.NOTION_ARTICLE_QUEUE_DATABASE_ID) || config.database, config);
+}
+
+export function createNotionGameArticleQueue(options: { envFile?: string | null } = {}) {
+  return createNotionArticleQueue({ ...options, config: GAME_ARTICLE_QUEUE });
+}
+
+export function queueBodyNotes(blocks: any[], config = GAME_ARTICLE_QUEUE): string {
+  return blocks.filter(block => !plain(block.code?.caption).startsWith(`${config.bodyMarker}/`))
+    .map(block => plain(block[block.type]?.rich_text ?? (block.child_page?.title ? [{ text: { content: block.child_page.title } }] : [])))
+    .filter(Boolean).join("\n");
 }

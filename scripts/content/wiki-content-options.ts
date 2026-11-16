@@ -98,5 +98,5 @@ export function assertApprovedHubCoverScope(options: ContentOptions, contract: s
 
 // Resolve bundle type before loading credentials or running publication checks.
 export function assertUpdatePublishedScope(options: ContentOptions, contract: string) {
-  if (options.updatePublished && contract !== "article@1" && contract !== "stats-report@1") throw new Error("--update-published is only valid for article@1 and stats-report@1 bundles.");
+  if (options.updatePublished && contract !== "article@1" && contract !== "stats-report@1" && contract !== "game-article@1" && contract !== "article-links@1") throw new Error("--update-published is only valid for article@1, article-links@1, game-article@1 and stats-report@1 bundles.");
 }

@@ -1,3 +1,9 @@
+import { publishedArticleAction } from "./article-published-update";
+import { isDeepStrictEqual } from "node:util";
+import { assertArticleLinks } from "./article-links";
+import { createNotionGameArticleQueue } from "../articles/notion-article-queue";
+import { assertArticleQueue, assertArticleResultBinding, completeArticlePublication, type ArticleResultBinding } from "./article-publish";
+import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -9,13 +15,12 @@ import { bundlePath } from "../shared/roblox-wiki-bundle";
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
 import { readPublishQuery } from "../shared/publish-network.mjs";
 import { publicCopyFindings } from "./check-public-copy";
-import { assertProductionArticleMediaUrls, assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages } from "./article-image-readiness";
+import { assertProductionArticleMediaUrls, assertArticleImageReadiness, checkArticleImageReadiness, readArticleImageManifest, findArticleImages, usedVerifiedArticleImages } from "./article-image-readiness";
 import { assertNoArticleMediaErrors, checkArticleMedia } from "./check-article-media";
-import { verifyArticleAssets, verifyArticleLive } from "./article-publish";
+import { articleVerificationPages, verifyArticleAssets, verifyArticleLive } from "./article-publish";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { fetchImageBytes } from "../shared/fetch-image-bytes";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
-import { parseArticleContentPages } from "@/lib/article-blocks";
 import { resolveSeoTitle } from "@/lib/seo";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { pickEligibleArticleAuthorId } from "../shared/article-author-selection";
@@ -26,6 +31,10 @@ async function read(query:()=>PromiseLike<any>) {
   const result = await readPublishQuery(query);
   if (result.error) throw result.error;
   return result.data;
+}
+export async function assertGameArticleQueueBinding(row:any, bundle:{slug:string;namespace:string;game:{slug:string;kind:string}}, binding:ArticleResultBinding) {
+  assertArticleQueue(row,bundle.slug);await assertArticleResultBinding(row,binding);
+  if(row.namespace!==bundle.namespace || row.game_slug!==bundle.game.slug || row.game_kind!==bundle.game.kind)throw new Error("Game queue identity differs from bundle.");
 }
 export async function resolveGameArticleIdentity(db:SupabaseClient, namespace:string, game:{slug:string;kind:string}) {
   const row = await read(()=>db.from("games").select("id,namespace,slug,kind,parent_id,is_published,cover_image").eq("namespace",namespace).eq("slug",game.slug).eq("kind",game.kind).single());
@@ -66,11 +75,18 @@ export function gameArticlePayload(final:GameArticleFinal, namespace:string, gam
     word_count:final.content_md.trim().split(/\s+/).length};
 }
 export function gameArticleVerificationPages(content: string): string[] {
-  return parseArticleContentPages(content).map(blocks=>blocks.map(block=>{
-    if(block.kind==="markdown") return block.markdown;
-    if(block.kind==="invalid") throw new Error(`Invalid article block: ${block.message}`);
-    return "```"+block.kind+"\n"+JSON.stringify(block.data)+"\n```";
-  }).join("\n\n"));
+  return articleVerificationPages(content);
+}
+export function gameArticleReadbackMismatch(stored: Record<string, any>, final: GameArticleFinal) {
+  const expected = gameArticlePayload(final, stored.namespace, stored.game_id);
+  for (const field of ["slug", "title", "content_md", "meta_description", "seo_title", "tags", "faq_json", "sources_json", "is_published"]) {
+    if (!isDeepStrictEqual(stored[field], expected[field])) return field;
+  }
+  return null;
+}
+async function verifyGameArticleLive(final: GameArticleFinal) {
+  await revalidatePublishedContent(process.env,[{type:"game_content",slug:`articles/${final.slug}`}]);
+  await verifyArticleLive(final,final.cover_image!,resolveSeoTitle(final.seo_title)??final.title);
 }
 export async function publishGameArticleBundle(options:ContentOptions) {
   if (options.only?.length || options.approvedHubCoverSha256) throw new Error("Game articles do not accept wiki selection flags.");
@@ -78,7 +94,14 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   const root=await fs.realpath(path.resolve(options.bundle!));
   const bundle=bundleSchema.parse(await json(await bundlePath(root,"bundle.json")));
   const finalFile=await bundlePath(root,bundle.finalJson), mediaFile=await bundlePath(root,bundle.mediaJson);
-  const final=gameArticleFinalSchema.parse(await json(finalFile));
+  const finalBytes=await fs.readFile(finalFile);
+  const final=gameArticleFinalSchema.parse(JSON.parse(finalBytes.toString("utf8")));
+  const queueDb=bundle.queueId ? createNotionGameArticleQueue() : null;
+  if(queueDb)await queueDb.validate();
+  const queue=queueDb ? await queueDb.get(bundle.queueId!) : null;
+  const binding:ArticleResultBinding| null=queue ? {slug:bundle.slug,resultPath:queue.result_path!,finalPath:finalFile,sha256:createHash("sha256").update(finalBytes).digest("hex")} : null;
+  if(queue)await assertGameArticleQueueBinding(queue,bundle,binding!);
+  await assertArticleLinks(final,{namespace:bundle.namespace,gameSlug:bundle.game.slug,kind:bundle.game.kind});
   if(final.slug!==bundle.slug) throw new Error("Article slug differs from bundle.");
   if(options.target==="production") await assertLocalContentPublication();
   const db=createClient(process.env.SUPABASE_URL!,process.env.SUPABASE_SERVICE_ROLE!,{auth:{persistSession:false,autoRefreshToken:false}});
@@ -91,8 +114,8 @@ export async function publishGameArticleBundle(options:ContentOptions) {
     {preferredAuthorId:final.author_id},
   );
   final.author_id=authorId;
-  const expected=await read(()=>db.rpc("expected_game_page_path",{p_game_id:game.id,p_type:"article",p_slug:final.slug}));
-  if(expected!==`/articles/${final.slug}`) throw new Error("Target article route differs from contract.");
+  const expectedPath=await read(()=>db.rpc("expected_game_page_path",{p_game_id:game.id,p_type:"article",p_slug:final.slug}));
+  if(expectedPath!==`/articles/${final.slug}`) throw new Error("Target article route differs from contract.");
   const findings=publicCopyFindings(final,finalFile);
   if(findings.length) throw new Error(findings.map(f=>`${f.field}: ${f.rule}: ${f.excerpt}`).join("\n"));
   const manifest=await readArticleImageManifest(mediaFile);
@@ -101,7 +124,7 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   assertArticleImageReadiness(checkArticleImageReadiness({manifest,finalJson:final,env:sourceEnv}),mediaFile);
   assertNoArticleMediaErrors(await checkArticleMedia({...final,env:sourceEnv,requireLocalFiles:true}));
   if(final.cover_image && findArticleImages(final.content_md).some(image=>image.src===final.cover_image)) throw new Error("Article cover must not repeat a body image.");
-  const coverSource=final.cover_image || findArticleImages(final.content_md)[0]?.src || game.cover_image;
+  const coverSource=(current?.is_published && !final.cover_image ? current.cover_image : null) || final.cover_image || findArticleImages(final.content_md)[0]?.src || game.cover_image;
   if(!coverSource) throw new Error("Article cover is missing: provide cover_image, a body image, or the owning game cover_image.");
   if(options.target==="production") assertProductionArticleMediaUrls({...final,cover_image:coverSource});
   await verifyArticleAssets(final,coverSource);
@@ -109,13 +132,42 @@ export async function publishGameArticleBundle(options:ContentOptions) {
   // Decode and prepare cover before any writes, including body image uploads.
   const cover=await fetchImageBytes(new URL(coverSource,"https://bloxodes.com").href);
   const coverBytes=await sharp(cover).webp().toBuffer();
+  const expected = structuredClone(final);
+  for(const entry of usedVerifiedArticleImages(manifest,expected.content_md)) {
+    if(entry.public_url && entry.uploaded_path && process.env.SUPABASE_MEDIA_BUCKET) {
+      const targetUrl=toMediaPublicUrl(`${process.env.SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`)!;
+      expected.content_md=expected.content_md.split(entry.public_url).join(targetUrl);
+    }
+  }
+  const expectedCover=toMediaPublicUrl(`${process.env.SUPABASE_URL}/storage/v1/object/public/${process.env.SUPABASE_MEDIA_BUCKET}/articles/${final.slug}/cover-${createHash("sha256").update(coverBytes).digest("hex")}.webp`);
+  const mismatch=current?.is_published ? gameArticleReadbackMismatch(current,expected) ??
+    (final.cover_image && current.cover_image!==final.cover_image && current.cover_image!==expectedCover ? "cover_image" : null) : null;
+  const action=current?.is_published ? publishedArticleAction(mismatch,Boolean(options.updatePublished)) : "update";
   if(!options.apply) { console.log("PASS game-article@1 preflight; no writes."); return; }
+  if(queue)await assertGameArticleQueueBinding(await queueDb!.get(queue.id),bundle,binding!);
   if(!process.env.SUPABASE_MEDIA_BUCKET) throw new Error("Article apply requires SUPABASE_MEDIA_BUCKET.");
   if(options.target==="production" && (!process.env.REVALIDATE_SECRET || process.env.SUPABASE_MEDIA_PUBLIC_URL!=="https://media.bloxodes.com")) throw new Error("Production needs revalidation secret and production media origin.");
   if(options.target==="production") await assertLocalContentPublication();
   const stagingRoot=path.resolve("tmp/game-article-direct"); await fs.mkdir(stagingRoot,{recursive:true});
   const staging=await fs.mkdtemp(path.join(stagingRoot,"run-"));
+  const unlock=await acquireAgentWorkLock(path.resolve("tmp/content-publish/article"),"direct-game-article-publish");
+  if(!unlock){await fs.rm(staging,{recursive:true,force:true});throw new Error("Article publication is busy; retry.");}
   try {
+    const latest=await assertGameArticleRoute(db,final.slug,game.id,bundle.namespace);
+    if(!isDeepStrictEqual(latest,current))throw new Error("Live game article changed during publication preflight; retry with the current bundle.");
+    if(action==="verify") {
+      const verified={...expected,author_id:current.author_id,cover_image:current.cover_image};
+      equalFields(current,gameArticlePayload(verified,bundle.namespace,game.id),"published game article");
+      const visible=await read(()=>db.from("game_article_pages_view").select("id").eq("id",current.id).single());
+      if(visible.id!==current.id)throw new Error("Published article is not visible.");
+      if(options.target==="production") {
+        const verify=()=>verifyGameArticleLive(verified);
+        if(queue)await completeArticlePublication(queueDb!,queue,binding!,verify);else await verify();
+      }
+      console.log(`PASS already published: https://bloxodes.com/articles/${final.slug}`);
+      return;
+    }
+    if(queue)await assertGameArticleQueueBinding(await queueDb!.get(queue.id),bundle,binding!);
     const stagedFinal=path.join(staging,"final.json"),stagedMedia=path.join(staging,"media.json");
     await fs.writeFile(stagedFinal,JSON.stringify(final)); await fs.writeFile(stagedMedia,JSON.stringify(manifest));
     const {collectArticleImages}=await import("./collect-article-images");
@@ -129,20 +181,25 @@ export async function publishGameArticleBundle(options:ContentOptions) {
     if(!coverUrl) throw new Error("Storage returned no public cover URL.");
     promoted.cover_image=coverUrl;
     await verifyArticleAssets(promoted,promoted.cover_image);
-    const payload=gameArticlePayload(promoted,bundle.namespace,game.id);
+    const payload:Record<string,any>=gameArticlePayload(promoted,bundle.namespace,game.id);
+    if(current?.is_published) {payload.author_id=current.author_id;payload.published_at=current.published_at;if(!final.cover_image)payload.cover_image=current.cover_image;}
+    promoted.cover_image=payload.cover_image;
     // Recheck after media work. The route registry serializes competing inserts.
-    await assertGameArticleRoute(db,final.slug,game.id,bundle.namespace);
-    const stored=await read(()=>current ? db.from("game_article_pages").update(payload).eq("id",current.id).eq("namespace",bundle.namespace).eq("game_id",game.id).select("*").single() : db.from("game_article_pages").insert(payload).select("*").single());
+    const beforeWrite=await assertGameArticleRoute(db,final.slug,game.id,bundle.namespace);
+    if(!isDeepStrictEqual(beforeWrite,current))throw new Error("Live game article changed before write; retry with the current bundle.");
+    const stored=await read(()=>{
+      if(!current)return db.from("game_article_pages").insert(payload).select("*").single();
+      let update=db.from("game_article_pages").update(payload).eq("id",current.id).eq("namespace",bundle.namespace).eq("game_id",game.id);
+      if(current.updated_at)update=update.eq("updated_at",current.updated_at);
+      return update.select("*").single();
+    });
     equalFields(stored,payload,"game article");
     const visible=await read(()=>db.from("game_article_pages_view").select("id").eq("id",stored.id).single());
     if(visible.id!==stored.id) throw new Error("Published article is not visible.");
     if(options.target==="production") {
-      await revalidatePublishedContent(process.env,[{type:"game_content",slug:`articles/${final.slug}`}]);
-      const pages=gameArticleVerificationPages(promoted.content_md);
-      for (const [index,content_md] of pages.entries()) {
-        await verifyArticleLive({...promoted,content_md},promoted.cover_image,resolveSeoTitle(promoted.seo_title)??promoted.title,index+1);
-      }
+      const verify=()=>verifyGameArticleLive(promoted);
+      if(queue)await completeArticlePublication(queueDb!,queue,binding!,verify);else await verify();
     }
     console.log(`PASS published game article: https://bloxodes.com/articles/${final.slug}`);
-  } finally { await fs.rm(staging,{recursive:true,force:true}); }
+  } finally { try {await fs.rm(staging,{recursive:true,force:true});}finally{await unlock();} }
 }

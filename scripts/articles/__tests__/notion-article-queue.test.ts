@@ -178,10 +178,11 @@ test("a committed snapshot generation wins over a complete uncommitted one", () 
   assert.throws(() => articleQueueBodyData(blocks, "missing"), /missing or incomplete/);
 });
 
-test("queue title dedupe keeps the 0.8 boundary and includes blocked and rejected topics", () => {
+test("queue title dedupe requires equal subjects and includes blocked and rejected topics", () => {
   for (const status of ["pending", "processing", "blocked", "completed", "published", "rejected"]) {
     const existing = { ...row({ status, article_title: "Alpha Bravo Charlie Delta", topic_key: "another" }), id: "id" } as ArticleQueueRow;
-    assert.equal(duplicateQueueRow([existing], row({ article_title: "Alpha Bravo Charlie Delta Echo", topic_key: "new" }))?.id, "id");
+    assert.equal(duplicateQueueRow([existing], row({ article_title: "Alpha Bravo Charlie Delta Guide", topic_key: "new" }))?.id, "id");
+    assert.equal(duplicateQueueRow([existing], row({ article_title: "Alpha Bravo Charlie Delta Echo", topic_key: "new" })), null);
     assert.equal(duplicateQueueRow([existing], row({ article_title: "Alpha Bravo Charlie Delta Echo Foxtrot", topic_key: "new" })), null);
   }
 });
@@ -326,13 +327,25 @@ test("conflicting finished duplicates leave the entire group unchanged and log I
   for (const item of [...f.pages.values()].filter(p => p.properties.Status.select.name !== "Pending")) assert.ok(messages[0].includes(item.id));
 });
 
-test("duplicate cleanup keeps distinct topics linked only through a skipped similar title", async () => {
+test("duplicate cleanup keeps distinct topics linked only through subject containment", async () => {
   const f = fixture();
   for (const [index, title] of ["Alpha Bravo Charlie Delta", "Alpha Bravo Charlie Delta Echo", "Bravo Charlie Delta Echo"].entries()) {
     const p = page(row({ article_title: title, topic_key: `topic-${index}` }), randomUUID(), `2026-11-0${index + 1}T00:00:00Z`); f.pages.set(p.id, p);
   }
-  assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 1);
-  assert.deepEqual((await f.queue.list()).map(item => item.status), ["pending", "skipped", "pending"]);
+  assert.equal(await f.queue.reconcileDuplicates(await f.queue.list()), 0);
+  assert.deepEqual((await f.queue.list()).map(item => item.status), ["pending", "pending", "pending"]);
+});
+
+test("reconciliation keeps Dual Katana and Cursed Dual Katana, even with reused keys", async () => {
+  const f = fixture();
+  for (const title of ["How to Get Dual Katana in Blox Fruits", "How to Get Cursed Dual Katana in Blox Fruits"]) {
+    const p = page(row({ article_title:title, game:"Blox Fruits", universe_id:1, topic_key:"reused", idempotency_key:"reused" }));f.pages.set(p.id,p);
+  }
+  const rows=await f.queue.list();
+  assert.equal(duplicateQueueRow([rows[0]],rows[1]),null);
+  assert.equal(await f.queue.reconcileDuplicates(rows),0);
+  assert.deepEqual((await f.queue.list()).map(item=>item.status),["pending","pending"]);
+  assert.deepEqual(f.mutations,[]);
 });
 
 test("a duplicate completed after the scheduler snapshot is never skipped", async () => {

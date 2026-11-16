@@ -12,9 +12,10 @@ const id="11111111-1111-4111-8111-111111111111";
 const dev="https://bbtcaurrtyoukvjbxbbj.supabase.co";
 const bundle={contract:"game-article@1",namespace:"example",game:{slug:"example-game",kind:"game"},slug:"example-guide",finalJson:"final.json",mediaJson:"media.json"};
 const final={slug:bundle.slug,title:"Example Guide",content_md:"Complete the first task.",cover_image:`${dev}/storage/v1/object/public/media/cover.webp`,author_id:id};
-test("game article contract rejects queues, Roblox IDs, unknown keys and escaping paths",async()=>{
+test("game article contract accepts optional queue IDs and rejects invalid identities and escaping paths",async()=>{
   assert.equal(bundleSchema.parse(bundle).contract,"game-article@1");
-  for(const bad of [{...bundle,queueId:id},{...bundle,namespace:"roblox"},{...bundle,game:{slug:"example-game"}},{...bundle,finalJson:"../final.json"},{...bundle,mediaJson:"/media.json"},{...bundle,contract:"game-article@2"}]) assert.equal(bundleSchema.safeParse(bad).success,false);
+  assert.equal(bundleSchema.parse({...bundle,queueId:id}).queueId,id);
+  for(const bad of [{...bundle,queueId:"invalid"},{...bundle,namespace:"roblox"},{...bundle,game:{slug:"example-game"}},{...bundle,finalJson:"../final.json"},{...bundle,mediaJson:"/media.json"},{...bundle,contract:"game-article@2"}]) assert.equal(bundleSchema.safeParse(bad).success,false);
   for(const bad of [{...final,universe_id:123},{...final,sources:["https://example.com"]},{...final,is_published:false}]) assert.equal(gameArticleFinalSchema.safeParse(bad).success,false);
   for (const cover_image of [undefined,null,""]) for (const author_id of [undefined,null,id])
     assert.equal(gameArticleFinalSchema.safeParse({...final,cover_image,author_id}).success,true);
@@ -22,7 +23,7 @@ test("game article contract rejects queues, Roblox IDs, unknown keys and escapin
   assert.equal(gameArticleFinalSchema.safeParse({...final,tags:["news"],sources_json:[{title:"Official",url:"https://example.com"}]}).success,true);
 });
 
-for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-owner","reserved-route","archive-clash","duplicate-slug","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","no-authors","body-cover","game-cover","missing-cover","repeated-cover"]) test(`game article ${scenario}`,async()=>{
+for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-owner","reserved-route","archive-clash","duplicate-slug","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","no-authors","body-cover","game-cover","missing-cover","repeated-cover","published-identical","published-stale","published-update","published-update-cover"]) test(`game article ${scenario}`,async()=>{
   const root=path.resolve("tmp",`game-article-${randomUUID()}`);await fs.mkdir(root,{recursive:true});
   try {
     await fs.writeFile(path.join(root,"bundle.json"),JSON.stringify(bundle));
@@ -36,9 +37,10 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
     if(scenario==='author-preferred') inputFinal.author_id='22222222-2222-4222-8222-222222222222';
     if(scenario==='author-null') inputFinal.author_id=null;
     if(scenario==='author-ineligible') inputFinal.author_id='33333333-3333-4333-8333-333333333333';
-    if(["body-cover","game-cover","missing-cover"].includes(scenario)) delete inputFinal.cover_image;
+    if(["body-cover","game-cover","missing-cover","published-update"].includes(scenario)) delete inputFinal.cover_image;
     if(bodyScenario) inputFinal.content_md=`Complete the first task.\n\n## First task\n\n![First task screenshot](${bodyUrl})\n\n![Second task screenshot](${secondUrl})`;
     if(scenario==='repeated-cover') inputFinal.cover_image=bodyUrl;
+    inputFinal.content_md=String(inputFinal.content_md)+"\n\nSee the [Example Game wiki](/wiki/example-game).";
     await fs.writeFile(path.join(root,"final.json"),JSON.stringify(inputFinal));
     // An inspected unavailable target is an accepted text-only article image pass.
     await fs.writeFile(path.join(root,"media.json"),JSON.stringify({schema:1,article_slug:bundle.slug,required:true,visual_type:"steps",expected_count:1,entries:[{id:"step",label:"First task",placement_heading:"First task",required:true,status:"missing",availability_failure:"inspection",missing_reason:"Screenshot does not show the requested task.",acceptance_note:"Reviewer accepted the clear text instructions."}]}));
@@ -51,11 +53,19 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
       const previous=fs.existsSync(root+'/report.json')?JSON.parse(fs.readFileSync(root+'/report.json','utf8')):null;
       const calls=[],uploads=previous?.uploads??[];let stored=previous?.stored??null;
       const existingAuthor='22222222-2222-4222-8222-222222222222';
+      if(scenario.startsWith('published-')&&!stored) {
+        const input=JSON.parse(fs.readFileSync(root+'/final.json','utf8'));
+        const content_md=scenario==='published-identical'?input.content_md:'Owner revised the live copy.';
+        stored={...input,id,namespace:'example',game_id:id,canonical_path:'/articles/example-guide',author_id:existingAuthor,
+          content_md,seo_title:null,meta_description:null,tags:[],faq_json:[],sources_json:[],is_published:true,
+          word_count:content_md.trim().split(/\\s+/).length,published_at:'2025-01-02',cover_image:${JSON.stringify(dev)}+'/storage/v1/object/public/media/'+(scenario==='published-update-cover'?'game.webp':'cover.webp')};
+      }
       if(scenario==='author-existing'&&!stored) stored={id,namespace:'example',game_id:id,author_id:existingAuthor};
       process.on('exit',()=>fs.writeFileSync(root+'/report.json',JSON.stringify({calls,stored,uploads})));
       globalThis.fetch=async(input,init)=>{
         const url=new URL(typeof input==='string'?input:input.url??input.href),method=init?.method??'GET';calls.push({path:url.pathname,method,url:url.href});
         const json=data=>new Response(JSON.stringify(data),{headers:{'content-type':'application/json'}});
+        if(url.origin==='https://bloxodes.com'&&url.pathname==='/wiki/example-game') return new Response('Example Game wiki');
         // Recollect managed-dev images from their original source when the target URL changes.
         if(scenario==='body-cover'&&method==='GET'&&url.origin==='https://example.com'&&['/first.webp','/second.webp'].includes(url.pathname)) {
           return new Response(fs.readFileSync(root+(url.pathname==='/first.webp'?'/body.webp':'/game.webp')),{headers:{'content-type':'image/webp'}});
@@ -79,17 +89,17 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
         if(url.pathname.endsWith('/game_article_pages')) {
           if(method==='GET'&&url.searchParams.has('game_id')) return json(scenario==='duplicate-slug'?[{id:'other-article'}]:[]);
           if(method==='GET') return json(scenario==='foreign-owner'?{id,namespace:'other',game_id:'other'}:stored);
-          stored={...JSON.parse(init.body),id,published_at:'2026-01-01'};
+          stored={...JSON.parse(init.body),id,published_at:JSON.parse(init.body).published_at??'2026-01-01'};
           if(scenario==='bad-readback') stored.title='Wrong title';
           return json(stored);
         }
         throw new Error('Unexpected request '+method+' '+url.pathname);
       };`;
-    const apply=["apply","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","body-cover","game-cover"].includes(scenario);
+    const apply=["apply","bad-readback","author-absent","author-null","author-existing","author-ineligible","author-preferred","body-cover","game-cover","published-identical","published-stale","published-update","published-update-cover"].includes(scenario);
     const mediaOrigin=scenario==='body-cover'?"https://media.example.com":dev;
     for(let attempt=0;attempt<(scenario==='body-cover'||scenario==='game-cover'||scenario==='author-absent'?2:1);attempt++) {
-    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,"--target","managed-dev",...(apply?["--apply"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
-    assert.equal(result.status,(apply&&scenario!=="bad-readback")||scenario==="dry-run"?0:1,result.stderr);
+    const result=spawnSync(process.execPath,["--import","tsx","--import",`data:text/javascript,${encodeURIComponent(preload)}`,"scripts/content/roblox-wiki-cli.ts","publish",root,"--target","managed-dev",...(apply?["--apply"]:[]),...(scenario.startsWith("published-update")?["--update-published"]:[])],{encoding:"utf8",timeout:30000,env:{...process.env,BLOXODES_ENV_PROFILE:"process-only",SUPABASE_URL:dev,SUPABASE_SERVICE_ROLE:"test-role",SUPABASE_MEDIA_BUCKET:"media",SUPABASE_MEDIA_PUBLIC_URL:`${mediaOrigin}/storage/v1/object/public/media`}});
+    assert.equal(result.status,(apply&&!["bad-readback","published-stale"].includes(scenario))||scenario==="dry-run"?0:1,result.stderr);
     if(scenario==='no-authors') assert.match(result.stderr,/No eligible article authors/);
     if(scenario==='missing-cover') assert.match(result.stderr,/provide cover_image, a body image, or the owning game cover_image/);
     if(scenario==='repeated-cover') assert.match(result.stderr,/cover must not repeat a body image/);
@@ -98,7 +108,7 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
     const report=JSON.parse(await fs.readFile(path.join(root,"report.json"),"utf8"));
     assert.ok(report.calls.every((call:{path:string})=>!call.path.includes('article_generation_queue')&&!call.path.includes('roblox_universes')));
     if(!apply) assert.ok(report.calls.every((call:{method:string;path:string})=>call.method==='GET'||call.path.endsWith('/expected_game_page_path')));
-    if(apply&&scenario!=='bad-readback') {
+    if(apply&&!scenario.startsWith('published-')&&scenario!=='bad-readback') {
       assert.equal(report.stored.author_id,['author-existing','author-preferred'].includes(scenario)?'22222222-2222-4222-8222-222222222222':id);
       const sourceFile=scenario==='body-cover'?'body.webp':scenario==='game-cover'?'game.webp':'image.webp';
       const expectedHash=createHash("sha256").update(await sharp(await fs.readFile(path.join(root,sourceFile))).webp().toBuffer()).digest("hex");
@@ -108,8 +118,24 @@ for(const scenario of ["dry-run","apply","hidden-game","roblox-clash","foreign-o
         assert.ok(report.stored.content_md.includes(`${mediaOrigin}/storage/v1/object/public/media/${bodyPath.replace('first.webp','second.webp')}`));
         assert.ok(!report.stored.content_md.includes(dev));
         assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===bodyUrl));
-        for(const name of ['first','second']) assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===`https://example.com/${name}.webp`));
+        if(attempt===0)for(const name of ['first','second']) assert.ok(report.calls.some((call:{url:string;method:string})=>call.method==='GET'&&call.url===`https://example.com/${name}.webp`));
       }
+    }
+    if(scenario==='published-stale') {
+      assert.match(result.stderr,/live article differs.*--update-published/);
+      assert.equal(report.stored.content_md,'Owner revised the live copy.');
+      assert.equal(report.uploads.length,0);
+      assert.ok(report.calls.every((call:{path:string;method:string})=>!call.path.endsWith('/game_article_pages')||call.method==='GET'));
+    }
+    if(scenario==='published-identical') {
+      assert.match(result.stdout,/already published/);assert.equal(report.uploads.length,0);
+      assert.ok(report.calls.every((call:{path:string;method:string})=>!call.path.endsWith('/game_article_pages')||call.method==='GET'));
+    }
+    if(scenario.startsWith('published-update')) {
+      assert.equal(report.stored.author_id,'22222222-2222-4222-8222-222222222222');assert.equal(report.stored.published_at,'2025-01-02');
+      assert.equal(report.stored.content_md,inputFinal.content_md);
+      if(scenario==='published-update')assert.equal(report.stored.cover_image,`${dev}/storage/v1/object/public/media/cover.webp`);
+      else assert.match(report.stored.cover_image,/cover-[0-9a-f]{64}\.webp$/);
     }
     if(scenario==='apply') {assert.equal(report.stored.game_id,id);assert.equal(report.stored.namespace,'example');assert.equal(report.stored.canonical_path,'/articles/example-guide');assert.match(report.stored.cover_image,new RegExp(`^${dev}/storage/v1/object/public/media/articles/example-guide/cover-[0-9a-f]+\\.webp$`));}
     }
