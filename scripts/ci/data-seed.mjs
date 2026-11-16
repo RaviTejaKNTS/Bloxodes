@@ -77,7 +77,7 @@ export function seedTables() {
   const checklist = add("game_checklist_pages_view", {...common,id:id(),game_id:gta.id,namespace:"gta",slug:"gta-5",title:"GTA 5 checklist",game_title:gta.title,canonical_path:"/checklists/gta-5",sections_json:[{code:"1",title:"Story"}]});
   add("game_checklist_items", {id:id(),namespace:"gta",page_id:checklist.id,section_code:"1.1.1",title:"Finish the first mission",description:"Complete the prologue.",is_required:true});
   route(checklist,"game","checklist");alias("/gta/checklists/gta-5",checklist,"checklist");
-  for (const [old,target] of [["/gta/checklists/page/2","/games/gta"],["/gta/maps","/games/gta"],["/minecraft/tools","/games/minecraft"],["/minecraft/wiki/legacy-minecraft","/games/minecraft"],["/minecraft/wiki/achievements","/wiki/minecraft-bedrock/achievements"],["/minecraft/wiki/enchantments","/wiki/minecraft-java/enchantments"]]) {
+  for (const [old,target] of [["/gta/checklists/page/2","/games/gta"],["/gta/maps","/games/gta"],["/minecraft/tools","/games/minecraft"],["/minecraft/wiki/legacy-minecraft","/games/minecraft"],["/minecraft/wiki/achievements","/wiki/minecraft-bedrock/achievements"],["/minecraft/wiki/enchantments","/wiki/minecraft-java/enchantments"],["/minecraft/wiki/mobs","/wiki/minecraft-java/mobs"]]) {
     const live=routes.find(row=>row.path===target && row.status==="live");alias(old,{id:live.page_id,game_id:live.game_id,canonical_path:target},live.page_type);
   }
   const author = add("authors", {...common,id:id(),name:"Alex Rivers",slug:"alex-rivers",bio_md:"Game guides and item routes.",avatar_url:"/Bloxodes.png"});

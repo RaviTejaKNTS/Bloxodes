@@ -78,6 +78,13 @@
       "title": "Minecraft Bedrock",
       "kind": "game",
       "parent": "minecraft"
+    },
+    {
+      "namespace": "hytale",
+      "slug": "hytale",
+      "title": "Hytale",
+      "kind": "game",
+      "parent": null
     }
   ],
   "collections": [
@@ -123,6 +130,12 @@
       "game": "bedrock",
       "slug": "achievements",
       "title": "Minecraft Bedrock achievements"
+    },
+    {
+      "namespace": "minecraft",
+      "game": "java",
+      "slug": "mobs",
+      "title": "Minecraft Java mobs"
     }
   ],
   "robloxWikis": [
