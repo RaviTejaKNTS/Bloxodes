@@ -72,7 +72,7 @@ The main agent is the `lead`: the agent the owner talks to in T3. Full detail: [
 **Data and secrets**
 
 - Never print, log or commit secrets. Change env values only in Infisical, with `infisical-env set`; a homelab sync writes them to the env files, the VPS, Dokploy and GitHub. Mac copies are read-only. See [environment](bloxodes-docs/environment.md).
-- Author against managed development. Production changes only through GitHub's release and publication jobs, or `content:publish` for Roblox and franchise wiki bundles and article bundles.
+- Content Factory content (wikis, articles, codes pages, stats reports) is authored in local files, reads production for context and overlap checks, and publishes straight to production through the guarded `content:publish` or `codes:publish` once its dry run passes. It never goes through managed development. Other production changes go only through GitHub's release and publication jobs. Managed development is for code PR checks and explicit manual opt-ins.
 - There is no local Supabase. Don't start one.
 - `roblox_universes.slug` is a stats slug. Never copy it into editorial slugs (`code_pages.slug`, `wiki_pages.slug`, `wiki_collection_pages.wiki_slug`, `quiz_pages.code` and the like).
 - Notion queue rows are never deleted. Set a status instead.

@@ -66,9 +66,11 @@ Pick one with `BLOXODES_ENV_PROFILE`.
 
 Process variables always win over file values. Within files, the first file wins.
 
-## Roblox wiki publisher
+## Content Factory commands
 
-`content:publish`, `content:status` and `content:candidates` pick the `managed-dev` or `production-preview` profile from `--target` (default `managed-dev`) and fail if the loaded credentials don't match the target. Production adds the `vps` overlay for a read-only schema-ledger check. They use `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` and the `WIKI_R2_*` names from `integrations/content.env`; production also needs `REVALIDATE_SECRET` and `VPS_SUPABASE_STUDIO_*`. No new names.
+`content:publish`, `content:status`, `content:candidates`, `collect:article-images`, `codes:context` and `codes:publish` pick the `production-preview` profile by default (or `managed-dev` with an explicit `--target managed-dev`, `--target development` for codes) and fail if the loaded credentials don't match the target. The target always overrides a profile inherited from the shell. Production adds the `vps` overlay for a read-only schema-ledger check. They use `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` and the `WIKI_R2_*` names from `integrations/content.env`; production also needs `REVALIDATE_SECRET` and `VPS_SUPABASE_STUDIO_*`. No new names.
+
+The Roblox article queue lives in Notion and needs `NOTION_ARTICLE_QUEUE_TOKEN` (in `pipelines/articles.env` and the homelab's `/etc/bloxodes/article-automation.env`). `NOTION_ARTICLE_QUEUE_DATABASE_ID`, `NOTION_ARTICLE_QUEUE_DATA_SOURCE_ID` and `ARTICLE_DISCOVERY_STATE_DIR` (default `/srv/data/bloxodes-automation-runtime/state/articles`, `~/.local/state/bloxodes/articles` on macOS) are optional overrides. The `ARTICLE_DEV_*` and `ARTICLE_QUEUE_SUPABASE_*` database credentials are only for the one-off queue migration and the unscheduled legacy article pipeline.
 
 The Content Factory has no env files. Its `bin/publisher` runs these commands from the device's main checkout (`/srv/data/projects/Bloxodes` or `~/projects/Bloxodes`), using that checkout's `.envs`.
 
