@@ -10,8 +10,8 @@ export function rowContract(columns) {
   if (!columns || Array.isArray(columns)) throw new Error("CI queries require explicit schema column types.");
   return { columns: new Set(Object.keys(columns)), types: columns, relations: {} };
 }
-export function tableContract(table) {
-  const definition = schemaManifest.tables[table];
+export function tableContract(table, manifest = schemaManifest) {
+  const definition = manifest.tables[table];
   if (!definition) throw new Error(`No CI schema manifest table: ${table}`);
   return rowContract(definition.columns);
 }
@@ -20,14 +20,14 @@ export function tableContract(table) {
 export function copyColumns(table, source) {
   return Object.fromEntries(Object.keys(schemaManifest.tables[table].columns).filter(key => Object.hasOwn(source, key)).map(key => [key, source[key]]));
 }
-export function validateSeedRows(tables) {
+export function validateSeedRows(tables, manifest = schemaManifest) {
   const errors = [];
   for (const [table, rows] of Object.entries(tables)) {
-    if (schemaManifest.absentTables.includes(table)) {
+    if (manifest.absentTables.includes(table)) {
       if (rows.length) throw new Error(`CI fixture seeds absent table ${table}`);
       continue;
     }
-    const contract = tableContract(table);
+    const contract = tableContract(table, manifest);
     for (const [index, row] of rows.entries()) for (const key of Object.keys(row)) {
       if (!contract.columns.has(key)) {
         const message = `Unknown CI seed column ${table}.${key}`;

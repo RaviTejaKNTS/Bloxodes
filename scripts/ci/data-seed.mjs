@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { addPublicSamples, addStatsSamples } from "./data-samples.mjs";
 import { defaultCatalogTables } from "./catalog-query-fixture.mjs";
 import { copyColumns, getEmbeds, schemaManifest, setEmbeds, tableContract, validateSeedRows } from "./data-schema.mjs";
+import { attachRelations } from "./data-relations.mjs";
 const read = file => JSON.parse(fs.readFileSync(new URL(`./fixtures/${file}`, import.meta.url), "utf8"));
 const timestamp = "2026-11-01T12:00:00Z";
 const common = { seo_title: null, is_published: true, is_public: true, published_at: timestamp, created_at: timestamp, updated_at: timestamp, content_updated_at: timestamp,
@@ -149,14 +150,9 @@ export function seedRpcs() {
     get_stats_visit_share_chart: [], search_site: [], get_roblox_universe_pipeline_health_v4: []
   };
 }
-export function seedContracts(tables) {
-  validateSeedRows(tables);
-  const contracts = Object.fromEntries(Object.keys(tables).filter(table => !schemaManifest.absentTables.includes(table)).map(table => [table, tableContract(table)]));
-  for (const [table, relations] of Object.entries(read("relations.json"))) {
-    for (const [target, key] of Object.entries(relations)) {
-      if (!contracts[table] || !contracts[target]) throw new Error(`Unknown CI seed relation ${table}.${target}`);
-      contracts[table].relations[target] = { read: row => getEmbeds(row)[target] ?? row[key], contract: contracts[target] };
-    }
-  }
+export function seedContracts(tables, manifest = schemaManifest) {
+  validateSeedRows(tables, manifest);
+  const contracts = Object.fromEntries(Object.keys(tables).filter(table => !manifest.absentTables.includes(table)).map(table => [table, tableContract(table, manifest)]));
+  attachRelations(contracts, tables, manifest, read("relations.json"), read("view-relations.json"));
   return contracts;
 }

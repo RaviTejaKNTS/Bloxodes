@@ -29,7 +29,15 @@ const unquote = value => {
   if (typeof parsed !== "string") throw new Error(`Invalid CI query value: ${value}`);
   return parsed;
 };
-const field = (row, key) => key.split(/->>?/).reduce((value, part) => value?.[part], row);
+const field = (row, key) => {
+  const [column, ...path] = key.split(/(->>?)/);
+  let value = row[column];
+  for (let index = 0; index < path.length; index += 2) {
+    value = value?.[path[index + 1]];
+    if (path[index] === "->>" && value != null && typeof value !== "string") value = JSON.stringify(value);
+  }
+  return value;
+};
 function validateField(key, contract) {
   const [column, ...path] = key.split(/->>?/);
   if (!identifier.test(column) || path.some(part => !/^[a-zA-Z_0-9]+$/.test(part))) throw new Error(`Invalid CI data field: ${key}`);
@@ -54,13 +62,9 @@ function arrayValue(raw, type) {
 }
 function compileFilter(column, expression, contract) {
   const type = validateField(column, contract), kind = columnKind(type);
-  const match = expression.match(/^([a-z]+)\.(.*)$/s);
+  const match = expression.match(/^(not\.)?([a-z]+)\.(.*)$/s);
   if (!match) throw new Error(`Invalid CI data filter: ${expression}`);
-  const [, operator, raw] = match;
-  if (operator === "not") {
-    const predicate = compileFilter(column, raw, contract);
-    return row => (raw.startsWith("is.") || field(row, column) != null) && !predicate(row);
-  }
+  const [, negated, operator, raw] = match;
   if (!["is", "eq", "neq", "gt", "gte", "lt", "lte", "in", "like", "ilike", "ov", "cs", "cd"].includes(operator)) throw new Error(`Unimplemented CI data filter: ${operator}`);
   if ((["like", "ilike"].includes(operator) && kind !== "text") ||
       (["cs", "cd"].includes(operator) && !["array", "json"].includes(kind)) ||
@@ -95,7 +99,7 @@ function compileFilter(column, expression, contract) {
     if (kind === "json") return actual;
     return typedValue(typeof actual === "object" ? JSON.stringify(actual) : String(actual), type);
   };
-  return row => {
+  const predicate = row => {
     const actual = field(row, column);
     if (operator === "is") return value === "null" ? actual == null : actual === (value === "true");
     if (actual == null) return false;
@@ -114,6 +118,7 @@ function compileFilter(column, expression, contract) {
       case "cd": return contains(value, comparable);
     }
   };
+  return negated ? row => (operator === "is" || field(row, column) != null) && !predicate(row) : predicate;
 }
 function compileLogic(term, contract) {
   const group = term.match(/^(not\.)?(and|or)\((.*)\)$/s);
@@ -131,10 +136,14 @@ function compileLogic(term, contract) {
 function compileProjection(select, contract) {
   const projections = splitTerms(select).map(part => {
     if (part === "*") return row => Object.fromEntries([...contract.columns].map(key => [key, row[key] ?? null]));
-    const embed = part.match(/^(?:(\w+):)?(\w+)\((.*)\)$/s);
+    const embed = part.match(/^(?:(\w+):)?(\w+)(?:!(\w+))?\((.*)\)$/s);
     if (embed) {
-      const [, alias, target, nested] = embed;
-      const relation = contract.relations[target];
+      const [, alias, target, hint, nested] = embed;
+      const configured = contract.relations[target];
+      const candidates = (Array.isArray(configured) ? configured : configured ? [configured] : [])
+        .filter(relation => !hint || relation.hints?.includes(hint));
+      if (candidates.length > 1) throw new Error(`Ambiguous CI data relation: ${target}; use a !foreign_key hint`);
+      const [relation] = candidates;
       if (!relation) throw new Error(`Unknown CI data relation: ${target}`);
       const project = compileProjection(nested, relation.contract);
       return row => {

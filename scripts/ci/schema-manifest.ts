@@ -1,9 +1,10 @@
 import "../shared/load-env";
 import fs from "node:fs";
-import { buildSchemaManifest, schemaCatalogQuery, serializeSchemaManifest } from "./schema-manifest-lib.mjs";
+import path from "node:path";
+import { buildSchemaManifest, compareSchemaManifests, schemaCatalogQuery, serializeSchemaManifest } from "./schema-manifest-lib.mjs";
 
 // Read-only managed-development metadata. --write replaces the committed fixture;
-// --check compares it after PR migrations. Production releases never invoke this.
+// --check validates its claims after PR migrations. Production releases never invoke this.
 const PROJECT = "bbtcaurrtyoukvjbxbbj";
 async function main() {
   const args = process.argv.slice(2);
@@ -18,15 +19,28 @@ async function main() {
   if (!response.ok) throw new Error(`Managed-development schema metadata failed with HTTP ${response.status}.`);
   const rows = await response.json();
   if (!Array.isArray(rows) || rows.length !== 1) throw new Error("Unexpected schema metadata response.");
-  const manifest = buildSchemaManifest(rows[0]);
+  const manifest = buildSchemaManifest(rows[0], { allowMissing: args[0] === "--check" });
   const expected = serializeSchemaManifest(manifest);
   const file = new URL("./fixtures/schema.json", import.meta.url);
   if (args[0] === "--write") {
     fs.writeFileSync(new URL("./fixtures/schema.json.tmp", import.meta.url), expected);
     fs.renameSync(new URL("./fixtures/schema.json.tmp", import.meta.url), file);
-  } else if (!fs.existsSync(file) || fs.readFileSync(file, "utf8") !== expected) {
-    throw new Error("CI schema manifest differs from managed development. Regenerate with node --import tsx scripts/ci/schema-manifest.ts --write and commit scripts/ci/fixtures/schema.json with the migration.");
+  } else {
+    const { errors, extras } = fs.existsSync(file)
+      ? compareSchemaManifests(JSON.parse(fs.readFileSync(file, "utf8")), manifest)
+      : { errors: ["fixtures/schema.json"], extras: [] };
+    if (errors.length || extras.length) {
+      const artifact = path.join(process.env.RUNNER_TEMP ?? "tmp", "ci-schema-manifest.json");
+      fs.mkdirSync(path.dirname(artifact), { recursive: true });
+      fs.writeFileSync(`${artifact}.tmp`, expected);
+      fs.renameSync(`${artifact}.tmp`, artifact);
+      for (const [label, names] of [["Unsupported fixture claims", errors], ["Managed-development additions (warning only)", extras]] as const) {
+        if (names.length) console.log(`${label} (${names.length}): ${names.slice(0, 40).join(", ")}${names.length > 40 ? ", ..." : ""}`);
+      }
+      console.log(`Fresh manifest: ${artifact}. Download ci-schema-manifest-<sha> and copy ci-schema-manifest.json to scripts/ci/fixtures/schema.json.`);
+    }
+    if (errors.length) throw new Error("CI schema manifest claims objects missing or different in managed development. Commit the generated manifest with the migration.");
   }
-  console.log(`CI schema manifest ${args[0] === "--check" ? "matches" : "generated from"} managed development (${PROJECT}): ${Object.keys(manifest.tables).length} tables/views, ${Object.keys(manifest.rpcs).length} RPCs.`);
+  console.log(`CI schema manifest ${args[0] === "--check" ? "is compatible with" : "generated from"} managed development (${PROJECT}): ${Object.keys(manifest.tables).length} tables/views, ${Object.keys(manifest.rpcs).length} RPCs.`);
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; });

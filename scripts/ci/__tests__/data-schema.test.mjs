@@ -33,6 +33,57 @@ test("embeds stay separate from base columns and SELECT star", () => {
   assert.throws(() => queryRows(tables.articles, new URLSearchParams("select=author"), {contract}), /Unknown CI data column/);
 });
 
+test("embeds reject dropped foreign keys before reading populated or empty tables", () => {
+  const tables = seedTables(), manifest = structuredClone(schemaManifest);
+  manifest.tables.articles.foreignKeys = manifest.tables.articles.foreignKeys.filter(key => key.name !== "articles_author_id_fkey");
+  const contract = seedContracts(tables, manifest).articles;
+  for (const rows of [tables.articles, []]) assert.throws(() => queryRows(rows, new URLSearchParams("select=slug,author:authors(name)"), {contract}), /Unknown CI data relation: authors/);
+});
+
+test("ambiguous embeds require a foreign key or column hint and join the chosen key", () => {
+  const tables = seedTables(), manifest = structuredClone(schemaManifest);
+  const editor = {...tables.authors[0],id:"00000000-0000-4000-8000-999999999999",name:"Editor"};
+  tables.authors.push(editor);
+  tables.articles[0].editor_id = editor.id;
+  manifest.tables.articles.columns.editor_id = {type:"uuid",nullable:true};
+  manifest.tables.articles.foreignKeys.push({name:"articles_editor_id_fkey",target:"authors",columns:["editor_id"],targetColumns:["id"]});
+  const contract = seedContracts(tables, manifest).articles;
+  for (const rows of [tables.articles, []]) assert.throws(() => queryRows(rows, new URLSearchParams("select=authors(name)"), {contract}), /Ambiguous CI data relation/);
+  const result = queryRows(tables.articles, new URLSearchParams("select=author:authors!articles_author_id_fkey(name),editor:authors!editor_id(name)"), {contract});
+  assert.deepEqual(result.data, [{author:{name:"Alex Rivers"},editor:{name:"Editor"}}]);
+  assert.throws(() => queryRows([], new URLSearchParams("select=authors!missing(name)"), {contract}), /Unknown CI data relation/);
+});
+
+test("foreign key direction determines object and array embeds, including view joins", () => {
+  const tables = seedTables(), contracts = seedContracts(tables);
+  for (const table of ["code_pages", "code_pages_view"]) {
+    const result = queryRows(tables[table], new URLSearchParams("select=universe:roblox_universes(name),codes!codes_code_page_id_fkey(code)"), {contract:contracts[table]}).data[0];
+    assert.equal(result.universe.name,"Blox Fruits");
+    assert.deepEqual(result.codes,[{code:"TRAIL2026"}]);
+  }
+  const manifest = structuredClone(schemaManifest);
+  manifest.tables.codes.foreignKeys = [];
+  const contract = seedContracts(tables, manifest).code_pages_view;
+  assert.throws(() => queryRows([], new URLSearchParams("select=codes(code)"), {contract}), /Unknown CI data relation/);
+});
+
+test("every handwritten view relationship names an existing base-table foreign key", () => {
+  const views = JSON.parse(fs.readFileSync(new URL("../fixtures/view-relations.json", import.meta.url), "utf8"));
+  const tables = seedTables(), contracts = seedContracts(tables);
+  for (const [view, definition] of Object.entries(views)) {
+    for (const key of definition.foreignKeys) {
+      assert.ok(schemaManifest.tables[key.table]?.foreignKeys.some(actual => actual.name === key.name), `${view}: ${key.table}.${key.name}`);
+      const manifest = structuredClone(schemaManifest);
+      manifest.tables[key.table].foreignKeys = manifest.tables[key.table].foreignKeys.filter(actual => actual.name !== key.name);
+      const changed = seedContracts(tables, manifest)[view];
+      for (const [target, candidates] of Object.entries(contracts[view].relations)) {
+        if (!candidates.some(candidate => candidate.hints.includes(key.name))) continue;
+        assert.throws(() => queryRows([],new URLSearchParams(`select=${target}!${key.name}(*)`),{contract:changed}), /Unknown CI data relation/);
+      }
+    }
+  }
+});
+
 const columns = Object.fromEntries(Object.entries({
   sort_order:"integer", total:"bigint", amount:"numeric", enabled:"boolean", day:"date", at:"timestamp with time zone", id:"uuid", title:"text", tags:"text[]", ids:"integer[]", metadata:"jsonb"
 }).map(([key,type]) => [key,{type}]));
@@ -57,6 +108,31 @@ test("operators reject incompatible types and implement array and JSON containme
   assert.deepEqual(run('tags=cs.{missing}&select=title').data,[]);
 });
 
+test("filters allow one not prefix and reject repeated not inside nested logic", () => {
+  for (const search of ["title=not.not.eq.Wordle", "or=(title.not.not.eq.Wordle,title.eq.Wordle)", "and=(title.eq.missing,or(title.not.not.eq.Wordle,title.eq.Wordle))", "or=(not.and(title.not.not.eq.Wordle))"]) {
+    for (const rows of [[row], []]) assert.throws(() => run(search,rows), /Unimplemented CI data filter: not/,search);
+  }
+  assert.deepEqual(run("title=not.eq.Other&select=title").data,[{title:"Wordle"}]);
+  assert.deepEqual(run("or=(title.not.eq.Other)&select=title").data,[{title:"Wordle"}]);
+  assert.deepEqual(run("title=not.eq.Wordle&select=title").data,[]);
+  assert.deepEqual(run("title=not.eq.Wordle",[{...row,title:null}]).data,[]);
+  assert.equal(run("title=not.is.null").data.length,1);
+});
+
+test("JSON text extraction preserves strings, serializes arrays and objects and keeps null", () => {
+  const tables = seedTables(), quiz = tables.quiz_pages[0], contract = seedContracts(tables).quiz_pages;
+  const result = queryRows([quiz],new URLSearchParams("select=easy:quiz_data->>easy,json:quiz_data->easy"),{contract}).data[0];
+  assert.equal(result.easy,JSON.stringify(quiz.quiz_data.easy));
+  assert.deepEqual(result.json,quiz.quiz_data.easy);
+  const rows = [{...row,metadata:{answer:"TRAIL",tags:["daily","word"],details:{count:2},number:2,enabled:true,empty:null}}];
+  assert.deepEqual(run("select=answer:metadata->>answer,tags:metadata->>tags,details:metadata->>details,number:metadata->>number,enabled:metadata->>enabled,empty:metadata->>empty,missing:metadata->>missing,nested:metadata->tags->>0",rows).data,
+    [{answer:"TRAIL",tags:'["daily","word"]',details:'{"count":2}',number:"2",enabled:"true",empty:null,missing:null,nested:"daily"}]);
+  const params = new URLSearchParams({"metadata->>tags":"eq."+JSON.stringify('["daily","word"]'),"metadata->>number":"eq.2",select:"title"});
+  assert.deepEqual(queryRows(rows,params,{contract:rowContract(columns)}).data,[{title:"Wordle"}]);
+  assert.deepEqual(run("or=(metadata->>answer.eq.TRAIL)&select=title",rows).data,[{title:"Wordle"}]);
+  assert.deepEqual(run("metadata->>empty=is.null&select=title",rows).data,[{title:"Wordle"}]);
+});
+
 test("Range distinguishes absence from malformed, reversed or unsafe values", () => {
   assert.equal(parseRange(undefined), undefined);
   assert.deepEqual(parseRange("0-9"), [0,9]);
@@ -71,6 +147,8 @@ test("HTTP audits missing columns, wrong types, incompatible operators and malfo
     ["puzzle_pages_view?select=slug,controls_json", {}],
     ["puzzle_pages_view?sort_order=gt.oops", {}],
     ["puzzle_pages_view?title=cs.{Wordle}", {}],
+    ["puzzle_pages_view?title=not.not.eq.Wordle", {}],
+    ["puzzle_pages_view?or=(title.not.not.eq.Wordle)", {}],
     ["puzzle_pages_view", {headers:{Range:"malformed"}}],
     ["rpc/get_stats_platform_current_summary?select=nonexistent", {method:"POST",body:"{}"}],
     ["rpc/get_stats_platform_ccu_trend", {method:"POST",body:'{"p_since":"oops"}'}]
