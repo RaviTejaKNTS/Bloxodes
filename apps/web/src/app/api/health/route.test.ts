@@ -12,6 +12,8 @@ vi.mock("@/lib/supabase-admin", () => ({
   })
 }));
 
+vi.mock("@/lib/indexnow", () => ({ isIndexNowEnabled: () => false }));
+
 import { GET } from "./route";
 
 function databaseQuery(error: { message: string } | null = null) {

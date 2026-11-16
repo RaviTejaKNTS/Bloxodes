@@ -43,6 +43,8 @@ Redirects are the other in-process cache (`apps/web/src/lib/site-route-snapshot.
 
 A catalog date change for a music, decal or avatar descendant page revalidates that page and the catalog sitemaps. Every descendant response, including its pagination and query variants, carries its exact `catalog:<descendant-slug>` tag as well as its parent and scope tags, and a scoped membership event purges only that exact tag and the sitemap tags, never the parent family. Music charts are the exception to "exact": `/catalog/roblox-music-ids/charts` serves every range through one path and the proxy tags by path only, so chart responses and their pagination carry all three weekly, monthly and yearly tags, and any period event purges every chart range. Item writes keep their own cache events for metadata and ordering.
 
+After its Cloudflare purge has finished and its response is sent, each `/api/revalidate` call also checks pending IndexNow URLs (`apps/web/src/lib/indexnow-publication.ts`), whatever events it carried. It takes at most 100, least recently checked first, fetches 5 at a time with a 500 ms limit each, and stops after 20 seconds. A URL that fails its check waits 1 minute, then 2, 4 and so on up to 6 hours before the next try. There is no separate timer or worker. See [SEO and indexing](seo-indexing.md#indexing-apis).
+
 Every non-Roblox page change uses the `game_content` event. One resolver works out the affected pages from stored route ownership (the page, its old URLs, its game's hub, collection pagination and the relevant index pages), the same for every game.
 
 ## Runtime variables

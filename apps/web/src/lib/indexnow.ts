@@ -1,10 +1,13 @@
 import "server-only";
 
 import { SITE_URL } from "@/lib/seo";
+import { isSearchIndexingEnabledForHost } from "@/lib/site-config";
 
 const DEFAULT_INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
 const DEFAULT_INDEXNOW_KEY = "3f48868cb2e04bfe8b1fb18849d4519f";
 const MAX_URLS_PER_REQUEST = 10_000;
+// A claimed URL is never retried, so give the one send a fair chance.
+const SEND_TIMEOUT_MS = 5_000;
 
 type IndexNowConfig = {
   endpoint: string;
@@ -59,8 +62,14 @@ function resolveSiteOrigin(): string {
   return normalizeOrigin(raw) ?? SITE_URL.replace(/\/$/, "");
 }
 
+export function isIndexNowEnabled(): boolean {
+  return process.env.NODE_ENV === "production"
+    && isSearchIndexingEnabledForHost(new URL(resolveSiteOrigin()).hostname)
+    && parseBoolean(process.env.INDEXNOW_ENABLED, true);
+}
+
 function resolveIndexNowConfig(): IndexNowConfig | null {
-  const enabled = parseBoolean(process.env.INDEXNOW_ENABLED, process.env.NODE_ENV === "production");
+  const enabled = isIndexNowEnabled();
   if (!enabled) return null;
 
   const siteOrigin = resolveSiteOrigin();
@@ -136,7 +145,7 @@ function chunkArray<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
-export async function submitIndexNowUrls(urls: string[]): Promise<IndexNowSubmitResult> {
+export async function submitIndexNowUrls(urls: string[], signal?: AbortSignal): Promise<IndexNowSubmitResult> {
   const config = resolveIndexNowConfig();
   if (!config) {
     return {
@@ -172,11 +181,13 @@ export async function submitIndexNowUrls(urls: string[]): Promise<IndexNowSubmit
   let submitted = 0;
   let successfulBatches = 0;
   let failedBatches = 0;
+  let failureReason: string | undefined;
 
   for (const batch of batches) {
     try {
       const res = await fetch(config.endpoint, {
         method: "POST",
+        signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(SEND_TIMEOUT_MS)]) : AbortSignal.timeout(SEND_TIMEOUT_MS),
         headers: {
           "Content-Type": "application/json; charset=utf-8"
         },
@@ -190,17 +201,17 @@ export async function submitIndexNowUrls(urls: string[]): Promise<IndexNowSubmit
 
       if (!res.ok) {
         failedBatches += 1;
-        const body = await res.text().catch(() => "");
-        console.warn(`IndexNow submission failed: ${res.status} ${res.statusText} ${body.slice(0, 200)}`);
+        failureReason = `indexnow-http-${res.status}`;
+        console.warn(`IndexNow submission failed: HTTP ${res.status}`);
         continue;
       }
 
       submitted += batch.length;
       successfulBatches += 1;
-    } catch (error) {
+    } catch {
       failedBatches += 1;
-      const message = error instanceof Error ? error.message : String(error);
-      console.warn(`IndexNow submission failed: ${message}`);
+      failureReason = "indexnow-network-error-or-timeout";
+      console.warn("IndexNow submission failed: network error or timeout");
     }
   }
 
@@ -209,11 +220,12 @@ export async function submitIndexNowUrls(urls: string[]): Promise<IndexNowSubmit
     attempted: uniqueUrls.length,
     submitted,
     successfulBatches,
-    failedBatches
+    failedBatches,
+    ...(failureReason ? { reason: failureReason } : {})
   };
 }
 
-export async function submitIndexNowPaths(paths: string[]): Promise<IndexNowSubmitResult> {
+export async function submitIndexNowPaths(paths: string[], signal?: AbortSignal): Promise<IndexNowSubmitResult> {
   const siteOrigin = resolveSiteOrigin();
   const normalizedUrls = paths
     .map((path) => {
@@ -225,5 +237,5 @@ export async function submitIndexNowPaths(paths: string[]): Promise<IndexNowSubm
     })
     .filter((url) => Boolean(url));
 
-  return submitIndexNowUrls(normalizedUrls);
+  return submitIndexNowUrls(normalizedUrls, signal);
 }
