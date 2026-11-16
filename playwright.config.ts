@@ -9,7 +9,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? (process.env.BLOXODES_CI_DATA === "1" ? 4 : 1) : undefined,
   timeout: 45_000,
   expect: { timeout: 10_000 },
   reporter: process.env.CI

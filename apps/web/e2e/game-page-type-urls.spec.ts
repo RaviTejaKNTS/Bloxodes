@@ -1,7 +1,6 @@
 import { expect, test, type APIRequestContext, type Page, type TestInfo } from "@playwright/test";
-import { createClient } from "@supabase/supabase-js";
+import { previewDatabase } from "./preview-database";
 
-const managedUrl = "https://bbtcaurrtyoukvjbxbbj.supabase.co";
 const siteUrl = "https://bloxodes.com";
 // PR B sets this in CI; A keeps unmoved production pilots valid.
 const requirePilotMoves = process.env.REQUIRE_PILOT_PAGE_TYPE_URLS === "true";
@@ -16,13 +15,7 @@ type Route = {
 };
 type Coverage = Array<{ path: string; expected: string; status: string }>;
 
-function database() {
-  expect(process.env.SUPABASE_URL).toBe(managedUrl);
-  expect(process.env.SUPABASE_SERVICE_ROLE).toBeTruthy();
-  return createClient(managedUrl, process.env.SUPABASE_SERVICE_ROLE!, {
-    auth: { persistSession: false, autoRefreshToken: false }
-  });
-}
+const database = previewDatabase;
 
 async function renders(page: Page, path: string, coverage: Coverage, checkSeo = true) {
   const entry = { path, expected: checkSeo ? "200; canonical/og:url/title" : "200; index links/title", status: "STARTED" };
@@ -62,7 +55,7 @@ async function report(info: TestInfo, coverage: Coverage) {
 
 for (const namespace of pilots) {
   test(`page-type move: ${namespace}`, async ({ page, request }, info) => {
-    test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
+    test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub preview coverage only");
     test.setTimeout(240_000);
     const coverage: Coverage = [];
     try {
@@ -190,7 +183,7 @@ for (const namespace of pilots) {
 }
 
 test("batch namespaces use page-type URLs and one-hop aliases", async ({ page, request }, info) => {
-  test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
+  test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub preview coverage only");
   test.setTimeout(240_000);
   const coverage: Coverage = [];
   try {
@@ -242,8 +235,8 @@ test("batch namespaces use page-type URLs and one-hop aliases", async ({ page, r
 });
 
 test("GTA, Red Dead and Minecraft move while Roblox retains its URL", async ({ page, request }, info) => {
-  test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development coverage only");
-  // Five cold page renders and seven redirects against managed development.
+  test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub preview coverage only");
+  // Five cold page renders and seven redirects against the preview data.
   test.setTimeout(240_000);
   const coverage: Coverage = [];
   try {

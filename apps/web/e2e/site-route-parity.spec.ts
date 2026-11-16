@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { createClient } from '@supabase/supabase-js';
+import { previewDatabase } from './preview-database';
 import fixture from '../../../scripts/routes/fixtures/phase-2-redirects.json';
 
-// Real production build, real middleware, managed-development route rows.
-// The frozen baseline includes reviewed final Minecraft move destinations.
-// No injected snapshot, catalog fetch fixture, content write, or production access.
-test('all frozen redirects preserve status and Location against managed development', async ({request, baseURL}) => {
+// Real production build and middleware against the configured preview data.
+test('all frozen redirects preserve status and Location against preview data', async ({request, baseURL}) => {
   test.setTimeout(240_000);
   const origin = baseURL!;
   for (const entry of fixture.cases) {
@@ -23,9 +21,7 @@ test('all frozen redirects preserve status and Location against managed developm
 test('live pages never redirect, across every registered page type', async ({request}) => {
   test.setTimeout(240_000);
   if(process.env.GITHUB_ACTIONS!=='true') throw new Error('Managed route parity must run on GitHub');
-  const url=process.env.SUPABASE_URL!;
-  expect(new URL(url).hostname).toBe('bbtcaurrtyoukvjbxbbj.supabase.co');
-  const client=createClient(url,process.env.SUPABASE_SERVICE_ROLE!,{auth:{persistSession:false,autoRefreshToken:false}});
+  const client=previewDatabase();
   const types=[...['code','article','wiki','collection','quiz','checklist','tool','event','catalog','puzzle'].map(type=>['roblox',type]),
     ...['hub','wiki','collection','code','tool','map','quiz','checklist','catalog'].map(type=>['game',type])];
   const covered:string[]=[];

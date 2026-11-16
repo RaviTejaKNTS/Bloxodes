@@ -1,3 +1,4 @@
+import { queryRows } from "./data-query.mjs";
 // CI-only PostgREST fixture shared by unit tests and the built-route harness.
 // It evaluates filters, ordering and ranges, rather than returning canned pages.
 export function catalogRows(kind, count, start = 1000) {
@@ -38,82 +39,7 @@ export function defaultCatalogTables() {
   };
 }
 
-// Split a PostgREST logic tree on top-level commas. A double-quoted value may
-// hold commas and brackets; PostgREST drops the quotes and one backslash layer.
-function logicTerms(expression) {
-  const terms = [];
-  let term = "", quoted = false;
-  for (let i = 0; i < expression.length; i += 1) {
-    const char = expression[i];
-    if (quoted && char === "\\") term += expression[++i] ?? "";
-    else if (char === '"') quoted = !quoted;
-    else if (char === "," && !quoted) { terms.push(term); term = ""; }
-    else term += char;
-  }
-  terms.push(term);
-  return terms;
-}
-
-function matches(row, column, expression) {
-  const dot = expression.indexOf(".");
-  const operator = expression.slice(0, dot);
-  const value = expression.slice(dot + 1);
-  const actual = row[column];
-  switch (operator) {
-    case "not": return !matches(row, column, value);
-    case "is": return value === "null" ? actual == null : String(actual) === value;
-    case "eq": return String(actual) === value;
-    case "gt": return actual != null && Number(actual) > Number(value);
-    case "gte": return actual != null && Number(actual) >= Number(value);
-    case "lte": return actual != null && Number(actual) <= Number(value);
-    case "ilike": {
-      // LIKE semantics: % and _ are wildcards, a backslash makes the next character literal.
-      let pattern = "";
-      for (let i = 0; i < value.length; i += 1) {
-        const char = value[i];
-        if (char === "\\" && i + 1 < value.length) pattern += value[++i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        else if (char === "%") pattern += ".*";
-        else if (char === "_") pattern += ".";
-        else pattern += char.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      }
-      return new RegExp(`^${pattern}$`, "is").test(String(actual ?? ""));
-    }
-    case "ov": return value.replace(/[{}]/g, "").split(",").some(item => actual?.includes(item));
-    case "cs": return value.replace(/[{}]/g, "").split(",").every(item => actual?.includes(item));
-    default: throw new Error(`Unimplemented fixture filter: ${operator}`);
-  }
-}
-
+// Preserve the catalog harness's counted out-of-range contract.
 export function queryCatalog(tableRows, params) {
-  let rows = [...tableRows];
-  for (const [column, expression] of params) {
-    if (["select", "order", "limit", "offset"].includes(column)) continue;
-    if (column === "or") {
-      const terms = logicTerms(expression.replace(/^\(|\)$/g, ""));
-      rows = rows.filter(row => terms.some(term => {
-        const dot = term.indexOf(".");
-        return matches(row, term.slice(0, dot), term.slice(dot + 1));
-      }));
-    } else rows = rows.filter(row => matches(row, column, expression));
-  }
-  const count = rows.length;
-  const orders = (params.get("order") ?? "").split(",").filter(Boolean).map(value => value.split("."));
-  rows.sort((a, b) => {
-    for (const [column, direction, nulls] of orders) {
-      const av = a[column], bv = b[column];
-      if (av === bv) continue;
-      if (av == null) return nulls === "nullsfirst" ? -1 : 1;
-      if (bv == null) return nulls === "nullsfirst" ? 1 : -1;
-      const comparison = av < bv ? -1 : 1;
-      return direction === "desc" ? -comparison : comparison;
-    }
-    return 0;
-  });
-  const offset = Number(params.get("offset") ?? 0);
-  const limit = Number(params.get("limit") ?? rows.length);
-  if (offset > 0 && offset >= count) {
-    return { data: null, count: null, error: { code: "PGRST103", message: "Requested range not satisfiable",
-      details: `An offset of ${offset} was requested, but there are only ${count} rows.`, hint: null } };
-  }
-  return { data: rows.slice(offset, offset + limit), count, error: null };
+  return queryRows(tableRows, params, { count: true });
 }

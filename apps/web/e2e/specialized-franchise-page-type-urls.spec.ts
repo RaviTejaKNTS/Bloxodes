@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-// The PR workflow runs this after the specialized namespace moves are applied
-// in managed development; missing fixtures must fail this suite.
+// The preview data includes the specialized namespace moves. Missing pages fail.
 const cases = [
   { old: "/gta/checklists/page/2", path: "/games/gta" },
   { old: "/gta/maps", path: "/games/gta" },
@@ -19,7 +18,7 @@ const cases = [
 
 for (const fixture of cases) {
   test(`specialized franchise move: ${fixture.old}`, async ({ page, request }, info) => {
-    test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub managed-development verification only");
+    test.skip(process.env.GITHUB_ACTIONS !== "true", "GitHub preview verification only");
     const coverage = { ...fixture, result: "STARTED" };
     try {
       const redirect = await request.get(fixture.old, { maxRedirects: 0 });

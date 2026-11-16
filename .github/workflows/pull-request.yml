@@ -39,6 +39,8 @@ jobs:
       extension: ${{ steps.scope.outputs.extension }}
       admin: ${{ steps.scope.outputs.admin }}
       mobile: ${{ steps.scope.outputs.mobile }}
+      browser_specs: ${{ steps.scope.outputs.browser_specs }}
+      catalog_regression: ${{ steps.scope.outputs.catalog_regression }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -89,39 +91,43 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: Block managed development and verify isolated environment
+        run: |
+          echo '0.0.0.0 bbtcaurrtyoukvjbxbbj.supabase.co' | sudo tee -a /etc/hosts > /dev/null
+          node scripts/ci/assert-isolated-data.mjs
+      - name: Start CI-only read data server
+        run: |
+          mkdir -p tmp/test-reports
+          node scripts/ci/data-server.mjs > tmp/test-reports/ci-data-server.log 2>&1 &
+          echo "$!" > "$RUNNER_TEMP/ci-data-server.pid"
+          node scripts/ci/assert-isolated-data.mjs --ready
       - run: npm ci --no-audit --no-fund
       - name: Verify public data error handling
         run: npm run test:unit:web
       - run: npm run typecheck:web
   managed-development:
     needs: scope
-    if: needs.scope.outputs.checks == 'true'
+    if: needs.scope.outputs.migrations == 'true'
     uses: ./.github/workflows/schema-release.yml
     with:
       production: false
       sha: ${{ github.event.pull_request.head.sha || github.sha }}
     secrets: inherit
   checks:
-    needs: [scope, managed-development]
-    if: ${{ always() && !cancelled() && needs.scope.outputs.checks == 'true' && (needs.scope.outputs.migrations == 'false' || needs.managed-development.result == 'success') }}
+    needs: scope
+    if: needs.scope.outputs.checks == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-    # Every run reads the one managed development database. Parallel runs
-    # overloaded it (statement timeouts, cold pages over 45s), so PR checks
-    # take turns instead of failing together.
-    concurrency:
-      group: bloxodes-pr-checks
-      queue: max
-      cancel-in-progress: false
+    timeout-minutes: 30
     env:
       CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
       BLOXODES_ENV_PROFILE: process-only
-      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
-      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
-      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
-      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
-      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      BLOXODES_CI_DATA: '1'
+      SUPABASE_URL: http://127.0.0.1:54321
+      SUPABASE_SERVICE_ROLE: ci-only-service-role
+      SUPABASE_ANON_KEY: ci-only-anon
+      NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-only-anon
+      SUPABASE_MEDIA_PUBLIC_URL: http://127.0.0.1:54321
       SITE_URL: https://bloxodes.com
       NEXT_PUBLIC_SITE_URL: https://bloxodes.com
       TEST_CANONICAL_ORIGIN: https://bloxodes.com
@@ -151,11 +157,15 @@ jobs:
       - run: npm run supabase:migrations:check
       - run: node --test scripts/ci/__tests__/*.test.mjs
       - run: npm run test:vps-boot-recovery
-      - name: Verify selected content against managed development
+      - name: Verify selected content contracts without database access
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: node --import tsx scripts/ci/verify-content-batches.ts
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            export BASE_SHA="$(git merge-base origin/production HEAD)"
+          fi
+          node --import tsx scripts/ci/verify-content-batches.ts
       - run: npm run env:doctor -- --ci
       - run: npm run env:check
       - run: npm run test:article-queue && npm run test:wiki-runtime && npm run test:public-copy && npm run test:codes-factory
@@ -170,16 +180,21 @@ jobs:
       - if: needs.scope.outputs.mobile == 'true'
         run: npm run typecheck:mobile
       - if: needs.scope.outputs.web == 'true'
-        run: npm run lint && npm run test:unit:web
-      - name: Build production routes with isolated catalog read fixtures
+        run: npm run lint
+      - name: Build production routes with CI-only data
         if: needs.scope.outputs.web == 'true'
         run: |
-          CATALOG_ROUTE_FIXTURES=1 NODE_OPTIONS="--import=$PWD/scripts/ci/catalog-fetch-fixture.mjs" npm run build:web
-          npm run typecheck:web
+          npm run build:web
+          node scripts/ci/assert-isolated-data.mjs --build
+      - uses: actions/cache@v4
+        if: needs.scope.outputs.web == 'true'
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - if: needs.scope.outputs.web == 'true'
         run: npx playwright install --with-deps chromium
       - name: Verify cold catalog pagination, filters and failure behavior
-        if: needs.scope.outputs.web == 'true'
+        if: needs.scope.outputs.catalog_regression == 'true'
         run: node scripts/ci/catalog-route-regression.mjs
       - name: Verify the first request on fresh servers redirects
         if: needs.scope.outputs.web == 'true'
@@ -187,7 +202,15 @@ jobs:
       - if: needs.scope.outputs.web == 'true'
         env:
           REQUIRE_PILOT_PAGE_TYPE_URLS: "true"
-        run: npx playwright test apps/web/e2e/catalog-covers.spec.ts apps/web/e2e/release-smoke.spec.ts apps/web/e2e/site-route-parity.spec.ts apps/web/e2e/shared-game-registry.spec.ts apps/web/e2e/game-page-type-urls.spec.ts apps/web/e2e/specialized-franchise-page-type-urls.spec.ts
+          BROWSER_SPECS: ${{ needs.scope.outputs.browser_specs }}
+        run: npx playwright test $BROWSER_SPECS
+      - name: Prove all data requests stayed in CI
+        if: always()
+        run: node scripts/ci/assert-isolated-data.mjs --audit
+      - name: Stop CI data server
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/ci-data-server.pid" ]; then kill "$(cat "$RUNNER_TEMP/ci-data-server.pid")"; fi
       - uses: actions/upload-artifact@v4
         if: always() && needs.scope.outputs.web == 'true'
         with:
@@ -205,6 +228,7 @@ jobs:
           SCOPE: ${{ needs.scope.result }}
           DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
           MANAGED: ${{ needs.managed-development.result }}
+          MIGRATIONS: ${{ needs.scope.outputs.migrations }}
           CHECKS: ${{ needs.checks.result }}
           DATA_ERRORS: ${{ needs.public-data-errors.result }}
           WEB: ${{ needs.scope.outputs.web }}
@@ -212,7 +236,7 @@ jobs:
           test "$SCOPE" = success
           if [ "$WEB" = true ]; then test "$DATA_ERRORS" = success; fi
           if [ "$DOCS_ONLY" != true ]; then
-            test "$MANAGED" = success
+            if [ "$MIGRATIONS" = true ]; then test "$MANAGED" = success; else test "$MANAGED" = skipped; fi
             test "$CHECKS" = success
           fi
   selected-franchise-development-qa:
