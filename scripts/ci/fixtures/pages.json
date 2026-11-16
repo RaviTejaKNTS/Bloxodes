@@ -260,7 +260,11 @@
         "damage": "10",
         "attackSpeed": "1",
         "range": "5",
-        "price": "100"
+        "price": "100",
+        "class": "Straight Sword",
+        "baseDamage": "10",
+        "sellPrice": "100",
+        "chance": "1/2"
       }
     },
     {
@@ -273,7 +277,12 @@
         "type": "Light",
         "defense": "10",
         "health": "100",
-        "price": "100"
+        "price": "100",
+        "class": "Light",
+        "slot": "Helmet",
+        "baseHealth": "10",
+        "sellPrice": "100",
+        "chance": "1/2"
       }
     },
     {
