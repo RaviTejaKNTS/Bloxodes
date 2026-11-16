@@ -5,8 +5,10 @@ import { assertFixtureEnvironment, createDataServer } from "../data-server.mjs";
 import fs from "node:fs";
 import { queryRows, rowContract } from "../data-query.mjs";
 import { seedTables, seedContracts } from "../data-seed.mjs";
+import { schemaManifest, validateSeedRows } from "../data-schema.mjs";
 
-const query = (rows, search) => queryRows(rows, new URLSearchParams(search));
+const types = { id:{type:"integer"},name:{type:"text"},date:{type:"date"},meta:{type:"jsonb"} };
+const query = (rows, search) => queryRows(rows, new URLSearchParams(search), {contract:rowContract(types)});
 test("fixture refuses workstation or implicit CI use", () => {
   assert.throws(() => assertFixtureEnvironment({}), /explicit GitHub CI/);
   assert.throws(() => assertFixtureEnvironment({GITHUB_ACTIONS:"true"}), /explicit GitHub CI/);
@@ -24,11 +26,11 @@ test("queries implement nested logic, quoted lists, JSON filters and date compar
 });
 test("count happens before range and projection includes embedded relations", () => {
   const rows = [{id:2,author:{name:"Alex",private:"hidden"}},{id:1,author:null}];
-  const contract = rowContract(rows);
-  contract.relations.authors = { key: "author", contract: rowContract([{name:"Alex",private:"hidden"}]) };
+  const contract = rowContract({id:{type:"integer"}});
+  contract.relations.authors = { read: row => row.author, contract: rowContract({name:{type:"text"},private:{type:"text"}}) };
   const result=queryRows(rows,new URLSearchParams('select=id,author:authors(name)&order=id.asc'),{range:[1,1],count:true,contract});
   assert.deepEqual(result,{data:[{id:2,author:{name:"Alex"}}],count:2,error:null});
-  assert.equal(queryRows(rows,new URLSearchParams('offset=9'),{count:true}).error.code,"PGRST103");
+  assert.equal(queryRows(rows,new URLSearchParams('offset=9'),{count:true,contract}).error.code,"PGRST103");
   assert.deepEqual(query(rows,'offset=9').data,[]);
 });
 test("seed has linked page inventories, both collection types and paginated game data", () => {
@@ -63,7 +65,7 @@ test("quoted PostgREST LIKE patterns retain commas, brackets and escaped wildcar
   const rows=[{name:"Rock, [paper] 50%_"},{name:"Rock paper 500x"}];
   const params=new URLSearchParams();
   params.set("or",'('+`name.ilike.${JSON.stringify("%Rock, [paper] 50\\%\\_%")}`+')');
-  assert.deepEqual(queryRows(rows,params).data,[rows[0]]);
+  assert.deepEqual(queryRows(rows,params,{contract:rowContract({name:{type:"text"}})}).data,[rows[0]]);
 });
 
 test("the fixture covers moved batch namespaces, every game page family and calculator datasets", () => {
@@ -107,8 +109,9 @@ test("every fixture table has sample rows or an explicit unused-route reason", (
   const exemptions = JSON.parse(fs.readFileSync(new URL("../fixtures/empty-table-contracts.json", import.meta.url)));
   for (const [table, rows] of Object.entries(tables)) {
     if (rows.length) { assert.equal(exemptions[table], undefined, `${table} no longer needs an empty-table exemption`); continue; }
+    if (schemaManifest.absentTables.includes(table)) continue;
     assert.ok(exemptions[table]?.reason, `${table} needs public samples or an unused-route reason`);
-    assert.ok(exemptions[table]?.columns.length, `${table} needs a schema even when empty`);
+    assert.ok(Object.keys(schemaManifest.tables[table]?.columns ?? {}).length, `${table} needs a schema even when empty`);
   }
   for (const table of Object.keys(exemptions)) assert.equal(tables[table]?.length, 0, table);
   const contract = seedContracts(tables).code_pages;

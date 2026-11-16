@@ -3,13 +3,8 @@
     "authors": "author",
     "roblox_universes": "universe"
   },
-  "published_articles_view": {
-    "authors": "author",
-    "roblox_universes": "universe"
-  },
   "game_article_pages_view": {
-    "authors": "author",
-    "roblox_universes": "universe"
+    "authors": "author"
   },
   "code_pages": {
     "roblox_universes": "universe",
@@ -35,9 +30,6 @@
     "roblox_universes": "universe"
   },
   "events_pages": {
-    "roblox_universes": "universe"
-  },
-  "events_pages_view": {
     "roblox_universes": "universe"
   },
   "tools": {

@@ -41,6 +41,9 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run supabase:migrations:check
       - run: node --import tsx scripts/ci/managed-schema.ts --apply
+      - name: Check CI fixture schema manifest
+        if: ${{ !inputs.production }}
+        run: node --import tsx scripts/ci/schema-manifest.ts --check
       - run: npm run supabase:managed-dev:check
       - name: Save read-only site route report
         continue-on-error: true

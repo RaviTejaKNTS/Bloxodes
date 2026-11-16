@@ -15,7 +15,7 @@ globalThis.fetch = async function catalogFixtureFetch(input, init) {
   if (state.failure === "transport") throw new TypeError("CI fixture transport failure");
   const result = state.failure
     ? { data: null, error: { code: state.failure, message: "CI fixture database failure", details: null, hint: null }, count: null }
-    : queryCatalog(tables[table], url.searchParams);
+    : queryCatalog(tables[table], url.searchParams, table);
   const headers = new Headers({ "Content-Type": "application/json" });
   const total = result.count ?? 0;
   const offset = Number(url.searchParams.get("offset") ?? 0);

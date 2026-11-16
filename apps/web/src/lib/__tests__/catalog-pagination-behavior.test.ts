@@ -35,7 +35,7 @@ function database(tables: Record<string, FixtureRow[]>, failure?: { code: string
         queries.push({ table, params });
         const failed = failure && (!failAfterProbe || params.get("select") !== "asset_id");
         if (failed && failure instanceof Error) return Promise.reject(failure).then(resolve, reject);
-        return Promise.resolve(failed ? { data: null, count: null, error: failure } : queryCatalog(tables[table] ?? [], params)).then(resolve, reject);
+        return Promise.resolve(failed ? { data: null, count: null, error: failure } : queryCatalog(tables[table] ?? [], params, table)).then(resolve, reject);
       };
       return (...args: unknown[]) => {
         const column = String(args[0]);

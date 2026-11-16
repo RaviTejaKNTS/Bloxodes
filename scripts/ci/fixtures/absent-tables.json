@@ -1,0 +1,4 @@
+{
+  "roblox_platform_stats_daily": "Absent in the real schema. Platform charts handle the missing relation; the players calendar returns no days.",
+  "roblox_platform_stats_hourly": "Absent in the real schema. The one-day platform chart falls back to get_stats_platform_ccu_trend."
+}

@@ -1,104 +1,35 @@
 {
   "app_sessions": {
-    "columns": [
-      "id",
-      "user_id",
-      "expires_at"
-    ],
     "reason": "Only signed-in sessions read this table; public CI pages use anonymous requests."
   },
   "cache_warm_events": {
-    "columns": [
-      "id",
-      "status",
-      "created_at"
-    ],
     "reason": "Cache-warming workers only; no public route reads it."
   },
   "game_collection_progress": {
-    "columns": [
-      "id",
-      "user_id",
-      "collection_page_id",
-      "item_slug"
-    ],
     "reason": "Saved progress requires a signed-in user; no selected CI spec signs in."
   },
   "game_quiz_progress": {
-    "columns": [
-      "id",
-      "user_id",
-      "page_id"
-    ],
     "reason": "Saved quiz progress requires a signed-in user; no selected CI spec signs in."
   },
   "roblox_decal_ids_ranked_view": {
-    "columns": [
-      "asset_id",
-      "texture_id",
-      "name",
-      "description",
-      "creator_name",
-      "roblox_created_at",
-      "is_for_sale",
-      "price_in_robux",
-      "sales",
-      "thumbnail_url",
-      "vote_count",
-      "upvote_percent",
-      "source_count",
-      "thumbnail_ready"
-    ],
     "reason": "Mobile API only; the web catalog reads roblox_decal_ids and its game view."
   },
   "roblox_groups": {
-    "columns": [
-      "group_id",
-      "name",
-      "description",
-      "owner_id",
-      "member_count"
-    ],
     "reason": "The ID-extractor API reads it only after user input; no selected spec submits a group ID."
   },
   "search_index": {
-    "columns": [
-      "id",
-      "title",
-      "href",
-      "kind"
-    ],
     "reason": "The search API reads it only after user input; no selected spec submits a search."
   },
   "site_feedback": {
-    "columns": [
-      "id",
-      "created_at"
-    ],
     "reason": "Feedback submission storage; no public read route."
   },
   "user_checklist_progress": {
-    "columns": [
-      "id",
-      "user_id",
-      "page_id"
-    ],
     "reason": "Saved checklist progress requires a signed-in user; no selected CI spec signs in."
   },
   "user_code_progress": {
-    "columns": [
-      "id",
-      "user_id",
-      "code_page_id"
-    ],
     "reason": "Saved code progress requires a signed-in user; no selected CI spec signs in."
   },
   "user_quiz_progress": {
-    "columns": [
-      "id",
-      "user_id",
-      "quiz_page_id"
-    ],
     "reason": "Saved quiz progress requires a signed-in user; no selected CI spec signs in."
   }
 }

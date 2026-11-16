@@ -1,3 +1,7 @@
+import { isDeepStrictEqual } from "node:util";
+import { columnKind, typedValue } from "./data-schema.mjs";
+export { rowContract } from "./data-schema.mjs";
+
 // The PostgREST subset used by public readers. Compile every clause before reading rows.
 export function splitTerms(value) {
   const terms = [], stack = [];
@@ -7,8 +11,8 @@ export function splitTerms(value) {
     if (quoted && char === "\\") { index++; continue; }
     if (char === '"') quoted = !quoted;
     if (quoted) continue;
-    if ("({".includes(char)) stack.push(char);
-    if (")}".includes(char) && stack.pop() !== (char === ")" ? "(" : "{")) throw new Error(`Invalid CI query syntax: ${value}`);
+    if ("({[".includes(char)) stack.push(char);
+    if (")}]".includes(char) && stack.pop() !== ({")":"(","}":"{","]":"["})[char]) throw new Error(`Invalid CI query syntax: ${value}`);
     if (char === "," && !stack.length) { terms.push(value.slice(start, index).trim()); start = index + 1; }
   }
   terms.push(value.slice(start).trim());
@@ -26,34 +30,54 @@ const unquote = value => {
   return parsed;
 };
 const field = (row, key) => key.split(/->>?/).reduce((value, part) => value?.[part], row);
-export function rowContract(rows, columns = []) {
-  return { columns: new Set([...columns, ...rows.flatMap(row => Object.keys(row))]), relations: {} };
-}
 function validateField(key, contract) {
   const [column, ...path] = key.split(/->>?/);
   if (!identifier.test(column) || path.some(part => !/^[a-zA-Z_0-9]+$/.test(part))) throw new Error(`Invalid CI data field: ${key}`);
   if (!contract.columns.has(column)) throw new Error(`Unknown CI data column: ${column}`);
-  return key;
+  if (/->>\w+->/.test(key)) throw new Error(`Invalid CI data JSON path: ${key}`);
+  const type = contract.types[column].type;
+  if (path.length && !["json", "array"].includes(columnKind(type))) throw new Error(`JSON path on incompatible CI data column: ${column}`);
+  return path.length ? (key.includes("->>") ? "text" : "jsonb") : type;
+}
+const contains = (actual, expected) => {
+  if (Array.isArray(actual)) return Array.isArray(expected)
+    ? expected.every(item => actual.some(value => contains(value, item)))
+    : actual.some(item => isDeepStrictEqual(item, expected));
+  if (actual && expected && typeof actual === "object" && typeof expected === "object" && !Array.isArray(expected)) {
+    return Object.entries(expected).every(([key, value]) => Object.hasOwn(actual, key) && contains(actual[key], value));
+  }
+  return isDeepStrictEqual(actual, expected);
+};
+function arrayValue(raw, type) {
+  if (!raw.startsWith("{") || !raw.endsWith("}")) throw new Error(`Invalid CI data array: ${raw}`);
+  return raw.length === 2 ? [] : splitTerms(raw.slice(1, -1)).map(item => typedValue(unquote(item), type.slice(0, -2)));
 }
 function compileFilter(column, expression, contract) {
-  validateField(column, contract);
+  const type = validateField(column, contract), kind = columnKind(type);
   const match = expression.match(/^([a-z]+)\.(.*)$/s);
   if (!match) throw new Error(`Invalid CI data filter: ${expression}`);
   const [, operator, raw] = match;
   if (operator === "not") {
     const predicate = compileFilter(column, raw, contract);
-    return row => !predicate(row);
+    return row => (raw.startsWith("is.") || field(row, column) != null) && !predicate(row);
   }
-  if (!["is", "eq", "neq", "gt", "gte", "lt", "lte", "in", "like", "ilike", "ov", "cs"].includes(operator)) throw new Error(`Unimplemented CI data filter: ${operator}`);
+  if (!["is", "eq", "neq", "gt", "gte", "lt", "lte", "in", "like", "ilike", "ov", "cs", "cd"].includes(operator)) throw new Error(`Unimplemented CI data filter: ${operator}`);
+  if ((["like", "ilike"].includes(operator) && kind !== "text") ||
+      (["cs", "cd"].includes(operator) && !["array", "json"].includes(kind)) ||
+      (operator === "ov" && kind !== "array") ||
+      (["gt", "gte", "lt", "lte"].includes(operator) && !["integer", "numeric", "text", "date", "timestamp", "uuid"].includes(kind))) {
+    throw new Error(`Incompatible CI data operator ${operator} for ${type}`);
+  }
+  const parse = value => kind === "array" ? arrayValue(value, type) : typedValue(kind === "json" ? value : unquote(value), type);
   let values, value, pattern;
-  if (["in", "ov", "cs"].includes(operator)) {
-    const open = operator === "in" ? "(" : "{";
-    const close = operator === "in" ? ")" : "}";
-    if (!raw.startsWith(open) || !raw.endsWith(close)) throw new Error(`Invalid CI data ${operator} list: ${raw}`);
-    values = raw.length === 2 ? [] : splitTerms(raw.slice(1, -1)).map(unquote);
-  } else {
+  if (operator === "in") {
+    if (!raw.startsWith("(") || !raw.endsWith(")")) throw new Error(`Invalid CI data in list: ${raw}`);
+    values = raw.length === 2 ? [] : splitTerms(raw.slice(1, -1)).map(parse);
+  } else if (operator === "is") {
     value = unquote(raw);
-    if (operator === "is" && !["null", "true", "false"].includes(value)) throw new Error(`Invalid CI data is value: ${raw}`);
+    if (value !== "null" && (kind !== "boolean" || !["true", "false"].includes(value))) throw new Error(`Invalid CI data is value for ${type}: ${raw}`);
+  } else {
+    value = parse(raw);
     if (["like", "ilike"].includes(operator)) {
       let source = "";
       for (let index = 0; index < value.length; index++) {
@@ -66,21 +90,28 @@ function compileFilter(column, expression, contract) {
       pattern = new RegExp(`^${source}$`, operator === "ilike" ? "is" : "s");
     }
   }
+  const actualValue = actual => {
+    if (kind === "array") return actual.map(item => typedValue(String(item), type.slice(0, -2)));
+    if (kind === "json") return actual;
+    return typedValue(typeof actual === "object" ? JSON.stringify(actual) : String(actual), type);
+  };
   return row => {
     const actual = field(row, column);
-    const comparable = typeof actual === "number" ? Number(value) : value;
+    if (operator === "is") return value === "null" ? actual == null : actual === (value === "true");
+    if (actual == null) return false;
+    const comparable = actualValue(actual);
     switch (operator) {
-      case "is": return value === "null" ? actual == null : String(actual) === value;
-      case "eq": return actual != null && String(actual) === value;
-      case "neq": return actual != null && String(actual) !== value;
-      case "gt": return actual != null && actual > comparable;
-      case "gte": return actual != null && actual >= comparable;
-      case "lt": return actual != null && actual < comparable;
-      case "lte": return actual != null && actual <= comparable;
-      case "in": return actual != null && values.includes(String(actual));
-      case "like": case "ilike": return actual != null && pattern.test(String(actual));
-      case "ov": return Array.isArray(actual) && values.some(item => actual.includes(item));
-      case "cs": return Array.isArray(actual) && values.every(item => actual.includes(item));
+      case "eq": return isDeepStrictEqual(comparable, value);
+      case "neq": return !isDeepStrictEqual(comparable, value);
+      case "gt": return comparable > value;
+      case "gte": return comparable >= value;
+      case "lt": return comparable < value;
+      case "lte": return comparable <= value;
+      case "in": return values.some(value => isDeepStrictEqual(comparable, value));
+      case "like": case "ilike": return pattern.test(comparable);
+      case "ov": return value.some(item => comparable.some(actual => isDeepStrictEqual(actual, item)));
+      case "cs": return contains(comparable, value);
+      case "cd": return contains(value, comparable);
     }
   };
 }
@@ -99,7 +130,7 @@ function compileLogic(term, contract) {
 }
 function compileProjection(select, contract) {
   const projections = splitTerms(select).map(part => {
-    if (part === "*") return row => row;
+    if (part === "*") return row => Object.fromEntries([...contract.columns].map(key => [key, row[key] ?? null]));
     const embed = part.match(/^(?:(\w+):)?(\w+)\((.*)\)$/s);
     if (embed) {
       const [, alias, target, nested] = embed;
@@ -107,7 +138,7 @@ function compileProjection(select, contract) {
       if (!relation) throw new Error(`Unknown CI data relation: ${target}`);
       const project = compileProjection(nested, relation.contract);
       return row => {
-        const value = row[relation.key];
+        const value = relation.read(row);
         return { [alias ?? target]: Array.isArray(value) ? value.map(project) : value == null ? null : project(value) };
       };
     }
@@ -123,7 +154,8 @@ function integer(value, name) {
   if (!/^\d+$/.test(String(value)) || !Number.isSafeInteger(Number(value))) throw new Error(`Invalid CI data ${name}: ${value}`);
   return Number(value);
 }
-export function queryRows(tableRows, params, { range, count = false, contract = rowContract(tableRows) } = {}) {
+export function queryRows(tableRows, params, { range, count = false, contract } = {}) {
+  if (!contract) throw new Error("CI queries require a schema manifest contract.");
   const predicates = [], orders = [];
   // Compilation cannot depend on row count, filter order or boolean short circuits.
   const project = compileProjection(params.get("select") ?? "*", contract);

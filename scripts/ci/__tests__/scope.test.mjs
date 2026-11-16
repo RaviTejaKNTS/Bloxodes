@@ -19,8 +19,8 @@ test("mobile-only changes avoid web and extension builds", () => {
   assert.equal(scope.extension, false);
 });
 
-test("managed development runs only for migration SQL or migration policy", () => {
-  for (const file of ["supabase/migrations/20261116123456_add_field.sql", "supabase/migration-policy.json"]) assert.equal(classify([file]).migrations, true);
+test("managed development runs only for migration SQL, migration policy or the schema manifest", () => {
+  for (const file of ["supabase/migrations/20261116123456_add_field.sql", "supabase/migration-policy.json", "scripts/ci/fixtures/schema.json"]) assert.equal(classify([file]).migrations, true);
   for (const file of ["apps/web/src/lib/db.ts", "scripts/ci/change-scope.mjs", ".github/workflows/pull-request.yml", "supabase/types/shared-games.ts"]) assert.equal(classify([file]).migrations, false);
 });
 const specs = files => classify(files).browser_specs.split(" ").map(file => file.match(/([^/]+)\.spec\.ts$/)?.[1]).filter(Boolean);

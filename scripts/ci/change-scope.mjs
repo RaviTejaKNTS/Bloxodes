@@ -34,7 +34,7 @@ export function classify(files) {
   const code = files.filter(file => !file.endsWith("/AGENTS.md") && !/^(AGENTS\.md|DESIGN\.md|bloxodes-docs\/|\.agents\/|\.claude\/|\.codex\/)/.test(file));
   const scope = {
     checks: code.length > 0,
-    migrations: code.some(file => file.startsWith("supabase/migrations/") || file === "supabase/migration-policy.json"),
+    migrations: code.some(file => file.startsWith("supabase/migrations/") || file === "supabase/migration-policy.json" || file === "scripts/ci/fixtures/schema.json"),
     web: code.some(isWebDependency),
     extension: code.some(file => /^(apps\/extension\/|tsconfig\.json$|package(-lock)?\.json$|\.github\/)/.test(file)),
     admin: code.some(file => /^(apps\/admin-extension\/|tsconfig\.json$|package(-lock)?\.json$|\.github\/)/.test(file)),

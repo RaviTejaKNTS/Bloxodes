@@ -3,6 +3,15 @@ import fs from "node:fs";
 import { pathToFileURL } from "node:url";
 import { seedTables, seedRpcs, seedContracts } from "./data-seed.mjs";
 import { queryRows } from "./data-query.mjs";
+import { rpcContract, schemaManifest, validateRpcSamples } from "./data-schema.mjs";
+
+export function parseRange(header) {
+  if (header === undefined) return undefined;
+  const match = typeof header === "string" && header.match(/^(\d+)-(\d+)$/);
+  const range = match && match.slice(1).map(Number);
+  if (!range || range.some(value => !Number.isSafeInteger(value)) || range[1] < range[0]) throw new Error(`Invalid CI data Range: ${header}`);
+  return range;
+}
 
 export function assertFixtureEnvironment(env = process.env) {
   if (env.GITHUB_ACTIONS !== "true" || env.BLOXODES_CI_DATA !== "1" || env.BLOXODES_ENV_PROFILE !== "process-only") throw new Error("CI data fixtures run only in explicit GitHub CI with process-only env.");
@@ -11,6 +20,7 @@ export function assertFixtureEnvironment(env = process.env) {
 export function createDataServer() {
   assertFixtureEnvironment();
   const tables = seedTables(), rpcs = seedRpcs(), contracts = seedContracts(tables);
+  validateRpcSamples(rpcs);
   const audit = { requests: 0, tables: {}, rpcs: {}, unexpected: [] };
   const image = fs.readFileSync("apps/web/public/Bloxodes.png");
   return http.createServer(async (req, res) => {
@@ -28,14 +38,36 @@ export function createDataServer() {
       const rpc = url.pathname.match(/^\/rest\/v1\/rpc\/([a-z_0-9]+)$/)?.[1];
       if (rpc && ["GET", "HEAD", "POST"].includes(req.method) && Object.hasOwn(rpcs, rpc)) {
         audit.rpcs[rpc] = (audit.rpcs[rpc] ?? 0) + 1;
-        // These are read-only RPCs. Their committed samples represent empty
-        // history or the summary row, independent of the requested time window.
-        req.resume(); send(200, rpcs[rpc]); return;
+        const params = new URLSearchParams(url.searchParams), args = {};
+        if (req.method === "POST") {
+          let body = "";
+          for await (const chunk of req) {
+            body += chunk;
+            if (body.length > 1_000_000) throw new Error("CI RPC body is too large");
+          }
+          const parsed = JSON.parse(body || "{}");
+          if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("CI RPC arguments must be an object");
+          Object.assign(args, parsed);
+        } else for (const [key, value] of [...params]) if (key.startsWith("p_")) {
+          if (params.getAll(key).length !== 1) throw new Error(`Duplicate CI RPC argument: ${key}`);
+          args[key] = value; params.delete(key);
+        }
+        const contract = rpcContract(rpc, args), range = parseRange(req.headers.range);
+        if (!contract) {
+          if ([...params].length || range) throw new Error(`Unsupported CI scalar RPC query: ${rpc}`);
+          send(200, rpcs[rpc]); return;
+        }
+        const result = queryRows(rpcs[rpc], params, {range,contract});
+        send(200, result.data); return;
       }
       const table = url.pathname.match(/^\/rest\/v1\/([a-z_0-9]+)$/)?.[1];
       if (!table || !Object.hasOwn(tables, table) || !["GET", "HEAD"].includes(req.method)) throw new Error(`Unsupported CI data request: ${req.method} ${url.pathname}`);
       audit.tables[table] = (audit.tables[table] ?? 0) + 1;
-      const range = req.headers.range?.match(/^(\d+)-(\d+)$/)?.slice(1).map(Number);
+      const range = parseRange(req.headers.range);
+      if (schemaManifest.absentTables.includes(table)) {
+        send(404, { code: "PGRST205", message: `Could not find the table 'public.${table}' in the schema cache`, details: null, hint: null });
+        return;
+      }
       const counted = /count=(exact|planned|estimated)/.test(req.headers.prefer ?? "");
       const result = queryRows(tables[table], url.searchParams, { range, count: counted, contract: contracts[table] });
       if (!tables[table].length) throw new Error(`CI data table ${table} has no representative rows; seed it before a public reader uses it.`);
