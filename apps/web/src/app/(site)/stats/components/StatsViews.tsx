@@ -54,6 +54,7 @@ import { StatsItemChartPanel } from "@/app/(site)/stats/components/StatsItemChar
 import { StatsRankChartPanel } from "@/app/(site)/stats/components/StatsRankChartPanel";
 import { StatsVisitShareChartPanel } from "@/app/(site)/stats/components/StatsVisitShareChartPanel";
 import {
+  statsGamesSeoTitle,
   DEFAULT_STATS_GAME_COLUMNS,
   STATS_CREATOR_SORT_OPTIONS,
   STATS_GAME_COLUMN_OPTIONS,
@@ -1524,11 +1525,8 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
   const genreParams = new URLSearchParams();
   if (activeGenre) genreParams.set("genre", activeGenre);
   const genreHref = activeGenre ? `/stats/games?${genreParams.toString()}` : null;
-  const title = activeSubgenre
-    ? `${activeSubgenre} Roblox game stats`
-    : activeGenre
-      ? `${activeGenre} Roblox game stats`
-      : "Roblox game stats table";
+  const title = statsGamesSeoTitle(data.filters.sort, activeGenre, activeSubgenre)
+    .replace(" (Live Player Counts)", "");
   const description = activeSubgenre
     ? `Compare ${activeSubgenre} Roblox games in the ${activeGenre} genre by current players, visits, rating, and tracked peaks.`
     : activeGenre

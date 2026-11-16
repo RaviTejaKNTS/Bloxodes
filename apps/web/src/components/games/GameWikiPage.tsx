@@ -1,3 +1,6 @@
+import { loadGameWikiHubCollections } from "@/lib/game-wiki-hub-data";
+import { wikiHubGameName, wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
+import type { SharedGameWikiCollectionPage } from "@/lib/shared-game-reader";
 import { WikiControls } from "@/components/wiki/WikiControls";
 import { SocialShare } from "@/components/SocialShare";
 import { ContentCard } from "@/components/ContentCard";
@@ -21,9 +24,14 @@ import { createGameReader, type SharedGameWikiPage } from "@/lib/shared-game-rea
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { breadcrumbJsonLd, buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
-export function gameWikiMetadata(page: GameWikiPresentationPage): Metadata {
+export function gameWikiMetadata(page: GameWikiPresentationPage, collections: SharedGameWikiCollectionPage[] = []): Metadata {
  const canonical = `${SITE_URL}${gameWikiCanonicalPath(page)}`;
- const title = resolveSeoTitle(page.seo_title) ?? page.title;
+ const title = page.game_kind === "franchise" ? (resolveSeoTitle(page.seo_title) ?? page.title) : wikiHubSeoTitle({
+   gameName: wikiHubGameName(page.title, page.game_short_title, page.game_title),
+   gameNameAliases: [page.game_short_title, page.game_title].filter((name): name is string => Boolean(name)),
+   seoTitle: page.seo_title,
+   collections
+ });
  const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
  const image = resolveGameCoverImage(page);
  return { title, description, alternates: buildAlternates(canonical), openGraph: { type: "article", title, description, url: canonical, siteName: SITE_NAME, images: image ? [image] : [] }, twitter: { card: "summary_large_image", title, description, images: image ? [image] : [] } };
@@ -64,7 +72,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, dire
   const reader = createGameReader(namespace);
 
   const isFranchiseHub = page.game_kind === "franchise";
-  const collections = isFranchiseHub ? [] : await reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.slug);
+  const collections = await loadGameWikiHubCollections(namespace, page.slug, page.game_kind);
   const directory = isFranchiseHub || page.canonical_path === `/${namespace}`
     ? directoryPages.filter(link => link.href !== page.canonical_path
       && (!isFranchiseHub || (link.kind === "game_wiki_pages_view" && link.href !== `/${namespace}` && link.href !== `/${namespace}/wiki`))
