@@ -67,8 +67,9 @@ export function robloxCodePageDescription(game: { name: string; updated_at: stri
 }
 
 export function gameCodeDescription(
-  page: { redeem_md?: string | null; troubleshoot_md?: string | null },
-  data: { name: string; codes: SeoCode[] }
+  page: { title?: string | null; redeem_md?: string | null; troubleshoot_md?: string | null },
+  data: { name: string | null; codes: SeoCode[] }
 ) {
-  return codePageDescription({ name: data.name, codes: data.codes, lastChecked: codePageLastChecked(data.codes), hasRedeemHelp: Boolean(page.redeem_md?.trim() && page.troubleshoot_md?.trim()) });
+  const name = data.name?.trim() || (page.title ?? "").replace(/\s+codes?\b.*$/i, "").trim() || "game";
+  return codePageDescription({ name, codes: data.codes, lastChecked: codePageLastChecked(data.codes), hasRedeemHelp: Boolean(page.redeem_md?.trim() && page.troubleshoot_md?.trim()) });
 }

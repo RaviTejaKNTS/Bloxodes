@@ -97,7 +97,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       twitter: { card: "summary_large_image", title, description, images: ctx.codes.image ? [ctx.codes.image] : [] }
     };
   }
-  return {};
+  // Any other game route keeps the root title, canonical and image.
+  const image = ctx.root.cover_image;
+  return { openGraph: { title: ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.root.title, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);

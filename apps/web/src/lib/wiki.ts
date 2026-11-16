@@ -615,8 +615,8 @@ function mergeCatalogPages(left: WikiCollectionListEntry[], right: WikiCollectio
 }
 
 /** Shared request-scoped collection read for hub metadata and rendering. */
-export const loadWikiHubCollections = requestCache(async (slug: string, universeId: number | null) => {
-  const normalized = slug.trim().toLowerCase();
+export const loadWikiHubCollections = requestCache(async (slug: string | null | undefined, universeId: number | null) => {
+  const normalized = slug?.trim().toLowerCase() ?? "";
   const [byUniverse, bySlug] = await Promise.all([
     universeId ? listPublishedWikiCollectionPagesByUniverseId(universeId) : Promise.resolve([]),
     normalized ? listPublishedWikiCollectionPagesByWikiSlug(normalized) : Promise.resolve([])
