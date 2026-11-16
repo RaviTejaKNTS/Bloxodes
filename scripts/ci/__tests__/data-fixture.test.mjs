@@ -62,3 +62,11 @@ test("quoted PostgREST LIKE patterns retain commas, brackets and escaped wildcar
   params.set("or",'('+`name.ilike.${JSON.stringify("%Rock, [paper] 50\\%\\_%")}`+')');
   assert.deepEqual(queryRows(rows,params).data,[rows[0]]);
 });
+
+test("the fixture covers moved batch namespaces, every game page family and calculator datasets", () => {
+  const tables=seedTables();
+  const roots=tables.games.filter(game=>game.parent_id===null && !["gta","red-dead","minecraft","peak","risk-of-rain"].includes(game.namespace));
+  assert.ok(roots.length>=2);
+  for(const kind of ["wiki","collection","code","tool","map","quiz","catalog","checklist"]) assert.ok(tables[`game_${kind}_pages_view`].length>0,kind);
+  for(const code of ["grow-a-garden-crops","grow-a-garden-2-seeds","grow-a-garden-2-mutations","the-forge-ores","the-forge-weapons","the-forge-armors","wizard-alchemy-potions","wizard-alchemy-materials","wizard-alchemy-races"]) assert.ok(tables.wiki_collection_pages_view.some(page=>page.code===code),code);
+});

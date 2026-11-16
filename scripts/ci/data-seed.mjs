@@ -43,9 +43,9 @@ export function seedTables() {
       how_it_works_md: "", game_title: game?.title, game_short_title: game?.title, game_cover_image: "/Bloxodes.png", game_hero_image: "/Bloxodes.png", published_dataset_id: id() };
     add(shared ? "game_collection_pages_view" : "wiki_collection_pages", page);
     add(shared ? "game_collection_datasets" : "wiki_collection_datasets", { id: page.published_dataset_id, namespace: page.namespace, collection_page_id: page.id, schema_version: 2, content_hash: "a".repeat(64), item_count: page.item_count,
-      meta_json: { itemFields: ["name", "description"], display: { fields: [{ key: "description", label: "Description" }] } }, created_at: timestamp, updated_at: timestamp, validation_json: {}, source_manifest_json: {} });
+      meta_json: { itemFields: ["name", "description"], display: { descriptionField: "description", tableFields: ["description"] } }, created_at: timestamp, updated_at: timestamp, validation_json: {}, source_manifest_json: {} });
     for (let index = 1; index <= page.item_count; index++) add(shared ? "game_collection_items" : "wiki_collection_items", { namespace: page.namespace, dataset_id: page.published_dataset_id, item_slug: `item-${index}`, item_name: `Trail supply ${index}`, section: index <= page.item_count / 2 ? "Supplies" : "Equipment", sort_order: index, image_key: null,
-      fields_json: { ...entry.fields, description: entry.paginated ? "Carry supplies to recover health and reach the next climb. ".repeat(35) : "A supply found near the trail." } });
+      fields_json: { ...entry.fields, description: entry.paginated ? "Carry supplies to recover health and reach the next climb. ".repeat(15) : "A supply found near the trail." } });
     route(page, shared ? "game" : "roblox", "collection");
     if (shared) alias(`/${page.namespace}/${page.namespace === "minecraft" ? game.slug + "/wiki" : "wiki/" + game.slug}/${entry.slug}`, page, "collection");
   }

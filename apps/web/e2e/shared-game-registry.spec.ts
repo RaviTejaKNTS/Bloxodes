@@ -23,6 +23,7 @@ for (const coverageCase of cases) {
     const { data: roots, error: rootError } = await sb.from("games").select("id,namespace,title")
       .is("parent_id", null).eq("is_published", true).not("namespace", "in", "(gta,red-dead,minecraft,roblox)").order("namespace");
     expect(rootError).toBeNull();
+    if (process.env.BLOXODES_CI_DATA === "1") expect(roots?.length, "CI registry roots must be seeded").toBeGreaterThan(0);
     if (!roots?.length) {
       report("SKIPPED", "no eligible published namespace roots");
       test.skip(true, "No eligible namespace roots");
@@ -73,6 +74,7 @@ for (const coverageCase of cases) {
         }
       } else selected = candidates[0];
     }
+    if (process.env.BLOXODES_CI_DATA === "1") expect(selected, `CI registry case must have sample data: ${coverageCase}`).toBeTruthy();
     if (!selected) {
       report("SKIPPED", coverageCase === "collection-page-2" ? "no published collection exposes a second page" : "no eligible published page in preview data");
       test.skip(true, `No data for ${coverageCase}`);
