@@ -72,7 +72,10 @@ test("expired state is pruned and a failed serialization preserves the previous 
 test("the kernel releases a killed writer's lock and admits only one concurrent reclaimer", { timeout: 20_000 }, async () => {
   const directory = await fixture();
   const moduleUrl = new URL("../article-local-state.ts", import.meta.url).href;
-  const source = `import { withArticleState } from ${JSON.stringify(moduleUrl)};
+  // A dynamic import with a default fallback works whether tsx loads the module as ESM or CJS
+  // (Node 22 in the runtime packaging job loads it as CJS without named exports).
+  const source = `const loaded = await import(${JSON.stringify(moduleUrl)});
+    const withArticleState = loaded.withArticleState ?? loaded.default?.withArticleState;
     await withArticleState(true, async () => { process.stdout.write('locked\\n'); await new Promise(resolve => setTimeout(resolve, 300000)); }, ${JSON.stringify(directory)});`;
   const writer = spawn(process.execPath, ["--import", "tsx", "--input-type=module", "-e", source], { stdio: ["ignore", "pipe", "pipe"], timeout: 15_000 });
   let stderr = "";
