@@ -15,6 +15,8 @@ export type DataApiRetryOptions = {
   baseDelayMs?: number;
   maxDelayMs?: number;
   sleep?: (ms: number) => Promise<void>;
+  // Retry Postgres statement timeouts (57014). Use only for reads, which are safe to repeat.
+  retryStatementTimeout?: boolean;
 };
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -104,7 +106,9 @@ export async function runDataApiOperation<T extends DataApiResult>(
     }
 
     if (!result.error) return result;
-    if (!isTransientDataApiFailure(result) || attempt >= retryLimit) {
+    const retryable =
+      isTransientDataApiFailure(result) || (options.retryStatementTimeout === true && result.error.code === "57014");
+    if (!retryable || attempt >= retryLimit) {
       throw new Error(dataApiFailureMessage(label, result));
     }
 
