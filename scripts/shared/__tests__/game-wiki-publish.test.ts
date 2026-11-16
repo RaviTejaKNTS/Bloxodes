@@ -27,7 +27,7 @@ test("game-wiki contract retains franchise authoring shapes and exports JSON Sch
 });
 
 test("status accepts a namespace without changing Roblox defaults or production gates", () => {
-  assert.deepEqual(parseContentOptions(["status", "--namespace", "red-dead", "--game", "red-dead-redemption"]), { command: "status", target: "managed-dev", apply: false, allowProd: false, namespace: "red-dead", game: "red-dead-redemption" });
+  assert.deepEqual(parseContentOptions(["status", "--namespace", "red-dead", "--game", "red-dead-redemption"]), { command: "status", target: "production", apply: false, allowProd: false, namespace: "red-dead", game: "red-dead-redemption" });
   assert.equal(parseContentOptions(["status", "--game", "example"]).namespace, undefined);
   assert.equal(parseContentOptions(["status", "--namespace", "gta", "--game", "gta", "--kind", "game"]).kind, "game");
   assert.throws(() => parseContentOptions(["status", "--game", "gta", "--kind", "game"]), /requires franchise status/);
@@ -425,7 +425,7 @@ test("CLI dry run validates a new root and its collection without any HTTP mutat
     if (method !== 'GET' || !url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected network write or media request: '+method+' '+url.pathname);
     return new Response('[]', {headers:{'content-type':'application/json'}});
   };`;
-  const run = (apply = false) => execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : [])], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
+  const run = (apply = false) => execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, "--target", "managed-dev", ...(apply ? ["--apply"] : [])], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
   try {
     assert.match(run(), /PASS all checks\. Dry run complete; no database or media writes/);
     await write("collections/items/final.json", { ...final, universe_id: 1 });
@@ -591,7 +591,7 @@ test("franchise status reports stored counts, target URLs and hidden parent visi
       return new Response(JSON.stringify(tables[url.pathname.split('/').pop()] ?? []),{headers:{'content-type':'application/json'}});
     };
   `;
-  const output = execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "status", "--namespace", "series", "--game", "sequel"], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
+  const output = execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "status", "--target", "managed-dev", "--namespace", "series", "--game", "sequel"], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
   const result = JSON.parse(output.trim().split("\n").at(-1)!);
   assert.equal(result[0].exists, true);
   assert.equal(result[0].published, true);
@@ -614,7 +614,7 @@ test("status resolves root and original-game hubs by game ID and respects a miss
     };
   `;
   const run = (namespace: string, kind?: string) => {
-    const output = execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "status", "--namespace", namespace, "--game", namespace, ...(kind ? ["--kind", kind] : [])], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
+    const output = execFileSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "status", "--target", "managed-dev", "--namespace", namespace, "--game", namespace, ...(kind ? ["--kind", kind] : [])], { encoding: "utf8", env: testEnvironment(), stdio: "pipe" });
     return JSON.parse(output.trim().split("\n").at(-1)!);
   };
   const root = run("gta");

@@ -17,7 +17,7 @@ The T3 schedule "Bloxodes Roblox wiki every 2 days (Content Factory)" runs in th
 3. **Data:** build the full, source-backed dataset with useful player fields. Approve rows and sections before images.
 4. **Images:** collect and wire images, then review them.
 5. **Write:** write the hub or collection `final.json` with the writing skill and `bloxodes-voice`.
-6. **Publish:** put the approved hub and collections in a `roblox-wiki@1` bundle and publish it with `content:publish`, managed development first, then production. See [publishing](#publishing).
+6. **Publish:** put the approved hub and collections in a `roblox-wiki@1` bundle and publish it with `content:publish`: a production dry run, then the production apply. See [publishing](#publishing).
 
 ## Publishing
 
@@ -25,11 +25,10 @@ The code repo owns one versioned publish command with three contracts: `contract
 
 | Command | Does |
 | --- | --- |
-| `npm run content:publish -- <abs-bundle> [--only hub\|<collection-slug>]` | Dry run against managed development: schema, identity, slugs, dataset audit, copy checks, titles, image readiness. No writes. |
-| `... --target managed-dev --apply` | Writes the selected pages to managed development. |
+| `npm run content:publish -- <abs-bundle> [--only hub\|<collection-slug>]` | Dry run against production: schema, identity, slugs, dataset audit, copy checks, titles, image readiness. No writes. |
 | `... --target production --apply --allow-prod` | Writes to production, then reads back, revalidates and checks every live URL. |
-| `npm run content:status -- --game <slug> [--target production]` | Hub and collection state, item counts, URLs. Franchise games add `--namespace <ns>` (and `--kind game` when the child shares the root's slug). |
-| `npm run content:candidates -- --target production` | Top-100 games with no hub, highest rank first. Doesn't claim the queue row. |
+| `npm run content:status -- --game <slug>` | Hub and collection state, item counts, URLs. Franchise games add `--namespace <ns>` (and `--kind game` when the child shares the root's slug). |
+| `npm run content:candidates` | Top-100 games with no hub, highest rank first. Doesn't claim the queue row. |
 | `npm run content:deployed-sha` | The live deployed SHA. |
 
 - **Production guard:** the checkout must be on `origin/production` (ahead of or behind the live SHA is fine) with no changed tracked files, and nothing between it and the live deployed SHA may touch what ships in the web image: `apps/web/`, `data/`, `Dockerfile` or the package files (`PUBLICATION_RELEVANT_PATHS`, kept in step with the deploy's change classifier). Scripts, contracts and migrations run from the checkout itself, so merges that only change them don't block. Production must have no pending migrations. The command never moves the checkout; it refuses and says why.
@@ -38,6 +37,7 @@ The code repo owns one versioned publish command with three contracts: `contract
 - **Sidebar icons:** discovery sidebar wiki cards prefer the current universe icon from `wiki_pages_view`. The stats index is a periodic snapshot and supplies a fallback, so a media refresh needs no stats rebuild.
 - **Not one transaction.** A late failure can leave some pages published. Rerun the same bundle; revision hashes make it safe.
 - **Speed and retries:** image checks, uploads, R2 readback, collection readback, revalidation and live checks run 8 at a time (`scripts/shared/publish-network.mjs`). Database writes stay one at a time, hub first. Network blips and HTTP 429/5xx on reads, R2 calls and live checks retry up to 3 times; validation failures and other 4xx never retry. Long phases print progress (`images 400/3326`), and errors show their real cause with credentials and URL queries removed.
+- Production is the default target for all three commands. `--target managed-dev` is a manual opt-in; the Content Factory never uses it.
 - The dry run is a scoped exception to "no checks locally". Builds, test suites and browser QA still run on GitHub.
 - The older path still works: `sync:game-wiki-runtime` and `sync:game-collection-runtime` behind the GitHub `roblox-wiki` and `roblox-collection` publishers, with selected Roblox QA ([release](../operations/release.md#managed-development-content-qa)).
 

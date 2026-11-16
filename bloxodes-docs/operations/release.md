@@ -1,8 +1,8 @@
 # Release
 
-Last verified: 2026-10-22
+Last verified: 2026-11-16
 
-How code and content reach production. GitHub does the checking, building and deploying, and publishes most content. Roblox wiki bundles publish with their own versioned command (below). Agents don't run checks or builds locally.
+How code and content reach production. GitHub does the checking, building and deploying for code. Content Factory content (Roblox and franchise wikis, articles, codes pages, stats reports) publishes straight to production with its own guarded commands, `content:publish` and `codes:publish`, with no managed-development step: when the production dry run passes, it publishes ([roblox wiki](../content/roblox-wiki.md#publishing), [articles](../content/articles.md#direct-publishing), [codes](../content/codes.md), [stats](../content/stats.md#monthly-reports)). The GitHub content jobs below remain for other selected content. Agents don't run checks or builds locally.
 
 ## Code: PR to production
 

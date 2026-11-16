@@ -1,18 +1,15 @@
-import "../shared/load-env";
+import "./load-notion-article-env";
 
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createNotionArticleQueue, duplicateQueueRow, type NotionArticleQueue } from "./notion-article-queue";
 
 import { slugify } from "@/lib/slug";
-import { resolveArticleDevCredentials } from "./article-queue-env";
 import {
   articleQueueIdempotencyKey,
-  findExistingQueueRow,
   findProductionArticleDuplicate
 } from "./article-queue-dedupe";
-import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
 import { fetchProductionEditorialInventory, type ProductionInventoryItem } from "./production-editorial-inventory";
 
 const ARTICLE_TYPES = ["guide", "tier_list", "explainer"] as const;
@@ -144,38 +141,14 @@ function queueDuplicate(row: Record<string, unknown>): Duplicate {
   };
 }
 
-/** Recover unique-index conflicts across workflows without changing curation's lookup. */
-async function findConflictingQueueRow(
-  supabase: SupabaseClient,
-  topicKey: string,
-  idempotencyKey: string
-): Promise<Record<string, unknown> | null> {
-  for (const [column, value] of [["topic_key", topicKey], ["idempotency_key", idempotencyKey]] as const) {
-    let query = supabase
-      .from("article_generation_queue")
-      .select("id, article_title, status, workflow_mode")
-      .eq(column, value);
-    if (column === "topic_key") {
-      // Migration 20260920000005 also includes blocked topics in this index.
-      query = query.in("status", ARTICLE_TOPIC_DEDUPE_STATUSES);
-    } else {
-      query = query.in("status", ["pending", "processing"]).is("event_id", null);
-    }
-    const { data, error } = await query.maybeSingle();
-    if (error) throw new Error(`Could not check conflicting queue ${column}: ${error.message}`);
-    if (data) return data as Record<string, unknown>;
-  }
-  return null;
-}
-
 export async function addArticleQueueItem(
-  supabase: SupabaseClient,
+  queue: NotionArticleQueue,
   options: AddArticleQueueOptions,
   inventory: ProductionInventoryItem[],
   now = new Date().toISOString()
 ): Promise<AddArticleQueueResult> {
   const row = buildQueueRow(options, now);
-  const existing = await findExistingQueueRow(supabase, row.topic_key, row.article_title, row.idempotency_key);
+  const existing = duplicateQueueRow(await queue.list(), row);
   const production = findProductionArticleDuplicate(row.article_title, inventory);
   const duplicate: Duplicate | null = existing ? queueDuplicate(existing)
     : production ? { kind: "production", key: production.key, title: production.title } : null;
@@ -183,35 +156,25 @@ export async function addArticleQueueItem(
   if (!options.apply) return { kind: "dry_run", exitCode: 0, row, duplicate };
   if (duplicate) return { kind: "duplicate", exitCode: 3, duplicate };
 
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .insert(row)
-    .select("id, status, article_title, topic_key")
-    .single();
-  if (!error && data) return { kind: "inserted", exitCode: 0, row: data };
-  if (error?.code === "23505") {
-    const raced = await findConflictingQueueRow(supabase, row.topic_key, row.idempotency_key);
-    if (raced) return { kind: "duplicate", exitCode: 3, duplicate: queueDuplicate(raced) };
-  }
-  throw new Error(`Could not add article queue item: ${error?.message ?? "missing inserted row"}`);
+  const result = await queue.put(row);
+  if (!result.created) return { kind: "duplicate", exitCode: 3, duplicate: queueDuplicate(result.row) };
+  return { kind: "inserted", exitCode: 0, row: { id: result.row.id, status: result.row.status, article_title: result.row.article_title, topic_key: result.row.topic_key ?? row.topic_key } };
 }
 
 async function main(): Promise<number> {
   const argv = process.argv.slice(2);
   if (argv.length === 1 && ["--help", "-h"].includes(argv[0])) {
     console.log("Usage: npm run articles:queue:add -- --title TEXT --type guide|tier_list|explainer --source-url URL [--source-url URL] --reason TEXT [--universe-id N] [--claim] [--worker NAME] [--dev-env-file PATH] [--json] [--apply]");
-    console.log("Plans by default. --apply inserts into managed development only; it does not authorize publication.");
-    console.log("Credentials: ARTICLE_DEV_SUPABASE_URL and ARTICLE_DEV_SUPABASE_SERVICE_ROLE, or --dev-env-file (same resolution as articles:queue:update).");
+    console.log("Plans by default. --apply adds a Notion Article Queue page; it does not authorize publication.");
+    console.log("Credentials: NOTION_ARTICLE_QUEUE_TOKEN. --dev-env-file remains an optional token env file.");
     return 0;
   }
   const options = parseArgs(argv);
-  const dev = resolveArticleDevCredentials({ envFile: options.devEnvFile });
-  const supabase = createClient(dev.url, dev.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
+  const queue = createNotionArticleQueue({ envFile: options.devEnvFile });
+  await queue.validate();
   // Fail closed if production inventory cannot be read, even for a dry run.
   const inventory = await fetchProductionEditorialInventory();
-  const result = await addArticleQueueItem(supabase, options, inventory.items);
+  const result = await addArticleQueueItem(queue, options, inventory.items);
   if (result.kind === "inserted") {
     console.log(options.json ? JSON.stringify(result.row) : result.row.id);
   } else if (result.kind === "dry_run") {

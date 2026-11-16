@@ -79,7 +79,7 @@ test("approval never bypasses format, decoding or the 1 MB byte limit", async ()
 });
 
 test("approval CLI syntax works on dry runs and applies without weakening production guards", () => {
-  for (const flags of [[], ["--apply"], ["--target=production"], ["--target=production", "--apply", "--allow-prod"]]) {
+  for (const flags of [[], ["--target=managed-dev", "--apply"], ["--target=production"], ["--target=production", "--apply", "--allow-prod"]]) {
     for (const selection of [[], ["--only=hub"], ["--only=pets", "--only=hub"]]) {
       assert.equal(parseContentOptions(["publish", "/bundle", flag, approval, ...selection, ...flags]).approvedHubCoverSha256, approval);
     }
@@ -96,6 +96,8 @@ test("approval CLI syntax works on dry runs and applies without weakening produc
     ["candidates", flag, approval],
     ["deployed-sha", flag, approval],
     ["publish", "/bundle", flag, approval, "--target=production", "--apply"],
+    // Production is the default target, so a bare --apply still needs --allow-prod.
+    ["publish", "/bundle", flag, approval, "--apply"],
     ["publish", "/bundle", flag, approval, "--allow-prod"]
   ]) assert.throws(() => parseContentOptions(args), undefined, args.join(" "));
 });

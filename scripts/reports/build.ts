@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
-import { loadBloxodesEnv } from '../shared/env-files';
+import { selectContentTarget } from '../shared/content-target-env';
 import { buildModel, dates, day, lastOf, ranks, coverage, players, type Row, type DailyRow } from './model';
 export const hash = (v: Buffer | string) => createHash('sha256').update(v).digest('hex');
 export const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
@@ -75,8 +75,7 @@ async function main() {
   const out = path.resolve(arg('--out'));
   if (!argv.includes('--allow-prod-read'))
     throw Error('Production reads require --allow-prod-read');
-  process.env.BLOXODES_ENV_PROFILE = 'production-preview';
-  loadBloxodesEnv();
+  selectContentTarget('production');
   if (process.env.SUPABASE_URL?.replace(/\/$/, '') !== 'https://database.bloxodes.com')
     throw Error('production-preview must select production');
   const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {

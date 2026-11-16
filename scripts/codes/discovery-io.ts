@@ -73,11 +73,11 @@ export class CodesQueue {
     }
     return existing ? "merge" : "create";
   }
-  private async callCreate(body: unknown) {
+  async callCreate(body: unknown) {
     let response: Response;
     try { response = await this.createFetch("https://api.notion.com/v1/pages", { method: "POST", signal: AbortSignal.timeout(20_000), headers: {
-      Authorization: `Bearer ${this.token}`, "Notion-Version": "2026-03-11", "Content-Type": "application/json" }, body: JSON.stringify(body) }); } catch { throw new FatalDiscoveryError("Notion create response uncertain; rerun to reconcile by Universe ID"); }
-    if (!response.ok) throw new FatalDiscoveryError(`Notion create failed (${response.status}); rerun to reconcile by Universe ID`);
-    await response.json();
+      Authorization: `Bearer ${this.token}`, "Notion-Version": "2026-03-11", "Content-Type": "application/json" }, body: JSON.stringify(body) }); } catch { throw new FatalDiscoveryError("Notion create response uncertain; rerun to reconcile by the queue dedupe key"); }
+    if (!response.ok) throw new FatalDiscoveryError(`Notion create failed (${response.status}); rerun to reconcile by the queue dedupe key`);
+    return await response.json();
   }
 }

@@ -20,7 +20,7 @@ npm run content:status -- --stats-report <slug> [--target managed-dev|production
 Stats reports support --visibility hidden|public and --update-published.
 Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1 and stats-report@1. See contracts/<contract>/v1/.
 --update-published permits deliberate updates to published article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
-Default target: managed-dev. Publication defaults to a read-only dry run.
+Default target: production. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
 SHA differences are allowed only outside these publish-relevant paths: ${PUBLICATION_RELEVANT_PATHS.join(", ")}.
@@ -51,12 +51,15 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   if (process.env.BLOXODES_ENV_PROFILE !== "process-only") {
     process.env.BLOXODES_ENV_PROFILE = options.target === "production" ? "production-preview" : "managed-dev";
   }
-  if (options.target === "production") {
+  {
     const overlays = new Set((process.env.BLOXODES_ENV_OVERLAYS ?? "").split(",").filter(Boolean));
-    overlays.add("vps");
+    if (options.target === "production") overlays.add("vps");
+    if (contract === "article@1") overlays.add("articles");
     process.env.BLOXODES_ENV_OVERLAYS = [...overlays].join(",");
   }
   loadBloxodesEnv();
+  const { selectContentTarget } = await import("../shared/content-target-env");
+  selectContentTarget(options.target);
   const { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } = await import("../shared/supabase-target");
   const matches = options.target === "production" ? isProductionSupabaseUrl : isManagedDevelopmentSupabaseUrl;
   if (options.target === "production" && process.env.SUPABASE_URL?.replace(/\/$/, "") !== "https://database.bloxodes.com") throw new Error("content:publish production requires https://database.bloxodes.com.");

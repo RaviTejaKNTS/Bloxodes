@@ -3,13 +3,14 @@ import { loadBloxodesEnv, readBloxodesEnvFile } from "../shared/env-files";
 import { createClient } from "@supabase/supabase-js";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { isProductionSupabaseUrl, assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 import { codePageFinalSchema } from "./final-contract";
 
 async function main() {
   const args = process.argv.slice(2);
   const get = (key: string) => args[args.indexOf(key) + 1];
   const publish = args[0] === "publish";
-  const target = args.includes("--target") ? get("--target") : publish ? "development" : "production";
+  const target = args.includes("--target") ? get("--target") : "production";
   if (!["production", "development"].includes(target)) throw new Error("--target must be production or development");
   process.env.BLOXODES_ENV_PROFILE = target === "production" ? "production-preview" : "managed-dev";
   if (target === "production") {
@@ -22,6 +23,9 @@ async function main() {
   const targetEnv = readBloxodesEnvFile(`targets/${target === "production" ? "production" : "managed-dev"}.env`);
   if (!targetEnv.SUPABASE_URL || !targetEnv.SUPABASE_SERVICE_ROLE) throw new Error("Target env is missing Supabase credentials");
   Object.assign(process.env, targetEnv);
+  if (target === "production" && !isProductionSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Codes production target must use production credentials");
+  if (target === "development") assertManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL, "codes development publish");
+  process.env.NODE_ENV = target === "production" ? "production" : "development";
   const sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {
     global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(30_000) }) }
   });

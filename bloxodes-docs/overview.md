@@ -62,4 +62,4 @@ All public content is in production Supabase. Roblox content and non-Roblox cont
 
 Collection data is stored as immutable revisions. Pages point at a published revision. See [database](data/supabase.md).
 
-Authoring never happens against production. Agents work against managed development, then GitHub publishes the exact approved content. See [release](operations/release.md).
+Content Factory content (wikis, articles, codes pages, stats reports) is authored in local files and publishes straight to production with `content:publish` or `codes:publish` once its production dry run passes. Its queues are in Notion. Managed development isn't in that path, so it can't block content. Other content and all code reach production through GitHub. See [release](operations/release.md).
