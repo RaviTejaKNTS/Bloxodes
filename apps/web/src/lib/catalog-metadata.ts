@@ -16,9 +16,10 @@ export async function finalizeCatalogMetadata(metadata: Metadata, options: { cat
   const code = path.slice("/catalog/".length)
     .replace(/\/page\/\d+\/?$/, "")
     .split("/").map(decodeURIComponent).join("/");
-  const page = Number(path.match(/\/page\/(\d+)\/?$/)?.[1] ?? 1);
   const catalog = options.catalog !== undefined ? options.catalog : await getCatalogPageContentByCodes(catalogCodeCandidates(code));
-  const count = options.count ?? (await loadCatalogPreviewData(code, page, false)).count;
+  // The total doesn't depend on the page. Reading page 1 keeps out-of-range
+  // page numbers out of the loader, so the route's own 404 still decides them.
+  const count = options.count ?? (await loadCatalogPreviewData(code, 1, false)).count;
   const counted = (title: unknown) => typeof title === "string" ? catalogTitleCount(title, count) : title;
   const title = counted(metadata.title) as Metadata["title"];
   const image = resolveCatalogImage(catalog ?? { code: code.split("/")[0] });

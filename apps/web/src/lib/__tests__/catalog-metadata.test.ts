@@ -34,3 +34,7 @@ it("honors a resolved legacy row and saved cover without another catalog query",
   expect(result.openGraph?.images).toEqual([catalog.thumb_url]);
   expect(mocks.catalog).not.toHaveBeenCalled();
 });
+it("reads the count from page one so an out-of-range page never reaches the loader", async () => {
+  await finalizeCatalogMetadata({ title: "Jujutsu Shenanigans Music IDs [137 Kill & Death Sounds] - Page 9007199254740992", alternates: { canonical: "/catalog/roblox-music-ids/games/jujutsu-shenanigans/page/9007199254740992" } });
+  expect(mocks.preview).toHaveBeenCalledWith("roblox-music-ids/games/jujutsu-shenanigans", 1, false);
+});
