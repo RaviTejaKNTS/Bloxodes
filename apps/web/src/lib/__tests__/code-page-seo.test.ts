@@ -25,10 +25,10 @@ describe("live codes metadata", () => {
       expect(description).toBe("1 active Example code, last checked November 16, 2026. Newest code: HELLO.");
     }
   });
-  it("only appends a reward below 155 characters", () => {
+  it("appends rewards through 160 characters", () => {
     const base = codePageDescription({ name: "Example", codes: [{ ...code, rewards_text: null }], lastChecked: checked });
-    const rewardLength = 154 - base.length - " Reward: .".length;
-    expect(codePageDescription({ name: "Example", codes: [{ ...code, rewards_text: "x".repeat(rewardLength) }], lastChecked: checked })).toHaveLength(154);
+    const rewardLength = 160 - base.length - " Reward: .".length;
+    expect(codePageDescription({ name: "Example", codes: [{ ...code, rewards_text: "x".repeat(rewardLength) }], lastChecked: checked })).toHaveLength(160);
     expect(codePageDescription({ name: "Example", codes: [{ ...code, rewards_text: "x".repeat(rewardLength + 1) }], lastChecked: checked })).toBe(base);
   });
   it("counts unique expired codes across current and legacy rows", () => {
@@ -41,7 +41,39 @@ describe("live codes metadata", () => {
   });
   it("never invents a check date", () => {
     expect(codePageLastChecked([{ ...code, last_seen_at: "bad date" }], null)).toBeNull();
-    expect(codePageLastChecked([code], "2026-11-17T00:00:00Z")).toBe("2026-11-17T00:00:00Z");
+    expect(codePageLastChecked([code], "2026-11-17T00:00:00Z")).toBe(checked);
     expect(codePageDescription({ name: "Example", codes: [], lastChecked: null })).toBe("No active Example codes right now.");
   });
+  it("adds closing help only when the sections render and the sentence fits", () => {
+    const input = { name: "Example", codes: [code], lastChecked: checked };
+    expect(codePageDescription({ ...input, hasRedeemHelp: true }))
+      .toBe("1 active Example code, last checked November 16, 2026. Newest code: HELLO. Reward: 50 coins. See how to redeem them and why a code might not work.");
+    const long = { ...code, rewards_text: "x".repeat(60) };
+    const description = codePageDescription({ ...input, codes: [long], hasRedeemHelp: true });
+    expect(description).toContain("Reward:");
+    expect(description).not.toContain("See how");
+    expect(description.length).toBeLessThanOrEqual(160);
+    expect(codePageDescription({ ...input, codes: [], hasExpiryHelp: true }))
+      .toBe("No active Example codes right now, last checked November 16, 2026. See why codes expire and where new ones appear.");
+  });
+  it("omits closing help when either conditional Roblox section is missing", () => {
+    expect(robloxCodePageDescription({ name: "Example", updated_at: "2026-11-30", redeem_md: "Redeem here." }, [code]))
+      .not.toContain("See how");
+    expect(robloxCodePageDescription({ name: "Example", updated_at: "2026-11-30", redeem_md: "Redeem here.", troubleshoot_md: "Check spelling." }, [code]))
+      .toContain("See how");
+  });
+  it("uses verification dates and omits an editorial date when no check exists", () => {
+    expect(codePageLastChecked([{ ...code, verified_at: "2026-11-18" }])).toBe("2026-11-18");
+    expect(robloxCodePageDescription({ name: "Example", updated_at: "2026-11-30" }, []))
+      .toBe("No active Example codes right now.");
+  });
+  it("never truncates a sentence or exceeds 160 with oversized stored values", () => {
+    for (const codes of [[{ ...code, code: "X".repeat(200) }], []]) {
+      const description = codePageDescription({ name: "Game ".repeat(50), codes, lastChecked: checked, hasRedeemHelp: true });
+      expect(description.length).toBeLessThanOrEqual(160);
+      expect(description).not.toMatch(/…|\.\.\./);
+      expect(description.endsWith(".")).toBe(true);
+    }
+  });
+
 });

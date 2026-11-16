@@ -33,6 +33,8 @@ export async function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: n
   return finalizeCatalogMetadata({
     title: catalogIdTitle(title),
     description: config.description,
+    openGraph: { description: config.description },
+    twitter: { description: config.description },
     robots: { index: isIndexableTrendingPage, follow: true },
     alternates: buildAlternates(path)
   });

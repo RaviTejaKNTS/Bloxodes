@@ -1,5 +1,5 @@
 import { loadGameWikiHubCollections } from "@/lib/game-wiki-hub-data";
-import { wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
+import { wikiHubGameName, wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
 import type { SharedGameWikiCollectionPage } from "@/lib/shared-game-reader";
 import { WikiControls } from "@/components/wiki/WikiControls";
 import { SocialShare } from "@/components/SocialShare";
@@ -27,7 +27,7 @@ import { breadcrumbJsonLd, buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL
 export function gameWikiMetadata(page: GameWikiPresentationPage, collections: SharedGameWikiCollectionPage[] = []): Metadata {
  const canonical = `${SITE_URL}${gameWikiCanonicalPath(page)}`;
  const title = page.game_kind === "franchise" ? (resolveSeoTitle(page.seo_title) ?? page.title) : wikiHubSeoTitle({
-   gameName: / Wiki$/i.test(page.title) ? page.title.replace(/(?: Roblox)? Wiki$/i, "").trim() : page.game_short_title || page.game_title,
+   gameName: wikiHubGameName(page.title, page.game_short_title, page.game_title),
    gameNameAliases: [page.game_short_title, page.game_title].filter((name): name is string => Boolean(name)),
    seoTitle: page.seo_title,
    collections

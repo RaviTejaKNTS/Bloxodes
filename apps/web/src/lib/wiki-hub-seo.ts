@@ -6,6 +6,11 @@ type HubCollection = {
   page_type?: string | null;
 };
 
+/** Prefer stored identity; title parsing is only a fallback for missing game data. */
+export function wikiHubGameName(title: string, ...names: (string | null | undefined)[]): string {
+  return names.find(name => name?.trim())?.trim() || title.replace(/ Wiki$/i, "").trim();
+}
+
 /** Match the hubs' game-data group followed by their collectibles group. */
 export function orderWikiHubCollections<T extends HubCollection>(collections: readonly T[]): T[] {
   return [

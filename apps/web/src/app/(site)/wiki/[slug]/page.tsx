@@ -1,4 +1,4 @@
-import { wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
+import { wikiHubGameName, wikiHubSeoTitle } from "@/lib/wiki-hub-seo";
 import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -52,9 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const collections = await loadWikiHubCollections(page.slug, page.universe_id ?? null);
-  const gameName = / Wiki$/i.test(page.title)
-    ? page.title.replace(/(?: Roblox)? Wiki$/i, "").trim()
-    : page.universe_display_name || page.universe_name;
+  const gameName = wikiHubGameName(page.title, page.universe_display_name, page.universe_name);
   const title = wikiHubSeoTitle({
     gameName: gameName || page.universe_display_name || page.universe_name || "Roblox",
     gameNameAliases: [page.universe_display_name, page.universe_name].filter((name): name is string => Boolean(name)),

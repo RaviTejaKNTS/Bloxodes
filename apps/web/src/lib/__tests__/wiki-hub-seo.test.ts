@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { wikiHubSeoTitle } from "../wiki-hub-seo";
+import { wikiHubGameName, wikiHubSeoTitle } from "../wiki-hub-seo";
 
 const collections = ["Fruits", "Swords", "Accessories", "Quests"].map(display_name => ({
   display_name, collection_slug: display_name.toLowerCase(), page_type: "database"
@@ -13,6 +13,12 @@ describe("wiki hub search titles", () => {
     expect(title(count)).toBe("Blox Fruits Wiki");
   });
 
+  it("keeps Roblox when it belongs to the stored game name", () => {
+    expect(wikiHubSeoTitle({ gameName: wikiHubGameName("My Roblox Wiki", "My Roblox"), seoTitle: "My Roblox Wiki", collections: collections.slice(0, 2) }))
+      .toBe("My Roblox Wiki: Fruits, Swords and Tips");
+    expect(wikiHubGameName("My Roblox Wiki", null, " ")).toBe("My Roblox");
+    expect(wikiHubGameName("Old Wiki", "My Roblox")).toBe("My Roblox");
+  });
   it("uses two short labels", () => {
     expect(title(2)).toBe("Blox Fruits Wiki: Fruits, Swords and Tips");
   });

@@ -135,7 +135,7 @@ const MUSIC_CHARTS: Record<MusicChartKey, {
     path: `${BASE_PATH}/trending`,
     title: "Top 500 Trending Roblox Songs Today",
     heading: "Top 500 Trending Roblox Songs Today",
-    description: "The 500 songs Roblox players are using most today, ranked, each with its ID ready to copy. Updated daily.",
+    description: "Up to 500 songs Roblox players are using most today, ranked, each with its ID ready to copy. Updated daily.",
     breadcrumbLabel: "Trending",
     statLabel: "ranked songs",
     source: null

@@ -36,7 +36,7 @@ describe("franchise codes layout", () => {
     const page: CodePage = { id: "codes", namespace: "example", game_id: "child", canonical_path: "/example/codes/child", title: "Child Codes", image: "https://media.bloxodes.com/child-cover.webp", seo_title: null, meta_description: "Redeem Child rewards.", intro_md: "Redeem rewards in Child.", redeem_md: "Open the reward menu.", rewards_md: "Spend rewards on gear.", troubleshoot_md: "Check the spelling.", find_codes_md: "Watch the developer announcements.", faq_json: [{ q: "Can rewards expire?", a: "Yes." }], updated_at: "2026-11-16T00:00:00Z", published_at: null };
     const $ = load(renderToStaticMarkup(await GameCodePage({ page, namespaceTitle: "Example" })));
     expect(JSON.parse($("script[type='application/ld+json']").text())["@graph"][0].description)
-      .toBe("1 active Child code, last checked November 16, 2026. Newest code: ACTIVE. Reward: A reward.");
+      .toBe("1 active Child code. Newest code: ACTIVE. Reward: A reward. See how to redeem them and why a code might not work.");
     expect($("#article-body")).toHaveLength(1);
     expect($(".content-sidebar-grid > aside#sidebar.space-y-4")).toHaveLength(1);
     expect($("#article-body h2").map((_, heading) => $(heading).text()).get()).toEqual(["Active codes", "How to redeem", "Expired codes", "Troubleshooting", "Rewards", "Where to find codes", "FAQ"]);
