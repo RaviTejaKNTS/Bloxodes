@@ -102,7 +102,7 @@ export function renderMusicGamePage({
   currentPage: number;
   contentHtml: PageContentHtml | null;
 }) {
-  const baseTitle = game.title;
+  const baseTitle = contentHtml?.title?.trim() || game.title;
   const title = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const basePath = `${MUSIC_GAMES_PATH}/${game.slug}`;
   const path = currentPage > 1 ? `${basePath}/page/${currentPage}` : basePath;

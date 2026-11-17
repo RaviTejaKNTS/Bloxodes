@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -449,8 +450,6 @@ type GrowGardenPreparedCollection = {
   totalPages: number;
 };
 
-const growGardenPreparedCollectionCache = new Map<string, Promise<GrowGardenPreparedCollection>>();
-
 function buildGrowGardenPreparedCollection(
   config: GrowGardenCollectionConfig,
   dataset: GrowGardenCollectionDataset
@@ -474,22 +473,18 @@ function buildGrowGardenPreparedCollection(
   };
 }
 
-export async function loadPreparedGrowGardenCollection(
-  config: GrowGardenCollectionConfig
-): Promise<GrowGardenPreparedCollection> {
-  const cached = growGardenPreparedCollectionCache.get(config.slug);
-  if (cached) return cached;
+// Keep prepared data within the request so a later render reads the published revision.
+const loadPreparedGrowGardenCollectionBySlug = cache(async (
+  slug: string
+): Promise<GrowGardenPreparedCollection> => {
+  const config = getGrowGardenCollectionConfig(slug);
+  if (!config) throw new Error(`Unknown grow-a-garden collection: ${slug}`);
+  const dataset = await loadGrowGardenCollectionDataset(config);
+  return buildGrowGardenPreparedCollection(config, dataset);
+});
 
-  const next: Promise<GrowGardenPreparedCollection> = loadGrowGardenCollectionDataset(config)
-    .then((dataset) => buildGrowGardenPreparedCollection(config, dataset))
-    .catch((error: unknown) => {
-      if (growGardenPreparedCollectionCache.get(config.slug) === next) {
-        growGardenPreparedCollectionCache.delete(config.slug);
-      }
-      throw error;
-    });
-  growGardenPreparedCollectionCache.set(config.slug, next);
-  return next;
+export async function loadPreparedGrowGardenCollection(config: GrowGardenCollectionConfig): Promise<GrowGardenPreparedCollection> {
+  return loadPreparedGrowGardenCollectionBySlug(config.slug);
 }
 
 export async function getPreparedGrowGardenCollectionPageCount(config: GrowGardenCollectionConfig) {
