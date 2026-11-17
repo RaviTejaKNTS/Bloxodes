@@ -19,6 +19,23 @@ function expectConfig(config: ReturnType<typeof loadR2ClientConfig>, accessKeyId
   assert.equal(config.bucket, bucket);
 }
 
+test("R2 downloads retry transient status and interrupted bodies within one budget", async () => {
+  const bytes = Buffer.from([0, 255, 128]);
+  let attempts = 0;
+  const delays: number[] = [];
+  const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "wiki" }, async () => {
+    attempts++;
+    if (attempts === 1) return new Response(null, { status: 503 });
+    if (attempts === 2) return new Response(new ReadableStream({
+      start(controller) { controller.error(new TypeError("fetch failed", { cause: { code: "ECONNRESET" } })); }
+    }));
+    return new Response(bytes);
+  }, () => new Date(), async (delay) => { delays.push(delay); });
+  assert.deepEqual(await client.getObject("item.webp"), bytes);
+  assert.equal(attempts, 3);
+  assert.deepEqual(delays, [250, 500]);
+});
+
 test("signs an R2 object upload without exposing the secret", async () => {
   let captured: { url: string; init: RequestInit } | null = null;
   const client = new R2Client(

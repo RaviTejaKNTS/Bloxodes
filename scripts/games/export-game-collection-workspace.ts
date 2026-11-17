@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { repoPath } from "@/lib/paths";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { exportCollectionMedia, imageFilename } from "../shared/export-collection-media";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
@@ -182,23 +183,6 @@ function sourceUrlsFrom(value: unknown): string[] {
   })));
 }
 
-function imageFilename(key: string) {
-  const filename = key.split("/").pop()?.trim();
-  if (!filename || filename === "." || filename === "..") throw new Error(`Invalid database image key: ${key}`);
-  return filename;
-}
-
-async function mapWithConcurrency<T>(values: T[], concurrency: number, work: (value: T) => Promise<void>) {
-  let next = 0;
-  await Promise.all(Array.from({ length: Math.min(concurrency, values.length) }, async () => {
-    while (true) {
-      const index = next++;
-      if (index >= values.length) return;
-      await work(values[index]);
-    }
-  }));
-}
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
 
@@ -361,12 +345,7 @@ async function main() {
   }
 
   const mediaRoot = path.join(workspace, "media");
-  await fs.mkdir(mediaRoot, { recursive: true });
-  await mapWithConcurrency(imageKeys, 16, async (key) => {
-    const response = await fetch(`https://media.bloxodes.com/wiki/${key}`, { signal: AbortSignal.timeout(20_000) });
-    if (!response.ok) throw new Error(`Failed to export ${key}: HTTP ${response.status}`);
-    await fs.writeFile(path.join(mediaRoot, imageFilename(key)), Buffer.from(await response.arrayBuffer()));
-  });
+  await exportCollectionMedia(imageKeys, mediaRoot);
   await Promise.all([
     fs.writeFile(target, serialized),
     fs.writeFile(path.join(workspace, "dataset.json"), `${JSON.stringify(datasetDocument, null, 2)}\n`),
