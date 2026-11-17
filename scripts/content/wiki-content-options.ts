@@ -6,6 +6,7 @@ export type ContentOptions = {
   apply: boolean;
   allowProd: boolean;
   updatePublished?: boolean;
+  liveImages?: "all" | "new" | "none";
   bundle?: string;
   game?: string;
   article?: string;
@@ -22,7 +23,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
   if (command !== "publish" && command !== "status" && command !== "candidates" && command !== "deployed-sha") {
     throw new Error("Expected publish, status, candidates or deployed-sha.");
   }
-  const options: ContentOptions = { command, target: "production", apply: false, allowProd: false };
+  const options: ContentOptions = { command, target: "production", apply: false, allowProd: false, ...(command === "publish" ? { liveImages: "new" as const } : {}) };
   const seen = new Set<string>();
   for (let index = 1; index < argv.length; index += 1) {
     const raw = argv[index];
@@ -41,10 +42,14 @@ export function parseContentOptions(argv: string[]): ContentOptions {
       else options.updatePublished = true;
       continue;
     }
-    if (!["--target", "--bundle", "--game", "--article", "--stats-report", "--visibility", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+    if (!["--live-images", "--target", "--bundle", "--game", "--article", "--stats-report", "--visibility", "--namespace", "--kind", "--only", "--approved-hub-cover-sha256"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
     const value = inline ?? argv[++index];
     if (!value || value.startsWith("--")) throw new Error(`${flag} needs a value.`);
-    if (flag === "--only") {
+    if (flag === "--live-images") {
+      if (command !== "publish") throw new Error("--live-images is only valid for publish.");
+      if (value !== "all" && value !== "new" && value !== "none") throw new Error("--live-images must be all, new or none.");
+      options.liveImages = value;
+    } else if (flag === "--only") {
       if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) throw new Error("--only must be hub or a collection slug.");
       (options.only ??= []).push(value);
     } else if (flag === "--target") {

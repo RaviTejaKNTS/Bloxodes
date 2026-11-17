@@ -41,9 +41,14 @@ export const cspMode = resolveCspMode(process.env.CSP_MODE, isProduction);
 export const cspHeaderKey =
   cspMode === "report-only" ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy";
 
+// The read fixture is HTTP on runner loopback. Production builds do not set
+// this explicit CI flag and retain their existing HTTPS-only policy.
+const isolatedCiData = process.env.GITHUB_ACTIONS === "true" && process.env.BLOXODES_CI_DATA === "1";
+
 export const publicCsp = (
   isProduction ? cspDirectives.publicProductionDirectives : cspDirectives.developmentDirectives
-).join("; ");
+).map(directive => isolatedCiData && directive.startsWith("connect-src ")
+  ? `${directive} http://127.0.0.1:54321` : directive).join("; ");
 
 export const secureCsp = (
   isProduction ? cspDirectives.secureProductionDirectives : cspDirectives.developmentDirectives

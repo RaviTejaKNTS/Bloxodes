@@ -102,7 +102,7 @@ export function HomeHero({ data }: { data: HomePageData }) {
     <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_25rem] lg:items-center lg:gap-10">
       <div className="min-w-0">
         <h1 className="mb-0 text-3xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-4xl xl:text-[2.75rem]">
-          Everything for the Roblox games you play
+          Roblox codes, wikis and stats for the games you play
         </h1>
         <p className="mt-3 max-w-2xl text-base text-muted md:text-[1.05rem]">
           {count(counts.codes)} code pages, {count(counts.wiki)} game wikis, {count(counts.articles)} guides and live stats for{" "}

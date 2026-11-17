@@ -9,7 +9,7 @@ export { parseContentOptions, type ContentOptions };
 async function main() {
   if (process.argv.includes("--help")) {
     const { PUBLICATION_RELEVANT_PATHS } = await import("../shared/local-content-publication-guard");
-    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published]
+    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published] [--live-images all|new|none]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
 npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --game <editorial-slug> [--target managed-dev|production]
@@ -20,6 +20,8 @@ npm run content:status -- --stats-report <slug> [--target managed-dev|production
 Stats reports support --visibility hidden|public and --update-published.
 Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1, article-links@1 and stats-report@1. See contracts/<contract>/v1/.
 --update-published permits deliberate updates to published article@1, article-links@1, game-article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
+--live-images controls post-apply wiki image checks: new (default) checks uploaded R2 keys and changed hub artwork; all checks every image; none skips image fetches.
+Page HTTP 200 and title checks always run. Articles use their separate asset verifier.
 Default target: production. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.

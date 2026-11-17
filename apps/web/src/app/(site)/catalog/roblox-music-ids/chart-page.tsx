@@ -1,13 +1,14 @@
 import { finalizeCatalogMetadata } from "@/lib/catalog-metadata";
 import { getCatalogMembershipDate } from "@/lib/catalog";
 import { catalogIdTitle } from "@/lib/catalog-id-title";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
 import { ContentFaq } from "@/components/ContentFaq";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
-import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
+import { breadcrumbJsonLd, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
   MusicBreadcrumb,
@@ -25,13 +26,15 @@ export async function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: n
   const config = getMusicChartConfig(key);
   const isIndexableTrendingPage = key === "trending" && (!pageNumber || pageNumber === 1);
   const title = pageNumber && pageNumber > 1
-    ? `${config.title} - Page ${pageNumber} | ${SITE_NAME}`
-    : `${config.title} | ${SITE_NAME}`;
+    ? `${config.title} - Page ${pageNumber}`
+    : config.title;
   const path = pageNumber && pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
 
   return finalizeCatalogMetadata({
     title: catalogIdTitle(title),
     description: config.description,
+    openGraph: { description: config.description },
+    twitter: { description: config.description },
     robots: { index: isIndexableTrendingPage, follow: true },
     alternates: buildAlternates(path)
   });
@@ -109,6 +112,10 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
           ]}
         />
       </header>
+
+      <p className="text-base text-muted">
+        Want every song? See the full list of <Link href={BASE_PATH} className="text-link hover:underline">Roblox music IDs</Link>.
+      </p>
 
       {showTrendingGuide ? (
         <p className=" text-base leading-7 text-muted md:text-lg">

@@ -204,7 +204,8 @@ it.each(["weekly", "monthly", "yearly"])("dates the %s chart and keeps its perio
   const result = inspect(await MusicChartsPage({ pageNumber: 2, searchParams: { range } }));
   expect(result.headings).toEqual(["Roblox music ID charts (October 2026)"]);
   const page = result.schemas.find(schema => schema["@type"] === "WebPage");
-  expect(page?.name).toBe(`${range[0].toUpperCase()}${range.slice(1)} Roblox music ID chart (October 2026) - Page 2`);
+  const period = { weekly: "Week", monthly: "Month", yearly: "Year" }[range];
+  expect(page?.name).toBe(`Top Trending Roblox Songs This ${period} (October 2026) - Page 2`);
   expect(String(page?.url)).toContain(`?range=${range}`);
 });
 
@@ -219,6 +220,13 @@ it("keeps the count in game music metadata and handles the zero-count title bran
   const withoutCount = await musicGamesGame.generateMetadata(props("roblox-music-ids/games/[game]/page.tsx"));
   expect(String(withoutCount.title)).toContain("(October 2026)");
   expect(String(withoutCount.title)).not.toContain("[50");
+});
+
+it("builds game music titles from the live total even when a saved seo_title has no count", async () => {
+  mocks.catalog.mockResolvedValue({ seo_title: "Saved Sound IDs [Hit Sounds]", title: "Saved Sound IDs" });
+  const metadata = await musicGamesGame.generateMetadata(props("roblox-music-ids/games/[game]/page.tsx"));
+  expect(String(metadata.title)).toMatch(/\[50 .+\] \(October 2026\)$/);
+  expect(String(metadata.title)).not.toContain("Saved");
 });
 
 it("dates both unknown decal-category metadata fallbacks", async () => {

@@ -54,6 +54,8 @@ export function loadR2ClientConfig(
 }
 
 export class R2Client {
+  // Keys written (or possibly written before a transport failure) in this apply.
+  readonly uploadedKeys = new Set<string>();
   readonly handlesRetries = true;
   constructor(
     private readonly config: R2ClientConfig,
@@ -92,6 +94,7 @@ export class R2Client {
       }
       // A failed response can still leave the object stored. Check it before retrying PUT.
       checkBeforeWrite = true;
+      this.uploadedKeys.add(input.key);
       return this.request("PUT", input.key, input.body, headers);
     }, { sleep: this.sleep });
   }

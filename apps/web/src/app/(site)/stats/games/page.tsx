@@ -17,19 +17,19 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const seo = getStatsGamesSeoState(parsed, taxonomy);
   const canonical = `${SITE_URL}${seo.canonicalPath}`;
   return {
-    title: `${seo.title} | ${SITE_NAME}`,
+    title: seo.title,
     description: seo.description,
     alternates: buildAlternates(canonical),
     robots: seo.indexable ? { index: true, follow: true } : { index: false, follow: true },
     openGraph: {
-      title: `${seo.title} | ${SITE_NAME}`,
+      title: seo.title,
       description: seo.description,
       url: canonical,
       siteName: SITE_NAME
     },
     twitter: {
       card: "summary",
-      title: `${seo.title} | ${SITE_NAME}`,
+      title: seo.title,
       description: seo.description
     }
   };

@@ -790,7 +790,7 @@ export function statsGamesSeoTitle(sort: StatsSortKey, genre?: string | null, su
     case "dislikes":
       return `${subject} With the Most Downvotes`;
     default:
-      return cleanedGenre ? `Top Trending ${subject} Right Now` : "Top Trending Roblox Games Right Now";
+      return cleanedGenre ? `Most Popular ${subject} Right Now` : "Most Popular Roblox Games Right Now (Live Player Counts)";
   }
 }
 
@@ -821,7 +821,7 @@ export function statsGamesSeoDescription(sort: StatsSortKey, genre?: string | nu
     case "dislikes":
       return `${title}. Browse ${genrePhrase} ranked by Roblox downvotes, with player counts, visits, favorites, and ratings.`;
     default:
-      return `${title}. Browse live current players, visits, favorites, ratings, and trend data for ${genrePhrase} on Bloxodes.`;
+      return `${title}. Browse live current players, visits, favorites, ratings, and trend data for ${genrePhrase}.`;
   }
 }
 

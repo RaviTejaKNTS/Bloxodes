@@ -1,8 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
-import { createClient } from "@supabase/supabase-js";
+import { previewDatabase } from "./preview-database";
 
-// Read-only discovery runs in GitHub against the preview's managed database.
-const managedUrl = "https://bbtcaurrtyoukvjbxbbj.supabase.co";
+// Read-only discovery uses the same data source as the preview.
 const kinds = ["wiki", "collection", "code", "tool", "map", "quiz", "catalog", "checklist", "hub"] as const;
 const cases = [...kinds, "root-wiki", "child-wiki", "collection-page-2", "non-collection-page-2", "unknown-path"] as const;
 type Entry = { id: string; game_id: string; namespace: string; canonical_path: string; title: string };
@@ -18,13 +17,13 @@ async function seo(page: Page) {
 
 for (const coverageCase of cases) {
   test(`registry coverage: ${coverageCase}`, async ({ page }, info) => {
-    test.skip(process.env.GITHUB_ACTIONS !== "true", "Managed-development browser coverage runs on GitHub only");
-    expect(process.env.SUPABASE_URL).toBe(managedUrl);
-    const sb = createClient(managedUrl, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false, autoRefreshToken: false } });
+    test.skip(process.env.GITHUB_ACTIONS !== "true", "Preview browser coverage runs on GitHub only");
+    const sb = previewDatabase();
     const report = (status: string, reason: string) => console.log(`[registry coverage] ${coverageCase}: ${status} - ${reason}`);
     const { data: roots, error: rootError } = await sb.from("games").select("id,namespace,title")
       .is("parent_id", null).eq("is_published", true).not("namespace", "in", "(gta,red-dead,minecraft,roblox)").order("namespace");
     expect(rootError).toBeNull();
+    if (process.env.BLOXODES_CI_DATA === "1") expect(roots?.length, "CI registry roots must be seeded").toBeGreaterThan(0);
     if (!roots?.length) {
       report("SKIPPED", "no eligible published namespace roots");
       test.skip(true, "No eligible namespace roots");
@@ -75,8 +74,9 @@ for (const coverageCase of cases) {
         }
       } else selected = candidates[0];
     }
+    if (process.env.BLOXODES_CI_DATA === "1") expect(selected, `CI registry case must have sample data: ${coverageCase}`).toBeTruthy();
     if (!selected) {
-      report("SKIPPED", coverageCase === "collection-page-2" ? "no published collection exposes a second page" : "no eligible published page in managed development");
+      report("SKIPPED", coverageCase === "collection-page-2" ? "no published collection exposes a second page" : "no eligible published page in preview data");
       test.skip(true, `No data for ${coverageCase}`);
       return;
     }

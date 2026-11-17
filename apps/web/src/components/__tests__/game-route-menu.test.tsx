@@ -1,6 +1,9 @@
 import { Children, isValidElement, type ReactElement } from "react";
 import { expect, it, vi, beforeEach } from "vitest";
 const state = vi.hoisted(() => ({ menu: vi.fn(), kind: "code", wiki: vi.fn(), collection: vi.fn(), specialized: vi.fn() }));
+// This test exercises route/menu composition; database readers are separate boundaries.
+vi.mock("@/lib/game-code-seo", () => ({ loadGameCodeSeoData: vi.fn() }));
+vi.mock("@/lib/game-wiki-hub-data", () => ({ loadGameWikiHubCollections: vi.fn() }));
 vi.mock("@/lib/game-site-data", () => ({ getGameMenuForPath: state.menu }));
 vi.mock("@/lib/site-route-page", () => ({ getLiveSiteRoute: async () => ({ source: "game", page_type: state.kind, page_id: "page" }) }));
 vi.mock("@/lib/game-registry", () => ({

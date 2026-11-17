@@ -1,6 +1,6 @@
 # SEO, indexing and analytics
 
-Last verified: 2026-11-04
+Last verified: 2026-11-16
 
 ## Sitemaps, feed and search
 
@@ -27,7 +27,13 @@ Since October 2025 Google has indexed only our homepage. So we give Google an al
 ## Indexing APIs
 
 - **Google Indexing API:** off. The VPS cron entry is commented out, and GitHub has no workflow or settings for it. A real submission runs `indexing:google` with `--apply` and needs `GOOGLE_INDEXING_API_ENABLED=true` in `.envs/pipelines/indexing.env`. State tables `google_indexing_attempts` and `google_indexing_url_state` haven't changed since 2026-07-01.
-- **IndexNow:** off (`INDEXNOW_ENABLED=false` on the live site). Don't run `indexnow:bootstrap` to test it; it isn't a dry run.
+- **IndexNow:** for newly published pages only, once `INDEXNOW_ENABLED=true` is set for the web app in Infisical. Non-production never submits.
+  - A database trigger on each content table records a page the first time it is published and adds its URL to `indexnow_urls` as `pending`. Pages that were already published when this shipped are `known` and are never sent. Updates, republishes and renames don't create a new submission. The trigger never blocks a content write; if it fails it logs a warning and that page isn't queued.
+  - Every `/api/revalidate` call checks up to 100 pending URLs after it has answered (see [cache](cache.md)). A URL is sent once its live page returns 200 HTML, isn't `noindex` for Bing, and has one canonical pointing at itself.
+  - A URL is sent at most once. A send that fails or times out is stored as `failed` with its reason in `detail` and is not retried, because Bing may already have it. A pending URL that hasn't passed in 30 days becomes `expired`.
+  - `/api/health` (operational scope) reports failed sends from the last 24 hours and pending URLs older than 24 hours. Only a recent failed send makes it unhealthy.
+  - Per-game Roblox stats pages (`/stats/games/...`) are not covered.
+  - Don't run `indexnow:bootstrap`; it submits the whole sitemap and isn't a dry run.
 
 ## Analytics
 

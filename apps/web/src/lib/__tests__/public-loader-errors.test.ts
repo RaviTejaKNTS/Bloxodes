@@ -6,7 +6,7 @@ vi.mock("@/lib/public-content-cache", () => ({ publicContentCache: (fn: unknown)
 const mocks = vi.hoisted(() => ({ admin: vi.fn() }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: mocks.admin }));
 
-import { getWikiPageBySlug, listPublishedWikiPages } from "@/lib/wiki";
+import { getWikiPageBySlug, listPublishedWikiPages, loadWikiHubCollections } from "@/lib/wiki";
 import { getToolContent, listPublishedTools, listPublishedToolsPage } from "@/lib/tools";
 import { getQuizPageByCode, listPublishedQuizzes } from "@/lib/quizzes";
 import { getCatalogPageContentByCodes, listPublishedTopLevelCatalogPages } from "@/lib/catalog";
@@ -23,6 +23,8 @@ const details = [
 ];
 const lists = [
   () => listPublishedWikiPages(),
+  () => loadWikiHubCollections("test", 123),
+  () => loadWikiHubCollections("test", null),
   () => listPublishedPuzzlePages(),
   () => getPuzzleAnswers("test"),
   () => listPublishedTools(),
