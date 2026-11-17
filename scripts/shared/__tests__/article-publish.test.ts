@@ -34,6 +34,7 @@ async function fixture(scenario: string) {
   await fs.mkdir(root, { recursive: true });
   const src = `${dev}/storage/v1/object/public/article-media/articles/${slug}/sources/step.webp`;
   const final = { slug, title: "Example Guide", content_md: `Complete the first task.\n\n## First task\n\n![The task menu shows the first objective](${src})`, universe_id: 12345, faq_json: [] };
+  final.content_md += "\n\nSee the [Example wiki](/wiki/example).";
   if (scenario.startsWith("video-")) final.content_md += "\n\n{{ youtube: dQw4w9WgXcQ }}";
   await fs.writeFile(path.join(root, "bundle.json"), JSON.stringify(bundle));
   await fs.writeFile(path.join(root, "final.json"), JSON.stringify(final));
@@ -60,6 +61,7 @@ async function fixture(scenario: string) {
       const url=new URL(typeof input==='string'?input:input.url??input.href);
       const method=init?.method??'GET'; calls.push({url:url.href,method});
       const json=data=>new Response(JSON.stringify(data),{headers:{'content-type':'application/json'}});
+      if(url.hostname==='bloxodes.com'&&url.pathname==='/wiki/example')return new Response('Example wiki');
       if(url.hostname==='api.notion.com') {
         if (url.pathname.includes('/data_sources/')) return json(${JSON.stringify(schema)});
         if (url.pathname.includes('/blocks/')) return json({results:[],has_more:false});
@@ -238,11 +240,12 @@ test("published update payload keeps the author, original date and null-cover fa
   }
 });
 
-test("update-published parses as a publish-only boolean and rejects every other contract", () => {
+test("update-published parses as a publish-only boolean and accepts article contracts", () => {
   const options = parseContentOptions(["publish", "/bundle", "--update-published"]);
   assert.equal(options.updatePublished, true);
   assert.doesNotThrow(() => assertUpdatePublishedScope(options, "article@1"));
-  for (const contract of ["game-article@1", "roblox-wiki@1", "game-wiki@1"]) {
+  for (const contract of ["article-links@1", "game-article@1"]) assert.doesNotThrow(() => assertUpdatePublishedScope(options,contract));
+  for (const contract of ["roblox-wiki@1", "game-wiki@1"]) {
     assert.throws(() => assertUpdatePublishedScope(options, contract), /only valid for article@1/);
     assert.doesNotThrow(() => assertUpdatePublishedScope({ ...options, updatePublished: false }, contract));
   }

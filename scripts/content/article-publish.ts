@@ -4,6 +4,9 @@ import { createHash } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { load } from "cheerio";
 import sharp from "sharp";
+import { setTimeout as delay } from "node:timers/promises";
+import { assertArticleLinks, assertRenderedArticleLinks, MissingRenderedArticleLinksError } from "./article-links";
+import { parseArticleContentPages } from "@/lib/article-blocks";
 import { articleFinalSchema, bundleSchema, type ArticleFinal } from "../../contracts/article/v1/schema";
 import { productionArticleDecision, publishedArticleAction, publishedArticlePayload, type PublishedArticleIdentity } from "./article-published-update";
 import type { ContentOptions } from "./wiki-content-options";
@@ -144,28 +147,52 @@ export async function verifyArticleAssets(final: ArticleFinal, cover?: string | 
   console.log(`PASS decodable images (${images.length}) and resolvable video embeds`);
 }
 
-export async function verifyArticleLive(final: ArticleFinal, cover: string, seoTitle = final.title, pageNumber = 1) {
-  const url = `https://bloxodes.com/articles/${final.slug}${pageNumber > 1 ? `/page/${pageNumber}` : ""}`;
-  await retryPublishNetwork(async () => {
-    const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
-    await requirePublishResponse(response, "Live article");
-    if (response.status !== 200 || response.url.replace(/\/$/, "") !== url) throw new Error("Live article must return HTTP 200 without a redirect.");
-    const html = load(await response.text());
-    const normalize = (text: string) => text.replace(/\s+/g, " ").trim();
-    if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(seoTitle)) throw new Error("Live article titles differ from final.json.");
-    if (!html("#article-body").text().trim() || /application error|unhandled runtime error|internal server error/i.test(html("body").text())) throw new Error("Live article body is empty or reports an application error.");
-    if (html('link[rel="canonical"]').attr("href") !== url || !html('meta[name="description"]').attr("content")?.trim()) throw new Error("Live canonical or description is missing or incorrect.");
-    // The article page shows its cover in the social image tags, not as an <img>.
-    if (html('meta[property="og:image"]').attr("content") !== new URL(cover, url).href) throw new Error("Live cover is missing.");
-    const matches = (src: string, expected: string) => src === expected || new URL(src || "/", url).searchParams.get("url") === expected;
-    const bodySources = html("#article-body img").map((_, el) => html(el).attr("src") ?? "").get();
-    for (const image of findArticleImages(final.content_md)) if (!bodySources.some(src => matches(src, image.src))) throw new Error("Live body image is missing.");
-    for (const { videoId } of findYouTubeDirectives(final.content_md)) {
-      if (!html("#article-body iframe").toArray().some(el => html(el).attr("src")?.includes(`youtube-nocookie.com/embed/${videoId}`))) throw new Error("Live video embed is missing.");
+export function articleVerificationPages(content: string): string[] {
+  return parseArticleContentPages(content).map(blocks => blocks.map(block => {
+    if (block.kind === "markdown") return block.markdown;
+    if (block.kind === "invalid") throw new Error(`Invalid article block: ${block.message}`);
+    return "```" + block.kind + "\n" + JSON.stringify(block.data) + "\n```";
+  }).join("\n\n"));
+}
+export async function verifyArticleLive(final: ArticleFinal, cover: string, seoTitle = final.title, pageNumber?: number) {
+  if (pageNumber === undefined) {
+    const pages = articleVerificationPages(final.content_md);
+    for (const [index, content_md] of pages.entries()) {
+      await verifyArticleLive({ ...final, content_md, faq_json: index === pages.length - 1 ? final.faq_json : [] }, cover, seoTitle, index + 1);
     }
-    // Include every rendered body image, even images not recorded by authoring helpers.
-    await verifyArticleAssets({ ...final, content_md: bodySources.map(src => `![Rendered image](${new URL(src, url).href})`).join("\n") }, cover);
-  });
+    return;
+  }
+  const url = `https://bloxodes.com/articles/${final.slug}${pageNumber > 1 ? `/page/${pageNumber}` : ""}`;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      await retryPublishNetwork(async () => {
+        const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
+        await requirePublishResponse(response, "Live article");
+        if (response.status !== 200 || response.url.replace(/\/$/, "") !== url) throw new Error("Live article must return HTTP 200 without a redirect.");
+        const html = load(await response.text());
+        const normalize = (text: string) => text.replace(/\s+/g, " ").trim();
+        if (html("h1").length !== 1 || normalize(html("h1").text()) !== normalize(final.title) || !html("title").text().includes(seoTitle)) throw new Error("Live article titles differ from final.json.");
+        if (!html("#article-body").text().trim() || /application error|unhandled runtime error|internal server error/i.test(html("body").text())) throw new Error("Live article body is empty or reports an application error.");
+        if (html('link[rel="canonical"]').attr("href") !== url || !html('meta[name="description"]').attr("content")?.trim()) throw new Error("Live canonical or description is missing or incorrect.");
+        // The article page shows its cover in the social image tags, not as an <img>.
+        if (html('meta[property="og:image"]').attr("content") !== new URL(cover, url).href) throw new Error("Live cover is missing.");
+        const matches = (src: string, expected: string) => src === expected || new URL(src || "/", url).searchParams.get("url") === expected;
+        const bodySources = html("#article-body img").map((_, el) => html(el).attr("src") ?? "").get();
+        for (const image of findArticleImages(final.content_md)) if (!bodySources.some(src => matches(src, image.src))) throw new Error("Live body image is missing.");
+        for (const { videoId } of findYouTubeDirectives(final.content_md)) {
+          if (!html("#article-body iframe").toArray().some(el => html(el).attr("src")?.includes(`youtube-nocookie.com/embed/${videoId}`))) throw new Error("Live video embed is missing.");
+        }
+        await assertRenderedArticleLinks(final, html.html());
+        // Include every rendered body image, even images not recorded by authoring helpers.
+        await verifyArticleAssets({ ...final, content_md: bodySources.map(src => `![Rendered image](${new URL(src, url).href})`).join("\n") }, cover);
+      });
+      break;
+    } catch (error) {
+      if (!(error instanceof MissingRenderedArticleLinksError)) throw error;
+      if (attempt >= 3) throw new Error(`${error.message} Still missing after 3 cache-refresh attempts at ${url}.`);
+      await delay(250 * 2 ** (attempt - 1));
+    }
+  }
   console.log(`PASS live article: ${url}`);
 }
 
@@ -200,6 +227,7 @@ export async function publishArticleBundle(options: ContentOptions) {
       if (!game || game.id !== final.universe_id) throw new Error("Article universe identity could not be confirmed unchanged.");
     }
   }
+  await assertArticleLinks(final, { universeId: final.universe_id ?? null });
   const findings = publicCopyFindings(final, finalPath);
   if (findings.length) throw new Error(findings.map(f => `${f.field}: ${f.rule}: ${f.excerpt}`).join("\n"));
   const manifest = await readArticleImageManifest(mediaPath);

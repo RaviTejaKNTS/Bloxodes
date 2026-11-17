@@ -82,6 +82,7 @@ test("retries transient R2 failures before succeeding", async () => {
   });
 
   assert.equal(attempts, 2);
+  assert.deepEqual([...client.uploadedKeys], ["123/retry.webp"]);
   assert.deepEqual(delays, [250]);
 });
 
@@ -113,6 +114,7 @@ test("Direct R2 PUT recovers a lost response by checking the stored content", as
   }, () => new Date(), async () => {});
   await client.putObject({ key: "stored.webp", body: utf8Bytes("image"), contentType: "image/webp" });
   assert.deepEqual(methods, ["PUT", "HEAD"]);
+  assert.deepEqual([...client.uploadedKeys], ["stored.webp"]);
 });
 
 test("R2 recovery only accepts HEAD with the expected hash, length and content type", async () => {
@@ -154,6 +156,7 @@ test("R2 upload accepts an existing object only when its content matches", async
   }, () => new Date(), async () => {});
   await client.uploadObject({ key: "existing.webp", body, contentType: "image/webp" });
   assert.deepEqual(methods, ["HEAD"]);
+  assert.equal(client.uploadedKeys.size, 0);
 });
 
 test("R2 checks accept 404 once, reject 403 once, and cap 503 retries at three", async () => {

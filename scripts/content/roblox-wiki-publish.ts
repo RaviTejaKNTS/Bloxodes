@@ -1,4 +1,5 @@
-import { mapPublishConcurrent, createPublishLimiter, readPublishQuery, retryPublishNetwork, requirePublishResponse, formatPublishError } from "../shared/publish-network.mjs";
+import { newCollectionImageKeys } from "../shared/publish-image-baseline";
+import { selectLiveImages, requireLiveImageResponse, type LiveImageSelection, mapPublishConcurrent, createPublishLimiter, readPublishQuery, retryPublishNetwork, requirePublishResponse, formatPublishError } from "../shared/publish-network.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -146,7 +147,7 @@ function collectionPageTitle(plan: CollectionPlan) {
     : String(pageCopyFromFinal(plan)!.title);
 }
 
-export async function verifyLive(url: string, title: string, seoTitle: string, expectedImages: string[]) {
+export async function verifyLive(url: string, title: string, seoTitle: string, expectedImages: string[], selection: Omit<LiveImageSelection, "expectedImages" | "renderedImages"> = {}) {
   const html = load(await retryPublishNetwork(async () => {
     const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
     await requirePublishResponse(response, url);
@@ -158,16 +159,17 @@ export async function verifyLive(url: string, title: string, seoTitle: string, e
   }));
   const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
   if (normalize(html("h1").first().text()) !== normalize(title) || !normalize(html("title").text()).includes(normalize(resolveSeoTitle(seoTitle) ?? seoTitle))) throw new Error(`${url}: rendered title does not match final.json. Check revalidation and deployed code.`);
-  const images = new Set(expectedImages);
+  const renderedImages: string[] = [];
   html("img").each((_, image) => {
     const src = html(image).attr("src");
-    if (src && !src.startsWith("data:")) images.add(new URL(src, url).href);
+    if (src && !src.startsWith("data:")) renderedImages.push(new URL(src, url).href);
   });
-  if (!images.size) throw new Error(`${url}: no images were available to verify.`);
-  await mapPublishConcurrent([...images], image => limitLiveImage(async () => {
+  const images = selectLiveImages({ ...selection, expectedImages, renderedImages });
+  if (selection.mode === "all" && !images.length) throw new Error(`${url}: no images were available to verify.`);
+  await mapPublishConcurrent(images, image => limitLiveImage(async () => {
     const bytes = await retryPublishNetwork(async () => {
       const result = await fetch(image, { signal: AbortSignal.timeout(30_000) });
-      await requirePublishResponse(result, `${url}: image failed to load, ${formatPublishError(image)}`);
+      await requireLiveImageResponse(result, image);
       if (!result.headers.get("content-type")?.startsWith("image/")) {
         await result.body?.cancel().catch(() => {});
         throw new Error(`${url}: image failed to load, ${formatPublishError(image)} (not an image).`);
@@ -177,7 +179,7 @@ export async function verifyLive(url: string, title: string, seoTitle: string, e
     const metadata = await sharp(bytes).metadata();
     if (!metadata.width || !metadata.height) throw new Error(`${url}: image has no decodable dimensions, ${formatPublishError(image)}.`);
   }), { label: `${url} images` });
-  console.log(`PASS live URL, titles and ${images.size} images: ${url}`);
+  console.log(`PASS live URL, titles and ${images.length} images: ${url}`);
 }
 
 export async function publishBundle(options: ContentOptions) {
@@ -275,6 +277,9 @@ export async function publishBundle(options: ContentOptions) {
   console.table(plans.map(plan => ({ code: plan.config.code, rows: plan.items.length, images: plan.items.filter(row => row.image_key).length, acceptedMissing: plan.items.filter(row => !row.image_key).length, contentHash: plan.contentHash })));
   if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes. Add --apply to publish."); return; }
   // Repeat the production guard immediately before the first write.
+  const newImageKeysByPage = options.target === "production" && (options.liveImages ?? "new") === "new"
+    ? new Map(await mapPublishConcurrent(plans, async plan => [ `/wiki/${plan.config.gameSlug}/${plan.config.slug}`, await newCollectionImageKeys(db, "wiki", plan.config.code, plan.contentHash, plan.items) ] as const))
+    : new Map<string, string[]>();
   if (options.target === "production") await assertLocalContentPublication();
   if (!universe) {
     const imported = await ensureContentUniverse(db, bundle.game.universeId, true);
@@ -292,7 +297,7 @@ export async function publishBundle(options: ContentOptions) {
   }
   const r2 = new R2Client(loadR2ClientConfig());
   if (cover) {
-    await r2.putObject({ key: cover.key, body: cover.bytes, contentType: cover.mime, metadata: { sha256: hash(cover.bytes), width: 768, height: 432 } });
+    await r2.uploadObject({ key: cover.key, body: cover.bytes, contentType: cover.mime, metadata: { sha256: hash(cover.bytes), width: 768, height: 432 } });
     if (!await r2.hasObject(cover.key)) throw new Error("Hub cover R2 readback failed.");
   }
   for (const plan of plans) { await uploadPlanMedia(plan, r2); await verifyPlanMedia(plan, r2); }
@@ -346,7 +351,7 @@ export async function publishBundle(options: ContentOptions) {
       ...plans.map(plan => ({ type: "wiki_collection" as const, slug: `${plan.config.gameSlug}/${plan.config.slug}` }))
     ];
     await mapPublishConcurrent(Array.from({ length: Math.ceil(events.length / 100) }, (_, index) => events.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch), { label: "revalidate batches" });
-    await mapPublishConcurrent(urls, entry => verifyLive(`https://bloxodes.com${entry.path}`, entry.title, entry.seo, entry.images), { label: "live pages" });
+    await mapPublishConcurrent(urls, entry => verifyLive(`https://bloxodes.com${entry.path}`, entry.title, entry.seo, entry.images, { mode: options.liveImages, uploadedImages: (newImageKeysByPage.get(entry.path) ?? []).map(key => resolveWikiMediaUrl(key)!), changedImages: cover ? [cover.url] : [] }), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
   for (const entry of urls) console.log(`${options.target === "production" ? "Live" : "Canonical production URL, staged in managed-dev"}: https://bloxodes.com${entry.path}`);
