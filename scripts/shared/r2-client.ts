@@ -48,7 +48,14 @@ export function loadR2ClientConfig(
     secretAccessKey: env.WIKI_R2_SECRET_ACCESS_KEY?.trim() || "",
     bucket: env.WIKI_R2_BUCKET?.trim() || ""
   };
-  const missing = Object.entries(config).filter(([, value]) => !value).map(([key]) => key);
+  const envNames = {
+    endpoint: "WIKI_R2_ENDPOINT",
+    accessKeyId: "WIKI_R2_ACCESS_KEY_ID",
+    secretAccessKey: "WIKI_R2_SECRET_ACCESS_KEY",
+    bucket: "WIKI_R2_BUCKET"
+  };
+  const missing = (Object.keys(config) as Array<keyof typeof config>)
+    .filter((key) => !config[key]).map((key) => envNames[key]);
   if (missing.length) throw new Error(`Missing R2 configuration: ${missing.join(", ")}`);
   return config;
 }
@@ -99,6 +106,14 @@ export class R2Client {
     }, { sleep: this.sleep });
   }
 
+  async getObject(key: string): Promise<Buffer> {
+    // Consume the body within the retry budget so interrupted downloads retry too.
+    return retryPublishNetwork(async () => {
+      const response = await this.request("GET", key, new Uint8Array(), {});
+      return Buffer.from(await response.arrayBuffer());
+    }, { sleep: this.sleep });
+  }
+
   async headObject(key: string) {
     return retryPublishNetwork(() => this.request("HEAD", key, new Uint8Array(), {}), { sleep: this.sleep });
   }
@@ -146,7 +161,7 @@ export class R2Client {
     const response = await this.fetchImpl(url, {
       method,
       headers,
-      body: method === "HEAD" ? undefined : Buffer.from(body),
+      body: method === "HEAD" || method === "GET" ? undefined : Buffer.from(body),
       signal: AbortSignal.timeout(30_000)
     });
     if (response.ok || acceptedStatuses.includes(response.status)) return response;

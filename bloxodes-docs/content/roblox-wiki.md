@@ -13,7 +13,7 @@ The T3 schedule "Bloxodes Roblox wiki every 2 days (Content Factory)" runs in th
 ## Workflow
 
 1. **Suggest and research:** confirm game identity, sources, scope, route and no overlap with production.
-2. **Workspace:** export an existing collection with `npm run export:game-collection-workspace`, or create a new one. Each collection lives in ignored `tmp/content-workspace/<game-slug>/collections/<collection-slug>/` with `dataset.json`, `media/`, `final.json` and `runtime-manifest.json`.
+2. **Workspace:** export an existing collection with `npm run export:game-collection-workspace`, or create a new one. The workspace exporters read media directly from R2 using `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET`. Each collection lives in ignored `tmp/content-workspace/<game-slug>/collections/<collection-slug>/` with `dataset.json`, `media/`, `final.json` and `runtime-manifest.json`.
 3. **Data:** build the full, source-backed dataset with useful player fields. Approve rows and sections before images.
 4. **Images:** collect and wire images, then review them.
 5. **Write:** write the hub or collection `final.json` with the writing skill and `bloxodes-voice`.
