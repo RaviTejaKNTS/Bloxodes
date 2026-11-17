@@ -474,12 +474,18 @@ function buildGrowGardenPreparedCollection(
 }
 
 // Keep prepared data within the request so a later render reads the published revision.
-export const loadPreparedGrowGardenCollection = cache(async (
-  config: GrowGardenCollectionConfig
+const loadPreparedGrowGardenCollectionBySlug = cache(async (
+  slug: string
 ): Promise<GrowGardenPreparedCollection> => {
+  const config = getGrowGardenCollectionConfig(slug);
+  if (!config) throw new Error(`Unknown grow-a-garden collection: ${slug}`);
   const dataset = await loadGrowGardenCollectionDataset(config);
   return buildGrowGardenPreparedCollection(config, dataset);
 });
+
+export async function loadPreparedGrowGardenCollection(config: GrowGardenCollectionConfig): Promise<GrowGardenPreparedCollection> {
+  return loadPreparedGrowGardenCollectionBySlug(config.slug);
+}
 
 export async function getPreparedGrowGardenCollectionPageCount(config: GrowGardenCollectionConfig) {
   return (await loadPreparedGrowGardenCollection(config)).totalPages;

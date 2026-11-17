@@ -230,12 +230,18 @@ function buildTheForgePreparedCollection(config: GameCollectionViewConfig, datas
 }
 
 // Keep prepared data within the request so a later render reads the published revision.
-export const loadPreparedTheForgeCollection = cache(async (
-  config: GameCollectionViewConfig
+const loadPreparedTheForgeCollectionBySlug = cache(async (
+  slug: string
 ): Promise<TheForgePreparedCollection> => {
+  const config = getTheForgeCollectionConfig(slug);
+  if (!config) throw new Error(`Unknown the-forge collection: ${slug}`);
   const dataset = await loadTheForgeCollectionDataset(config);
   return buildTheForgePreparedCollection(config, dataset);
 });
+
+export async function loadPreparedTheForgeCollection(config: GameCollectionViewConfig): Promise<TheForgePreparedCollection> {
+  return loadPreparedTheForgeCollectionBySlug(config.slug);
+}
 
 export async function getPreparedTheForgeCollectionPageCount(config: GameCollectionViewConfig) {
   return (await loadPreparedTheForgeCollection(config)).totalPages;
