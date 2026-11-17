@@ -256,6 +256,15 @@ test("live verification retries transport failures, checks every image, and reje
   await verifyLive(url, "Example Items", "Example Items", [fresh, old]);
   await verifyLive(url, "Example Items", "Example Items", [fresh, old], { mode: "none", uploadedImages: [fresh] });
   assert.equal(images.size, 0);
+  // A rerun has no uploads, but the selected hub art must still be fetched.
+  const cover = "https://media.bloxodes.com/wiki/cover.png";
+  const hero = "https://media.bloxodes.com/wiki/hero.png";
+  for (const artwork of [[cover], [cover, hero]]) {
+    images.clear();
+    await verifyLive(url, "Example Items", "Example Items", artwork, { changedImages: artwork });
+    await verifyLive(url, "Example Items", "Example Items", artwork, { changedImages: artwork });
+    for (const image of artwork) assert.equal(images.get(image), 2);
+  }
   html = '<title>Wrong</title><h1>Wrong</h1>';
   pageCalls = 1;
   await assert.rejects(verifyLive(url, "Example Items", "Example Items", []), /rendered title/);
