@@ -6,6 +6,22 @@ import { MAX_FRANCHISE_IMAGE_BYTES, MAX_FRANCHISE_IMAGE_PIXELS, verifyFranchiseP
 const image = (width: number, height: number) => sharp({ create: { width, height, channels: 3, background: "#446688" } }).png().toBuffer();
 const target = { label: "Example hub", url: "https://media.bloxodes.com/cover.png", role: "cover" };
 
+test("hosted franchise artwork reports Worker quota failures after exactly one request", async t => {
+  const original = globalThis.fetch;
+  t.after(() => { globalThis.fetch = original; });
+  for (const [status, body] of [[429, "Too Many Requests"], [500, "error code: 1027"]] as const) {
+    for (const role of ["cover", "thumbnail"]) {
+      let requests = 0;
+      globalThis.fetch = async () => {
+        requests++;
+        return new Response(body, { status, headers: { "content-type": "text/plain" } });
+      };
+      await assert.rejects(verifyFranchisePageImage({ ...target, role }), /Cloudflare Workers daily request quota.*100,000.*no retry/);
+      assert.equal(requests, 1, `HTTP ${status} ${role} quota failure must not retry`);
+    }
+  }
+});
+
 test("publication reads real image bytes and checks cover and thumbnail dimensions", async t => {
   const original = globalThis.fetch;
   t.after(() => { globalThis.fetch = original; });
