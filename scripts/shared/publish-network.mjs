@@ -30,7 +30,7 @@ export function formatPublishError(error) {
 }
 
 export function isTransientPublishError(error, depth = 0) {
-  if (!error || depth > 6) return false;
+  if (!error || depth > 6 || error.code === "MEDIA_WORKER_QUOTA") return false;
   function httpStatus(value, remaining = 6) {
     if (!value || !remaining) return 0;
     return Number(value.status || value.statusCode || value.$metadata?.httpStatusCode) || httpStatus(value.cause, remaining - 1);
@@ -121,4 +121,28 @@ export function createPublishLimiter(concurrency = PUBLISH_CONCURRENCY) {
       else active--;
     }
   };
+}
+
+// Only all mode discovers extra rendered images. New mode never fetches old keys.
+export function selectLiveImages({ mode = 'new', expectedImages, renderedImages = [], uploadedImages = [], changedImages = [] }) {
+  if (mode === 'none') return [];
+  if (mode === 'all') return [...new Set([...expectedImages, ...renderedImages])];
+  if (mode !== 'new') throw new Error('Live image mode must be all, new or none.');
+  const changed = new Set([...uploadedImages, ...changedImages]);
+  return [...new Set(expectedImages.filter(image => changed.has(image)))];
+}
+
+// A media Worker quota failure is terminal, even inside a network retry wrapper.
+export async function requireLiveImageResponse(response, image) {
+  if (new URL(image).hostname === 'media.bloxodes.com') {
+    const nonImage = !response.headers.get('content-type')?.startsWith('image/');
+    const quotaBody = response.status !== 429 && nonImage ? await response.clone().text() : '';
+    if (response.status === 429 || /(?:error\s*(?:code\s*)?[:=]?\s*1027|\b1027\b)/i.test(quotaBody)) {
+      await response.body?.cancel().catch(() => {});
+      const error = new Error(`media.bloxodes.com: Cloudflare Workers daily request quota exhausted (HTTP ${response.status}, Cloudflare error 1027 / free plan 100,000 requests per day). Live image checks stopped; no retry. Wait for the quota reset or raise the Worker limit before checking again.`);
+      error.code = 'MEDIA_WORKER_QUOTA';
+      throw error;
+    }
+  }
+  return requirePublishResponse(response, `Image failed to load, ${formatPublishError(image)}`);
 }

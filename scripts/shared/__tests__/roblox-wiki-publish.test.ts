@@ -13,7 +13,7 @@ const sha = "a".repeat(40);
 
 test("publication defaults to production dry run and gates production apply", () => {
   assert.deepEqual(parseContentOptions(["publish", "/bundle"]), {
-    command: "publish", target: "production", apply: false, allowProd: false, bundle: "/bundle"
+    command: "publish", target: "production", apply: false, allowProd: false, liveImages: "new", bundle: "/bundle"
   });
   assert.equal(parseContentOptions(["publish", "--bundle=/bundle", "--target=production"]).apply, false);
   assert.equal(parseContentOptions(["publish", "/bundle", "--target", "production", "--apply", "--allow-prod"]).allowProd, true);
@@ -242,11 +242,20 @@ test("live verification retries transport failures, checks every image, and reje
     await new Promise(resolve => setTimeout(resolve, 2)); active--;
     return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
   };
-  await verifyLive(url, "Example Items", "Example Items", Array.from({ length: 24 }, (_, index) => `https://media.bloxodes.com/${index}.png`));
+  await verifyLive(url, "Example Items", "Example Items", Array.from({ length: 24 }, (_, index) => `https://media.bloxodes.com/${index}.png`), { mode: "all" });
   assert.equal(pageCalls, 2);
   assert.equal(images.size, 25);
   assert.equal(images.get("https://media.bloxodes.com/0.png"), 2);
   assert.ok(maximum > 1 && maximum <= 8);
+  images.clear();
+  const fresh = "https://media.bloxodes.com/wiki/new.png";
+  const old = "https://media.bloxodes.com/wiki/old.png";
+  await verifyLive(url, "Example Items", "Example Items", [fresh, old], { uploadedImages: [fresh] });
+  assert.deepEqual([...images.keys()], [fresh]);
+  images.clear();
+  await verifyLive(url, "Example Items", "Example Items", [fresh, old]);
+  await verifyLive(url, "Example Items", "Example Items", [fresh, old], { mode: "none", uploadedImages: [fresh] });
+  assert.equal(images.size, 0);
   html = '<title>Wrong</title><h1>Wrong</h1>';
   pageCalls = 1;
   await assert.rejects(verifyLive(url, "Example Items", "Example Items", []), /rendered title/);
@@ -529,5 +538,15 @@ test("approved hub cover retains full original decoding, landscape shape, icon s
         assert.ok(result.calls.some(call => call.url === additionalThumbnail));
       }
     } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
+});
+
+test("live image mode defaults to new and validates explicit CLI values", () => {
+  for (const mode of ["all", "new", "none"]) {
+    assert.equal(parseContentOptions(["publish", "/bundle", `--live-images=${mode}`]).liveImages, mode);
+    assert.equal(parseContentOptions(["publish", "/bundle", "--live-images", mode]).liveImages, mode);
+  }
+  for (const args of [["publish", "/bundle", "--live-images=old"], ["publish", "/bundle", "--live-images"], ["status", "--game=example", "--live-images=none"], ["publish", "/bundle", "--live-images=all", "--live-images=new"]]) {
+    assert.throws(() => parseContentOptions(args));
   }
 });

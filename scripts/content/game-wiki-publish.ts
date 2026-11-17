@@ -249,7 +249,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   if (options.target === "production") {
     const paths = [...new Set([`/${bundle.namespace}`, `/${bundle.namespace}/wiki`, wikiPath, ...urls.map(url => url.path)])];
     await mapPublishConcurrent(Array.from({ length: Math.ceil(paths.length / 100) }, (_, index) => paths.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch.map(route => ({ type: "game_content" as const, slug: route.slice(1) }))), { label: "revalidate batches" });
-    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images), { label: "live pages" });
+    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images, { mode: options.liveImages, uploadedImages: [...r2.uploadedKeys].map(key => `https://media.bloxodes.com/wiki/${key}`), changedImages: artwork.filter((image, index) => image.url !== identity.game?.[index === 0 ? "cover_image" : "hero_image"]).map(image => image.url) }), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
 }
