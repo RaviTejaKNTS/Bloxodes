@@ -14,44 +14,57 @@ vi.mock("react", async (importOriginal) => {
   return { ...actual, cache: <T extends (...args: never[]) => unknown>(loader: T) => loader };
 });
 
-const runtime = {
-  document: {
-    meta: { schemaVersion: 2 },
-    items: [{ item: { name: "Test Item", rarity: "Common" }, system: { slug: "test-item", image: null } }]
-  }
-};
+function runtimeWithItems(count: number) {
+  return {
+    document: {
+      meta: { schemaVersion: 2 },
+      items: Array.from({ length: count }, (_, index) => ({
+        item: { name: `Test Item ${index + 1}`, rarity: "Common" },
+        system: { slug: `test-item-${index + 1}`, image: null }
+      }))
+    }
+  };
+}
 
 beforeEach(() => { loadRuntime.mockReset(); });
 
-describe("prepared collection promise caches", () => {
-  it("retries Grow a Garden crafting recipes after a transient database failure", async () => {
-    const config = getGrowGardenCollectionConfig("crafting-recipes")!;
-    loadRuntime.mockRejectedValueOnce(new Error("Cloudflare 504"));
-    loadRuntime.mockResolvedValueOnce(runtime);
+// React cache is an identity above: each call models a new request, without
+// memoization carried over from an earlier server render.
+const collections = [
+  {
+    game: "Grow a Garden",
+    load: () => loadPreparedGrowGardenCollection(getGrowGardenCollectionConfig("pets")!)
+  },
+  {
+    game: "The Forge",
+    load: () => loadPreparedTheForgeCollection(getTheForgeCollectionConfig("ores")!)
+  }
+];
 
-    const [first, concurrent] = await Promise.allSettled([
-      loadPreparedGrowGardenCollection(config), loadPreparedGrowGardenCollection(config)
-    ]);
-    expect(first.status).toBe("rejected");
-    expect(concurrent.status).toBe("rejected");
-    expect(loadRuntime).toHaveBeenCalledTimes(1);
+describe.each(collections)("$game prepared collection requests", ({ load }) => {
+  it("reads the newly published revision on a later request", async () => {
+    loadRuntime.mockResolvedValueOnce(runtimeWithItems(453));
+    const original = await load();
+    expect(original.itemCount).toBe(453);
+    expect(original.dataset.items).toHaveLength(453);
 
-    const recovered = await loadPreparedGrowGardenCollection(config);
-    expect(recovered.itemCount).toBe(1);
-    expect(recovered.totalPages).toBe(1);
-    expect(await loadPreparedGrowGardenCollection(config)).toBe(recovered);
+    loadRuntime.mockResolvedValueOnce(runtimeWithItems(461));
+    const published = await load();
+    expect(published.itemCount).toBe(461);
+    expect(published.dataset.items).toHaveLength(461);
+    expect(published.dataset.items[460].name).toBe("Test Item 461");
+    expect(published.groupedSections.flatMap((section) => section.items)).toHaveLength(461);
     expect(loadRuntime).toHaveBeenCalledTimes(2);
   });
 
-  it("retries The Forge after a transient database failure", async () => {
-    const config = getTheForgeCollectionConfig("ores")!;
+  it("recovers on a later request after a transient database failure", async () => {
     loadRuntime.mockRejectedValueOnce(new Error("Cloudflare 504"));
-    loadRuntime.mockResolvedValueOnce(runtime);
+    await expect(load()).rejects.toThrow("Cloudflare 504");
 
-    await expect(loadPreparedTheForgeCollection(config)).rejects.toThrow("Cloudflare 504");
-    const recovered = await loadPreparedTheForgeCollection(config);
+    loadRuntime.mockResolvedValueOnce(runtimeWithItems(1));
+    const recovered = await load();
     expect(recovered.itemCount).toBe(1);
-    expect(await loadPreparedTheForgeCollection(config)).toBe(recovered);
+    expect(recovered.totalPages).toBe(1);
     expect(loadRuntime).toHaveBeenCalledTimes(2);
   });
 });

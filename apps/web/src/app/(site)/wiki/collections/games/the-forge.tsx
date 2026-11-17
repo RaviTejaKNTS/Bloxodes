@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -212,8 +213,6 @@ type TheForgePreparedCollection = {
   totalPages: number;
 };
 
-const theForgePreparedCollectionCache = new Map<string, Promise<TheForgePreparedCollection>>();
-
 function buildTheForgePreparedCollection(config: GameCollectionViewConfig, dataset: TheForgeCollectionDataset): TheForgePreparedCollection {
   const groupedSections = buildGroupedSections(dataset.items, config.groupKey);
   const totalPages = buildCollectionPagination({
@@ -230,21 +229,13 @@ function buildTheForgePreparedCollection(config: GameCollectionViewConfig, datas
   };
 }
 
-export async function loadPreparedTheForgeCollection(config: GameCollectionViewConfig): Promise<TheForgePreparedCollection> {
-  const cached = theForgePreparedCollectionCache.get(config.slug);
-  if (cached) return cached;
-
-  const next: Promise<TheForgePreparedCollection> = loadTheForgeCollectionDataset(config)
-    .then((dataset) => buildTheForgePreparedCollection(config, dataset))
-    .catch((error: unknown) => {
-      if (theForgePreparedCollectionCache.get(config.slug) === next) {
-        theForgePreparedCollectionCache.delete(config.slug);
-      }
-      throw error;
-    });
-  theForgePreparedCollectionCache.set(config.slug, next);
-  return next;
-}
+// Keep prepared data within the request so a later render reads the published revision.
+export const loadPreparedTheForgeCollection = cache(async (
+  config: GameCollectionViewConfig
+): Promise<TheForgePreparedCollection> => {
+  const dataset = await loadTheForgeCollectionDataset(config);
+  return buildTheForgePreparedCollection(config, dataset);
+});
 
 export async function getPreparedTheForgeCollectionPageCount(config: GameCollectionViewConfig) {
   return (await loadPreparedTheForgeCollection(config)).totalPages;

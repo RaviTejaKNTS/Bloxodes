@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -449,8 +450,6 @@ type GrowGardenPreparedCollection = {
   totalPages: number;
 };
 
-const growGardenPreparedCollectionCache = new Map<string, Promise<GrowGardenPreparedCollection>>();
-
 function buildGrowGardenPreparedCollection(
   config: GrowGardenCollectionConfig,
   dataset: GrowGardenCollectionDataset
@@ -474,23 +473,13 @@ function buildGrowGardenPreparedCollection(
   };
 }
 
-export async function loadPreparedGrowGardenCollection(
+// Keep prepared data within the request so a later render reads the published revision.
+export const loadPreparedGrowGardenCollection = cache(async (
   config: GrowGardenCollectionConfig
-): Promise<GrowGardenPreparedCollection> {
-  const cached = growGardenPreparedCollectionCache.get(config.slug);
-  if (cached) return cached;
-
-  const next: Promise<GrowGardenPreparedCollection> = loadGrowGardenCollectionDataset(config)
-    .then((dataset) => buildGrowGardenPreparedCollection(config, dataset))
-    .catch((error: unknown) => {
-      if (growGardenPreparedCollectionCache.get(config.slug) === next) {
-        growGardenPreparedCollectionCache.delete(config.slug);
-      }
-      throw error;
-    });
-  growGardenPreparedCollectionCache.set(config.slug, next);
-  return next;
-}
+): Promise<GrowGardenPreparedCollection> => {
+  const dataset = await loadGrowGardenCollectionDataset(config);
+  return buildGrowGardenPreparedCollection(config, dataset);
+});
 
 export async function getPreparedGrowGardenCollectionPageCount(config: GrowGardenCollectionConfig) {
   return (await loadPreparedGrowGardenCollection(config)).totalPages;
