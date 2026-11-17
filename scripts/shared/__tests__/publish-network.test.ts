@@ -114,7 +114,7 @@ test("live image modes select uploads and changed hub artwork without discoverin
 });
 
 test("media quota failures name the Worker limit and never retry, including nested retry wrappers", async () => {
-  for (const [status, body] of [[429, "Too many requests"], [500, "error code: 1027"], [200, "<h1>Error 1027</h1>"]] as const) {
+  for (const [status, body] of [[429, "error code: 1027"], [500, "error code: 1027"], [503, " \nerror code: 1027\n "]] as const) {
     let attempts = 0;
     await assert.rejects(retryPublishNetwork(() => retryPublishNetwork(async () => {
       attempts++;
@@ -126,4 +126,21 @@ test("media quota failures name the Worker limit and never retry, including nest
   const image = new Response("bytes", { headers: { "content-type": "image/png" } });
   assert.equal(await requireLiveImageResponse(image, "https://media.bloxodes.com/wiki/image.png"), image);
   assert.equal(await image.text(), "bytes");
+});
+
+
+test("ordinary rate limits and server errors retry, unrelated 1027 text is not Worker quota", async () => {
+  for (const host of ["media.bloxodes.com", "elsewhere.example"]) {
+    for (const [status, body] of [[429, "Too many requests"], [500, "item 1027 failed"], [503, "<h1>error code: 1027</h1>"], [429, "error code: 1027 extra"], [404, "error code: 1027"]] as const) {
+      let attempts = 0;
+      await assert.rejects(retryPublishNetwork(async () => {
+        attempts++;
+        await requireLiveImageResponse(new Response(body, { status }), `https://${host}/wiki/image.png`);
+      }, { sleep: async () => {} }), { status });
+      assert.equal(attempts, status === 404 ? 1 : 3);
+    }
+  }
+  await assert.rejects(requireLiveImageResponse(new Response("error code: 1027", { status: 503 }), "https://elsewhere.example/image.png"), { status: 503 });
+  const ok = new Response("item 1027", { status: 200 });
+  assert.equal(await requireLiveImageResponse(ok, "https://media.bloxodes.com/wiki/image.png"), ok);
 });

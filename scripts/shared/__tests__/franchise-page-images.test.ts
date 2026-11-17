@@ -9,7 +9,7 @@ const target = { label: "Example hub", url: "https://media.bloxodes.com/cover.pn
 test("hosted franchise artwork reports Worker quota failures after exactly one request", async t => {
   const original = globalThis.fetch;
   t.after(() => { globalThis.fetch = original; });
-  for (const [status, body] of [[429, "Too Many Requests"], [500, "error code: 1027"]] as const) {
+  for (const [status, body] of [[429, "error code: 1027"], [500, "error code: 1027"]] as const) {
     for (const role of ["cover", "thumbnail"]) {
       let requests = 0;
       globalThis.fetch = async () => {

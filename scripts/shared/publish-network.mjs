@@ -135,9 +135,9 @@ export function selectLiveImages({ mode = 'new', expectedImages, renderedImages 
 // A media Worker quota failure is terminal, even inside a network retry wrapper.
 export async function requireLiveImageResponse(response, image) {
   if (new URL(image).hostname === 'media.bloxodes.com') {
-    const nonImage = !response.headers.get('content-type')?.startsWith('image/');
-    const quotaBody = response.status !== 429 && nonImage ? await response.clone().text() : '';
-    if (response.status === 429 || /(?:error\s*(?:code\s*)?[:=]?\s*1027|\b1027\b)/i.test(quotaBody)) {
+    const quotaStatus = response.status === 429 || response.status >= 500 && response.status <= 599;
+    const quotaBody = quotaStatus ? await response.clone().text() : '';
+    if (quotaStatus && quotaBody.trim() === 'error code: 1027') {
       await response.body?.cancel().catch(() => {});
       const error = new Error(`media.bloxodes.com: Cloudflare Workers daily request quota exhausted (HTTP ${response.status}, Cloudflare error 1027 / free plan 100,000 requests per day). Live image checks stopped; no retry. Wait for the quota reset or raise the Worker limit before checking again.`);
       error.code = 'MEDIA_WORKER_QUOTA';

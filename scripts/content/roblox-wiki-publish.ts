@@ -1,3 +1,4 @@
+import { newCollectionImageKeys } from "../shared/publish-image-baseline";
 import { selectLiveImages, requireLiveImageResponse, type LiveImageSelection, mapPublishConcurrent, createPublishLimiter, readPublishQuery, retryPublishNetwork, requirePublishResponse, formatPublishError } from "../shared/publish-network.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -276,6 +277,9 @@ export async function publishBundle(options: ContentOptions) {
   console.table(plans.map(plan => ({ code: plan.config.code, rows: plan.items.length, images: plan.items.filter(row => row.image_key).length, acceptedMissing: plan.items.filter(row => !row.image_key).length, contentHash: plan.contentHash })));
   if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes. Add --apply to publish."); return; }
   // Repeat the production guard immediately before the first write.
+  const newImageKeysByPage = options.target === "production" && (options.liveImages ?? "new") === "new"
+    ? new Map(await mapPublishConcurrent(plans, async plan => [ `/wiki/${plan.config.gameSlug}/${plan.config.slug}`, await newCollectionImageKeys(db, "wiki", plan.config.code, plan.contentHash, plan.items) ] as const))
+    : new Map<string, string[]>();
   if (options.target === "production") await assertLocalContentPublication();
   if (!universe) {
     const imported = await ensureContentUniverse(db, bundle.game.universeId, true);
@@ -347,7 +351,7 @@ export async function publishBundle(options: ContentOptions) {
       ...plans.map(plan => ({ type: "wiki_collection" as const, slug: `${plan.config.gameSlug}/${plan.config.slug}` }))
     ];
     await mapPublishConcurrent(Array.from({ length: Math.ceil(events.length / 100) }, (_, index) => events.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch), { label: "revalidate batches" });
-    await mapPublishConcurrent(urls, entry => verifyLive(`https://bloxodes.com${entry.path}`, entry.title, entry.seo, entry.images, { mode: options.liveImages, uploadedImages: [...r2.uploadedKeys].map(key => resolveWikiMediaUrl(key)!), changedImages: cover && cover.url !== existingHub?.cover_image ? [cover.url] : [] }), { label: "live pages" });
+    await mapPublishConcurrent(urls, entry => verifyLive(`https://bloxodes.com${entry.path}`, entry.title, entry.seo, entry.images, { mode: options.liveImages, uploadedImages: (newImageKeysByPage.get(entry.path) ?? []).map(key => resolveWikiMediaUrl(key)!), changedImages: cover ? [cover.url] : [] }), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
   for (const entry of urls) console.log(`${options.target === "production" ? "Live" : "Canonical production URL, staged in managed-dev"}: https://bloxodes.com${entry.path}`);
