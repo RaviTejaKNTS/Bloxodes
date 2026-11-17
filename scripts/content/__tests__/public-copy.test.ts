@@ -86,7 +86,9 @@ test("canonical Manifest game titles, objectives and prerequisites pass", () => 
     { description_json: { prerequisites: ["Cargo Manifest"] } },
     { intro_md: "Complete Cargo Manifest and extract the Courier Manifest." },
     { description_json: { name: "Departure Manifest" } },
-    { intro_md: "Departure Manifest gives non-banner units Deployable." }
+    { intro_md: "Departure Manifest gives non-banner units Deployable." },
+    { description_json: { name: "Residual Manifest" } },
+    { description_json: { teachablePerks: ["Inner Focus", "Residual Manifest", "Overzealous"] } }
   ]) {
     const result = checkCopy({ title: "Active Matter", ...copy });
     assert.equal(result.status, 0, result.stderr);

@@ -9,7 +9,7 @@ export { parseContentOptions, type ContentOptions };
 async function main() {
   if (process.argv.includes("--help")) {
     const { PUBLICATION_RELEVANT_PATHS } = await import("../shared/local-content-publication-guard");
-    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published]
+    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published] [--live-images all|new|none]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
 npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --game <editorial-slug> [--target managed-dev|production]
@@ -18,8 +18,10 @@ npm run --silent content:deployed-sha
 npm run content:status -- --article <slug> [--target managed-dev|production]
 npm run content:status -- --stats-report <slug> [--target managed-dev|production]
 Stats reports support --visibility hidden|public and --update-published.
-Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1 and stats-report@1. See contracts/<contract>/v1/.
---update-published permits deliberate updates to published article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
+Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1, article-links@1 and stats-report@1. See contracts/<contract>/v1/.
+--update-published permits deliberate updates to published article@1, article-links@1, game-article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
+--live-images controls post-apply wiki image checks: new (default) checks uploaded R2 keys and changed hub artwork; all checks every image; none skips image fetches.
+Page HTTP 200 and title checks always run. Articles use their separate asset verifier.
 Default target: production. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
@@ -40,7 +42,7 @@ Without it, a local cover must match the current official thumbnail bytes. All i
     console.log(await deployedContentSha());
     return;
   }
-  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | "stats-report@1" | undefined;
+  let contract: "roblox-wiki@1" | "game-wiki@1" | "article@1" | "game-article@1" | "stats-report@1" | "article-links@1" | undefined;
   if (options.command === "publish") {
     const { readWikiContract } = await import("../shared/wiki-publish-contract");
     contract = await readWikiContract(options.bundle!);
@@ -54,7 +56,7 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   {
     const overlays = new Set((process.env.BLOXODES_ENV_OVERLAYS ?? "").split(",").filter(Boolean));
     if (options.target === "production") overlays.add("vps");
-    if (contract === "article@1") overlays.add("articles");
+    if (contract === "article@1" || contract === "game-article@1") overlays.add("articles");
     process.env.BLOXODES_ENV_OVERLAYS = [...overlays].join(",");
   }
   loadBloxodesEnv();
@@ -68,7 +70,9 @@ Without it, a local cover must match the current official thumbnail bytes. All i
   if (!process.env.SUPABASE_SERVICE_ROLE) throw new Error("Missing SUPABASE_SERVICE_ROLE for the selected target.");
   const { publishBundle, contentStatus, contentCandidates } = await import("./roblox-wiki-publish");
   if (options.command === "publish") {
-    if (contract === "stats-report@1") {
+    if (contract === "article-links@1") {
+      const { publishArticleLinkRepair } = await import("./article-link-repair"); await publishArticleLinkRepair(options);
+    } else if (contract === "stats-report@1") {
       const { publishStatsReport } = await import("./stats-report-publish"); await publishStatsReport(options);
     } else if (contract === "game-article@1") {
       process.env.NODE_ENV = options.target === "production" ? "production" : "development";
