@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+import { compareArticleTopics, type ArticleScope, scopeMatches } from "./article-topic-similarity";
 import { slugify } from "@/lib/slug";
-import { groupingSimilarity } from "./article-curation-intent";
 import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
 import type { ProductionInventoryItem } from "./production-editorial-inventory";
 
@@ -11,14 +11,15 @@ export function articleQueueIdempotencyKey(title: string, universeId: number | n
 }
 
 export function nearDuplicateArticleTitle(title: string, existingTitle: string): boolean {
-  return groupingSimilarity(title, existingTitle).jaccard >= 0.8;
+  return compareArticleTopics(title, existingTitle).duplicate;
 }
 
 export function findProductionArticleDuplicate(
   title: string,
-  inventory: ProductionInventoryItem[]
+  inventory: ProductionInventoryItem[],
+  scope?: ArticleScope | null
 ): ProductionInventoryItem | null {
-  return inventory.find((item) => item.family === "article" && nearDuplicateArticleTitle(title, item.title)) ?? null;
+  return inventory.find((item) => item.family === "article" && (!scope || scopeMatches(scope,item)) && nearDuplicateArticleTitle(title, item.title)) ?? null;
 }
 
 /** Preserve curation's lookup order, status scope, and 1,000-row similarity scan. */

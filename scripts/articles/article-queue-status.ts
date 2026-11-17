@@ -27,8 +27,8 @@ const ALLOWED_TRANSITIONS: Record<ArticleQueueStatus, ArticleQueueStatus[]> = {
   // A publish that fails after the row is completed hands it back for a retry.
   completed: ["completed", "published", "rejected", "blocked"],
   published: ["published"],
-  // A rejected draft that was fixed and re-checked can still publish.
-  rejected: ["rejected", "completed"],
+  // Revisions reclaim the existing draft before completing it again.
+  rejected: ["rejected", "processing", "completed"],
   skipped: ["skipped"],
   failed: ["failed"]
 };

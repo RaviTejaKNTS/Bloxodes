@@ -1,5 +1,7 @@
 import "./load-notion-article-env";
 
+import { withArticleQueueClaimLock, newArticleClaimToken, confirmArticleQueueClaim } from "./article-queue-claim";
+import { inferArticleScope, similarArticleTopics, type TopicCandidate } from "./article-topic-similarity";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -114,7 +116,7 @@ export function buildQueueRow(options: AddArticleQueueOptions, now = new Date().
     updated_at: now,
     last_attempted_at: options.claim ? now : null,
     locked_at: options.claim ? now : null,
-    locked_by: options.claim ? options.worker : null,
+    locked_by: options.claim ? newArticleClaimToken(options.worker) : null,
     last_error: null,
     outcome_reason: null,
     next_attempt_at: null,
@@ -132,7 +134,7 @@ type Duplicate =
 export type AddArticleQueueResult =
   | { kind: "dry_run"; exitCode: 0; row: ReturnType<typeof buildQueueRow>; duplicate: Duplicate | null }
   | { kind: "duplicate"; exitCode: 3; duplicate: Duplicate }
-  | { kind: "inserted"; exitCode: 0; row: { id: string; status: string; article_title: string; topic_key: string } };
+  | { kind: "inserted"; exitCode: 0; row: { id: string; status: string; article_title: string; topic_key: string; claim_token?: string } };
 
 function queueDuplicate(row: Record<string, unknown>): Duplicate {
   return {
@@ -146,19 +148,27 @@ export async function addArticleQueueItem(
   options: AddArticleQueueOptions,
   inventory: ProductionInventoryItem[],
   now = new Date().toISOString()
-): Promise<AddArticleQueueResult> {
-  const row = buildQueueRow(options, now);
-  const existing = duplicateQueueRow(await queue.list(), row);
-  const production = findProductionArticleDuplicate(row.article_title, inventory);
-  const duplicate: Duplicate | null = existing ? queueDuplicate(existing)
-    : production ? { kind: "production", key: production.key, title: production.title } : null;
-  // A plan always exits successfully, including when the planned insert is a duplicate.
-  if (!options.apply) return { kind: "dry_run", exitCode: 0, row, duplicate };
-  if (duplicate) return { kind: "duplicate", exitCode: 3, duplicate };
+): Promise<AddArticleQueueResult & { near_matches?: TopicCandidate[] }> {
+  const work = async (): Promise<AddArticleQueueResult & { near_matches?: TopicCandidate[] }> => {
+    const row = buildQueueRow(options, now);
+    const rows = await queue.list();
+    const scope = options.universeId ? {universeId:options.universeId} : inferArticleScope(options.title,inventory);
+    const matches = scope ? similarArticleTopics(options.title,scope,inventory,rows) : [];
+    const existing = duplicateQueueRow(rows, row);
+    const intentDuplicate = matches.find(match=>match.duplicate);
+    const production = findProductionArticleDuplicate(row.article_title, inventory, scope);
+    const duplicate: Duplicate | null = existing ? queueDuplicate(existing)
+      : production ? { kind: "production", key: production.key, title: production.title } : intentDuplicate ? {kind:"production",key:intentDuplicate.url,title:intentDuplicate.title} : null;
+    // A plan always exits successfully, including when the planned insert is a duplicate.
+    if (!options.apply) return { kind: "dry_run", exitCode: 0, row, duplicate, near_matches:matches.slice(0,10) };
+    if (duplicate) return { kind: "duplicate", exitCode: 3, duplicate, near_matches:matches.slice(0,10) };
 
-  const result = await queue.put(row);
-  if (!result.created) return { kind: "duplicate", exitCode: 3, duplicate: queueDuplicate(result.row) };
-  return { kind: "inserted", exitCode: 0, row: { id: result.row.id, status: result.row.status, article_title: result.row.article_title, topic_key: result.row.topic_key ?? row.topic_key } };
+    const result = await queue.put(row);
+    if (!result.created) return { kind: "duplicate", exitCode: 3, duplicate: queueDuplicate(result.row) };
+    if(options.claim) await confirmArticleQueueClaim(queue,result.row.id,row.locked_by!,row.locked_at!);
+    return { kind: "inserted", exitCode: 0, row: { id: result.row.id, status: result.row.status, article_title: result.row.article_title, topic_key: result.row.topic_key ?? row.topic_key, ...(options.claim ? {claim_token:row.locked_by!} : {}) }, near_matches:matches.slice(0,10) };
+  };
+  return options.apply && options.claim ? withArticleQueueClaimLock(work) : work();
 }
 
 async function main(): Promise<number> {
@@ -176,17 +186,18 @@ async function main(): Promise<number> {
   const inventory = await fetchProductionEditorialInventory();
   const result = await addArticleQueueItem(queue, options, inventory.items);
   if (result.kind === "inserted") {
-    console.log(options.json ? JSON.stringify(result.row) : result.row.id);
+    console.log(options.json ? JSON.stringify({...result.row,near_matches:result.near_matches??[]}) : options.claim ? JSON.stringify(result.row) : result.row.id);
   } else if (result.kind === "dry_run") {
-    console.log(JSON.stringify({ dry_run: true, row: result.row, duplicate: result.duplicate }, null, 2));
+    console.log(JSON.stringify({ dry_run: true, row: result.row, duplicate: result.duplicate, near_matches:result.near_matches }, null, 2));
   } else if (options.json) {
-    console.log(JSON.stringify({ duplicate: result.duplicate }));
+    console.log(JSON.stringify({ duplicate: result.duplicate,near_matches:result.near_matches }));
   } else if (result.duplicate.kind === "queue") {
     const workflow = result.duplicate.workflow_mode === undefined ? "" : ` | ${result.duplicate.workflow_mode}`;
     console.log(`Duplicate queue item: ${result.duplicate.id} | ${result.duplicate.article_title} | ${result.duplicate.status}${workflow}`);
   } else {
     console.log(`Duplicate production article: ${result.duplicate.key} | ${result.duplicate.title}`);
   }
+  if(!options.json && result.near_matches?.length)console.log(JSON.stringify({near_matches:result.near_matches},null,2));
   return result.exitCode;
 }
 

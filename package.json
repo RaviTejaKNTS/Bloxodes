@@ -74,7 +74,7 @@
     "articles:queue:migrate-to-notion": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/migrate-article-queue-to-notion.ts",
     "articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/update-article-queue-item.ts",
     "articles:review:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-release-review.ts",
-    "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts",
+    "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts scripts/content/__tests__/article-links.test.ts scripts/content/__tests__/game-article-queue-binding.test.ts",
     "articles:writer:local": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:homelab": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:batch": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-homelab-article-batch.ts",
@@ -237,7 +237,16 @@
     "test:codes-factory": "NODE_ENV=test node --import tsx --test scripts/codes/__tests__/*.test.ts",
     "report:build": "node --max-old-space-size=4096 --import tsx scripts/reports/build.ts",
     "report:chart": "node --max-old-space-size=4096 --import tsx scripts/reports/chart.ts",
-    "report:assemble": "node --import tsx scripts/reports/assemble.ts"
+    "report:assemble": "node --import tsx scripts/reports/assemble.ts",
+    "game-articles:queue:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/game-article-queue.ts list",
+    "game-articles:queue:add": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/game-article-queue.ts add",
+    "game-articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/game-article-queue.ts update",
+    "articles:related": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/article-context-cli.ts related",
+    "articles:similar": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/article-context-cli.ts similar",
+    "content:check-article-links": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/content/check-article-links.ts",
+    "articles:links:missing": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/article-links-cli.ts missing",
+    "articles:links:verify-unchanged": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/article-links-cli.ts verify-unchanged",
+    "articles:links:prepare": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/article-links-cli.ts prepare"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

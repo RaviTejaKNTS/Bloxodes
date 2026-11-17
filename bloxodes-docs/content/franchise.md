@@ -1,6 +1,6 @@
 # Franchise games
 
-Last verified: 2026-11-04
+Last verified: 2026-11-16
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
@@ -8,7 +8,9 @@ Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever
 
 The T3 schedule "Bloxodes other games every 6 hours (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
 
-1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
+1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md#other-games-queue) and sets it to `In progress`. The row's page holds the approved plan. The owner's `Ready` rows always come first.
+   - **No `Ready` row:** the run finds one worthy non-Roblox game that Bloxodes doesn't cover yet, writes its plan into a new row the way an owner plan reads (identity, pages and URLs, sources, notes), marks it Added by `Agent` with Priority 900, sets it `In progress` and builds it in the same run. One game per run. Worthy means real player demand now or soon (a recent release still in a store's top-sellers or most-played chart or above about 5,000 Steam players, a release in the next 30 days near the top of a most-wishlisted list with confirmed content, or a game that stays in the most-played charts), enough sources and art for a hub and at least two collections, and no Bloxodes game row or queue row for it in any status. If nothing qualifies it adds nothing. The exact rules are in the factory's `franchise-wiki-main` skill (step 1b).
+   - A self-found row left `In progress` for more than 12 hours was left by a run that stopped; the next run with no `Ready` row takes it back.
 2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data, images and source pages, a Haiku writer, run through the factory's `bin/haiku-write` as a plain API call, writes the copy from its prompt files and that research, and the main agent builds the page.
 3. Publishes each game as a `game-wiki@1` bundle with `content:publish`: a production dry run, then the production apply. No managed development, PR or GitHub run.
 4. Sets `Done`, or `Waiting for approval` when the plan has page types the factory doesn't build yet, and writes the Run report.
@@ -29,7 +31,7 @@ Every franchise skill follows these. They're here once so the skills don't repea
 
 ## Planning a new game
 
-Start with `bloxodes-franchise-plan`. It decides whether the title is a single game or a franchise with several games, picks the useful page types, and checks the registry and routes. Put the final plan in the Other Games Queue row, then set it to `Ready`.
+Start with `bloxodes-franchise-plan`. It decides whether the title is a single game or a franchise with several games, picks the useful page types, and checks the registry and routes. Put the final plan in the Other Games Queue row, then set it to `Ready`. A `Planning` row is never taken by the scheduled run, including its self-found step.
 
 ## Routes
 

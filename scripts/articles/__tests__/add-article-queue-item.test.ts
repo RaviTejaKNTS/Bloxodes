@@ -125,15 +125,15 @@ test("claim matches processing update fields and supports completion", () => {
   assert.equal(row.attempts, 1);
   assert.equal(row.last_attempted_at, now);
   assert.equal(row.locked_at, now);
-  assert.equal(row.locked_by, "factory-test");
+  assert.match(row.locked_by!, /^factory-test#[a-f0-9-]{36}$/);
   assert.equal(row.universe_id, 5750914919);
   assert.equal(row.source_metadata.universe_id, row.universe_id);
   assert.equal(row.idempotency_key, "5750914919:fisch-kraken-boss-guide");
   assert.doesNotThrow(() => assertArticleQueueTransition(row.status, "completed"));
 });
 
-test("title dedupe includes the 0.8 boundary and uses curation token normalization", () => {
-  assert.ok(nearDuplicateArticleTitle("Alpha Bravo Charlie Delta Echo", "Alpha Bravo Charlie Delta"));
+test("title dedupe requires the same normalized subject without extra tokens", () => {
+  assert.equal(nearDuplicateArticleTitle("Alpha Bravo Charlie Delta Echo", "Alpha Bravo Charlie Delta"), false);
   assert.equal(nearDuplicateArticleTitle("Alpha Bravo Charlie Delta Echo Foxtrot", "Alpha Bravo Charlie Delta"), false);
   assert.ok(nearDuplicateArticleTitle("Roblox Fisch Kraken Weapon Guide", "Kraken weapons in Fisch"));
   assert.equal(nearDuplicateArticleTitle("Fisch Kraken Boss Guide", "Fisch Rod Crafting Guide"), false);
@@ -177,9 +177,11 @@ test("queue similarity scan preserves the status scope and 1,000-row cap", async
 
 function notionStub(rows: Record<string, any>[] = [], raced = false) {
   const calls: string[] = [];
+  let saved: Record<string,any>;
   const queue = {
+    async get() { return saved; },
     async list() { calls.push("list"); return rows; },
-    async put(row: Record<string, any>) { calls.push("put"); return { created: !raced, row: { id: raced ? "winner" : "new-id", ...row } }; }
+    async put(row: Record<string, any>) { calls.push("put"); saved={id:raced ? "winner" : "new-id",...row};return { created: !raced, row: saved }; }
   } as unknown as NotionArticleQueue;
   return { queue, calls };
 }
@@ -213,6 +215,19 @@ test("queue and production duplicates return exit 3 without creating a page", as
     assert.equal(result.exitCode, apply ? 3 : 0);
     assert.deepEqual(f.calls, ["list"]);
   }
+});
+
+test("queue add permits a subject-containment near match and prints its score and URL", async () => {
+  const title="How to Get Cursed Dual Katana in Blox Fruits";
+  const existingTitle="How to Get Dual Katana in Blox Fruits";
+  const options={...parseArgs([...args,"--apply","--universe-id","1"]),title};
+  const f=notionStub([{id:"existing",article_title:existingTitle,status:"pending",universe_id:1}]);
+  const inventory=[{family:"article",title:existingTitle,key:"dual-katana",universe_id:1},
+    {family:"wiki",title:"Blox Fruits",key:"blox-fruits",universe_id:1}];
+  const result=await addArticleQueueItem(f.queue,options,inventory,now);
+  assert.equal(result.exitCode,0);assert.equal(result.kind,"inserted");assert.deepEqual(f.calls,["list","put"]);
+  const match=result.near_matches?.find(item=>item.page_type==="article");
+  assert.ok(match);assert.equal(match.duplicate,false);assert.ok(match.score!>0);assert.equal(match.url,"https://bloxodes.com/articles/dual-katana");
 });
 
 test("apply returns the Notion page UUID and resolves a concurrent insertion", async () => {

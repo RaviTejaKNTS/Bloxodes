@@ -2,7 +2,7 @@ import { z } from "zod";
 import { bundleSchema as articleBundle, articleFinalSchema } from "../../article/v1/schema";
 const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const bundleSchema = articleBundle.omit({contract:true,queueId:true}).extend({
-  contract:z.literal("game-article@1"), namespace:slug.refine(value=>value!=="roblox"),
+  queueId:z.string().uuid().optional(), contract:z.literal("game-article@1"), namespace:slug.refine(value=>value!=="roblox"),
   game:z.object({slug,kind:z.enum(["game","franchise"])}).strict(),
 }).strict();
 export const gameArticleFinalSchema = articleFinalSchema.omit({universe_id:true,sources:true}).extend({
