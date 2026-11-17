@@ -6,4 +6,4 @@ export type FixtureResult = {
 };
 export function catalogRows(kind: string, count: number, start?: number): FixtureRow[];
 export function defaultCatalogTables(): Record<string, FixtureRow[]>;
-export function queryCatalog(rows: FixtureRow[], params: URLSearchParams): FixtureResult;
+export function queryCatalog(rows: FixtureRow[], params: URLSearchParams, table: string): FixtureResult;

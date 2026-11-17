@@ -12,6 +12,7 @@ vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NEXT_NOT_
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({
   getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: { items: [{ system: { image: "https://media.bloxodes.com/item.webp" } }] } }),
   listPublishedSharedGameWikiCollectionImageUrls: async () => [],
+  listPublishedSharedGameWikiCollectionsByWikiSlug: async () => [],
 }) }));
 // Metadata adapters remain real; only collection document preparation is outside this route test.
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: 3 }) }));
@@ -65,6 +66,7 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
     select: () => query, is: (key: string, value: unknown) => { filters[key] = value; return query; },
     eq: (key: string, value: unknown) => { filters[key] = value; return query; }, not: () => query,
     abortSignal: (_signal: AbortSignal) => query,
+    single: async () => ({ data: rows().find(matches) ?? null, error: null }),
     maybeSingle: async () => {
       if (state.timeout && table === "site_routes") return new Promise<never>(() => {});
       if (state.error === table) return { data: null, error: { message: "Sensitive database details" } };
@@ -89,7 +91,7 @@ function robloxPage() {
 vi.mock("@/lib/wiki-collection-runtime", () => ({ getPublishedWikiCollectionRuntime: async () => ({ config: {}, document: { items: [{ system: { image: "https://media.bloxodes.com/item.webp" }, item: {} }] } }), hasWikiCollectionImageCredit: () => false }));
 // Keep Roblox loaders separate: registry dispatch must never claim their rows.
 vi.mock("@/lib/db", async original => ({ ...await original<typeof import("@/lib/db")>(), getCodePageBySlug: async () => robloxPage(), getChecklistPageBySlug: async () => state.robloxContent ? { page: robloxPage(), items: [] } : null }));
-vi.mock("@/lib/wiki", async original => ({ ...await original<typeof import("@/lib/wiki")>(), getWikiPageBySlug: async () => robloxPage() }));
+vi.mock("@/lib/wiki", async original => ({ ...await original<typeof import("@/lib/wiki")>(), getWikiPageBySlug: async () => robloxPage(), loadWikiHubCollections: async () => [] }));
 vi.mock("@/lib/wiki-collections", async original => ({ ...await original<typeof import("@/lib/wiki-collections")>(), getWikiCollectionPageByPath: async () => robloxPage() }));
 vi.mock("@/lib/tools", async original => ({ ...await original<typeof import("@/lib/tools")>(), getToolContentWithDevFallback: async () => robloxPage() }));
 vi.mock("@/lib/catalog", async original => ({ ...await original<typeof import("@/lib/catalog")>(), getCatalogPageContentByCodes: async () => robloxPage() }));
@@ -120,7 +122,7 @@ const entries = [
   { name: "codes", kind: "code", path: "/codes/peak-detail", entry: codesEntry, params: { slug: "peak-detail" } },
   { name: "catalog", kind: "catalog", path: "/catalog/peak-detail", entry: catalogEntry, params: { slug: ["peak-detail"] } },
 ];
-// Only canonical and OG URLs may change; all metadata content is compared deeply.
+// Compare unchanged page families deeply; codes have explicit live metadata assertions.
 function normalizeUrls(metadata: unknown, path: string) {
   return JSON.parse(JSON.stringify(metadata).replaceAll(path, "/same-page"));
 }
@@ -146,7 +148,9 @@ describe("page-type entry points with pilot-style fixtures", () => {
         openGraph: { url: "https://bloxodes.com/games/peak" },
       });
     }
-    expect(normalizeUrls(movedMetadata, path)).toEqual(normalizeUrls(oldMetadata, legacyPath));
+    if (kind === "code") {
+      expect(movedMetadata).toMatchObject({ title: "SEO title", description: "No active Child codes right now.", openGraph: { title: "SEO title", description: "No active Child codes right now." }, twitter: { title: "SEO title", description: "No active Child codes right now." } });
+    } else expect(normalizeUrls(movedMetadata, path)).toEqual(normalizeUrls(oldMetadata, legacyPath));
   });
   it.each(entries)("$name rejects hidden pages in rendering and metadata", async ({ kind, path, entry, params }) => {
     state.kind = kind; state.path = path; state.hiddenGame = true;

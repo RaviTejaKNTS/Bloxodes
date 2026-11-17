@@ -1,0 +1,29 @@
+{
+  "game_article_pages_view": {
+    "table": "game_article_pages",
+    "foreignKeys": [{ "table": "game_article_pages", "name": "game_article_pages_author_id_fkey" }]
+  },
+  "code_pages_index_view": {
+    "table": "code_pages",
+    "foreignKeys": [{ "table": "code_pages", "name": "code_pages_universe_id_fkey" }]
+  },
+  "code_pages_view": {
+    "table": "code_pages",
+    "foreignKeys": [
+      { "table": "code_pages", "name": "code_pages_universe_id_fkey" },
+      { "table": "codes", "name": "codes_code_page_id_fkey" }
+    ]
+  },
+  "quiz_pages_view": {
+    "table": "quiz_pages",
+    "foreignKeys": [{ "table": "quiz_pages", "name": "quiz_pages_universe_id_fkey" }]
+  },
+  "checklist_pages_view": {
+    "table": "checklist_pages",
+    "foreignKeys": [{ "table": "checklist_pages", "name": "checklist_pages_universe_id_fkey" }]
+  },
+  "tools_view": {
+    "table": "tools",
+    "foreignKeys": [{ "table": "tools", "name": "tools_universe_id_fkey" }]
+  }
+}

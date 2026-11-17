@@ -204,7 +204,8 @@ it.each(["weekly", "monthly", "yearly"])("dates the %s chart and keeps its perio
   const result = inspect(await MusicChartsPage({ pageNumber: 2, searchParams: { range } }));
   expect(result.headings).toEqual(["Roblox music ID charts (October 2026)"]);
   const page = result.schemas.find(schema => schema["@type"] === "WebPage");
-  expect(page?.name).toBe(`${range[0].toUpperCase()}${range.slice(1)} Roblox music ID chart (October 2026) - Page 2`);
+  const period = { weekly: "Week", monthly: "Month", yearly: "Year" }[range];
+  expect(page?.name).toBe(`Top Trending Roblox Songs This ${period} (October 2026) - Page 2`);
   expect(String(page?.url)).toContain(`?range=${range}`);
 });
 

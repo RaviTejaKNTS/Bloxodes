@@ -37,7 +37,7 @@ All units run from `/srv/data/bloxodes-automation-runtime/current`. Article disc
 | --- | --- | --- |
 | `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:curate`, then `articles:discover`, sharing a kernel lock (needs Python 3). Curation adds `Pending` rows to the [Article Queue](notion-queues.md#article-queue) the Content Factory article run writes from. State in `/srv/data/bloxodes-automation-runtime/state/articles/state.json`. 45-minute limit, 512 MB memory. Starts nothing else. |
 | `bloxodes-codes-discovery.timer` | 01:15, 07:15, 13:15, 19:15 IST, up to 5 minutes later | `codes:discover`: adds new Beebom and RobloxDen codes games to the [Codes Queue](notion-queues.md#codes-queue). Needs `NOTION_CODES_QUEUE_TOKEN`. State in `/srv/data/bloxodes-automation-runtime/state/codes-discovery/`. Enable once with `sudo systemctl enable --now bloxodes-codes-discovery.timer`. |
-| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. It also requests two made-up URLs twice each and opens an `[error-page-cache]` issue (and exits 1) if Cloudflare serves a 4xx/5xx from its cache; see [Cloudflare](../infrastructure/cloudflare.md#caching). Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
+| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. The health check also fails when an IndexNow send failed in the last 24 hours. It also requests two made-up URLs twice each and opens an `[error-page-cache]` issue (and exits 1) if Cloudflare serves a 4xx/5xx from its cache; see [Cloudflare](../infrastructure/cloudflare.md#caching). Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 
 Article writing and publication run in the Content Factory. The homelab writer, publication and audit units were removed on 2026-10-30; the installer removes them if it finds them, and restores the old units if activation fails.
 
@@ -93,7 +93,7 @@ Scheduled:
 
 | Workflow | Schedule (UTC) | Does |
 | --- | --- | --- |
-| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
+| `managed-dev-cleanup.yml` (Managed development cleanup) | Sundays 21:40 (Mondays 03:10 IST) | Deletes superseded collection datasets in managed development and vacuums. Waits in the `bloxodes-managed-content-qa` lane. Fails when the database passes 450 MB. See [Supabase](../data/supabase.md#managed-development). |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 

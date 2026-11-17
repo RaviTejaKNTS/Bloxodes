@@ -27,7 +27,7 @@ for (const {path: pathname, contains} of selected.slice(0, 20)) {
   });
 }
 
-// The PR preview uses existing managed-development collections of both page types.
+// The preview includes collections of both page types.
 if (!process.env.RELEASE_SMOKE_BATCH && !process.env.RELEASE_SMOKE_PATHS) {
   for (const pathname of ["/wiki/1-stone-skipping/stones-and-throwables", "/wiki/sarab/maps", "/wiki/sarab/badges"]) {
     test(`${pathname} shows game content without collection-use instructions`, async ({ page }, info) => {

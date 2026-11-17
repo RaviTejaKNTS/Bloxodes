@@ -46,6 +46,7 @@ Use `bloxodes-code-workflow-runner` and `bloxodes-code-writing`, then publish wi
 - `code_pages.slug` is the editorial game slug. Never add `-codes` and never copy the stats slug from `roblox_universes.slug`.
 - `roblox_link` is the Roblox experience URL. `source_url` is RobloxDen. `source_url_2` is Beebom.
 - Leave `seo_title` empty unless the owner asks for a custom title.
+- The search description of a codes page is built from live data, the same way for Roblox and non-Roblox games (`apps/web/src/lib/code-page-seo.ts`, `game-code-seo.ts`): active count, the newest real check date (`last_seen_at` or `verified_at`, never the page's edit date), the newest code, then a reward and a closing sentence when they fit in 160 characters. With no active codes it says so and gives the expired count. The stored `meta_description` is still written by the factory but no longer shows in search.
 - Page copy stays evergreen: no code names, counts, dates, month or year labels, or words like "latest", "current" or "updated daily".
 - Never seed active or expired codes by hand.
 - `/codes` (the index) has hand-written guide copy in `apps/web/src/app/(site)/codes/index-content.tsx`. It ships with web deploys.

@@ -14,6 +14,7 @@ vi.mock("next/navigation", () => ({ notFound: () => { throw new Error("NEXT_NOT_
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({
   getPublishedSharedGameWikiCollectionRuntime: async () => ({ config: {}, document: { items: [{ system: { image: "https://media.bloxodes.com/item.webp" } }] } }),
   listPublishedSharedGameWikiCollectionImageUrls: async () => [],
+  listPublishedSharedGameWikiCollectionsByWikiSlug: async () => [],
 }) }));
 // Metadata adapters remain real; only collection document preparation is outside this route test.
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: 3 }) }));
@@ -63,6 +64,7 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string)
     select: () => query, is: (key: string, value: unknown) => { filters[key] = value; return query; },
     eq: (key: string, value: unknown) => { filters[key] = value; return query; }, not: () => query,
     abortSignal: (_signal: AbortSignal) => query,
+    single: async () => ({ data: rows().find(matches) ?? null, error: null }),
     maybeSingle: async () => {
       if (state.timeout && table === "site_routes") return new Promise<never>(() => {});
       if (state.error === table) return { data: null, error: { message: "Sensitive database details" } };
@@ -112,6 +114,7 @@ describe("shared registry route", () => {
     else expect((result as { props: Record<string, unknown> }).props[kind === "tool" ? "tool" : kind === "checklist" ? "data" : "page"]).toEqual(oldPage);
     const metadata = await generateMetadata(props());
     if (kind === "checklist") expect(metadata.alternates?.canonical).toBe("https://bloxodes.com/example/detail");
+    else if (kind === "code") expect(metadata).toMatchObject({ title: "SEO title", description: "No active Child codes right now.", openGraph: { title: "SEO title", description: "No active Child codes right now." }, twitter: { title: "SEO title", description: "No active Child codes right now." } });
     else expect(metadata).toEqual(await previousMetadata(props()));
   });
   it.each(["gone", "old"])("%s rows cannot render even when a page still exists", async status => {
@@ -183,6 +186,10 @@ describe("shared registry route", () => {
     state.kind = kind; state.error = "site_routes";
     const log = vi.spyOn(console, "warn").mockImplementation(() => {});
     if (kind === "checklist") expect((await generateMetadata(props())).alternates?.canonical).toBe("https://bloxodes.com/example/detail");
+    else if (kind === "code") {
+      const metadata = await generateMetadata(props());
+      expect(metadata).toMatchObject({ title: "SEO title", description: "No active Child codes right now.", openGraph: { title: "SEO title", description: "No active Child codes right now." }, twitter: { title: "SEO title", description: "No active Child codes right now." } });
+    }
     else expect(await generateMetadata(props())).toEqual(await previousMetadata(props()));
     expect(await SharedGamePage(props())).toBeTruthy();
     expect(state.queries.filter(q => q.table.endsWith("_pages_view")).some(q => q.filters.canonical_path === "/example/detail")).toBe(true);

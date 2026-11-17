@@ -133,9 +133,9 @@ const MUSIC_CHARTS: Record<MusicChartKey, {
   trending: {
     activeNav: "trending",
     path: `${BASE_PATH}/trending`,
-    title: "Trending Roblox music IDs",
-    heading: "Trending Roblox music IDs",
-    description: "The daily Roblox top songs list, capped to the first 500 music IDs.",
+    title: "Top 500 Trending Roblox Songs Today",
+    heading: "Top 500 Trending Roblox Songs Today",
+    description: "Up to 500 songs Roblox players are using most today, ranked, each with its ID ready to copy. Updated daily.",
     breadcrumbLabel: "Trending",
     statLabel: "ranked songs",
     source: null
@@ -143,9 +143,9 @@ const MUSIC_CHARTS: Record<MusicChartKey, {
   weekly: {
     activeNav: "charts",
     path: `${BASE_PATH}/charts`,
-    title: "Weekly Roblox music ID chart",
-    heading: "Weekly Roblox music ID chart",
-    description: "Roblox Creator Store music IDs from the weekly chart.",
+    title: "Top Trending Roblox Songs This Week",
+    heading: "Top Trending Roblox Songs This Week",
+    description: "The songs Roblox players are using most this week, ranked, each with its ID ready to copy.",
     breadcrumbLabel: "Weekly Chart",
     statLabel: "weekly chart songs",
     source: "creator_store_top_week"
@@ -153,9 +153,9 @@ const MUSIC_CHARTS: Record<MusicChartKey, {
   monthly: {
     activeNav: "charts",
     path: `${BASE_PATH}/charts`,
-    title: "Monthly Roblox music ID chart",
-    heading: "Monthly Roblox music ID chart",
-    description: "Roblox Creator Store music IDs from the monthly chart.",
+    title: "Top Trending Roblox Songs This Month",
+    heading: "Top Trending Roblox Songs This Month",
+    description: "The songs Roblox players are using most this month, ranked, each with its ID ready to copy.",
     breadcrumbLabel: "Monthly Chart",
     statLabel: "monthly chart songs",
     source: "creator_store_top_month"
@@ -163,9 +163,9 @@ const MUSIC_CHARTS: Record<MusicChartKey, {
   yearly: {
     activeNav: "charts",
     path: `${BASE_PATH}/charts`,
-    title: "Yearly Roblox music ID chart",
-    heading: "Yearly Roblox music ID chart",
-    description: "Roblox Creator Store music IDs from the yearly chart.",
+    title: "Top Trending Roblox Songs This Year",
+    heading: "Top Trending Roblox Songs This Year",
+    description: "The songs Roblox players are using most this year, ranked, each with its ID ready to copy.",
     breadcrumbLabel: "Yearly Chart",
     statLabel: "yearly chart songs",
     source: "creator_store_top_year"

@@ -1,0 +1,402 @@
+{
+  "games": [
+    {
+      "namespace": "peak",
+      "slug": "peak",
+      "title": "PEAK",
+      "kind": "game",
+      "parent": null
+    },
+    {
+      "namespace": "risk-of-rain",
+      "slug": "risk-of-rain",
+      "title": "Risk of Rain",
+      "kind": "franchise",
+      "parent": null
+    },
+    {
+      "namespace": "risk-of-rain",
+      "slug": "risk-of-rain-2",
+      "title": "Risk of Rain 2",
+      "kind": "game",
+      "parent": "risk-of-rain"
+    },
+    {
+      "namespace": "arc-raiders",
+      "slug": "arc-raiders",
+      "title": "ARC Raiders",
+      "kind": "game",
+      "parent": null
+    },
+    {
+      "namespace": "gta",
+      "slug": "gta",
+      "title": "Grand Theft Auto",
+      "kind": "franchise",
+      "parent": null
+    },
+    {
+      "namespace": "gta",
+      "slug": "gta-5",
+      "title": "GTA 5",
+      "kind": "game",
+      "parent": "gta"
+    },
+    {
+      "namespace": "red-dead",
+      "slug": "red-dead",
+      "title": "Red Dead",
+      "kind": "franchise",
+      "parent": null
+    },
+    {
+      "namespace": "red-dead",
+      "slug": "red-dead-redemption-2",
+      "title": "Red Dead Redemption 2",
+      "kind": "game",
+      "parent": "red-dead"
+    },
+    {
+      "namespace": "minecraft",
+      "slug": "minecraft",
+      "title": "Minecraft",
+      "kind": "franchise",
+      "parent": null
+    },
+    {
+      "namespace": "minecraft",
+      "slug": "java",
+      "wikiSlug": "minecraft-java",
+      "title": "Minecraft Java",
+      "kind": "game",
+      "parent": "minecraft"
+    },
+    {
+      "namespace": "minecraft",
+      "slug": "bedrock",
+      "wikiSlug": "minecraft-bedrock",
+      "title": "Minecraft Bedrock",
+      "kind": "game",
+      "parent": "minecraft"
+    },
+    {
+      "namespace": "hytale",
+      "slug": "hytale",
+      "title": "Hytale",
+      "kind": "game",
+      "parent": null
+    }
+  ],
+  "collections": [
+    {
+      "namespace": "peak",
+      "game": "peak",
+      "slug": "items",
+      "title": "PEAK items",
+      "paginated": true
+    },
+    {
+      "namespace": "risk-of-rain",
+      "game": "risk-of-rain-2",
+      "slug": "items",
+      "title": "Risk of Rain 2 items"
+    },
+    {
+      "namespace": "arc-raiders",
+      "game": "arc-raiders",
+      "slug": "items",
+      "title": "ARC Raiders items"
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "spaceship-parts",
+      "title": "GTA 5 spaceship parts"
+    },
+    {
+      "namespace": "red-dead",
+      "game": "red-dead-redemption-2",
+      "slug": "cigarette-cards",
+      "title": "Red Dead Redemption 2 cigarette cards"
+    },
+    {
+      "namespace": "minecraft",
+      "game": "java",
+      "slug": "enchantments",
+      "title": "Minecraft Java enchantments"
+    },
+    {
+      "namespace": "minecraft",
+      "game": "bedrock",
+      "slug": "achievements",
+      "title": "Minecraft Bedrock achievements"
+    },
+    {
+      "namespace": "minecraft",
+      "game": "java",
+      "slug": "mobs",
+      "title": "Minecraft Java mobs"
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "letter-scraps",
+      "title": "GTA 5 letter scraps",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "nuclear-waste",
+      "title": "GTA 5 nuclear waste",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "submarine-pieces",
+      "title": "GTA 5 submarine pieces",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "monkey-mosaics",
+      "title": "GTA 5 monkey mosaics",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "peyote-plants",
+      "title": "GTA 5 peyote plants",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "epsilon-tracts",
+      "title": "GTA 5 Epsilon tracts",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "hidden-packages",
+      "title": "GTA 5 hidden packages",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "stunt-jumps",
+      "title": "GTA 5 stunt jumps",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "under-the-bridge",
+      "title": "GTA 5 Under the Bridge flights",
+      "count": 1
+    },
+    {
+      "namespace": "gta",
+      "game": "gta-5",
+      "slug": "knife-flights",
+      "title": "GTA 5 knife flights",
+      "count": 1
+    }
+  ],
+  "robloxWikis": [
+    {
+      "slug": "blox-fruits",
+      "title": "Blox Fruits wiki",
+      "universe_id": 994732206
+    },
+    {
+      "slug": "1-stone-skipping",
+      "title": "1 Stone Skipping wiki",
+      "universe_id": 100000002
+    },
+    {
+      "slug": "sarab",
+      "title": "Sarab wiki",
+      "universe_id": 100000003
+    },
+    {
+      "slug": "grow-a-garden",
+      "title": "Grow a Garden wiki",
+      "universe_id": 100000004
+    },
+    {
+      "slug": "grow-a-garden-2",
+      "title": "Grow a Garden 2 wiki",
+      "universe_id": 100000005
+    },
+    {
+      "slug": "the-forge",
+      "title": "The Forge wiki",
+      "universe_id": 100000006
+    },
+    {
+      "slug": "wizard-alchemy",
+      "title": "Wizard Alchemy wiki",
+      "universe_id": 100000007
+    }
+  ],
+  "robloxCollections": [
+    {
+      "wiki": "1-stone-skipping",
+      "slug": "stones-and-throwables",
+      "title": "Stones and throwables",
+      "page_type": "database"
+    },
+    {
+      "wiki": "sarab",
+      "slug": "maps",
+      "title": "Sarab maps",
+      "page_type": "database"
+    },
+    {
+      "wiki": "sarab",
+      "slug": "badges",
+      "title": "Sarab badges",
+      "page_type": "collectible"
+    },
+    {
+      "wiki": "grow-a-garden",
+      "slug": "crops",
+      "title": "Grow a Garden crops",
+      "count": 1,
+      "fields": {
+        "averageValue": "20",
+        "averageWeight": "1 kg",
+        "priceFloorValue": "10",
+        "priceFloorWeight": "1 kg",
+        "tier": "Common",
+        "obtainable": "yes"
+      }
+    },
+    {
+      "wiki": "grow-a-garden-2",
+      "slug": "seeds",
+      "title": "Grow a Garden 2 seeds",
+      "count": 1,
+      "fields": {
+        "id": "carrot",
+        "price": "10",
+        "rarity": "Common",
+        "harvestType": "Single",
+        "availability": "Shop",
+        "whereToGet": "Seed shop"
+      }
+    },
+    {
+      "wiki": "grow-a-garden-2",
+      "slug": "mutations",
+      "title": "Grow a Garden 2 mutations",
+      "count": 1,
+      "fields": {
+        "id": "golden",
+        "multiplier": "2x",
+        "whereToGet": "Golden crop",
+        "bestUse": "High-value crops"
+      }
+    },
+    {
+      "wiki": "the-forge",
+      "slug": "ores",
+      "title": "The Forge ores",
+      "count": 1,
+      "fields": {
+        "region": "Stonewake Cross",
+        "rarity": "Common",
+        "dropChance": "1/2",
+        "multiplier": "1x",
+        "sellPrice": "10",
+        "rocks": "Pebble",
+        "trait": "None"
+      }
+    },
+    {
+      "wiki": "the-forge",
+      "slug": "weapons",
+      "title": "The Forge weapons",
+      "count": 1,
+      "fields": {
+        "weaponType": "Sword",
+        "type": "Sword",
+        "damage": "10",
+        "attackSpeed": "1",
+        "range": "5",
+        "price": "100",
+        "class": "Straight Sword",
+        "baseDamage": "10",
+        "sellPrice": "100",
+        "chance": "1/2"
+      }
+    },
+    {
+      "wiki": "the-forge",
+      "slug": "armors",
+      "title": "The Forge armors",
+      "count": 1,
+      "fields": {
+        "armorType": "Helmet",
+        "type": "Light",
+        "defense": "10",
+        "health": "100",
+        "price": "100",
+        "class": "Light",
+        "slot": "Helmet",
+        "baseHealth": "10",
+        "sellPrice": "100",
+        "chance": "1/2"
+      }
+    },
+    {
+      "wiki": "wizard-alchemy",
+      "slug": "potions",
+      "title": "Wizard Alchemy potions",
+      "count": 1,
+      "fields": {
+        "category": "Health",
+        "minMagic": 10,
+        "power": 20,
+        "effect": "Restore health",
+        "recommendedShard": "Ruby",
+        "compatibleRace": "Human"
+      }
+    },
+    {
+      "wiki": "wizard-alchemy",
+      "slug": "materials",
+      "title": "Wizard Alchemy materials",
+      "count": 1,
+      "fields": {
+        "collectionSection": "Shards",
+        "magicPower": 10,
+        "elementEffect": "Fire",
+        "source": "Mining"
+      }
+    },
+    {
+      "wiki": "wizard-alchemy",
+      "slug": "races",
+      "title": "Wizard Alchemy races",
+      "count": 1,
+      "fields": {
+        "collectionSection": "Common",
+        "rarity": "Common",
+        "rollChance": "50%",
+        "bestFor": "Starting out",
+        "coreBonus": "Health",
+        "passive": "Restore health",
+        "mainLimit": "None",
+        "elementSynergy": "Fire",
+        "keepPriority": "Low"
+      }
+    }
+  ]
+}

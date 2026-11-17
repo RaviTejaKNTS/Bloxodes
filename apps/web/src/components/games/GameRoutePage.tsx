@@ -1,3 +1,5 @@
+import { loadGameCodeSeoData } from "@/lib/game-code-seo";
+import { gameCodeDescription, normalizeActiveCodeTitle } from "@/lib/code-page-seo";
 import { GameMenuBridge } from "@/components/games/GameMenuBridge";
 import { getGameMenuForPath } from "@/lib/game-site-data";
 import { specializedMinecraftToolRoute, specializedGtaMapRoute } from "@/lib/specialized-game-route";
@@ -13,6 +15,7 @@ import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGameRoot, getGameWikiByPath, getGameWikiById, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath, getGameCollectionById, getGameCodeById, getGameToolById } from "@/lib/game-registry";
+import { loadGameWikiHubCollections } from "@/lib/game-wiki-hub-data";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 import { gameRootWikiPage } from "@/lib/game-root-page";
@@ -65,7 +68,11 @@ async function context(params: Props["params"]) {
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ctx = await context(params);
-  if (ctx.wiki) return gameWikiMetadata(ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki);
+  if (ctx.wiki) {
+    const page = ctx.wiki.game_id === ctx.root.id ? gameRootWikiPage(ctx.root, ctx.wiki) : ctx.wiki;
+    const collections = await loadGameWikiHubCollections(ctx.root.namespace, page.slug, page.game_kind);
+    return gameWikiMetadata(page, collections);
+  }
   if (ctx.collection) {
     return gameCollectionMetadata(ctx.collection, ctx.currentPage);
   }
@@ -80,8 +87,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   if (ctx.catalog) return gameContentMetadata(ctx.catalog);
   if (ctx.checklist) return checklistMetadata(ctx.checklist,gameChecklistConfig(ctx.root.namespace, ctx.checklist.canonical_path));
-  const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
-  return { openGraph: { title: ctx.codes?.title || ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
+  if (ctx.codes) {
+    const data = await loadGameCodeSeoData(ctx.codes.id, ctx.codes.namespace, ctx.codes.game_id);
+    const title = normalizeActiveCodeTitle(ctx.codes.seo_title || ctx.codes.title);
+    const description = gameCodeDescription(ctx.codes, data);
+    return {
+      title, description, alternates: buildAlternates(`${SITE_URL}${ctx.path}`),
+      openGraph: { title, description, url: SITE_URL + ctx.path, images: ctx.codes.image ? [ctx.codes.image] : [] },
+      twitter: { card: "summary_large_image", title, description, images: ctx.codes.image ? [ctx.codes.image] : [] }
+    };
+  }
+  // Any other game route keeps the root title, canonical and image.
+  const image = ctx.root.cover_image;
+  return { openGraph: { title: ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.root.title, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);

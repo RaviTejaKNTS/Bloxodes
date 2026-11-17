@@ -1143,7 +1143,7 @@ export async function listPublishedChecklistsPage(
         const { data, count, error, status } = await sb
           .from("checklist_pages_view")
           .select(
-            "id, slug, title, description_md, seo_description, cover_image, published_at, updated_at, created_at, item_count, leaf_item_count, universe, universe_id",
+            "id, slug, title, description_md, seo_description, published_at, updated_at, created_at, item_count, leaf_item_count, universe, universe_id",
             { count: "exact" }
           )
           .eq("is_public", true)

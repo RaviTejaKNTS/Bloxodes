@@ -1,3 +1,4 @@
+import { activeCodeLabel, normalizeActiveCodeTitle, codePageLastChecked, robloxCodePageDescription } from "@/lib/code-page-seo";
 import { resolvePageTypeGameRoute } from "@/lib/page-type-game-route";
 import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
@@ -30,7 +31,6 @@ import {
 } from "@/lib/db";
 import type { Code, CodePageWithCounts } from "@/lib/db";
 import {
-  CODES_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   breadcrumbJsonLd,
@@ -340,24 +340,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   const codes = Array.isArray((game as any).codes) ? ((game as any).codes as Code[]) : [];
-  const latestCodeFirstSeen = codes.reduce<string | null>((latest, code) => {
-    if (code.status !== "active") return latest;
-    if (!code.first_seen_at) return latest;
-    if (!latest || code.first_seen_at > latest) return code.first_seen_at;
-    return latest;
-  }, null);
   const activeCount = codes.filter((code) => code.status === "active").length;
-  const baselineUpdatedAt = resolveModifiedAt(game) ?? game.updated_at;
-  const lastContentUpdate = latestCodeFirstSeen && baselineUpdatedAt && latestCodeFirstSeen > baselineUpdatedAt
-    ? latestCodeFirstSeen
-    : baselineUpdatedAt ?? game.updated_at;
   const when = monthYear();
   const title =
-    resolveSeoTitle(game.seo_title) || `${game.name} Codes (${when}) - ${activeCount} Active Codes`;
-  const descriptionRaw =
-    game.seo_description ||
-    `Get the latest ${game.name} codes for ${when} and redeem them for free in-game rewards. Updated daily with only active and working codes.`;
-  const description = descriptionRaw?.trim() || CODES_DESCRIPTION;
+    normalizeActiveCodeTitle(resolveSeoTitle(game.seo_title) || `${game.name} Codes (${when}) - ${activeCodeLabel(activeCount)}`);
+  const description = robloxCodePageDescription(game, codes);
   const canonicalUrl = `${SITE_URL}/codes/${game.slug}`;
   const coverImage = game.cover_image?.startsWith("http")
     ? game.cover_image
@@ -478,7 +465,7 @@ export default async function GamePage({ params }: Params) {
     timeZone: "UTC",
   });
 
-  const lastChecked = codes.reduce((acc, c) => (acc > c.last_seen_at ? acc : c.last_seen_at), game.updated_at);
+  const lastChecked = codePageLastChecked(codes, game.updated_at) ?? lastContentUpdate;
   const allCodePages = await listCodePagesWithActiveCounts();
   const currentGenreL2 = normalizeCategory(universe?.genre_l2 ?? (game as any).genre_l2 ?? null);
   const currentGenreL1 = normalizeCategory(universe?.genre_l1 ?? (game as any).genre_l1 ?? null);
@@ -611,11 +598,7 @@ export default async function GamePage({ params }: Params) {
     : game.cover_image
       ? `${SITE_URL.replace(/\/$/, "")}/${game.cover_image.replace(/^\//, "")}`
       : `${SITE_URL}/Bloxodes.png`;
-  const metaDescriptionRaw = markdownToPlainText(
-    game.seo_description ||
-    `Get the latest ${game.name} codes for ${monthYear()} and redeem them for free in-game rewards. Updated daily with only active and working codes.`
-  );
-  const metaDescription = metaDescriptionRaw?.trim() || CODES_DESCRIPTION;
+  const metaDescription = robloxCodePageDescription(game, codes);
   const publishedAt = resolvePublishedAt(game) ?? game.created_at;
   const publishedIso = new Date(publishedAt).toISOString();
   const updatedIso = new Date(lastContentUpdate).toISOString();
