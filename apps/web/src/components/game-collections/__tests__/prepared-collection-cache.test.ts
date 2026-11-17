@@ -6,9 +6,10 @@ import {
   getTheForgeCollectionConfig, getPreparedTheForgeCollectionPageCount, loadPreparedTheForgeCollection
 } from "@/app/(site)/wiki/collections/games/the-forge";
 
+type CacheNode = { children: Map<unknown, CacheNode>; result?: { value: unknown } };
+
 const { loadRuntime, requestScope } = await vi.hoisted(async () => {
   const { AsyncLocalStorage } = await import("node:async_hooks");
-  type CacheNode = { children: Map<unknown, CacheNode>; result?: { value: unknown } };
   return {
     loadRuntime: vi.fn(),
     requestScope: new AsyncLocalStorage<Map<object, CacheNode>>()
@@ -27,13 +28,13 @@ vi.mock("react", async (importOriginal) => {
       return (...args: Args): Result => {
         const request = requestScope.getStore();
         if (!request) return loader(...args);
-        let node = request.get(key);
+        let node: CacheNode = request.get(key)!;
         if (!node) {
           node = { children: new Map() };
           request.set(key, node);
         }
         for (const arg of args) {
-          let child = node.children.get(arg);
+          let child: CacheNode | undefined = node.children.get(arg);
           if (!child) {
             child = { children: new Map() };
             node.children.set(arg, child);
