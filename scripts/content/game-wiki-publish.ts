@@ -1,3 +1,4 @@
+import { newCollectionImageKeys } from "../shared/publish-image-baseline";
 import { mapPublishConcurrent, readPublishQuery, formatPublishError } from "../shared/publish-network.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -220,6 +221,9 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   console.table(plans.map(plan => ({ code: plan.code, rows: plan.items.length, images: plan.items.filter(item => item.image_key).length, acceptedMissing: plan.items.filter(item => !item.image_key).length, contentHash: plan.contentHash })));
   for (const url of urls) console.log(`${options.target === "production" ? "Live" : "Canonical production URL, staged in managed-dev"}: https://bloxodes.com${url.path}`);
   if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes. Add --apply to publish."); return; }
+  const newImageKeysByPage = options.target === "production" && (options.liveImages ?? "new") === "new"
+    ? new Map(await mapPublishConcurrent(plans, async plan => [ `${wikiPath}/${plan.manifest.collection.slug}`, await newCollectionImageKeys(db, "game", plan.code, plan.contentHash, plan.items, bundle.namespace) ] as const))
+    : new Map<string, string[]>();
   if (options.target === "production") await assertLocalContentPublication();
   if (options.target === "production" && identity.hub && hub) {
     const directory = path.join(repoRoot, "tmp/publish-snapshots");
@@ -249,7 +253,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   if (options.target === "production") {
     const paths = [...new Set([`/${bundle.namespace}`, `/${bundle.namespace}/wiki`, wikiPath, ...urls.map(url => url.path)])];
     await mapPublishConcurrent(Array.from({ length: Math.ceil(paths.length / 100) }, (_, index) => paths.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch.map(route => ({ type: "game_content" as const, slug: route.slice(1) }))), { label: "revalidate batches" });
-    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images), { label: "live pages" });
+    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images, { mode: options.liveImages, uploadedImages: (newImageKeysByPage.get(url.path) ?? []).map(key => `https://media.bloxodes.com/wiki/${key}`), changedImages: artwork.map(image => image.url) }), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
 }
