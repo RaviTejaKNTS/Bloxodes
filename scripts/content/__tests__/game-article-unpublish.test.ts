@@ -99,13 +99,79 @@ test("unpublish refuses an article owned by another game", async () => {
   assert.equal(pages[0].is_published, true);
 });
 
-test("unpublish refuses missing and already-unpublished articles", async () => {
-  const hidden = [{ ...structuredClone(ARTICLE), is_published: false }];
-  const first = fakeDb(hidden);
-  await assert.rejects(unpublishGameArticle(bundle, { db: first.db, target: "managed-dev", apply: true, log: () => {} }), /already unpublished/);
-  assert.equal(first.writes.length, 0);
+const productionDeps = (calls: string[], overrides: Record<string, unknown> = {}) => ({
+  target: "production" as const, apply: true, log: () => {},
+  assertPublication: async () => { calls.push("guard"); },
+  lock: async () => async () => { calls.push("unlock"); },
+  revalidate: async (slug: string) => { calls.push(`revalidate:${slug}`); },
+  verifyGone: async (url: string) => { calls.push(`gone:${url}`); },
+  ...overrides,
+});
+
+test("unpublish refuses a missing article", async () => {
   const empty = fakeDb([]);
   await assert.rejects(unpublishGameArticle(bundle, { db: empty.db, target: "managed-dev", apply: false, log: () => {} }), /does not exist/);
+  assert.equal(empty.writes.length, 0);
+});
+
+test("already-unpublished article owned by the bundle only re-verifies", async () => {
+  const pages = [{ ...structuredClone(ARTICLE), is_published: false }];
+  const dry = fakeDb(pages);
+  const { out, log } = lines();
+  const preview = await unpublishGameArticle(bundle, { db: dry.db, target: "production", apply: false, log });
+  assert.equal(preview.applied, false);
+  assert.ok(out.some(line => line.includes("already unpublished") && line.includes("only re-verifies")));
+  assert.equal(dry.writes.length, 0);
+
+  const live = fakeDb(pages);
+  const calls: string[] = [];
+  const result = await unpublishGameArticle(bundle, { db: live.db, ...productionDeps(calls) });
+  assert.equal(result.applied, true);
+  assert.equal(result.wrote, false);
+  assert.equal(live.writes.length, 0, "no second mutation");
+  assert.deepEqual(calls, ["guard", `revalidate:${ARTICLE.slug}`, `gone:https://bloxodes.com/articles/${ARTICLE.slug}`, "unlock"]);
+});
+
+test("already-unpublished article of another game is still refused", async () => {
+  const pages = [{ ...structuredClone(ARTICLE), is_published: false, namespace: "red-dead", game_id: OTHER.id }];
+  const { db, writes } = fakeDb(pages);
+  await assert.rejects(unpublishGameArticle(bundle, { db, ...productionDeps([]) }), /another game/);
+  assert.equal(writes.length, 0);
+});
+
+test("revalidation failure after the write is fixed by a rerun with no second mutation", async () => {
+  const pages = [structuredClone(ARTICLE)];
+  const { db, writes } = fakeDb(pages);
+  const first: string[] = [];
+  await assert.rejects(unpublishGameArticle(bundle, { db, ...productionDeps(first, { revalidate: async () => { throw new Error("revalidate down"); } }) }), /revalidate down/);
+  assert.equal(writes.length, 1);
+  assert.equal(pages[0].is_published, false);
+  assert.deepEqual(first, ["guard", "unlock"], "lock released after the failure");
+
+  const second: string[] = [];
+  const result = await unpublishGameArticle(bundle, { db, ...productionDeps(second) });
+  assert.equal(result.applied, true);
+  assert.equal(result.wrote, false);
+  assert.equal(writes.length, 1, "rerun does not write again");
+  assert.deepEqual(second, ["guard", `revalidate:${ARTICLE.slug}`, `gone:https://bloxodes.com/articles/${ARTICLE.slug}`, "unlock"]);
+});
+
+test("lock is released when a step after acquisition throws", async () => {
+  for (const failure of ["preflight", "verifyGone"] as const) {
+    const pages = [structuredClone(ARTICLE)];
+    const { db } = fakeDb(pages);
+    const calls: string[] = [];
+    let preflights = 0;
+    const flaky = {
+      from(table: string) {
+        if (failure === "preflight" && table === "games" && ++preflights === 2) throw new Error("db down");
+        return db.from(table);
+      },
+    } as any;
+    const overrides = failure === "verifyGone" ? { verifyGone: async () => { throw new Error("still live"); } } : {};
+    await assert.rejects(unpublishGameArticle(bundle, { db: flaky, ...productionDeps(calls, overrides) }), failure === "preflight" ? /db down/ : /still live/);
+    assert.equal(calls.at(-1), "unlock", `unlock after ${failure} failure`);
+  }
 });
 
 test("production apply refuses without its guards", async () => {

@@ -31,24 +31,26 @@ async function read(query: () => PromiseLike<any>) {
 }
 
 // Read the owning game, the article row and its route, and refuse anything
-// that is not one live article of this bundle's game.
+// that is not an article of this bundle's game. An already-unpublished row the
+// bundle owns is allowed so a rerun can repeat the checks after a failed step.
 export async function unpublishPreflight(db: SupabaseClient, bundle: Bundle) {
   const game = await read(() => db.from("games").select("id,namespace,slug,kind").eq("namespace", bundle.namespace).eq("slug", bundle.game.slug).eq("kind", bundle.game.kind).maybeSingle());
   if (!game) throw new Error(`Owning game ${bundle.namespace}/${bundle.game.slug} (${bundle.game.kind}) does not exist.`);
   const current: Row | null = await read(() => db.from("game_article_pages").select("*").eq("slug", bundle.slug).maybeSingle());
   if (!current) throw new Error(`Game article ${bundle.slug} does not exist; nothing to unpublish.`);
   if (current.namespace !== bundle.namespace || current.game_id !== game.id) throw new Error("Article slug belongs to another game; refusing to unpublish.");
-  if (current.is_published !== true) throw new Error(`Game article ${bundle.slug} is already unpublished.`);
+  if (current.is_published !== true && current.is_published !== false) throw new Error(`Game article ${bundle.slug} has no published state; refusing to unpublish.`);
   const route = await read(() => db.from("site_routes").select("source,page_type,page_id,game_id,status").eq("path", `/articles/${bundle.slug}`).maybeSingle());
   if (route && (route.source !== "game" || route.page_type !== "article" || route.page_id !== current.id)) throw new Error("Article route is owned by another page; refusing to unpublish.");
-  return { game, current, route };
+  return { game, current, route, alreadyUnpublished: current.is_published === false };
 }
 
 export async function unpublishGameArticle(bundle: Bundle, deps: UnpublishDeps) {
   const log = deps.log ?? console.log;
   const url = `https://bloxodes.com/articles/${bundle.slug}`;
-  const { game, current, route } = await unpublishPreflight(deps.db, bundle);
-  log(`Plan: set game_article_pages.is_published=false for ${bundle.slug} (id ${current.id}, ${bundle.namespace}/${game.slug}). Content, author, cover and published_at stay. Route ${route ? `/articles/${bundle.slug} (${route.status})` : "none"} stays reserved for this article.`);
+  const { game, current, route, alreadyUnpublished } = await unpublishPreflight(deps.db, bundle);
+  if (alreadyUnpublished) log(`Plan: ${bundle.slug} (id ${current.id}, ${bundle.namespace}/${game.slug}) is already unpublished. Apply skips the write and only re-verifies readback, revalidation and the live 404.`);
+  else log(`Plan: set game_article_pages.is_published=false for ${bundle.slug} (id ${current.id}, ${bundle.namespace}/${game.slug}). Content, author, cover and published_at stay. Route ${route ? `/articles/${bundle.slug} (${route.status})` : "none"} stays reserved for this article.`);
   if (!deps.apply) {
     log("PASS game-article@1 unpublish preflight; no writes.");
     return { applied: false as const, id: current.id };
@@ -62,13 +64,17 @@ export async function unpublishGameArticle(bundle: Bundle, deps: UnpublishDeps) 
   try {
     const latest = await unpublishPreflight(deps.db, bundle);
     if (!isDeepStrictEqual(latest.current, current)) throw new Error("Live game article changed during unpublish preflight; retry.");
-    // Not retried: a mutation must run once. The filters make it a no-op if the row moved.
-    let update = deps.db.from("game_article_pages").update({ is_published: false })
-      .eq("id", current.id).eq("namespace", bundle.namespace).eq("game_id", game.id).eq("is_published", true);
-    if (current.updated_at) update = update.eq("updated_at", current.updated_at);
-    const written = await update.select("*").maybeSingle();
-    if (written.error) throw written.error;
-    if (!written.data) throw new Error("Game article changed before write; nothing was unpublished. Retry.");
+    if (alreadyUnpublished) {
+      log(`Skip write: ${bundle.slug} is already unpublished; repeating the checks only.`);
+    } else {
+      // Not retried: a mutation must run once. The filters make it a no-op if the row moved.
+      let update = deps.db.from("game_article_pages").update({ is_published: false })
+        .eq("id", current.id).eq("namespace", bundle.namespace).eq("game_id", game.id).eq("is_published", true);
+      if (current.updated_at) update = update.eq("updated_at", current.updated_at);
+      const written = await update.select("*").maybeSingle();
+      if (written.error) throw written.error;
+      if (!written.data) throw new Error("Game article changed before write; nothing was unpublished. Retry.");
+    }
     // Read back from the table, not the write response.
     const stored: Row = await read(() => deps.db.from("game_article_pages").select("*").eq("id", current.id).single());
     if (stored.is_published !== false) throw new Error("Readback: game article is still published.");
@@ -84,8 +90,8 @@ export async function unpublishGameArticle(bundle: Bundle, deps: UnpublishDeps) 
       await deps.revalidate!(bundle.slug);
       await deps.verifyGone!(url);
     }
-    log(`PASS unpublished game article: ${url}`);
-    return { applied: true as const, id: current.id };
+    log(`PASS ${alreadyUnpublished ? "re-verified unpublished" : "unpublished"} game article: ${url}`);
+    return { applied: true as const, id: current.id, wrote: !alreadyUnpublished };
   } finally { await unlock(); }
 }
 
