@@ -194,7 +194,7 @@ test('hub selection requires frozen exact cover evidence while leaving authoring
   assert.throws(() => selectedPlan(root, hubBatch)); // Missing evidence cannot fall back to a mutable CDN URL.
   put('hub/final.json.qa-cover.json', evidence);
   const before = fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8');
-  assert.equal(selectedPlan(root, hubBatch).hubs[0].cover.url, `https://media.bloxodes.com/wiki/7/hubs/cover-${evidence.sha256.slice(0, 16)}.png`);
+  assert.equal(selectedPlan(root, hubBatch).hubs[0].cover.url, `https://wiki-media.bloxodes.com/7/hubs/cover-${evidence.sha256.slice(0, 16)}.png`);
   assert.equal(fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8'), before);
   for (const mutation of [{...evidence, sha256: 'a'.repeat(64)}, {...evidence, file: '../escape.png'}, {...evidence, file: '/cover.png'}, {...evidence, format: 'svg'}, {...evidence, url: 'https://example.com/cover.png'}]) {
     put('hub/final.json.qa-cover.json', mutation);

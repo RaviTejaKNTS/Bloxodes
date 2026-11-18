@@ -84,5 +84,5 @@ The Content Factory has no env files. Its `bin/publisher` runs these commands fr
 
 ## Known issues
 
-- `WIKI_MEDIA_PUBLIC_BASE_URL` sits in `env/examples/retired.env.example` but `apps/web/src/lib/wiki-media.ts` still reads it as an optional override.
+- `WIKI_MEDIA_PUBLIC_BASE_URL` sits in `env/examples/retired.env.example` but `apps/web/src/lib/wiki-media.ts` still reads it as an optional override (default `https://wiki-media.bloxodes.com`). Leave it unset: publishers refuse to run with any other value.
 - Legacy names `HOSTINGER_Token`, `VPS_ADMIN_PASSWORD1` and the `ARTICLE_WRITER_PI_*` group remain in private profiles with no code consumer.

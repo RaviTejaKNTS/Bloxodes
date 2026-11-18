@@ -43,7 +43,7 @@ function runtimeDocument(item: Record<string, unknown>, section = "Items") {
         slug,
         section,
         sortOrder: 1,
-        image: `https://media.bloxodes.com/wiki/test/${slug}.webp`
+        image: `https://wiki-media.bloxodes.com/test/${slug}.webp`
       }
     }]
   };
@@ -143,7 +143,7 @@ describe("tool datasets use published collection runtimes", () => {
     expect(ores.ores.length).toBeGreaterThan(0);
     expect(weapons.weapons.length).toBeGreaterThan(0);
     expect(armors.armorPieces.length).toBeGreaterThan(0);
-    expect(ores.ores.find((item) => item.imageUrl)?.imageUrl).toMatch(/^https:\/\/media\.bloxodes\.com\/wiki\//);
+    expect(ores.ores.find((item) => item.imageUrl)?.imageUrl).toMatch(/^https:\/\/wiki-media\.bloxodes\.com\//);
   });
 
   it("loads both garden tool families from database-shaped documents", async () => {
@@ -155,7 +155,7 @@ describe("tool datasets use published collection runtimes", () => {
     expect(garden.crops.length).toBeGreaterThan(0);
     expect(garden2.crops.length).toBeGreaterThan(0);
     expect(garden2.mutations.length).toBeGreaterThan(0);
-    expect(garden.crops.find((item) => item.imageUrl)?.imageUrl).toMatch(/^https:\/\/media\.bloxodes\.com\/wiki\//);
+    expect(garden.crops.find((item) => item.imageUrl)?.imageUrl).toMatch(/^https:\/\/wiki-media\.bloxodes\.com\//);
   });
 
   it("loads the specialized Grow a Garden collection page from the database document", async () => {
@@ -164,7 +164,7 @@ describe("tool datasets use published collection runtimes", () => {
     const dataset = await loadGrowGardenCollectionDataset(config!);
 
     expect(dataset.items.length).toBeGreaterThan(0);
-    expect(dataset.items.find((item) => item.image)?.image).toMatch(/^https:\/\/media\.bloxodes\.com\/wiki\//);
+    expect(dataset.items.find((item) => item.image)?.image).toMatch(/^https:\/\/wiki-media\.bloxodes\.com\//);
   });
 
   it("loads Wizard Alchemy planner datasets from database-shaped documents", async () => {
@@ -176,6 +176,6 @@ describe("tool datasets use published collection runtimes", () => {
     expect(planner.potions.length).toBeGreaterThan(0);
     expect(planner.materials.length).toBeGreaterThan(0);
     expect(rerolls.races.length).toBeGreaterThan(0);
-    expect(planner.potions.find((item) => item.image)?.image).toMatch(/^https:\/\/media\.bloxodes\.com\/wiki\//);
+    expect(planner.potions.find((item) => item.image)?.image).toMatch(/^https:\/\/wiki-media\.bloxodes\.com\//);
   });
 });

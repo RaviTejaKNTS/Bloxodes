@@ -5,6 +5,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { preserveCatalogPublicationDates } from "../shared/catalog-publication";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
@@ -101,7 +102,8 @@ function parseArgs(argv: string[]): CliOptions {
 async function readJson(filePath: string): Promise<unknown> {
   const resolved = path.resolve(process.cwd(), filePath);
   const raw = await readFile(resolved, "utf8");
-  return JSON.parse(raw);
+  // Older files may carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+  return rewriteLegacyWikiMediaUrlsDeep(JSON.parse(raw));
 }
 
 function isCatalogPageFinal(value: unknown): value is CatalogPageFinal {

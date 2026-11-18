@@ -99,12 +99,12 @@ test("Supabase reads across nested collection batches share one request limit", 
 });
 
 test("live image modes select uploads and changed hub artwork without discovering old images", () => {
-  const old = "https://media.bloxodes.com/wiki/existing.png";
-  const fresh = "https://media.bloxodes.com/wiki/upload.png";
-  const cover = "https://media.bloxodes.com/wiki/cover.png";
-  const hero = "https://media.bloxodes.com/wiki/hero.png";
+  const old = "https://wiki-media.bloxodes.com/existing.png";
+  const fresh = "https://wiki-media.bloxodes.com/upload.png";
+  const cover = "https://wiki-media.bloxodes.com/cover.png";
+  const hero = "https://wiki-media.bloxodes.com/hero.png";
   const extra = "https://bloxodes.com/extra.png";
-  const input = { expectedImages: [old, fresh, cover, hero, fresh], renderedImages: [old, extra], uploadedImages: [fresh, "https://media.bloxodes.com/wiki/other-page.png"], changedImages: [cover, hero] };
+  const input = { expectedImages: [old, fresh, cover, hero, fresh], renderedImages: [old, extra], uploadedImages: [fresh, "https://wiki-media.bloxodes.com/other-page.png"], changedImages: [cover, hero] };
   assert.deepEqual(selectLiveImages(input), [fresh, cover, hero]);
   assert.deepEqual(selectLiveImages({ ...input, mode: "new" }), [fresh, cover, hero]);
   assert.deepEqual(selectLiveImages({ ...input, mode: "all" }), [old, fresh, cover, hero, extra]);
@@ -113,34 +113,16 @@ test("live image modes select uploads and changed hub artwork without discoverin
   assert.deepEqual(selectLiveImages({ expectedImages: [] }), []);
 });
 
-test("media quota failures name the Worker limit and never retry, including nested retry wrappers", async () => {
-  for (const [status, body] of [[429, "error code: 1027"], [500, "error code: 1027"], [503, " \nerror code: 1027\n "]] as const) {
+test("live image responses retry rate limits and server errors, and fail fast on other errors", async () => {
+  for (const [status, body] of [[429, "Too many requests"], [500, "item failed"], [503, "error code: 1027"], [404, "Not found"]] as const) {
     let attempts = 0;
-    await assert.rejects(retryPublishNetwork(() => retryPublishNetwork(async () => {
+    await assert.rejects(retryPublishNetwork(async () => {
       attempts++;
-      await requireLiveImageResponse(new Response(body, { status }), "https://media.bloxodes.com/wiki/image.png");
-    }, { sleep: async () => assert.fail("must not retry") }), { sleep: async () => assert.fail("must not retry") }), /Cloudflare Workers daily request quota.*100,000/);
-    assert.equal(attempts, 1);
+      await requireLiveImageResponse(new Response(body, { status }), "https://wiki-media.bloxodes.com/image.png");
+    }, { sleep: async () => {} }), { status });
+    assert.equal(attempts, status === 404 ? 1 : 3);
   }
-  await assert.rejects(requireLiveImageResponse(new Response(null, { status: 429 }), "https://elsewhere.example/image.png"), /HTTP 429/);
   const image = new Response("bytes", { headers: { "content-type": "image/png" } });
-  assert.equal(await requireLiveImageResponse(image, "https://media.bloxodes.com/wiki/image.png"), image);
+  assert.equal(await requireLiveImageResponse(image, "https://wiki-media.bloxodes.com/image.png"), image);
   assert.equal(await image.text(), "bytes");
-});
-
-
-test("ordinary rate limits and server errors retry, unrelated 1027 text is not Worker quota", async () => {
-  for (const host of ["media.bloxodes.com", "elsewhere.example"]) {
-    for (const [status, body] of [[429, "Too many requests"], [500, "item 1027 failed"], [503, "<h1>error code: 1027</h1>"], [429, "error code: 1027 extra"], [404, "error code: 1027"]] as const) {
-      let attempts = 0;
-      await assert.rejects(retryPublishNetwork(async () => {
-        attempts++;
-        await requireLiveImageResponse(new Response(body, { status }), `https://${host}/wiki/image.png`);
-      }, { sleep: async () => {} }), { status });
-      assert.equal(attempts, status === 404 ? 1 : 3);
-    }
-  }
-  await assert.rejects(requireLiveImageResponse(new Response("error code: 1027", { status: 503 }), "https://elsewhere.example/image.png"), { status: 503 });
-  const ok = new Response("item 1027", { status: 200 });
-  assert.equal(await requireLiveImageResponse(ok, "https://media.bloxodes.com/wiki/image.png"), ok);
 });

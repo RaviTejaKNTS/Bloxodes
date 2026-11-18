@@ -42,7 +42,7 @@ describe("database-backed wiki collection renderer", () => {
               slug: "test-item",
               section: "Rare",
               sortOrder: 10,
-              image: "https://media.bloxodes.com/wiki/123/items/test-item-abcd.webp"
+              image: "https://wiki-media.bloxodes.com/123/items/test-item-abcd.webp"
             }
           }
         ]
@@ -50,7 +50,7 @@ describe("database-backed wiki collection renderer", () => {
     );
 
     expect(prepared.dataset.items).toHaveLength(1);
-    expect(prepared.dataset.items[0].image).toContain("media.bloxodes.com/wiki/");
+    expect(prepared.dataset.items[0].image).toContain("wiki-media.bloxodes.com/");
     expect(prepared.groupedSections.map((section) => section.label)).toEqual(["Rare"]);
     expect(prepared.totalPages).toBe(1);
     expect(prepared.viewConfig.cardFields).toContain("videoUrl");

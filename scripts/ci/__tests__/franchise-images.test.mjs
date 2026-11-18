@@ -95,3 +95,16 @@ test('image contract uses bounded concurrent page reads and deduplicated image c
   assert.equal(images.length, 14, '12 tool images and two root images');
   assert.equal(new Set(images.map(image => `${image.role}:${image.url}`)).size, 14);
 });
+
+test('wiki media is accepted on the R2 custom domain and the retired Worker route, and always checked on the new host', async () => {
+  const key = 'example/child/hub-cover-0123456789abcdef.webp';
+  assert.equal(franchiseImageUrl(`https://wiki-media.bloxodes.com/${key}`), `https://wiki-media.bloxodes.com/${key}`);
+  assert.equal(franchiseImageUrl(`https://media.bloxodes.com/wiki/${key}`), `https://wiki-media.bloxodes.com/${key}`);
+  assert.equal(franchiseImageUrl('https://media.bloxodes.com/wiki-cover.webp'), 'https://media.bloxodes.com/wiki-cover.webp');
+  for (const bad of ['https://wiki-media.bloxodes.com.evil.test/a.png', 'http://wiki-media.bloxodes.com/a.png', 'https://wiki-media.bloxodes.com:8443/a.png']) assert.equal(franchiseImageUrl(bad), null);
+  const legacy = { ...game, cover_image: `https://media.bloxodes.com/wiki/${key}`, hero_image: 'https://media.bloxodes.com/wiki/example/child/hub-hero-0123456789abcdef.webp' };
+  assert.deepEqual(requireFranchiseHubImages(legacy).map(image => image.url), [`https://wiki-media.bloxodes.com/${key}`, 'https://wiki-media.bloxodes.com/example/child/hub-hero-0123456789abcdef.webp']);
+  const verified = await validate({ quizzes: [page] }, { games: [root, legacy] });
+  assert.ok(verified.some(image => image.url === `https://wiki-media.bloxodes.com/${key}`));
+  assert.ok(!verified.some(image => image.url.startsWith('https://media.bloxodes.com/wiki/')));
+});

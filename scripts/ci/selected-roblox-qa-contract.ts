@@ -2,6 +2,7 @@
  * Keep this import graph free of the backend runner and its I/O dependencies.
  */
 import {markdownToPlainText} from '../../apps/web/src/lib/markdown';
+import {wikiMediaUrl} from '../../apps/web/src/lib/wiki-media';
 
 export class QaFailure extends Error {}
 // Same target as the franchise contract, without importing its file/bundle graph.
@@ -23,7 +24,7 @@ export function publishedHubCover(universeId: number, input: unknown) {
       typeof evidence.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(evidence.sha256) ||
       !['png', 'jpeg', 'webp', 'avif'].includes(evidence.format)) throw new QaFailure('Invalid frozen hub cover evidence.');
   const extension = evidence.format === 'jpeg' ? 'jpg' : evidence.format;
-  return {...evidence, url: `https://media.bloxodes.com/wiki/${universeId}/hubs/cover-${evidence.sha256.slice(0, 16)}.${extension}`};
+  return {...evidence, url: wikiMediaUrl(`${universeId}/hubs/cover-${evidence.sha256.slice(0, 16)}.${extension}`)};
 }
 
 // Mirror only the pure metadata values from apps/web/src/lib/seo.ts here.

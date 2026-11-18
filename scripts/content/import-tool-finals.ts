@@ -6,6 +6,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
@@ -165,7 +166,8 @@ async function loadRows(files: string[]): Promise<ToolRow[]> {
 
   for (const file of files) {
     const raw = await readFile(path.resolve(process.cwd(), file), "utf8");
-    const row = normalizeFinal(JSON.parse(raw) as unknown, file);
+    // Older files may carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+    const row = normalizeFinal(rewriteLegacyWikiMediaUrlsDeep(JSON.parse(raw) as unknown), file);
     if (seen.has(row.code)) throw new Error(`Duplicate tool code in import: ${row.code}`);
     seen.add(row.code);
     rows.push(row);

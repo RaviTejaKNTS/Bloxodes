@@ -3,6 +3,7 @@ import { validateFranchisePublicationImages } from "../shared/franchise-page-ima
 import "../shared/load-env";
 import { reservedGameNamespaces } from "../../apps/web/src/lib/game-route-names";
 import { parseGameMapData, parseGameQuizData, parseGameCatalogData } from "../../apps/web/src/lib/game-page-data";
+import { rewriteLegacyWikiMediaUrlsDeep } from "../../apps/web/src/lib/wiki-media";
 import fs from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
@@ -23,7 +24,8 @@ async function main() {
   if (!argv.includes("--allow-prod")) throw new Error("Production publication requires --allow-prod.");
   assertProductionPublication();
  }
- const payload = JSON.parse(await fs.readFile(file, "utf8")) as Record<string, Array<Record<string, unknown>>>;
+ // Older payloads carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+ const payload = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await fs.readFile(file, "utf8")) as Record<string, Array<Record<string, unknown>>>);
  const contract = { games: { table: "games", conflict: "namespace,slug,kind" }, wiki: { table: "game_wiki_pages", conflict: "game_id" }, codesPages: { table: "game_code_pages", conflict: "game_id" }, tools: { table: "game_tool_pages", conflict: "namespace,slug" }, maps: { table: "game_map_pages", conflict:"namespace,slug" }, articles:{table:"game_article_pages",conflict:"namespace,slug"}, quizzes:{table:"game_quiz_pages",conflict:"namespace,slug"}, catalog:{table:"game_catalog_pages",conflict:"namespace,slug"}, checklists:{table:"game_checklist_pages",conflict:"namespace,slug"}, checklistItems:{table:"game_checklist_items",conflict:"page_id,item_key"}, codes: { table: "game_codes", conflict: "code_page_id,code" } } as const;
  if (!Object.keys(payload).length || Object.keys(payload).some(key => !(key in contract))) throw new Error("Supported groups: games, wiki, codesPages, tools, maps, articles, quizzes, catalog, checklists, checklistItems, codes.");
  const sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false } });

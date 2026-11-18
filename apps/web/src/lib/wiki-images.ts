@@ -1,3 +1,5 @@
+import { rewriteLegacyWikiMediaUrls, wikiMediaKeyFromUrl } from "@/lib/wiki-media";
+
 type WikiImageFields = {
   cover_image?: string | null;
   icon_url?: string | null;
@@ -13,7 +15,7 @@ function normalizeImage(value?: string | null): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
   if (!trimmed) return null;
-  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (/^https?:\/\//i.test(trimmed)) return rewriteLegacyWikiMediaUrls(trimmed);
   return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
 }
 
@@ -42,7 +44,7 @@ export function pickWikiThumbnail(value: unknown): string | null {
 
 function publishedR2HubCover(page: WikiImageFields): string | null {
   const cover = normalizeImage(page.cover_image);
-  return cover && /^https:\/\/media\.bloxodes\.com\/wiki\/\d+\/hubs\/cover-[a-f0-9]+\./.test(cover) ? cover : null;
+  return cover && /^\d+\/hubs\/cover-[a-f0-9]+\./.test(wikiMediaKeyFromUrl(cover) ?? "") ? cover : null;
 }
 
 export function resolveWikiCardImage(page: WikiImageFields): string | null {

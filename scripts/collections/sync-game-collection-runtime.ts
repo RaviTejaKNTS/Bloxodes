@@ -9,6 +9,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { type GameCollectionConfig } from "@/lib/game-collections";
+import { rewriteLegacyWikiMediaUrls, rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { assertRobloxCollectionCopy } from "../content/roblox-collection-copy";
@@ -175,7 +176,8 @@ async function resolveImageSource(
     if (!options.allowRemoteImages || !normalizeLegacyMedia) {
       throw new Error(`Remote image ${value} must be downloaded and verified before runtime publication.`);
     }
-    const url = new URL(value);
+    // Read retired media.bloxodes.com/wiki images from the R2 custom domain, not through the redirect.
+    const url = new URL(rewriteLegacyWikiMediaUrls(value));
     if (url.protocol !== "https:") throw new Error(`Collection image must use HTTPS: ${value}`);
     return { sourcePath: null, sourceGitPath: null, sourceUrl: url.toString() };
   }
@@ -474,8 +476,9 @@ export async function planCollection(source: CollectionSource, documentOverride?
         : document.meta?.sources || document.meta?.sourceUrls || []
     },
     items,
+    // Older bundles carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
     finalJson: source.finalJsonPath
-      ? JSON.parse(await fs.readFile(source.finalJsonPath, "utf8")) as Record<string, unknown>
+      ? rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await fs.readFile(source.finalJsonPath, "utf8")) as Record<string, unknown>)
       : null
   };
 }
@@ -522,7 +525,8 @@ function resolveCountTokens<T>(value: T, count: number): T {
 
 export function pageCopyFromFinal(plan: CollectionPlan) {
   if (!plan.finalJson) return null;
-  const final = resolveCountTokens(plan.finalJson, plan.items.length);
+  // Callers may set plan.finalJson directly, so canonicalize wiki media URLs here too.
+  const final = rewriteLegacyWikiMediaUrlsDeep(resolveCountTokens(plan.finalJson, plan.items.length));
   if (final.code !== plan.config.code) {
     throw new Error(`${plan.config.code} final.json has code ${String(final.code || "(missing)")}.`);
   }

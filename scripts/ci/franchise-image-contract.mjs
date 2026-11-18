@@ -1,14 +1,16 @@
 import { mapPublishConcurrent } from "../shared/publish-network.mjs";
+import { rewriteLegacyWikiMediaUrl, WIKI_MEDIA_HOSTNAME } from "../shared/wiki-media-url.mjs";
 
 const pageGroups = ['wiki', 'codesPages', 'tools', 'maps', 'quizzes', 'articles', 'catalog', 'checklists'];
 const published = (group, row) => row?.[group === 'checklists' ? 'is_public' : 'is_published'] === true;
-// Stored franchise media uses this origin; arbitrary Supabase projects are not trusted.
-const imageHosts = new Set(['media.bloxodes.com']);
+// Stored franchise media uses these origins (Storage and the wiki R2 custom domain); arbitrary Supabase projects are not trusted.
+const imageHosts = new Set(['media.bloxodes.com', WIKI_MEDIA_HOSTNAME]);
 
+/** The approved image URL, with a retired media.bloxodes.com/wiki URL moved to the R2 custom domain. */
 export function franchiseImageUrl(value) {
   if (typeof value !== 'string' || !value.trim() || /[\s\\]/.test(value)) return null;
   try {
-    const url = new URL(value);
+    const url = new URL(rewriteLegacyWikiMediaUrl(new URL(value).href));
     if (url.protocol !== 'https:' || !imageHosts.has(url.hostname) || url.port || url.username || url.password || /\/Bloxodes(?:-(?:dark|light))?\.(png|webp|svg)$/i.test(url.pathname)) return null;
     return url.href;
   } catch { return null; }

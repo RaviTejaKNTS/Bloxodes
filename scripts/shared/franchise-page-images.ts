@@ -1,4 +1,4 @@
-import { retryPublishNetwork, requirePublishResponse, requireLiveImageResponse, readPublishQuery, formatPublishError } from "./publish-network.mjs";
+import { retryPublishNetwork, requirePublishResponse, readPublishQuery, formatPublishError } from "./publish-network.mjs";
 import sharp from "sharp";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { assertFranchisePageImages, franchiseImageUrl } from "../ci/franchise-image-contract.mjs";
@@ -37,14 +37,7 @@ export async function verifyFranchisePageImage({ url, role, label }: { url: stri
   if (!allowedUrl) throw new Error(`${label}: disallowed ${role} image URL ${formatPublishError(url)}`);
   const bytes = await retryPublishNetwork(async () => {
     const response = await fetch(allowedUrl, { redirect: "manual", signal: AbortSignal.timeout(30_000) });
-    const context = `${label}: unavailable ${role} image ${allowedUrl} (redirects are not allowed)`;
-    if (new URL(allowedUrl).hostname === "media.bloxodes.com") {
-      await requireLiveImageResponse(response, allowedUrl).catch(error => {
-        throw Object.assign(new Error(`${context}: ${formatPublishError(error)}`), { cause: error });
-      });
-    } else {
-      await requirePublishResponse(response, context);
-    }
+    await requirePublishResponse(response, `${label}: unavailable ${role} image ${allowedUrl} (redirects are not allowed)`);
     if (!response.headers.get("content-type")?.startsWith("image/")) {
       await response.body?.cancel().catch(() => {});
       throw new Error(`${label}: unavailable ${role} image ${allowedUrl} (not an image)`);

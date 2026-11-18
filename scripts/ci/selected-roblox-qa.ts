@@ -15,6 +15,7 @@ import {bundleInput, collectionVisibleFacts, stable} from './selected-franchise-
 import {assertEnvironment, publishedHubCover, QaFailure} from './selected-roblox-qa-contract';
 import {getFieldLabel} from '../../apps/web/src/lib/game-collections';
 import {resolveWikiCardImage, resolveWikiMetadataImage} from '../../apps/web/src/lib/wiki-images';
+import {rewriteLegacyWikiMediaUrlsDeep as currentMedia, wikiMediaUrl} from '../../apps/web/src/lib/wiki-media';
 import {validateRobloxHubCover} from '../shared/roblox-hub-cover';
 
 export {assertEnvironment, robloxMetadata} from './selected-roblox-qa-contract';
@@ -167,8 +168,9 @@ async function verify() {
   const readback: any[] = [], browser: any = {urls: plan.urls, collections: [], hubs: []}, media = new Set<string>();
   for (const hub of plan.hubs) {
     const row = await result(db.from('wiki_pages').select('*').eq('slug', hub.final.slug).single());
-    for (const key of ['slug', 'universe_id', 'title', 'seo_title', 'meta_description', 'description_md', 'tips_md']) same(hub.final[key], row[key], `Hub ${key}`);
-    same(hub.final.controls_json ?? [], row.controls_json, 'Hub controls');
+    // Publishers store retired media.bloxodes.com/wiki URLs on the R2 custom domain.
+    for (const key of ['slug', 'universe_id', 'title', 'seo_title', 'meta_description', 'description_md', 'tips_md']) same(currentMedia(hub.final[key]), row[key], `Hub ${key}`);
+    same(currentMedia(hub.final.controls_json ?? []), row.controls_json, 'Hub controls');
     same(true, row.is_published, 'Hub publication');
     const universe = await result(db.from('roblox_universes').select('icon_url,thumbnail_urls').eq('universe_id', row.universe_id).single());
     const artwork = await verifyPublishedHubArtwork(hub, row, universe);
@@ -182,7 +184,7 @@ async function verify() {
     const identity = {code: final.code, wiki_slug: manifest.game.slug, collection_slug: manifest.collection.slug, universe_id: manifest.game.universeId, page_type: manifest.collection.pageType, item_count: dataset.items.length, is_published: true};
     for (const [key, value] of Object.entries(identity)) same(value, page[key], `${final.code}.${key}`);
     if (!page.published_dataset_id) throw new QaFailure('Missing staged revision pointer.');
-    const copy = resolveCount(final, dataset.items.length);
+    const copy = currentMedia(resolveCount(final, dataset.items.length));
     for (const key of ['intro_md', 'how_it_works_md', 'description_md', 'wiki_md']) if (typeof copy[key] !== 'string') copy[key] = null;
     copy.schema_ld_json = copy.schema_ld_json && typeof copy.schema_ld_json === 'object' ? copy.schema_ld_json : null;
     copy.thumb_url = typeof copy.thumb_url === 'string' && copy.thumb_url.trim() ? copy.thumb_url : null;
@@ -210,7 +212,7 @@ async function verify() {
         if (!/^[a-f0-9]{64}$/.test(saved.image_sha256 ?? '') || !['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/avif'].includes(saved.image_mime)) throw new QaFailure('Missing exact image metadata.');
         const extension = saved.image_mime === 'image/jpeg' ? 'jpg' : saved.image_mime.slice(6);
         same(`${manifest.game.universeId}/${manifest.collection.slug}/${item.item_slug}-${saved.image_sha256.slice(0, 16)}.${extension}`, saved.image_key, 'Roblox image key');
-        image = `https://media.bloxodes.com/wiki/${saved.image_key}`;
+        image = wikiMediaUrl(saved.image_key);
         if (!media.has(image)) {
           const remote = await fetch(image, {redirect: 'error', signal: AbortSignal.timeout(30_000)});
           if (!remote.ok) throw new QaFailure('Selected public media is unavailable.');

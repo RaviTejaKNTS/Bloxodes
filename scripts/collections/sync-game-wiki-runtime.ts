@@ -9,6 +9,7 @@ import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { ensureOfficialUniverseMedia, hasOfficialUniverseMedia } from "@/lib/roblox/universe-media";
 import { normalizeWikiCoverOverride } from "@/lib/wiki-images";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 
@@ -45,7 +46,8 @@ function requiredString(input: unknown, field: string, minimum = 1): string {
 }
 
 export async function readFinal(file: string, coverOverride = allowCoverOverride): Promise<WikiFinal> {
-  const parsed = JSON.parse(await fs.readFile(file, "utf8")) as Partial<WikiFinal>;
+  // Older bundles carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+  const parsed = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await fs.readFile(file, "utf8")) as Partial<WikiFinal>);
   if (!Number.isSafeInteger(parsed.universe_id) || Number(parsed.universe_id) <= 0) {
     throw new Error("wiki final universe_id must be a positive safe integer.");
   }

@@ -248,8 +248,8 @@ test("live verification retries transport failures, checks every image, and reje
   assert.equal(images.get("https://media.bloxodes.com/0.png"), 2);
   assert.ok(maximum > 1 && maximum <= 8);
   images.clear();
-  const fresh = "https://media.bloxodes.com/wiki/new.png";
-  const old = "https://media.bloxodes.com/wiki/old.png";
+  const fresh = "https://wiki-media.bloxodes.com/new.png";
+  const old = "https://wiki-media.bloxodes.com/old.png";
   await verifyLive(url, "Example Items", "Example Items", [fresh, old], { uploadedImages: [fresh] });
   assert.deepEqual([...images.keys()], [fresh]);
   images.clear();
@@ -257,8 +257,8 @@ test("live verification retries transport failures, checks every image, and reje
   await verifyLive(url, "Example Items", "Example Items", [fresh, old], { mode: "none", uploadedImages: [fresh] });
   assert.equal(images.size, 0);
   // A rerun has no uploads, but the selected hub art must still be fetched.
-  const cover = "https://media.bloxodes.com/wiki/cover.png";
-  const hero = "https://media.bloxodes.com/wiki/hero.png";
+  const cover = "https://wiki-media.bloxodes.com/cover.png";
+  const hero = "https://wiki-media.bloxodes.com/hero.png";
   for (const artwork of [[cover], [cover, hero]]) {
     images.clear();
     await verifyLive(url, "Example Items", "Example Items", artwork, { changedImages: artwork });
@@ -378,7 +378,7 @@ async function runCollectionMediaFixture(root: string, apply: boolean, scenario 
   `;
   const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, "--target", "managed-dev", ...(apply ? ["--apply"] : []), ...extraArgs], {
     encoding: "utf8", timeout: 30_000,
-    env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" }
+    env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://wiki-media.bloxodes.com" }
   });
   assert.ifError(result.error);
   const stored = JSON.parse(await fs.readFile(report, "utf8")) as {

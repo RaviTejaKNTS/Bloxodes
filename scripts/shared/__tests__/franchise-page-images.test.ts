@@ -6,20 +6,18 @@ import { MAX_FRANCHISE_IMAGE_BYTES, MAX_FRANCHISE_IMAGE_PIXELS, verifyFranchiseP
 const image = (width: number, height: number) => sharp({ create: { width, height, channels: 3, background: "#446688" } }).png().toBuffer();
 const target = { label: "Example hub", url: "https://media.bloxodes.com/cover.png", role: "cover" };
 
-test("hosted franchise artwork reports Worker quota failures after exactly one request", async t => {
+test("retired wiki media URLs are checked at the R2 custom domain, never through the redirect", async t => {
   const original = globalThis.fetch;
   t.after(() => { globalThis.fetch = original; });
-  for (const [status, body] of [[429, "error code: 1027"], [500, "error code: 1027"]] as const) {
-    for (const role of ["cover", "thumbnail"]) {
-      let requests = 0;
-      globalThis.fetch = async () => {
-        requests++;
-        return new Response(body, { status, headers: { "content-type": "text/plain" } });
-      };
-      await assert.rejects(verifyFranchisePageImage({ ...target, role }), /Cloudflare Workers daily request quota.*100,000.*no retry/);
-      assert.equal(requests, 1, `HTTP ${status} ${role} quota failure must not retry`);
-    }
-  }
+  const bytes = await image(160, 90);
+  const requests: string[] = [];
+  globalThis.fetch = async url => {
+    requests.push(String(url));
+    return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
+  };
+  await verifyFranchisePageImage({ ...target, url: "https://media.bloxodes.com/wiki/gta/gta-6/hub-cover-0123456789abcdef.png" });
+  await verifyFranchisePageImage({ ...target, url: "https://wiki-media.bloxodes.com/gta/gta-6/hub-cover-0123456789abcdef.png" });
+  assert.deepEqual(requests, Array(2).fill("https://wiki-media.bloxodes.com/gta/gta-6/hub-cover-0123456789abcdef.png"));
 });
 
 test("publication reads real image bytes and checks cover and thumbnail dimensions", async t => {
@@ -54,7 +52,7 @@ test("the fetch boundary rejects foreign hosts and non-default ports without req
   t.after(() => { globalThis.fetch = original; });
   let requests = 0;
   globalThis.fetch = async () => { requests++; throw new Error("must not fetch"); };
-  for (const url of ["https://127.0.0.1/a.png", "https://example.com/a.png", "https://media.bloxodes.com.evil.test/a.png", "https://other.supabase.co/a.png", "https://media.bloxodes.com:8443/a.png"]) {
+  for (const url of ["https://127.0.0.1/a.png", "https://example.com/a.png", "https://media.bloxodes.com.evil.test/a.png", "https://other.supabase.co/a.png", "https://media.bloxodes.com:8443/a.png", "https://wiki-media.bloxodes.com:8443/a.png", "https://wiki-media.bloxodes.com.evil.test/a.png"]) {
     await assert.rejects(verifyFranchisePageImage({ ...target, url }), /Example hub.*disallowed cover image/);
   }
   assert.equal(requests, 0);

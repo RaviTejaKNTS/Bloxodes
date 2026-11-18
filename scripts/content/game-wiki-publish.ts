@@ -6,7 +6,7 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { wikiMediaPublicBaseUrl } from "@/lib/wiki-media";
+import { rewriteLegacyWikiMediaUrlsDeep, wikiMediaKeyFromUrl, wikiMediaPublicBaseUrl, wikiMediaUrl, WIKI_MEDIA_BASE_URL } from "@/lib/wiki-media";
 import { bundleSchema, gameSchema, hubFinalSchema, collectionFinalSchema } from "../../contracts/game-wiki/v1/schema";
 import { assertGameWikiRoutes, assertPageTypeLinks, assertNoRobloxIdentifiers, gameWikiPath, selectGameWikiPages, resolveGameWikiIdentity } from "../shared/game-wiki-bundle";
 import { bundlePath, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
@@ -39,9 +39,10 @@ export async function planGameWikiImage(root: string, value: string, namespace: 
   let metadata: sharp.Metadata;
   let hostedKey: string | undefined;
   if (/^https?:/.test(value)) {
-    if (!new RegExp(`^https://media\\.bloxodes\\.com/wiki/${namespace}/[a-z0-9-]+/[a-zA-Z0-9._/-]+$`).test(value) || value.includes("/../")) throw new Error(`${role}: use hosted artwork under this game's R2 prefix or a local bundle file.`);
-    hostedKey = new URL(value).pathname.slice("/wiki/".length);
-    const image = await verifyFranchisePageImage({ url: value, role: role === "hero" ? "thumbnail" : "cover", label: gameSlug });
+    // Current and retired (media.bloxodes.com/wiki) hosts name the same R2 key.
+    hostedKey = wikiMediaKeyFromUrl(value) ?? undefined;
+    if (!hostedKey || !new RegExp(`^${namespace}/[a-z0-9-]+/[a-zA-Z0-9._/-]+$`).test(hostedKey) || hostedKey.includes("/../")) throw new Error(`${role}: use hosted artwork under this game's R2 prefix or a local bundle file.`);
+    const image = await verifyFranchisePageImage({ url: wikiMediaUrl(hostedKey), role: role === "hero" ? "thumbnail" : "cover", label: gameSlug });
     bytes = image.bytes;
     metadata = image.metadata;
   } else {
@@ -59,7 +60,7 @@ export async function planGameWikiImage(root: string, value: string, namespace: 
   if (role === "hero" && width !== height) throw new Error(`${gameSlug}: hero_image must be square (${width}x${height}).`);
   const hash = digest(bytes);
   const key = hostedKey ?? `${namespace}/${gameSlug}/hub-${role}-${hash.slice(0, 16)}.${format === "jpeg" ? "jpg" : format}`;
-  return { bytes, key, url: `https://media.bloxodes.com/wiki/${key}`, mime: mime[format], hash, width, height };
+  return { bytes, key, url: wikiMediaUrl(key), mime: mime[format], hash, width, height };
 }
 
 async function rows(db: SupabaseClient, table: string, namespace: string) {
@@ -108,7 +109,8 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   if (options.target === "production") await assertLocalContentPublication();
   const gameFile = await json(await bundlePath(root, "game.json"));
   assertNoRobloxIdentifiers(gameFile, "game.json");
-  const gameInput = gameSchema.parse(gameFile);
+  // Older bundles carry the retired Worker route; store the R2 custom domain.
+  const gameInput = rewriteLegacyWikiMediaUrlsDeep(gameSchema.parse(gameFile));
   if (gameInput.slug !== bundle.game.slug || gameInput.title !== bundle.game.name || gameInput.namespace != null && gameInput.namespace !== bundle.namespace || gameInput.kind != null && gameInput.kind !== bundle.game.kind || gameInput.parent_slug != null && gameInput.parent_slug !== bundle.game.parent) throw new Error("game.json identity must match bundle.namespace and bundle.game.");
   checkCopy({ ...gameInput, description_json: { title: gameInput.title, short_title: gameInput.short_title } }, "game.json");
   assertPageTypeLinks(gameInput, "game.json");
@@ -127,7 +129,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     hub = await check("hub schema, identity, controls and copy", async () => {
       const file = await json(await bundlePath(root, selected.hub!.finalJson));
       assertNoRobloxIdentifiers(file, "wiki/final.json");
-      const final = hubFinalSchema.parse(file);
+      const final = rewriteLegacyWikiMediaUrlsDeep(hubFinalSchema.parse(file));
       assertPageTypeLinks(final, "wiki/final.json");
       if (final.slug !== identity.hubSlug || final.game_slug !== bundle.game.slug || final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== wikiPath) throw new Error("Hub identity/route must match the target game's permanent hub slug and route.");
       if (bundle.game.kind === "game" && gameInput.status === "released" && !final.tips_md.trim()) throw new Error("Released games require gameplay tips.");
@@ -171,7 +173,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     if (issues.some(issue => issue.level === "error")) throw new Error(issues.map(issue => issue.message).join("\n"));
     const file = await json(await bundlePath(folder, manifest.finalJson));
     assertNoRobloxIdentifiers(file, `${slug}/final.json`);
-    const final = collectionFinalSchema.parse(file);
+    const final = rewriteLegacyWikiMediaUrlsDeep(collectionFinalSchema.parse(file));
     assertPageTypeLinks(final, `${slug}/final.json`);
     if (final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== `${wikiPath}/${slug}`) throw new Error("Collection target namespace/route mismatch.");
     checkCopy(final, `${slug}/final.json`);
@@ -188,7 +190,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     assertCollectionTitle(final.title, [bundle.game.name, gameInput.short_title], plan.items.length);
     assertCollectionMissingImages(plan.items, entry.missingImages, manifest.missingImages);
     for (const item of plan.items) checkCopy({ description_json: { name: item.item_name, ...item.fields_json } }, `${slug}/${item.item_slug}`);
-    const imageUrls = plan.items.flatMap(item => item.image_key ? [`https://media.bloxodes.com/wiki/${item.image_key}`] : []);
+    const imageUrls = plan.items.flatMap(item => item.image_key ? [wikiMediaUrl(item.image_key)] : []);
     if (final.thumb_url && !imageUrls.includes(final.thumb_url)) throw new Error("thumb_url must be null or an exact planned item image URL.");
     plan.finalJson.thumb_url = final.thumb_url || imageUrls[0];
     pageCopy(plan);
@@ -213,11 +215,11 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   });
   await check("R2 configuration", async () => {
     if (loadR2ClientConfig().bucket !== "bloxodes-wiki") throw new Error("WIKI_R2_BUCKET must be bloxodes-wiki.");
-    if (wikiMediaPublicBaseUrl() !== "https://media.bloxodes.com/wiki") throw new Error("Remove WIKI_MEDIA_PUBLIC_BASE_URL override.");
+    if (wikiMediaPublicBaseUrl() !== WIKI_MEDIA_BASE_URL) throw new Error(`Remove WIKI_MEDIA_PUBLIC_BASE_URL override; publication uses ${WIKI_MEDIA_BASE_URL}.`);
   });
   if (options.target === "production" && !process.env.REVALIDATE_SECRET) failures.push("Production needs REVALIDATE_SECRET for immediate revalidation.");
   if (failures.length) throw new Error(`${failures.length} preflight check(s) failed. No database or media writes were made.\n${failures.join("\n")}`);
-  const urls = [...(hub ? [{ path: wikiPath, title: hub.title, seo: hub.seo_title, images: artwork.map(image => image.url) }] : []), ...plans.map(plan => ({ path: `${wikiPath}/${plan.manifest.collection.slug}`, title: String(pageCopy(plan)!.title), seo: String(pageCopy(plan)!.seo_title), images: plan.items.flatMap(item => item.image_key ? [`https://media.bloxodes.com/wiki/${item.image_key}`] : []) }))];
+  const urls = [...(hub ? [{ path: wikiPath, title: hub.title, seo: hub.seo_title, images: artwork.map(image => image.url) }] : []), ...plans.map(plan => ({ path: `${wikiPath}/${plan.manifest.collection.slug}`, title: String(pageCopy(plan)!.title), seo: String(pageCopy(plan)!.seo_title), images: plan.items.flatMap(item => item.image_key ? [wikiMediaUrl(item.image_key)] : []) }))];
   console.table(plans.map(plan => ({ code: plan.code, rows: plan.items.length, images: plan.items.filter(item => item.image_key).length, acceptedMissing: plan.items.filter(item => !item.image_key).length, contentHash: plan.contentHash })));
   for (const url of urls) console.log(`${options.target === "production" ? "Live" : "Canonical production URL, staged in managed-dev"}: https://bloxodes.com${url.path}`);
   if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes. Add --apply to publish."); return; }
@@ -253,7 +255,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   if (options.target === "production") {
     const paths = [...new Set([`/${bundle.namespace}`, `/${bundle.namespace}/wiki`, wikiPath, ...urls.map(url => url.path)])];
     await mapPublishConcurrent(Array.from({ length: Math.ceil(paths.length / 100) }, (_, index) => paths.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch.map(route => ({ type: "game_content" as const, slug: route.slice(1) }))), { label: "revalidate batches" });
-    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images, { mode: options.liveImages, uploadedImages: (newImageKeysByPage.get(url.path) ?? []).map(key => `https://media.bloxodes.com/wiki/${key}`), changedImages: artwork.map(image => image.url) }), { label: "live pages" });
+    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images, { mode: options.liveImages, uploadedImages: (newImageKeysByPage.get(url.path) ?? []).map(wikiMediaUrl), changedImages: artwork.map(image => image.url) }), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
 }

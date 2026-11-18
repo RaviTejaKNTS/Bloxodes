@@ -68,7 +68,7 @@ Use this after `bloxodes-franchise-wiki-research` and parent approval. Write one
 - `cover_image` **(required)**: a landscape 16:9 image for cards and social previews. Official key art, store art or a real gameplay screenshot. Never pad portrait box art into a wide frame.
 - `hero_image` **(required)**: a separate square-friendly image for the thumbnail beside the title. Never reuse the cover URL.
 
-Both images are served from Bloxodes media (`https://media.bloxodes.com/wiki/...`), never hotlinked. Keep them in the bundle as local files or hosted URLs under `https://media.bloxodes.com/wiki/<namespace>/`; `content:publish` validates and uploads them. A hub without both images isn't ready: don't hand it in, send it back to the image stage.
+Both images are served from Bloxodes media (`https://wiki-media.bloxodes.com/...`), never hotlinked. Keep them in the bundle as local files or hosted URLs under `https://wiki-media.bloxodes.com/<namespace>/`; `content:publish` validates and uploads them. A hub without both images isn't ready: don't hand it in, send it back to the image stage.
 
 ## Franchise differences
 
@@ -111,8 +111,8 @@ These are the only places this skill differs from the Roblox one.
   "developer": "",
   "publisher": "",
   "description_md": "",
-  "cover_image": "https://media.bloxodes.com/wiki/...",
-  "hero_image": "https://media.bloxodes.com/wiki/...",
+  "cover_image": "https://wiki-media.bloxodes.com/...",
+  "hero_image": "https://wiki-media.bloxodes.com/...",
   "official_url": "",
   "release_dates_json": {},
   "platforms_json": [],
@@ -124,7 +124,7 @@ These are the only places this skill differs from the Roblox one.
 ## Before you return
 
 - Both JSON files parse.
-- `cover_image` and `hero_image` are set, different, landscape and square respectively, and hosted on `media.bloxodes.com`.
+- `cover_image` and `hero_image` are set, different, landscape and square respectively, and hosted on `wiki-media.bloxodes.com`.
 - Title, SEO title and any headings meet `bloxodes-docs/content/page-standards.md`.
 - Scope claims match the brief.
 - The voice guide's "Before you hand it in" check passes on the description and tips.

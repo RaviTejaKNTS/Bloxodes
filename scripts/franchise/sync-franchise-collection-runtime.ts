@@ -11,6 +11,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { collectionImageKey, uploadCollectionImages, verifyCollectionImages } from "../shared/franchise-collection-media";
@@ -301,7 +302,8 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
   };
   let finalJson: Record<string, unknown> | null = null;
   try {
-    finalJson = JSON.parse(await fs.readFile(finalPath, "utf8")) as Record<string, unknown>;
+    // Older bundles carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+    finalJson = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await fs.readFile(finalPath, "utf8")) as Record<string, unknown>);
   } catch (error) {
     if (context || publish || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
@@ -332,7 +334,8 @@ function resolveCountTokens<T>(valueToResolve: T, count: number): T {
 
 export function pageCopy(plan: Plan): Record<string, unknown> | null {
   if (!plan.finalJson) return null;
-  const final = resolveCountTokens(plan.finalJson, plan.items.length);
+  // Callers may set plan.finalJson directly, so canonicalize wiki media URLs here too.
+  const final = rewriteLegacyWikiMediaUrlsDeep(resolveCountTokens(plan.finalJson, plan.items.length));
   const collectionSlug = plan.manifest.collection.slug;
   if (typeof final.wiki_slug !== "string" || !SAFE_SLUG.test(final.wiki_slug) || final.collection_slug !== collectionSlug || final.code !== `${final.wiki_slug}-${collectionSlug}` || final.code !== plan.code) {
     throw new Error(`${plan.code} final.json identity does not match its manifest.`);

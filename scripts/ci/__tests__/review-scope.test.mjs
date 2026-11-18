@@ -13,7 +13,7 @@ test("guidance and private skill resources avoid paid reviews", () => {
 });
 
 test("each executable release surface receives a review, including mixed PRs", () => {
-  for (const file of ["apps/web/src/app/page.tsx", "apps/mobile/package.json", "apps/extension/manifest.json", "scripts/ci/publish-content.ts", "workers/wiki-media/src/index.ts", "workers/wiki-media/wrangler.jsonc", "supabase/migrations/20261007123456_add.sql", "package-lock.json", ".github/workflows/publish.yml", ".github/codex/review.md", "Dockerfile", "Dockerfile.stats-worker", "env/config.json", "data/recipes.json", "t3.json", "next.config.ts"]) {
+  for (const file of ["apps/web/src/app/page.tsx", "apps/mobile/package.json", "apps/extension/manifest.json", "scripts/ci/publish-content.ts", "workers/example/src/index.ts", "workers/example/wrangler.jsonc", "supabase/migrations/20261007123456_add.sql", "package-lock.json", ".github/workflows/publish.yml", ".github/codex/review.md", "Dockerfile", "Dockerfile.stats-worker", "env/config.json", "data/recipes.json", "t3.json", "next.config.ts"]) {
     assert.equal(needsCodexReview(["bloxodes-docs/operations/release.md", file]), true, file);
   }
 });
