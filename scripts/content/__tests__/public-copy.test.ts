@@ -87,6 +87,8 @@ test("canonical Manifest game titles, objectives and prerequisites pass", () => 
     { intro_md: "Complete Cargo Manifest and extract the Courier Manifest." },
     { description_json: { name: "Departure Manifest" } },
     { intro_md: "Departure Manifest gives non-banner units Deployable." },
+    { description_json: { name: "Manifest Canyon" } },
+    { intro_md: "Kelly County includes Port Gellhorn and Manifest Canyon." },
     { description_json: { name: "Residual Manifest" } },
     { description_json: { teachablePerks: ["Inner Focus", "Residual Manifest", "Overzealous"] } }
   ]) {
