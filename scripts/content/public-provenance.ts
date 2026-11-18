@@ -18,9 +18,11 @@ const PUBLIC_PROVENANCE_PATTERNS = [
 
 export function publicProvenanceMatch(value: string): RegExpExecArray | null {
   for (const pattern of PUBLIC_PROVENANCE_PATTERNS) {
-    // Mask only case-exact game titles for the manifest check, preserving diagnostic offsets.
+    // Mask only case-exact game titles and place names for the manifest check, preserving diagnostic offsets.
     const candidate = pattern === MANIFEST_PATTERN
-      ? value.replace(/\b(?:Cargo|Courier|Departure|Residual) Manifest\b/g, title => " ".repeat(title.length))
+      ? value
+        .replace(/\b(?:Cargo|Courier|Departure|Residual) Manifest\b/g, title => " ".repeat(title.length))
+        .replace(/\bManifest Canyon\b/g, place => " ".repeat(place.length))
       : value;
     const match = pattern.exec(candidate);
     if (match) {
