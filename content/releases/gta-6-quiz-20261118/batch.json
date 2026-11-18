@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "game-pages",
+      "namespace": "gta",
+      "file": "quizzes/gta-6.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/quizzes/gta-6",
+      "contains": "GTA 6 Quiz"
+    }
+  ],
+  "events": [
+    {
+      "type": "game_content",
+      "slug": "gta"
+    }
+  ]
+}
