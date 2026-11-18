@@ -48,13 +48,10 @@ begin
     raise exception 'wiki media host rewrite must run with session_replication_role = replica';
   end if;
 
-  -- Route lock order (bloxodes-docs/data/supabase.md): games, then game_* pages
-  -- with collections last, then Roblox pages.
   foreach target in array array[
-    'games', 'game_wiki_pages', 'game_tool_pages', 'game_code_pages',
-    'game_map_pages', 'game_quiz_pages', 'game_catalog_pages', 'game_checklist_pages', 'game_article_pages',
-    'game_collection_pages',
     'wiki_pages', 'wiki_collection_pages',
+    'games', 'game_wiki_pages', 'game_collection_pages', 'game_tool_pages', 'game_code_pages',
+    'game_map_pages', 'game_quiz_pages', 'game_catalog_pages', 'game_checklist_pages', 'game_article_pages',
     'articles', 'code_pages', 'tools', 'catalog_pages', 'quiz_pages', 'checklist_pages', 'events_pages', 'puzzle_pages'
   ] loop
     if to_regclass(format('public.%I', target)) is null then continue; end if;
