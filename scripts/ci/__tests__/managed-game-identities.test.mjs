@@ -73,6 +73,16 @@ test("existing development pages and batch games keep their development IDs", as
   assert.equal(result.payload.codes[0].code_page_id, devCodes);
 });
 
+test("two reviewed pages never collapse onto one development page", async () => {
+  const devWiki = "4b1e2c3d-6f7a-4b8c-9d0e-1f2a3b4c5d6e";
+  const payload = { wiki: [
+    { id: "5c2f3d4e-7a8b-4c9d-8e1f-2a3b4c5d6e7f", game_id: prodGame, slug: "example-2", title: "One" },
+    { id: "6d3a4e5f-8b9c-4dae-9f2a-3b4c5d6e7f80", game_id: prodGame, slug: "example-2-b", title: "Two" },
+  ] };
+  const lookup = development({ pages: [{ table: "game_wiki_pages", game_id: devGame, id: devWiki }] });
+  await assert.rejects(managedGamePagesPayload({ payload, namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup }), /Several wiki rows map to development page/);
+});
+
 test("production identities cover only games the selected game pages reference", async () => {
   const batch = { operations: [{ publisher: "game-pages", namespace: "example", file: "a.json" }, { publisher: "content-final", file: "b.json" }] };
   const payloads = { "a.json": { games: [{ id: root, slug: "example", kind: "franchise" }], quizzes: quizPayload().quizzes, wiki: [{ game_id: root }] } };
@@ -91,6 +101,10 @@ test("production publication never maps IDs and identities reach only managed QA
   assert.match(publisher, /const mappedFile = managed && operation\.publisher === "game-pages" \? await managedGamePagesFile/);
   assert.doesNotMatch(fs.readFileSync(new URL("../../games/publish-game-pages.ts", import.meta.url), "utf8"), /managed-game-identities|PRODUCTION_GAME_IDENTITIES/);
   const selected = fs.readFileSync(new URL("../../../.github/workflows/publish-content.yml", import.meta.url), "utf8");
+  const identityJob = selected.split("\n  game-identities:\n")[1].split("\n  managed:\n")[0];
+  const install = identityJob.split("\n      - run: npm ci")[0];
+  assert.doesNotMatch(install, /secrets\./, "no secret reaches dependency installation");
+  assert.match(identityJob.split("id: lookup")[1], /SUPABASE_SERVICE_ROLE: \$\{\{ secrets\.SUPABASE_SERVICE_ROLE \}\}/);
   const publishJob = selected.split("\n  publish:\n")[1];
   assert.doesNotMatch(publishJob, /PRODUCTION_GAME_IDENTITIES|game_identities/);
   assert.match(selected, /game_identities: \$\{\{ needs\.game-identities\.outputs\.games \}\}/);

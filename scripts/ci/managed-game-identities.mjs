@@ -96,12 +96,16 @@ export async function managedGamePagesPayload({ payload, namespace, identities, 
   // Existing development pages keep their own UUIDs; checklists are re-identified by checklist staging.
   const pages = new Map();
   for (const [group, table] of [...Object.entries(slugPages), ...Object.entries(gamePages)]) {
+    const targets = new Set();
     for (const row of output[group] ?? []) {
       const key = group in gamePages ? row?.game_id : row?.slug;
       if (typeof row?.id !== "string" || typeof key !== "string") continue;
       const filters = group in gamePages ? { game_id: row.game_id } : { namespace, slug: row.slug };
       const existing = await lookup.pageId(table, filters);
       if (existing && existing !== row.id) { pages.set(row.id, existing); changes.push({ group, from: row.id, to: existing }); row.id = existing; }
+      // Two reviewed rows must never collapse onto one development page.
+      if (targets.has(row.id)) throw new Error(`Several ${group} rows map to development page ${row.id}.`);
+      targets.add(row.id);
     }
   }
   for (const row of output.codes ?? []) if (pages.has(row?.code_page_id)) row.code_page_id = pages.get(row.code_page_id);
