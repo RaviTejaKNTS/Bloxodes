@@ -84,6 +84,14 @@ async function managedGamePagesFile(namespace: string, file: string): Promise<st
         for (const [column, value] of Object.entries(filters)) query = query.eq(column, value);
         return (await one(query.maybeSingle()))?.id ?? null;
       },
+      checklistItems: async ({namespace, page_id}) => {
+        const rows: Array<{id: string; item_key: string}> = [];
+        for (let start = 0; ; start += 500) {
+          const page = await one(db.from("game_checklist_items").select("id,item_key").eq("page_id", page_id).eq("namespace", namespace).order("id").range(start, start + 499));
+          rows.push(...page);
+          if (page.length < 500) return rows;
+        }
+      },
     },
   });
   if (!changes.length) return null;

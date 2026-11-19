@@ -11,6 +11,9 @@ const nonPageGroups = new Set(["games", "checklistItems", "codes"]);
 // upserts them on game_id, so production replaces the same single page this lookup finds.
 const slugPages = { tools: "game_tool_pages", maps: "game_map_pages", articles: "game_article_pages", quizzes: "game_quiz_pages", catalog: "game_catalog_pages" };
 const gamePages = { wiki: "game_wiki_pages", codesPages: "game_code_pages" };
+// Checklist pages use the same namespace and slug key. Their retained tasks are matched by the
+// publisher's page_id and item_key key, because the publisher's dry run requires both UUIDs to match.
+const checklistPages = { checklists: "game_checklist_pages" };
 
 /** @param {unknown} value */
 function validIdentity(value) {
@@ -61,6 +64,7 @@ export async function productionGameIdentities(batch, readPayload, fetchGames) {
  * Managed side: rewrite production game and page IDs to the matching development rows.
  * `lookup.gameById(id)` returns {namespace} or null, `lookup.gameByIdentity(identity)` returns an ID or null,
  * `lookup.pageId(table, filters)` returns the existing development page ID or null.
+ * `lookup.checklistItems({namespace, page_id})` returns every development task of that page as {id, item_key}.
  * A referenced game that is neither in development nor in `identities` is left unchanged, so the publisher
  * still rejects it with its ownership check.
  */
@@ -95,9 +99,10 @@ export async function managedGamePagesPayload({ payload, namespace, identities, 
     if (nonPageGroups.has(group) || !Array.isArray(rows)) continue;
     for (const row of rows) if (typeof row?.game_id === "string") row.game_id = mapped(row.game_id);
   }
-  // Existing development pages keep their own UUIDs; checklists are re-identified by checklist staging.
+  // Existing development pages keep their own UUIDs. Checklist staging later re-identifies the
+  // mapped checklist rows with temporary QA UUIDs, so this only has to satisfy the dry run.
   const pages = new Map();
-  for (const [group, table] of [...Object.entries(slugPages), ...Object.entries(gamePages)]) {
+  for (const [group, table] of [...Object.entries(slugPages), ...Object.entries(gamePages), ...Object.entries(checklistPages)]) {
     const targets = new Set();
     for (const row of output[group] ?? []) {
       const key = group in gamePages ? row?.game_id : row?.slug;
@@ -111,5 +116,19 @@ export async function managedGamePagesPayload({ payload, namespace, identities, 
     }
   }
   for (const row of output.codes ?? []) if (pages.has(row?.code_page_id)) row.code_page_id = pages.get(row.code_page_id);
+  for (const row of output.checklistItems ?? []) if (pages.has(row?.page_id)) row.page_id = pages.get(row.page_id);
+  // Retained development tasks keep their own UUIDs; new tasks pass through unchanged.
+  const items = new Set();
+  for (const page of output.checklists ?? []) {
+    if (typeof page?.id !== "string") continue;
+    const existing = new Map((await lookup.checklistItems({ namespace, page_id: page.id })).map(item => [item.item_key, item.id]));
+    for (const row of output.checklistItems ?? []) {
+      if (row?.page_id !== page.id || typeof row.id !== "string") continue;
+      const id = existing.get(row.item_key);
+      if (id && id !== row.id) { changes.push({ group: "checklistItems", from: row.id, to: id }); row.id = id; }
+      if (items.has(row.id)) throw new Error(`Several checklistItems rows map to development task ${row.id}.`);
+      items.add(row.id);
+    }
+  }
   return { payload: output, changes };
 }

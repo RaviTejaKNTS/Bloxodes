@@ -10,8 +10,9 @@ const quiz = "07bdb7b2-6765-442b-bfd1-f4b96051a658";
 const identity = { id: prodGame, namespace: "example", slug: "example-2", kind: "game" };
 
 // Development: the franchise root shares its ID, the game was created separately.
-function development({ games = [{ id: root, namespace: "example", slug: "example", kind: "franchise" }, { id: devGame, namespace: "example", slug: "example-2", kind: "game" }], pages = [] } = {}) {
+function development({ games = [{ id: root, namespace: "example", slug: "example", kind: "franchise" }, { id: devGame, namespace: "example", slug: "example-2", kind: "game" }], pages = [], tasks = [] } = {}) {
   return {
+    checklistItems: async ({ namespace, page_id }) => tasks.filter(task => task.namespace === namespace && task.page_id === page_id).map(({ id, item_key }) => ({ id, item_key })),
     gameById: async id => games.find(game => game.id === id) ?? null,
     gameByIdentity: async ({ namespace, slug, kind }) => games.find(game => game.namespace === namespace && game.slug === slug && game.kind === kind)?.id ?? null,
     pageId: async (table, filters) => pages.find(page => page.table === table && Object.entries(filters).every(([key, value]) => page[key] === value))?.id ?? null,
@@ -81,6 +82,69 @@ test("two reviewed pages never collapse onto one development page", async () => 
   ] };
   const lookup = development({ pages: [{ table: "game_wiki_pages", game_id: devGame, id: devWiki }] });
   await assert.rejects(managedGamePagesPayload({ payload, namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup }), /Several wiki rows map to development page/);
+});
+
+const prodChecklist = "7e4b5f60-9cad-4ebf-8a3b-4c5d6e7f8091";
+const devChecklist = "8f5c6071-adbe-4fc0-9b4c-5d6e7f8091a2";
+const prodTask = n => `0000000${n}-1111-4111-8111-111111111111`;
+const devTask = n => `0000000${n}-2222-4222-8222-222222222222`;
+const checklistPayload = (pageId = prodChecklist) => ({
+  checklists: [{ id: pageId, namespace: "example", game_id: prodGame, slug: "example-2-100-percent", title: "Example 2 100%", is_public: true, published_at: "2026-11-01T00:00:00Z" }],
+  checklistItems: [
+    { id: prodTask(1), page_id: pageId, namespace: "example", item_key: "boss-one", section_code: "1", title: "Beat the first boss" },
+    { id: prodTask(2), page_id: pageId, namespace: "example", item_key: "boss-two", section_code: "1", title: "Beat the second boss" },
+    { id: prodTask(3), page_id: pageId, namespace: "example", item_key: "new-task", section_code: "2", title: "A task new in this batch" },
+  ],
+});
+const devTasks = pageId => [
+  { id: devTask(1), page_id: pageId, namespace: "example", item_key: "boss-one" },
+  { id: devTask(2), page_id: pageId, namespace: "example", item_key: "boss-two" },
+];
+
+test("a checklist with a different development page UUID keeps the development page and task UUIDs", async () => {
+  const payload = checklistPayload();
+  const lookup = development({ pages: [{ table: "game_checklist_pages", namespace: "example", slug: "example-2-100-percent", id: devChecklist }], tasks: devTasks(devChecklist) });
+  const result = await managedGamePagesPayload({ payload, namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup });
+  const [page] = result.payload.checklists;
+  assert.equal(page.id, devChecklist);
+  assert.equal(page.game_id, devGame);
+  assert.deepEqual(result.payload.checklistItems.map(item => [item.page_id, item.item_key, item.id]), [
+    [devChecklist, "boss-one", devTask(1)],
+    [devChecklist, "boss-two", devTask(2)],
+    [devChecklist, "new-task", prodTask(3)],
+  ]);
+  assert.deepEqual(result.changes.filter(change => change.group.startsWith("checklist")), [
+    { group: "checklists", from: prodChecklist, to: devChecklist },
+    { group: "checklistItems", from: prodTask(1), to: devTask(1) },
+    { group: "checklistItems", from: prodTask(2), to: devTask(2) },
+  ]);
+  assert.equal(payload.checklists[0].id, prodChecklist, "the reviewed input is never modified");
+  assert.equal(payload.checklistItems[0].id, prodTask(1));
+});
+
+test("a checklist with the same page UUID still maps retained task UUIDs", async () => {
+  const lookup = development({ pages: [{ table: "game_checklist_pages", namespace: "example", slug: "example-2-100-percent", id: prodChecklist }], tasks: devTasks(prodChecklist) });
+  const result = await managedGamePagesPayload({ payload: checklistPayload(), namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup });
+  assert.equal(result.payload.checklists[0].id, prodChecklist);
+  assert.deepEqual(result.payload.checklistItems.map(item => [item.page_id, item.id]), [[prodChecklist, devTask(1)], [prodChecklist, devTask(2)], [prodChecklist, prodTask(3)]]);
+  assert.equal(result.changes.some(change => change.group === "checklists"), false);
+});
+
+test("a checklist new to development passes through with its reviewed UUIDs", async () => {
+  const result = await managedGamePagesPayload({ payload: checklistPayload(), namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup: development() });
+  assert.deepEqual(result.payload.checklists[0].id, prodChecklist);
+  assert.deepEqual(result.payload.checklistItems.map(item => item.id), [prodTask(1), prodTask(2), prodTask(3)]);
+  assert.deepEqual(result.changes, [{ group: "games", from: prodGame, to: devGame }]);
+});
+
+test("two reviewed checklists never collapse onto one development page", async () => {
+  const payload = checklistPayload();
+  payload.checklists.push({ ...payload.checklists[0], id: "9a6d7182-becf-4ad1-8c5d-6e7f8091a2b3", slug: "example-2-other" });
+  const lookup = development({ pages: [
+    { table: "game_checklist_pages", namespace: "example", slug: "example-2-100-percent", id: devChecklist },
+    { table: "game_checklist_pages", namespace: "example", slug: "example-2-other", id: devChecklist },
+  ] });
+  await assert.rejects(managedGamePagesPayload({ payload, namespace: "example", identities: [identity], target: MANAGED_TARGET, lookup }), /Several checklists rows map to development page/);
 });
 
 test("production identities cover only games the selected game pages reference", async () => {

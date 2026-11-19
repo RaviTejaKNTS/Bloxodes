@@ -4,6 +4,7 @@ export type ManagedGameLookup = {
   gameById(id: string): Promise<{ namespace: string } | null>;
   gameByIdentity(identity: { namespace: string; slug: string; kind: string }): Promise<string | null>;
   pageId(table: string, filters: Record<string, unknown>): Promise<string | null>;
+  checklistItems(filters: { namespace: string; page_id: string }): Promise<Array<{ id: string; item_key: string }>>;
 };
 export const MANAGED_TARGET: string;
 export function parseGameIdentities(text: string | undefined | null): GameIdentity[];
