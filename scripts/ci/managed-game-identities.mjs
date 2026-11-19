@@ -6,7 +6,9 @@ export const MANAGED_TARGET = "https://bbtcaurrtyoukvjbxbbj.supabase.co";
 const uuid = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i;
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const nonPageGroups = new Set(["games", "checklistItems", "codes"]);
-// Page groups whose existing development row is found by namespace and slug, or by game.
+// Page groups whose existing development row is found by the publisher's conflict key: namespace and
+// slug, or game. Wiki and code pages are unique per game (unique(game_id)) and publish_game_content_batch
+// upserts them on game_id, so production replaces the same single page this lookup finds.
 const slugPages = { tools: "game_tool_pages", maps: "game_map_pages", articles: "game_article_pages", quizzes: "game_quiz_pages", catalog: "game_catalog_pages" };
 const gamePages = { wiki: "game_wiki_pages", codesPages: "game_code_pages" };
 
