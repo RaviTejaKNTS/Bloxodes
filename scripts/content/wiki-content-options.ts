@@ -6,6 +6,7 @@ export type ContentOptions = {
   apply: boolean;
   allowProd: boolean;
   updatePublished?: boolean;
+  unpublish?: boolean;
   liveImages?: "all" | "new" | "none";
   bundle?: string;
   game?: string;
@@ -35,10 +36,11 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     }
     if (seen.has(flag) && flag !== "--only") throw new Error(`Duplicate option: ${flag}`);
     seen.add(flag);
-    if (flag === "--apply" || flag === "--allow-prod" || flag === "--update-published") {
+    if (flag === "--apply" || flag === "--allow-prod" || flag === "--update-published" || flag === "--unpublish") {
       if (inline !== undefined) throw new Error(`${flag} takes no value.`);
       if (flag === "--apply") options.apply = true;
       else if (flag === "--allow-prod") options.allowProd = true;
+      else if (flag === "--unpublish") options.unpublish = true;
       else options.updatePublished = true;
       continue;
     }
@@ -69,6 +71,8 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     } else options.game = value;
   }
   if (options.updatePublished && command !== "publish") throw new Error("--update-published is only valid for publish.");
+  if (options.unpublish && command !== "publish") throw new Error("--unpublish is only valid for publish.");
+  if (options.unpublish && (options.updatePublished || options.only?.length || options.approvedHubCoverSha256 !== undefined)) throw new Error("--unpublish cannot be combined with --update-published, --only or --approved-hub-cover-sha256.");
   if (options.statsReport && (command !== "status" || options.game || options.article || options.namespace || !/^[a-z0-9-]+$/.test(options.statsReport))) throw new Error("--stats-report requires status and one report slug");
   if (options.visibility && command !== "publish") throw new Error("--visibility requires publish");
   assertApprovedHubCoverOption(options);
@@ -104,4 +108,9 @@ export function assertApprovedHubCoverScope(options: ContentOptions, contract: s
 // Resolve bundle type before loading credentials or running publication checks.
 export function assertUpdatePublishedScope(options: ContentOptions, contract: string) {
   if (options.updatePublished && contract !== "article@1" && contract !== "stats-report@1" && contract !== "game-article@1" && contract !== "article-links@1") throw new Error("--update-published is only valid for article@1, article-links@1, game-article@1 and stats-report@1 bundles.");
+}
+
+// Unpublishing is only built for non-Roblox game articles.
+export function assertUnpublishScope(options: ContentOptions, contract: string) {
+  if (options.unpublish && contract !== "game-article@1") throw new Error("--unpublish is only valid for game-article@1 bundles.");
 }

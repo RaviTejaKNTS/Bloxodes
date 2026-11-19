@@ -90,6 +90,7 @@ async function verifyGameArticleLive(final: GameArticleFinal) {
 }
 export async function publishGameArticleBundle(options:ContentOptions) {
   if (options.only?.length || options.approvedHubCoverSha256) throw new Error("Game articles do not accept wiki selection flags.");
+  if (options.unpublish) throw new Error("Use the game article unpublish path for --unpublish.");
   if (options.target==="production" && options.apply && !options.allowProd) throw new Error("Production apply requires --allow-prod.");
   const root=await fs.realpath(path.resolve(options.bundle!));
   const bundle=bundleSchema.parse(await json(await bundlePath(root,"bundle.json")));
