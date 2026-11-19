@@ -5,12 +5,14 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { publicationSitemap, verifyPublicText } from "./public-readback.mjs";
 import { wikiPublicationReceipt, wikiPublicationFailure } from "./wiki-publication-receipt";
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { assertCiContentFinal, batchPath, ownedPath, parseBatch } from "./content-contract.mjs";
 import { assertProductionPublication } from "./publication-guard";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { stageChecklist, verifyChecklists } from "./managed-checklists";
 import { contentDigest } from "./managed-content-receipt.mjs";
+import { managedGamePagesPayload, parseGameIdentities } from "./managed-game-identities.mjs";
+import os from "node:os";
 
 const args = process.argv.slice(2);
 const file = batchPath(args[args.indexOf("--batch") + 1]);
@@ -66,6 +68,38 @@ function command(operation: any, write: boolean): string[] {
     default: throw new Error("Unsupported publisher.");
   }
 }
+async function managedGamePagesFile(namespace: string, file: string): Promise<string | null> {
+  const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {auth: {persistSession: false}});
+  const one = async (query: PromiseLike<{data: any; error: any}>) => { const {data, error} = await query; if (error) throw error; return data; };
+  const {payload, changes} = await managedGamePagesPayload({
+    payload: JSON.parse(fs.readFileSync(file, "utf8")),
+    namespace,
+    identities: parseGameIdentities(process.env.BLOXODES_PRODUCTION_GAME_IDENTITIES),
+    target: process.env.SUPABASE_URL,
+    lookup: {
+      gameById: id => one(db.from("games").select("namespace").eq("id", id).maybeSingle()),
+      gameByIdentity: async identity => (await one(db.from("games").select("id").eq("namespace", identity.namespace).eq("slug", identity.slug).eq("kind", identity.kind).maybeSingle()))?.id ?? null,
+      pageId: async (table, filters) => {
+        let query = db.from(table).select("id");
+        for (const [column, value] of Object.entries(filters)) query = query.eq(column, value);
+        return (await one(query.maybeSingle()))?.id ?? null;
+      },
+      checklistItems: async ({namespace, page_id}) => {
+        const rows: Array<{id: string; item_key: string}> = [];
+        for (let start = 0; ; start += 500) {
+          const page = await one(db.from("game_checklist_items").select("id,item_key").eq("page_id", page_id).eq("namespace", namespace).order("id").range(start, start + 499));
+          rows.push(...page);
+          if (page.length < 500) return rows;
+        }
+      },
+    },
+  });
+  if (!changes.length) return null;
+  for (const change of changes) console.log(`Managed QA maps ${change.group} ${change.from} to development ${change.to}.`);
+  const mapped = path.join(process.env.RUNNER_TEMP ?? os.tmpdir(), `managed-game-pages-${randomUUID()}.json`);
+  fs.writeFileSync(mapped, JSON.stringify(payload));
+  return mapped;
+}
 async function run(operation: any, write: boolean) {
   if (operation.publisher === "content-final") {
     assertCiContentFinal(JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8")));
@@ -110,11 +144,13 @@ async function run(operation: any, write: boolean) {
   }
   let selected=operation;
   let stagedFile: string | null=null;
+  // Managed QA only: map production game IDs to the same games in development.
+  const mappedFile = managed && operation.publisher === "game-pages" ? await managedGamePagesFile(operation.namespace, inputPath(operation.file)) : null;
   if(managed && write && operation.file) {
-    stagedFile=await stageChecklist(operation,inputPath(operation.file));
+    stagedFile=await stageChecklist(operation,mappedFile ?? inputPath(operation.file));
   }
   const [script, ...options] = command(selected, write);
-  if(stagedFile) options[options.indexOf('--file')+1]=stagedFile;
+  if(stagedFile ?? mappedFile) options[options.indexOf('--file')+1]=(stagedFile ?? mappedFile)!;
   execFileSync("npm", ["run", script!, "--", ...options], { cwd: root, env: process.env, stdio: "inherit" });
   if (write && operation.publisher === "roblox-codes-page") {
     const payload = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
