@@ -12,7 +12,8 @@ type Props = {
 
 const chanceTargets = [0.5, 0.75, 0.9, 0.95] as const;
 
-function parseChancePercent(chance: string) {
+function parseChancePercent(chance: string | null | undefined) {
+  if (typeof chance !== "string") return 0;
   const match = chance.match(/[\d.]+/);
   if (!match) return 0;
   const parsed = Number(match[0]);
@@ -37,8 +38,9 @@ function chanceAfterRolls(chance: number, rolls: number) {
   return 1 - Math.pow(1 - chance, rolls);
 }
 
+// Races without a known roll chance can't be rolled for, so the calculator leaves them out.
 function sortRaces(races: WizardAlchemyRace[]) {
-  return [...races].sort((a, b) => parseChancePercent(b.rollChance) - parseChancePercent(a.rollChance));
+  return races.filter((race) => parseChancePercent(race.rollChance) > 0).sort((a, b) => parseChancePercent(b.rollChance) - parseChancePercent(a.rollChance));
 }
 
 function RacePortrait({

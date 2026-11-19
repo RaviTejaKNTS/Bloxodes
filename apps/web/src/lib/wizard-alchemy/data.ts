@@ -31,7 +31,7 @@ export type WizardAlchemyRace = {
   image?: string;
   collectionSection: string;
   rarity: string;
-  rollChance: string;
+  rollChance: string | null;
   bestFor: string;
   coreBonus: string;
   passive: string | null;
