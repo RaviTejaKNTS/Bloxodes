@@ -29,12 +29,53 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Read-only: the production identity of each game the batch's game pages reference, so managed QA
+  # can map production game IDs to the same games in development.
+  game-identities:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    outputs:
+      games: ${{ steps.lookup.outputs.games }}
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_APPROVED_SHA: ${{ inputs.approved_sha }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      BATCH: ${{ inputs.batch }}
+      BUNDLE_HASH: ${{ inputs.bundle_hash }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: production
+          fetch-depth: 0
+      - name: Require the reviewed current production SHA
+        run: |
+          test "$GITHUB_REF" = refs/heads/production
+          test "$BLOXODES_APPROVED_SHA" = "$(git rev-parse HEAD)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --include=dev --no-audit --no-fund
+      - name: Load the selected private bundle
+        if: inputs.bundle_hash != ''
+        run: |
+          test -z "$BATCH"
+          node --import tsx scripts/ci/download-content-bundle.ts
+      - id: lookup
+        name: Read production identities of referenced games
+        run: node --import tsx scripts/ci/production-game-identities.ts
   managed:
+    needs: game-identities
     uses: ./.github/workflows/managed-content-qa.yml
     with:
       batch: ${{ inputs.batch }}
       bundle_hash: ${{ inputs.bundle_hash }}
       approved_sha: ${{ inputs.approved_sha }}
+      game_identities: ${{ needs.game-identities.outputs.games }}
     secrets: inherit
   publish:
     needs: managed

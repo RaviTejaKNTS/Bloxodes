@@ -5,6 +5,8 @@ on:
       batch: {type: string, required: false, default: ''}
       bundle_hash: {type: string, required: false, default: ''}
       approved_sha: {type: string, required: true}
+      # Production identities of referenced games, read by the selected-content job. Never credentials.
+      game_identities: {type: string, required: false, default: ''}
   workflow_dispatch:
     inputs:
       batch: {type: string, required: false}
@@ -63,6 +65,8 @@ jobs:
         if: inputs.self_test == true
         run: node --import tsx scripts/ci/checklist-qa-fixture.ts
       - name: Prove all inputs and stage development content
+        env:
+          BLOXODES_PRODUCTION_GAME_IDENTITIES: ${{ inputs.game_identities }}
         run: node --import tsx scripts/ci/publish-content.ts --managed --stage --batch "$BATCH"
       - name: Create isolated checklist account and runner-only session secret
         run: |
