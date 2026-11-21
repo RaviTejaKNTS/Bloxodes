@@ -1,0 +1,1138 @@
+{
+  "quizzes": [
+    {
+      "id": "07bdb7b2-6765-442b-bfd1-f4b96051a658",
+      "namespace": "gta",
+      "game_id": "b95a66e8-6af0-4d2f-b08b-1288e66fb83b",
+      "slug": "gta-6",
+      "title": "GTA 6 Quiz: 15 Questions on Leonida, Vice City and the Radio",
+      "intro_md": "Think you know Leonida and Vice City? Here's your chance to prove it.",
+      "description_md": "Jason and Lucia's opening, the radio dial, Leonida's regions, cheats, trophies and the early GTA games are all fair game. Some answers come fast, and a few will make you second-guess yourself.",
+      "seo_title": null,
+      "meta_description": "How well do you know GTA 6? Test yourself on Leonida, Vice City, the radio stations, the pre-order pack, cheats and GTA series history in 15 questions.",
+      "sources_json": [
+        {
+          "title": "Rockstar, GTA VI",
+          "url": "https://www.rockstargames.com/VI"
+        },
+        {
+          "title": "Rockstar, Music",
+          "url": "https://www.rockstargames.com/VI/music"
+        },
+        {
+          "title": "Rockstar, Only in Leonida",
+          "url": "https://www.rockstargames.com/VI/only-in-leonida"
+        },
+        {
+          "title": "Rockstar, Lucia",
+          "url": "https://www.rockstargames.com/VI/only-in-leonida/lucia"
+        },
+        {
+          "title": "Rockstar, Vice City (Jason and Brian)",
+          "url": "https://www.rockstargames.com/VI/only-in-leonida/vice-city"
+        },
+        {
+          "title": "Wikipedia, Grand Theft Auto (series)",
+          "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_(series)"
+        },
+        {
+          "title": "Wikipedia, Grand Theft Auto (video game)",
+          "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_(video_game)"
+        },
+        {
+          "title": "Wikipedia, Grand Theft Auto VI",
+          "url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI"
+        },
+        {
+          "title": "Beebom, cheats",
+          "url": "https://beebom.com/gta-6-cheat-codes/"
+        },
+        {
+          "title": "Beebom, trophies",
+          "url": "https://beebom.com/gta-6-trophy-achievements-list/"
+        },
+        {
+          "title": "PlayStationInfo, cheats",
+          "url": "https://www.playstationinfo.de/en/2026/11/18/gta-6-cheats-all-61-codes-for-ps5-and-xbox-and-how-to-unlock-them/"
+        },
+        {
+          "title": "Game Informer, radio",
+          "url": "https://gameinformer.com/2026/10/08/you-can-preview-6-of-the-radio-stations-in-grand-theft-auto-vi-right-now-plus-new"
+        },
+        {
+          "title": "gtabase, editions",
+          "url": "https://www.gtabase.com/articles/gta-6/gta-6-editions-guide-pre-order-bonus-special-editions-content"
+        },
+        {
+          "title": "gta6motors, garages",
+          "url": "https://gta6motors.com/guides/garages/"
+        }
+      ],
+      "is_published": true,
+      "quiz_data": {
+        "easy": [
+          {
+            "id": "easy-l1",
+            "question": "When did GTA 6 launch?",
+            "options": [
+              {
+                "id": "a",
+                "text": "November 26, 2026"
+              },
+              {
+                "id": "b",
+                "text": "October 19, 2026"
+              },
+              {
+                "id": "c",
+                "text": "November 19, 2026"
+              },
+              {
+                "id": "d",
+                "text": "November 5, 2026"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "easy-l2",
+            "question": "Which two platforms did GTA 6 launch on?",
+            "options": [
+              {
+                "id": "a",
+                "text": "PlayStation 5 and Xbox Series X|S"
+              },
+              {
+                "id": "b",
+                "text": "Xbox One and Nintendo Switch"
+              },
+              {
+                "id": "c",
+                "text": "PlayStation 4 and Xbox One"
+              },
+              {
+                "id": "d",
+                "text": "Nintendo Switch and PlayStation 5"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "easy-l3",
+            "question": "What ESRB rating does GTA 6 carry?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Teen"
+              },
+              {
+                "id": "b",
+                "text": "Mature"
+              },
+              {
+                "id": "c",
+                "text": "Adults Only"
+              },
+              {
+                "id": "d",
+                "text": "Everyone"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "easy-s1",
+            "question": "Who are the two playable leads in GTA 6?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Michael De Santa and Franklin Clinton"
+              },
+              {
+                "id": "b",
+                "text": "Niko Bellic and Claude Speed"
+              },
+              {
+                "id": "c",
+                "text": "Carl Johnson and Trevor Philips"
+              },
+              {
+                "id": "d",
+                "text": "Jason Duval and Lucia Caminos"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "easy-s2",
+            "question": "What does the GTA 6 story open with?",
+            "options": [
+              {
+                "id": "a",
+                "text": "An easy score gone wrong"
+              },
+              {
+                "id": "b",
+                "text": "A surprise wedding in Vice City"
+              },
+              {
+                "id": "c",
+                "text": "A stolen food truck"
+              },
+              {
+                "id": "d",
+                "text": "A street race in Vice City"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "easy-s3",
+            "question": "Where does the criminal conspiracy in GTA 6 stretch?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Across Blaine County"
+              },
+              {
+                "id": "b",
+                "text": "Across Liberty City"
+              },
+              {
+                "id": "c",
+                "text": "Across the state of San Andreas"
+              },
+              {
+                "id": "d",
+                "text": "Across the state of Leonida"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "easy-eb",
+            "question": "What kind of item is the Vintage Vice City Pack?",
+            "options": [
+              {
+                "id": "a",
+                "text": "A post-launch expansion"
+              },
+              {
+                "id": "b",
+                "text": "A pre-order bonus"
+              },
+              {
+                "id": "c",
+                "text": "A launch-day patch"
+              },
+              {
+                "id": "d",
+                "text": "A free weekend trial"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "easy-r6",
+            "question": "Where would you tune in for the best pop music in Vice City?",
+            "options": [
+              {
+                "id": "a",
+                "text": "The Chamber"
+              },
+              {
+                "id": "b",
+                "text": "Back Country"
+              },
+              {
+                "id": "c",
+                "text": "Flash FM"
+              },
+              {
+                "id": "d",
+                "text": "Dirty South Classics"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "easy-cs1",
+            "question": "What did Jason Duval do before his criminal life in Leonida?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Served in the Army"
+              },
+              {
+                "id": "b",
+                "text": "Worked as a police officer"
+              },
+              {
+                "id": "c",
+                "text": "Coached a boxing team"
+              },
+              {
+                "id": "d",
+                "text": "Worked as a Navy diver"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "medium-nx1",
+            "question": "The GTA 6 Extended Look gameplay showcase aired on which streaming service?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Disney+"
+              },
+              {
+                "id": "b",
+                "text": "Netflix"
+              },
+              {
+                "id": "c",
+                "text": "Hulu"
+              },
+              {
+                "id": "d",
+                "text": "Prime Video"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "medium-rg1",
+            "question": "Which of these is one of Leonida's regions?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Alderney"
+              },
+              {
+                "id": "b",
+                "text": "Los Santos"
+              },
+              {
+                "id": "c",
+                "text": "Mount Kalaga"
+              },
+              {
+                "id": "d",
+                "text": "Blaine County"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          }
+        ],
+        "medium": [
+          {
+            "id": "medium-r2",
+            "question": "Name the station that plays modern Latin music.",
+            "options": [
+              {
+                "id": "a",
+                "text": "Cocoteo"
+              },
+              {
+                "id": "b",
+                "text": "Back Country"
+              },
+              {
+                "id": "c",
+                "text": "The Chamber"
+              },
+              {
+                "id": "d",
+                "text": "Dirty South Classics"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "medium-r4",
+            "question": "Amapiano fans should tune to which station?",
+            "options": [
+              {
+                "id": "a",
+                "text": "The Chamber"
+              },
+              {
+                "id": "b",
+                "text": "Afro Bank FM"
+              },
+              {
+                "id": "c",
+                "text": "Back Country"
+              },
+              {
+                "id": "d",
+                "text": "Dirty South Classics"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "medium-hs1",
+            "question": "The first Grand Theft Auto was released in which year?",
+            "options": [
+              {
+                "id": "a",
+                "text": "1993"
+              },
+              {
+                "id": "b",
+                "text": "1995"
+              },
+              {
+                "id": "c",
+                "text": "1997"
+              },
+              {
+                "id": "d",
+                "text": "2000"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "medium-hs7",
+            "question": "When did Grand Theft Auto IV launch?",
+            "options": [
+              {
+                "id": "a",
+                "text": "2006"
+              },
+              {
+                "id": "b",
+                "text": "2010"
+              },
+              {
+                "id": "c",
+                "text": "2012"
+              },
+              {
+                "id": "d",
+                "text": "2008"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "medium-hs8",
+            "question": "In what year did Grand Theft Auto V come out?",
+            "options": [
+              {
+                "id": "a",
+                "text": "2013"
+              },
+              {
+                "id": "b",
+                "text": "2011"
+              },
+              {
+                "id": "c",
+                "text": "2016"
+              },
+              {
+                "id": "d",
+                "text": "2015"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "medium-rg2",
+            "question": "Which of these places is in Leonida?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Sandy Shores"
+              },
+              {
+                "id": "b",
+                "text": "Port Gellhorn"
+              },
+              {
+                "id": "c",
+                "text": "Vinewood"
+              },
+              {
+                "id": "d",
+                "text": "Paleto Bay"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "medium-rg3",
+            "question": "Name the Leonida region in this list.",
+            "options": [
+              {
+                "id": "a",
+                "text": "Alderney"
+              },
+              {
+                "id": "b",
+                "text": "Mount Chiliad"
+              },
+              {
+                "id": "c",
+                "text": "Grassrivers"
+              },
+              {
+                "id": "d",
+                "text": "Paleto Bay"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "medium-c1",
+            "question": "Who hands you the Gone Fishing mission?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Michael De Santa"
+              },
+              {
+                "id": "b",
+                "text": "Niko Bellic"
+              },
+              {
+                "id": "c",
+                "text": "Franklin Clinton"
+              },
+              {
+                "id": "d",
+                "text": "Cal Hampton"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "medium-c2",
+            "question": "What drops packages into the water during Gone Fishing?",
+            "options": [
+              {
+                "id": "a",
+                "text": "A plane"
+              },
+              {
+                "id": "b",
+                "text": "A tow truck"
+              },
+              {
+                "id": "c",
+                "text": "A cargo train"
+              },
+              {
+                "id": "d",
+                "text": "A delivery van"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "medium-c4",
+            "question": "The GTA 6 story is split into how many chapters?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Four"
+              },
+              {
+                "id": "b",
+                "text": "Five"
+              },
+              {
+                "id": "c",
+                "text": "Eight"
+              },
+              {
+                "id": "d",
+                "text": "Six"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "medium-ch1",
+            "question": "Which D-pad direction opens the phone you use for cheats?",
+            "options": [
+              {
+                "id": "a",
+                "text": "D-pad down"
+              },
+              {
+                "id": "b",
+                "text": "D-pad left"
+              },
+              {
+                "id": "c",
+                "text": "D-pad up"
+              },
+              {
+                "id": "d",
+                "text": "D-pad right"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "medium-ch2",
+            "question": "When do cheats unlock in GTA 6?",
+            "options": [
+              {
+                "id": "a",
+                "text": "After the prologue"
+              },
+              {
+                "id": "b",
+                "text": "After Chapter 1"
+              },
+              {
+                "id": "c",
+                "text": "After you buy the Ultimate Edition"
+              },
+              {
+                "id": "d",
+                "text": "After the main story is complete"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "medium-ch3",
+            "question": "What happens to trophy progress when you use a cheat?",
+            "options": [
+              {
+                "id": "a",
+                "text": "It's turned off for that play session"
+              },
+              {
+                "id": "b",
+                "text": "It's saved and counted later"
+              },
+              {
+                "id": "c",
+                "text": "Hidden trophies unlock right away"
+              },
+              {
+                "id": "d",
+                "text": "It's doubled for that play session"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "medium-tr1",
+            "question": "How many trophies and achievements does GTA 6 have?",
+            "options": [
+              {
+                "id": "a",
+                "text": "45"
+              },
+              {
+                "id": "b",
+                "text": "55"
+              },
+              {
+                "id": "c",
+                "text": "60"
+              },
+              {
+                "id": "d",
+                "text": "50"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "medium-vp1",
+            "question": "What car is included in the Vintage Vice City Pack?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Bravado Buffalo"
+              },
+              {
+                "id": "b",
+                "text": "Declasse Sabre"
+              },
+              {
+                "id": "c",
+                "text": "'55 Vapid Stanier"
+              },
+              {
+                "id": "d",
+                "text": "Vapid Dominator"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "medium-ma",
+            "question": "Who composed the original GTA 6 score?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Daft Punk"
+              },
+              {
+                "id": "b",
+                "text": "Air"
+              },
+              {
+                "id": "c",
+                "text": "Phoenix"
+              },
+              {
+                "id": "d",
+                "text": "Justice"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          }
+        ],
+        "hard": [
+          {
+            "id": "hard-tr2",
+            "question": "Of GTA 6's trophies and achievements, how many are hidden?",
+            "options": [
+              {
+                "id": "a",
+                "text": "28"
+              },
+              {
+                "id": "b",
+                "text": "22"
+              },
+              {
+                "id": "c",
+                "text": "38"
+              },
+              {
+                "id": "d",
+                "text": "33"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "hard-ch4",
+            "question": "What happens if you try to save while a cheat is active?",
+            "options": [
+              {
+                "id": "a",
+                "text": "The save works with a warning"
+              },
+              {
+                "id": "b",
+                "text": "The save is blocked"
+              },
+              {
+                "id": "c",
+                "text": "The save goes to a backup slot"
+              },
+              {
+                "id": "d",
+                "text": "The save rolls back to the last checkpoint"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "hard-rb",
+            "question": "Who are the two hosts of the Vice City pop station?",
+            "options": [
+              {
+                "id": "a",
+                "text": "El Martillo and La Gata"
+              },
+              {
+                "id": "b",
+                "text": "DJ Kerry and DJ Tom"
+              },
+              {
+                "id": "c",
+                "text": "Robyn and Alex"
+              },
+              {
+                "id": "d",
+                "text": "MW and Delta Dawne"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "hard-wl1",
+            "question": "Roughly how many animal species does GTA 6 include?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Under 60 species"
+              },
+              {
+                "id": "b",
+                "text": "About 100 species"
+              },
+              {
+                "id": "c",
+                "text": "About 500 species"
+              },
+              {
+                "id": "d",
+                "text": "Over 170 species"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "hard-m-b",
+            "question": "Grand Theft Auto VI: The Album has how many original tracks?",
+            "options": [
+              {
+                "id": "a",
+                "text": "34"
+              },
+              {
+                "id": "b",
+                "text": "24"
+              },
+              {
+                "id": "c",
+                "text": "44"
+              },
+              {
+                "id": "d",
+                "text": "40"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "hard-m-d",
+            "question": "How many tracks does the original score have?",
+            "options": [
+              {
+                "id": "a",
+                "text": "20"
+              },
+              {
+                "id": "b",
+                "text": "30"
+              },
+              {
+                "id": "c",
+                "text": "42"
+              },
+              {
+                "id": "d",
+                "text": "25"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "hard-lu1",
+            "question": "When did Lucia's father start teaching her to fight?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Once she was a teenager"
+              },
+              {
+                "id": "b",
+                "text": "After she left home"
+              },
+              {
+                "id": "c",
+                "text": "As soon as she could walk"
+              },
+              {
+                "id": "d",
+                "text": "When she first got a job"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "hard-r1",
+            "question": "On what date did Rockstar reveal six GTA 6 radio stations?",
+            "options": [
+              {
+                "id": "a",
+                "text": "October 1, 2026"
+              },
+              {
+                "id": "b",
+                "text": "October 18, 2026"
+              },
+              {
+                "id": "c",
+                "text": "September 8, 2026"
+              },
+              {
+                "id": "d",
+                "text": "October 8, 2026"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "hard-hs2",
+            "question": "The first Grand Theft Auto was made by which studio?",
+            "options": [
+              {
+                "id": "a",
+                "text": "DMA Design"
+              },
+              {
+                "id": "b",
+                "text": "Bullfrog Productions"
+              },
+              {
+                "id": "c",
+                "text": "Naughty Dog"
+              },
+              {
+                "id": "d",
+                "text": "id Software"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "hard-t1",
+            "question": "When did the first GTA 6 trailer release?",
+            "options": [
+              {
+                "id": "a",
+                "text": "January 5, 2024"
+              },
+              {
+                "id": "b",
+                "text": "December 5, 2023"
+              },
+              {
+                "id": "c",
+                "text": "December 15, 2023"
+              },
+              {
+                "id": "d",
+                "text": "December 5, 2024"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "hard-t4",
+            "question": "After its first delay, GTA 6 was set for which date?",
+            "options": [
+              {
+                "id": "a",
+                "text": "March 26, 2026"
+              },
+              {
+                "id": "b",
+                "text": "May 16, 2026"
+              },
+              {
+                "id": "c",
+                "text": "May 26, 2026"
+              },
+              {
+                "id": "d",
+                "text": "May 26, 2027"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "hard-pr1",
+            "question": "Where do you register a stolen car so it stays yours?",
+            "options": [
+              {
+                "id": "a",
+                "text": "At a car dealership"
+              },
+              {
+                "id": "b",
+                "text": "At a police station"
+              },
+              {
+                "id": "c",
+                "text": "At a car wash"
+              },
+              {
+                "id": "d",
+                "text": "At a Pay 'n' Spray"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "hard-vp2",
+            "question": "Which property comes with the Vintage Vice City Pack?",
+            "options": [
+              {
+                "id": "a",
+                "text": "A garage at Shore Court"
+              },
+              {
+                "id": "b",
+                "text": "A penthouse in Vice City"
+              },
+              {
+                "id": "c",
+                "text": "A boathouse at the marina"
+              },
+              {
+                "id": "d",
+                "text": "A safe house in Liberty City"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          },
+          {
+            "id": "hard-vp3",
+            "question": "Whose palm tree inspired the tropical pattern on most of the pack's weapons?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Michael De Santa"
+              },
+              {
+                "id": "b",
+                "text": "Tommy Vercetti"
+              },
+              {
+                "id": "c",
+                "text": "Niko Bellic"
+              },
+              {
+                "id": "d",
+                "text": "Carl Johnson"
+              }
+            ],
+            "correctOptionId": "b",
+            "image": null
+          },
+          {
+            "id": "hard-j2",
+            "question": "Where does Jason work for local drug runners?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Liberty City"
+              },
+              {
+                "id": "b",
+                "text": "Los Santos"
+              },
+              {
+                "id": "c",
+                "text": "Leonida Keys"
+              },
+              {
+                "id": "d",
+                "text": "Blaine County"
+              }
+            ],
+            "correctOptionId": "c",
+            "image": null
+          },
+          {
+            "id": "hard-br",
+            "question": "What does Jason have to do to live rent-free in one of Brian's properties?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Pay rent to Brian each month"
+              },
+              {
+                "id": "b",
+                "text": "Run a bar for Brian"
+              },
+              {
+                "id": "c",
+                "text": "Keep the boats running at the marina"
+              },
+              {
+                "id": "d",
+                "text": "Help with local shakedowns"
+              }
+            ],
+            "correctOptionId": "d",
+            "image": null
+          },
+          {
+            "id": "hard-b",
+            "question": "The first Grand Theft Auto was first released for which platforms?",
+            "options": [
+              {
+                "id": "a",
+                "text": "MS-DOS and Windows"
+              },
+              {
+                "id": "b",
+                "text": "Nintendo 64 and Sega Dreamcast"
+              },
+              {
+                "id": "c",
+                "text": "Xbox 360 and Xbox One"
+              },
+              {
+                "id": "d",
+                "text": "Sega Genesis and Super Nintendo"
+              }
+            ],
+            "correctOptionId": "a",
+            "image": null
+          }
+        ]
+      }
+    }
+  ]
+}

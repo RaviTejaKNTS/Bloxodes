@@ -2,14 +2,14 @@ import { formatPublishError } from "../shared/publish-network.mjs";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { loadBloxodesEnv } from "../shared/env-files";
-import { assertApprovedHubCoverScope, assertUpdatePublishedScope, parseContentOptions, type ContentOptions } from "./wiki-content-options";
+import { assertApprovedHubCoverScope, assertUnpublishScope, assertUpdatePublishedScope, parseContentOptions, type ContentOptions } from "./wiki-content-options";
 
 export { parseContentOptions, type ContentOptions };
 
 async function main() {
   if (process.argv.includes("--help")) {
     const { PUBLICATION_RELEVANT_PATHS } = await import("../shared/local-content-publication-guard");
-    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published] [--live-images all|new|none]
+    console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--approved-hub-cover-sha256 <64-hex>] [--target managed-dev|production] [--apply [--allow-prod]] [--update-published | --unpublish] [--live-images all|new|none]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
 npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --game <editorial-slug> [--target managed-dev|production]
@@ -20,6 +20,7 @@ npm run content:status -- --stats-report <slug> [--target managed-dev|production
 Stats reports support --visibility hidden|public and --update-published.
 Supported contracts: roblox-wiki@1, game-wiki@1, article@1, game-article@1, article-links@1 and stats-report@1. See contracts/<contract>/v1/.
 --update-published permits deliberate updates to published article@1, article-links@1, game-article@1 and stats-report@1 bundles. Matching bundles still only verify on production.
+--unpublish takes one published game-article@1 bundle off the site: it sets is_published=false on the row matching the bundle's slug and game, keeps the row, content and route, and proves the page answers 404. Dry run by default; --apply (with --allow-prod on production) writes.
 --live-images controls post-apply wiki image checks: new (default) checks uploaded R2 keys and changed hub artwork; all checks every image; none skips image fetches.
 Page HTTP 200 and title checks always run. Articles use their separate asset verifier.
 Default target: production. Publication defaults to a read-only dry run.
@@ -47,6 +48,7 @@ Without it, a local cover must match the current official thumbnail bytes. All i
     const { readWikiContract } = await import("../shared/wiki-publish-contract");
     contract = await readWikiContract(options.bundle!);
     assertUpdatePublishedScope(options, contract);
+    assertUnpublishScope(options, contract);
     if (options.visibility && contract !== "stats-report@1") throw new Error("--visibility is only supported for stats-report@1");
     if (contract !== "roblox-wiki@1") assertApprovedHubCoverScope(options, contract);
   }
@@ -74,6 +76,10 @@ Without it, a local cover must match the current official thumbnail bytes. All i
       const { publishArticleLinkRepair } = await import("./article-link-repair"); await publishArticleLinkRepair(options);
     } else if (contract === "stats-report@1") {
       const { publishStatsReport } = await import("./stats-report-publish"); await publishStatsReport(options);
+    } else if (contract === "game-article@1" && options.unpublish) {
+      process.env.NODE_ENV = options.target === "production" ? "production" : "development";
+      const { unpublishGameArticleBundle } = await import("./game-article-unpublish");
+      await unpublishGameArticleBundle(options);
     } else if (contract === "game-article@1") {
       process.env.NODE_ENV = options.target === "production" ? "production" : "development";
       const { publishGameArticleBundle } = await import("./game-article-publish");

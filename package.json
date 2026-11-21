@@ -74,7 +74,7 @@
     "articles:queue:migrate-to-notion": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/migrate-article-queue-to-notion.ts",
     "articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/update-article-queue-item.ts",
     "articles:review:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-release-review.ts",
-    "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts scripts/content/__tests__/article-links.test.ts scripts/content/__tests__/game-article-queue-binding.test.ts",
+    "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts scripts/content/__tests__/article-links.test.ts scripts/content/__tests__/game-article-queue-binding.test.ts scripts/content/__tests__/game-article-unpublish.test.ts",
     "articles:writer:local": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:homelab": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:batch": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-homelab-article-batch.ts",
