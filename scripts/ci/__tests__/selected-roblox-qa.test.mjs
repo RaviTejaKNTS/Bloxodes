@@ -194,7 +194,7 @@ test('hub selection requires frozen exact cover evidence while leaving authoring
   assert.throws(() => selectedPlan(root, hubBatch)); // Missing evidence cannot fall back to a mutable CDN URL.
   put('hub/final.json.qa-cover.json', evidence);
   const before = fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8');
-  assert.equal(selectedPlan(root, hubBatch).hubs[0].cover.url, `https://media.bloxodes.com/wiki/7/hubs/cover-${evidence.sha256.slice(0, 16)}.png`);
+  assert.equal(selectedPlan(root, hubBatch).hubs[0].cover.url, `https://wiki-media.bloxodes.com/7/hubs/cover-${evidence.sha256.slice(0, 16)}.png`);
   assert.equal(fs.readFileSync(path.join(root, 'hub/final.json'), 'utf8'), before);
   for (const mutation of [{...evidence, sha256: 'a'.repeat(64)}, {...evidence, file: '../escape.png'}, {...evidence, file: '/cover.png'}, {...evidence, format: 'svg'}, {...evidence, url: 'https://example.com/cover.png'}]) {
     put('hub/final.json.qa-cover.json', mutation);
@@ -228,7 +228,7 @@ test('published artwork checks the exact R2 bytes, never the malformed first off
     const result = await verifyPublishedHubArtwork(hub, {cover_image: cover.url}, {icon_url: icon, thumbnail_urls: [thumbnail]}, fetcher);
     assert.equal(result.cover.sha256, sha256(bytes)); assert.equal(result.cover.bytes, bytes.length);
     assert.deepEqual(calls, [cover.url, icon]);
-    for (const wrong of [null, thumbnail, icon, cover.url.replace(String(universeId), '1'), cover.url.replace('media.bloxodes.com', 'evil.example'), cover.url.replace('https:', 'http:'), cover.url + '?v=1', cover.url + '#fragment', cover.url.replace('.png', '.jpg'), cover.url.replace('cover-', 'cover-a'), cover.url.replace('/wiki/', '/wiki/../wiki/'), cover.url.replace('media.bloxodes.com', 'media.bloxodes.com:443'), cover.url.replace('media.bloxodes.com', 'user@media.bloxodes.com')]) {
+    for (const wrong of [null, thumbnail, icon, cover.url.replace(String(universeId), '1'), cover.url.replace('wiki-media.bloxodes.com', 'evil.example'), cover.url.replace('https:', 'http:'), cover.url + '?v=1', cover.url + '#fragment', cover.url.replace('.png', '.jpg'), cover.url.replace('cover-', 'cover-a'), cover.url.replace(`/${universeId}/`, `/x/../${universeId}/`), cover.url.replace('wiki-media.bloxodes.com', 'wiki-media.bloxodes.com:443'), cover.url.replace('wiki-media.bloxodes.com', 'user@wiki-media.bloxodes.com')]) {
       calls.length = 0;
       await assert.rejects(verifyPublishedHubArtwork(hub, {cover_image: wrong}, {icon_url: icon}, fetcher));
       assert.deepEqual(calls, [], 'Invalid URLs must fail before network access');

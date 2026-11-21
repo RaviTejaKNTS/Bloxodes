@@ -13,7 +13,7 @@ describe("WebPage image schema", () => {
     expect(webPageJsonLd(page)).not.toHaveProperty("image");
   });
 
-  it.each(["https://tr.rbxcdn.com/example/768/432/Image/Webp", "https://media.bloxodes.com/wiki/cover.webp"])("preserves real hosted artwork (%s)", image => {
+  it.each(["https://tr.rbxcdn.com/example/768/432/Image/Webp", "https://wiki-media.bloxodes.com/cover.webp"])("preserves real hosted artwork (%s)", image => {
     expect(webPageJsonLd({ ...page, image }).image).toBe(image);
   });
 

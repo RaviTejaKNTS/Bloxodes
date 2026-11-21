@@ -8,6 +8,7 @@ import { isDeepStrictEqual } from "node:util";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { validateMinecraftToolRules } from "@/lib/minecraft-tools/validate";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 
 const args = process.argv.slice(2);
 const apply = args.includes("--apply");
@@ -27,7 +28,8 @@ async function main() {
   if (owner.error) throw owner.error;
   const plans: Record<string, unknown>[] = [];
   for (const file of files) {
-    const data = JSON.parse(await readFile(path.resolve(file), "utf8")) as Record<string, unknown>;
+    // Older files carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+    const data = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await readFile(path.resolve(file), "utf8")) as Record<string, unknown>);
     const slug = data.slug ?? data.code;
     if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(`${file} has an invalid slug.`);
     if (data.namespace && data.namespace !== "minecraft") throw new Error(`${file} is not a Minecraft tool.`);

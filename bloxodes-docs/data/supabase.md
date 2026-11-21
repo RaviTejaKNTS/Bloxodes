@@ -71,6 +71,7 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
 - Collection and quiz data lives only in the database. The repo holds no runtime content JSON.
+- A data-only migration that must not fire triggers (no `updated_at` or sitemap date change, no revalidation or IndexNow work) uses `set local session_replication_role = replica` around plain `UPDATE`s and restores the runner's settings at the end. Restore the role with `SET LOCAL` (run through `execute` in a `DO` block if it comes from a saved value), not `set_config()`, which Supabase's managed `postgres` role can't use for it. Never use `ALTER TABLE … DISABLE TRIGGER`: it takes a SHARE ROW EXCLUSIVE lock that blocks writes to the table until the shared migration transaction commits.
 - `site_routes` triggers serialize URL changes with one transaction advisory lock. A transaction that writes several page tables must write them in the route migration's lock order: `games`, then `game_*` pages (collections last), then Roblox pages.
 
 ## Known issues

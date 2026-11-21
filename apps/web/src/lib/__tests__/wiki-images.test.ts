@@ -15,11 +15,19 @@ const page = {
 
 describe("wiki image roles", () => {
   it("uses the published R2 hub cover for cards and metadata while retaining the square icon", () => {
-    const cover = "https://media.bloxodes.com/wiki/123/hubs/cover-0123456789abcdef.png";
+    const cover = "https://wiki-media.bloxodes.com/123/hubs/cover-0123456789abcdef.png";
     const published = { ...page, cover_image: cover };
     expect(resolveWikiCardImage(published)).toBe(cover);
     expect(resolveWikiMetadataImage(published)).toBe(cover);
     expect(resolveWikiHeaderImage(published, [])).toBe(page.icon_url);
+  });
+
+  it("serves a legacy Worker-route hub cover from the R2 custom domain", () => {
+    const published = { ...page, cover_image: "https://media.bloxodes.com/wiki/123/hubs/cover-0123456789abcdef.png" };
+    const current = "https://wiki-media.bloxodes.com/123/hubs/cover-0123456789abcdef.png";
+    expect(resolveWikiCardImage(published)).toBe(current);
+    expect(resolveWikiMetadataImage(published)).toBe(current);
+    expect(resolveWikiHeaderImage({ cover_image: published.cover_image }, [])).toBe(current);
   });
 
   it("uses a landscape universe thumbnail for wiki cards", () => {

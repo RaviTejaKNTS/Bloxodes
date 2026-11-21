@@ -7,6 +7,7 @@ import { pathToFileURL } from "node:url";
 import { assertProductionPublication } from "../ci/publication-guard";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type ToolFinal = {
@@ -88,7 +89,8 @@ function isEventsFinal(value: unknown): value is EventsFinal {
 }
 
 export async function readEntry(file: string): Promise<FinalEntry> {
-  const parsed = JSON.parse(await readFile(path.resolve(process.cwd(), file), "utf8")) as unknown;
+  // Older files may carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+  const parsed = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await readFile(path.resolve(process.cwd(), file), "utf8")) as unknown);
   if (isToolFinal(parsed)) {
     const code = parsed.code.trim().toLowerCase();
     return { kind: "tool", file, row: parsed, code, title: parsed.title.trim(), urlPath: `/tools/${code}` };

@@ -175,7 +175,7 @@ async function fixture() {
 }
 
 function testEnvironment() {
-  return { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" };
+  return { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://wiki-media.bloxodes.com" };
 }
 
 // Mirror expected_game_page_path in 20261101120000_game_page_type_urls.sql.
@@ -213,7 +213,8 @@ async function applyFixture(root: string, tables: Record<string, Array<Record<st
     globalThis.fetch = async (input, init) => {
       const url = new URL(typeof input === 'string' ? input : input.url ?? input.href);
       const method = init?.method ?? input.method ?? 'GET';
-      if (url.hostname === 'media.bloxodes.com' && method === 'GET') {
+      // Media is only ever read on the R2 custom domain; retired media.bloxodes.com/wiki URLs are rewritten first.
+      if (url.hostname === 'wiki-media.bloxodes.com' && method === 'GET') {
         const file = url.pathname.endsWith('cover.webp') ? 'wiki/cover.webp' : 'wiki/hero.webp';
         return new Response(fs.readFileSync(${JSON.stringify(root)}+'/'+file), {headers:{'content-type':'image/webp'}});
       }
@@ -649,7 +650,7 @@ test("parallel media preparation preserves dataset order and content hash", asyn
 });
 
 
-test("repeat publication preserves stored media identities without namespace rules", async () => {
+test("repeat publication preserves stored media identities without namespace rules, moving retired media URLs to the R2 custom domain", async () => {
   for (const namespace of ["minecraft", "new-game"]) {
     const { root, write } = await fixture();
     try {
@@ -658,13 +659,15 @@ test("repeat publication preserves stored media identities without namespace rul
       const hero = `https://media.bloxodes.com/wiki/${namespace}/${namespace}/hero.webp`;
       const gameInput = JSON.parse(await fs.readFile(path.join(root, "game.json"), "utf8"));
       await write("game.json", { ...gameInput, cover_image: cover, hero_image: hero });
+      const current = (url: string) => url.replace("https://media.bloxodes.com/wiki/", "https://wiki-media.bloxodes.com/");
       const first = await applyFixture(root, { games: [{ id: randomUUID(), namespace, slug: namespace, kind: "franchise", parent_id: null, url_style: "page_type", is_published: true, cover_image: cover, hero_image: hero }] });
       const storedItem = first.tables.game_collection_items[0];
       const oldKey = `${namespace}/${namespace}/items/${storedItem.image_sha256}.webp`;
       storedItem.image_key = oldKey;
       const second = await applyFixture(root, first.tables);
-      assert.equal(second.tables.games.find(game => game.kind === "game")!.cover_image, cover);
-      assert.equal(second.tables.games.find(game => game.kind === "game")!.hero_image, hero);
+      assert.equal(first.tables.games.find(game => game.kind === "game")!.cover_image, current(cover));
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.cover_image, current(cover));
+      assert.equal(second.tables.games.find(game => game.kind === "game")!.hero_image, current(hero));
       assert.ok(second.tables.game_collection_items.every(item => item.image_key === oldKey));
     } finally { await fs.rm(root, { recursive: true, force: true }); }
   }

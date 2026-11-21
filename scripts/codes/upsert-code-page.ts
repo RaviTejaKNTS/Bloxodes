@@ -7,6 +7,7 @@ import path from "node:path";
 import { slugify, stripCodesSuffix } from "@/lib/slug";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls } from "../shared/storage-public-url";
 
@@ -123,7 +124,8 @@ function validatePayload(value: unknown): CodePagePayload {
 async function loadPayload(filePath: string): Promise<CodePagePayload> {
   const resolved = path.resolve(process.cwd(), filePath);
   const raw = await readFile(resolved, "utf8");
-  return validatePayload(JSON.parse(raw));
+  // Older files may carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+  return validatePayload(rewriteLegacyWikiMediaUrlsDeep(JSON.parse(raw)));
 }
 
 function mapSourceUrls(sourceUrls: string[] | undefined): SourceUrlFields {

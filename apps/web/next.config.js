@@ -57,6 +57,7 @@ const nextConfig = {
       { protocol: "https", hostname: "**.ggpht.com" },
       { protocol: "https", hostname: "**.googleusercontent.com" },
       { protocol: "https", hostname: "media.bloxodes.com" },
+      { protocol: "https", hostname: "wiki-media.bloxodes.com" },
       { protocol: "https", hostname: "www.rockstargames.com" },
       { protocol: "https", hostname: "media.rockstargames.com" },
       { protocol: "https", hostname: "media-rockstargames-com.akamaized.net" },

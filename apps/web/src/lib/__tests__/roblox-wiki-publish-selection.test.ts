@@ -206,16 +206,16 @@ describe("publisher page selection", () => {
     expect(state.events).toEqual([]);
   });
 
-  it.each(["https://media.bloxodes.com/wrong", "https://media.bloxodes.com", "https://media.bloxodes.com/wiki/nested", "https://media.bloxodes.com/wiki?x=1", "https://other.example/wiki"])("rejects the incorrect media base %s before writes", async base => {
+  it.each(["https://media.bloxodes.com/wiki", "https://media.bloxodes.com", "https://wiki-media.bloxodes.com/nested", "https://wiki-media.bloxodes.com?x=1", "https://other.example/wiki"])("rejects the incorrect media base %s before writes", async base => {
     vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", base);
     const logged = vi.spyOn(console, "error").mockImplementation(() => {});
     await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("preflight check(s) failed");
-    expect(logged).toHaveBeenCalledWith(expect.stringContaining("publication uses https://media.bloxodes.com/wiki"));
+    expect(logged).toHaveBeenCalledWith(expect.stringContaining("publication uses https://wiki-media.bloxodes.com"));
     expect(state.events).toEqual([]);
   });
 
   it("accepts the normalized exact media base", async () => {
-    vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", "  https://media.bloxodes.com/wiki///  ");
+    vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", "  https://wiki-media.bloxodes.com///  ");
     await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
     expect(state.events).toEqual([]);
   });

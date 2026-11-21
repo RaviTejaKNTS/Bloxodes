@@ -9,6 +9,7 @@ import {contentDigest} from './managed-content-receipt.mjs';
 import {collectionImageKey} from '../shared/franchise-collection-media';
 import {parseGameQuizData} from '../../apps/web/src/lib/game-page-data';
 import {getFieldLabel} from '../../apps/web/src/lib/game-collections';
+import {rewriteLegacyWikiMediaUrlsDeep as currentMedia, wikiMediaUrl} from '../../apps/web/src/lib/wiki-media';
 
 const output = 'tmp/test-reports/selected-franchise';
 const stateFile = path.join(process.env.RUNNER_TEMP!, 'selected-franchise-state.json');
@@ -64,14 +65,15 @@ async function verify() {
   for (const game of plan.games) {
     const result = await db.from('games').select('*').eq('namespace', plan.namespace).eq('slug', game.slug).eq('kind', game.kind).single();
     if (result.error) throw result.error;
-    for (const [key, value] of Object.entries(game)) same(value, result.data[key], `Game ${game.slug}.${key}`);
+    // Publishers store retired media.bloxodes.com/wiki URLs on the R2 custom domain.
+    for (const [key, value] of Object.entries(game)) same(currentMedia(value), result.data[key], `Game ${game.slug}.${key}`);
     readback.push({kind: 'game', slug: game.slug, id: result.data.id, parentId: result.data.parent_id, gameKind: result.data.kind});
   }
   for (const entry of plan.pages) {
     const table = entry.kind === 'hub' ? 'game_wiki_pages' : entry.kind === 'article' ? 'game_article_pages' : 'game_quiz_pages';
     const result = await db.from(table).select('*').eq('namespace', plan.namespace).eq('slug', entry.row.slug).single();
     if (result.error) throw result.error;
-    for (const [key, value] of Object.entries(entry.row)) same(key === 'quiz_data' ? parseGameQuizData(value) : value, result.data[key], `${table}.${entry.row.slug}.${key}`);
+    for (const [key, value] of Object.entries(entry.row)) same(currentMedia(key === 'quiz_data' ? parseGameQuizData(value) : value), result.data[key], `${table}.${entry.row.slug}.${key}`);
     const expectedPath = await db.rpc('expected_game_page_path', {p_game_id: result.data.game_id, p_type: entry.kind === 'hub' ? 'wiki' : entry.kind === 'article' ? 'article' : 'quiz', p_slug: entry.row.slug});
     if (expectedPath.error) throw expectedPath.error;
     same(entry.path, expectedPath.data, 'Expected game path');
@@ -91,7 +93,7 @@ async function verify() {
     if (!page.is_published || page.page_type !== manifest.collection.pageType || page.item_count !== dataset.items.length || page.canonical_path !== entry.path || !page.published_dataset_id) throw new Error(`Invalid published pointer/count/type: ${final.code}`);
     const replaceCount = (value: unknown): any => typeof value === 'string' ? value.replaceAll('{count}', dataset.items.length.toLocaleString('en-US')) : Array.isArray(value) ? value.map(replaceCount) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, child]) => [key, replaceCount(child)])) : value;
     const copyKeys = ['title', 'display_name', 'seo_title', 'meta_description', 'intro_md', 'how_it_works_md', 'description_md', 'description_json', 'faq_json', 'schema_ld_json', 'thumb_url', 'wiki_md', 'wiki_sort_order'];
-    for (const key of copyKeys) same(replaceCount(final[key] ?? (key === 'wiki_sort_order' ? manifest.collection.sortOrder ?? 0 : null)), page[key], `${final.code}.${key}`);
+    for (const key of copyKeys) same(currentMedia(replaceCount(final[key] ?? (key === 'wiki_sort_order' ? manifest.collection.sortOrder ?? 0 : null))), page[key], `${final.code}.${key}`);
     const revision = await db.from('game_collection_datasets').select('*').eq('namespace', plan.namespace).eq('id', page.published_dataset_id).eq('collection_page_id', page.id).single();
     if (revision.error) throw revision.error;
     const rows: any[] = [];
@@ -116,7 +118,7 @@ async function verify() {
         item.image_key = storedKey ?? collectionImageKey({namespace: plan.namespace, mediaPrefix: plan.namespace, gameSlug: manifest.game.slug, collectionSlug: manifest.collection.slug, itemSlug: item.item_slug, hash: image.hash, extension: image.mime === 'image/jpeg' ? 'jpg' : image.mime.replace('image/', '')});
         Object.assign(item, {image_mime: image.mime, image_width: image.width, image_height: image.height, image_bytes: image.bytes.length, image_sha256: image.hash});
         if (!verifiedMedia.has(item.image_key)) {
-          const mediaUrl = `https://media.bloxodes.com/wiki/${item.image_key.split('/').map(encodeURIComponent).join('/')}`;
+          const mediaUrl = wikiMediaUrl(item.image_key.split('/').map(encodeURIComponent).join('/'));
           const remote = await fetch(mediaUrl, {redirect: 'error', signal: AbortSignal.timeout(30_000)});
           if (!remote.ok) throw new Error(`Selected media unavailable: ${item.image_key}`);
           same(image.hash, hash(Buffer.from(await remote.arrayBuffer())), `Public prepared image ${item.image_key}`);

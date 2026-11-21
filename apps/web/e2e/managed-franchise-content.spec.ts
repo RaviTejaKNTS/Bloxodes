@@ -93,7 +93,7 @@ for (const url of selected.urls) {
 for (const hub of selected.pages.filter(page => page.kind === 'hub')) {
   test(`${hub.path} hosted artwork loads before visual review`, async ({page}, info) => {
     await page.goto(hub.path, {waitUntil: 'load'});
-    const images = page.locator('main img[src^="https://media.bloxodes.com/"]');
+    const images = page.locator('main img[src^="https://wiki-media.bloxodes.com/"], main img[src^="https://media.bloxodes.com/"]');
     expect(await images.count(), 'Selected wiki artwork must be present').toBeGreaterThan(0);
     for (const image of await images.all()) {
       await image.scrollIntoViewIfNeeded();

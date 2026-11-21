@@ -14,7 +14,7 @@ Bloxodes is a gaming guide site at https://bloxodes.com. It started with Roblox 
 | Mobile app | `apps/mobile` | Expo Router. Calls `/api/mobile/*` with optional bearer login. |
 | Jobs and pipelines | `scripts/` | Grouped by pipeline, run through `npm run` aliases in `package.json`. |
 | Database | `supabase/` | Migrations and the `revalidate` and `cache-warm` Edge Functions. |
-| Wiki media worker | `workers/wiki-media` | Cloudflare Worker serving R2 images at `media.bloxodes.com/wiki/*`. |
+| Wiki media | R2 bucket `bloxodes-wiki` | Served directly by the R2 custom domain `wiki-media.bloxodes.com`. URL helpers in `apps/web/src/lib/wiki-media.ts`. |
 
 ## How a page request flows
 
@@ -22,7 +22,7 @@ Bloxodes is a gaming guide site at https://bloxodes.com. It started with Roblox 
 2. Cloudflare reaches Traefik on the Hostinger VPS.
 3. Traefik routes to the Dokploy service `bloxodes-web-ujegas`, the Next.js app on port 3000.
 4. The app reads self-hosted Supabase at `https://database.bloxodes.com`.
-5. Media comes from `https://media.bloxodes.com` (Supabase Storage, plus R2 for wiki collection images).
+5. Media comes from `https://media.bloxodes.com` (Supabase Storage) and `https://wiki-media.bloxodes.com` (R2, wiki hub and collection images).
 
 ## Machines
 

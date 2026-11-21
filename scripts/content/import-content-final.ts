@@ -11,6 +11,7 @@ import {randomUUID} from 'node:crypto';
 
 import { parseQuizData } from "@/lib/quiz-types";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep } from "@/lib/wiki-media";
 import {
   pickEligibleArticleAuthorId,
   type ArticleAuthorCandidate
@@ -156,7 +157,8 @@ function parseArgs(argv: string[]): CliOptions {
 async function readJson(filePath: string): Promise<unknown> {
   const resolved = path.resolve(process.cwd(), filePath);
   const raw = await readFile(resolved, "utf8");
-  return JSON.parse(raw);
+  // Older files may carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+  return rewriteLegacyWikiMediaUrlsDeep(JSON.parse(raw));
 }
 
 function wordCount(markdown: string): number {

@@ -1,6 +1,6 @@
 # Cloudflare and media
 
-Last verified: 2026-11-09
+Last verified: 2026-11-18
 
 Cloudflare proxies every public hostname and is the long-lived HTML cache. R2 stores wiki collection images.
 
@@ -11,7 +11,8 @@ Cloudflare proxies every public hostname and is the long-lived HTML cache. R2 st
 | `bloxodes.com`, `www` | The website. |
 | `database.bloxodes.com` | Supabase API (Kong). |
 | `studio.bloxodes.com` | Supabase Studio, behind basic auth. |
-| `media.bloxodes.com` | Public media: Supabase Storage bucket `bloxodes-media`, and `/wiki/*` from R2. |
+| `media.bloxodes.com` | Public media: Supabase Storage bucket `bloxodes-media`. `/wiki/*` permanently redirects to `wiki-media.bloxodes.com`. |
+| `wiki-media.bloxodes.com` | R2 custom domain for bucket `bloxodes-wiki` (wiki hub and collection images). No Worker. |
 
 Old `bloxodesdb.ravitejaknts.com` and `bloxodesstudio.ravitejaknts.com` still answer. Don't use them in code or docs.
 
@@ -31,7 +32,9 @@ Old `bloxodesdb.ravitejaknts.com` and `bloxodesstudio.ravitejaknts.com` still an
 ## Wiki media (R2)
 
 - Collection and hub images live in R2 bucket `bloxodes-wiki`.
-- `workers/wiki-media` (Cloudflare Worker, `wrangler.jsonc`) serves them at `https://media.bloxodes.com/wiki/<key>` with one-year immutable caching.
+- The bucket's R2 custom domain `wiki-media.bloxodes.com` serves them at `https://wiki-media.bloxodes.com/<key>` (bucket root is the host root). No Worker runs, so image views don't count toward the Workers Free daily limit (100,000 requests). Objects carry `cache-control: public, max-age=31536000, immutable` from `scripts/shared/r2-client.ts`, and Cloudflare caches them at the edge.
+- Old links `media.bloxodes.com/wiki/*` get a permanent redirect rule to `https://wiki-media.bloxodes.com/*`. Code builds only the new host (`apps/web/src/lib/wiki-media.ts`). Publishers accept old-prefix URLs and store the new host, and the web app's database client rewrites old-prefix URLs it reads.
+- Don't serve public media through a Worker. The account is on Workers Free, every view would count, and going over the daily limit breaks images with HTTP 429 `error code: 1027` until midnight UTC.
 - Uploads use the S3 API with `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET` (`scripts/shared/r2-client.ts`). GitHub publication jobs have these.
 - Keys are immutable. A new image means a new key in a new dataset revision.
 

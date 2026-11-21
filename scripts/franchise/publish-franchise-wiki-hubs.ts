@@ -10,6 +10,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { rewriteLegacyWikiMediaUrlsDeep, wikiMediaKeyFromUrl } from "@/lib/wiki-media";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 
 const args = process.argv.slice(2);
@@ -39,13 +40,14 @@ export async function runFranchiseWikiHubsCli() {
   const plans = [];
   for (const slug of [...new Set(slugs)]) {
     const dir = path.resolve(value("--workspace"), slug, "wiki", slug);
-    const game = JSON.parse(await readFile(path.join(dir, "game.json"), "utf8"));
-    const wiki = JSON.parse(await readFile(path.join(dir, "final.json"), "utf8"));
+    // Older bundles carry the retired media.bloxodes.com/wiki route; store the R2 custom domain.
+    const game = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await readFile(path.join(dir, "game.json"), "utf8")));
+    const wiki = rewriteLegacyWikiMediaUrlsDeep(JSON.parse(await readFile(path.join(dir, "final.json"), "utf8")));
     if (game.slug !== slug || wiki.slug !== slug || wiki.game_slug !== slug || game.is_published !== true || wiki.is_published !== true) throw new Error(`Unapproved or mismatched hub ${slug}`);
     const images = requireFranchiseHubImages(game, slug);
     for (const image of images) {
       const { url } = image;
-      if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/`)) throw new Error(`Unapproved media URL for ${slug}`);
+      if (!wikiMediaKeyFromUrl(url)?.startsWith(`${namespace}/`)) throw new Error(`Unapproved media URL for ${slug}`);
     }
     plans.push({ slug, game, wiki });
   }

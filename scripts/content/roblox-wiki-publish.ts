@@ -11,7 +11,7 @@ import { THE_FORGE_COLLECTIONS } from "@/lib/game-collections/the-forge-view";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { readGameCollectionGroups } from "@/lib/game-collections/registry";
 import { resolveSeoTitle } from "@/lib/seo";
-import { resolveWikiMediaUrl, wikiMediaPublicBaseUrl } from "@/lib/wiki-media";
+import { resolveWikiMediaUrl, rewriteLegacyWikiMediaUrlsDeep, wikiMediaPublicBaseUrl, WIKI_MEDIA_BASE_URL } from "@/lib/wiki-media";
 import { fetchOfficialUniverseMedia, persistOfficialUniverseMedia } from "@/lib/roblox/universe-media";
 import { officialUniverseCover } from "../shared/official-universe-cover";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
@@ -218,7 +218,7 @@ export async function publishBundle(options: ContentOptions) {
     hub = await check("hub schema, copy and identity", async () => {
       const file = await bundlePath(root, selected.hub!.finalJson);
       hubFinalSchema.parse(await json(file));
-      const final = await readFinal(file);
+      const final = rewriteLegacyWikiMediaUrlsDeep(await readFinal(file));
       if (final.slug !== bundle.game.slug || final.universe_id !== bundle.game.universeId) throw new Error("Hub final.json slug/universe_id must match bundle.game.");
       if (final.is_published === false) throw new Error("Set hub final.json is_published to true or omit it to publish.");
       checkCopy(final as unknown as Record<string, unknown>, file);
@@ -242,7 +242,8 @@ export async function publishBundle(options: ContentOptions) {
       const issues: Issue[] = [];
       auditDataset(source.config.code, source.datasetPath, document, issues);
       if (issues.some(issue => issue.level === "error")) throw new Error(issues.map(issue => issue.message).join("\n"));
-      const final = collectionFinalSchema.parse(await json(source.finalJsonPath!));
+      // Older bundles carry the retired Worker route; store the R2 custom domain.
+      const final = rewriteLegacyWikiMediaUrlsDeep(collectionFinalSchema.parse(await json(source.finalJsonPath!)));
       if (final.wiki_slug !== bundle.game.slug || final.collection_slug !== manifest.collection.slug || final.universe_id !== bundle.game.universeId || final.code !== source.config.code) throw new Error("Collection final.json identity must match bundle.game and its manifest.");
       if (final.is_published === false) throw new Error("Set collection final.json is_published to true or omit it to publish.");
       if (final.display_name !== manifest.collection.label) throw new Error("final.json display_name must match manifest collection.label.");
@@ -270,7 +271,7 @@ export async function publishBundle(options: ContentOptions) {
   await mapPublishConcurrent(plans, plan => check(`collection identity ${plan.config.code}`, () => collectionIdentity(plan)));
   await check("R2 configuration", async () => {
     if (loadR2ClientConfig().bucket !== "bloxodes-wiki") throw new Error("WIKI_R2_BUCKET must be bloxodes-wiki.");
-    if (wikiMediaPublicBaseUrl() !== "https://media.bloxodes.com/wiki") throw new Error("Remove WIKI_MEDIA_PUBLIC_BASE_URL override; publication uses https://media.bloxodes.com/wiki.");
+    if (wikiMediaPublicBaseUrl() !== WIKI_MEDIA_BASE_URL) throw new Error(`Remove WIKI_MEDIA_PUBLIC_BASE_URL override; publication uses ${WIKI_MEDIA_BASE_URL}.`);
   });
   if (options.target === "production" && !process.env.REVALIDATE_SECRET) failures.push("Set REVALIDATE_SECRET in the production target for immediate revalidation.");
   if (failures.length) throw new Error(`${failures.length} preflight check(s) failed. Fix the findings above and rerun the same bundle. No database or media writes were made.`);
