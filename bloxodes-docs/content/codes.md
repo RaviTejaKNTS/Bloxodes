@@ -35,7 +35,9 @@ The factory calls these from the MacBook Pro's Bloxodes main checkout through it
 
 ## Code updates (VPS)
 
-VPS cron runs `refresh:codes` (`scripts/codes/update-codes.ts`) at 00:00, 06:00, 12:00 and 18:00 UTC, with concurrency 6 and a 750 ms batch delay. It scrapes each published page's sources and upserts `codes` through the `upsert_code` RPC (case-insensitive, provider precedence, reactivation). If a source partly fails, it keeps what it saw rather than expiring everything missing.
+VPS cron runs `refresh:codes` (`scripts/codes/update-codes.ts`) at 00:00, 06:00, 12:00 and 18:00 UTC, with concurrency 6 and a 750 ms batch delay. It scrapes each published page's sources and upserts `codes` through the `upsert_code` RPC (case-insensitive, provider precedence, reactivation).
+
+Each source votes on each code: active, or not working (RobloxDen's `check` badge or any expired list). The vote from the higher provider priority wins (Beebom 3, RobloxDen 2), and a tie counts as not working. A code whose winning vote is not working is set expired even if its stored row has a higher provider priority. A code one source lists as active, with no not-working vote, stays active. If a source fails, codes no source listed are kept, but explicit expired and `check` votes still apply. The decision is `planCodeRefresh` in `apps/web/src/lib/code-refresh-plan.ts`.
 
 ## Manual page setup
 

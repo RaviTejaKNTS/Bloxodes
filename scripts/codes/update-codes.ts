@@ -1,17 +1,17 @@
 import "../shared/load-env";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { promises as fs } from "node:fs";
-import { CodeSourcesUnavailableError, detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
+import { CodeSourcesUnavailableError, detectProvider, scrapeSources } from "@/lib/scraper";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { CodePage } from "@/lib/db";
 import {
   sanitizeCodeDisplay,
   normalizeCodeKey,
   cleanExpiredCodeList,
-  stripPastedCopySuffix,
 } from "@/lib/code-normalization";
 import { isLikelyNonCodeText } from "@/lib/beebom";
 import { isSuspiciousEmptyCodeRefresh } from "@/lib/code-refresh-safety";
+import { planCodeRefresh } from "@/lib/code-refresh-plan";
 import { runDataApiOperation } from "../shared/data-api-retry";
 import { enqueueRevalidationEvents } from "../shared/revalidation-events";
 import { buildCopyCleanupPlan, type CleanupCodePage, type CleanupCodeRow } from "./copy-text-cleanup";
@@ -264,35 +264,8 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
 
   const { codes, expiredCodes, sourceFailures } = await scrapeSources(enabledUrls, { allowPartial: true });
   if (sourceFailures?.length) console.warn(`Incomplete scrape for ${game.slug}: ${sourceFailures.map(f => f.error).join("; ")}. Missing codes will be preserved.`);
-  let newCodesCount = 0;
   const scrapedExpired = expiredCodes ?? [];
-
-  const expiredByNormalized = new Map<string, { display: string; priority: number }>();
-  const setExpired = (display: string, priority: number) => {
-    const cleaned = stripPastedCopySuffix(display);
-    const normalized = normalizeCodeKey(cleaned);
-    if (!cleaned || !normalized) return;
-    const existing = expiredByNormalized.get(normalized);
-    if (!existing || priority > existing.priority) {
-      expiredByNormalized.set(normalized, { display: cleaned, priority });
-    }
-  };
-
-  const incomingNormalized = new Set<string>();
-
   const existingExpiredArray = Array.isArray(game.expired_codes) ? game.expired_codes : [];
-  for (const displayCode of cleanExpiredCodeList(existingExpiredArray).codes) {
-    if (isLikelyNonCodeText(displayCode)) continue;
-    setExpired(displayCode, -1);
-  }
-
-  for (const raw of scrapedExpired) {
-    const displayCode = stripPastedCopySuffix(typeof raw === "string" ? raw : raw?.code);
-    if (!displayCode) continue;
-    const provider = typeof raw === "string" ? undefined : raw?.provider;
-    const priority = getCodeDisplayPriority(provider);
-    setExpired(displayCode, priority);
-  }
 
   const { data: existingRows, error: existingError } = await runDataApiOperation(`Load existing codes for ${game.slug}`, () => sb
     .from("codes")
@@ -339,151 +312,66 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     return !code || !isLikelyNonCodeText(code);
   });
 
-  const existingNormalizedMap = new Map<string, { code: string; providerPriority: number; status: string; firstSeenAt?: string | null }>();
-  const expiredInDb = new Set<string>();
-  for (const row of validExistingRows) {
-    const existingCode = sanitizeCodeDisplay(row.code);
-    if (!existingCode) continue;
-    const normalized = normalizeCodeKey(existingCode);
-    if (!normalized) continue;
-    const providerPriority = Number(row.provider_priority ?? 0);
-    if (row.status === "expired") {
-      expiredInDb.add(normalized);
-    }
-    if (existingNormalizedMap.has(normalized)) {
-      const current = existingNormalizedMap.get(normalized)!;
-      if (current.providerPriority >= providerPriority) {
-        continue;
-      }
-    }
-    existingNormalizedMap.set(normalized, { code: existingCode, providerPriority, status: row.status, firstSeenAt: row.first_seen_at });
-  }
+  const plan = planCodeRefresh({
+    codes,
+    expiredCodes: scrapedExpired,
+    hasSourceFailures: Boolean(sourceFailures?.length),
+    existingRows: validExistingRows.flatMap((row) => {
+      const code = sanitizeCodeDisplay(row.code);
+      return code ? [{ code, status: row.status, providerPriority: Number(row.provider_priority ?? 0) }] : [];
+    }),
+    existingExpiredCodes: cleanExpiredCodeList(existingExpiredArray).codes.filter(
+      (code) => !isLikelyNonCodeText(code)
+    ),
+  });
 
-  let upserted = 0;
-
-  for (let i = codes.length - 1; i >= 0; i -= 1) {
-    const c = codes[i];
-    const displayCode = stripPastedCopySuffix(c.code);
-    if (!displayCode) {
-      continue;
-    }
-    const normalized = normalizeCodeKey(displayCode);
-    if (!normalized) {
-      continue;
-    }
-    const providerPriority = Number(c.providerPriority ?? getCodeDisplayPriority(c.provider) ?? 0);
-    const expiredEntry = expiredByNormalized.get(normalized);
-    if (expiredEntry) {
-      if (expiredEntry.priority >= providerPriority) {
-        continue; // expired wins for equal or higher priority
-      }
-      expiredByNormalized.delete(normalized); // higher priority active overrides expired
-    }
-    incomingNormalized.add(normalized);
-
-    // Skip if a code with the same normalized value already exists for this code page
-    const existingEntry = existingNormalizedMap.get(normalized);
-    if (existingEntry) {
-      const existingExpired = existingEntry.status === "expired";
-      const higherPriorityExists = existingEntry.providerPriority > providerPriority;
-      const samePrioritySameDisplay = existingEntry.providerPriority === providerPriority && existingEntry.code === displayCode;
-
-      if (!existingExpired && (higherPriorityExists || samePrioritySameDisplay)) {
-        // Still touch the row to refresh last_seen_at without overwriting provider priority
-        const { error: touchError } = await runDataApiOperation(`Touch code for ${game.slug}`, () => sb
-          .from("codes")
-          .update({ last_seen_at: new Date().toISOString() })
-          .eq("code_page_id", game.id)
-          .eq("code", existingEntry.code));
-
-        if (touchError) {
-          throw new Error(`failed to refresh last_seen_at for ${displayCode}: ${touchError.message}`);
-        }
-
-        existingNormalizedMap.set(normalized, {
-          code: existingEntry.code,
-          providerPriority: existingEntry.providerPriority,
-          status: existingEntry.status,
-          firstSeenAt: existingEntry.firstSeenAt,
-        });
-        continue;
-      }
-    }
-
-    c.code = displayCode;
-    if (c.isNew) {
-      newCodesCount += 1;
-    }
-
-    const status = c.status === "check" ? "expired" : c.status;
+  for (const upsert of plan.upserts) {
     const { error } = await runDataApiOperation(`Upsert code for ${game.slug}`, () => sb.rpc("upsert_code", {
       p_code_page_id: game.id,
-      p_code: displayCode,
-      p_status: status,
-      p_rewards_text: c.rewardsText ?? null,
-      p_level_requirement: c.levelRequirement ?? null,
-      p_is_new: c.isNew ?? false,
-      p_provider_priority: providerPriority,
+      p_code: upsert.code,
+      p_status: upsert.status,
+      p_rewards_text: upsert.rewardsText,
+      p_level_requirement: upsert.levelRequirement,
+      p_is_new: upsert.isNew,
+      p_provider_priority: upsert.providerPriority,
     }));
 
     if (error) {
-      throw new Error(`upsert failed for ${c.code}: ${error.message}`);
-    }
-
-    // The atomic RPC owns reactivation timestamps and provider precedence.
-    const stored = existingEntry && existingEntry.providerPriority > providerPriority ? existingEntry : {
-      code: existingEntry && existingEntry.providerPriority === providerPriority ? existingEntry.code : displayCode,
-      providerPriority, status, firstSeenAt: existingEntry?.firstSeenAt
-    };
-    existingNormalizedMap.set(normalized, stored);
-
-    upserted += 1;
-  }
-
-  const existingCheckRows = validExistingRows.filter((row) => row.status === "check");
-  if (existingCheckRows.length) {
-    const codesToMove = existingCheckRows
-      .map((row) => sanitizeCodeDisplay(row.code))
-      .filter((code): code is string => Boolean(code));
-
-    if (codesToMove.length) {
-      const { error: moveError } = await sb
-        .from("codes")
-        .update({
-          status: "expired",
-          is_new: false,
-          last_seen_at: new Date().toISOString(),
-        })
-        .eq("code_page_id", game.id)
-        .in("code", codesToMove);
-
-      if (moveError) {
-        throw new Error(`failed to convert check codes to expired for ${game.slug}: ${moveError.message}`);
-      }
-
-      for (const code of codesToMove) {
-        setExpired(code, 0);
-      }
+      throw new Error(`upsert failed for ${upsert.code}: ${error.message}`);
     }
   }
 
-  const existingActiveOrCheck = validExistingRows.filter((row) => row.status === "active");
+  if (plan.touch.length) {
+    // Refresh last_seen_at on rows a higher-priority source already owns, without overwriting them.
+    const { error: touchError } = await runDataApiOperation(`Touch codes for ${game.slug}`, () => sb
+      .from("codes")
+      .update({ last_seen_at: new Date().toISOString() })
+      .eq("code_page_id", game.id)
+      .in("code", plan.touch));
 
-  const toExpireEntries = existingActiveOrCheck
-    .map((row) => {
-      const displayCode = sanitizeCodeDisplay(row.code);
-      if (!displayCode) return null;
-      const normalized = normalizeCodeKey(displayCode);
-      if (!normalized) return null;
-      return { normalized, original: displayCode };
-    })
-    .filter((entry): entry is { normalized: string; original: string } => {
-      if (!entry) return false;
-      return !sourceFailures?.length && !incomingNormalized.has(entry.normalized);
-    });
+    if (touchError) {
+      throw new Error(`failed to refresh last_seen_at for ${game.slug}: ${touchError.message}`);
+    }
+  }
 
-  if (toExpireEntries.length) {
-    const codesToExpire = toExpireEntries.map((entry) => entry.original);
+  if (plan.convertCheck.length) {
+    const { error: moveError } = await sb
+      .from("codes")
+      .update({
+        status: "expired",
+        is_new: false,
+        last_seen_at: new Date().toISOString(),
+      })
+      .eq("code_page_id", game.id)
+      .eq("status", "check")
+      .in("code", plan.convertCheck);
+
+    if (moveError) {
+      throw new Error(`failed to convert check codes to expired for ${game.slug}: ${moveError.message}`);
+    }
+  }
+
+  if (plan.expire.length) {
     const { error: expireError } = await sb
       .from("codes")
       .update({
@@ -492,17 +380,15 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
         last_seen_at: new Date().toISOString(),
       })
       .eq("code_page_id", game.id)
-      .in("code", codesToExpire);
+      .eq("status", "active")
+      .in("code", plan.expire);
 
     if (expireError) {
       throw new Error(`expiration update failed for ${game.slug}: ${expireError.message}`);
     }
-
-    for (const entry of toExpireEntries) {
-      setExpired(entry.original, 0);
-    }
   }
-  const updatedExpiredCodes = Array.from(expiredByNormalized.values()).map((entry) => entry.display);
+
+  const updatedExpiredCodes = plan.expiredCodes;
   let expiredArrayChanged = false;
   if (updatedExpiredCodes.length !== existingExpiredArray.length) {
     expiredArrayChanged = true;
@@ -532,10 +418,10 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     status: sourceFailures?.length ? "error" : "ok",
     ...(sourceFailures?.length ? { error: `Partial refresh; preserved missing codes. ${sourceFailures.map(f => f.error).join("; ")}` } : {}),
     found: codes.length,
-    upserted,
-    expired: toExpireEntries.length,
+    upserted: plan.upserts.length,
+    expired: plan.expire.length,
     removedInvalid: invalidExistingCodes.length,
-    newCodes: newCodesCount,
+    newCodes: plan.newCodes,
   };
 }
 

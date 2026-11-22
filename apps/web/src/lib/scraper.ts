@@ -3,7 +3,7 @@ import { scrapeRobloxdenPage } from "./robloxden";
 import { scrapeBeebomPage } from "./beebom";
 import { scrapeProGameGuidesPage } from "./progameguides";
 import { scrapeDestructoidPage } from "./destructoid";
-import type { ScrapeResult, ScrapedCode } from "./scraper-types";
+import type { ScrapeResult, ScrapedCode, ScrapedExpiredCode } from "./scraper-types";
 import { normalizeCodeKey, stripPastedCopySuffix, stripTrailingCopyButtonText } from "./code-normalization";
 
 const SCRAPER_MAP = {
@@ -26,11 +26,6 @@ function sanitizeRewardText(raw?: string): string | undefined {
   // Remove copy labels after "(new)" so "200 Spins Copy (new)" is fully cleaned.
   return stripTrailingCopyButtonText(withoutNew) ?? undefined;
 }
-
-const STATUS_PRIORITY: Record<ScrapedCode["status"], number> = {
-  active: 2,
-  check: 1,
-};
 
 const PROVIDER_PRIORITY: Record<NonNullable<ScrapedCode["provider"]>, number> = {
   progameguides: 0,
@@ -72,17 +67,24 @@ type AggregatedEntry = {
   data: ScrapedCode;
   codePriority: number;
   rewardPriority: number;
+  // Highest provider priority that lists the code as active, or as "check"
+  // (RobloxDen's "likely expired" badge). -1 when no source did.
+  activeVotePriority: number;
+  checkVotePriority: number;
 };
+
+function recordStatusVote(entry: AggregatedEntry, code: ScrapedCode) {
+  const priority = getCodeDisplayPriority(code.provider);
+  if (code.status === "active") {
+    entry.activeVotePriority = Math.max(entry.activeVotePriority, priority);
+  } else {
+    entry.checkVotePriority = Math.max(entry.checkVotePriority, priority);
+  }
+}
 
 function mergeCodeEntry(existing: AggregatedEntry, incoming: ScrapedCode): AggregatedEntry {
   const merged = { ...existing };
   const result = merged.data;
-
-  const incomingStatusPriority = STATUS_PRIORITY[incoming.status];
-  const existingStatusPriority = STATUS_PRIORITY[result.status];
-  if (incomingStatusPriority > existingStatusPriority) {
-    result.status = incoming.status;
-  }
 
   if (incoming.levelRequirement != null && result.levelRequirement == null) {
     result.levelRequirement = incoming.levelRequirement;
@@ -127,11 +129,22 @@ function mergeCodeEntry(existing: AggregatedEntry, incoming: ScrapedCode): Aggre
   return merged;
 }
 
+/**
+ * Merges every source's result into one list per code.
+ *
+ * Each source casts a vote for a code: "active", or "not working" (RobloxDen's
+ * "check" badge or any expired list). The vote from the highest provider
+ * priority wins; on a tie, "not working" wins. The output keeps one invariant
+ * consumers rely on: a code in `codes` with status "active" is never in
+ * `expiredCodes`. A code whose winning vote is "not working" keeps its entry in
+ * `codes` (status "check", so its reward text survives) and/or appears in
+ * `expiredCodes` with the provider that reported it, so its priority is known.
+ */
 export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
   const map = new Map<string, AggregatedEntry>();
   const order: string[] = [];
-  const expiredMap = new Map<string, { code: string; priority: number }>();
-  const expiredCandidates: { normalized: string; code: string; priority: number }[] = [];
+  const expiredMap = new Map<string, { code: string; provider?: ScrapedCode["provider"]; priority: number }>();
+  const expiredOrder: string[] = [];
 
   for (const result of results) {
     for (const codeEntry of result.codes) {
@@ -147,7 +160,7 @@ export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
       if (!normalizedCode) continue;
       const existing = map.get(normalizedCode);
       if (!existing) {
-        map.set(normalizedCode, {
+        const created: AggregatedEntry = {
           data: {
             ...sanitizedEntry,
             rewardsText: normalizedRewards,
@@ -155,10 +168,15 @@ export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
           },
           codePriority: getCodeDisplayPriority(codeEntry.provider),
           rewardPriority: getRewardPriority(codeEntry.provider),
-        });
+          activeVotePriority: -1,
+          checkVotePriority: -1,
+        };
+        recordStatusVote(created, sanitizedEntry);
+        map.set(normalizedCode, created);
         order.push(normalizedCode);
       } else {
         const merged = mergeCodeEntry(existing, sanitizedEntry);
+        recordStatusVote(merged, sanitizedEntry);
         map.set(normalizedCode, merged);
       }
     }
@@ -169,27 +187,41 @@ export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
       if (!code) continue;
       const normalizedExpired = normalizeCodeKey(code);
       if (!normalizedExpired) continue;
-      const incomingPriority = getCodeDisplayPriority(provider);
-      expiredCandidates.push({ normalized: normalizedExpired, code, priority: incomingPriority });
+      const priority = getCodeDisplayPriority(provider);
+      const existing = expiredMap.get(normalizedExpired);
+      if (!existing) {
+        expiredMap.set(normalizedExpired, { code, provider, priority });
+        expiredOrder.push(normalizedExpired);
+      } else if (priority > existing.priority) {
+        expiredMap.set(normalizedExpired, { code, provider, priority });
+      }
     }
   }
 
-  for (const candidate of expiredCandidates) {
-    const aggregated = map.get(candidate.normalized);
-    const hasHigherPriorityActive =
-      aggregated && aggregated.data.status === "active" && (aggregated.codePriority ?? 0) > candidate.priority;
-    if (hasHigherPriorityActive) continue;
-
-    const existing = expiredMap.get(candidate.normalized);
-    if (!existing || candidate.priority > existing.priority) {
-      expiredMap.set(candidate.normalized, { code: candidate.code, priority: candidate.priority });
-    }
-  }
+  const activeWins = (normalized: string) => {
+    const aggregated = map.get(normalized);
+    if (!aggregated || aggregated.activeVotePriority < 0) return false;
+    const notWorkingPriority = Math.max(
+      aggregated.checkVotePriority,
+      expiredMap.get(normalized)?.priority ?? -1
+    );
+    return aggregated.activeVotePriority > notWorkingPriority;
+  };
 
   const mergedCodes = order
-    .map((key) => map.get(key)?.data)
+    .map((key) => {
+      const entry = map.get(key);
+      if (!entry) return null;
+      entry.data.status = activeWins(key) ? "active" : "check";
+      return entry.data;
+    })
     .filter((entry): entry is ScrapedCode => Boolean(entry));
-  const mergedExpired = Array.from(expiredMap.values()).map((entry) => entry.code);
+  const mergedExpired: ScrapedExpiredCode[] = expiredOrder
+    .filter((key) => !activeWins(key))
+    .map((key) => {
+      const entry = expiredMap.get(key)!;
+      return entry.provider ? { code: entry.code, provider: entry.provider } : entry.code;
+    });
   return { codes: mergedCodes, expiredCodes: mergedExpired };
 }
 
