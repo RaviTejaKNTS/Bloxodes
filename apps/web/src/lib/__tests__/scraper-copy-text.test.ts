@@ -48,7 +48,7 @@ describe("source HTML through shared code intake", () => {
       robloxdenRow("2MLIKESCopy", true, "Expired"),
       robloxdenRow("2MLIKES", true, "Expired"),
     ));
-    expect(mergeScrapeResults([parsed])).toEqual({ codes: [], expiredCodes: ["2MLIKES"] });
+    expect(mergeScrapeResults([parsed])).toEqual({ codes: [], expiredCodes: [{ code: "2MLIKES", provider: "robloxden" }] });
   });
 
   it("collapses Build An Attack Army's separated Copy row into Cannon", () => {
@@ -67,7 +67,7 @@ describe("source HTML through shared code intake", () => {
     `));
     expect(mergeScrapeResults([parsed])).toEqual({
       codes: [expect.objectContaining({ code: "Cannon", rewardsText: "Coins" })],
-      expiredCodes: ["OLDCODE"],
+      expiredCodes: [{ code: "OLDCODE", provider: "beebom" }],
     });
   });
 
@@ -111,9 +111,60 @@ describe("code merge precedence after copy cleanup", () => {
     for (const code of codes) {
       expect(mergeScrapeResults([{ codes: [{ code, status: "active" }], expiredCodes: [] }]).codes[0].code).toBe(code);
     }
-    expect(mergeScrapeResults([
+    const merged = mergeScrapeResults([
       { codes: [{ code: "Cannon Copy", status: "active", provider: "robloxden" }], expiredCodes: [] },
       { codes: [], expiredCodes: [{ code: "CannonCopied", provider: "beebom" }] },
-    ]).expiredCodes).toEqual(["Cannon"]);
+    ]);
+    expect(merged.expiredCodes).toEqual([{ code: "Cannon", provider: "beebom" }]);
+    expect(merged.codes).toEqual([expect.objectContaining({ code: "Cannon", status: "check" })]);
+  });
+});
+
+describe("code merge status votes", () => {
+  it.each([false, true])("lets Beebom's expired vote beat RobloxDen's active listing, reversed=%s", (reversed) => {
+    const results = [
+      { codes: [{ code: "FALL", status: "active" as const, provider: "robloxden" as const }], expiredCodes: [] },
+      { codes: [], expiredCodes: [{ code: "FALL", provider: "beebom" as const }] },
+    ];
+    const merged = mergeScrapeResults(reversed ? results.reverse() : results);
+    expect(merged.codes).toEqual([expect.objectContaining({ code: "FALL", status: "check", providerPriority: 2 })]);
+    expect(merged.expiredCodes).toEqual([{ code: "FALL", provider: "beebom" }]);
+  });
+
+  it("keeps RobloxDen's check vote and Beebom's expired provider together", () => {
+    const merged = mergeScrapeResults([
+      { codes: [{ code: "KIRA", status: "check", provider: "robloxden" }], expiredCodes: [] },
+      { codes: [], expiredCodes: [{ code: "KIRA", provider: "beebom" }] },
+    ]);
+    expect(merged.codes).toEqual([expect.objectContaining({ code: "KIRA", status: "check" })]);
+    expect(merged.expiredCodes).toEqual([{ code: "KIRA", provider: "beebom" }]);
+  });
+
+  it("lets Beebom's active listing beat RobloxDen's check badge", () => {
+    const merged = mergeScrapeResults([
+      { codes: [{ code: "LUH", status: "check", provider: "robloxden" }], expiredCodes: [] },
+      { codes: [{ code: "LUH", status: "active", provider: "beebom" }], expiredCodes: [] },
+    ]);
+    expect(merged).toEqual({
+      codes: [expect.objectContaining({ code: "LUH", status: "active", provider: "beebom", providerPriority: 3 })],
+      expiredCodes: [],
+    });
+  });
+
+  it("keeps a code only one source lists as active", () => {
+    const merged = mergeScrapeResults([
+      { codes: [{ code: "15VAMPIRERETURN", status: "active", provider: "robloxden" }], expiredCodes: [] },
+      { codes: [{ code: "LUH", status: "active", provider: "beebom" }], expiredCodes: [] },
+    ]);
+    expect(merged.codes.map((entry) => [entry.code, entry.status])).toEqual([
+      ["15VAMPIRERETURN", "active"],
+      ["LUH", "active"],
+    ]);
+    expect(merged.expiredCodes).toEqual([]);
+  });
+
+  it("still accepts plain string expired codes", () => {
+    const merged = mergeScrapeResults([{ codes: [], expiredCodes: ["OLD"] }]);
+    expect(merged.expiredCodes).toEqual(["OLD"]);
   });
 });
