@@ -1,6 +1,6 @@
 # Cloudflare and media
 
-Last verified: 2026-11-18
+Last verified: 2026-11-22
 
 Cloudflare proxies every public hostname and is the long-lived HTML cache. R2 stores wiki collection images.
 
@@ -33,11 +33,12 @@ Old `bloxodesdb.ravitejaknts.com` and `bloxodesstudio.ravitejaknts.com` still an
 
 - Collection and hub images live in R2 bucket `bloxodes-wiki`.
 - The bucket's R2 custom domain `wiki-media.bloxodes.com` serves them at `https://wiki-media.bloxodes.com/<key>` (bucket root is the host root). No Worker runs, so image views don't count toward the Workers Free daily limit (100,000 requests). Objects carry `cache-control: public, max-age=31536000, immutable` from `scripts/shared/r2-client.ts`, and Cloudflare caches them at the edge.
-- Old links `media.bloxodes.com/wiki/*` get a permanent redirect rule to `https://wiki-media.bloxodes.com/*`. Code builds only the new host (`apps/web/src/lib/wiki-media.ts`). Publishers accept old-prefix URLs and store the new host, and the web app's database client rewrites old-prefix URLs it reads.
+- Old links `media.bloxodes.com/wiki/*` get a 301 from the zone redirect rule "Wiki media to R2 domain" (phase `http_request_dynamic_redirect`) to `https://wiki-media.bloxodes.com/*`. No Worker route is left on the zone. Code builds only the new host (`apps/web/src/lib/wiki-media.ts`). Publishers accept old-prefix URLs and store the new host, and the web app's database client rewrites old-prefix URLs it reads.
 - Don't serve public media through a Worker. The account is on Workers Free, every view would count, and going over the daily limit breaks images with HTTP 429 `error code: 1027` until midnight UTC.
 - Uploads use the S3 API with `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET` (`scripts/shared/r2-client.ts`). GitHub publication jobs have these.
 - Keys are immutable. A new image means a new key in a new dataset revision.
 
 ## Known issues
 
-- `CLOUDFLARE_API_TOKEN` only purges cache. `CLOUDFLARE_BLOXODES_API` (an account token, verify with `/accounts/<id>/tokens/verify`) reads analytics, settings, DNS and rulesets and can edit cache rules, but its IP allow-list only accepts the VPS over IPv4: SSH to the VPS and run `curl -4` there, passing the header over stdin.
+- `CLOUDFLARE_API_TOKEN` only purges cache. `CLOUDFLARE_BLOXODES_API` (an account token, verify with `/accounts/<id>/tokens/verify`) reads zone analytics, settings, DNS and rulesets and can edit cache rules, redirect rules and Worker routes. It can't manage R2 custom domains or read Worker analytics. Its IP allow-list only accepts the VPS over IPv4: SSH to the VPS and run `curl -4` there, passing the header over stdin.
+- Worker scripts `bloxodes-wiki-media` and `bloxodes-wiki-media-development` are still on the account with no route, so they get no traffic. Delete them in the dashboard (Workers & Pages).
