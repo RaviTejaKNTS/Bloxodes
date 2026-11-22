@@ -142,7 +142,15 @@ describe("codes refresh status decision", () => {
     const rows: StoredCodeRow[] = [{ code: "BACK", status: "check", providerPriority: 3 }];
     const result = plan([robloxden([rd("BACK")])], rows);
     expect(result.convertCheck).toEqual(["BACK"]);
+    expect(result.expiredCodes).toEqual(["BACK"]);
     expect(applyPlan(rows, result)).toEqual({ BACK: "expired" });
+  });
+
+  it("keeps a code in expired_codes when the RPC will reject its lower-priority reactivation", () => {
+    const rows: StoredCodeRow[] = [{ code: "OLD", status: "expired", providerPriority: 3 }];
+    const result = plan([robloxden([rd("OLD")])], rows, { existingExpiredCodes: ["OLD"] });
+    expect(result.expiredCodes).toEqual(["OLD"]);
+    expect(applyPlan(rows, result)).toEqual({ OLD: "expired" });
   });
 
   it("leaves only LUH and 15LUH active for Basketball Zero's live data", () => {

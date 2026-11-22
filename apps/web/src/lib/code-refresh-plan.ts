@@ -133,9 +133,16 @@ export function planCodeRefresh(input: CodeRefreshInput): CodeRefreshPlan {
     const status = isActive(key) ? "active" : "expired";
 
     if (status === "active") {
-      listedActive.add(key);
-      expiredArray.delete(key);
       const existing = stored.get(key);
+      // upsert_code ignores a status from a lower provider priority, so a stored
+      // expired or "check" row with a higher priority stays not working. Keep it
+      // in expired_codes so the two stores agree.
+      const reactivationRejected =
+        existing != null && existing.status !== "active" && existing.providerPriority > priority;
+      if (!reactivationRejected) {
+        listedActive.add(key);
+        expiredArray.delete(key);
+      }
       if (
         existing?.status === "active" &&
         (existing.providerPriority > priority ||
