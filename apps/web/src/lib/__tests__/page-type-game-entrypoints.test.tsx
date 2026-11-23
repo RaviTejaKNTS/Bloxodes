@@ -25,7 +25,7 @@ vi.mock("@/components/games/GameCollectionPage", async original => {
     (args[0].currentPage ?? 1) > 3 ? actual.renderSharedGameCollection(...args) : state.render(...args) };
 });
 vi.mock("@/components/games/GameContentPage", async original => ({ ...await original<typeof import("@/components/games/GameContentPage")>(), GameContentPage: "content-page" }));
-vi.mock("@/components/games/GameMap", () => ({ GameMap: "game-map" }));
+vi.mock("@/components/games/GameImageMapPage", () => ({ GameImageMapPage: "game-image-map" }));
 vi.mock("@/components/games/GameCatalog", () => ({ GameCatalog: "game-catalog" }));
 vi.mock("@/components/games/GameQuizPage", async original => ({ ...await original<typeof import("@/components/games/GameQuizPage")>(), GameQuizPage: "game-quiz" }));
 vi.mock("@/components/games/GameCodePage", () => ({ GameCodePage: "game-code" }));

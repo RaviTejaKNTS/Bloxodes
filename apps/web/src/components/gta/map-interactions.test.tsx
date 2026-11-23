@@ -4,6 +4,8 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Gta5InteractiveMap } from "./Gta5InteractiveMap";
 import { GtaInteractiveMap } from "./GtaInteractiveMap";
+import { ImagePinsMap } from "@/components/maps/ImagePinsMap";
+import { imagePinsMapPageData } from "@/lib/image-pins-map";
 import { MapViewport } from "@/components/maps/MapViewport";
 import type { Gta5MapMarker } from "@/lib/gta-map-types";
 import type { GtaMapPageData } from "@/lib/gta-interactive-map-types";
@@ -27,10 +29,12 @@ const fake = vi.hoisted(() => ({
     invalidateSize: ReturnType<typeof vi.fn>;
     remove: ReturnType<typeof vi.fn>;
   }>,
-  frames: [] as FrameRequestCallback[]
+  frames: [] as FrameRequestCallback[],
+  attributions: [] as string[],
+  progressCodes: [] as string[]
 }));
 vi.mock("@/components/SiteLogo", () => ({ SiteLogo: () => <span>Logo</span> }));
-vi.mock("@/lib/collection-checklist-progress-client", () => ({ useCollectionChecklistProgress: () => ({ checked: fake.checked, toggle: fake.toggle }) }));
+vi.mock("@/lib/collection-checklist-progress-client", () => ({ useCollectionChecklistProgress: (options: { code: string }) => { fake.progressCodes.push(options.code); return { checked: fake.checked, toggle: fake.toggle }; } }));
 vi.mock("leaflet.markercluster", () => ({}));
 vi.mock("leaflet", () => {
   function layer() {
@@ -59,7 +63,7 @@ vi.mock("leaflet", () => {
           disable: vi.fn(() => { container.removeEventListener("wheel", wheel); wheelEnabled = false; })
         },
         touchZoom: { enable: vi.fn() },
-        attributionControl: { setPrefix: vi.fn(), addAttribution: vi.fn(), removeAttribution: vi.fn() }
+        attributionControl: { setPrefix: vi.fn(), addAttribution: vi.fn((html: string) => { fake.attributions.push(html); }), removeAttribution: vi.fn() }
       };
       fake.maps.push(map);
       return map;
@@ -75,6 +79,14 @@ const shared: GtaMapPageData = {
   layers: [{ ...config.layers[0], collectionCode: null, guideUrl: null, collectionAvailable: false, defaultEnabled: true }],
   markers: [first, second].map(marker => ({ ...marker, layer: config.layers[0].slug, layerLabel: config.layers[0].label, color: "#fff", group: "Places", view: config.views[0].slug, title: marker.name, sourceId: marker.id, sourceTitle: "Map", sourceUrl: "https://example.com/map", category: "Places", collectionNumber: null, collectionName: null, referenceOnly: true, mode: null, edition: null, variant: null, sourceImage: null, checkId: null, note: null }))
 };
+const imagePins = imagePinsMapPageData(
+  { slug: "leonida", title: "Leonida map", game_title: "Example Game", meta_description: "Every town.", canonical_path: "/maps/leonida", updated_at: "2026-11-23" },
+  { image: "https://wiki-media.bloxodes.com/example/map.webp", width: 400, height: 800, attribution: "Map: Example <Studio> poster", markers: [
+    { id: "first", title: "First location", category: "Counties", x: 25, y: 25, description: "Find it here." },
+    { id: "second", title: "Second location", category: "Cities and towns", x: 75, y: 75, href: "/wiki/example/cities" }
+  ] },
+  { title: "Example Game", path: "/wiki/example" }
+);
 let root: Root;
 let container: HTMLDivElement;
 let modal: WeakSet<HTMLDialogElement>;
@@ -99,6 +111,8 @@ beforeEach(() => {
   fake.pinElements.length = 0;
   fake.maps.length = 0;
   fake.frames.length = 0;
+  fake.attributions.length = 0;
+  fake.progressCodes.length = 0;
   container = document.createElement("div");
   document.body.append(container);
   root = createRoot(container);
@@ -107,7 +121,8 @@ afterEach(async () => { vi.useRealTimers(); await settle(() => root.unmount()); 
 
 describe.each([
   { name: "GTA 5", element: <Gta5InteractiveMap markers={[first, second]} /> },
-  { name: "registered GTA maps", element: <GtaInteractiveMap map={shared} /> }
+  { name: "registered GTA maps", element: <GtaInteractiveMap map={shared} /> },
+  { name: "image-pins maps", element: <ImagePinsMap map={imagePins} attribution="Map: Example <Studio> poster" /> }
 ])("$name interactions", ({ element }) => {
   it("loads a deep link, selects a different pin without history writes, and shares that pin", async () => {
     const replace = vi.spyOn(window.history, "replaceState");
@@ -263,5 +278,48 @@ describe.each([
     map.dragging.disable.mockClear();
     await settle(() => canvas.dispatchEvent(pointer("touch")));
     expect(map.dragging.disable).toHaveBeenCalledOnce();
+  });
+});
+
+describe("image-pins maps use the full shared viewer", () => {
+  it("renders the full-screen map UI with one layer per category and no progress tracking", async () => {
+    await settle(() => root.render(<MapViewport><ImagePinsMap map={imagePins} attribution="Map: Example <Studio> poster" /></MapViewport>));
+    await settle(() => undefined);
+    expect(container.querySelector(".gta-map-app.gta-interactive-map .gta-map-canvas")).not.toBeNull();
+    expect(container.querySelector(".gta-map-topbar h1")?.textContent).toBe("Leonida map");
+    expect(container.querySelector(".gta-map-back")?.getAttribute("href")).toBe("/wiki/example");
+    expect(container.querySelector(".gta-map-sidebar__search input")).not.toBeNull();
+    expect(container.querySelectorAll(".gta-map-controls button")).toHaveLength(3);
+    expect(Array.from(container.querySelectorAll(".gta-map-layer"), layer => layer.querySelector(".gta-map-layer__label")?.textContent)).toEqual(["Counties", "Cities and towns"]);
+    expect(container.querySelector(".gta-map-sidebar__header span")?.textContent).toBe("2 locations on this map");
+    expect(container.querySelector(".gta-map-remaining")).toBeNull();
+    expect(fake.progressCodes).toEqual([]);
+    expect(fake.pinClicks).toHaveLength(2);
+    // The map's own credit, escaped, instead of the GTA Wiki line.
+    expect(fake.attributions).toEqual(["Map: Example &lt;Studio&gt; poster"]);
+    await settle(() => fake.pinClicks[1]());
+    expect(container.querySelector(".gta-map-detail h2")?.textContent).toBe("Second location");
+    expect(container.querySelector(".gta-map-detail .gta-map-eyebrow")?.textContent).toBe("Cities and towns");
+    expect(container.querySelector(".gta-map-detail .gta-map-guide-link")?.getAttribute("href")).toBe("/wiki/example/cities");
+    expect(container.querySelector(".gta-map-detail .gta-map-complete")).toBeNull();
+    expect(container.querySelector(".gta-map-detail__source")?.textContent).toBe("Map: Example <Studio> poster");
+  });
+
+  it("hides a category's pins when its layer is switched off", async () => {
+    await settle(() => root.render(<ImagePinsMap map={imagePins} attribution="Map" />));
+    await settle(() => undefined);
+    expect(container.querySelector(".gta-map-layer-count span")?.textContent).toBe("2 locations shown");
+    await settle(() => container.querySelector<HTMLButtonElement>(".gta-map-layer")!.click());
+    expect(container.querySelector(".gta-map-layer-count span")?.textContent).toBe("1 locations shown");
+    expect(Array.from(container.querySelectorAll(".gta-map-location strong"), item => item.textContent)).toEqual(["Second location"]);
+  });
+
+  it("keeps the GTA credit and progress on registered GTA maps", async () => {
+    await settle(() => root.render(<GtaInteractiveMap map={shared} />));
+    await settle(() => undefined);
+    expect(fake.attributions).toEqual(['<a href="' + shared.config.views[0].sourceUrl.replace(/&/g, "&amp;") + '" target="_blank" rel="noreferrer">GTA Wiki map data</a> · © Rockstar Games']);
+    expect(container.querySelector(".gta-map-sidebar__header span")?.textContent).toBe("0 of 0 guide items completed");
+    expect(container.querySelector(".gta-map-remaining")?.textContent?.trim()).toBe("Hide completed locations");
+    expect(container.querySelector(".gta-map-detail__source")?.innerHTML).toBe('Coordinates: <a href="https://example.com/map" target="_blank" rel="noreferrer">GTA Wiki map page</a>. Map artwork © Rockstar Games.');
   });
 });

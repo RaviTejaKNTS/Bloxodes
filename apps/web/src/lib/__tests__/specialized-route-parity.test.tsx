@@ -12,7 +12,7 @@ import type { MinecraftToolClient } from "@/components/games/specialized/minecra
 import type { Gta5InteractiveMap } from "@/components/gta/Gta5InteractiveMap";
 import type { GtaInteractiveMap } from "@/components/gta/GtaInteractiveMap";
 import type { GtaMapGuide } from "@/components/gta/GtaMapGuide";
-import type { GameMap } from "@/components/games/GameMap";
+import type { ImagePinsMap } from "@/components/maps/ImagePinsMap";
 
 // Keep the page-type routing, specialist renderers and metadata real. Stub IO
 // and interactive boundaries to inspect saved identities and calculator inputs.
@@ -74,7 +74,7 @@ vi.mock("@/lib/gta-map", () => ({ getGta5MapMarkers: async () => [{ id: "pin-id"
 vi.mock("@/components/gta/Gta5InteractiveMap", () => ({ Gta5InteractiveMap: (props: Parameters<typeof Gta5InteractiveMap>[0]) => <div data-engine="gta5" data-pins={JSON.stringify(props.markers)} /> }));
 vi.mock("@/components/gta/GtaInteractiveMap", () => ({ GtaInteractiveMap: (props: Parameters<typeof GtaInteractiveMap>[0]) => <div data-engine="layered" data-layer={props.map.layers[0].slug} /> }));
 vi.mock("@/components/gta/GtaMapGuide", () => ({ GtaMapGuide: ({ map, children, title }: Parameters<typeof GtaMapGuide>[0]) => <><h1>{title}</h1>{map}<article>{children}</article></> }));
-vi.mock("@/components/games/GameMap", () => ({ GameMap: ({ data }: Parameters<typeof GameMap>[0]) => <div data-engine="image-pins" data-pin={data.markers[0].id} /> }));
+vi.mock("@/components/maps/ImagePinsMap", () => ({ ImagePinsMap: ({ map, attribution }: Parameters<typeof ImagePinsMap>[0]) => <div data-engine="image-pins" data-pin={map.markers[0].id} data-layer={map.layers[0].slug} data-credit={attribution}><h1>{map.config.mapTitle}</h1></div> }));
 vi.mock("@/lib/gta-interactive-maps", () => ({ getGtaInteractiveMapPageData: async () => state.page.renderer_key !== "gta-layered" ? null : ({ config: { route: state.page.canonical_path, title: "Saved map", mapTitle: state.page.title, description: "Saved description.", mappedPointCount: 1, about: [], views: [] }, layers: [{ slug: "layer-id", label: "Saved layer", sourceUrl: "https://example.com/map", sourceTitle: "Map", pointCount: 1 }], guides: [], hubTitle: "Saved wiki", hubPath: "/wiki/gta-3" }) }));
 
 import GameEntry, { generateMetadata as gameEntryMetadata } from "@/app/(site)/games/[slug]/page";
@@ -178,6 +178,17 @@ describe("specialized page-type resolver contracts", () => {
       }
       if (kind === "checklist") { expect(rendered).toContain("gta:gta-5"); expect(rendered).toContain("task-id"); }
       if (kind === "map") expect(rendered).toContain(variant === "gta-layered" ? "layer-id" : "pin-id");
+      if (variant === "image-pins") {
+        // The full viewer and guide layout, with page copy, comments and the map credit below the map.
+        const $ = load(rendered);
+        expect($('.gta-map-guide [data-engine="image-pins"]')).toHaveLength(1);
+        expect($('[data-engine="image-pins"] h1').text()).toBe("Saved title");
+        expect($('[data-engine="image-pins"]').attr("data-credit")).toBe("Map");
+        expect($("#map-guide-heading").text()).toBe("About the Saved game map");
+        expect($("#article-body").text()).toContain("Saved description.");
+        expect($('[data-entity="game_map"]').attr("data-comments-id")).toBe("page-id");
+        expect($("#article-body [data-engine]")).toHaveLength(0);
+      }
       if (kind === "tool") {
         const calculator = JSON.parse(load(rendered)("[data-calculator]").attr("data-calculator")!);
         expect(calculator).toEqual({ slug: "xp-calculator", rules: state.page.rules_json });

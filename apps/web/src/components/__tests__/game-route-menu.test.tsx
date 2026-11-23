@@ -25,7 +25,7 @@ vi.mock("@/components/games/GameCollectionPage", () => ({ renderSharedGameCollec
 vi.mock("@/components/games/GameCodePage", () => ({ GameCodePage: () => null }));
 vi.mock("@/components/games/GameToolPage", () => ({ GameToolPage: () => null }));
 vi.mock("@/components/games/GameContentPage", () => ({}));
-vi.mock("@/components/games/GameMap", () => ({}));
+vi.mock("@/components/games/GameImageMapPage", () => ({}));
 vi.mock("@/components/games/GameCatalog", () => ({}));
 vi.mock("@/components/games/GameQuizPage", () => ({}));
 vi.mock("@/components/ChecklistPageTemplate", () => ({}));
