@@ -48,7 +48,7 @@ export function imagePinsMapPageData(
   const used = new Set<string>();
   const layers = new Map<string, GtaMapLayer>();
   for (const marker of data.markers) {
-    const category = marker.category ?? IMAGE_PINS_UNCATEGORIZED;
+    const category = marker.category?.trim() || IMAGE_PINS_UNCATEGORIZED;
     const existing = layers.get(category);
     if (existing) { existing.pointCount += 1; continue; }
     layers.set(category, {
@@ -71,7 +71,7 @@ export function imagePinsMapPageData(
     });
   }
   const markers: GtaMapMarker[] = data.markers.map(marker => {
-    const layer = layers.get(marker.category ?? IMAGE_PINS_UNCATEGORIZED)!;
+    const layer = layers.get(marker.category?.trim() || IMAGE_PINS_UNCATEGORIZED)!;
     return {
       ...imagePinsPoint(marker, data),
       id: marker.id,

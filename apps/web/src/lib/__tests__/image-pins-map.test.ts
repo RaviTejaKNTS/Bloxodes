@@ -55,6 +55,12 @@ describe("image-pins layers", () => {
     expect(imagePinsMapPageData(page, data, { title: "", path: "/" }).layers.map(layer => layer.color)).toEqual(map.layers.map(layer => layer.color));
   });
 
+  it("puts blank categories with uncategorized pins instead of an empty layer", () => {
+    const blank = { ...data, markers: [{ ...data.markers[0], id: "blank", category: "  " }, { ...data.markers[0], id: "none", category: undefined }] };
+    const layers = imagePinsMapPageData(page, blank, { title: "Example Game", path: "/wiki/example" }).layers;
+    expect(layers.map(layer => [layer.label, layer.pointCount])).toEqual([[IMAGE_PINS_UNCATEGORIZED, 2]]);
+  });
+
   it("joins each marker to its layer and keeps its copy and guide link", () => {
     const north = map.markers.find(marker => marker.id === "north")!;
     expect(north).toMatchObject({ name: "North County", layer: "counties", layerLabel: "Counties", color: IMAGE_PINS_LAYER_COLORS[0], description: "The northern county.", category: "Counties", guideUrl: null, number: null });

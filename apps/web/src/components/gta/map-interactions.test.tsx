@@ -322,6 +322,8 @@ describe("image-pins maps use the full shared viewer", () => {
   });
 
   it("lists layers that start switched off so they can be turned on", async () => {
+    // No ?point= deep link, which would switch its layer on.
+    window.history.replaceState(null, "", "/gta/maps/example");
     const hidden: GtaMapPageData = { ...shared, layers: shared.layers.map(layer => ({ ...layer, defaultEnabled: false })) };
     await settle(() => root.render(<GtaInteractiveMap map={hidden} />));
     await settle(() => undefined);
