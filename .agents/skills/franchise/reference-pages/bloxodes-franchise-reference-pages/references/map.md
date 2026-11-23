@@ -56,7 +56,7 @@ Map plan:
 1. Write the `maps` group in `final.json` only after evidence/data approval.
 2. Use `image-pins` for new simple maps and the specialist importer for existing GTA maps.
 3. Write an answer-first intro and descriptive headings that cover real map locations and player goals. Marker titles stay plain; descriptions name landmarks, requirements or rewards. Don't explain zoom, search or filters.
-4. Return the payload and source proof. The parent runs GitHub QA; no local builds, checks or preview.
+4. Return the payload and source proof. The parent runs GitHub QA; no local builds, checks or preview. Before production, the parent compares screenshots of the new map with an existing map of the same engine on desktop and mobile. A passing smoke test isn't enough.
 
 ## Field jobs
 
