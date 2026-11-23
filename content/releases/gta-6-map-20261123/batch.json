@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "game-pages",
+      "namespace": "gta",
+      "file": "maps/gta-6.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/maps/gta-6",
+      "contains": "GTA 6 Interactive Map"
+    }
+  ],
+  "events": [
+    {
+      "type": "game_content",
+      "slug": "gta"
+    }
+  ]
+}
