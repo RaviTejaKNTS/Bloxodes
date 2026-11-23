@@ -3,8 +3,9 @@
   display: flow-root;
 }
 
-/* The shared reference stream already supplies a 24px grid gap. */
-#article-body > .ads-content-plain-copy + .ads-content-plain-copy {
+/* The shared reference grid stream already supplies a 24px gap, so pull split copy back together.
+ * Prose streams are display: block with no gap; there the pull would stack each block on the last. */
+#article-body:not(.journey-content-stream--prose):not(.journey-content-stream--interactive) > .ads-content-plain-copy + .ads-content-plain-copy {
   margin-top: -1.5rem;
 }
 
