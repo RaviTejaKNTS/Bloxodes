@@ -473,7 +473,7 @@ export function InteractiveImageMap({ map, credit, progress }: { map: Interactiv
 
   const currentView = viewBySlug.get(selectedView) ?? config.views[0];
   const visibleCount = shownMarkers.length;
-  const groupedLayers = Array.from(new Set(visibleLayers.map((layer) => layer.group)));
+  const groupedLayers = Array.from(new Set(currentModeLayers.map((layer) => layer.group)));
   const listLimit = query.trim() ? 180 : 100;
 
   return (
@@ -547,7 +547,7 @@ export function InteractiveImageMap({ map, credit, progress }: { map: Interactiv
           {groupedLayers.map((group) => (
             <div className="gta-map-layer-group" key={group}>
               <h2>{group}</h2>
-              {visibleLayers.filter((layer) => layer.group === group).map((layer) => {
+              {currentModeLayers.filter((layer) => layer.group === group).map((layer) => {
                 const tracked = markers.filter((marker) => marker.layer === layer.slug && marker.collectionCode && marker.checkId);
                 const complete = new Set(tracked.filter(isChecked).map((marker) => marker.collectionCode + ":" + marker.checkId)).size;
                 const count = layerItemCount(layer, markers);

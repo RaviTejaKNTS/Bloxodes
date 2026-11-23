@@ -312,6 +312,24 @@ describe("image-pins maps use the full shared viewer", () => {
     await settle(() => container.querySelector<HTMLButtonElement>(".gta-map-layer")!.click());
     expect(container.querySelector(".gta-map-layer-count span")?.textContent).toBe("1 locations shown");
     expect(Array.from(container.querySelectorAll(".gta-map-location strong"), item => item.textContent)).toEqual(["Second location"]);
+    // The switched-off layer keeps its button so it can be turned back on.
+    const counties = container.querySelector<HTMLButtonElement>(".gta-map-layer")!;
+    expect(counties.querySelector(".gta-map-layer__label")?.textContent).toBe("Counties");
+    expect(counties.getAttribute("aria-pressed")).toBe("false");
+    await settle(() => counties.click());
+    expect(container.querySelector(".gta-map-layer-count span")?.textContent).toBe("2 locations shown");
+    expect(container.querySelector(".gta-map-layer")?.getAttribute("aria-pressed")).toBe("true");
+  });
+
+  it("lists layers that start switched off so they can be turned on", async () => {
+    const hidden: GtaMapPageData = { ...shared, layers: shared.layers.map(layer => ({ ...layer, defaultEnabled: false })) };
+    await settle(() => root.render(<GtaInteractiveMap map={hidden} />));
+    await settle(() => undefined);
+    const layer = container.querySelector<HTMLButtonElement>(".gta-map-layer");
+    expect(layer).not.toBeNull();
+    expect(layer!.getAttribute("aria-pressed")).toBe("false");
+    await settle(() => layer!.click());
+    expect(container.querySelector(".gta-map-layer")?.getAttribute("aria-pressed")).toBe("true");
   });
 
   it("keeps the GTA credit and progress on registered GTA maps", async () => {
