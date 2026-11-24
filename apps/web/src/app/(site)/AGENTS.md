@@ -90,4 +90,4 @@ Checklist and quiz routes use neutral contracts/configuration in `lib/engagement
 
 ## Shared game reference routes
 
-Page-type routes serve maps, quizzes, catalogs and standalone checklists. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. GTA maps keep their registered engines; their snapshots load from shared storage.
+Page-type routes serve maps, quizzes, catalogs and standalone checklists. Reuse `GameContentPage`, `GameImageMapPage` (shared `InteractiveImageMap` viewer), `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. GTA maps keep their registered engines; their snapshots load from shared storage.

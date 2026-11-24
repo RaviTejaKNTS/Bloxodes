@@ -2,9 +2,8 @@ import { MapViewport } from "@/components/maps/MapViewport";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { gameBreadcrumbs } from "@/lib/game-root-page";
 import { getGameMapBySlug } from "@/lib/game-extra-pages";
-import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
-import { GameMap } from "@/components/games/GameMap";
-import { parseGameMapData } from "@/lib/game-page-data";
+import { gameContentMetadata } from "@/components/games/GameContentPage";
+import { GameImageMapPage } from "@/components/games/GameImageMapPage";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -87,7 +86,7 @@ export default async function GtaInteractiveMapPage({ params }: PageProps) {
   if (!data) {
     const page = await getGameMapBySlug("gta", slug);
     if(!page || page.renderer_key !== "image-pins") notFound();
-    return <GameContentPage page={page}><GameMap data={parseGameMapData(page.map_data)} /></GameContentPage>;
+    return <GameImageMapPage page={page} />;
   }
   const shared = await getGameMapBySlug("gta", slug);
   if (!shared) notFound();

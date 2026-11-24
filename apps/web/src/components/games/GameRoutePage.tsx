@@ -7,11 +7,11 @@ import { gameChecklistConfig } from "@/lib/engagement/config";
 import { getLiveSiteRoute } from "@/lib/site-route-page";
 import { getGameExtendedPage, getGameChecklistByPath, getGameExtendedPageById, getGameChecklistById } from "@/lib/game-extra-pages";
 import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
-import { GameMap } from "@/components/games/GameMap";
+import { GameImageMapPage } from "@/components/games/GameImageMapPage";
 import { GameCatalog } from "@/components/games/GameCatalog";
 import { GameQuizPage, gameQuizMetadata } from "@/components/games/GameQuizPage";
 import { ChecklistPageTemplate, checklistMetadata } from "@/components/ChecklistPageTemplate";
-import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
+import { parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGameRoot, getGameWikiByPath, getGameWikiById, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath, getGameCollectionById, getGameCodeById, getGameToolById } from "@/lib/game-registry";
@@ -126,7 +126,7 @@ async function renderPage(ctx: Awaited<ReturnType<typeof context>>) {
     const specialized = await specializedGtaMapRoute(ctx.root.namespace, ctx.map.slug);
     if (specialized) return specialized.render();
   }
-  if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameContentPage page={ctx.map}><GameMap data={parseGameMapData(ctx.map.map_data)} /></GameContentPage>; }
+  if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameImageMapPage page={ctx.map} />; }
   if (ctx.catalog) return <GameContentPage page={ctx.catalog}><GameCatalog data={parseGameCatalogData(ctx.catalog.catalog_data)} /></GameContentPage>;
   if (ctx.quiz) return <GameQuizPage page={ctx.quiz} />;
   if (ctx.checklist) return <ChecklistPageTemplate data={ctx.checklist} config={gameChecklistConfig(ctx.root.namespace, ctx.checklist.canonical_path)} sidebar={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.checklist.game_id} canonicalPath={ctx.checklist.canonical_path} />} />;

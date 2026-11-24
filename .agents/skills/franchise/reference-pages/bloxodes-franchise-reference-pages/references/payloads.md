@@ -8,7 +8,7 @@ Maps, quizzes and catalogs accept `seo_title`, `meta_description`, `intro_md`, `
 
 Group `maps`, table `game_map_pages`, section `maps`. New maps use `renderer_key=image-pins`. `map_data` has `image`, positive numeric `width` and `height`, `attribution`, and `markers`.
 
-Each marker needs a unique `id`, `title`, and numeric `x` and `y` from 0 to 100, measured as percentages from the image's left and top edges. Optional fields are `category`, `description` and a safe `href`. Coordinates must come from verified map sources. Do not guess positions from prose.
+Each marker needs a unique `id`, `title`, and numeric `x` and `y` from 0 to 100, measured as percentages from the image's left and top edges. Optional fields are `category`, `description` and a safe `href`. Each `category` becomes a map layer the reader can switch on and off, so keep to a few clear groups. Coordinates must come from verified map sources. Do not guess positions from prose.
 
 Images and links must be HTTPS or site-relative URLs. Preserve artwork credits. Existing GTA maps use their specialist `gta-layered` and `gta5` engines and the controlled `import:gta-shared-maps` command. Their snapshots are frozen; changing one requires a reviewed migration, not an ordinary content edit.
 
