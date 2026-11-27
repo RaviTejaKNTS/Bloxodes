@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/fruit-tower-defense.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/magnet-simulator-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/mining-simulator.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/codes",
+      "contains": "Codes"
+    }
+  ],
+  "events": [
+    {
+      "type": "code",
+      "slug": "fruit-tower-defense"
+    },
+    {
+      "type": "code",
+      "slug": "magnet-simulator-2"
+    },
+    {
+      "type": "code",
+      "slug": "mining-simulator"
+    }
+  ]
+}
