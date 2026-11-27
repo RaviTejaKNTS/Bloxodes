@@ -142,7 +142,10 @@ function emergencyRule(enabled) {
       'not starts_with(http.request.uri.path, "/admin")',
       'not starts_with(http.request.uri.path, "/dashboard")',
       'not starts_with(http.request.uri.path, "/_next/")',
-      'not starts_with(http.request.uri.path, "/cdn-cgi/"))'
+      'not starts_with(http.request.uri.path, "/cdn-cgi/")',
+      // A React Server Components request without its _rsc cache-buster would
+      // be stored as the page's HTML and served to every visitor.
+      'not (any(http.request.headers["rsc"][*] == "1") and not any(http.request.uri.args.names[*] == "_rsc")))'
     ].join(" and "),
     action: "set_cache_settings",
     action_parameters: {

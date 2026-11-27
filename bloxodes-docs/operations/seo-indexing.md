@@ -18,7 +18,7 @@ Since October 2025 Google has indexed only our homepage. So we give Google an al
   - `GOOGLE_INDEXABLE_PATHS`: exact paths (home, trust pages, authors, stats hubs and reports, tools, wiki and codes indexes, top codes pages).
   - `/catalog` and `/articles` allow everything beneath them.
   - `GOOGLE_INDEXABLE_GAMES`: per game, its wiki hub and everything under it, plus listed codes, quiz and checklist slugs.
-- The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML URL that isn't allowed, including query variants. It depends only on the URL, never the user agent.
+- The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML URL that isn't allowed. It depends only on the URL, never the user agent. Cloudflare strips query strings before the origin on most public pages ([query strings](../infrastructure/cloudflare.md#query-strings)), so a query variant there gets the clean page's header and canonical. Paths that keep their query still get the header on query variants.
 - To add a game, add one typed entry to `GOOGLE_INDEXABLE_GAMES` with its confirmed slugs. An entry only lifts the Google block; it never overrides a page's own noindex.
 - Don't set `googleBot: { index: true }` in page metadata.
 - Sitemaps still list Google-blocked pages.
