@@ -1,6 +1,6 @@
 # Cloudflare and media
 
-Last verified: 2026-11-22
+Last verified: 2026-11-27
 
 Cloudflare proxies every public hostname and is the long-lived HTML cache. R2 stores wiki collection images.
 
@@ -21,9 +21,19 @@ Old `bloxodesdb.ravitejaknts.com` and `bloxodesstudio.ravitejaknts.com` still an
 - Only anonymous, successful public HTML is cached. APIs (except `/api/game-top-nav`), auth, account and mutation paths bypass the cache.
 - Public pages send `cache-control: s-maxage=3600, stale-while-revalidate=31532400`. Next sends the same header on a 404, so Cloudflare must not follow it for errors.
 - **Error pages are never stored.** Every cache rule ("Bloxodes public HTML cache", "Bloxodes game top nav API cache" and the emergency rule) sets Edge TTL status code TTLs 400–499 and 500–599 to `-1` (no store). The two live rules follow the origin header (`respect_origin`) for everything else; the emergency rule overrides it (fixed 2xx TTL, 3xx not stored). Search engines, Bing first, drop a page that returns an error, and a stored error keeps being served after the site recovers. Set on 2026-11-09 after cached 404s hit published wiki pages on Nov 1–4. If you change a cache rule, keep these two entries. The homelab health check (`scripts/ops/site-health-monitor.mjs`) requests made-up URLs every 5 minutes and opens an `[error-page-cache]` GitHub issue if Cloudflare serves one from cache.
+- **React Server Components requests are never stored without their cache-buster.** Next sends in-site navigation as `RSC: 1` plus `?_rsc=<code>`, and the response is `text/x-component`, not HTML. Cloudflare ignores `Vary`, so a request with the header and no `_rsc` would be stored under the page's own key and served to every visitor. The public HTML rule and the emergency rule skip the cache for that case (`not (any(http.request.headers["rsc"][*] == "1") and not any(http.request.uri.args.names[*] == "_rsc"))`). Keep that clause if you change either rule. To clear a page that got stored this way, purge its `page:<path>` tag; a URL purge doesn't clear it.
 - Pages carry cache tags from `apps/web/src/lib/public-cache-tags.ts`. Content changes purge by tag. See [cache](../operations/cache.md).
 - Deploys purge the changed tags. Changes to the shared site shell (layout, `globals.css`, `next.config.js`, `apps/web/src/config/*`, `Site*`, consent and `ui` components, `PublicSiteProviders.tsx`) also purge the `site` tag, which every page has. A full purge needs an explicit workflow input.
 - Keep Rocket Loader and script deferral off; they break the ad script.
+
+## Query strings
+
+Rule "Bloxodes strip query strings from cacheable HTML" (phase `http_request_transform`, set in the dashboard) removes the query string from public HTML requests before the cache and the origin. Every link ending (`?utm_source=`, `?fbclid=`, a client-side `?q=` or `?sort=`, and the `?_rsc=` links Bing crawls without the `RSC` header) shares the clean page's cached copy. The browser still shows the full URL, so client components read it with `useSearchParams()`.
+
+- It skips any request with an `RSC` header, so in-site navigation keeps its `_rsc` key.
+- It skips paths whose server pages read `searchParams`: `/catalog/roblox-{accessories,animations,avatar-items,body-parts,clothing,emotes,items-and-bundles,makeup,dictionary}`, `/catalog/roblox-music-ids/charts`, `/stats/games`, `/stats/items`, `/stats/creators`, `/wiki` and `/wiki/page/`. It also skips the paths the cache rule bypasses (`/api`, `/auth`, `/account`, `/login`, `/admin`, `/dashboard`, `/_next/`, `/cdn-cgi/`).
+- A page whose server output starts depending on the query needs its path added to the rule and to `apps/web/src/lib/__tests__/cloudflare-query-strip-contract.test.ts`. That test only catches a `page.tsx` that names `searchParams` directly. A page that passes its props to a helper which reads the query, a layout, a route handler or new proxy logic isn't caught, so check those by hand in review.
+- Redirects from stripped paths drop the incoming query, so an old link's tracking tags don't reach the new page.
 
 ## Emergency cache
 
